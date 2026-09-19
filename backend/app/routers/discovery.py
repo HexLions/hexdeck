@@ -28,7 +28,7 @@ from ..services.sse import board_topic, hub
 
 router = APIRouter(prefix="/api/v1/discovery", tags=["discovery"])
 
-logger = logging.getLogger("nexdeck.discovery")
+logger = logging.getLogger("hexdeck.discovery")
 
 
 def suggestion(entry: dict[str, Any], host_hint: str) -> dict[str, Any]:

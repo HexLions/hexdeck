@@ -456,7 +456,7 @@ def import_board(
 
     Without those two rights the import was a way to read any environment
     variable of the server: a member imported a board whose connection had
-    ``api_key: "${NEXDECK_SECRET_KEY}"``, and read the value straight back out
+    ``api_key: "${HEXDECK_SECRET_KEY}"``, and read the value straight back out
     of the connection list. That key signs every session and unlocks every
     stored secret.
 

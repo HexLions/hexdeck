@@ -21,7 +21,7 @@ from ..uploads import read_at_most
 
 router = APIRouter(prefix="/api/v1/backups", tags=["admin"])
 
-logger = logging.getLogger("nexdeck.backups")
+logger = logging.getLogger("hexdeck.backups")
 
 #: Bigger than any plausible dashboard, small enough that a wrong file does
 #: not eat the machine's memory before it is refused.
@@ -106,9 +106,9 @@ def _verdict(verdict: backup.Verdict) -> dict:
         "reason": verdict.reason,
         "key_inside": verdict.key_inside,
         # ⚠️ Two questions, not one. Whether the archive brings a key, and
-        # whether this installation would ignore it because NEXDECK_SECRET_KEY
+        # whether this installation would ignore it because HEXDECK_SECRET_KEY
         # is set. The worst combination is "no key in the archive, no variable
-        # here": nexdeck then makes a new one and nothing stored can be read.
+        # here": HexDeck then makes a new one and nothing stored can be read.
         # Asking only the first made the preview look reassuring exactly then.
         "key_from_env": bool(get_settings().secret_key),
     }
@@ -144,7 +144,7 @@ async def restore_archive(
 
     ⚠️ The administrator types their own user name to get here. Not a
     checkbox: a checkbox is one careless click, and this is the one action in
-    nexdeck that cannot be undone from inside nexdeck.
+    HexDeck that cannot be undone from inside HexDeck.
 
     ⚠️ ``without_safety_copy`` goes ahead even when the copy of the current
     state cannot be written. It exists because the reason for restoring may be

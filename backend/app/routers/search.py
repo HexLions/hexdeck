@@ -12,7 +12,7 @@ from ..services import search
 
 router = APIRouter(prefix="/api/v1/settings/search", tags=["system"])
 
-logger = logging.getLogger("nexdeck.search")
+logger = logging.getLogger("hexdeck.search")
 
 
 @router.get("", summary="Read the search targets of the bar")

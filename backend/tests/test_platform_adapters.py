@@ -177,12 +177,12 @@ async def test_syncthing_reads_pull_errors_and_an_unknown_state(ctx: Context) ->
 async def test_pbs_signs_with_a_colon_not_an_equals_sign(ctx: Context) -> None:
     """Proxmox VE wants PVEAPIToken=id=secret, PBS wants PBSAPIToken=id:secret.
     The wrong one gives a 401 that explains nothing."""
-    config = {"url": "https://pbs.example.com:8007", "token_id": "monitor@pbs!nexdeck", "secret": "s3cret"}
+    config = {"url": "https://pbs.example.com:8007", "token_id": "monitor@pbs!HexDeck", "secret": "s3cret"}
     respx.get("https://pbs.example.com:8007/api2/json/status/datastore-usage").mock(return_value=httpx.Response(200, json={"data": [
         {"store": "main", "total": 24_000_000_000_000, "used": 18_000_000_000_000},
     ]}))
     await get_adapter("pbs").fetch("datastores", config, {}, ctx)
-    assert respx.calls.last.request.headers["Authorization"] == "PBSAPIToken=monitor@pbs!nexdeck:s3cret"
+    assert respx.calls.last.request.headers["Authorization"] == "PBSAPIToken=monitor@pbs!HexDeck:s3cret"
 
 
 @respx.mock

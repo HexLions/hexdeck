@@ -13,7 +13,7 @@ import logging
 from collections.abc import Callable, Coroutine
 from typing import Any
 
-logger = logging.getLogger("nexdeck.loop")
+logger = logging.getLogger("hexdeck.loop")
 
 _main: asyncio.AbstractEventLoop | None = None
 

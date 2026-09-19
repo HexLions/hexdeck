@@ -18,7 +18,7 @@ from ..uploads import read_at_most
 
 router = APIRouter(prefix="/api/v1/assets", tags=["assets"])
 
-logger = logging.getLogger("nexdeck.assets")
+logger = logging.getLogger("hexdeck.assets")
 
 MAX_BYTES = 12 * 1024 * 1024
 ALLOWED = {"image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/svg+xml": "svg", "image/gif": "gif", "image/avif": "avif"}
@@ -42,7 +42,7 @@ def list_assets(user: CurrentUser, db: DbSession, kind: str = "") -> list[dict]:
     return [{**_public(one), "used_by": where.get(one.id, [])} for one in db.scalars(query)]
 
 
-#: What must not be in an SVG that nexdeck serves.
+#: What must not be in an SVG that HexDeck serves.
 #:
 #: ⚠️ A blocklist is the wrong shape for this, and the previous one proved it:
 #: it named three strings, and ``onbegin=``, ``onmouseover=`` and ``onload =``
@@ -150,10 +150,10 @@ def serve(asset_id: int, filename: str, request: Request, user: OptionalUser, db
         path,
         media_type=asset.content_type,
         headers={
-            # Only for whoever asked: a shared cache in front of nexdeck must
+            # Only for whoever asked: a shared cache in front of HexDeck must
             # not hand it to the next person.
             "Cache-Control": "private, max-age=86400",
-            # ⚠️ An uploaded file is somebody's bytes served from nexdeck's own
+            # ⚠️ An uploaded file is somebody's bytes served from HexDeck's own
             # address. "sandbox" puts it in an origin of its own, so even an
             # SVG that got past the check above cannot read the session, add
             # the request header the app expects, or touch a page that frames

@@ -1,6 +1,6 @@
 """The installation's mail server.
 
-One place where nexdeck itself can send an e-mail, as opposed to the e-mail
+One place where HexDeck itself can send an e-mail, as opposed to the e-mail
 notification channel: a channel belongs to whoever set it up and carries its
 own server, while a password reset has to go out before anyone is signed in.
 
@@ -22,7 +22,7 @@ from sqlalchemy.orm import Session as DbSessionType
 from ..crypto import decrypt, encrypt
 from ..models import Setting
 
-logger = logging.getLogger("nexdeck.mail")
+logger = logging.getLogger("hexdeck.mail")
 
 KEY = "smtp"
 TIMEOUT = 20.0
@@ -38,7 +38,7 @@ DEFAULTS: dict[str, Any] = {
     "username": "",
     "password": "",
     "from_address": "",
-    "from_name": "nexdeck",
+    "from_name": "HexDeck",
 }
 
 
@@ -109,7 +109,7 @@ def send(config: dict[str, Any], to_address: str, subject: str, body: str) -> No
 
     mail = EmailMessage()
     mail["Subject"] = subject
-    mail["From"] = formataddr((config["from_name"] or "nexdeck", config["from_address"]))
+    mail["From"] = formataddr((config["from_name"] or "HexDeck", config["from_address"]))
     mail["To"] = to_address
     mail.set_content(body)
 

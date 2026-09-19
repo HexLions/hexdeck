@@ -445,7 +445,7 @@ async def test_unifi_local_account_logs_in_and_reads_the_classic_api(ctx: Contex
     respx.get(f"{UNIFI}/proxy/network/api/s/default/stat/health").mock(side_effect=health)
     respx.get(f"{UNIFI}/proxy/network/api/s/default/stat/device").mock(return_value=httpx.Response(200, json={"data": [{"name": "AP", "type": "uap", "model": "U6", "state": 1, "num_sta": 5}]}))
     respx.get(f"{UNIFI}/proxy/network/api/s/default/stat/sta").mock(return_value=httpx.Response(200, json={"data": [{}, {}, {}, {}, {}, {}, {}]}))
-    config = {"url": UNIFI, "username": "nexdeck", "password": "secret", "site": "default", "unifi_os": True, "insecure": True}
+    config = {"url": UNIFI, "username": "HexDeck", "password": "secret", "site": "default", "unifi_os": True, "insecure": True}
     summary = await get_adapter("unifi").fetch("summary", config, {}, ctx)
     assert summary.primary == {"label": "Clients", "value": 7}
     assert {chip["label"]: chip["value"] for chip in summary.secondary}["WAN down"] == "8.4 Mbit/s", "the classic API counts bytes"
@@ -558,7 +558,7 @@ async def test_synology_containers_with_load_and_actions(ctx: Context) -> None:
         return {"success": False, "error": {"code": 101}}
 
     _dsm(handler)
-    config = {"url": NAS, "username": "nexdeck", "password": "secret", "insecure": True}
+    config = {"url": NAS, "username": "HexDeck", "password": "secret", "insecure": True}
     adapter = get_adapter("synology")
     data = await adapter.fetch("containers", config, {}, ctx)
     assert data.status == "warn", "one container is unhealthy"
@@ -611,7 +611,7 @@ async def test_synology_virtual_machines_with_usage_and_actions(ctx: Context) ->
         return {"success": False, "error": {"code": 103}}
 
     _dsm(handler)
-    config = {"url": NAS, "username": "nexdeck", "password": "secret", "insecure": True}
+    config = {"url": NAS, "username": "HexDeck", "password": "secret", "insecure": True}
     adapter = get_adapter("synology")
     data = await adapter.fetch("vms", config, {}, ctx)
     assert data.status == "ok"
@@ -1039,7 +1039,7 @@ class _Reolink:
         return httpx.Response(200, json=out)
 
 
-CONFIG = {"url": REO, "username": "nexdeck", "password": "pw", "insecure": False}
+CONFIG = {"url": REO, "username": "HexDeck", "password": "pw", "insecure": False}
 
 
 @respx.mock
@@ -1291,7 +1291,7 @@ async def test_the_dsm_password_never_travels_in_the_address(ctx: Context) -> No
     every reverse proxy in between, and the browser history of anybody who
     copied the address out of a report. TLS does not change that, because the
     URL is exactly what those write down. The log redaction added earlier
-    covers nexdeck's own log and nothing beyond it.
+    covers HexDeck's own log and nothing beyond it.
 
     Measured against DSM 7.4.1 on 07.09.2026: the login takes a form body on
     API version 6 and answers with the same sid.
@@ -1303,7 +1303,7 @@ async def test_the_dsm_password_never_travels_in_the_address(ctx: Context) -> No
         return_value=httpx.Response(200, json={"success": True, "data": {"model": "DS1825+", "firmware_ver": "7.4.1"}}),
     )
     must_not_appear = "chosen-so-it-can-be-searched-for"
-    await get_adapter("synology").test({"url": NAS, "username": "nexdeck", "password": must_not_appear, "insecure": True}, ctx)
+    await get_adapter("synology").test({"url": NAS, "username": "HexDeck", "password": must_not_appear, "insecure": True}, ctx)
 
     assert login.called, "the login was never sent, so this test proves nothing"
     request = login.calls[0].request
@@ -1314,7 +1314,7 @@ async def test_the_dsm_password_never_travels_in_the_address(ctx: Context) -> No
 
     body = parse_qs(request.content.decode())
     assert body.get("passwd") == [must_not_appear], "the password did not go in the body either"
-    assert body.get("account") == ["nexdeck"]
+    assert body.get("account") == ["HexDeck"]
 
 
 @respx.mock
@@ -1322,7 +1322,7 @@ async def test_a_login_dsm_refuses_says_which_refusal_it_was(ctx: Context) -> No
     """DSM answers HTTP 200 with ``success: false`` and a number. The number
     is the whole message, and 403 there means "two-factor is required", not
     "forbidden"."""
-    config = {"url": NAS, "username": "nexdeck", "password": "wrong", "insecure": True}
+    config = {"url": NAS, "username": "HexDeck", "password": "wrong", "insecure": True}
     for code, expected in ((400, "wrong account or password"), (403, "two-factor authentication is required")):
         respx.post(f"{NAS}/webapi/auth.cgi").mock(
             return_value=httpx.Response(200, json={"success": False, "error": {"code": code}}),
@@ -1337,7 +1337,7 @@ async def test_a_login_that_answers_with_a_page_is_not_a_crash(ctx: Context) -> 
     """⚠️ Both of these come from the same place in practice: a reverse proxy
     in front of DSM that is unhappy, or a sign-in page where the API should
     be. Neither is JSON, and neither should reach the card as a traceback."""
-    config = {"url": NAS, "username": "nexdeck", "password": "secret", "insecure": True}
+    config = {"url": NAS, "username": "HexDeck", "password": "secret", "insecure": True}
 
     respx.post(f"{NAS}/webapi/auth.cgi").mock(return_value=httpx.Response(502, text="<html>Bad Gateway</html>"))
     with pytest.raises(AdapterError) as broken:

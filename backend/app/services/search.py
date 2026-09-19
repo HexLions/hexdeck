@@ -1,6 +1,6 @@
 """The search bar that leaves the house.
 
-nexdeck's own bar finds boards, cards and settings. This is the other half:
+HexDeck's own bar finds boards, cards and settings. This is the other half:
 a handful of targets a typed word can be handed to, on the web or to a service
 that is already connected. Homarr, Glance and Dashy all do it, and it is the
 one thing the bar was missing.

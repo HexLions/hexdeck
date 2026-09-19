@@ -18,7 +18,7 @@ from .integrations import resolve_config
 from .loop import run_on_loop
 from .sse import board_topic, hub
 
-logger = logging.getLogger("nexdeck.logs")
+logger = logging.getLogger("hexdeck.logs")
 
 MAX_LINE = 2000
 #: How many lines one write carries, and how long a part-full batch may wait.
@@ -94,7 +94,7 @@ class LogTailer:
                 raise
             except Exception as error:  # noqa: BLE001
                 logger.info("Log follower for widget %s stopped (%s); retrying.", widget_id, error.__class__.__name__)
-                self._emit(board_id, widget_id, f"[nexdeck] log stream interrupted: {error.__class__.__name__}, retrying", source)
+                self._emit(board_id, widget_id, f"[HexDeck] log stream interrupted: {error.__class__.__name__}, retrying", source)
             await asyncio.sleep(10)
 
     async def _docker_lines(self, config: dict, wanted: str, widget_id: int, source: str, board_id: int | None) -> None:
@@ -102,7 +102,7 @@ class LogTailer:
             containers = (await client.get("/containers/json", params={"all": 1})).json()
             match = next((c for c in containers if container_name(c) == wanted or c.get("Id", "").startswith(wanted)), None)
             if match is None:
-                self._emit(board_id, widget_id, f"[nexdeck] no container named {wanted!r}", source)
+                self._emit(board_id, widget_id, f"[HexDeck] no container named {wanted!r}", source)
                 await asyncio.sleep(50)
                 return
             inspect = (await client.get(f"/containers/{match['Id']}/json")).json()

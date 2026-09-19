@@ -325,10 +325,10 @@ def test_the_link_in_the_mail_carries_the_host(client: TestClient, monkeypatch: 
 
 
 def test_the_address_may_come_from_the_environment(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
-    """⚠️ The ordinary Docker case: NEXDECK_PUBLIC_URL in the compose file and
+    """⚠️ The ordinary Docker case: HEXDECK_PUBLIC_URL in the compose file and
     nothing in the settings. The rest of the app falls back to it; this did
     not, and only this one sends a link out of the building."""
-    monkeypatch.setenv("NEXDECK_PUBLIC_URL", "https://deck.example.org")
+    monkeypatch.setenv("HEXDECK_PUBLIC_URL", "https://deck.example.org")
     from app import config
 
     config.reset_settings_cache()
@@ -346,7 +346,7 @@ def test_the_address_may_come_from_the_environment(client: TestClient, monkeypat
 
 def test_a_stored_address_beats_the_environment(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     """Somebody who types one into the settings means it."""
-    monkeypatch.setenv("NEXDECK_PUBLIC_URL", "https://from-the-compose-file.example.org")
+    monkeypatch.setenv("HEXDECK_PUBLIC_URL", "https://from-the-compose-file.example.org")
     from app import config
 
     config.reset_settings_cache()

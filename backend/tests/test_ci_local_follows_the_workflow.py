@@ -77,7 +77,7 @@ def test_the_version_check_runs_for_a_tag_and_is_told_its_name() -> None:
 
 def test_a_step_keeps_its_environment_and_its_folder() -> None:
     e2e = _planned(tag=None, install=False)["End-to-end test"]
-    assert e2e.env.get("NEXDECK_E2E_PYTHON")
+    assert e2e.env.get("HEXDECK_E2E_PYTHON")
     assert e2e.directory == ROOT / "frontend"
 
 

@@ -30,7 +30,7 @@ MAC = "00:1A:2B:3C:4D:5E"
 
 @pytest.fixture(autouse=True)
 def fresh_settings(monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
-    monkeypatch.delenv("NEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
+    monkeypatch.delenv("HEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
     config.reset_settings_cache()
     yield
     config.reset_settings_cache()
@@ -73,7 +73,7 @@ def test_a_reachability_check_does_not_follow_a_redirect_to_loopback(monkeypatch
     monkeypatch.setattr(health, "_clients", {})
     ok, _latency, detail = asyncio.run(health.check_http("http://checks.example.com/start", 5.0, 0, False))
     assert ok is False
-    assert "not an address nexdeck calls" in detail
+    assert "not an address HexDeck calls" in detail
     assert LOOPBACK not in seen
 
 

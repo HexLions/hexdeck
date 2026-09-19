@@ -2,8 +2,8 @@
 
 Plex separates two things: plex.tv answers "who are you" and "which servers
 may you use"; the Plex Media Server at home answers "what is in the library".
-The sign-in runs over a PIN: nexdeck asks plex.tv for one, the browser sends
-the person to Plex, and nexdeck asks plex.tv until a token comes back. The
+The sign-in runs over a PIN: HexDeck asks plex.tv for one, the browser sends
+the person to Plex, and HexDeck asks plex.tv until a token comes back. The
 token then goes into the integration like a typed one, encrypted at rest.
 """
 
@@ -20,7 +20,7 @@ from ..config import get_settings
 
 BASE_URL = "https://plex.tv/api/v2"
 AUTH_URL = "https://app.plex.tv/auth"
-PRODUCT = "nexdeck"
+PRODUCT = "HexDeck"
 
 _client: httpx.AsyncClient | None = None
 
@@ -102,7 +102,7 @@ async def account_name(token: str) -> str:
 
 
 def _urls(connections: list[dict[str, Any]]) -> list[str]:
-    """Every address of a server, local ones first: nexdeck usually sits in the same network."""
+    """Every address of a server, local ones first: HexDeck usually sits in the same network."""
     local = [str(c["uri"]) for c in connections if c.get("local") and c.get("uri")]
     remote = [str(c["uri"]) for c in connections if not c.get("local") and c.get("uri")]
     return local + remote

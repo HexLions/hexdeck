@@ -17,11 +17,11 @@ ADMIN = {"username": "admin", "password": "correct-horse-battery"}
 def data_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     directory = tmp_path / "data"
     directory.mkdir()
-    monkeypatch.setenv("NEXDECK_DATA_DIR", str(directory))
-    monkeypatch.setenv("NEXDECK_SECRET_KEY", "test-secret-key-not-for-production")
-    monkeypatch.setenv("NEXDECK_DEMO", "0")
-    monkeypatch.setenv("NEXDECK_HEALTH_INTERVAL_SECONDS", "5")
-    monkeypatch.setenv("NEXDECK_LOG_LEVEL", "WARNING")
+    monkeypatch.setenv("HEXDECK_DATA_DIR", str(directory))
+    monkeypatch.setenv("HEXDECK_SECRET_KEY", "test-secret-key-not-for-production")
+    monkeypatch.setenv("HEXDECK_DEMO", "0")
+    monkeypatch.setenv("HEXDECK_HEALTH_INTERVAL_SECONDS", "5")
+    monkeypatch.setenv("HEXDECK_LOG_LEVEL", "WARNING")
     from app import config, crypto, db
     from app.services import collector as collector_module
     from app.services import login_guard

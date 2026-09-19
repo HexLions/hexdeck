@@ -1,12 +1,12 @@
-"""What may run in nexdeck's own origin, and what may not.
+"""What may run in HexDeck's own origin, and what may not.
 
 Three separate doors into the same room, all found on 06.09.2026:
 
 * the icon proxy hands out SVG it fetched from a public collection, from
-  nexdeck's own address, and SVG is a document that runs script
+  HexDeck's own address, and SVG is a document that runs script
 * the stylesheet an operator may set barred ``@import`` and allowed ``url()``,
   which fetches just as well
-* ``NEXDECK_CORS_ORIGINS='*'`` reads like "let anyone see the public parts"
+* ``HEXDECK_CORS_ORIGINS='*'`` reads like "let anyone see the public parts"
   and means "let any site the operator visits act as them"
 """
 
@@ -85,14 +85,14 @@ def test_cors_with_a_star_refuses_to_start(monkeypatch: pytest.MonkeyPatch, data
     from app import config, main
 
     try:
-        monkeypatch.setenv("NEXDECK_CORS_ORIGINS", "*")
+        monkeypatch.setenv("HEXDECK_CORS_ORIGINS", "*")
         config.reset_settings_cache()
         with pytest.raises(RuntimeError) as refused:
             importlib.reload(main)
         assert "cannot be combined" in str(refused.value)
 
         # And a named origin still works, or the setting would be useless.
-        monkeypatch.setenv("NEXDECK_CORS_ORIGINS", "https://deck.example.com")
+        monkeypatch.setenv("HEXDECK_CORS_ORIGINS", "https://deck.example.com")
         config.reset_settings_cache()
         importlib.reload(main)
         assert any("CORSMiddleware" in str(m) for m in main.app.user_middleware)
@@ -100,7 +100,7 @@ def test_cors_with_a_star_refuses_to_start(monkeypatch: pytest.MonkeyPatch, data
         # ⚠️ Reloading the module replaces ``app``, and every other test reads
         # it from here. Leaving one behind with a middleware nobody asked for
         # is the kind of thing that turns up three files later as a mystery.
-        monkeypatch.delenv("NEXDECK_CORS_ORIGINS", raising=False)
+        monkeypatch.delenv("HEXDECK_CORS_ORIGINS", raising=False)
         config.reset_settings_cache()
         importlib.reload(main)
         assert not any("CORSMiddleware" in str(m) for m in main.app.user_middleware)
@@ -116,5 +116,5 @@ def test_the_iframe_card_refuses_our_own_address() -> None:
     from pathlib import Path
 
     source = (Path(__file__).resolve().parents[2] / "frontend" / "src" / "components" / "renderers.tsx").read_text(encoding="utf-8")
-    assert IFRAME.search(source), "the iframe card no longer checks whether it is framing nexdeck itself"
+    assert IFRAME.search(source), "the iframe card no longer checks whether it is framing HexDeck itself"
     assert "allow-same-origin" in source, "the sandbox was loosened or tightened without this test hearing about it"

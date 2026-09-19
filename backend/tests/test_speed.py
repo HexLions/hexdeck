@@ -83,11 +83,11 @@ def test_the_key_file_is_read_once_and_not_per_request(data_dir: Path, monkeypat
     """⚠️ Every signed cookie and every session check goes through here, so a
     ``mkdir`` and a read from disk happened on every single request.
 
-    ⚠️ Without an empty ``NEXDECK_SECRET_KEY`` this test proves nothing: the
+    ⚠️ Without an empty ``HEXDECK_SECRET_KEY`` this test proves nothing: the
     configured secret is returned before the file is ever looked at, and the
     fixtures set one. It caught nothing at first for exactly that reason.
     """
-    monkeypatch.setenv("NEXDECK_SECRET_KEY", "")
+    monkeypatch.setenv("HEXDECK_SECRET_KEY", "")
     from app import config
 
     config.reset_settings_cache()
@@ -110,7 +110,7 @@ def test_the_log_view_does_not_read_the_whole_file(client: TestClient, data_dir:
     setup_admin(client)
     path = journal.log_file()
     path.parent.mkdir(parents=True, exist_ok=True)
-    line = "2026-09-07 12:00:00 INFO     nexdeck [-] line number {number}\n"
+    line = "2026-09-07 12:00:00 INFO     HexDeck [-] line number {number}\n"
     with path.open("w", encoding="utf-8") as handle:
         for number in range(20_000):
             handle.write(line.format(number=number))
@@ -379,7 +379,7 @@ def test_a_sign_in_builds_one_client_and_not_one_per_leg(
     async def one_sign_in() -> None:
         try:
             assert await oidc.discovery("https://id.example.com")
-            assert await oidc.exchange(document, "nexdeck", "secret", "https://deck.example.com/cb", "code", "verifier")
+            assert await oidc.exchange(document, "HexDeck", "secret", "https://deck.example.com/cb", "code", "verifier")
             assert await oidc.userinfo(document, "pretend")
             # A second provider, so the discovery cache does not hide a build.
             assert await oidc.discovery("https://other.example.com")

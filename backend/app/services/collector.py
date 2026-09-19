@@ -45,7 +45,7 @@ from .notify import emit
 from .sse import board_topic, hub
 from .state import live
 
-logger = logging.getLogger("nexdeck.collector")
+logger = logging.getLogger("hexdeck.collector")
 
 MAX_BACKOFF = 300
 MIN_INTERVAL = 5
@@ -97,7 +97,7 @@ class Collector:
         if self._client is None:
             self._client = outbound_client(
                 follow_redirects=True,
-                headers={"User-Agent": "nexdeck"},
+                headers={"User-Agent": "hexdeck"},
                 timeout=15.0,
             )
         return self._client

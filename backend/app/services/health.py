@@ -25,7 +25,7 @@ from ..models import HealthCheck, Outage, Page, Widget, utcnow
 from . import history, notify
 from .sse import board_topic, hub
 
-logger = logging.getLogger("nexdeck.health")
+logger = logging.getLogger("hexdeck.health")
 
 WAKE_SECONDS = 5
 PARALLEL = 16
@@ -46,7 +46,7 @@ def http_client(insecure: bool) -> httpx.AsyncClient:
         # ⚠️ With the member rule on every hop. Whoever may edit a board sets
         # the address of a check, and a redirect from a server of their own
         # led on to 127.0.0.1 past the check on the first address.
-        client = outbound_client(member=True, verify=not insecure, follow_redirects=True, headers={"User-Agent": "nexdeck-check"})
+        client = outbound_client(member=True, verify=not insecure, follow_redirects=True, headers={"User-Agent": "hexdeck-check"})
         _clients[insecure] = client
     return client
 

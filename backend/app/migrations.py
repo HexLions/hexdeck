@@ -16,7 +16,7 @@ from sqlalchemy.engine import Connection
 from .db import get_engine
 from .models import Base
 
-logger = logging.getLogger("nexdeck.migrations")
+logger = logging.getLogger("hexdeck.migrations")
 
 def _nexview_logo(connection: Connection) -> None:
     """Nexview widgets created before the logo shipped carry the placeholder symbol."""
@@ -168,12 +168,12 @@ def migrate() -> None:
         if current > newest:
             # ⚠️ Said out loud, because nothing else will say it. There is no
             # migration that runs backwards, so a database written by a newer
-            # nexdeck keeps columns and tables this build does not know, and
+            # HexDeck keeps columns and tables this build does not know, and
             # the symptoms turn up later as odd errors nobody connects to a
             # downgrade. Refusing to start would be worse: the operator would
             # have no way in to fix it.
             logger.error(
-                "This database was written by a newer nexdeck (schema %d, this build knows %d). "
+                "This database was written by a newer HexDeck (schema %d, this build knows %d). "
                 "Downgrading is not supported; expect trouble until you go back to the newer version.",
                 current, newest,
             )

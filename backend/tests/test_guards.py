@@ -627,7 +627,7 @@ def test_every_setting_is_written_down() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     names = [name for name in Settings.model_fields if not name.startswith("_")]
     assert len(names) >= 15, f"only {len(names)} settings were found, so this guard proves nothing"
-    missing = [f"NEXDECK_{name.upper()}" for name in names if f"NEXDECK_{name.upper()}" not in readme]
+    missing = [f"HEXDECK_{name.upper()}" for name in names if f"HEXDECK_{name.upper()}" not in readme]
     assert missing == [], "settings the README does not mention: " + ", ".join(missing)
 
 
@@ -637,13 +637,13 @@ def test_the_compose_file_passes_on_what_the_example_offers() -> None:
     """
     compose = (ROOT / "docker-compose.yml").read_text(encoding="utf-8")
     example = (ROOT / ".env.example").read_text(encoding="utf-8")
-    offered = set(re.findall(r"^#?\s*(NEXDECK_[A-Z_]+|DOCKER_GID|PUID|PGID|TZ)=", example, re.M))
+    offered = set(re.findall(r"^#?\s*(HEXDECK_[A-Z_]+|DOCKER_GID|PUID|PGID|TZ)=", example, re.M))
     assert len(offered) >= 8, f"only {len(offered)} variables were read out of the example, so this guard proves nothing"
     # A variable the example offers has to be either passed through or
     # deliberately left out, which is what this list is for.
     not_for_compose = {
-        "NEXDECK_ALLOW_LOOPBACK_TARGETS", "NEXDECK_UPLOAD_QUOTA_MB",
-        "NEXDECK_KEEP_ACTION_LOG_DAYS", "NEXDECK_KEEP_NOTICES_DAYS", "NEXDECK_KEEP_OUTAGES_DAYS",
+        "HEXDECK_ALLOW_LOOPBACK_TARGETS", "HEXDECK_UPLOAD_QUOTA_MB",
+        "HEXDECK_KEEP_ACTION_LOG_DAYS", "HEXDECK_KEEP_NOTICES_DAYS", "HEXDECK_KEEP_OUTAGES_DAYS",
     }
     lost = sorted(name for name in offered - not_for_compose if name not in compose)
     assert lost == [], "variables the example offers that never reach the container: " + ", ".join(lost)

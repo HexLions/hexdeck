@@ -4,7 +4,7 @@
 catches an unreadable key and anything unexpected. The documented route for a
 saved connection, ``POST /integrations/{id}/test``, read the stored config
 outside its ``try`` and caught adapter errors only. After a restore with a
-different ``NEXDECK_SECRET_KEY`` a script calling it got an HTTP 500 with no
+different ``HEXDECK_SECRET_KEY`` a script calling it got an HTTP 500 with no
 word about the key. Found on 07.09.2026, still there on 12.09.2026.
 """
 
@@ -37,7 +37,7 @@ def test_an_unreadable_key_is_named(client: TestClient, monkeypatch: pytest.Monk
     assert answer.status_code == 200, answer.text
     assert answer.json()["ok"] is False
     assert answer.json()["code"] == "secret_unreadable"
-    assert "NEXDECK_SECRET_KEY" in answer.json()["hint"]
+    assert "HEXDECK_SECRET_KEY" in answer.json()["hint"]
 
 
 def test_an_unexpected_failure_is_a_message(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:

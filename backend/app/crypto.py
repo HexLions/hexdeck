@@ -31,7 +31,7 @@ class SecretUnreadable(Exception):
 #: installation salt would need a second file next to ``secret.key``, and
 #: losing it would make every stored secret unreadable, which is the failure
 #: this whole module exists to avoid. What the fixed salt still buys is the
-#: only thing that matters here: an operator who set ``NEXDECK_SECRET_KEY`` to
+#: only thing that matters here: an operator who set ``HEXDECK_SECRET_KEY`` to
 #: something short now costs an attacker with the database file 210000 rounds
 #: per guess instead of one hash. The generated key is 288 bits of randomness
 #: and was never at risk either way.
@@ -48,7 +48,7 @@ def _legacy_key_from(secret: bytes) -> bytes:
     """One SHA-256, as it was until 07.09.2026.
 
     ⚠️ Still here on purpose, and only for reading. Everything encrypted before
-    that day was written with it, and nexdeck 0.1.0 is out in the world. A
+    that day was written with it, and HexDeck 0.1.0 is out in the world. A
     change that silently makes every stored API key unreadable would be worse
     than the weakness it fixes. Values are rewritten with the new key whenever
     they are saved again.
@@ -99,7 +99,7 @@ def decrypt(value: str) -> str:
         return _fernet().decrypt(value[len(PREFIX) :].encode("utf-8")).decode("utf-8")
     except InvalidToken as error:
         raise SecretUnreadable(
-            "A stored secret cannot be decrypted. The NEXDECK_SECRET_KEY or the "
+            "A stored secret cannot be decrypted. The HEXDECK_SECRET_KEY or the "
             "data/secret.key file no longer matches the database."
         ) from error
 

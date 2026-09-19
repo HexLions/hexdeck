@@ -113,7 +113,7 @@ jobs:
       - name: End-to-end test
         working-directory: frontend
         env:
-          NEXDECK_E2E_PYTHON: python
+          HEXDECK_E2E_PYTHON: python
         run: npm run e2e
 
       - name: Keep the report when something fails

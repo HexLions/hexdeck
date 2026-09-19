@@ -13,7 +13,7 @@ from ..services import mail
 
 router = APIRouter(prefix="/api/v1/settings/mail", tags=["system"])
 
-logger = logging.getLogger("nexdeck.mail")
+logger = logging.getLogger("hexdeck.mail")
 
 
 @router.get("", summary="Read the mail server settings")
@@ -42,7 +42,7 @@ async def test(body: MailTestBody, admin: AdminUser, db: DbSession) -> dict:
     config = mail.stored(db)
     try:
         # Blocking network work; the event loop must not wait on it.
-        await asyncio.to_thread(mail.send, config, to_address, "nexdeck test message", "This is the test message from your nexdeck installation. The mail server works.")
+        await asyncio.to_thread(mail.send, config, to_address, "HexDeck test message", "This is the test message from your HexDeck installation. The mail server works.")
     except mail.MailError as failure:
         raise error(failure.code, failure.message) from failure
     logger.info("A test message was sent to %s by %s.", to_address, admin.username)

@@ -69,7 +69,7 @@ def export_config(integration: Integration) -> dict[str, Any]:
     config = dict(integration.config or {})
     for f in _fields(integration.kind):
         if f.secret and config.get(f.name):
-            env_name = f"NEXDECK_{integration.kind}_{integration.id}_{f.name}".upper()
+            env_name = f"HEXDECK_{integration.kind}_{integration.id}_{f.name}".upper()
             config[f.name] = "${" + env_name + "}"
     return config
 

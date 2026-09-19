@@ -139,7 +139,7 @@ def optional_user(request: Request, db: DbSession) -> User | None:
         user = _user_from_cookie(request, db)
         if user is not None and request.method not in ("GET", "HEAD", "OPTIONS"):
             if request.headers.get(CSRF_HEADER) != "1":
-                raise error("csrf", "This request must come from the nexdeck app.", status.HTTP_403_FORBIDDEN)
+                raise error("csrf", "This request must come from the HexDeck app.", status.HTTP_403_FORBIDDEN)
     if user is not None and _kept_at_the_door(request, db, user):
         journal.set_actor(user.username)
         raise error(

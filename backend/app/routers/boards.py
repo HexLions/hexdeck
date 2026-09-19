@@ -47,7 +47,7 @@ from .auth import cookie_secure
 
 router = APIRouter(prefix="/api/v1", tags=["boards"])
 
-logger = logging.getLogger("nexdeck.boards")
+logger = logging.getLogger("hexdeck.boards")
 
 
 def _announce(board_id: int) -> None:
@@ -114,10 +114,10 @@ def kiosk_session(body: KioskSession, request: Request, response: Response, db: 
         raise error("unauthenticated", "This kiosk link is not valid.", status.HTTP_401_UNAUTHORIZED)
     cookie, seconds = create_kiosk_cookie(row.id, row.expires_at)
     # ⚠️ Same source as the session cookie, not a second reading of the world.
-    # This used to look at NEXDECK_PUBLIC_URL, which says how browsers reach
-    # nexdeck and nothing about this request: an installation that had not set
+    # This used to look at HEXDECK_PUBLIC_URL, which says how browsers reach
+    # HexDeck and nothing about this request: an installation that had not set
     # it handed a wall display a cookie without Secure even over HTTPS, and
-    # NEXDECK_COOKIE_SECURE=always did not apply to it at all.
+    # HEXDECK_COOKIE_SECURE=always did not apply to it at all.
     response.set_cookie(KIOSK_COOKIE, cookie, max_age=seconds, httponly=True, samesite="lax",
                         secure=cookie_secure(request), path="/")
     return {"board_id": row.board_id, "expires_in": seconds}

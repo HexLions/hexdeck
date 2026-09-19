@@ -77,7 +77,7 @@ async def test_what_the_browser_is_told_gives_nothing_away(monkeypatch: pytest.M
     service = collector_module.Collector()
 
     async def explode(widget_id: int) -> float | None:
-        raise RuntimeError("/srv/nexdeck/app/adapters/secret_path.py line 42: password=hunter2")
+        raise RuntimeError("/srv/HexDeck/app/adapters/secret_path.py line 42: password=hunter2")
 
     monkeypatch.setattr(service, "_refresh", explode)
     live.clear()

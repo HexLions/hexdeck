@@ -3,7 +3,7 @@
 ⚠️ A kiosk link carries its token in the address, ``/k/nk_...``, and the page
 was sent with ``Referrer-Policy: same-origin``. Every script, style and picture
 that first page loaded went out with the whole address as its Referer, so the
-token stood in the access log of every reverse proxy in front of nexdeck, once
+token stood in the access log of every reverse proxy in front of HexDeck, once
 per file. Found on 07.09.2026, still there on 12.09.2026.
 """
 

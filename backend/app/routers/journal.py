@@ -1,4 +1,4 @@
-"""nexdeck's own log, for administrators: read it, filter it, take it home.
+"""HexDeck's own log, for administrators: read it, filter it, take it home.
 
 The level can be changed here without a restart, because a restart usually
 destroys the state somebody wanted to look at.
@@ -64,7 +64,7 @@ def set_level(body: ModeChange, admin: AdminUser, db: DbSession) -> ModePublic:
     if journal.fixed_by_env():
         raise error(
             "fixed_by_env",
-            "The log level comes from NEXDECK_LOG_LEVEL and cannot be changed here.",
+            "The log level comes from HEXDECK_LOG_LEVEL and cannot be changed here.",
             status.HTTP_409_CONFLICT,
         )
     try:
@@ -78,12 +78,12 @@ def set_level(body: ModeChange, admin: AdminUser, db: DbSession) -> ModePublic:
 def download(admin: AdminUser) -> Response:
     text, cut = journal.download()
     if cut:
-        text += "\n[nexdeck] Cut off here: the log is larger than the download limit.\n"
+        text += "\n[HexDeck] Cut off here: the log is larger than the download limit.\n"
     stamp = datetime.now().strftime("%Y-%m-%d_%H%M")
     return Response(
         content=text,
         media_type="text/plain; charset=utf-8",
-        headers={"Content-Disposition": f'attachment; filename="nexdeck-{stamp}.log"'},
+        headers={"Content-Disposition": f'attachment; filename="hexdeck-{stamp}.log"'},
     )
 
 

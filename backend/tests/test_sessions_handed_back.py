@@ -1,7 +1,7 @@
-"""A session nexdeck opens at a service is a session it closes.
+"""A session HexDeck opens at a service is a session it closes.
 
 A Reolink hub lets only a handful of accounts in at once and keeps a token
-for an hour. On 11.09.2026 the hub turned nexdeck away with "too many users
+for an hour. On 11.09.2026 the hub turned HexDeck away with "too many users
 are signed in" after an afternoon of restarts, and the code had four ways of
 taking a seat without ever giving it back: cards logging in side by side, the
 Test button, a saved connection and a deleted one. The first lives in the

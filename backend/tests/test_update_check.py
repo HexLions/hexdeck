@@ -1,4 +1,4 @@
-"""The one call nexdeck makes to the outside, and who may make it.
+"""The one call HexDeck makes to the outside, and who may make it.
 
 ⚠️ Nothing tested any of this. The switch is off by default, and the promise
 attached to it is a privacy promise: an installation that was never told to
@@ -21,7 +21,7 @@ from app.routers import system
 
 from .conftest import CSRF, create_user, login, setup_admin
 
-GITHUB = "https://api.github.com/repos/DerKezorm/nexdeck/releases/latest"
+GITHUB = "https://api.github.com/repos/HexLions/hexdeck/releases/latest"
 
 
 @pytest.fixture(autouse=True)

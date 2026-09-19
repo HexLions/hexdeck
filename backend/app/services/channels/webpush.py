@@ -28,7 +28,7 @@ from ...models import PushSubscription, Setting
 from ..notify import Message
 from ..public_url import public_url
 
-logger = logging.getLogger("nexdeck.webpush")
+logger = logging.getLogger("hexdeck.webpush")
 
 SETTING_KEY = "vapid"
 TTL_SECONDS = 24 * 3600

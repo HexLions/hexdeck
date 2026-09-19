@@ -161,7 +161,7 @@ async def send(kind: str, config: dict[str, Any], message: Message, *, user_id: 
         await _slack(config, message)
     elif kind == "apprise":
         # ⚠️ An administrator's only. Apprise sends through its own HTTP library
-        # and follows redirects there, where no address check of nexdeck
+        # and follows redirects there, where no address check of HexDeck
         # reaches, so a member's channel was a way of asking what listens
         # beside the server. Decided on 12.09.2026.
         def by_an_administrator() -> bool:
@@ -251,7 +251,7 @@ def _email(config: dict[str, Any], message: Message, user_id: int | None = None)
             to_address = str(getattr(owner, "email", "") or "").strip()
         if not to_address:
             raise RuntimeError("No address to write to, and none on the account either.")
-    mail_service.send(settings, to_address, f"[nexdeck] {message.title}", plain_text(message))
+    mail_service.send(settings, to_address, f"[HexDeck] {message.title}", plain_text(message))
 
 
 async def _ntfy(config: dict[str, Any], message: Message) -> None:
@@ -277,7 +277,7 @@ async def _discord(config: dict[str, Any], message: Message) -> None:
     embed: dict[str, Any] = {"title": message.title, "description": message.body, "color": colour}
     if message.link:
         embed["url"] = message.link
-    await _post(config["webhook"], json={"username": "nexdeck", "embeds": [embed]})
+    await _post(config["webhook"], json={"username": "HexDeck", "embeds": [embed]})
 
 
 async def _slack(config: dict[str, Any], message: Message) -> None:

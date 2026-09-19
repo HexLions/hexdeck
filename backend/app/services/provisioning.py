@@ -18,7 +18,7 @@ from ..db import db_session
 from ..models import Board, Page, Widget
 from .boards import ImportError_, import_board
 
-logger = logging.getLogger("nexdeck.provisioning")
+logger = logging.getLogger("hexdeck.provisioning")
 
 _seen: dict[str, float] = {}
 POLL_SECONDS = 10

@@ -114,11 +114,11 @@ def test_only_automatic_backups_are_swept(client: TestClient) -> None:
 def test_the_archive_carries_the_key(client: TestClient, data_dir: Path) -> None:
     """⚠️ The reason this feature exists at all. Every service credential in
     the database is encrypted with the key in secret.key. Restore the database
-    without it and nexdeck makes a new key, after which not one connection can
+    without it and HexDeck makes a new key, after which not one connection can
     be read and nobody suspects the key."""
     setup_admin(client)
     # The ordinary installation keeps it in a file. The tests run with
-    # NEXDECK_SECRET_KEY set, so the file has to be put there on purpose.
+    # HEXDECK_SECRET_KEY set, so the file has to be put there on purpose.
     (data_dir / "secret.key").write_text("a-key-from-a-file", encoding="utf-8")
     entry = _make(client)
     files = _inside(_archive(client, entry["name"]))
@@ -144,9 +144,9 @@ def test_the_wrong_password_opens_nothing(client: TestClient) -> None:
 
 def test_the_profile_in_the_archive_lists_what_is_really_in_it(client: TestClient) -> None:
     """⚠️ It used to be written before the packing and named secret.key even
-    where only a note about it went in. Nothing in nexdeck reads the field, so
+    where only a note about it went in. Nothing in HexDeck reads the field, so
     the only reader it could mislead is the person opening the ZIP by hand on
-    a day when nexdeck is what stopped working."""
+    a day when HexDeck is what stopped working."""
     setup_admin(client)
     entry = _make(client)
     files = _inside(_archive(client, entry["name"]))
@@ -155,7 +155,7 @@ def test_the_profile_in_the_archive_lists_what_is_really_in_it(client: TestClien
 
 
 def test_an_installation_without_a_key_file_says_so_in_the_archive(client: TestClient, data_dir: Path) -> None:
-    """The key can live in NEXDECK_SECRET_KEY instead. Then it is in that
+    """The key can live in HEXDECK_SECRET_KEY instead. Then it is in that
     machine's Docker file, and the archive must not look complete."""
     setup_admin(client)
     entry = _make(client)
@@ -163,7 +163,7 @@ def test_an_installation_without_a_key_file_says_so_in_the_archive(client: TestC
     files = _inside(_archive(client, entry["name"]))
     assert "secret.key" not in files
     assert "NO-KEY-IN-HERE.txt" in files
-    assert b"NEXDECK_SECRET_KEY" in files["NO-KEY-IN-HERE.txt"]
+    assert b"HEXDECK_SECRET_KEY" in files["NO-KEY-IN-HERE.txt"]
 
 
 def test_profile_pictures_travel_with_it(client: TestClient, data_dir: Path) -> None:
@@ -284,7 +284,7 @@ def test_a_restore_backs_the_current_state_up_first(client: TestClient) -> None:
 
 def test_a_restore_needs_the_administrators_own_name(client: TestClient) -> None:
     """⚠️ Not a checkbox. A checkbox is one careless click, and this is the
-    one action that cannot be undone from inside nexdeck."""
+    one action that cannot be undone from inside HexDeck."""
     setup_admin(client)
     entry = _make(client)
     blob = _archive(client, entry["name"])
@@ -343,7 +343,7 @@ def test_the_pictures_come_back_too(client: TestClient, data_dir: Path) -> None:
 def test_the_key_comes_back_too(client: TestClient, data_dir: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """⚠️ Without it every stored credential is unreadable afterwards, and the
     key is the last thing anybody suspects."""
-    monkeypatch.delenv("NEXDECK_SECRET_KEY", raising=False)
+    monkeypatch.delenv("HEXDECK_SECRET_KEY", raising=False)
     from app import config, crypto
 
     config.reset_settings_cache()
@@ -372,7 +372,7 @@ def test_the_environment_variable_beats_the_key_in_the_archive(client: TestClien
     blob = _archive(client, entry["name"])
     (data_dir / "secret.key").unlink()
 
-    # The fixture sets NEXDECK_SECRET_KEY, so this models the Docker case.
+    # The fixture sets HEXDECK_SECRET_KEY, so this models the Docker case.
     backup.restore(blob, PASSWORD)
     assert not (data_dir / "secret.key").exists(), "no file was written where the variable rules"
 
@@ -385,7 +385,7 @@ def test_credentials_are_readable_again_after_a_restore(client: TestClient, monk
     every credential it just put back unreadable, which looks exactly like a
     corrupt backup.
     """
-    monkeypatch.delenv("NEXDECK_SECRET_KEY", raising=False)
+    monkeypatch.delenv("HEXDECK_SECRET_KEY", raising=False)
     from app import config, crypto
     from app.services.integrations import resolve_config
 
@@ -476,7 +476,7 @@ def test_a_restore_from_another_installation_can_still_be_read(client: TestClien
     a process that kept the old derived key considers every credential it just
     put back unreadable, which looks exactly like a corrupt archive.
     """
-    monkeypatch.delenv("NEXDECK_SECRET_KEY", raising=False)
+    monkeypatch.delenv("HEXDECK_SECRET_KEY", raising=False)
     from app import config, crypto
     from app.services.integrations import resolve_config
 
@@ -520,7 +520,7 @@ def test_the_preview_says_where_the_key_would_come_from(client: TestClient) -> N
     entry = _make(client)
     blob = _archive(client, entry["name"])
     seen = _upload(client, blob, path="inspect").json()
-    # The fixture sets NEXDECK_SECRET_KEY, and there is no key file, so this
+    # The fixture sets HEXDECK_SECRET_KEY, and there is no key file, so this
     # is the Docker case: nothing in the archive, the variable rules here.
     assert seen["key_inside"] is False
     assert seen["key_from_env"] is True

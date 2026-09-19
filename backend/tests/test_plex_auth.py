@@ -19,10 +19,10 @@ async def test_pin_url_and_polling(data_dir) -> None:  # noqa: ANN001
     pins = respx.post(f"{PLEX}/pins").mock(return_value=httpx.Response(201, json={"id": 4711, "code": "ABCD"}))
     challenge = await plex_auth.begin_login()
     assert challenge["id"] == "4711" and challenge["code"] == "ABCD"
-    assert challenge["url"].startswith("https://app.plex.tv/auth#?clientID=") and "code=ABCD" in challenge["url"] and "product%5D=nexdeck" in challenge["url"]
+    assert challenge["url"].startswith("https://app.plex.tv/auth#?clientID=") and "code=ABCD" in challenge["url"] and "product%5D=HexDeck" in challenge["url"]
     sent = pins.calls.last.request
     assert sent.url.params["strong"] == "true"
-    assert sent.headers["X-Plex-Product"] == "nexdeck" and len(sent.headers["X-Plex-Client-Identifier"]) == 32
+    assert sent.headers["X-Plex-Product"] == "HexDeck" and len(sent.headers["X-Plex-Client-Identifier"]) == 32
     assert sent.headers["X-Plex-Client-Identifier"] == plex_auth.client_identifier(), "one identifier per installation"
 
     poll = respx.get(f"{PLEX}/pins/4711").mock(side_effect=[httpx.Response(200, json={"id": 4711, "authToken": None}), httpx.Response(200, json={"id": 4711, "authToken": "tok-1"})])
@@ -68,7 +68,7 @@ def test_plex_routes_need_a_member_and_pass_plex_answers_through(client: TestCli
     assert started.status_code == 200 and started.json()["code"] == "ZZ"
     # ⚠️ POST with the code in the body, not GET with it in the address. The
     # browser polls this every two seconds while somebody agrees at plex.tv, so
-    # as a query parameter the code stood in nexdeck's own log and in every
+    # as a query parameter the code stood in HexDeck's own log and in every
     # line of the reverse proxy in front of it.
     polled = client.post("/api/v1/plex/pin/1", json={"code": "ZZ"}, headers=CSRF)
     assert polled.json() == {"token": "tok-9", "username": "plex-user"}

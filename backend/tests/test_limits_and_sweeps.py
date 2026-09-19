@@ -94,7 +94,7 @@ async def test_a_body_without_a_length_is_counted_as_it_arrives() -> None:
 
 def test_an_account_cannot_fill_the_disk(client: TestClient, monkeypatch) -> None:
     setup_admin(client)
-    monkeypatch.setenv("NEXDECK_UPLOAD_QUOTA_MB", "1")
+    monkeypatch.setenv("HEXDECK_UPLOAD_QUOTA_MB", "1")
     from app import config
 
     config.reset_settings_cache()
@@ -114,7 +114,7 @@ def test_an_account_cannot_fill_the_disk(client: TestClient, monkeypatch) -> Non
 
 def test_no_ceiling_means_no_ceiling(client: TestClient, monkeypatch) -> None:
     setup_admin(client)
-    monkeypatch.setenv("NEXDECK_UPLOAD_QUOTA_MB", "0")
+    monkeypatch.setenv("HEXDECK_UPLOAD_QUOTA_MB", "0")
     from app import config
 
     config.reset_settings_cache()
@@ -170,7 +170,7 @@ def test_an_outage_that_is_still_running_is_never_swept(client: TestClient) -> N
 
 def test_a_switched_off_sweep_keeps_everything(client: TestClient, monkeypatch) -> None:
     setup_admin(client)
-    monkeypatch.setenv("NEXDECK_KEEP_ACTION_LOG_DAYS", "0")
+    monkeypatch.setenv("HEXDECK_KEEP_ACTION_LOG_DAYS", "0")
     from app import config
 
     config.reset_settings_cache()

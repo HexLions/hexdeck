@@ -22,7 +22,7 @@ from ..config import get_settings
 from ..models import ActionLog, Asset, Notice, Outage, utcnow
 from . import password_reset
 
-logger = logging.getLogger("nexdeck.retention")
+logger = logging.getLogger("hexdeck.retention")
 
 
 def prune_old_records(db: Session) -> dict[str, int]:

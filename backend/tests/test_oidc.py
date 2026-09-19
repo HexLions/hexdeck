@@ -7,7 +7,7 @@ and four of the findings of that day sat inside it.
 
 The signature check itself is pyjwt's, and it is not retested here: ``claims``
 is replaced so the tests can say what the provider claimed and get on with the
-part that belongs to nexdeck.
+part that belongs to HexDeck.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ PROVIDER = {
     "slug": "keycloak",
     "label": "Keycloak",
     "issuer_url": "https://id.example.com/realms/home",
-    "client_id": "nexdeck",
+    "client_id": "HexDeck",
     "client_secret": "very-secret",
     "scopes": "openid profile email",
     "enabled": True,
@@ -50,7 +50,7 @@ DOCUMENT = {
 def provider(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> dict:
     # ⚠️ Without a public URL the sign-in stops before it starts: the return
     # address is built from it, and OIDC cannot work without one.
-    monkeypatch.setenv("NEXDECK_PUBLIC_URL", "https://deck.example.com")
+    monkeypatch.setenv("HEXDECK_PUBLIC_URL", "https://deck.example.com")
     from app import config
 
     config.reset_settings_cache()

@@ -8,15 +8,15 @@ carry off the machine. Only the second one is a backup.
 
 ⚠️ **The database alone is not enough.** Every service credential in it is
 encrypted, and the key is not in the database. It sits beside it in
-``secret.key``. Restore a database without that file and nexdeck quietly makes
+``secret.key``. Restore a database without that file and HexDeck quietly makes
 a new key, after which not one connection can be read: no Radarr, no Plex, no
 mail server, and no hint as to why.
 
 ⚠️ **Which is exactly why the archive carries a password.** With the key
 inside, the file is everything somebody needs.
 
-⚠️ **AES-ZIP and not a format of our own.** A format only nexdeck can open is
-useless on the day nexdeck is what broke. A ZIP opens with 7-Zip, with WinRAR
+⚠️ **AES-ZIP and not a format of our own.** A format only HexDeck can open is
+useless on the day HexDeck is what broke. A ZIP opens with 7-Zip, with WinRAR
 and with the Explorer, so the data stays reachable without us.
 """
 
@@ -39,7 +39,7 @@ from .. import __version__
 from ..config import get_settings
 from ..db import paused_for_swap
 
-logger = logging.getLogger("nexdeck.backup")
+logger = logging.getLogger("hexdeck.backup")
 
 FOLDER = "backups"
 AUTOMATIC = "automatic"
@@ -70,12 +70,12 @@ CACHE_TABLES = ("history_samples", "history_minutes")
 
 WITHOUT_KEY = """This archive has no secret.key.
 
-The installation it came from keeps its key in the NEXDECK_SECRET_KEY
+The installation it came from keeps its key in the HEXDECK_SECRET_KEY
 environment variable instead of in a file, so the key is in that machine's
 Docker or systemd configuration and not here.
 
 Restoring this database without that same value leaves every stored service
-credential unreadable. Copy NEXDECK_SECRET_KEY across as well.
+credential unreadable. Copy HEXDECK_SECRET_KEY across as well.
 """
 
 
@@ -171,7 +171,7 @@ def latest_schema() -> int:
 def compatible(profile: Profile) -> tuple[bool, str]:
     """Could this archive go into the running build?
 
-    ⚠️ Forwards only. A backup from a newer nexdeck carries tables and columns
+    ⚠️ Forwards only. A backup from a newer HexDeck carries tables and columns
     this build has never heard of, and there is no migration that runs
     backwards. An older one is fine: the ordinary startup path brings it up.
     """
@@ -194,7 +194,7 @@ def create(*, kind: str = MANUAL, note: str = "") -> Path:
 
     stamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
     extra = _safe_note(note)
-    base = f"nexdeck-{kind}-{__version__}-{stamp}" + (f"-{extra}" if extra else "")
+    base = f"hexdeck-{kind}-{__version__}-{stamp}" + (f"-{extra}" if extra else "")
 
     target = target_folder / f"{base}.db"
     # VACUUM INTO refuses to write over a file that is already there.
@@ -401,9 +401,9 @@ def archive(name: str, password: str) -> bytes:
 
         # ⚠️ Last, and with the real list. Written earlier it would be a guess:
         # it would name ``secret.key`` even where only the note about it went
-        # in. Nothing in nexdeck reads this field, so the only reader it could
+        # in. Nothing in HexDeck reads this field, so the only reader it could
         # mislead is the person the open ZIP was chosen for, opening it on a
-        # day when nexdeck is not running.
+        # day when HexDeck is not running.
         profile.contains = inside
         archive_file.writestr(PROFILE, profile.as_json())
 
@@ -452,8 +452,8 @@ class Verdict:
     #:
     #: ⚠️ Not the same question as whether the target has one, and mixing the
     #: two made the preview reassuring in exactly the worst case. An archive
-    #: from an installation that keeps its key in NEXDECK_SECRET_KEY carries
-    #: no file; restore it somewhere without that variable and nexdeck makes a
+    #: from an installation that keeps its key in HEXDECK_SECRET_KEY carries
+    #: no file; restore it somewhere without that variable and HexDeck makes a
     #: new key. After that nothing stored can be read, and the key is the last
     #: thing anybody suspects.
     key_inside: bool
@@ -468,7 +468,7 @@ def _open(data: bytes, password: str) -> tuple[Profile, bytes, str | None, dict[
             archive_file.setpassword(password.encode("utf-8"))
             names = set(archive_file.namelist())
             if DATABASE not in names:
-                raise BackupError("not_a_backup", "This file is not a nexdeck backup.")
+                raise BackupError("not_a_backup", "This file is not a HexDeck backup.")
             try:
                 raw_db = archive_file.read(DATABASE)
             except RuntimeError as failure:
@@ -486,23 +486,23 @@ def _open(data: bytes, password: str) -> tuple[Profile, bytes, str | None, dict[
                 if name.split("/", 1)[0] in EXTRAS and not name.endswith("/")
             }
             for name in extras:
-                # ⚠️ A nexdeck archive holds these folders flat. ``avatars/..``
+                # ⚠️ A HexDeck archive holds these folders flat. ``avatars/..``
                 # starts with ``avatars`` all the same, and the check before
                 # writing let it through after the database had already been
                 # swapped, so the restore stopped halfway. Refused here, before
                 # anything is touched. Found on 12.09.2026.
                 filename = name.partition("/")[2]
                 if filename in (".", "..") or any(mark in filename for mark in ("/", "\\", "\x00")):
-                    raise BackupError("not_a_backup", "This file is not a nexdeck backup.")
+                    raise BackupError("not_a_backup", "This file is not a HexDeck backup.")
     except BackupError:
         raise
     except (RuntimeError, ValueError, json.JSONDecodeError) as failure:
         raise BackupError("wrong_password", "The password does not open this archive.") from failure
     except Exception as failure:  # noqa: BLE001 - a broken ZIP arrives as anything
-        raise BackupError("not_a_backup", "This file is not a nexdeck backup.") from failure
+        raise BackupError("not_a_backup", "This file is not a HexDeck backup.") from failure
 
     if not raw_db.startswith(b"SQLite format 3\x00"):
-        raise BackupError("not_a_backup", "This file is not a nexdeck backup.")
+        raise BackupError("not_a_backup", "This file is not a HexDeck backup.")
     if not profile.schema:
         # Older archives had no profile; ask the database itself.
         profile.schema = _schema_from_bytes(raw_db)
@@ -621,7 +621,7 @@ def restore(data: bytes, password: str, *, without_safety_copy: bool = False) ->
         # computed "restore_" + reason would hide it from the guard that
         # checks every code has a translation, and the guard would stay green
         # while the message came out in the wrong language.
-        raise BackupError("too_new", "This backup comes from a newer nexdeck than this one.")
+        raise BackupError("too_new", "This backup comes from a newer HexDeck than this one.")
 
     from ..config import get_settings as read_settings
     from ..crypto import forget_key
@@ -674,7 +674,7 @@ def restore(data: bytes, password: str, *, without_safety_copy: bool = False) ->
             # The environment variable always wins; a file beside it changes
             # nothing. Somebody who does not know that searches for a while.
             logger.warning(
-                "The restored backup carries a secret.key, but NEXDECK_SECRET_KEY is set and wins. "
+                "The restored backup carries a secret.key, but HEXDECK_SECRET_KEY is set and wins. "
                 "Stored credentials stay unreadable unless the variable holds the same value."
             )
         else:

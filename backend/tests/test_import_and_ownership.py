@@ -87,14 +87,14 @@ def test_a_file_that_is_not_even_a_board_does_not_take_the_start_up_down(client:
     # comes apart deeper down, which is the case the net is there for.
     path = _provision(data_dir / "boards", "board: {name: wrong}\npages: [{name: one, widgets: [{kind: core.clock, layout: nope}]}]\n", "wrong.yaml")
 
-    with caplog.at_level(logging.WARNING, logger="nexdeck.provisioning"):
+    with caplog.at_level(logging.WARNING, logger="HexDeck.provisioning"):
         provisioning.load_all()
     assert _cards_of("the-wall") == ["a note", "time"], "the good file was not loaded"
 
     # And it is not tried again on every pass of the watch: the file has not
     # changed, so the next round says nothing.
     caplog.clear()
-    with caplog.at_level(logging.WARNING, logger="nexdeck.provisioning"):
+    with caplog.at_level(logging.WARNING, logger="HexDeck.provisioning"):
         for again in provisioning._files():
             if provisioning._seen.get(again.name) != again.stat().st_mtime:
                 provisioning._load(again)

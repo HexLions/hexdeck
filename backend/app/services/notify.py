@@ -19,7 +19,7 @@ from ..models import Notice, NotificationChannel, Role, Subscription, User
 from .loop import spawn
 from .sse import hub, user_topic
 
-logger = logging.getLogger("nexdeck.notify")
+logger = logging.getLogger("hexdeck.notify")
 
 #: What somebody can be told about. Every one of these has to actually fire:
 #: a list that offers three things that never happen is worse than a short
@@ -39,7 +39,7 @@ EVENTS: dict[str, str] = {
     "auth_rejected": "A service rejected its credentials",
     "cert_expiring": "A certificate is running out",
     "disk_filling": "A disk is filling up",
-    "update_available": "A new nexdeck version",
+    "update_available": "A new HexDeck version",
     "test": "Test message",
 }
 

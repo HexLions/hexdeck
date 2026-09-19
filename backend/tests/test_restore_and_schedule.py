@@ -1,7 +1,7 @@
 """What has to hold around a restore, and what runs by itself.
 
-⚠️ Restoring is the one action in nexdeck that cannot be undone from inside
-nexdeck, and until 07.09.2026 three things about it were not true:
+⚠️ Restoring is the one action in HexDeck that cannot be undone from inside
+HexDeck, and until 07.09.2026 three things about it were not true:
 
 * the safety copy of the current state was called the only way back and was
   skipped with a warning whenever it failed
@@ -91,8 +91,8 @@ def test_the_list_is_newest_first_whatever_the_names_say(client: TestClient) -> 
     setup_admin(client)
     root = backup.folder()
     root.mkdir(parents=True, exist_ok=True)
-    for number, name in enumerate(("nexdeck-manual-0.9.0-2020-01-01_000000.db",
-                                   "nexdeck-automatic-0.10.0-2026-09-07_120000.db")):
+    for number, name in enumerate(("HexDeck-manual-0.9.0-2020-01-01_000000.db",
+                                   "HexDeck-automatic-0.10.0-2026-09-07_120000.db")):
         path = root / name
         path.write_bytes(b"SQLite format 3\x00" + b"\x00" * 100)
         # The second one is the newer file, whatever its name sorts like.
@@ -101,13 +101,13 @@ def test_the_list_is_newest_first_whatever_the_names_say(client: TestClient) -> 
         os.utime(path, (time.time() + number, time.time() + number))
 
     names = [entry.name for entry in backup.listing()]
-    assert names[0] == "nexdeck-automatic-0.10.0-2026-09-07_120000.db", names
+    assert names[0] == "HexDeck-automatic-0.10.0-2026-09-07_120000.db", names
 
 
 def test_a_snapshot_is_written_by_itself_and_then_left_alone(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     """⚠️ The sweeper for automatic snapshots existed and the writer did not."""
     setup_admin(client)
-    monkeypatch.setenv("NEXDECK_BACKUP_EVERY_HOURS", "24")
+    monkeypatch.setenv("HEXDECK_BACKUP_EVERY_HOURS", "24")
     from app import config
 
     config.reset_settings_cache()
@@ -116,7 +116,7 @@ def test_a_snapshot_is_written_by_itself_and_then_left_alone(client: TestClient,
     assert first is not None, "no snapshot was written at all"
     assert backup.write_one_if_due() is None, "a second one inside the interval"
 
-    monkeypatch.setenv("NEXDECK_BACKUP_EVERY_HOURS", "0")
+    monkeypatch.setenv("HEXDECK_BACKUP_EVERY_HOURS", "0")
     config.reset_settings_cache()
     assert backup.write_one_if_due() is None, "zero hours means off"
 

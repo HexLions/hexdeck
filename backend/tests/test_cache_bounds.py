@@ -73,7 +73,7 @@ async def test_what_an_adapter_keeps_of_its_own_survives_a_sweep() -> None:
 ])
 def test_the_machines_own_metadata_service_is_never_fetched(url: str) -> None:
     """A widget option is enough to name an address. This one hands out the
-    credentials of the host nexdeck runs on."""
+    credentials of the host HexDeck runs on."""
     with pytest.raises(AdapterError) as refused:
         guard_outbound(url)
     assert refused.value.code == "forbidden_host"

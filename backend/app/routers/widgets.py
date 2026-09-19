@@ -39,7 +39,7 @@ from ..services.state import live
 
 router = APIRouter(prefix="/api/v1", tags=["widgets"])
 
-logger = logging.getLogger("nexdeck.widgets")
+logger = logging.getLogger("hexdeck.widgets")
 
 
 def _widget(db: DbSession, widget_id: int) -> tuple[Widget, Page]:
@@ -260,7 +260,7 @@ def _image_client(insecure: bool) -> httpx.AsyncClient:
     if not insecure:
         return collector.client
     if _insecure_client is None or _insecure_client.is_closed:
-        _insecure_client = outbound_client(verify=False, follow_redirects=True, timeout=15.0, headers={"User-Agent": "nexdeck"})
+        _insecure_client = outbound_client(verify=False, follow_redirects=True, timeout=15.0, headers={"User-Agent": "hexdeck"})
     return _insecure_client
 
 
@@ -305,7 +305,7 @@ async def widget_image(widget_id: int, path: str, request: Request, user: Option
         raise error("unreachable", f"The service did not deliver the image: {failure.__class__.__name__}.", status.HTTP_502_BAD_GATEWAY) from failure
     content_type = response.headers.get("content-type", "") or source.media_type
     # ⚠️ "image/" is not enough. image/svg+xml passes that test and is not a
-    # picture but a document that runs script, handed out from nexdeck's own
+    # picture but a document that runs script, handed out from HexDeck's own
     # address. No service sends a poster as SVG.
     if content_type.split(";")[0].strip().lower() == "image/svg+xml":
         raise error("no_image", "The service answered with SVG, which is not served as an image.", status.HTTP_404_NOT_FOUND)
@@ -328,7 +328,7 @@ _streams_open = 0
 @router.get("/widgets/{widget_id}/stream", summary="Relay a widget's live video through the server")
 async def widget_stream(widget_id: int, request: Request, user: OptionalUser, db: DbSession) -> StreamingResponse:
     """Live video (HTTP-FLV from a camera or recorder) flows through the server with
-    the service's credentials; the browser only ever talks to nexdeck and plays
+    the service's credentials; the browser only ever talks to HexDeck and plays
     the bytes with Media Source Extensions, no transcoder anywhere."""
     global _streams_open
     widget, page = _widget(db, widget_id)

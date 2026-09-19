@@ -20,8 +20,8 @@ from app import config
 
 @pytest.fixture
 def key_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
-    monkeypatch.setenv("NEXDECK_DATA_DIR", str(tmp_path))
-    monkeypatch.delenv("NEXDECK_SECRET_KEY", raising=False)
+    monkeypatch.setenv("HEXDECK_DATA_DIR", str(tmp_path))
+    monkeypatch.delenv("HEXDECK_SECRET_KEY", raising=False)
     config.reset_settings_cache()
     yield tmp_path
     config.reset_settings_cache()

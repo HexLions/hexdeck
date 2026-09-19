@@ -25,7 +25,7 @@ from ..models import PasswordReset, Role, Session, User, utcnow
 from ..security import hash_token, new_opaque_token, now_ms
 from . import mail as mail_service
 
-logger = logging.getLogger("nexdeck.password_reset")
+logger = logging.getLogger("hexdeck.password_reset")
 
 #: Long enough to walk to another room, short enough that a link left in an
 #: inbox is not a spare key.
@@ -34,8 +34,8 @@ VALID_MINUTES = 30
 #: button ten times must not leave ten open doors.
 MAX_OPEN = 3
 
-SUBJECT = "Set a new nexdeck password"
-BODY = """Somebody asked to set a new password for the nexdeck account "{username}".
+SUBJECT = "Set a new HexDeck password"
+BODY = """Somebody asked to set a new password for the HexDeck account "{username}".
 
 Open this link within {minutes} minutes:
 
@@ -61,7 +61,7 @@ def _public_url(db: DbSessionType) -> str:
     """Where browsers reach this installation, read by ``services.public_url``.
 
     ⚠️ The setting **or** the environment variable. This looked only at the
-    setting, so an installation configured through ``NEXDECK_PUBLIC_URL`` in
+    setting, so an installation configured through ``HEXDECK_PUBLIC_URL`` in
     its compose file, which is the ordinary case in Docker, sent out a link
     with no host in it.
     """
@@ -97,7 +97,7 @@ def request(db: DbSessionType, username_or_email: str) -> None:
         # mail that already arrived and was useless.
         logger.warning(
             "A password reset for %s was not sent: this installation has no public URL. "
-            "Set NEXDECK_PUBLIC_URL, or the address under System, Address.",
+            "Set HEXDECK_PUBLIC_URL, or the address under System, Address.",
             user.username,
         )
         return
@@ -191,7 +191,7 @@ RESCUE_MINUTES = 15
 def rescue_link(base: str = "") -> str:
     """A one-time sign-in link for an administrator who is locked out.
 
-    ⚠️ The only way back into nexdeck used to be a mail, and without a mail
+    ⚠️ The only way back into HexDeck used to be a mail, and without a mail
     server the sign-in page did not even offer the link. An installation whose
     last administrator lost their password was finished: no switch, no rescue,
     nothing short of editing the database by hand.

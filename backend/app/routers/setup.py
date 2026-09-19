@@ -18,7 +18,7 @@ from ..services.collector import collector
 from .auth import open_session, user_public
 
 router = APIRouter(prefix="/api/v1/setup", tags=["setup"])
-logger = logging.getLogger("nexdeck.setup")
+logger = logging.getLogger("hexdeck.setup")
 
 
 def needs_setup(db: DbSession) -> bool:
@@ -39,7 +39,7 @@ def setup_status(db: DbSession) -> SetupStatus:
 async def run_setup(body: SetupBody, request: Request, response: Response, db: DbSession) -> UserPublic:
     """Creates the administrator, the starter board and, when asked, the demo."""
     if not needs_setup(db):
-        raise error("already_set_up", "nexdeck is already set up.", status.HTTP_409_CONFLICT)
+        raise error("already_set_up", "HexDeck is already set up.", status.HTTP_409_CONFLICT)
     # A fresh installation has nothing "new" to announce: the first account
     # has seen this version by definition.
     user = User(username=body.username, display_name=body.display_name.strip() or body.username, password_hash=hash_password(body.password), role=Role.admin.value, locale=body.locale, seen_version=__version__)

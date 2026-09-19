@@ -60,7 +60,7 @@ from .services.health import health as health_service
 from .services.logs import log_tailer
 from .services.loop import set_main_loop
 
-logger = logging.getLogger("nexdeck")
+logger = logging.getLogger("hexdeck")
 
 
 def _housekeeping_once() -> None:
@@ -124,7 +124,7 @@ def _rescue_and_exit() -> None:
     raise SystemExit(0)
 
 
-if os.environ.get("NEXDECK_RESCUE", "") not in ("", "0", "false"):
+if os.environ.get("HEXDECK_RESCUE", "") not in ("", "0", "false"):
     _rescue_and_exit()
 
 
@@ -151,10 +151,10 @@ async def lifespan(app: FastAPI):
     await hass_listener.start()
     housekeeping = asyncio.create_task(_housekeeping(), name="housekeeping")
     provisioning_task = asyncio.create_task(provisioning.watch(), name="provisioning")
-    logger.info("nexdeck %s ready.", __version__)
+    logger.info("HexDeck %s ready.", __version__)
     if LEGACY_NAMES_ADOPTED:
         logger.warning(
-            "Read %d setting(s) under the old NEXDECK_ prefix: %s. They still work; rename them to HEXDECK_.",
+            "Read %d setting(s) under the old HEXDECK_ prefix: %s. They still work; rename them to HEXDECK_.",
             len(LEGACY_NAMES_ADOPTED), ", ".join(LEGACY_NAMES_ADOPTED),
         )
     try:
@@ -176,7 +176,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="nexdeck",
+    title="HexDeck",
     version=__version__,
     description="The live homelab dashboard of the nexapps family.",
     lifespan=lifespan,
@@ -196,7 +196,7 @@ if "*" in _cors:
     # "let any site the operator visits do anything as them". Measured on
     # 07.09.2026 against a running instance.
     raise RuntimeError(
-        "NEXDECK_CORS_ORIGINS='*' cannot be combined with signing in, because it would let any "
+        "HEXDECK_CORS_ORIGINS='*' cannot be combined with signing in, because it would let any "
         "site act as the signed-in user. Name the origins instead, comma separated.",
     )
 if _cors:
@@ -278,7 +278,7 @@ async def security_headers(request: Request, call_next):  # noqa: ANN001
         # proxy hands out SVG it fetched from a public collection, and the
         # image proxy passes through whatever content type the service sent.
         # SVG is a document that can run script, and it would have run in
-        # nexdeck's own origin. A route that needs something looser sets its
+        # HexDeck's own origin. A route that needs something looser sets its
         # own header; this is only the floor.
         response.headers.setdefault(
             "Content-Security-Policy",
@@ -289,7 +289,7 @@ async def security_headers(request: Request, call_next):  # noqa: ANN001
         # ⚠️ The page a kiosk link opens carries the token in its address, and
         # with same-origin every script, style and picture of that first load
         # went out with the whole address as its Referer, into the access log
-        # of every proxy in front of nexdeck. The page takes the token out of
+        # of every proxy in front of HexDeck. The page takes the token out of
         # the address once it is in; until then nothing passes it on.
         referrer = "no-referrer" if request.url.path.startswith("/k/") else "same-origin"
         response.headers.setdefault("Referrer-Policy", referrer)

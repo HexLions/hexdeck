@@ -17,7 +17,7 @@ from .auth import user_public
 
 router = APIRouter(prefix="/api/v1/users", tags=["users"])
 
-logger = logging.getLogger("nexdeck.users")
+logger = logging.getLogger("hexdeck.users")
 
 
 @router.get("", summary="List users")

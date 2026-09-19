@@ -228,7 +228,7 @@ def test_icon_names_and_search_merge_both_collections(client: TestClient, monkey
 
 
 def test_bundled_logos_are_served_and_listed_without_network(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
-    """The nexapps logos ship with nexdeck: no collection carries them, and no request leaves the house."""
+    """The nexapps logos ship with HexDeck: no collection carries them, and no request leaves the house."""
     import time
 
     from app.services import icons
@@ -383,7 +383,7 @@ async def test_the_collector_says_goodbye_to_its_sessions(client: TestClient, mo
     from app.services.collector import collector
 
     setup_admin(client)
-    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "nexdeck", "password": "pw"}}, headers=CSRF).json()
+    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "HexDeck", "password": "pw"}}, headers=CSRF).json()
     collector._caches[integration["id"]] = {"reolink_token": ("T1", 9e12)}
     goodbyes: list[tuple[int | None, object]] = []
 

@@ -206,7 +206,7 @@ SYSTEM_ANSWERS = {
         {"id": "volume_1", "display_name": "volume_1", "status": "normal", "size": {"used": "43500000000000", "total": "125700000000000"}},
     ]},
 }
-CONFIG = {"url": NAS, "username": "nexdeck", "password": "a-password", "insecure": True}
+CONFIG = {"url": NAS, "username": "HexDeck", "password": "a-password", "insecure": True}
 
 
 def _dsm() -> None:

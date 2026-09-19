@@ -142,7 +142,7 @@ def create_starter(db: Session, owner_id: int | None, docker_host: str = "") -> 
     db.flush()
     widgets: list[tuple[str, str, dict[str, Any], int | None]] = [
         ("core.clock", "Clock", {"date": True}, None),
-        ("core.markdown", "Welcome", {"content": "**Welcome to nexdeck.**\n\nSwitch to edit mode with the pencil, add integrations under Settings, and drag widgets where you want them."}, None),
+        ("core.markdown", "Welcome", {"content": "**Welcome to HexDeck.**\n\nSwitch to edit mode with the pencil, add integrations under Settings, and drag widgets where you want them."}, None),
     ]
     if docker_host:
         integration = Integration(kind="docker", name="Docker", config={"host": docker_host, "insecure": False}, created_by=owner_id)

@@ -152,7 +152,7 @@ def test_export_and_import_roundtrip(client: TestClient) -> None:
     assert exported.status_code == 200
     text = exported.text
     assert "secret-key" not in text, "secrets never leave in a board file"
-    assert "${NEXDECK_RADARR_" in text
+    assert "${HEXDECK_RADARR_" in text
     assert "radarr.queue" in text and "core.markdown" in text
     imported = client.post("/api/v1/boards/import", json={"yaml_text": text, "slug": "media-copy"}, headers=CSRF)
     assert imported.status_code == 201, imported.text
@@ -300,7 +300,7 @@ def test_camera_snapshots_are_fresh_and_keep_the_session_token_on_the_server(cli
 
     setup_admin(client)
     board = _board(client)
-    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "nexdeck", "password": "pw", "insecure": False}}, headers=CSRF).json()
+    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "HexDeck", "password": "pw", "insecure": False}}, headers=CSRF).json()
     widget = _widget(client, board["pages"][0]["id"], kind="reolink.camera", integration_id=integration["id"], options={"channel": 1})
     with respx.mock:
         respx.post("http://cam/api.cgi").mock(side_effect=_reolink_device)
@@ -320,7 +320,7 @@ def test_live_video_is_relayed_through_the_server(client: TestClient) -> None:
 
     setup_admin(client)
     board = _board(client)
-    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "nexdeck", "password": "pw", "insecure": False}}, headers=CSRF).json()
+    integration = client.post("/api/v1/integrations", json={"kind": "reolink", "name": "Cams", "config": {"url": "http://cam", "username": "HexDeck", "password": "pw", "insecure": False}}, headers=CSRF).json()
     widget = _widget(client, board["pages"][0]["id"], kind="reolink.camera", integration_id=integration["id"], options={"channel": 0, "mode": "live", "quality": "sub"})
     with respx.mock:
         respx.post("http://cam/api.cgi").mock(side_effect=_reolink_device)

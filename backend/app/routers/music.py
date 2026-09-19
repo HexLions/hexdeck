@@ -43,7 +43,7 @@ from .widgets import _image_client
 
 router = APIRouter(prefix="/api/v1", tags=["music"])
 
-logger = logging.getLogger("nexdeck.music")
+logger = logging.getLogger("hexdeck.music")
 
 #: How many tracks the server relays at once.
 #:

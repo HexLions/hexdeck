@@ -112,7 +112,7 @@ async def test_traefik_counts_broken_routers(ctx: Context) -> None:
     }))
     # The broken one stands last on purpose: only the sorting can bring it up.
     respx.get("http://traefik:8080/api/http/routers").mock(return_value=httpx.Response(200, json=[
-        {"name": "deck@docker", "rule": "Host(`deck.example.com`)", "status": "enabled", "service": "nexdeck"},
+        {"name": "deck@docker", "rule": "Host(`deck.example.com`)", "status": "enabled", "service": "HexDeck"},
         {"name": "photos@docker", "rule": "Host(`photos.example.com`)", "status": "disabled", "service": "immich"},
     ]))
     traefik = get_adapter("traefik")
@@ -141,7 +141,7 @@ async def test_npm_signs_in_once_and_warns_before_a_certificate_ends(ctx: Contex
         {"nice_name": "intern.example.org", "domain_names": ["intern.example.org"], "expires_on": soon},
     ]))
     respx.get("http://npm:81/api/nginx/proxy-hosts").mock(return_value=httpx.Response(200, json=[
-        {"domain_names": ["deck.example.com"], "forward_scheme": "http", "forward_host": "nexdeck", "forward_port": 8000, "enabled": 1, "certificate_id": 1},
+        {"domain_names": ["deck.example.com"], "forward_scheme": "http", "forward_host": "HexDeck", "forward_port": 8000, "enabled": 1, "certificate_id": 1},
         {"domain_names": ["old.example.com"], "forward_scheme": "http", "forward_host": "retired", "forward_port": 80, "enabled": 0, "certificate_id": 0},
     ]))
     npm = get_adapter("npm")

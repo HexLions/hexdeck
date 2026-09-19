@@ -1,6 +1,6 @@
 """How the installation looks: the accent colour and a style sheet of its own.
 
-nexdeck ships one look in two brightnesses. That is enough for most, and not
+HexDeck ships one look in two brightnesses. That is enough for most, and not
 enough for the people who put a dashboard on a wall and want it to match the
 room. Two knobs are all it takes: the colour everything highlights with, and a
 style sheet the operator writes.
@@ -39,7 +39,7 @@ FORBIDDEN = (
     (re.compile(r"<\s*script", re.I), "A script does not belong in a style sheet."),
 )
 
-#: The ready-made colours. The first one is what nexdeck has always looked like.
+#: The ready-made colours. The first one is what HexDeck has always looked like.
 PRESETS: dict[str, str] = {
     "cyan": "#22d3ee",
     "violet": "#a78bfa",

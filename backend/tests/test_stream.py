@@ -31,7 +31,7 @@ def _free_port() -> int:
 @pytest.fixture
 def live_server(tmp_path: Path) -> Iterator[str]:
     port = _free_port()
-    env = {**os.environ, "NEXDECK_DATA_DIR": str(tmp_path / "data"), "NEXDECK_SECRET_KEY": "stream-test-secret", "NEXDECK_LOG_LEVEL": "WARNING"}
+    env = {**os.environ, "HEXDECK_DATA_DIR": str(tmp_path / "data"), "HEXDECK_SECRET_KEY": "stream-test-secret", "HEXDECK_LOG_LEVEL": "WARNING"}
     process = subprocess.Popen(
         [sys.executable, "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", str(port), "--log-level", "warning"],
         cwd=BACKEND, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,

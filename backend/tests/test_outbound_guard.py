@@ -1,14 +1,14 @@
-"""Which addresses nexdeck will call, and which it will not.
+"""Which addresses HexDeck will call, and which it will not.
 
 The server sits inside the network and reaches what a member's browser cannot:
-nexdeck's own API, the router, the hypervisor. A notification channel takes an
+HexDeck's own API, the router, the hypervisor. A notification channel takes an
 address from any member and reports the answer back, which turned that field
 into a way of asking what else is listening.
 
 Two ranges are barred and nothing else. Private networks stay open on purpose:
 a homelab dashboard that cannot reach 192.168.x is no use to anyone.
 
-* loopback, because that is nexdeck itself and whatever else listens beside it
+* loopback, because that is HexDeck itself and whatever else listens beside it
 * 169.254.0.0/16, because it hands out the host's credentials on every cloud
 
 Decided on 07.09.2026, after the first draft barred far more and would have
@@ -28,7 +28,7 @@ from app.adapters.base import AdapterError, guard_member_target, guard_outbound,
 
 @pytest.fixture(autouse=True)
 def fresh_settings(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.delenv("NEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
+    monkeypatch.delenv("HEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
     config.reset_settings_cache()
     yield
     config.reset_settings_cache()
@@ -108,8 +108,8 @@ def test_only_http_and_https() -> None:
 
 
 def test_the_operator_can_lift_it(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Somebody really does run a notification service next to nexdeck."""
-    monkeypatch.setenv("NEXDECK_ALLOW_LOOPBACK_TARGETS", "1")
+    """Somebody really does run a notification service next to HexDeck."""
+    monkeypatch.setenv("HEXDECK_ALLOW_LOOPBACK_TARGETS", "1")
     config.reset_settings_cache()
     guard_member_target("http://127.0.0.1:8000/")
 

@@ -302,7 +302,7 @@ async def test_nomad_refuses_a_job_name_that_is_not_one(ctx: Context) -> None:
 async def test_nomad_names_a_refused_token(ctx: Context) -> None:
     """⚠️ Nomad's own words, in plain text: "ACL token not found" is a typo in
     the token, "Permission denied" a policy that is missing a rule. One of them
-    is fixed in nexdeck and the other in Nomad."""
+    is fixed in HexDeck and the other in Nomad."""
     respx.get(f"{NOMAD}/v1/jobs").mock(return_value=httpx.Response(403, text="ACL token not found"))
     with pytest.raises(AuthFailed) as refusal:
         await get_adapter("nomad").fetch("jobs", CONFIG, {}, ctx)

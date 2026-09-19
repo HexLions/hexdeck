@@ -12,7 +12,7 @@ from ..services import plex_auth
 
 router = APIRouter(prefix="/api/v1/plex", tags=["plex"])
 
-logger = logging.getLogger("nexdeck.plex")
+logger = logging.getLogger("hexdeck.plex")
 
 
 class ServersBody(BaseModel):
@@ -50,7 +50,7 @@ async def poll_pin(pin_id: str, body: PlexPinBody, user: AdminUser) -> dict:
 
     ⚠️ POST with the code in the body, not GET with it in the address. The
     code claims the PIN, and the browser polls this every two seconds: as a
-    query parameter it was written into nexdeck's own log and into every line
+    query parameter it was written into HexDeck's own log and into every line
     of the reverse proxy in front of it, where it stays long after the sign-in.
     """
     code = body.code
@@ -60,7 +60,7 @@ async def poll_pin(pin_id: str, body: PlexPinBody, user: AdminUser) -> dict:
     except plex_auth.PlexTvError as failure:
         raise _plex_failure(failure) from failure
     if token:
-        # Somebody linked a Plex account to nexdeck. The token is never
+        # Somebody linked a Plex account to HexDeck. The token is never
         # written down here; that it happened, and to whom, is.
         logger.info("A Plex account (%s) was linked by %s.", username or "unknown", user.username)
     return {"token": token, "username": username}

@@ -28,13 +28,13 @@ from .conftest import CSRF, setup_admin
 def catchers_are_reachable(monkeypatch: pytest.MonkeyPatch) -> None:
     """The catchers below listen on 127.0.0.1, and that is barred by default.
 
-    ⚠️ Since 07.09.2026 nexdeck refuses to call loopback and the link-local
+    ⚠️ Since 07.09.2026 HexDeck refuses to call loopback and the link-local
     range, because a notification channel takes an address from any member and
     reports the answer back, which made that field a way of asking what else
     listens beside the server. The catchers here are exactly the case the
     setting exists for, so the tests turn it on and thereby prove it works.
     """
-    monkeypatch.setenv("NEXDECK_ALLOW_LOOPBACK_TARGETS", "1")
+    monkeypatch.setenv("HEXDECK_ALLOW_LOOPBACK_TARGETS", "1")
     from app import config
 
     config.reset_settings_cache()
@@ -177,7 +177,7 @@ def test_the_mail_channel_delivers_a_message(client: TestClient, smtp: SmtpCatch
     setup_admin(client)
     stored = client.put("/api/v1/settings/mail", json={
         "host": "127.0.0.1", "port": smtp.port, "security": "none",
-        "from_address": "deck@example.com", "from_name": "nexdeck",
+        "from_address": "deck@example.com", "from_name": "HexDeck",
     }, headers=CSRF)
     assert stored.status_code == 200, stored.text
     result = send_through(client, "email", {"to_address": "you@example.com"})
@@ -186,7 +186,7 @@ def test_the_mail_channel_delivers_a_message(client: TestClient, smtp: SmtpCatch
     mail = smtp.mails[0]
     assert mail["from"] == "<deck@example.com>"
     assert mail["to"] == ["<you@example.com>"]
-    assert "Subject: [nexdeck] nexdeck test message" in mail["body"]
+    assert "Subject: [HexDeck] HexDeck test message" in mail["body"]
     assert "the channel works" in mail["body"]
 
 
@@ -198,7 +198,7 @@ def test_ntfy_posts_to_the_topic_with_its_headers(client: TestClient, http: Http
     request = http.requests[0]
     assert request["path"] == "/probe"
     assert "the channel works" in request["body"]
-    assert request["headers"]["title"] == "nexdeck test message"
+    assert request["headers"]["title"] == "HexDeck test message"
     # Without the header a protected topic answers 403, and the message is gone.
     assert request["headers"]["authorization"] == "Bearer tk_probe"
 
@@ -211,7 +211,7 @@ def test_gotify_posts_a_message_with_its_token(client: TestClient, http: HttpCat
     assert request["path"].startswith("/message")
     assert "token=probe-token" in request["path"]
     body = json.loads(request["body"])
-    assert body["title"] == "nexdeck test message"
+    assert body["title"] == "HexDeck test message"
     assert "the channel works" in body["message"]
 
 
@@ -220,8 +220,8 @@ def test_discord_posts_an_embed(client: TestClient, http: HttpCatcher) -> None:
     result = send_through(client, "discord", {"webhook": f"http://127.0.0.1:{http.port}/webhook"})
     assert result["ok"] is True, result
     body = json.loads(http.requests[0]["body"])
-    assert body["username"] == "nexdeck"
-    assert body["embeds"][0]["title"] == "nexdeck test message"
+    assert body["username"] == "HexDeck"
+    assert body["embeds"][0]["title"] == "HexDeck test message"
 
 
 def test_slack_posts_plain_text(client: TestClient, http: HttpCatcher) -> None:
@@ -229,7 +229,7 @@ def test_slack_posts_plain_text(client: TestClient, http: HttpCatcher) -> None:
     result = send_through(client, "slack", {"webhook": f"http://127.0.0.1:{http.port}/webhook"})
     assert result["ok"] is True, result
     body = json.loads(http.requests[0]["body"])
-    assert "nexdeck test message" in body["text"]
+    assert "HexDeck test message" in body["text"]
 
 
 def test_apprise_hands_the_message_to_the_library(client: TestClient, http: HttpCatcher) -> None:
@@ -239,7 +239,7 @@ def test_apprise_hands_the_message_to_the_library(client: TestClient, http: Http
     result = send_through(client, "apprise", {"urls": f"json://127.0.0.1:{http.port}/apprise"})
     assert result["ok"] is True, result
     body = json.loads(http.requests[0]["body"])
-    assert body["title"] == "nexdeck test message"
+    assert body["title"] == "HexDeck test message"
 
 
 def test_a_service_that_refuses_is_reported_and_remembered(client: TestClient) -> None:

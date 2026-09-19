@@ -23,7 +23,7 @@ from ..models import Integration, Widget
 from .integrations import resolve_config
 from .loop import run_on_loop, spawn
 
-logger = logging.getLogger("nexdeck.hass")
+logger = logging.getLogger("hexdeck.hass")
 
 RECONNECT_SECONDS = 15
 #: The floor between two refreshes of one card, whatever the house does.

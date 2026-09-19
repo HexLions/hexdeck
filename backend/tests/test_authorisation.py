@@ -89,7 +89,7 @@ board: {name: harmless}
 integrations:
   - name: stolen
     kind: docker
-    config: {host: "${NEXDECK_SECRET_KEY}"}
+    config: {host: "${HEXDECK_SECRET_KEY}"}
 pages: [{name: one, widgets: []}]
 """
 
@@ -107,7 +107,7 @@ pages:
 def test_an_imported_board_cannot_read_the_servers_environment(client: TestClient, monkeypatch) -> None:
     """The ${VAR} expansion belongs to the operator's own files. Over HTTP it
     handed any member the key that signs every session."""
-    monkeypatch.setenv("NEXDECK_SECRET_KEY", "the-installation-signing-key")
+    monkeypatch.setenv("HEXDECK_SECRET_KEY", "the-installation-signing-key")
     setup_admin(client)
     create_user(client, "kim")
     kim = TestClient(client.app)
@@ -194,7 +194,7 @@ def test_a_plain_drawing_is_accepted() -> None:
 
 
 def test_an_uploaded_file_is_served_in_a_sandbox(client: TestClient) -> None:
-    """Even a payload that got past the check must not run as part of nexdeck."""
+    """Even a payload that got past the check must not run as part of HexDeck."""
     setup_admin(client)
     drawing = b'<svg xmlns="http://www.w3.org/2000/svg"><rect width="4" height="4"/></svg>'
     made = client.post("/api/v1/assets", files={"file": ("bg.svg", drawing, "image/svg+xml")}, headers=CSRF)

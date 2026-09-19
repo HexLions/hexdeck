@@ -1,9 +1,9 @@
 """Apprise channels are set up by administrators, and only theirs send.
 
 ⚠️ Apprise sends through its own HTTP library and follows redirects there, so
-none of nexdeck's address checks reach its requests. A member could point a
+none of HexDeck's address checks reach its requests. A member could point a
 channel at a server of their own that answers with a redirect to 127.0.0.1, and
-read from the test result whether something listens beside nexdeck. Every other
+read from the test result whether something listens beside HexDeck. Every other
 kind goes through a client that checks each hop. Decided on 12.09.2026: Apprise
 stays, for the people who may point the server anywhere already.
 """
@@ -23,8 +23,8 @@ from app.services.notify import Message
 
 from .conftest import CSRF, create_user, login, setup_admin
 
-APPRISE = {"kind": "apprise", "name": "Everything", "config": {"urls": "json://hooks.example.com/nexdeck"}, "events": []}
-MESSAGE = Message(event="test", title="nexdeck test message", body="", level="info")
+APPRISE = {"kind": "apprise", "name": "Everything", "config": {"urls": "json://hooks.example.com/HexDeck"}, "events": []}
+MESSAGE = Message(event="test", title="HexDeck test message", body="", level="info")
 
 
 def _member(client: TestClient) -> TestClient:
@@ -78,4 +78,4 @@ def test_an_apprise_channel_a_member_already_has_is_neither_changed_nor_sent(cli
     assert notified == []
 
     asyncio.run(channels.send("apprise", {"urls": "json://hooks.example.com/admin"}, MESSAGE, user_id=_id_of("admin")))
-    assert notified == ["nexdeck test message"]
+    assert notified == ["HexDeck test message"]

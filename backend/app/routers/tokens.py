@@ -15,7 +15,7 @@ from ..security import new_opaque_token
 
 router = APIRouter(prefix="/api/v1/tokens", tags=["tokens"])
 
-logger = logging.getLogger("nexdeck.tokens")
+logger = logging.getLogger("hexdeck.tokens")
 
 
 def _public(token: ApiToken) -> dict:

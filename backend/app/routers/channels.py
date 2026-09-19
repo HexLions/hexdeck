@@ -23,12 +23,12 @@ from ..services.notify import EVENTS, Message
 
 router = APIRouter(prefix="/api/v1", tags=["channels"])
 
-logger = logging.getLogger("nexdeck.channels")
+logger = logging.getLogger("hexdeck.channels")
 
 #: Kinds only an administrator may set up.
 #:
 #: ⚠️ Apprise sends through its own HTTP library and follows redirects there,
-#: where no address check of nexdeck reaches, so for a member it was a way of
+#: where no address check of HexDeck reaches, so for a member it was a way of
 #: asking what listens beside the server. Decided on 12.09.2026.
 ADMIN_ONLY_KINDS = frozenset({"apprise"})
 
@@ -166,7 +166,7 @@ def delete_channel(channel_id: int, user: MemberUser, db: DbSession) -> None:
 async def test_channel(channel_id: int, user: MemberUser, db: DbSession) -> dict:
     channel = _own(db, channel_id, user)
     _count_a_press(user.id)
-    message = Message(event="test", title="nexdeck test message", body="If you can read this, the channel works.", level="info")
+    message = Message(event="test", title="HexDeck test message", body="If you can read this, the channel works.", level="info")
     try:
         await send(channel.kind, resolve_channel_config(channel), message, user_id=user.id)
     except Exception as failure:  # noqa: BLE001

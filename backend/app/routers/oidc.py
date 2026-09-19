@@ -19,7 +19,7 @@ from ..services.public_url import public_url
 from .auth import STEP_COOKIE, STEP_MINUTES, cookie_secure, open_session
 
 router = APIRouter(prefix="/api/v1", tags=["oidc"])
-logger = logging.getLogger("nexdeck.oidc")
+logger = logging.getLogger("hexdeck.oidc")
 
 
 def _provider(db: DbSession, slug: str) -> OidcProvider:

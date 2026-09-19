@@ -1,6 +1,6 @@
 """Every place that needs the public address reads the same one.
 
-⚠️ The address can be set in the interface or in NEXDECK_PUBLIC_URL, and five
+⚠️ The address can be set in the interface or in HEXDECK_PUBLIC_URL, and five
 places read it three different ways. Web Push and the rescue link read only
 the environment, so an installation that set its address in the interface
 signed its push messages as mailto:admin@localhost, which a push service may

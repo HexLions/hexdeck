@@ -16,7 +16,7 @@ SMTP = {
     "username": "deck",
     "password": "letmein",
     "from_address": "deck@example.com",
-    "from_name": "nexdeck",
+    "from_name": "HexDeck",
 }
 
 

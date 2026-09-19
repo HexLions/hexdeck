@@ -342,7 +342,7 @@ class OidcProviderBody(BaseModel):
     enabled: bool = True
     auto_create: bool = True
     default_role: Literal["admin", "user", "guest"] = "user"
-    #: The provider asks for a second factor itself, so nexdeck does not.
+    #: The provider asks for a second factor itself, so HexDeck does not.
     trusts_second_factor: bool = False
 
 
@@ -365,7 +365,7 @@ class SmtpBody(BaseModel):
     #: Left out or sent back as ``********`` keeps the stored one.
     password: str | None = Field(default=None, max_length=300)
     from_address: str = Field(default="", max_length=200)
-    from_name: str = Field(default="nexdeck", max_length=120)
+    from_name: str = Field(default="HexDeck", max_length=120)
 
 
 class MailTestBody(BaseModel):

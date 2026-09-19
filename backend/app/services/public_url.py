@@ -1,6 +1,6 @@
 """Where browsers reach this installation, read in one place.
 
-⚠️ The address can be set in the interface or in ``NEXDECK_PUBLIC_URL``, and
+⚠️ The address can be set in the interface or in ``HEXDECK_PUBLIC_URL``, and
 five places used to read it three different ways. Web Push and the rescue
 link looked at the environment only, so an installation that set its address
 in the interface signed its push messages as ``mailto:admin@localhost`` and

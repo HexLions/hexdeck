@@ -1,7 +1,7 @@
 """A refused address reads as one sentence, without a double space.
 
 ⚠️ The host went into the message with a space after it, and the sentence adds
-its own: "127.0.0.1  is not an address nexdeck calls." It stood like that in the
+its own: "127.0.0.1  is not an address HexDeck calls." It stood like that in the
 problems card and under every refused check. Found on 12.09.2026.
 """
 
@@ -17,7 +17,7 @@ from app.adapters.base import AdapterError, guard_member_target, guard_outbound
 
 @pytest.fixture(autouse=True)
 def fresh_settings(monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
-    monkeypatch.delenv("NEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
+    monkeypatch.delenv("HEXDECK_ALLOW_LOOPBACK_TARGETS", raising=False)
     config.reset_settings_cache()
     yield
     config.reset_settings_cache()
@@ -30,4 +30,4 @@ def fresh_settings(monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
 def test_the_refusal_names_the_host_in_one_clean_sentence(check: Callable[[str], None], url: str, host: str) -> None:
     with pytest.raises(AdapterError) as refused:
         check(url)
-    assert refused.value.message == f"{host} is not an address nexdeck calls."
+    assert refused.value.message == f"{host} is not an address HexDeck calls."

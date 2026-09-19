@@ -1,4 +1,4 @@
-"""nexdeck's own log: written to a file, readable back, and self-limiting.
+"""HexDeck's own log: written to a file, readable back, and self-limiting.
 
 Everything used to go to standard output and nowhere else, so the one thing
 an administrator asks for after a bad night did not exist on a machine whose
@@ -23,7 +23,7 @@ from .conftest import CSRF, create_user, login, setup_admin
 def _fresh_log(data_dir, monkeypatch: pytest.MonkeyPatch):  # noqa: ANN001, ANN201
     """Each test gets the data directory of its own instance, and a schema.
 
-    ⚠️ The suite sets ``NEXDECK_LOG_LEVEL=WARNING`` so a test run stays quiet,
+    ⚠️ The suite sets ``HEXDECK_LOG_LEVEL=WARNING`` so a test run stays quiet,
     which means ``setup()`` starts in the quiet level and drops every INFO line
     these tests write. The level is forced back afterwards; the environment is
     what the one test about it changes for itself.
@@ -35,7 +35,7 @@ def _fresh_log(data_dir, monkeypatch: pytest.MonkeyPatch):  # noqa: ANN001, ANN2
     # also freezes it: ``fixed_by_env`` would be true and the switch in the
     # interface would refuse every change. These tests model a normal install,
     # where nobody set it, and the one test about the environment sets it back.
-    monkeypatch.setenv("NEXDECK_LOG_LEVEL", "")
+    monkeypatch.setenv("HEXDECK_LOG_LEVEL", "")
     config.reset_settings_cache()
     migrate()
     journal.setup()
@@ -47,7 +47,7 @@ def _fresh_log(data_dir, monkeypatch: pytest.MonkeyPatch):  # noqa: ANN001, ANN2
         path.unlink(missing_ok=True)
 
 
-def _write(message: str, level: int = logging.INFO, name: str = "nexdeck.test") -> None:
+def _write(message: str, level: int = logging.INFO, name: str = "HexDeck.test") -> None:
     logging.getLogger(name).log(level, message)
     for handler in logging.getLogger().handlers:
         handler.flush()
@@ -89,12 +89,12 @@ def test_the_search_looks_at_the_whole_line() -> None:
 def test_a_line_from_an_older_format_stays_readable() -> None:
     """⚠️ After an update the same file holds lines the version before it
     wrote. Refusing them would blank out exactly the part somebody wants."""
-    old = journal.parse("2026-09-06 04:12:33 WARNING nexdeck.collector Radarr stopped answering")
+    old = journal.parse("2026-09-06 04:12:33 WARNING HexDeck.collector Radarr stopped answering")
     assert old is not None
     assert old.level == "WARNING" and old.request_id is None
     assert old.message == "Radarr stopped answering"
 
-    new = journal.parse("2026-09-06 04:12:33 WARNING  nexdeck.collector [a1b2c3 kim] Radarr stopped answering")
+    new = journal.parse("2026-09-06 04:12:33 WARNING  HexDeck.collector [a1b2c3 kim] Radarr stopped answering")
     assert new is not None
     assert new.request_id == "a1b2c3 kim"
     assert new.message == "Radarr stopped answering"
@@ -202,21 +202,21 @@ def test_an_unknown_level_or_duration_is_refused() -> None:
 def test_the_level_takes_effect_at_once() -> None:
     """A restart destroys the state somebody wanted to look at."""
     journal.apply_mode("quiet")
-    assert logging.getLogger("nexdeck").level == logging.WARNING
+    assert logging.getLogger("hexdeck").level == logging.WARNING
     journal.apply_mode("trace")
-    assert logging.getLogger("nexdeck").level == logging.DEBUG
+    assert logging.getLogger("hexdeck").level == logging.DEBUG
 
 
 def test_a_level_in_the_environment_wins(monkeypatch: pytest.MonkeyPatch) -> None:
     """An operator who sets it there means it, and the interface says so."""
     from app import config
 
-    monkeypatch.setenv("NEXDECK_LOG_LEVEL", "debug")
+    monkeypatch.setenv("HEXDECK_LOG_LEVEL", "debug")
     config.reset_settings_cache()
     try:
         assert journal.env_mode() == "detailed", "the technical name reaches a level, not nothing"
         assert journal.fixed_by_env() is True
-        monkeypatch.setenv("NEXDECK_LOG_LEVEL", "")
+        monkeypatch.setenv("HEXDECK_LOG_LEVEL", "")
         config.reset_settings_cache()
         assert journal.fixed_by_env() is False, "and an empty one leaves the choice to the interface"
     finally:
@@ -277,7 +277,7 @@ def test_a_level_the_environment_fixed_is_not_overwritten(client: TestClient, mo
     setup_admin(client)
     from app import config
 
-    monkeypatch.setenv("NEXDECK_LOG_LEVEL", "trace")
+    monkeypatch.setenv("HEXDECK_LOG_LEVEL", "trace")
     config.reset_settings_cache()
     try:
         assert client.get("/api/v1/journal/level").json()["fixed_by_env"] is True
@@ -303,7 +303,7 @@ def test_nobody_setting_the_level_leaves_the_switch_alive(monkeypatch: pytest.Mo
     of the environment answered "somebody set this" on every installation, and
     the switch in the interface was greyed out for everybody with a reason that
     was not true."""
-    monkeypatch.delenv("NEXDECK_LOG_LEVEL", raising=False)
+    monkeypatch.delenv("HEXDECK_LOG_LEVEL", raising=False)
     from app import config
 
     config.reset_settings_cache()
@@ -323,7 +323,7 @@ def test_a_key_in_a_query_never_reaches_the_file() -> None:
     the deep level exists precisely so somebody can download that file and
     attach it to an issue.
 
-    ``passwd`` is still redacted although nexdeck no longer sends the DSM
+    ``passwd`` is still redacted although HexDeck no longer sends the DSM
     password that way: the pattern guards every service that does, and a
     redaction rule that only covers what is sent today is a rule that ages.
     """
@@ -332,7 +332,7 @@ def test_a_key_in_a_query_never_reaches_the_file() -> None:
         'HTTP Request: GET %s "HTTP/1.1 200 OK"',
         "http://kavita.example.com:5000/api/Series?apiKey=THE-REAL-KEY&libraryId=1",
     )
-    logging.getLogger("nexdeck").info(
+    logging.getLogger("hexdeck").info(
         "GET https://dsm.example.com:5001/webapi/auth.cgi?account=admin&passwd=THE-REAL-PASSWORD&format=sid",
     )
     for handler in logging.getLogger().handlers:

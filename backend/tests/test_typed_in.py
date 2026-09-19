@@ -1,6 +1,6 @@
 """The one action that lets somebody type the value in.
 
-⚠️ Everything else nexdeck runs is reachable only because the card put it in
+⚠️ Everything else HexDeck runs is reachable only because the card put it in
 its last answer with exactly those parameters, which is the guard of 0.2.0. A
 field on a card breaks that comparison by design: nobody knows in advance which
 address a person will paste. The way through is not a hole but a declaration —
@@ -115,7 +115,7 @@ def test_what_may_not_be_typed_in(client: TestClient, value: str) -> None:
 def test_an_address_that_only_the_server_can_reach_is_refused(client: TestClient) -> None:
     """The same rule a member-supplied notification address gets.
 
-    A field on a board is the least trusted way an address enters nexdeck, and
+    A field on a board is the least trusted way an address enters HexDeck, and
     loopback answers to whatever else runs beside the server.
     """
     setup_admin(client)

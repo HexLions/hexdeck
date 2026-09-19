@@ -26,7 +26,7 @@ import httpx
 from pydantic import BaseModel
 from pydantic import Field as PydanticField
 
-logger = logging.getLogger("nexdeck.adapters")
+logger = logging.getLogger("hexdeck.adapters")
 
 #: ``integrations`` is a list of connection numbers. Its ``options`` name the
 #: kinds that may be picked; the server checks both the kind and whether the
@@ -286,7 +286,7 @@ class Ask(BaseModel):
     name: str
     label: str
     #: ``choice`` picks from ``options``; ``url`` is checked the way a
-    #: member-supplied address is checked everywhere else in nexdeck: http or
+    #: member-supplied address is checked everywhere else in HexDeck: http or
     #: https, a host, and nothing that only answers to the server itself.
     kind: Literal["text", "url", "choice"] = "text"
     #: For ``choice``: what may be picked. Delivered with the card's answer,
@@ -341,7 +341,7 @@ class Action(BaseModel):
 class Deed:
     """One action a card of its own may be pointed at.
 
-    ⚠️ An allowlist, and deliberately short. Every other action in nexdeck is
+    ⚠️ An allowlist, and deliberately short. Every other action in HexDeck is
     reachable only because the card that offers it put it in its last answer,
     which is the guard from 0.2.0; a button carries no such answer, so what a
     button may reach is written down here instead. An adapter that declares
@@ -643,7 +643,7 @@ def timeline(
     unit: str = "",
     shape: str = "line",
 ) -> dict[str, Any]:
-    """A history the card brings with it, rather than one nexdeck collected.
+    """A history the card brings with it, rather than one HexDeck collected.
 
     ⚠️ The renderer's own series stop after 24 hours, because that is how long
     ``history.py`` keeps minute rows. A service that has kept months of its own
@@ -831,11 +831,11 @@ def _is_loopback(host: str) -> bool:
 
 def _barred_message(what: str) -> AdapterError:
     return AdapterError(
-        f"{what} is not an address nexdeck calls.",
+        f"{what} is not an address HexDeck calls.",
         code="forbidden_host",
-        hint="Loopback and the link-local range are barred: the first is nexdeck itself and whatever else "
+        hint="Loopback and the link-local range are barred: the first is HexDeck itself and whatever else "
              "listens beside it, the second hands out the host's credentials on every cloud. "
-             "NEXDECK_ALLOW_LOOPBACK_TARGETS=1 lifts it.",
+             "HEXDECK_ALLOW_LOOPBACK_TARGETS=1 lifts it.",
     )
 
 
@@ -861,7 +861,7 @@ def guard_outbound(url: str) -> None:
     split = urlsplit(url if "://" in url else f"http://{url}")
     if split.scheme not in ("http", "https"):
         raise AdapterError(
-            f"nexdeck speaks http and https, not {split.scheme or 'that'}.",
+            f"HexDeck speaks http and https, not {split.scheme or 'that'}.",
             code="bad_scheme",
             hint="A service address starts with http:// or https://.",
         )
@@ -884,8 +884,8 @@ def guard_member_target(url: str) -> None:
     the same thing into a notification channel is asking the server what else
     is listening beside it, and getting the answer back as an HTTP status.
 
-    ``NEXDECK_ALLOW_LOOPBACK_TARGETS=1`` lifts it for the operator who really
-    does run a notification service next to nexdeck.
+    ``HEXDECK_ALLOW_LOOPBACK_TARGETS=1`` lifts it for the operator who really
+    does run a notification service next to HexDeck.
     """
     from ..config import get_settings
 
@@ -1231,7 +1231,7 @@ class Adapter:
 
         Same shape as :meth:`image_source`, and the same reason: the server
         fetches with the service's credentials, so the browser never sees them
-        and never has to reach the service at all. On a homelab where nexdeck
+        and never has to reach the service at all. On a homelab where HexDeck
         is the only thing published, that is the difference between a link that
         works from outside and one that does not.
         """

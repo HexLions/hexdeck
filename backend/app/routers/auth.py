@@ -36,7 +36,7 @@ from ..services import avatars, login_guard, mail, password_reset, two_factor
 from ..uploads import read_at_most
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
-logger = logging.getLogger("nexdeck.auth")
+logger = logging.getLogger("hexdeck.auth")
 
 
 def cookie_secure(request: Request) -> bool:

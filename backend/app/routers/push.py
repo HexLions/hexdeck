@@ -14,7 +14,7 @@ from ..services.channels import webpush
 
 router = APIRouter(prefix="/api/v1/push", tags=["push"])
 
-logger = logging.getLogger("nexdeck.push")
+logger = logging.getLogger("hexdeck.push")
 
 
 @router.get("/key", summary="Read the public VAPID key")

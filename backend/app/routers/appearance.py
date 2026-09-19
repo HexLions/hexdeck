@@ -12,7 +12,7 @@ from ..services import appearance
 
 router = APIRouter(prefix="/api/v1/settings/appearance", tags=["system"])
 
-logger = logging.getLogger("nexdeck.appearance")
+logger = logging.getLogger("hexdeck.appearance")
 
 
 @router.get("", summary="Read the look of the installation")

@@ -24,14 +24,14 @@ from ..services.public_url import public_url
 from ..services.sse import hub
 
 router = APIRouter(tags=["system"])
-logger = logging.getLogger("nexdeck.system")
+logger = logging.getLogger("hexdeck.system")
 
-#: Where nexdeck lives. One place, so the About page and the update check can
+#: Where HexDeck lives. One place, so the About page and the update check can
 #: never point at two different repositories.
-REPO_URL = "https://github.com/DerKezorm/nexdeck"
-WEBSITE_URL = "https://nexdeck.nexapps.dev"
+REPO_URL = "https://github.com/HexLions/hexdeck"
+WEBSITE_URL = REPO_URL
 LICENSE = "AGPL-3.0-or-later"
-RELEASES_URL = "https://api.github.com/repos/DerKezorm/nexdeck/releases/latest"
+RELEASES_URL = "https://api.github.com/repos/HexLions/hexdeck/releases/latest"
 #: The newest version already announced, so the timer does not repeat itself.
 _told_about: str | None = None
 _update_cache: dict[str, object] = {}
@@ -51,7 +51,7 @@ _client: httpx.AsyncClient | None = None
 def http_client() -> httpx.AsyncClient:
     global _client
     if _client is None or _client.is_closed:
-        _client = outbound_client(timeout=8, headers={"User-Agent": "nexdeck"})
+        _client = outbound_client(timeout=8, headers={"User-Agent": "hexdeck"})
     return _client
 
 
@@ -105,7 +105,7 @@ async def about(user: CurrentUser, db: DbSession) -> dict:
         "latest_version": None,
     }
     if user.role == "admin":
-        # ⚠️ The switch decides whether nexdeck *asks*, not whether an answer
+        # ⚠️ The switch decides whether HexDeck *asks*, not whether an answer
         # it already has may be shown. With the switch off this returned None
         # even right after somebody had pressed "check now", so the press
         # looked like it had failed. Nothing goes out on this path unless the
@@ -136,14 +136,14 @@ async def check_now(admin: AdminUser, db: DbSession) -> dict:
     """The daily question, asked by hand.
 
     ⚠️ This used to be refused while the daily check was off, on the grounds
-    that it is the one call nexdeck makes to the outside. That reasoning
+    that it is the one call HexDeck makes to the outside. That reasoning
     covers the *standing* call, which an operator has to agree to, and not
     this one: an administrator pressing a button is the consent. The effect
     was that the one person most likely to want to look now and then, the one
     who deliberately keeps a daily outbound call switched off, was the only
     one who could not.
 
-    The switch still decides whether nexdeck asks by itself. Nothing goes out
+    The switch still decides whether HexDeck asks by itself. Nothing goes out
     here unless somebody presses.
     """
     await latest_version(force=True)
@@ -160,9 +160,9 @@ def _tell_about_update(latest: str, current: str) -> None:
     if not latest or latest == current or latest == _told_about:
         return
     _told_about = latest
-    logger.info("nexdeck %s is out; this installation runs %s.", latest, current)
-    emit("update_available", f"nexdeck {latest} is out",
-         f"This installation runs {current}.", link="https://github.com/DerKezorm/nexdeck/releases")
+    logger.info("HexDeck %s is out; this installation runs %s.", latest, current)
+    emit("update_available", f"HexDeck {latest} is out",
+         f"This installation runs {current}.", link=f"{REPO_URL}/releases")
 
 
 @router.patch("/api/v1/settings", summary="Change installation settings")

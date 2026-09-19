@@ -41,7 +41,7 @@ def ctx() -> Context:
 
 def _me(darf: list[str], role: str = "admin") -> respx.Route:
     return respx.get(f"{NEXVIEW}/api/v1/me").mock(return_value=httpx.Response(200, json={
-        "version": "0.31.1", "konto": {"id": 1, "username": "nexdeck", "role": role}, "schluessel": None, "darf": darf,
+        "version": "0.31.1", "konto": {"id": 1, "username": "HexDeck", "role": role}, "schluessel": None, "darf": darf,
     }))
 
 

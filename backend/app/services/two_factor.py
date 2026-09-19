@@ -29,7 +29,7 @@ from sqlalchemy.orm import Session as DbSessionType
 from ..crypto import SecretUnreadable, decrypt, encrypt
 from ..models import RecoveryCode, Setting, User, utcnow
 
-logger = logging.getLogger("nexdeck.two_factor")
+logger = logging.getLogger("hexdeck.two_factor")
 
 STEP_SECONDS = 30
 #: One step either side, so a phone whose clock drifts a little still works.
@@ -59,7 +59,7 @@ def read_secret(user: User) -> str:
 
     ⚠️ ``SecretUnreadable`` used to travel out of here and come back as a 500
     at the sign-in. That happens after a restore into an installation with a
-    different ``NEXDECK_SECRET_KEY``, which is the moment somebody most needs
+    different ``HEXDECK_SECRET_KEY``, which is the moment somebody most needs
     to get in. An unreadable secret is treated as no second factor at all: the
     account signs in with its password, sees that the factor is gone and can
     set a new one. Better than an account nobody can reach and a stack trace.
@@ -78,7 +78,7 @@ def enabled(user: User) -> bool:
     return bool(user.totp_confirmed and user.totp_secret and read_secret(user))
 
 
-def otpauth_url(user: User, secret: str, issuer: str = "nexdeck") -> str:
+def otpauth_url(user: User, secret: str, issuer: str = "HexDeck") -> str:
     return pyotp.TOTP(secret).provisioning_uri(name=user.username, issuer_name=issuer)
 
 

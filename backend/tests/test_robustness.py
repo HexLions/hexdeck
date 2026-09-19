@@ -10,7 +10,7 @@ whoever was in front of it had no way to tell.
   dashboard page, so a client asking for JSON got HTML and a success. POST
   already answered 405, so the two methods disagreed about whether the address
   exists at all.
-* After a restore into an installation with a different NEXDECK_SECRET_KEY,
+* After a restore into an installation with a different HEXDECK_SECRET_KEY,
   the sign-in of an account with a second factor answered 500, and pressing
   Test on a saved connection did too. That is exactly the moment somebody
   needs to get in.
@@ -130,7 +130,7 @@ def test_testing_a_connection_whose_keys_cannot_be_read_answers_in_words(client:
     assert answer.status_code == 200, answer.text
     assert answer.json()["ok"] is False
     assert answer.json()["code"] == "secret_unreadable"
-    assert "NEXDECK_SECRET_KEY" in answer.json()["hint"]
+    assert "HEXDECK_SECRET_KEY" in answer.json()["hint"]
 
 
 def test_a_refresh_interval_can_be_taken_off_again(client: TestClient) -> None:

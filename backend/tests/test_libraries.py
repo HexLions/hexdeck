@@ -298,7 +298,7 @@ async def _resolver(ctx: Context, config: dict):
 async def test_the_button_offers_exactly_the_action_it_was_given(ctx: Context) -> None:
     """⚠️ In the card's own answer, because that is what the collector checks a
     press against. A button that knew its action only from its options would be
-    the one card in nexdeck that can be asked for anything."""
+    the one card in HexDeck that can be asked for anything."""
     data = await get_adapter("core").fetch("button", {}, _button(deed="rescan", target="7"), ctx)
     assert [one.id for one in data.actions] == ["rescan"]
     assert data.actions[0].params == {"target": "7"}
@@ -497,7 +497,7 @@ async def test_a_machine_card_saved_before_the_split_still_finds_its_guest(monke
 @respx.mock
 async def test_a_speedtest_tracker_without_a_measurement_still_tests_green(ctx: Context) -> None:
     """⚠️ The test asked ``results/latest``, which a fresh installation does
-    not have: 404, and nexdeck said the address may point at the wrong
+    not have: 404, and HexDeck said the address may point at the wrong
     service. That is the state of every new install."""
     tracker = "http://speedtest.example.com"
     respx.get(f"{tracker}/api/v1/results").mock(return_value=httpx.Response(200, json={"data": []}))

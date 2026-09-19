@@ -22,7 +22,7 @@ from ..services.integrations import public_config, resolve_config, store_config,
 
 router = APIRouter(prefix="/api/v1", tags=["integrations"])
 
-logger = logging.getLogger("nexdeck.integrations")
+logger = logging.getLogger("hexdeck.integrations")
 
 
 @router.get("/adapters", summary="List every adapter and its widgets")
@@ -192,7 +192,7 @@ async def test_integration(body: IntegrationTest, user: AdminUser, db: DbSession
     existing = db.get(Integration, body.integration_id) if body.integration_id else None
     # ⚠️ Reading a stored connection can fail, and it used to fail as a 500
     # with a stack trace. After a restore into an installation with a
-    # different NEXDECK_SECRET_KEY every stored key is unreadable, and the
+    # different HEXDECK_SECRET_KEY every stored key is unreadable, and the
     # first thing anybody does then is press Test.
     try:
         stored = store_config(body.kind, body.config, existing.config if existing and existing.kind == body.kind else None)
@@ -202,7 +202,7 @@ async def test_integration(body: IntegrationTest, user: AdminUser, db: DbSession
         return {
             "ok": False,
             "message": "The stored keys of this connection cannot be read.",
-            "hint": "They were encrypted with a different NEXDECK_SECRET_KEY. Enter them again and save.",
+            "hint": "They were encrypted with a different HEXDECK_SECRET_KEY. Enter them again and save.",
             "code": "secret_unreadable",
         }
     missing = validate_required(body.kind, config)
@@ -304,7 +304,7 @@ async def test_saved(integration_id: int, user: AdminUser, db: DbSession) -> dic
         return {
             "ok": False,
             "message": "The stored keys of this connection cannot be read.",
-            "hint": "They were encrypted with a different NEXDECK_SECRET_KEY. Enter them again and save.",
+            "hint": "They were encrypted with a different HEXDECK_SECRET_KEY. Enter them again and save.",
             "code": "secret_unreadable",
         }
     try:

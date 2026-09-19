@@ -1,4 +1,4 @@
-"""nexdeck's own log: a file an administrator can read, filter and download.
+"""HexDeck's own log: a file an administrator can read, filter and download.
 
 Until now everything went to standard output and nowhere else. That is fine
 on a laptop and useless on a NAS: the one question a self-hosted dashboard
@@ -84,7 +84,7 @@ LINE = re.compile(
     r"(?P<message>.*)$"
 )
 
-logger = logging.getLogger("nexdeck.journal")
+logger = logging.getLogger("hexdeck.journal")
 
 #: The number of the request being served, so the lines of one call belong
 #: together in a file that a dozen background tasks write to at the same time.
@@ -182,14 +182,14 @@ def rotated() -> list[Path]:
 
 
 def env_mode() -> str | None:
-    """The level from ``NEXDECK_LOG_LEVEL``, if somebody actually set it.
+    """The level from ``HEXDECK_LOG_LEVEL``, if somebody actually set it.
 
     ⚠️ Read from the environment, not from the settings. ``log_level`` carries
     a default of ``INFO``, so asking the settings said "somebody set this" on
     every installation, and the switch in the interface was greyed out with
     the wrong reason for everybody.
     """
-    value = (os.environ.get("NEXDECK_LOG_LEVEL") or "").strip().lower()
+    value = (os.environ.get("HEXDECK_LOG_LEVEL") or "").strip().lower()
     if not value:
         return None
     if value in MODES:
@@ -272,7 +272,7 @@ def apply_mode(mode: str) -> None:
     _mode = mode
 
     logging.getLogger().setLevel(levels["root"])
-    logging.getLogger("nexdeck").setLevel(levels["app"])
+    logging.getLogger("hexdeck").setLevel(levels["app"])
     for name in NOISY:
         logging.getLogger(name).setLevel(levels["libs"])
     if _handler is not None:

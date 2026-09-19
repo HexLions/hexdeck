@@ -17,13 +17,13 @@ import httpx
 from ..adapters.base import outbound_client
 from ..config import get_settings
 
-logger = logging.getLogger("nexdeck.icons")
+logger = logging.getLogger("hexdeck.icons")
 
 SOURCES = (
     ("dashboard-icons", "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/{ext}/{name}.{ext}", "https://api.github.com/repos/homarr-labs/dashboard-icons/git/trees/main?recursive=1"),
     ("selfhst", "https://cdn.jsdelivr.net/gh/selfhst/icons/{ext}/{name}.{ext}", "https://api.github.com/repos/selfhst/icons/git/trees/main?recursive=1"),
 )
-#: Logos that ship with nexdeck: the nexapps family, which no collection carries.
+#: Logos that ship with HexDeck: the nexapps family, which no collection carries.
 BUNDLED = Path(__file__).resolve().parent.parent / "bundled_icons"
 SAFE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,80}$")
 NEGATIVE_SECONDS = 3600
@@ -52,7 +52,7 @@ _client: httpx.AsyncClient | None = None
 def http_client() -> httpx.AsyncClient:
     global _client
     if _client is None or _client.is_closed:
-        _client = outbound_client(timeout=10, follow_redirects=True, headers={"User-Agent": "nexdeck"})
+        _client = outbound_client(timeout=10, follow_redirects=True, headers={"User-Agent": "hexdeck"})
     return _client
 
 

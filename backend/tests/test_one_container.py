@@ -164,7 +164,7 @@ def _dsm(answers: dict) -> None:
     respx.get(f"{NAS}/webapi/entry.cgi").mock(side_effect=route)
 
 
-SYNO_CONFIG = {"url": NAS, "username": "nexdeck", "password": "a-password", "insecure": True}
+SYNO_CONFIG = {"url": NAS, "username": "HexDeck", "password": "a-password", "insecure": True}
 
 
 @respx.mock
@@ -214,7 +214,7 @@ async def test_proxmox_pays_for_nothing_extra(ctx: Context) -> None:
          "mem": 2_000_000_000, "maxmem": 8_000_000_000, "disk": 18_000_000_000, "maxdisk": 32_000_000_000,
          "netin": 2_100_000_000, "netout": 400_000_000, "uptime": 260_000},
     ]}))
-    config = {"url": PVE, "token_id": "root@pam!nexdeck", "token_secret": "s", "insecure": True}
+    config = {"url": PVE, "token_id": "root@pam!HexDeck", "token_secret": "s", "insecure": True}
 
     data = await get_adapter("proxmox").fetch("guest", config, {"which": "docker"}, ctx)
 
