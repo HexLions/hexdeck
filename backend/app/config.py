@@ -1,22 +1,53 @@
 """Runtime settings, read once from the environment.
 
-Everything is prefixed ``NEXDECK_``. The data directory holds the database,
-the encryption key, uploads and caches; it is the only thing that needs to
-persist between container restarts.
+Everything is prefixed ``HEXDECK_``. The names from before the fork,
+``NEXDECK_*``, are still read: :func:`adopt_legacy_environment` copies each
+one to its new name at import time, and the start-up log names the ones in
+use. The data directory holds the database, the encryption key, uploads and
+caches; it is the only thing that needs to persist between container
+restarts.
 """
 
 from __future__ import annotations
 
+import os
 import secrets
+from collections.abc import MutableMapping
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+PREFIX = "HEXDECK_"
+LEGACY_PREFIX = "NEXDECK_"
+
+
+def adopt_legacy_environment(environ: MutableMapping[str, str] = os.environ) -> list[str]:
+    """Copy every ``NEXDECK_*`` variable to ``HEXDECK_*`` where the new name is unset.
+
+    Returns the old names that were adopted, sorted, for the start-up log.
+    The new name always wins: an operator halfway through renaming gets the
+    value they wrote last, not the one they forgot to delete.
+    """
+    adopted: list[str] = []
+    for name in sorted(environ):
+        if not name.startswith(LEGACY_PREFIX):
+            continue
+        new_name = PREFIX + name[len(LEGACY_PREFIX):]
+        if new_name in environ:
+            continue
+        environ[new_name] = environ[name]
+        adopted.append(name)
+    return adopted
+
+
+#: Filled once at import, read by the start-up log.
+LEGACY_NAMES_ADOPTED: list[str] = adopt_legacy_environment()
+
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="NEXDECK_", extra="ignore")
+    model_config = SettingsConfigDict(env_prefix=PREFIX, extra="ignore")
 
     #: Where the database, key file, uploads and caches live.
     data_dir: Path = Path("data")

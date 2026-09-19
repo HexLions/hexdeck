@@ -18,7 +18,7 @@ from starlette.staticfiles import StaticFiles
 
 from . import __version__
 from .adapters.base import close_relaxed_client
-from .config import get_settings
+from .config import LEGACY_NAMES_ADOPTED, get_settings
 from .db import db_session, get_engine
 from .migrations import migrate
 from .routers import (
@@ -152,6 +152,11 @@ async def lifespan(app: FastAPI):
     housekeeping = asyncio.create_task(_housekeeping(), name="housekeeping")
     provisioning_task = asyncio.create_task(provisioning.watch(), name="provisioning")
     logger.info("nexdeck %s ready.", __version__)
+    if LEGACY_NAMES_ADOPTED:
+        logger.warning(
+            "Read %d setting(s) under the old NEXDECK_ prefix: %s. They still work; rename them to HEXDECK_.",
+            len(LEGACY_NAMES_ADOPTED), ", ".join(LEGACY_NAMES_ADOPTED),
+        )
     try:
         yield
     finally:
