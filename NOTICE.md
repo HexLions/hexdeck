@@ -26,4 +26,8 @@ Updated at every milestone.
 - **M1 — Fork and rebranding.** Product name, container image
   (`ghcr.io/hexlions/hexdeck`), environment prefix (`HEXDECK_`, with the
   original `NEXDECK_` still read as a fallback) and CI target. No functional
-  change.
+  change. Identifiers stored in data (database file name, backup profile,
+  cookie names, browser storage keys, Docker labels, board export key,
+  key-derivation salts) keep their nexdeck spelling so existing
+  installations, backups and board files work unchanged. The adapters under
+  `backend/app/adapters/` are as upstream has them.

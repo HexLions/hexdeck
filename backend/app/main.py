@@ -154,7 +154,7 @@ async def lifespan(app: FastAPI):
     logger.info("HexDeck %s ready.", __version__)
     if LEGACY_NAMES_ADOPTED:
         logger.warning(
-            "Read %d setting(s) under the old HEXDECK_ prefix: %s. They still work; rename them to HEXDECK_.",
+            "Read %d setting(s) under the old NEXDECK_ prefix: %s. They still work; rename them to HEXDECK_.",
             len(LEGACY_NAMES_ADOPTED), ", ".join(LEGACY_NAMES_ADOPTED),
         )
     try:
