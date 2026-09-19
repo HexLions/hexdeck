@@ -1,5 +1,5 @@
 /**
- * nexdeck's own log, for an administrator who was asked what happened.
+ * HexDeck's own log, for an administrator who was asked what happened.
  *
  * The level can be raised here without a restart, because a restart usually
  * destroys the state somebody wanted to look at. A deep level carries an end
@@ -169,7 +169,7 @@ export function JournalSettings() {
                   <tr key={`${line.time}-${index}`} className="border-b border-line last:border-0 align-top">
                     <td className="py-1 px-2 whitespace-nowrap text-faint">{line.time}</td>
                     <td className={`py-1 px-2 whitespace-nowrap font-semibold ${LEVEL_COLOURS[line.level] ?? 'text-muted'}`}>{line.level}</td>
-                    <td className="py-1 px-2 whitespace-nowrap text-faint">{line.logger.replace(/^nexdeck\./, '')}</td>
+                    <td className="py-1 px-2 whitespace-nowrap text-faint">{line.logger.replace(/^hexdeck\./, '')}</td>
                     <td className="py-1 px-2 whitespace-nowrap text-faint">{line.request_id === '-' ? '' : line.request_id}</td>
                     <td className="py-1 px-2 whitespace-pre">{line.message}</td>
                   </tr>

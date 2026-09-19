@@ -1,7 +1,7 @@
 /**
  * The look of the installation, painted onto the page.
  *
- * nexdeck ships one look in two brightnesses. An accent colour and a style
+ * HexDeck ships one look in two brightnesses. An accent colour and a style
  * sheet of the operator's own are enough to make it belong in the room it
  * hangs in, and both come from one setting that everybody may read.
  *
@@ -16,7 +16,7 @@ export interface Appearance {
   presets?: Record<string, string>
 }
 
-const STYLE_ID = 'nexdeck-appearance'
+const STYLE_ID = 'hexdeck-appearance'
 const HEX = /^#[0-9a-f]{6}$/i
 
 /** The three parts of a `#rrggbb` colour as numbers, or null if it is not one. */
@@ -51,7 +51,7 @@ export function accentVariables(colour: string): Record<string, string> {
  * Paint it on. The accent goes onto the root element, where it beats the
  * style sheet's own value in both brightnesses; the operator's style sheet
  * goes into one tag of its own at the end of the head, so it wins over
- * everything nexdeck ships and nothing else has to move.
+ * everything HexDeck ships and nothing else has to move.
  */
 export function applyAppearance(look: Appearance | null | undefined): void {
   const root = document.documentElement

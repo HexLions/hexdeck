@@ -9,9 +9,9 @@
  * diagnostic report, nothing in the event log, and the machine had three
  * gigabytes free every time. It is a known and unsolved problem around
  * Rollup's native binding on Windows (nodejs/help#5119, reported there on
- * Node 22 as well), and nothing in nexdeck can fix it.
+ * Node 22 as well), and nothing in HexDeck can fix it.
  *
- * What nexdeck can decide is what a test run does about it. Until now the run
+ * What HexDeck can decide is what a test run does about it. Until now the run
  * died with the server, and it did not die honestly: the browser was still on
  * the board, so the first test reported "this card is not visible after 15
  * seconds" and every test after it reported that it could not reach the port.

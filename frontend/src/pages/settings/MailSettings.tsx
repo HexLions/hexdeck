@@ -18,13 +18,13 @@ interface Smtp {
   configured: boolean
 }
 
-const EMPTY: Smtp = { host: '', port: 587, security: 'starttls', username: '', password: '', from_address: '', from_name: 'nexdeck', configured: false }
+const EMPTY: Smtp = { host: '', port: 587, security: 'starttls', username: '', password: '', from_address: '', from_name: 'HexDeck', configured: false }
 
 /**
  * The mail server of the installation.
  *
  * Not the same as an e-mail notification channel: a channel belongs to whoever
- * set it up, this one belongs to nexdeck itself and carries what has to go out
+ * set it up, this one belongs to HexDeck itself and carries what has to go out
  * before anybody is signed in, a password reset above all.
  */
 export function MailSettings() {

@@ -34,7 +34,7 @@ const DATA = path.join(root, '.e2e-data')
 const BUILT_DATA = path.join(root, '.e2e-built-data')
 
 /** In CI Python is on the path; here it sits in the backend's venv. */
-const PYTHON = process.env.NEXDECK_E2E_PYTHON || (process.platform === 'win32' ? path.join(root, 'backend', '.venv', 'Scripts', 'python.exe') : 'python')
+const PYTHON = process.env.HEXDECK_E2E_PYTHON || (process.platform === 'win32' ? path.join(root, 'backend', '.venv', 'Scripts', 'python.exe') : 'python')
 
 // Only the main process clears the data directory; worker processes load this
 // file too and must not remove the database under the running server.
@@ -81,7 +81,7 @@ export default defineConfig({
     {
       command: `"${PYTHON}" -m uvicorn app.main:app --host 127.0.0.1 --port ${BACKEND_PORT}`,
       cwd: path.join(root, 'backend'),
-      env: { NEXDECK_DATA_DIR: DATA, NEXDECK_SECRET_KEY: 'e2e-only-secret', NEXDECK_LOG_LEVEL: 'WARNING' },
+      env: { HEXDECK_DATA_DIR: DATA, HEXDECK_SECRET_KEY: 'e2e-only-secret', HEXDECK_LOG_LEVEL: 'WARNING' },
       url: `http://127.0.0.1:${BACKEND_PORT}/api/v1/setup/status`,
       reuseExistingServer: false,
       timeout: 120_000,
@@ -94,7 +94,7 @@ export default defineConfig({
       // tools/dev-server.mjs for what was measured and why it is not ours.
       command: `node tools/dev-server.mjs --host 127.0.0.1 --port ${FRONTEND_PORT} --strictPort`,
       cwd: here,
-      env: { NEXDECK_API: `http://127.0.0.1:${BACKEND_PORT}` },
+      env: { HEXDECK_API: `http://127.0.0.1:${BACKEND_PORT}` },
       url: `http://127.0.0.1:${FRONTEND_PORT}`,
       reuseExistingServer: false,
       timeout: 120_000,
@@ -110,10 +110,10 @@ export default defineConfig({
       command: `"${PYTHON}" -m uvicorn app.main:app --host 127.0.0.1 --port ${BUILT_PORT}`,
       cwd: path.join(root, 'backend'),
       env: {
-        NEXDECK_DATA_DIR: BUILT_DATA,
-        NEXDECK_SECRET_KEY: 'e2e-only-secret',
-        NEXDECK_LOG_LEVEL: 'WARNING',
-        NEXDECK_STATIC_DIR: path.join(here, 'dist'),
+        HEXDECK_DATA_DIR: BUILT_DATA,
+        HEXDECK_SECRET_KEY: 'e2e-only-secret',
+        HEXDECK_LOG_LEVEL: 'WARNING',
+        HEXDECK_STATIC_DIR: path.join(here, 'dist'),
       },
       url: `http://127.0.0.1:${BUILT_PORT}/api/v1/setup/status`,
       reuseExistingServer: false,

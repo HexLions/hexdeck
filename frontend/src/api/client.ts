@@ -18,11 +18,11 @@ export class ApiError extends Error {
   }
 }
 
-const BASE = ((globalThis as { __NEXDECK_BASE__?: string }).__NEXDECK_BASE__ ?? '') + '/api/v1'
+const BASE = ((globalThis as { __HEXDECK_BASE__?: string }).__HEXDECK_BASE__ ?? '') + '/api/v1'
 
 /** An address the server handed out (a profile picture, an upload), as the browser must call it. */
 export function serverUrl(path: string): string {
-  return ((globalThis as { __NEXDECK_BASE__?: string }).__NEXDECK_BASE__ ?? '') + path
+  return ((globalThis as { __HEXDECK_BASE__?: string }).__HEXDECK_BASE__ ?? '') + path
 }
 
 /**
@@ -113,7 +113,7 @@ export async function api<T = unknown>(path: string, init: RequestInit & { json?
  * rejects: a 422 carries ``detail`` as a **list** of field errors, so every
  * one of the four fell through to "HTTP 422" and the person saw a number
  * instead of which field was wrong. The shapes in the wild are three:
- * nexdeck's own ``{detail: {code, message}}``, the flat ``{code, message}``
+ * HexDeck's own ``{detail: {code, message}}``, the flat ``{code, message}``
  * the 404 handler sends for an address that does not exist, and FastAPI's
  * validation list.
  */

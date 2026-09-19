@@ -54,7 +54,7 @@ export function CommandPalette({ open, onClose, boards, widgets, actions = [], o
   const entries = useMemo<Entry[]>(() => {
     const list: Entry[] = []
     for (const widget of widgets) {
-      // ⚠️ ``safeUrl`` throws away an address with a scheme nexdeck will not
+      // ⚠️ ``safeUrl`` throws away an address with a scheme HexDeck will not
       // open, and the entry was offered anyway: pressing it opened a blank
       // window. Asked here, so an entry that cannot be opened is not offered.
       if (safeUrl(widget.link)) {

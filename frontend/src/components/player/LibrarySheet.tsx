@@ -2,7 +2,7 @@
  * The library as a sheet beside the board, for cards too small to carry it
  * and for the bar at the bottom.
  *
- * nexdeck's own sheet, the one the card settings open in, so it looks and
+ * HexDeck's own sheet, the one the card settings open in, so it looks and
  * closes like everything else: Escape, the shade, the cross. On a phone it
  * takes the whole width.
  */

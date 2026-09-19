@@ -17,7 +17,7 @@ export async function currentSubscription(): Promise<PushSubscription | null> {
   return (await registration?.pushManager.getSubscription()) ?? null
 }
 
-/** Ask for permission, subscribe at the push service and register with nexdeck. */
+/** Ask for permission, subscribe at the push service and register with HexDeck. */
 export async function subscribePush(): Promise<void> {
   if (!pushSupported()) throw new Error('unsupported')
   const permission = await Notification.requestPermission()

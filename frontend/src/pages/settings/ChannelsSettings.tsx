@@ -20,7 +20,7 @@ type EventSpec = { event: string; label: string }
 const DEFAULT_EVENTS = ['outage', 'recovery', 'action_failed']
 
 /**
- * Where nexdeck writes when something happens.
+ * Where HexDeck writes when something happens.
  *
  * One row of services, the ways you have set up as tiles below it, and the one
  * you are working on opened underneath. A service can hold as many as you like:

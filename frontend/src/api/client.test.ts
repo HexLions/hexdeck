@@ -9,7 +9,7 @@
 import { readFailure } from './client'
 
 describe('readFailure', () => {
-  it("reads nexdeck's own shape", () => {
+  it("reads HexDeck's own shape", () => {
     const seen = readFailure({ detail: { code: 'quota_full', message: 'The limit is 200 MB.', hint: 'Delete a file.' } }, 413)
     expect(seen.code).toBe('quota_full')
     expect(seen.message).toBe('The limit is 200 MB.')

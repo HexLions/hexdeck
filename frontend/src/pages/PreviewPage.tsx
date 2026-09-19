@@ -12,11 +12,11 @@ export function PreviewPage() {
   const [page, setPage] = useState(1)
   // The preview runs without a backend, so logos come straight from the CDN here.
   useEffect(() => {
-    const scope = globalThis as { __NEXDECK_ICON_BASE__?: string }
-    const previous = scope.__NEXDECK_ICON_BASE__
-    scope.__NEXDECK_ICON_BASE__ = 'https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/'
+    const scope = globalThis as { __HEXDECK_ICON_BASE__?: string }
+    const previous = scope.__HEXDECK_ICON_BASE__
+    scope.__HEXDECK_ICON_BASE__ = 'https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/'
     return () => {
-      scope.__NEXDECK_ICON_BASE__ = previous
+      scope.__HEXDECK_ICON_BASE__ = previous
     }
   }, [])
   const noop = () => undefined

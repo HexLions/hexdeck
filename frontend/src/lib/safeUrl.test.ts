@@ -20,7 +20,7 @@ describe('safeUrl', () => {
     expect(safeUrl('?page=2')).toBe('?page=2')
   })
 
-  it('refuses a scheme that would run as part of nexdeck', () => {
+  it('refuses a scheme that would run as part of HexDeck', () => {
     // These come out of feeds and third-party APIs, not from the operator.
     for (const url of [
       'javascript:alert(1)',

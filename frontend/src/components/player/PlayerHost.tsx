@@ -87,7 +87,7 @@ export function PlayerHost() {
     }
     const unwatch = () => window.clearTimeout(stuckTimer)
     const tab = Math.random().toString(36).slice(2)
-    const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('nexdeck-player') : null
+    const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('hexdeck-player') : null
 
     const tryPlay = () => {
       void audio.play().catch((failure: unknown) => {

@@ -29,7 +29,7 @@ interface Verdict {
  *
  * ⚠️ **Two questions, not one.** Whether the archive brings a key, and
  * whether this installation would ignore it because the variable is set. The
- * worst combination is "no key in the archive and no variable here": nexdeck
+ * worst combination is "no key in the archive and no variable here": HexDeck
  * makes a new one, and afterwards not a single stored credential can be read,
  * with nothing pointing at the key as the cause.
  */
@@ -183,7 +183,7 @@ export function RestoreDialog({ open, onClose, username, onDone }: {
       {verdict?.restorable && (
         <>
           {/* ⚠️ Not a checkbox. A checkbox is one careless click, and this is
-              the one action that cannot be undone from inside nexdeck. */}
+              the one action that cannot be undone from inside HexDeck. */}
           <p className="text-sm text-bad mb-2">{t('backups.restore.warning')}</p>
           <Field label={t('backups.restore.confirm', { name: username })} htmlFor="restore-confirm">
             <input id="restore-confirm" className="input" autoComplete="off" value={confirm} onChange={(event) => setConfirm(event.target.value)} />

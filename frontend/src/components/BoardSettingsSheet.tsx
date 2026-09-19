@@ -301,7 +301,7 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
             {t('board.export')}
           </a>
           <Field label={t('board.import')} help={t('board.importHelp')}>
-            <textarea className="input" rows={6} value={importText} onChange={(e) => setImportText(e.target.value)} placeholder="nexdeck: 1&#10;board:&#10;  name: …" />
+            <textarea className="input" rows={6} value={importText} onChange={(e) => setImportText(e.target.value)} placeholder="HexDeck: 1&#10;board:&#10;  name: …" />
           </Field>
           <button
             className="btn"

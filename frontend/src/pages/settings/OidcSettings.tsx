@@ -57,7 +57,7 @@ export function OidcSettings() {
             <input id="o-label" className="input" value={form.label} onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))} />
           </Field>
           <Field label={t('settings.system.oidcIssuer')} htmlFor="o-issuer">
-            <input id="o-issuer" className="input" type="url" placeholder="https://auth.example.com/application/o/nexdeck/" value={form.issuer_url} onChange={(e) => setForm((f) => ({ ...f, issuer_url: e.target.value }))} />
+            <input id="o-issuer" className="input" type="url" placeholder="https://auth.example.com/application/o/hexdeck/" value={form.issuer_url} onChange={(e) => setForm((f) => ({ ...f, issuer_url: e.target.value }))} />
           </Field>
           <Field label={t('settings.system.oidcClientId')} htmlFor="o-client">
             <input id="o-client" className="input" value={form.client_id} onChange={(e) => setForm((f) => ({ ...f, client_id: e.target.value }))} />

@@ -4,7 +4,7 @@
  * ⚠️ Most addresses on a board are not the operator's. A feed entry's link,
  * a Hacker News story, a monitor's URL from Uptime Kuma: all of them come out
  * of a third-party service and land in an `href`. A `javascript:` address
- * there runs as part of nexdeck, with the session, on any board that shows
+ * there runs as part of HexDeck, with the session, on any board that shows
  * that card.
  *
  * The content-security-policy the server sends stops it in a deployed build.
@@ -17,7 +17,7 @@
 const ALLOWED = new Set(['http:', 'https:', 'mailto:'])
 
 /**
- * The address if it is one nexdeck may link to, otherwise an empty string.
+ * The address if it is one HexDeck may link to, otherwise an empty string.
  *
  * A relative address ("/b/home", "#top") is kept: it stays inside the app.
  */

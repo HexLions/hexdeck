@@ -4,11 +4,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// Where the API lives during development. NEXDECK_API overrides it, from the
+// Where the API lives during development. HEXDECK_API overrides it, from the
 // environment or from a gitignored .env.local next to this file, when the
 // backend runs on another port than 8000.
-const fileEnv = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), 'NEXDECK_')
-const apiTarget = process.env.NEXDECK_API || fileEnv.NEXDECK_API || 'http://127.0.0.1:8000'
+const fileEnv = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), 'HEXDECK_')
+const apiTarget = process.env.HEXDECK_API || fileEnv.HEXDECK_API || 'http://127.0.0.1:8000'
 
 export default defineConfig({
   plugins: [
@@ -21,8 +21,8 @@ export default defineConfig({
       filename: 'sw.ts',
       injectRegister: 'auto',
       manifest: {
-        name: 'nexdeck',
-        short_name: 'nexdeck',
+        name: 'HexDeck',
+        short_name: 'HexDeck',
         description: 'The live homelab dashboard.',
         theme_color: '#0a0d12',
         background_color: '#0a0d12',

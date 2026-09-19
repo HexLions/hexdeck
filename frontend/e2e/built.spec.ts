@@ -107,7 +107,7 @@ test('a picture from another address still loads once the service worker is in c
   // foreign pictures included, and that fetch failed where the page's own
   // <img> would have been allowed. It went unnoticed because Nexview was the
   // first adapter to hand the browser a picture from somewhere else; every
-  // other one goes through nexdeck's own image proxy.
+  // other one goes through HexDeck's own image proxy.
   //
   // The foreign address here is the dev server of this very run: another
   // port is another origin, it serves /icon-192.png from public/, and it

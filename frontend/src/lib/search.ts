@@ -1,7 +1,7 @@
 /**
  * The bar that leaves the house.
  *
- * nexdeck's own bar finds boards, cards and settings. These few lines are the
+ * HexDeck's own bar finds boards, cards and settings. These few lines are the
  * other half: a typed word handed to a search engine or to a service that is
  * already connected. A shortcut in front picks one of them, so `!y cats` goes
  * straight to YouTube instead of showing every target at once.

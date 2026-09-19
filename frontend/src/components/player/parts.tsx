@@ -69,7 +69,7 @@ export interface Palette {
  * The colour a cover lends the card: its most vivid tone, kept bright enough to
  * read on the dark card and dark enough to carry white on the light one.
  *
- * Only possible because covers come through nexdeck's own address. A cover
+ * Only possible because covers come through HexDeck's own address. A cover
  * from another origin would taint the canvas and give nothing back.
  */
 export function useCoverColour(url: string): Palette | null {

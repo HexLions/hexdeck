@@ -9,7 +9,7 @@ declare const self: ServiceWorkerGlobalScope & { __WB_MANIFEST: { url: string; r
 const MANIFEST = self.__WB_MANIFEST || []
 /**
  * ⚠️ The name carries the build, so the sweep in `activate` has something to
- * sweep. It used to be the literal 'nexdeck-shell-v1' for every build ever
+ * sweep. It used to be the literal 'hexdeck-shell-v1' for every build ever
  * made: the sweep kept every cache whose name differed from the current one,
  * and no name ever differed, so the files of every past version stayed in the
  * browser's storage until somebody cleared the site by hand.
@@ -18,7 +18,7 @@ const MANIFEST = self.__WB_MANIFEST || []
  * precached file does, so nothing has to be kept in step by hand.
  */
 const STAMP = MANIFEST.map((entry) => entry.revision ?? entry.url).join('|')
-const CACHE = `nexdeck-shell-${hash(STAMP)}`
+const CACHE = `hexdeck-shell-${hash(STAMP)}`
 
 function hash(text: string): string {
   let value = 5381
@@ -45,7 +45,7 @@ self.addEventListener('fetch', (event) => {
   const request = event.request
   if (request.method !== 'GET') return
   const url = new URL(request.url)
-  // ⚠️ Only nexdeck's own addresses. The worker used to answer every request
+  // ⚠️ Only HexDeck's own addresses. The worker used to answer every request
   // that was not /api/ by fetching it itself, pictures from other addresses
   // included, and that fetch failed where the page's own <img> was allowed:
   // Nexview's covers come from TMDB and broke on every board the worker
@@ -73,10 +73,10 @@ self.addEventListener('push', (event) => {
   try {
     payload = event.data?.json() ?? {}
   } catch {
-    payload = { title: 'nexdeck', body: event.data?.text() }
+    payload = { title: 'HexDeck', body: event.data?.text() }
   }
   event.waitUntil(
-    self.registration.showNotification(payload.title || 'nexdeck', {
+    self.registration.showNotification(payload.title || 'HexDeck', {
       body: payload.body || '',
       tag: payload.tag,
       icon: '/icon-192.png',

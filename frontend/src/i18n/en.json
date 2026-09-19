@@ -57,7 +57,7 @@
       "oidc_state_mismatch": "The sign-in attempt expired. Try again.",
       "oidc_unreachable": "The identity provider could not be reached.",
       "oidc_bad_token": "The identity provider's answer could not be verified.",
-      "oidc_no_account": "No nexdeck account is linked to this identity yet.",
+      "oidc_no_account": "No HexDeck account is linked to this identity yet.",
       "oidc_disabled": "This account is disabled.",
       "oidc_token_refused": "The identity provider refused the sign-in code.",
       "oidc_no_public_url": "The public URL is not set. An administrator has to set it first.",
@@ -105,7 +105,7 @@
     "intro": {
       "0": "The first account is the administrator. Everything else can be changed later.",
       "1": "Both can be changed any time in the profile.",
-      "2": "The demo fills a board with invented, moving data so you see what nexdeck can do. A real Docker host gives you your containers right away."
+      "2": "The demo fills a board with invented, moving data so you see what HexDeck can do. A real Docker host gives you your containers right away."
     },
     "passwordHelp": "At least eight characters.",
     "demo": {
@@ -144,9 +144,9 @@
     },
     "mail": {
       "title": "Mail server",
-      "help": "How nexdeck itself sends mail: password resets and other messages that have to go out before anyone is signed in. Notification channels keep their own server.",
+      "help": "How HexDeck itself sends mail: password resets and other messages that have to go out before anyone is signed in. Notification channels keep their own server.",
       "host": "SMTP server",
-      "hostHelp": "Empty means nexdeck sends no mail at all.",
+      "hostHelp": "Empty means HexDeck sends no mail at all.",
       "port": "Port",
       "security": "Encryption",
       "securityNone": "None",
@@ -251,7 +251,7 @@
       "installation": "Installation",
       "installationHelp": "Settings that concern the whole installation.",
       "publicUrl": "Public URL",
-      "publicUrlHelp": "As browsers see nexdeck. Needed for identity providers and Web Push.",
+      "publicUrlHelp": "As browsers see HexDeck. Needed for identity providers and Web Push.",
       "demo": "Demo mode for everything",
       "demoHelp": "Every widget shows fake data. Switch it off when you connect real services.",
       "updateCheck": "Check for updates",
@@ -267,7 +267,7 @@
       "oidcAutoCreate": "Create accounts on first sign-in",
       "oidcAutoCreateHelp": "Off means only linked accounts may sign in.",
       "oidcTrustsSecondFactor": "This provider checks a second factor itself",
-      "oidcTrustsSecondFactorHelp": "Off means nexdeck asks for its own code after this provider signs somebody in, if that account has one set up. Turn it on where authentik, Authelia or Keycloak already ask.",
+      "oidcTrustsSecondFactorHelp": "Off means HexDeck asks for its own code after this provider signs somebody in, if that account has one set up. Turn it on where authentik, Authelia or Keycloak already ask.",
       "oidcRedirect": "Redirect URI to register at the provider: {{url}}",
       "oidcAdd": "Add provider"
     },
@@ -275,13 +275,13 @@
       "title": "Search that leaves the house",
       "help": "The bar behind Ctrl+K finds boards, cards and settings. This is where a typed word may go besides: to a search engine, or to a service that is already connected.",
       "enabled": "Offer the way out",
-      "enabledHelp": "Off means the bar stays inside nexdeck.",
+      "enabledHelp": "Off means the bar stays inside HexDeck.",
       "name": "Name",
       "url": "Address with {query}",
       "prefix": "Shortcut",
       "add": "Add a target",
       "remove": "Remove {{name}}",
-      "empty": "No target yet. Without one the bar stays inside nexdeck.",
+      "empty": "No target yet. Without one the bar stays inside HexDeck.",
       "fromIntegrations": "Take them from the connections",
       "nothingNew": "Nothing new found.",
       "added": "{{count}} target taken.",
@@ -290,7 +290,7 @@
     },
     "appearance": {
       "title": "Appearance",
-      "help": "nexdeck ships one look in two brightnesses. Here you set the accent colour for everyone, and you may add a style sheet of your own.",
+      "help": "HexDeck ships one look in two brightnesses. Here you set the accent colour for everyone, and you may add a style sheet of your own.",
       "accent": "Accent colour",
       "accentHelp": "Applies to every account and both brightnesses.",
       "own": "A colour of your own",
@@ -298,7 +298,7 @@
       "ownHex": "Colour as a hex value",
       "backToPreset": "Back to the choice",
       "css": "Style sheet of your own",
-      "cssHelp": "Loaded on every page, after everything nexdeck ships.",
+      "cssHelp": "Loaded on every page, after everything HexDeck ships.",
       "cssLimits": "At most 20,000 characters. @import is not allowed: it would fetch a file from somewhere else.",
       "reset": "Back to what it shipped with",
       "previewTitle": "Preview",
@@ -317,9 +317,9 @@
     },
     "journal": {
       "title": "Log level",
-      "intro": "How much nexdeck writes down. A deeper level takes effect at once, without a restart, and switches itself off again.",
+      "intro": "How much HexDeck writes down. A deeper level takes effect at once, without a restart, and switches itself off again.",
       "level": "Level",
-      "fixedByEnv": "Set through NEXDECK_LOG_LEVEL and not changed here.",
+      "fixedByEnv": "Set through HEXDECK_LOG_LEVEL and not changed here.",
       "duration": "For how long",
       "durationHelp": "A deep level writes a lot. This is when it goes back to normal.",
       "untilRestart": "Until the next restart",
@@ -442,7 +442,7 @@
   },
   "channels": {
     "push": "Web Push on this device",
-    "pushHelp": "Notifications reach this browser or the installed app, even when nexdeck is closed.",
+    "pushHelp": "Notifications reach this browser or the installed app, even when HexDeck is closed.",
     "pushOn": "Web Push is on for this device.",
     "pushOff": "Web Push is off for this device.",
     "pushDenied": "The browser refused notifications. Allow them in the site settings.",
@@ -487,7 +487,7 @@
       },
       "gotify": {
         "server": "Enter the address of your Gotify server on the left.",
-        "app": "In Gotify, open Apps and create one for nexdeck.",
+        "app": "In Gotify, open Apps and create one for HexDeck.",
         "token": "Copy the application token and paste it on the left."
       },
       "apprise": {
@@ -746,20 +746,20 @@
     "askFailed": "GitHub did not answer. Nothing said about the newest version.",
     "updateAvailable": "{{version}} is out",
     "thanks": "Thanks",
-    "thanksIntro": "nexdeck is built on other people's work. Some of the following is politeness, some of it is their terms.",
+    "thanksIntro": "HexDeck is built on other people's work. Some of the following is politeness, some of it is their terms.",
     "forerunners": "Came first",
-    "forerunnersNote": "Homarr, Homepage and Glance showed what a homelab dashboard can be. nexdeck went its own way, and it started from theirs.",
+    "forerunnersNote": "Homarr, Homepage and Glance showed what a homelab dashboard can be. HexDeck went its own way, and it started from theirs.",
     "icons": "Icons",
     "iconsNote": "Dashboard Icons holds the logos of the services, Lucide the drawn symbols. Both come through the server, so no browser talks to a content network.",
     "dataSources": "Data",
     "weatherNote": "The weather widget asks Open-Meteo, free and without an account. Their data comes from national weather services.",
     "services": "Plex, Jellyfin, Emby, Radarr, Sonarr, Home Assistant and the others",
-    "servicesNote": "nexdeck reads their APIs. The names and logos belong to them, and none of these projects has anything to do with nexdeck.",
+    "servicesNote": "HexDeck reads their APIs. The names and logos belong to them, and none of these projects has anything to do with HexDeck.",
     "notifyServices": "Notification services",
-    "notifyNote": "Where nexdeck writes when something happens. Apprise alone speaks to a hundred more.",
+    "notifyNote": "Where HexDeck writes when something happens. Apprise alone speaks to a hundred more.",
     "builtWith": "Built with",
-    "family": "The nexapps family",
-    "familyNote": "Nexview asks for films and series, nexmail is the mail client, nexdeck watches the machines they run on."
+    "family": "Where it comes from",
+    "familyNote": "HexDeck is a fork of nexdeck by DerKezorm, one of the nexapps tools next to Nexview and nexmail. It stays under the AGPL-3.0."
   },
   "status": {
     "ok": "Everything is fine",
@@ -774,7 +774,7 @@
     "nothingUpcoming": "Nothing coming up",
     "noLinks": "No links yet",
     "noUrl": "No URL set",
-    "noSelfFrame": "This card cannot show nexdeck itself",
+    "noSelfFrame": "This card cannot show HexDeck itself",
     "noEntries": "No entries",
     "waitingLog": "Waiting for log lines…",
     "collecting": "Collecting…",
@@ -932,7 +932,7 @@
     "timeout": "Plex did not confirm the sign-in in time. Try again.",
     "server": "Server",
     "shared": "shared",
-    "pickServer": "Local addresses come first; pick another one if nexdeck cannot reach it.",
+    "pickServer": "Local addresses come first; pick another one if HexDeck cannot reach it.",
     "noServers": "This account has no Plex server of its own."
   },
   "gauge": {
@@ -957,7 +957,7 @@
       "manual": "By hand"
     },
     "reason": {
-      "too_new": "From a newer nexdeck",
+      "too_new": "From a newer HexDeck",
       "ok": "ok"
     },
     "list": {
@@ -987,9 +987,9 @@
       "warning": "This replaces the database, the key and the pictures. Everyone is signed out, you included. The current state is backed up first.",
       "withoutSafetyCopy": "Restore even if the safety copy of the current state cannot be written. Only when that copy is the thing that is broken.",
       "confirm": "Type {{name}} to confirm",
-      "keyOnlyFromEnv": "There is no key in this archive. This installation takes its key from NEXDECK_SECRET_KEY, so the credentials will be readable if the variable holds the same value as on the machine the backup came from.",
-      "noKeyAtAll": "There is no key in this archive and none in the environment here. nexdeck will make a new one, and no stored credential will be readable afterwards. Every connection would have to be entered again.",
-      "envKeyWins": "This archive brings a key, but NEXDECK_SECRET_KEY is set here and wins. The credentials stay unreadable unless the variable holds the same value."
+      "keyOnlyFromEnv": "There is no key in this archive. This installation takes its key from HEXDECK_SECRET_KEY, so the credentials will be readable if the variable holds the same value as on the machine the backup came from.",
+      "noKeyAtAll": "There is no key in this archive and none in the environment here. HexDeck will make a new one, and no stored credential will be readable afterwards. Every connection would have to be entered again.",
+      "envKeyWins": "This archive brings a key, but HEXDECK_SECRET_KEY is set here and wins. The credentials stay unreadable unless the variable holds the same value."
     }
   },
   "nav": {

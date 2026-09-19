@@ -50,7 +50,7 @@ export function TopBar(props: Props) {
   }, [menu])
   return (
     <header className="glass-strong sticky top-0 z-40 h-12 flex items-center gap-2 px-3 border-x-0 border-t-0 rounded-none">
-      <Link to="/" className="flex items-center gap-2 mr-1" aria-label="nexdeck">
+      <Link to="/" className="flex items-center gap-2 mr-1" aria-label="HexDeck">
         <LogoMark size={26} />
         <span className="font-semibold tracking-tight hidden lg:inline">
           nex<span className="text-accent">deck</span>

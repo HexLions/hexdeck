@@ -3,7 +3,7 @@
  *
  * A feed entry, a Hacker News story, a monitor from Uptime Kuma: the address
  * on those cards is written by a stranger. One of them saying `javascript:`
- * would run as part of nexdeck, on every board that shows the card.
+ * would run as part of HexDeck, on every board that shows the card.
  */
 import { render, screen } from '@testing-library/react'
 

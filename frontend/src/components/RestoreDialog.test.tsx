@@ -3,7 +3,7 @@
  *
  * ⚠️ Whether the credentials survive a restore depends on two things, not
  * one: whether the archive brings a key, and whether this installation would
- * ignore it because NEXDECK_SECRET_KEY is set. Asking only the first makes
+ * ignore it because HEXDECK_SECRET_KEY is set. Asking only the first makes
  * the preview look reassuring in the one combination that ruins the
  * installation, which is exactly what happened in nexview.
  */
@@ -62,7 +62,7 @@ describe('RestoreDialog', () => {
 
   it('stays quiet about the key when the archive brings one and nothing overrides it', async () => {
     await lookInside(VERDICT)
-    expect(screen.queryByText(/NEXDECK_SECRET_KEY/)).toBeNull()
+    expect(screen.queryByText(/HEXDECK_SECRET_KEY/)).toBeNull()
   })
 
   it('warns hardest when there is no key anywhere', async () => {
@@ -73,7 +73,7 @@ describe('RestoreDialog', () => {
 
   it('explains the variable when the archive has no key but the machine does', async () => {
     await lookInside({ ...VERDICT, key_inside: false, key_from_env: true })
-    expect(screen.getByText(/NEXDECK_SECRET_KEY/)).toBeInTheDocument()
+    expect(screen.getByText(/HEXDECK_SECRET_KEY/)).toBeInTheDocument()
     expect(screen.queryByText(/entered again|neu eingetragen/i)).toBeNull()
   })
 
@@ -95,7 +95,7 @@ describe('RestoreDialog', () => {
     expect(go).toBeEnabled()
   })
 
-  it('does not offer to replace a backup from a newer nexdeck', async () => {
+  it('does not offer to replace a backup from a newer HexDeck', async () => {
     await lookInside({ ...VERDICT, restorable: false, reason: 'too_new' })
     expect(document.querySelector('#restore-confirm')).toBeNull()
     expect(screen.getByRole('button', { name: /Replace everything|alles ersetzen/i })).toBeDisabled()

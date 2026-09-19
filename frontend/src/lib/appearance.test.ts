@@ -36,25 +36,25 @@ describe('the accent colour', () => {
 describe('painting it on', () => {
   beforeEach(() => {
     document.documentElement.removeAttribute('style')
-    document.getElementById('nexdeck-appearance')?.remove()
+    document.getElementById('hexdeck-appearance')?.remove()
   })
 
   it('sets the variables and adds the style sheet', () => {
     applyAppearance({ preset: 'violet', accent: '', colour: '#a78bfa', css: '.card { border-radius: 4px; }' })
     expect(document.documentElement.style.getPropertyValue('--nd-accent')).toBe('#a78bfa')
-    expect(document.getElementById('nexdeck-appearance')?.textContent).toBe('.card { border-radius: 4px; }')
+    expect(document.getElementById('hexdeck-appearance')?.textContent).toBe('.card { border-radius: 4px; }')
   })
 
   it('takes the style sheet away again when it is emptied', () => {
     applyAppearance({ preset: 'cyan', accent: '', colour: '#22d3ee', css: '.card { border-radius: 4px; }' })
     applyAppearance({ preset: 'cyan', accent: '', colour: '#22d3ee', css: '   ' })
-    expect(document.getElementById('nexdeck-appearance')).toBeNull()
+    expect(document.getElementById('hexdeck-appearance')).toBeNull()
   })
 
   it('keeps only one tag however often it is painted', () => {
     for (let round = 0; round < 3; round += 1) applyAppearance({ preset: 'cyan', accent: '', colour: '#22d3ee', css: `.a${round} {}` })
-    expect(document.querySelectorAll('#nexdeck-appearance')).toHaveLength(1)
-    expect(document.getElementById('nexdeck-appearance')?.textContent).toBe('.a2 {}')
+    expect(document.querySelectorAll('#hexdeck-appearance')).toHaveLength(1)
+    expect(document.getElementById('hexdeck-appearance')?.textContent).toBe('.a2 {}')
   })
 
   it('gives the shipped colour back when there is nothing to apply', () => {

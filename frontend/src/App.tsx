@@ -47,7 +47,7 @@ function Guard({ children }: { children: React.ReactNode }) {
  * The look the operator chose, painted on once the browser is signed in.
  *
  * Signed out there is nothing to read and nothing to paint, so the sign-in
- * page keeps the colours nexdeck ships with.
+ * page keeps the colours HexDeck ships with.
  */
 function Look() {
   const user = useAuth((s) => s.user)

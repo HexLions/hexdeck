@@ -38,7 +38,7 @@ export class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, info: ErrorInfo): void {
     // The console is the only place this can go: sending it anywhere would be
     // an outbound call nobody asked for.
-    console.error('nexdeck could not draw this:', error, info.componentStack)
+    console.error('HexDeck could not draw this:', error, info.componentStack)
   }
 
   private retry = (): void => {

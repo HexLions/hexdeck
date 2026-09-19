@@ -57,7 +57,7 @@
       "oidc_state_mismatch": "Der Anmeldeversuch ist abgelaufen. Versuch es noch einmal.",
       "oidc_unreachable": "Der Anbieter ist nicht erreichbar.",
       "oidc_bad_token": "Die Antwort des Anbieters ließ sich nicht prüfen.",
-      "oidc_no_account": "Mit dieser Identität ist noch kein nexdeck-Konto verknüpft.",
+      "oidc_no_account": "Mit dieser Identität ist noch kein HexDeck-Konto verknüpft.",
       "oidc_disabled": "Dieses Konto ist gesperrt.",
       "oidc_token_refused": "Der Anbieter hat den Anmeldecode abgelehnt.",
       "oidc_no_public_url": "Die öffentliche Adresse ist nicht eingestellt. Das muss ein Administrator zuerst tun.",
@@ -105,7 +105,7 @@
     "intro": {
       "0": "Das erste Konto ist der Administrator. Alles andere lässt sich später ändern.",
       "1": "Beides lässt sich jederzeit im Profil ändern.",
-      "2": "Die Vorführung füllt ein Board mit erfundenen, lebendigen Daten, damit du siehst, was nexdeck kann. Ein echter Docker-Host bringt dir sofort deine Container."
+      "2": "Die Vorführung füllt ein Board mit erfundenen, lebendigen Daten, damit du siehst, was HexDeck kann. Ein echter Docker-Host bringt dir sofort deine Container."
     },
     "passwordHelp": "Mindestens acht Zeichen.",
     "demo": {
@@ -144,9 +144,9 @@
     },
     "mail": {
       "title": "Mailserver",
-      "help": "Wie nexdeck selbst Mail verschickt: vergessene Passwörter und alles, was hinaus muss, bevor jemand angemeldet ist. Benachrichtigungswege behalten ihren eigenen Server.",
+      "help": "Wie HexDeck selbst Mail verschickt: vergessene Passwörter und alles, was hinaus muss, bevor jemand angemeldet ist. Benachrichtigungswege behalten ihren eigenen Server.",
       "host": "SMTP-Server",
-      "hostHelp": "Leer heißt: nexdeck verschickt gar keine Mail.",
+      "hostHelp": "Leer heißt: HexDeck verschickt gar keine Mail.",
       "port": "Port",
       "security": "Verschlüsselung",
       "securityNone": "Keine",
@@ -251,7 +251,7 @@
       "installation": "Installation",
       "installationHelp": "Einstellungen, die die ganze Installation betreffen.",
       "publicUrl": "Öffentliche Adresse",
-      "publicUrlHelp": "So sehen Browser nexdeck. Nötig für Anmeldeanbieter und Web Push.",
+      "publicUrlHelp": "So sehen Browser HexDeck. Nötig für Anmeldeanbieter und Web Push.",
       "demo": "Vorführmodus für alles",
       "demoHelp": "Jedes Widget zeigt erfundene Daten. Abschalten, wenn echte Dienste angebunden sind.",
       "updateCheck": "Nach Updates suchen",
@@ -267,7 +267,7 @@
       "oidcAutoCreate": "Konten bei der ersten Anmeldung anlegen",
       "oidcAutoCreateHelp": "Aus heißt: Nur verknüpfte Konten dürfen sich anmelden.",
       "oidcTrustsSecondFactor": "Dieser Anbieter prüft selbst einen zweiten Faktor",
-      "oidcTrustsSecondFactorHelp": "Aus heißt: nexdeck fragt nach der Anmeldung über diesen Anbieter den eigenen Code ab, sofern das Konto einen eingerichtet hat. Einschalten, wo authentik, Authelia oder Keycloak schon fragen.",
+      "oidcTrustsSecondFactorHelp": "Aus heißt: HexDeck fragt nach der Anmeldung über diesen Anbieter den eigenen Code ab, sofern das Konto einen eingerichtet hat. Einschalten, wo authentik, Authelia oder Keycloak schon fragen.",
       "oidcRedirect": "Beim Anbieter einzutragende Rücksprungadresse: {{url}}",
       "oidcAdd": "Anbieter hinzufügen"
     },
@@ -290,7 +290,7 @@
     },
     "appearance": {
       "title": "Aussehen",
-      "help": "nexdeck bringt einen Look in zwei Helligkeiten mit. Hier stellst du die Akzentfarbe für alle ein und kannst ein eigenes Stylesheet dazulegen.",
+      "help": "HexDeck bringt einen Look in zwei Helligkeiten mit. Hier stellst du die Akzentfarbe für alle ein und kannst ein eigenes Stylesheet dazulegen.",
       "accent": "Akzentfarbe",
       "accentHelp": "Gilt für alle Konten und beide Helligkeiten.",
       "own": "Eigene Farbe",
@@ -298,7 +298,7 @@
       "ownHex": "Farbe als Hex-Wert",
       "backToPreset": "Zurück zur Auswahl",
       "css": "Eigenes Stylesheet",
-      "cssHelp": "Wird auf jeder Seite geladen, nach allem, was nexdeck mitbringt.",
+      "cssHelp": "Wird auf jeder Seite geladen, nach allem, was HexDeck mitbringt.",
       "cssLimits": "Höchstens 20.000 Zeichen. @import ist nicht erlaubt: es würde eine Datei von außerhalb nachladen.",
       "reset": "Auf Werkseinstellung",
       "previewTitle": "Vorschau",
@@ -317,9 +317,9 @@
     },
     "journal": {
       "title": "Protokollstufe",
-      "intro": "Wie viel nexdeck mitschreibt. Eine tiefere Stufe wirkt sofort, ohne Neustart, und schaltet sich von selbst wieder ab.",
+      "intro": "Wie viel HexDeck mitschreibt. Eine tiefere Stufe wirkt sofort, ohne Neustart, und schaltet sich von selbst wieder ab.",
       "level": "Stufe",
-      "fixedByEnv": "Über NEXDECK_LOG_LEVEL gesetzt und hier nicht änderbar.",
+      "fixedByEnv": "Über HEXDECK_LOG_LEVEL gesetzt und hier nicht änderbar.",
       "duration": "Wie lange",
       "durationHelp": "Eine tiefe Stufe schreibt viel. Dann geht es zurück auf normal.",
       "untilRestart": "Bis zum nächsten Neustart",
@@ -442,7 +442,7 @@
   },
   "channels": {
     "push": "Web Push auf diesem Gerät",
-    "pushHelp": "Meldungen erreichen diesen Browser oder die installierte App, auch wenn nexdeck geschlossen ist.",
+    "pushHelp": "Meldungen erreichen diesen Browser oder die installierte App, auch wenn HexDeck geschlossen ist.",
     "pushOn": "Web Push ist auf diesem Gerät an.",
     "pushOff": "Web Push ist auf diesem Gerät aus.",
     "pushDenied": "Der Browser hat Mitteilungen abgelehnt. Erlaube sie in den Seiteneinstellungen.",
@@ -487,7 +487,7 @@
       },
       "gotify": {
         "server": "Trage links die Adresse deines Gotify-Servers ein.",
-        "app": "Lege in Gotify unter Apps eine Anwendung für nexdeck an.",
+        "app": "Lege in Gotify unter Apps eine Anwendung für HexDeck an.",
         "token": "Kopiere das Application-Token und setze es links ein."
       },
       "apprise": {
@@ -746,20 +746,20 @@
     "askFailed": "GitHub hat nicht geantwortet. Über die neueste Fassung ist damit nichts gesagt.",
     "updateAvailable": "{{version}} ist da",
     "thanks": "Danksagung",
-    "thanksIntro": "nexdeck steht auf der Arbeit anderer. Manches davon ist Höflichkeit, manches sind ihre Bedingungen.",
+    "thanksIntro": "HexDeck steht auf der Arbeit anderer. Manches davon ist Höflichkeit, manches sind ihre Bedingungen.",
     "forerunners": "Waren zuerst da",
-    "forerunnersNote": "Homarr, Homepage und Glance haben gezeigt, was ein Homelab-Dashboard sein kann. nexdeck ist einen eigenen Weg gegangen, losgelaufen ist es auf ihrem.",
+    "forerunnersNote": "Homarr, Homepage und Glance haben gezeigt, was ein Homelab-Dashboard sein kann. HexDeck ist einen eigenen Weg gegangen, losgelaufen ist es auf ihrem.",
     "icons": "Symbole",
     "iconsNote": "Dashboard Icons hält die Logos der Dienste bereit, Lucide die gezeichneten Zeichen. Beide laufen über den Server, kein Browser spricht mit einem fremden Netz.",
     "dataSources": "Daten",
     "weatherNote": "Die Wetterkarte fragt Open-Meteo, kostenlos und ohne Konto. Die Daten kommen von den staatlichen Wetterdiensten.",
     "services": "Plex, Jellyfin, Emby, Radarr, Sonarr, Home Assistant und die anderen",
-    "servicesNote": "nexdeck liest ihre Schnittstellen. Namen und Logos gehören ihnen, und keines dieser Projekte hat mit nexdeck etwas zu tun.",
+    "servicesNote": "HexDeck liest ihre Schnittstellen. Namen und Logos gehören ihnen, und keines dieser Projekte hat mit HexDeck etwas zu tun.",
     "notifyServices": "Meldedienste",
-    "notifyNote": "Wohin nexdeck schreibt, wenn etwas passiert. Apprise allein spricht mit hundert weiteren.",
+    "notifyNote": "Wohin HexDeck schreibt, wenn etwas passiert. Apprise allein spricht mit hundert weiteren.",
     "builtWith": "Gebaut mit",
-    "family": "Die nexapps-Familie",
-    "familyNote": "Nexview fragt Filme und Serien an, nexmail ist der Mail-Client, nexdeck sieht den Maschinen zu, auf denen beide laufen."
+    "family": "Woher es kommt",
+    "familyNote": "HexDeck ist ein Fork von nexdeck von DerKezorm, einem der nexapps-Werkzeuge neben Nexview und nexmail. Es bleibt unter der AGPL-3.0."
   },
   "status": {
     "ok": "Alles in Ordnung",
@@ -774,7 +774,7 @@
     "nothingUpcoming": "Nichts steht an",
     "noLinks": "Noch keine Links",
     "noUrl": "Keine Adresse gesetzt",
-    "noSelfFrame": "Diese Karte kann nexdeck nicht selbst zeigen",
+    "noSelfFrame": "Diese Karte kann HexDeck nicht selbst zeigen",
     "noEntries": "Keine Einträge",
     "waitingLog": "Warte auf Protokollzeilen…",
     "collecting": "Sammle…",
@@ -932,7 +932,7 @@
     "timeout": "Plex hat die Anmeldung nicht rechtzeitig bestätigt. Versuch es noch einmal.",
     "server": "Server",
     "shared": "geteilt",
-    "pickServer": "Lokale Adressen stehen zuerst; wähle eine andere, wenn nexdeck sie nicht erreicht.",
+    "pickServer": "Lokale Adressen stehen zuerst; wähle eine andere, wenn HexDeck sie nicht erreicht.",
     "noServers": "Dieses Konto hat keinen eigenen Plex-Server."
   },
   "gauge": {
@@ -957,7 +957,7 @@
       "manual": "Von Hand"
     },
     "reason": {
-      "too_new": "Aus einem neueren nexdeck",
+      "too_new": "Aus einem neueren HexDeck",
       "ok": "ok"
     },
     "list": {
@@ -987,9 +987,9 @@
       "warning": "Das ersetzt Datenbank, Schlüssel und Bilder. Alle werden abgemeldet, du eingeschlossen. Der jetzige Stand wird vorher gesichert.",
       "withoutSafetyCopy": "Auch wiederherstellen, wenn die Sicherheitskopie des jetzigen Standes nicht geschrieben werden kann. Nur, wenn genau diese Kopie das Kaputte ist.",
       "confirm": "Zum Bestätigen {{name}} eintippen",
-      "keyOnlyFromEnv": "In diesem Archiv liegt kein Schlüssel. Diese Installation nimmt ihren aus NEXDECK_SECRET_KEY. Die Zugänge sind danach lesbar, wenn dort derselbe Wert steht wie auf dem Rechner, von dem die Sicherung stammt.",
-      "noKeyAtAll": "In diesem Archiv liegt kein Schlüssel, und hier steht auch keiner in der Umgebung. nexdeck erzeugt dann einen neuen, und danach ist kein gespeicherter Zugang mehr lesbar. Jede Anbindung müsste neu eingetragen werden.",
-      "envKeyWins": "Dieses Archiv bringt einen Schlüssel mit, aber hier ist NEXDECK_SECRET_KEY gesetzt und gewinnt. Die Zugänge bleiben unlesbar, wenn dort nicht derselbe Wert steht."
+      "keyOnlyFromEnv": "In diesem Archiv liegt kein Schlüssel. Diese Installation nimmt ihren aus HEXDECK_SECRET_KEY. Die Zugänge sind danach lesbar, wenn dort derselbe Wert steht wie auf dem Rechner, von dem die Sicherung stammt.",
+      "noKeyAtAll": "In diesem Archiv liegt kein Schlüssel, und hier steht auch keiner in der Umgebung. HexDeck erzeugt dann einen neuen, und danach ist kein gespeicherter Zugang mehr lesbar. Jede Anbindung müsste neu eingetragen werden.",
+      "envKeyWins": "Dieses Archiv bringt einen Schlüssel mit, aber hier ist HEXDECK_SECRET_KEY gesetzt und gewinnt. Die Zugänge bleiben unlesbar, wenn dort nicht derselbe Wert steht."
     }
   },
   "nav": {

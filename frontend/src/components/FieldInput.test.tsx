@@ -1,5 +1,5 @@
 /**
- * The two field types that answer out of nexdeck itself rather than out of a
+ * The two field types that answer out of HexDeck itself rather than out of a
  * service: a board, and a colour.
  *
  * ⚠️ The board picker exists because the field type that asks a service needs

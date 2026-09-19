@@ -1,7 +1,7 @@
 /**
  * The button card: the whole card is one button.
  *
- * ⚠️ Where it leads decides the element. A board stays inside nexdeck, so it
+ * ⚠️ Where it leads decides the element. A board stays inside HexDeck, so it
  * is a router link: the app keeps its state, the stream stays open, and a
  * wall display does not reload itself to go one board over. An address leaves,
  * so it is a plain anchor. Drawing both the same way would reload the whole
@@ -33,7 +33,7 @@ export function targetOf(kind: string, where: string): { inside: string } | { ou
   if (!wanted) return null
   if (kind === 'link') {
     // ⚠️ Through safeUrl. The address is typed in, and javascript: in it
-    // would run in nexdeck's own origin, with the session.
+    // would run in HexDeck's own origin, with the session.
     const url = safeUrl(wanted)
     return url ? { outside: url } : null
   }

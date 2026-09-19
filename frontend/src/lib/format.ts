@@ -29,6 +29,6 @@ export function clamp(value: number, low: number, high: number): number {
 export function iconUrl(icon: string | undefined | null): string | null {
   if (!icon) return null
   if (icon.startsWith('http') || icon.startsWith('/') || icon.startsWith('data:')) return icon
-  const base = (globalThis as { __NEXDECK_ICON_BASE__?: string }).__NEXDECK_ICON_BASE__ ?? '/api/v1/icons/'
+  const base = (globalThis as { __HEXDECK_ICON_BASE__?: string }).__HEXDECK_ICON_BASE__ ?? '/api/v1/icons/'
   return `${base}${encodeURIComponent(icon)}.svg`
 }

@@ -1,7 +1,7 @@
 {
   "entries": {
     "0.1.0": {
-      "lead": "nexdeck is here: a live dashboard for your homelab with thirty integrations, boards for desktop, phone and wall displays, and actions right on the cards.",
+      "lead": "HexDeck is here: a live dashboard for your homelab with thirty integrations, boards for desktop, phone and wall displays, and actions right on the cards.",
       "sections": [
         {
           "title": "Live boards",
@@ -27,7 +27,7 @@
       "smallTitle": "Also new",
       "small": [
         "Boards export and import as YAML, and files in data/boards provision them.",
-        "Docker labels nexdeck.* and homepage.* create tiles automatically.",
+        "Docker labels HexDeck.* and homepage.* create tiles automatically.",
         "Personal API tokens for scripts and automations."
       ]
     },
@@ -36,12 +36,12 @@
       "sections": [
         {
           "title": "Nine holes closed",
-          "body": "A board named after a number reached other people's boards. An action on a card could be anything the caller made up. A member could import a board that read the server's secret key. Uploads could run in nexdeck's own origin, and the Synology password travelled in the address.",
+          "body": "A board named after a number reached other people's boards. An action on a card could be anything the caller made up. A member could import a board that read the server's secret key. Uploads could run in HexDeck's own origin, and the Synology password travelled in the address.",
           "path": "Settings > About"
         },
         {
           "title": "A way back in",
-          "body": "If the last administrator is locked out and there is no mail server, starting the container once with NEXDECK_RESCUE=1 prints a one-time sign-in link, good for fifteen minutes. It goes to the terminal, never to the log.",
+          "body": "If the last administrator is locked out and there is no mail server, starting the container once with HEXDECK_RESCUE=1 prints a one-time sign-in link, good for fifteen minutes. It goes to the terminal, never to the log.",
           "path": "docs/operating.md"
         },
         {
@@ -56,7 +56,7 @@
       ],
       "smallTitle": "Also in this release",
       "small": [
-        "Running nexdeck is written down: backups, restoring, updating and the Docker socket.",
+        "Running HexDeck is written down: backups, restoring, updating and the Docker socket.",
         "Seventeen settings that were documented nowhere are in the README, with a guard that keeps the table in step.",
         "A card can no longer fall silent for good: any unexpected failure puts a message on it and tries again.",
         "Old records are cleaned up on a schedule, and every limit has a number behind it."
@@ -149,17 +149,17 @@
         },
         {
           "title": "A card may leave one blank for you to fill in",
-          "body": "Everything nexdeck runs is picked from a list a service handed over, and that is what keeps a card from being a way in. A field is the exception, so the adapter has to declare it: which single parameter is blank, and what may go in it. An address is checked the way every address you type into nexdeck is checked.",
+          "body": "Everything HexDeck runs is picked from a list a service handed over, and that is what keeps a card from being a way in. A field is the exception, so the adapter has to declare it: which single parameter is blank, and what may go in it. An address is checked the way every address you type into HexDeck is checked.",
           "path": "Edit mode > Add widget > MeTube > Fetch a video"
         },
         {
           "title": "Save a download to your own machine",
-          "body": "MeTube fetches to the server, which is where the file then sits. A finished row now has a save button beside its bin, and the file comes through nexdeck, so it works from outside the house and really saves instead of playing in a tab.",
+          "body": "MeTube fetches to the server, which is where the file then sits. A finished row now has a save button beside its bin, and the file comes through HexDeck, so it works from outside the house and really saves instead of playing in a tab.",
           "path": "Edit mode > Add widget > MeTube > Downloads"
         },
         {
           "title": "A chart of what a card kept itself",
-          "body": "Speedtest Tracker keeps months of measurements, and nexdeck only ever drew its own day. Its History card asks the tracker instead: 24 hours, 7, 30 or 90 days, download, upload or both, as a line or as bars.",
+          "body": "Speedtest Tracker keeps months of measurements, and HexDeck only ever drew its own day. Its History card asks the tracker instead: 24 hours, 7, 30 or 90 days, download, upload or both, as a line or as bars.",
           "path": "Edit mode > Add widget > Speedtest Tracker > History"
         },
         {
@@ -288,7 +288,7 @@
       "smallTitle": "Also in this version",
       "small": [
         "All six were measured against running instances and start without the beta badge.",
-        "Healthchecks closes its connections after every answer; nexdeck asks for exactly that, so no card loses a request."
+        "Healthchecks closes its connections after every answer; HexDeck asks for exactly that, so no card loses a request."
       ]
     },
     "0.8.0": {
@@ -369,7 +369,7 @@
       ]
     },
     "0.11.0": {
-      "lead": "Your music in nexdeck: a player card plays the library of Plex, Jellyfin or Emby in the browser.",
+      "lead": "Your music in HexDeck: a player card plays the library of Plex, Jellyfin or Emby in the browser.",
       "sections": [
         {
           "title": "Play the music library",
@@ -403,14 +403,14 @@
           "path": "Board menu > Kiosk"
         },
         {
-          "title": "Reolink keeps letting nexdeck in",
+          "title": "Reolink keeps letting HexDeck in",
           "body": "Cards starting together, the Test button and saving a connection each opened a session at the device and never closed it, until the device refused with too many users. Every session is handed back now.",
           "path": "Settings > Integrations > Reolink"
         }
       ],
       "smallTitle": "Also in this version",
       "small": [
-        "A Reolink device that refuses logins right now lets nexdeck in again once its old sessions expire, at most an hour after updating."
+        "A Reolink device that refuses logins right now lets HexDeck in again once its old sessions expire, at most an hour after updating."
       ]
     },
     "0.12.0": {
@@ -466,7 +466,7 @@
       "sections": [
         {
           "title": "Apprise only for administrators",
-          "body": "Members no longer see Apprise among the notification channels, and an Apprise channel a member set up earlier stops sending. Apprise follows redirects in its own library, where nexdeck's address check does not reach.",
+          "body": "Members no longer see Apprise among the notification channels, and an Apprise channel a member set up earlier stops sending. Apprise follows redirects in its own library, where HexDeck's address check does not reach.",
           "path": "Settings > Notifications"
         },
         {
@@ -481,7 +481,7 @@
         },
         {
           "title": "Public URL",
-          "body": "The address set here now counts for Web Push and the rescue link as well. NEXDECK_URL_BASE is gone: the interface never ran below a sub path, so an installation that set it runs under / again.",
+          "body": "The address set here now counts for Web Push and the rescue link as well. HEXDECK_URL_BASE is gone: the interface never ran below a sub path, so an installation that set it runs under / again.",
           "path": "Settings > Address"
         }
       ],
@@ -526,7 +526,7 @@
       "sections": [
         {
           "title": "TrueNAS with a read-only key",
-          "body": "On TrueNAS 25.04 and later the old REST API turns a Read-Only Administrator's key away, so the cards needed a full administrator. With an https:// address nexdeck now uses TrueNAS' current API, where that key reads the system, the pools and the alerts. Over http:// the key stays on the old API, because TrueNAS revokes a key for good once it arrives over a plain connection; the message then says to switch to https.",
+          "body": "On TrueNAS 25.04 and later the old REST API turns a Read-Only Administrator's key away, so the cards needed a full administrator. With an https:// address HexDeck now uses TrueNAS' current API, where that key reads the system, the pools and the alerts. Over http:// the key stays on the old API, because TrueNAS revokes a key for good once it arrives over a plain connection; the message then says to switch to https.",
           "path": "Settings > Connections > TrueNAS"
         },
         {

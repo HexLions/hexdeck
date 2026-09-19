@@ -63,7 +63,7 @@ export function PlayerCard({ widget, data, canAct, editing }: RenderProps) {
 
   // ⚠️ A card whose first read failed stays red until the collector tries
   // again, and after a failure that is up to half an hour away. Measured on
-  // 11.09.2026: nexdeck started while the network was still down, the media
+  // 11.09.2026: HexDeck started while the network was still down, the media
   // servers were back a minute later, and all four player cards stayed locked
   // behind their error. Somebody who may play here asks again every minute
   // while the card is on screen, so it opens up soon after the server is back.

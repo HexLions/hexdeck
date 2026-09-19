@@ -1,5 +1,5 @@
 /**
- * The nexdeck mark: a deck of three stacked cards, the front one lit in the
+ * The HexDeck mark: a deck of three stacked cards, the front one lit in the
  * accent, and the live dot glowing at the top right. Cards are what a board
  * is made of, the stack is the deck, the dot is what makes it live.
  */

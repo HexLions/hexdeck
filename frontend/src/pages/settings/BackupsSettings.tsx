@@ -1,7 +1,7 @@
 /**
  * Backups: write one, carry one off the machine, put one back.
  *
- * ⚠️ **The button that matters is "Download".** The copies nexdeck writes by
+ * ⚠️ **The button that matters is "Download".** The copies HexDeck writes by
  * itself sit in the same directory as the database, so on the same volume;
  * when that dies they die together. They are a restore point for a bad
  * migration, not a backup. It becomes a backup when it leaves the machine.

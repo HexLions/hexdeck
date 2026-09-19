@@ -1,7 +1,7 @@
 /**
  * The button card: one card, one button, and where it is allowed to lead.
  *
- * ⚠️ The target decides the element. A board stays inside nexdeck and has to
+ * ⚠️ The target decides the element. A board stays inside HexDeck and has to
  * be a router link, or a press reloads the whole app to go one board over and
  * a wall display drops its stream. An address leaves and has to be an anchor.
  * A target that is neither leads nowhere at all: the address is typed in by
@@ -37,7 +37,7 @@ describe('targetOf', () => {
     expect(targetOf('link', 'https://nas.example.com')).toEqual({ outside: 'https://nas.example.com' })
   })
 
-  it('refuses an address that would run as part of nexdeck', () => {
+  it('refuses an address that would run as part of HexDeck', () => {
     expect(targetOf('link', 'javascript:alert(1)')).toBeNull()
     expect(targetOf('link', 'data:text/html,<script>alert(1)</script>')).toBeNull()
   })

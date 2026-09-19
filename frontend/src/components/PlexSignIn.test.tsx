@@ -18,7 +18,7 @@ vi.mock('../api/client', () => ({
     if (path === '/plex/pin') return { id: '7', code: 'QWER', url: 'https://app.plex.tv/auth#?code=QWER' }
     // The code claims the PIN and goes in the body, never in the address:
     // the browser polls this every two seconds, and a query parameter would
-    // stand in nexdeck's log and in every line of the proxy in front of it.
+    // stand in HexDeck's log and in every line of the proxy in front of it.
     if (path.startsWith('/plex/pin/')) {
       expect(body).toEqual({ code: 'QWER' })
       return pollAnswers.shift() ?? { token: null, username: null }

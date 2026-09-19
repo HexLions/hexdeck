@@ -42,7 +42,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, onAction, on
   const errorCode = String(data?.meta?.code ?? '')
   const errorText = failed ? (i18n.language.split('-')[0] === 'en' ? String(data?.error) : t(`errors.widget.${errorCode}`, { defaultValue: String(data?.error) })) : ''
   // ⚠️ data?.link comes from the service, not from the operator. A
-  // javascript: address here would run as part of nexdeck.
+  // javascript: address here would run as part of HexDeck.
   const link = safeUrl(widget.link || data?.link || widget.service_link) || undefined
   // Clocks and app tiles draw themselves without a header; the player's cover runs to the edge.
   const bare = ['app', 'clock', 'button', 'image', 'player'].includes(widget.renderer)

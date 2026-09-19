@@ -1,7 +1,7 @@
 /**
  * The step-by-step guides next to the fields of a notification channel.
  *
- * Only where the setting up happens outside nexdeck and takes more than two
+ * Only where the setting up happens outside HexDeck and takes more than two
  * moves. The steps themselves are texts under ``channels.guide.<kind>.<step>``;
  * here stands only which steps a service has and where they lead.
  */

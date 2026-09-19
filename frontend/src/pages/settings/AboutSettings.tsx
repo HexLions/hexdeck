@@ -10,7 +10,7 @@ import { entriesFor, latestVersion } from '../../lib/whatsnew'
 import { useAuth } from '../../stores/auth'
 import { SettingsCard } from './SettingsCard'
 
-/** A link that leaves nexdeck, always in a new tab. */
+/** A link that leaves HexDeck, always in a new tab. */
 function Out({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
@@ -30,10 +30,10 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 }
 
 /**
- * What nexdeck is built on, and who came first.
+ * What HexDeck is built on, and who came first.
  *
  * Kept by hand. Generating it from the dependency files would list dozens of
- * packages nobody reads; these are the ones nexdeck actually stands on.
+ * packages nobody reads; these are the ones HexDeck actually stands on.
  */
 const BUILT_WITH = [
   { name: 'FastAPI', url: 'https://fastapi.tiangolo.com', license: 'MIT' },
@@ -144,6 +144,8 @@ function Thanks() {
         <div>
           <p className="text-[11px] uppercase tracking-wide text-faint">{t('about.family')}</p>
           <p className="mt-1.5 text-sm">
+            <Out href="https://github.com/DerKezorm/nexdeck">nexdeck</Out>
+            {' · '}
             <Out href="https://nexview.nexapps.dev">Nexview</Out>
             {' · '}
             <Out href="https://nexmail.nexapps.dev">nexmail</Out>
@@ -156,7 +158,7 @@ function Thanks() {
 }
 
 /**
- * About nexdeck: what this installation is, where it comes from, what it
+ * About HexDeck: what this installation is, where it comes from, what it
  * stands on.
  *
  * The update check lives here and not with the other switches: whoever wants
@@ -244,7 +246,7 @@ export function AboutSettings() {
           {/* ⚠️ Always, not only while the daily check is on. It used to hang
               off that switch, so the one person who most wants to look now and
               then, the one who deliberately keeps the daily outbound call off,
-              was the one with no button. The switch decides whether nexdeck
+              was the one with no button. The switch decides whether HexDeck
               asks by itself; this asks once, because somebody pressed it. */}
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <button

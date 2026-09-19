@@ -185,7 +185,7 @@ function ActionButtons({
 /**
  * The save link that sits beside a row's buttons.
  *
- * ⚠️ An anchor, not a button, and pointing at nexdeck rather than at the
+ * ⚠️ An anchor, not a button, and pointing at HexDeck rather than at the
  * service. Both matter: `download` is ignored across origins, so a link
  * straight to the service opens the video in a tab instead of saving it, and
  * on a homelab the browser usually cannot reach the service at all.
@@ -684,7 +684,7 @@ export function BookmarksCard({ data }: RenderProps) {
 // Iframe
 // ---------------------------------------------------------------------------
 
-/** Does this address point back at nexdeck itself? */
+/** Does this address point back at HexDeck itself? */
 function framesOurselves(url: string): boolean {
   try {
     return new URL(url, window.location.href).origin === window.location.origin
@@ -1019,7 +1019,7 @@ interface Line {
 /**
  * A history over real time, drawn as a line or as bars.
  *
- * ⚠️ Not the same thing as ChartCard. That one draws what nexdeck collected,
+ * ⚠️ Not the same thing as ChartCard. That one draws what HexDeck collected,
  * which stops after 24 hours because that is how long the minute rows are
  * kept. This draws what the service handed over, which can be months, and the
  * points carry their own timestamps rather than being evenly spaced.

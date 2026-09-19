@@ -246,7 +246,7 @@ function RemoteChoice({ spec, value, onChange, label, help, integrationId }: {
  * One of this installation's own boards, or one page of it.
  *
  * ⚠️ Its own field type rather than the one that asks a service. The list of
- * boards is nexdeck's, not any integration's, and the field that asks a
+ * boards is HexDeck's, not any integration's, and the field that asks a
  * service needs a connection to ask; a card that belongs to no service has
  * none.
  *

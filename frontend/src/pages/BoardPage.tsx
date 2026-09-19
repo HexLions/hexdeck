@@ -270,7 +270,7 @@ export function BoardPage() {
       // was the exception: "Removed." stood in English on a German board, in
       // the one place the eye goes right after a press. A sentence the service
       // itself wrote back has no entry and stays as it came, which is right:
-      // it is MeTube speaking, not nexdeck.
+      // it is MeTube speaking, not HexDeck.
       setToast({ text: tLabel(result.message), level: 'ok' })
     } catch (failure) {
       setToast({ text: failure instanceof ApiError ? failure.message : t('errors.network'), level: 'error' })

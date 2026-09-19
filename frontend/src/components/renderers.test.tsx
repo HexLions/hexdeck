@@ -37,7 +37,7 @@ describe('renderers', () => {
     expect(screen.queryByRole('button', { name: 'Restart' })).toBeNull()
   })
 
-  it('offers a row file as a real download, pointed at nexdeck', () => {
+  it('offers a row file as a real download, pointed at HexDeck', () => {
     // ⚠️ Both halves matter. `download` is ignored across origins, so a link
     // straight to the service would play the video in a tab instead of saving
     // it, and on a homelab the browser usually cannot reach the service at all.

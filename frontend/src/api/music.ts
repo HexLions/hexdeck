@@ -7,7 +7,7 @@
  */
 import { del, get, patch, post } from './client'
 
-const BASE = ((globalThis as { __NEXDECK_BASE__?: string }).__NEXDECK_BASE__ ?? '') + '/api/v1'
+const BASE = ((globalThis as { __HEXDECK_BASE__?: string }).__HEXDECK_BASE__ ?? '') + '/api/v1'
 
 export type Quality = 'original' | 'high' | 'low'
 export const QUALITIES: Quality[] = ['original', 'high', 'low']
