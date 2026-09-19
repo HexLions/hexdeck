@@ -7,7 +7,7 @@ integration secrets are written as `${ENVIRONMENT_VARIABLE}` references.
 ## The file
 
 ```yaml
-nexdeck: 1
+HexDeck: 1
 board:
   name: Media
   slug: media
@@ -34,7 +34,7 @@ integrations:
     kind: radarr
     config:
       url: http://radarr:7878
-      api_key: ${NEXDECK_RADARR_1_API_KEY}
+      api_key: ${HEXDECK_RADARR_1_API_KEY}
 ```
 
 Widgets reference integrations by **name**. An integration with that name

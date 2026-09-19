@@ -1,6 +1,6 @@
 # API
 
-nexdeck's own interface uses the same API that is open to you. The
+HexDeck's own interface uses the same API that is open to you. The
 interactive documentation lives at `/api/docs` on every installation.
 
 ## Authentication
@@ -21,7 +21,7 @@ interactive documentation lives at `/api/docs` on every installation.
 | `GET /api/v1/widgets/{id}/data` | The latest data of one widget. |
 | `POST /api/v1/widgets/{id}/refresh` | Fetch right now. |
 | `GET /api/v1/widgets/{id}/music/{view}` | The library of a music player card: `albums`, `artists`, `artist`, `album`, `playlists`, `playlist`, `search`, `shuffle`, and `mix` on Jellyfin and Emby. `id`, `q`, `sort` and `offset` narrow it down. Needs the act permission. |
-| `GET /api/v1/widgets/{id}/audio/{track_id}` | The sound of one track, relayed by nexdeck with `Range` passed through. `quality` is `original`, `high` or `low`, `formats` lists what the browser plays, `start` is where converted sound begins. Needs the act permission. |
+| `GET /api/v1/widgets/{id}/audio/{track_id}` | The sound of one track, relayed by HexDeck with `Range` passed through. `quality` is `original`, `high` or `low`, `formats` lists what the browser plays, `start` is where converted sound begins. Needs the act permission. |
 | `POST /api/v1/widgets/{id}/music/playlists` | Create a playlist on the media server with `{"name": "...", "track_ids": [...]}`. `POST` and `DELETE` on `.../playlists/{playlist_id}/tracks` add tracks (`track_ids`) and take entries out (`entries`); `PATCH` and `DELETE` on `.../playlists/{playlist_id}` rename and delete. Smart playlists on Plex are refused. Needs the act permission. |
 | `GET /api/v1/adapters` | Every adapter with its fields and widgets. |
 | `GET /api/v1/boards/{slug}/export` | The board as YAML. |

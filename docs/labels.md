@@ -1,8 +1,8 @@
 # Docker labels
 
-With a Docker integration, nexdeck suggests tiles for running containers
+With a Docker integration, HexDeck suggests tiles for running containers
 (Settings of a board > Edit > Add widget > App tile, or the setup wizard).
-Labels on a container fill the suggestion in; without labels, nexdeck
+Labels on a container fill the suggestion in; without labels, HexDeck
 guesses from the image name and the first published port.
 
 ```yaml
@@ -30,7 +30,7 @@ services:
 The `homepage.*` labels (`homepage.name`, `homepage.href`, `homepage.icon`,
 `homepage.group`, `homepage.description`) are read as well, so a stack that
 was labelled for Homepage shows the same tiles here without changes. When
-both are present, `nexdeck.*` wins.
+both are present, `HexDeck.*` wins.
 
 Service widgets (queues, streams, containers) are not created from labels;
 they need an integration with credentials, which labels should not carry.
