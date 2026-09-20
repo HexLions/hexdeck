@@ -44,3 +44,6 @@ Updated at every milestone.
   as a preset.
 - **Italian.** The interface, the adapters' texts and the cards' labels in
   Italian, next to English and German. Release notes stay in English.
+- **Arranging.** Several cards can be selected (Shift or Ctrl and a click)
+  and moved together by drag or arrow keys; "Tidy up" in edit mode puts
+  every card of a page back in reading order without gaps, sizes kept.

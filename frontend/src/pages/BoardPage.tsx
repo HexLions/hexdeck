@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, LayoutGrid, Plus, Settings2 } from 'lucide-react'
+import { Check, LayoutGrid, Plus, Settings2, Wand2 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -9,6 +9,7 @@ import type { BoardSummary, BoardWithLive } from '../api/types'
 import { ActionSheet, type PendingAction } from '../components/ActionSheet'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { BoardGrid } from '../components/BoardGrid'
+import { tidy } from '../lib/arrange'
 import { columnsOf, maxWidthOf } from '../lib/layout'
 import { BoardSettingsSheet } from '../components/BoardSettingsSheet'
 import { CommandPalette } from '../components/CommandPalette'
@@ -429,6 +430,19 @@ export function BoardPage() {
           </button>
           <button className="btn btn-flat" onClick={() => setBoardSettings(true)} aria-label={t('board.settings')}>
             <Settings2 size={15} /> <span className="hidden sm:inline">{t('board.settings')}</span>
+          </button>
+          {/* Every card of the page put back in reading order, sizes kept.
+              The one action here that moves cards the person did not touch,
+              so it asks first. */}
+          <button
+            className="btn btn-flat"
+            onClick={() => {
+              if (!activePage || !window.confirm(t('board.tidyConfirm'))) return
+              onLayoutChange('lg', tidy(activePage.layouts.lg ?? [], columnsOf(data?.settings)))
+            }}
+            aria-label={t('board.tidy')}
+          >
+            <Wand2 size={15} /> <span className="hidden sm:inline">{t('board.tidy')}</span>
           </button>
           <button className="btn btn-accent rounded-full" onClick={() => setEditing(false)}>
             <Check size={15} /> {t('common.done')}
