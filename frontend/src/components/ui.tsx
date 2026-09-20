@@ -269,5 +269,10 @@ export function EmptyState({ title, body, action }: { title: string; body?: stri
 }
 
 export function Spinner() {
-  return <span className="inline-block w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin" aria-label="Loading" />
+  return (
+    <svg className="inline-block w-4 h-4 animate-spin" viewBox="0 0 16 16" aria-label="Loading" role="img">
+      <path d="M8 1.5 13.6 4.75v6.5L8 14.5 2.4 11.25v-6.5z" fill="none" stroke="currentColor" className="text-line-strong" strokeWidth="1.6" />
+      <path d="M8 1.5 13.6 4.75v6.5" fill="none" stroke="currentColor" className="text-accent" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
 }
