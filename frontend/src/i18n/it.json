@@ -35,6 +35,7 @@
       "too_many_streams": "Il server inoltra solo un numero limitato di flussi in diretta alla volta.",
       "no_channel": "Non c'è una telecamera con questo numero di canale.",
       "device_error": "Il dispositivo ha risposto con un errore.",
+      "rate_limited": "Il limite orario di GitHub è esaurito. Aggiungi un token di accesso personale alla connessione GitHub, oppure aspetta la prossima ora.",
       "not_ready": "Il servizio non è ancora stato configurato.",
       "nexmail_key_missing": "nexmail non ha ricevuto alcuna chiave API. Inserisci la chiave in questa connessione.",
       "nexmail_key_invalid": "nexmail non riconosce questa chiave, oppure è stata revocata. Crea una nuova chiave in nexmail sotto Impostazioni → Chiavi API e inseriscila in questa connessione.",

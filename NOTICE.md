@@ -56,3 +56,10 @@ Updated at every milestone.
   ticked and deleted on the items card; milestones are added and ticked
   on the roadmap card. A notepad card (`notepad.pad`) is typed into on the
   board itself.
+- **M4 — GitHub.** The GitHub adapter reads issues, pull requests with
+  their review state, workflow runs and milestones next to releases, from
+  a list of repositories or from a HexDeck project's linked ones. Every
+  answer is kept with its ETag and asked for again with If-None-Match; the
+  rate limit headers are honoured, a used-up limit is a clear message with
+  the reset time and the last answer is shown meanwhile. An optional
+  personal access token raises the limit from sixty to five thousand.

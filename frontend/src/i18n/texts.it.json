@@ -1235,7 +1235,20 @@
     "Write on the board. Whoever may edit the board may write; everyone else reads.": "Scrivi sulla board. Chi può modificare la board scrive; tutti gli altri leggono.",
     "Typed into the card itself; this is the same text.": "Digitato nella card stessa; questo è lo stesso testo.",
     "Fixed-width type": "Carattere a larghezza fissa",
-    "For lists, commands and anything that lines up.": "Per liste, comandi e tutto ciò che deve allinearsi."
+    "For lists, commands and anything that lines up.": "Per liste, comandi e tutto ciò che deve allinearsi.",
+    "GitHub": "GitHub",
+    "Releases, open issues, pull requests, the last workflow run and the milestones of the repositories you watch.": "Release, issue aperte, pull request, l'ultima esecuzione dei workflow e le milestone dei repository che segui.",
+    "Optional, and recommended: five thousand requests an hour instead of sixty, and private repositories. A fine-grained token with read access to issues, pull requests and Actions is enough.": "Facoltativo, ma consigliato: cinquemila richieste all'ora invece di sessanta, e i repository privati. Basta un token fine-grained con accesso in lettura a issue, pull request e Actions.",
+    "One repository at a glance: open issues, pull requests, the last workflow run and the next milestone.": "Un repository a colpo d'occhio: issue aperte, pull request, l'ultima esecuzione dei workflow e la prossima milestone.",
+    "Empty takes the first repository of the project below.": "Vuoto prende il primo repository del progetto qui sotto.",
+    "Takes the repositories linked to a HexDeck project. Empty uses the list below.": "Prende i repository collegati a un progetto HexDeck. Vuoto usa la lista qui sotto.",
+    "One per line, as owner/name.": "Uno per riga, come owner/name.",
+    "The open issues of the repositories, newest activity first, with their labels.": "Le issue aperte dei repository, prima le più attive di recente, con le loro etichette.",
+    "The open pull requests, draft or ready, and how their review stands.": "Le pull request aperte, bozza o pronte, e a che punto è la loro review.",
+    "Workflow runs": "Esecuzioni dei workflow",
+    "The latest Actions runs with how they ended.": "Le ultime esecuzioni di Actions e come sono finite.",
+    "Milestones": "Milestone",
+    "The open milestones of the repositories, with their due date and how far along they are.": "Le milestone aperte dei repository, con la scadenza e a che punto sono."
   },
   "labels": {
     "Jobs": "Job",
@@ -1903,6 +1916,14 @@
     "Pick a project in the card settings": "Scegli un progetto nelle impostazioni della card",
     "No such card": "Nessuna card di questo tipo",
     "Projects live in this installation.": "I progetti vivono in questa installazione.",
-    "The notepad lives on the board.": "Il blocco note vive sulla board."
+    "The notepad lives on the board.": "Il blocco note vive sulla board.",
+    "Next milestone": "Prossima milestone",
+    "Stars": "Stelle",
+    "No open issues": "Nessuna issue aperta",
+    "No open pull requests": "Nessuna pull request aperta",
+    "No workflow run yet": "Ancora nessuna esecuzione",
+    "No open milestones": "Nessuna milestone aperta",
+    "Nothing open": "Niente di aperto",
+    "GitHub answers, without a token: sixty requests an hour.": "GitHub risponde, senza token: sessanta richieste all'ora."
   }
 }

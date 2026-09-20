@@ -37,7 +37,9 @@ export function IntegrationsSettings() {
     const needle = adapterSearch.trim().toLowerCase()
     const groups: Record<string, AdapterSpec[]> = {}
     for (const adapter of adapters.data ?? []) {
-      if (!adapter.needs_integration) continue
+      // An adapter that works without a connection but declares fields, such
+      // as GitHub with its optional token, may still be given one.
+      if (!adapter.needs_integration && adapter.fields.length === 0) continue
       // The technical name counts: somebody types "wol", "pbs" or "npm",
       // which none of the written-out names contain.
       const haystack = `${adapter.kind} ${adapter.label} ${adapter.category} ${adapter.description ?? ''}`.toLowerCase()

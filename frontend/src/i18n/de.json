@@ -35,6 +35,7 @@
       "too_many_streams": "Der Server leitet nur eine begrenzte Zahl von Livebildern gleichzeitig weiter.",
       "no_channel": "Es gibt keine Kamera mit dieser Kanalnummer.",
       "device_error": "Das Gerät hat mit einem Fehler geantwortet.",
+      "rate_limited": "GitHubs Stundenlimit ist aufgebraucht. Trage ein persönliches Zugriffstoken in die GitHub-Verbindung ein, oder warte auf die nächste Stunde.",
       "not_ready": "Der Dienst ist noch nicht eingerichtet.",
       "nexmail_key_missing": "nexmail hat keinen API-Schlüssel erhalten. Trage den Schlüssel in dieser Anbindung ein.",
       "nexmail_key_invalid": "nexmail kennt diesen Schlüssel nicht, oder er wurde widerrufen. Lege in nexmail unter Einstellungen → API-Schlüssel einen neuen an und trage ihn in dieser Anbindung ein.",

@@ -136,6 +136,8 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
 
   if (!widget) return null
   const isApp = widget.kind === 'core.app'
+  /** A connection the card can do without: the app tile, and adapters that declare fields yet need none. */
+  const optional = isApp || Boolean(adapter && !adapter.needs_integration && adapter.fields.length > 0)
   // A service widget needs an integration of its own kind; an app tile may follow any service.
   const matching = (integrations.data ?? []).filter((i) => isApp || i.kind === adapterKind)
   const followed = isApp ? matching.find((i) => String(i.id) === integrationId) : undefined
@@ -158,7 +160,7 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
         icon,
         link,
         integration_id: integrationId ? Number(integrationId) : undefined,
-        clear_integration: !integrationId && (adapter?.needs_integration || isApp) ? true : undefined,
+        clear_integration: !integrationId && (adapter?.needs_integration || optional) ? true : undefined,
         options,
         refresh_seconds: refresh ? Number(refresh) : undefined,
         // An emptied field means "back to the card's own interval", and that
@@ -228,8 +230,8 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
       <Field label={t('widget.link')} htmlFor="w-link" help={followed ? t('widget.linkFollows') : t('widget.linkHelp')}>
         <input id="w-link" className="input" type="url" value={link} placeholder={followedUrl || 'https://'} onChange={(e) => setLink(e.target.value)} />
       </Field>
-      {(adapter?.needs_integration || isApp) && (
-        <Field label={isApp ? t('widget.integrationOptional') : t('widget.integration')} htmlFor="w-int" help={isApp ? t('widget.integrationFollowHelp') : undefined}>
+      {(adapter?.needs_integration || optional) && (
+        <Field label={optional ? t('widget.integrationOptional') : t('widget.integration')} htmlFor="w-int" help={isApp ? t('widget.integrationFollowHelp') : undefined}>
           <Select id="w-int" value={integrationId} onChange={chooseIntegration} options={[{ value: '', label: t('widget.noIntegration') }, ...matching.map((i) => ({ value: String(i.id), label: i.name }))]} />
         </Field>
       )}

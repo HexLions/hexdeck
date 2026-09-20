@@ -35,6 +35,7 @@
       "too_many_streams": "The server relays only a limited number of live streams at once.",
       "no_channel": "There is no camera with this channel number.",
       "device_error": "The device answered with an error.",
+      "rate_limited": "GitHub's hourly limit is used up. Add a personal access token to the GitHub connection, or wait for the hour to turn.",
       "not_ready": "The service has not been set up yet.",
       "nexmail_key_missing": "nexmail received no API key. Enter the key in this connection.",
       "nexmail_key_invalid": "nexmail does not know this key, or it was revoked. Create a new key in nexmail under Settings → API keys and enter it in this connection.",

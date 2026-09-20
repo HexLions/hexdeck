@@ -20,6 +20,7 @@ HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezor
 - **Users, roles and sharing.** Administrators, users and guests. Boards are private, shared with people or with a whole role, at view, edit or act level.
 - **Reachability and notifications.** App tiles carry a check with uptime bars; outages reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
 - **Boards as files.** Export a board as YAML, keep it in Git, drop it into `data/boards/` to provision it. Docker labels create tiles.
+- **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token in the GitHub connection makes it five thousand.
 - **Projects and a roadmap.** Milestones, items and linked repositories kept in HexDeck itself; a roadmap card shows what is due in the next weeks, a project card its state, an items card what to tick off, on any board.
 - **Sign in your way.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens.
 
