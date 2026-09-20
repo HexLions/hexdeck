@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
@@ -402,3 +403,65 @@ class AppearanceBody(BaseModel):
     #: reaches the service and gets a sentence back instead of a 422.
     accent: str = Field(default="", max_length=32)
     css: str = Field(default="", max_length=20000)
+
+
+# -- projects -----------------------------------------------------------------
+
+ProjectStatus = Literal["active", "paused", "done"]
+MilestoneStatus = Literal["open", "done"]
+ItemStatus = Literal["todo", "doing", "done"]
+
+
+class ProjectCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    description: str = Field(default="", max_length=4000)
+    status: ProjectStatus = "active"
+    colour: str = Field(default="", pattern=r"^(#[0-9a-fA-F]{6})?$")
+
+
+class ProjectPatch(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    description: str | None = Field(default=None, max_length=4000)
+    status: ProjectStatus | None = None
+    colour: str | None = Field(default=None, pattern=r"^(#[0-9a-fA-F]{6})?$")
+    position: int | None = Field(default=None, ge=0)
+
+
+class RepoCreate(BaseModel):
+    repo: str = Field(min_length=3, max_length=200)
+
+
+class MilestoneCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    target_date: date | None = None
+    status: MilestoneStatus = "open"
+
+
+class MilestonePatch(BaseModel):
+    title: str | None = Field(default=None, min_length=1, max_length=200)
+    #: Left out leaves the date; ``clear_date`` removes it.
+    target_date: date | None = None
+    clear_date: bool = False
+    status: MilestoneStatus | None = None
+    position: int | None = Field(default=None, ge=0)
+
+
+class ItemCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    notes: str = Field(default="", max_length=4000)
+    status: ItemStatus = "todo"
+    milestone_id: int | None = None
+    issue: str = Field(default="", max_length=240)
+
+
+class ItemPatch(BaseModel):
+    title: str | None = Field(default=None, min_length=1, max_length=200)
+    notes: str | None = Field(default=None, max_length=4000)
+    status: ItemStatus | None = None
+    milestone_id: int | None = None
+    clear_milestone: bool = False
+    issue: str | None = Field(default=None, max_length=240)
+
+
+class ItemOrder(BaseModel):
+    ids: list[int] = Field(min_length=1, max_length=1000)

@@ -8,12 +8,13 @@ widgets can share it, and the collector polls it once for all of them.
 from __future__ import annotations
 
 import enum
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any
 
 from sqlalchemy import (
     JSON,
     Boolean,
+    Date,
     DateTime,
     Float,
     ForeignKey,
@@ -529,3 +530,69 @@ class Setting(Base):
 
     key: Mapped[str] = mapped_column(String(80), primary_key=True)
     value: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+
+
+class Project(Base):
+    """Something being built, in HexDeck's own database. Not necessarily software."""
+
+    __tablename__ = "projects"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120))
+    slug: Mapped[str] = mapped_column(String(80), unique=True, index=True)
+    description: Mapped[str] = mapped_column(Text, default="")
+    #: ``active``, ``paused`` or ``done``.
+    status: Mapped[str] = mapped_column(String(16), default="active")
+    #: ``#rrggbb`` or empty for the board's accent.
+    colour: Mapped[str] = mapped_column(String(7), default="")
+    position: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(Utc(), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(Utc(), default=utcnow, onupdate=utcnow)
+
+    repos: Mapped[list[ProjectRepo]] = relationship(back_populates="project", cascade="all, delete-orphan", order_by="ProjectRepo.position")
+    milestones: Mapped[list[Milestone]] = relationship(back_populates="project", cascade="all, delete-orphan", order_by="Milestone.position")
+    items: Mapped[list[ProjectItem]] = relationship(back_populates="project", cascade="all, delete-orphan", order_by="ProjectItem.position")
+
+
+class ProjectRepo(Base):
+    """A GitHub repository a project reads from, as ``owner/name``. Read, never written."""
+
+    __tablename__ = "project_repos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id", ondelete="CASCADE"), index=True)
+    repo: Mapped[str] = mapped_column(String(200))
+    position: Mapped[int] = mapped_column(Integer, default=0)
+
+    project: Mapped[Project] = relationship(back_populates="repos")
+
+
+class Milestone(Base):
+    __tablename__ = "milestones"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id", ondelete="CASCADE"), index=True)
+    title: Mapped[str] = mapped_column(String(200))
+    target_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    #: ``open`` or ``done``.
+    status: Mapped[str] = mapped_column(String(16), default="open")
+    position: Mapped[int] = mapped_column(Integer, default=0)
+
+    project: Mapped[Project] = relationship(back_populates="milestones")
+
+
+class ProjectItem(Base):
+    __tablename__ = "project_items"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id", ondelete="CASCADE"), index=True)
+    milestone_id: Mapped[int | None] = mapped_column(ForeignKey("milestones.id", ondelete="SET NULL"), nullable=True)
+    title: Mapped[str] = mapped_column(String(200))
+    notes: Mapped[str] = mapped_column(Text, default="")
+    #: ``todo``, ``doing`` or ``done``.
+    status: Mapped[str] = mapped_column(String(16), default="todo")
+    #: ``owner/name#123`` or empty. A reference, shown as a link; never written to.
+    issue: Mapped[str] = mapped_column(String(240), default="")
+    position: Mapped[int] = mapped_column(Integer, default=0)
+
+    project: Mapped[Project] = relationship(back_populates="items")
