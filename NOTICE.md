@@ -63,3 +63,8 @@ Updated at every milestone.
   rate limit headers are honoured, a used-up limit is a clear message with
   the reset time and the last answer is shown meanwhile. An optional
   personal access token raises the limit from sixty to five thousand.
+- **M5 — TrueNAS.** The REST API fallback is refused on TrueNAS 25.04 and
+  later, where it is deprecated, raises an alert on every call from 25.10.1
+  and is removed in 26; the card says to use https:// and a user-linked
+  read-only key. The README gains a TrueNAS SCALE section and the two
+  warnings that must not be buried: the secret key and the Docker socket.

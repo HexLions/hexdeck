@@ -104,6 +104,41 @@ A guard test keeps this table in step with the settings in the code.
 
 HexDeck speaks plain HTTP on port 8000 and trusts `X-Forwarded-Proto` for its cookies. Server-Sent Events need a proxy that does not buffer: for nginx, `proxy_buffering off;` on the location; Traefik and Caddy need nothing.
 
+### Two things to decide before the first start
+
+**`HEXDECK_SECRET_KEY` encrypts every stored API key.** Set it yourself on the first start and keep it somewhere safe. Left empty, HexDeck generates one into `/data/secret.key`; lose that file and every connection has to be entered again. Backups leave the key out on purpose, so a restore on another machine needs the same variable.
+
+**A writable Docker socket is root on the host.** Whoever can act on a board that has Docker cards can start, stop and read the logs of any container, which is a step from root on the machine. Mount the socket only if you want those buttons. To see states and logs without handing over the socket, run a read-only proxy such as `tecnativa/docker-socket-proxy` next to HexDeck and point the Docker connection at `tcp://socket-proxy:2375`; with `CONTAINERS=1` and nothing else enabled, the cards show but the buttons refuse.
+
+### TrueNAS SCALE
+
+Install HexDeck as a Custom App (Apps → Discover Apps → Install via YAML) with this compose:
+
+```yaml
+services:
+  hexdeck:
+    image: ghcr.io/hexlions/hexdeck:main
+    container_name: hexdeck
+    restart: unless-stopped
+    ports:
+      - "5175:8000"
+    volumes:
+      - /mnt/POOL/apps/hexdeck/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HEXDECK_SECRET_KEY=generate-one-and-keep-it
+      - HEXDECK_PUBLIC_URL=http://truenas.lan:5175
+      - PUID=1000
+      - PGID=1000
+```
+
+- Paths are absolute, under `/mnt/<pool>/…`; make the dataset first, or Docker creates the directory as root and `PUID`/`PGID` fix its ownership on the first start.
+- `PUID`/`PGID` are the owner of the files in the data volume; use the user that owns the dataset.
+- The Docker socket's group is detected at start. When that fails (the log says so), set `DOCKER_GID` to the group id of `/var/run/docker.sock` on the host, or leave the socket out.
+- `:main` is the newest build; a release tag such as `:0.17.0` stays put.
+
+For the **TrueNAS card itself**, use `https://` and an API key **linked to a user** with the Read-Only Administrator role, not a full administrator's. Over https HexDeck speaks the current JSON-RPC API, which is what TrueNAS 25.04 and later expect; the old REST API is refused on those versions, because every call to it raises a deprecation alert on the NAS and TrueNAS 26 removes it.
+
 ## The services it speaks to
 
 **Hosts and containers.** Docker, Proxmox VE, Proxmox Backup Server, Kopia, Duplicati, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, Semaphore UI, Meilisearch, Synology DSM, Unraid, TrueNAS, Glances, Beszel, Prometheus, Grafana, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix.
