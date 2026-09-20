@@ -45,6 +45,7 @@
     "A local account without two-factor authentication.": "Ein lokales Konto ohne Zwei-Faktor-Anmeldung.",
     "A new media request": "Eine neue Medienanfrage",
     "A new HexDeck version": "Eine neue HexDeck-Fassung",
+    "A maintenance item is due": "Eine Wartung ist fällig",
     "A port that is open while the machine runs. 22 for SSH, 3389 for remote desktop, 445 for file sharing.": "Ein Port, der offen ist, solange der Rechner läuft. 22 für SSH, 3389 für Remotedesktop, 445 für Dateifreigaben.",
     "A query with several series, one row per label value.": "Eine Abfrage mit mehreren Reihen, eine Zeile je Label-Wert.",
     "A ring": "Ein Ring",
@@ -1226,7 +1227,6 @@
     "Empty shows every project.": "Leer zeigt jedes Projekt.",
     "Show finished milestones": "Erledigte Meilensteine zeigen",
     "One project: its state, the next milestone, how much is done and the repositories it reads.": "Ein Projekt: sein Stand, der nächste Meilenstein, wie viel erledigt ist und die Repositories, die es liest.",
-    "The items of a project, to tick off and reorder on the board.": "Die Aufgaben eines Projekts, auf dem Board abzuhaken und umzusortieren.",
     "Milestone": "Meilenstein",
     "Empty shows every item.": "Leer zeigt jede Aufgabe.",
     "Hide finished items": "Erledigte Aufgaben ausblenden",
@@ -1248,7 +1248,10 @@
     "Workflow runs": "Workflow-Läufe",
     "The latest Actions runs with how they ended.": "Die letzten Actions-Läufe und wie sie ausgingen.",
     "Milestones": "Meilensteine",
-    "The open milestones of the repositories, with their due date and how far along they are.": "Die offenen Meilensteine der Repositories, mit Fälligkeit und Fortschritt."
+    "The open milestones of the repositories, with their due date and how far along they are.": "Die offenen Meilensteine der Repositories, mit Fälligkeit und Fortschritt.",
+    "The items of a project, to tick off and reorder on the board; the dated ones say when they are due.": "Die Aufgaben eines Projekts, auf dem Board abzuhaken und umzusortieren; die datierten sagen, wann sie fällig sind.",
+    "Show dated items": "Datierte Aufgaben zeigen",
+    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Aufgaben mit Fälligkeit, darunter wiederkehrende Wartung, neben den Meilensteinen."
   },
   "labels": {
     "Jobs": "Jobs",

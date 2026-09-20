@@ -452,6 +452,8 @@ class ItemCreate(BaseModel):
     status: ItemStatus = "todo"
     milestone_id: int | None = None
     issue: str = Field(default="", max_length=240)
+    due_on: date | None = None
+    repeat_days: int = Field(default=0, ge=0, le=3650)
 
 
 class ItemPatch(BaseModel):
@@ -461,6 +463,9 @@ class ItemPatch(BaseModel):
     milestone_id: int | None = None
     clear_milestone: bool = False
     issue: str | None = Field(default=None, max_length=240)
+    due_on: date | None = None
+    clear_due: bool = False
+    repeat_days: int | None = Field(default=None, ge=0, le=3650)
 
 
 class ItemOrder(BaseModel):

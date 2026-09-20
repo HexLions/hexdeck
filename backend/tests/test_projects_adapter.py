@@ -38,6 +38,12 @@ def seeded(client) -> dict:
             ProjectItem(project_id=p.id, milestone_id=soon.id, title="Roadmap card", status="done", position=0),
             ProjectItem(project_id=p.id, milestone_id=soon.id, title="Items card", status="doing", issue="HexLions/hexdeck#7", position=1),
             ProjectItem(project_id=p.id, milestone_id=None, title="Docs", status="todo", position=2),
+            ProjectItem(project_id=q.id, milestone_id=None, title="Water the plants", status="todo", position=0,
+                        due_on=today - timedelta(days=1), repeat_days=7),
+            ProjectItem(project_id=q.id, milestone_id=None, title="Prune", status="todo", position=1,
+                        due_on=today + timedelta(days=200)),
+            ProjectItem(project_id=q.id, milestone_id=None, title="Mulched", status="done", position=2,
+                        due_on=today - timedelta(days=10)),
         ])
         db.commit()
         return {"p": p.id, "q": q.id, "soon": soon.id}
@@ -45,8 +51,13 @@ def seeded(client) -> dict:
 
 async def test_the_roadmap_sorts_by_date_and_grades_each_milestone(seeded, ctx: Context) -> None:
     data = await get_adapter("projects").fetch("roadmap", {}, {"weeks": "4", "done": False}, ctx)
-    assert [(i["title"], i["status"]) for i in data.items] == [("Late", "late"), ("Soon", "soon"), ("Far", "open"), ("Someday", "open")]
-    assert data.items[0]["days"] == -3 and data.items[1]["project"] == "HexDeck" and data.items[1]["colour"] == "#3aa0ff"
+    assert [(i["title"], i["status"]) for i in data.items] == [
+        ("Late", "late"), ("Water the plants", "late"), ("Soon", "soon"), ("Far", "open"), ("Prune", "open"), ("Someday", "open"),
+    ]
+    assert [i["kind"] for i in data.items[:3]] == ["milestone", "item", "milestone"]
+    assert data.items[1]["repeat_days"] == 7 and data.items[1]["days"] == -1, "a dated item is on the roadmap next to the milestones"
+    assert "Mulched" not in [i["title"] for i in data.items], "a finished one-off item is off the roadmap"
+    assert data.items[0]["days"] == -3 and data.items[2]["project"] == "HexDeck" and data.items[2]["colour"] == "#3aa0ff"
     assert data.primary["value"] == 1, "one milestone is due within four weeks; the late one is late, not due"
     assert data.items[0]["project_id"] == seeded["p"] and [p["name"] for p in data.meta["projects"]] == ["HexDeck", "Garden"]
     assert data.status == "bad", "a late milestone turns the card red"
@@ -54,7 +65,7 @@ async def test_the_roadmap_sorts_by_date_and_grades_each_milestone(seeded, ctx: 
 
 async def test_the_roadmap_can_show_done_ones_and_one_project_only(seeded, ctx: Context) -> None:
     adapter = get_adapter("projects")
-    data = await adapter.fetch("roadmap", {}, {"weeks": "12", "done": True, "project": str(seeded["q"])}, ctx)
+    data = await adapter.fetch("roadmap", {}, {"weeks": "12", "done": True, "project": str(seeded["q"]), "items": False}, ctx)
     assert [(i["title"], i["status"]) for i in data.items] == [("Done", "done"), ("Far", "soon")]
     assert data.status == "warn", "sixty days is within a twelve-week horizon"
 
@@ -69,7 +80,7 @@ async def test_the_project_card_counts_and_names_the_next_milestone(seeded, ctx:
 
 async def test_a_project_without_repositories_works(seeded, ctx: Context) -> None:
     data = await get_adapter("projects").fetch("project", {}, {"project": str(seeded["q"])}, ctx)
-    assert data.items == [] and data.status == "ok" and data.primary["value"] == 0
+    assert data.items == [] and data.status == "ok" and data.primary["value"] == 33
 
 
 async def test_the_items_card_lists_in_order_and_can_narrow_to_a_milestone(seeded, ctx: Context) -> None:
@@ -80,6 +91,15 @@ async def test_the_items_card_lists_in_order_and_can_narrow_to_a_milestone(seede
     narrowed = await adapter.fetch("items", {}, {"project": str(seeded["p"]), "milestone": str(seeded["soon"]), "hide_done": True}, ctx)
     assert [i["title"] for i in narrowed.items] == ["Items card"]
     assert data.meta["project_id"] == seeded["p"]
+
+
+async def test_the_items_card_says_when_an_item_is_due_and_how_often(seeded, ctx: Context) -> None:
+    data = await get_adapter("projects").fetch("items", {}, {"project": str(seeded["q"])}, ctx)
+    plants, prune, mulched = data.items
+    assert plants["days"] == -1 and plants["repeat_days"] == 7 and plants["due"] == "late"
+    assert prune["days"] == 200 and prune["repeat_days"] == 0 and prune["due"] == "open"
+    assert mulched["due"] == "done"
+    assert data.status == "bad", "a late item turns the card red"
 
 
 async def test_a_card_without_a_project_says_so(seeded, ctx: Context) -> None:

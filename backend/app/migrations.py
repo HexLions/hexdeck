@@ -136,6 +136,13 @@ def _project_tables(connection: Connection) -> None:
         connection.execute(text(f"SELECT 1 FROM {table} LIMIT 1"))
 
 
+def _maintenance_columns(connection: Connection) -> None:
+    _add_column(connection, "project_items", "due_on", "DATE")
+    _add_column(connection, "project_items", "repeat_days", "INTEGER NOT NULL DEFAULT 0")
+    _add_column(connection, "project_items", "last_done", "DATE")
+    _add_column(connection, "project_items", "announced_on", "DATE")
+
+
 MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     # (version, description, function). Version 1 is create_all.
     (2, "Nexview widgets get the bundled Nexview logo", _nexview_logo),
@@ -150,6 +157,7 @@ MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     (11, "A page counts its saved layouts", _layout_version_column),
     (12, "An upload knows its own fingerprint", _asset_digest_column),
     (13, "Projects, milestones and items", _project_tables),
+    (14, "Items can be due, and come back", _maintenance_columns),
 ]
 
 

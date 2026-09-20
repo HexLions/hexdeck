@@ -103,3 +103,47 @@ def test_a_write_reschedules_the_project_cards(client: TestClient, monkeypatch) 
     scheduled.clear()
     _project(client)
     assert widget["id"] in scheduled
+
+
+def test_a_recurring_item_rolls_over_when_it_is_done(client: TestClient) -> None:
+    """Maintenance: an item with a due date and an interval. Ticking it off
+    moves the date forward by the interval and puts it back to do."""
+    from datetime import date, timedelta
+
+    setup_admin(client)
+    pid = _project(client)["id"]
+    today = date.today()
+    item = client.post(f"/api/v1/projects/{pid}/items", json={"title": "Test the backup restore", "due_on": (today - timedelta(days=2)).isoformat(), "repeat_days": 30}, headers=CSRF).json()
+    assert item["repeat_days"] == 30 and item["due_on"] == (today - timedelta(days=2)).isoformat()
+    done = client.patch(f"/api/v1/items/{item['id']}", json={"status": "done"}, headers=CSRF).json()
+    assert done["status"] == "todo", "a recurring item is never finished, only done for now"
+    assert done["due_on"] == (today + timedelta(days=28)).isoformat(), "the next date counts from the one that was due, not from today"
+    assert done["last_done"] == today.isoformat()
+    # A one-off item with a date simply finishes.
+    once = client.post(f"/api/v1/projects/{pid}/items", json={"title": "Replace the UPS battery", "due_on": today.isoformat()}, headers=CSRF).json()
+    assert client.patch(f"/api/v1/items/{once['id']}", json={"status": "done"}, headers=CSRF).json()["status"] == "done"
+    # A date that fell far behind rolls forward until it is in the future.
+    stale = client.post(f"/api/v1/projects/{pid}/items", json={"title": "Old", "due_on": (today - timedelta(days=100)).isoformat(), "repeat_days": 30}, headers=CSRF).json()
+    rolled = client.patch(f"/api/v1/items/{stale['id']}", json={"status": "done"}, headers=CSRF).json()
+    assert date.fromisoformat(rolled["due_on"]) > today
+    assert client.patch(f"/api/v1/items/{item['id']}", json={"clear_due": True}, headers=CSRF).json()["due_on"] is None
+
+
+def test_items_that_are_due_are_announced_once_a_day(client: TestClient, monkeypatch) -> None:
+    from datetime import date, timedelta
+
+    from app.services import notify
+    from app.services import projects as project_service
+
+    sent: list[tuple[str, str]] = []
+    monkeypatch.setattr(notify, "emit", lambda event, title, body="", **kw: sent.append((event, title)))
+    setup_admin(client)
+    pid = _project(client)["id"]
+    today = date.today()
+    client.post(f"/api/v1/projects/{pid}/items", json={"title": "Renew the certificate", "due_on": today.isoformat(), "repeat_days": 90}, headers=CSRF)
+    client.post(f"/api/v1/projects/{pid}/items", json={"title": "Later", "due_on": (today + timedelta(days=5)).isoformat()}, headers=CSRF)
+    client.post(f"/api/v1/projects/{pid}/items", json={"title": "Late", "due_on": (today - timedelta(days=3)).isoformat()}, headers=CSRF)
+    with db_session() as db:
+        assert project_service.announce_due(db, today) == 2
+        assert project_service.announce_due(db, today) == 0, "the same day announces once"
+    assert sorted(title for event, title in sent if event == "maintenance_due") == ["Late", "Renew the certificate"]

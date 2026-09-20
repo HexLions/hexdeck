@@ -7,6 +7,7 @@ import logging
 import os
 import secrets
 from contextlib import asynccontextmanager
+from datetime import date
 from pathlib import Path
 
 import anyio.to_thread
@@ -54,6 +55,7 @@ from .services import backup, history, journal, provisioning, retention
 from .services import channels as channel_service
 from .services import icons as icon_service
 from .services import oidc as oidc_service
+from .services import projects as project_service
 from .services.channels import webpush as webpush_service
 from .services.collector import collector
 from .services.hass_ws import hass_listener
@@ -70,8 +72,11 @@ def _housekeeping_once() -> None:
         journal.enforce_expiry(db)
         retention.prune_old_records(db)
         sessions_gone = prune_sessions(db)
+        due = project_service.announce_due(db, date.today())
     if sessions_gone:
         logger.info("Swept %d session(s) that had run out.", sessions_gone)
+    if due:
+        logger.info("Announced %d maintenance item(s) that are due.", due)
     log_tailer.prune()
     try:
         backup.write_one_if_due()

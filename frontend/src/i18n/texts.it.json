@@ -45,6 +45,7 @@
     "A local account without two-factor authentication.": "Un account locale senza autenticazione a due fattori.",
     "A new media request": "Una nuova richiesta multimediale",
     "A new HexDeck version": "Una nuova versione di HexDeck",
+    "A maintenance item is due": "Una manutenzione è in scadenza",
     "A port that is open while the machine runs. 22 for SSH, 3389 for remote desktop, 445 for file sharing.": "Una porta aperta mentre la macchina è accesa. 22 per SSH, 3389 per il desktop remoto, 445 per la condivisione file.",
     "A query with several series, one row per label value.": "Una query con più serie, una riga per valore di etichetta.",
     "A ring": "Un anello",
@@ -1226,7 +1227,6 @@
     "Empty shows every project.": "Vuoto mostra tutti i progetti.",
     "Show finished milestones": "Mostra le milestone concluse",
     "One project: its state, the next milestone, how much is done and the repositories it reads.": "Un progetto: il suo stato, la prossima milestone, quanto è fatto e i repository che legge.",
-    "The items of a project, to tick off and reorder on the board.": "Gli item di un progetto, da spuntare e riordinare sulla board.",
     "Milestone": "Milestone",
     "Empty shows every item.": "Vuoto mostra tutti gli item.",
     "Hide finished items": "Nascondi gli item conclusi",
@@ -1248,7 +1248,10 @@
     "Workflow runs": "Esecuzioni dei workflow",
     "The latest Actions runs with how they ended.": "Le ultime esecuzioni di Actions e come sono finite.",
     "Milestones": "Milestone",
-    "The open milestones of the repositories, with their due date and how far along they are.": "Le milestone aperte dei repository, con la scadenza e a che punto sono."
+    "The open milestones of the repositories, with their due date and how far along they are.": "Le milestone aperte dei repository, con la scadenza e a che punto sono.",
+    "The items of a project, to tick off and reorder on the board; the dated ones say when they are due.": "Gli item di un progetto, da spuntare e riordinare sulla board; quelli con una data dicono quando scadono.",
+    "Show dated items": "Mostra gli item con una data",
+    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Gli item con una scadenza, tra cui le manutenzioni ricorrenti, accanto alle milestone."
   },
   "labels": {
     "Jobs": "Job",

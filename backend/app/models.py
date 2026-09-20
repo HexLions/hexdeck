@@ -594,5 +594,12 @@ class ProjectItem(Base):
     #: ``owner/name#123`` or empty. A reference, shown as a link; never written to.
     issue: Mapped[str] = mapped_column(String(240), default="")
     position: Mapped[int] = mapped_column(Integer, default=0)
+    #: Maintenance: when it is due, and every how many days it comes back
+    #: once done. ``0`` is a one-off. ``last_done`` is the last tick.
+    due_on: Mapped[date | None] = mapped_column(Date, nullable=True)
+    repeat_days: Mapped[int] = mapped_column(Integer, default=0)
+    last_done: Mapped[date | None] = mapped_column(Date, nullable=True)
+    #: The day it was last announced as due, so a day announces once.
+    announced_on: Mapped[date | None] = mapped_column(Date, nullable=True)
 
     project: Mapped[Project] = relationship(back_populates="items")

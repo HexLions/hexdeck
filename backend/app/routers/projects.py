@@ -8,6 +8,7 @@ viewers may see. GitHub is a reference on an item, never written to.
 from __future__ import annotations
 
 import logging
+from datetime import date
 
 from fastapi import APIRouter, status
 from sqlalchemy import select
@@ -34,6 +35,7 @@ from ..services.projects import (
     repo_view,
     reschedule_cards,
     slug_for,
+    tick,
 )
 
 router = APIRouter(prefix="/api/v1", tags=["projects"])
@@ -167,7 +169,8 @@ def add_item(project_id: int, body: ItemCreate, user: MemberUser, db: DbSession)
     if body.milestone_id is not None and not any(m.id == body.milestone_id for m in project.milestones):
         raise error("bad_milestone", "That milestone is not part of this project.")
     row = ProjectItem(project_id=project.id, milestone_id=body.milestone_id, title=body.title.strip(), notes=body.notes,
-                      status=body.status, issue=body.issue.strip(), position=next_position(project.items))
+                      status=body.status, issue=body.issue.strip(), position=next_position(project.items),
+                      due_on=body.due_on, repeat_days=body.repeat_days)
     db.add(row)
     db.commit()
     reschedule_cards(db)
@@ -187,8 +190,16 @@ def patch_item(item_id: int, body: ItemPatch, user: MemberUser, db: DbSession) -
         row.title = body.title.strip()
     if body.notes is not None:
         row.notes = body.notes
-    if body.status is not None:
+    if body.status == "done":
+        tick(row, date.today())
+    elif body.status is not None:
         row.status = body.status
+    if body.clear_due:
+        row.due_on = None
+    elif body.due_on is not None:
+        row.due_on = body.due_on
+    if body.repeat_days is not None:
+        row.repeat_days = body.repeat_days
     if body.clear_milestone:
         row.milestone_id = None
     elif body.milestone_id is not None:

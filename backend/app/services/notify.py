@@ -40,6 +40,7 @@ EVENTS: dict[str, str] = {
     "cert_expiring": "A certificate is running out",
     "disk_filling": "A disk is filling up",
     "update_available": "A new HexDeck version",
+    "maintenance_due": "A maintenance item is due",
     "test": "Test message",
 }
 
