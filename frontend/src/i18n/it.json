@@ -783,6 +783,12 @@
     "family": "Da dove viene",
     "familyNote": "HexDeck è un fork di nexdeck di DerKezorm, uno degli strumenti nexapps accanto a Nexview, nexmail e nexpulse. Resta sotto licenza AGPL-3.0."
   },
+  "projects": {
+    "pickProjectFirst": "Scegli prima il progetto.",
+    "none": "Ancora nessun progetto. Creane uno in Impostazioni, Progetti.",
+    "everyProject": "Tutti i progetti",
+    "everyMilestone": "Tutte le milestone"
+  },
   "status": {
     "ok": "Tutto a posto",
     "warn": "Avviso",

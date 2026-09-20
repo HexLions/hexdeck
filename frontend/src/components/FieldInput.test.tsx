@@ -19,11 +19,17 @@ const calls = vi.hoisted(() => ({
     { id: 1, slug: 'home', name: 'Home', pages: [{ id: 1, slug: 'overview', name: 'Overview' }, { id: 2, slug: 'media', name: 'Media' }] },
     { id: 2, slug: 'network', name: 'Network', pages: [{ id: 3, slug: 'overview', name: 'Overview' }] },
   ] as unknown[],
+  projects: [
+    { id: 1, name: 'HexDeck', slug: 'hexdeck', status: 'active', colour: '', position: 0, repos: [], items: [],
+      milestones: [{ id: 10, title: 'M3', target_date: null, status: 'open', position: 0 }] },
+    { id: 2, name: 'Garden', slug: 'garden', status: 'active', colour: '', position: 1, repos: [], items: [], milestones: [] },
+  ] as unknown[],
 }))
 
 vi.mock('../api/client', () => ({
   get: vi.fn(async (path: string) => {
     if (path === '/boards') return calls.boards
+    if (path === '/projects') return calls.projects
     throw new Error(`unexpected request ${path}`)
   }),
 }))
@@ -95,5 +101,33 @@ describe('the colour field', () => {
     expect(screen.getByText('#ff8800')).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: 'Clear' }))
     expect(picked).toEqual([''])
+  })
+})
+
+/** Which project, and which milestone of the project chosen in another field. */
+describe('the project pickers', () => {
+  it('offers every project', async () => {
+    const onChange = vi.fn()
+    show(spec({ name: 'project', label: 'Project', type: 'project' }), '', onChange)
+    await screen.findByRole('option', { name: 'Garden' })
+    await userEvent.selectOptions(screen.getByRole('combobox'), '2')
+    expect(onChange).toHaveBeenCalledWith('2')
+  })
+
+  it('offers the milestones of the chosen project, and asks for one first', async () => {
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+    const milestone = spec({ name: 'milestone', label: 'Milestone', type: 'milestone', from_field: 'project' })
+    const view = render(
+      <QueryClientProvider client={client}>
+        <FieldInput spec={milestone} value="" onChange={() => undefined} />
+      </QueryClientProvider>,
+    )
+    expect(await screen.findByText(/Pick the project first/)).toBeInTheDocument()
+    view.rerender(
+      <QueryClientProvider client={client}>
+        <FieldInput spec={milestone} value="" onChange={() => undefined} integrationId={1} />
+      </QueryClientProvider>,
+    )
+    await screen.findByRole('option', { name: 'M3' })
   })
 })

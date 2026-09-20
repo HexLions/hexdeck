@@ -783,6 +783,12 @@
     "family": "Where it comes from",
     "familyNote": "HexDeck is a fork of nexdeck by DerKezorm, one of the nexapps tools next to Nexview, nexmail and nexpulse. It stays under the AGPL-3.0."
   },
+  "projects": {
+    "pickProjectFirst": "Pick the project first.",
+    "none": "No projects yet. Create one under Settings, Projects.",
+    "everyProject": "Every project",
+    "everyMilestone": "Every milestone"
+  },
   "status": {
     "ok": "Everything is fine",
     "warn": "Warning",
