@@ -8,7 +8,7 @@ and caches identical requests for a few seconds.
 Every adapter lives in one file under `backend/app/adapters/`. It declares
 its connection fields, its widgets, and how to fetch, act and fake data.
 The frontend never knows a service: every widget returns a `WidgetData`
-that one of twenty-eight renderers draws.
+that one of thirty-one renderers draws.
 
 ## Adapters in 0.12.0
 
@@ -167,7 +167,7 @@ a tight spot.
 `value`, `gauge`, `stats`, `list`, `nowplaying`, `calendar`, `text`,
 `bookmarks`, `iframe`, `clock`, `weather`, `feed`, `log`, `chart`, `app`, `posters`,
 `counters`, `camera`, `bars`, `ring`, `timeline`, `button`, `image`, `wol`,
-`search`, `ask`, `player`: twenty-eight, the keys of `RENDERER_MIN` in
+`search`, `ask`, `player`, `roadmap`, `project`, `items`: thirty-one, the keys of `RENDERER_MIN` in
 `backend/app/adapters/base.py`. A fetch may pick another renderer for its data through
 `meta["renderer"]`; the media library card uses that for its icon row.
 

@@ -1213,7 +1213,23 @@
     "How much the ping grows while the line is busy, graded from A+ to F.": "Wie stark der Ping wächst, während die Leitung ausgelastet ist, benotet von A+ bis F.",
     "nexpulse": "nexpulse",
     "Run a speed test": "Speedtest starten",
-    "Nothing to pick, it acts on the whole connection": "Nichts zu wählen, es wirkt auf die ganze Anbindung"
+    "Nothing to pick, it acts on the whole connection": "Nichts zu wählen, es wirkt auf die ganze Anbindung",
+    "Projects": "Projekte",
+    "What is being built: roadmap of milestones, one project's state, and its items to tick off.": "Was gerade entsteht: eine Roadmap der Meilensteine, der Stand eines Projekts und seine Aufgaben zum Abhaken.",
+    "Roadmap": "Roadmap",
+    "Every milestone of every project on one time line, the late and the imminent ones marked.": "Jeder Meilenstein jedes Projekts auf einer Zeitleiste, die überfälligen und die nahen markiert.",
+    "Horizon": "Horizont",
+    "4 weeks": "4 Wochen",
+    "8 weeks": "8 Wochen",
+    "12 weeks": "12 Wochen",
+    "Milestones due within this are marked as coming up.": "Meilensteine, die in dieser Zeit fällig werden, gelten als bevorstehend.",
+    "Empty shows every project.": "Leer zeigt jedes Projekt.",
+    "Show finished milestones": "Erledigte Meilensteine zeigen",
+    "One project: its state, the next milestone, how much is done and the repositories it reads.": "Ein Projekt: sein Stand, der nächste Meilenstein, wie viel erledigt ist und die Repositories, die es liest.",
+    "The items of a project, to tick off and reorder on the board.": "Die Aufgaben eines Projekts, auf dem Board abzuhaken und umzusortieren.",
+    "Milestone": "Meilenstein",
+    "Empty shows every item.": "Leer zeigt jede Aufgabe.",
+    "Hide finished items": "Erledigte Aufgaben ausblenden"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -1874,6 +1890,12 @@
     "The newest test failed": "Der neueste Test ist fehlgeschlagen",
     "The newest test failed. The numbers are from the test before it.": "Der neueste Test ist fehlgeschlagen. Die Zahlen stammen vom Test davor.",
     "The ping grows a lot while the line is busy": "Der Ping wächst stark, während die Leitung ausgelastet ist",
-    "This test did not measure the ping under load": "Dieser Test hat den Ping unter Last nicht gemessen"
+    "This test did not measure the ping under load": "Dieser Test hat den Ping unter Last nicht gemessen",
+    "Milestones open": "Offene Meilensteine",
+    "No milestones yet": "Noch keine Meilensteine",
+    "Nothing to do": "Nichts zu tun",
+    "Pick a project in the card settings": "Wähle in den Karteneinstellungen ein Projekt",
+    "No such card": "Keine solche Karte",
+    "Projects live in this installation.": "Die Projekte leben in dieser Installation."
   }
 }

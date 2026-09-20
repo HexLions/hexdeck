@@ -82,6 +82,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^finished (.+)$/, 'fertig $1'],
     [/^last (.+)$/, 'zuletzt $1'],
     [/^renewed (\d+) days ago$/, 'vor $1 Tagen erneuert'],
+    [/^Due in (\d+) weeks$/, 'Fällig in $1 Wochen'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -145,6 +146,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^finished (.+)$/, 'finito $1'],
     [/^last (.+)$/, 'ultimo $1'],
     [/^renewed (\d+) days ago$/, 'rinnovato $1 giorni fa'],
+    [/^Due in (\d+) weeks$/, 'In scadenza entro $1 settimane'],
   ],
 }
 

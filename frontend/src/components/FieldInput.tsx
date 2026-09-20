@@ -3,6 +3,7 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { get } from '../api/client'
+import { listProjects } from '../api/projects'
 import type { BoardSummary, FieldSpec, Integration } from '../api/types'
 import { tAdapter } from '../i18n/texts'
 import { PicturePicker } from './PicturePicker'
@@ -254,6 +255,57 @@ function RemoteChoice({ spec, value, onChange, label, help, integrationId }: {
  *
  * The value is what an address is made of later: "home", or "home/media".
  */
+/**
+ * Which project, or which milestone of the project chosen in another field.
+ * Both read the same list, so the second costs no request of its own. The
+ * project's id arrives as `projectId`, which is what the sheet passes for
+ * a field's `from_field`.
+ */
+function ProjectPicker({ spec, value, onChange, label, help, projectId }: {
+  spec: FieldSpec
+  value: unknown
+  onChange: (value: unknown) => void
+  label: string
+  help?: string
+  projectId?: number
+}) {
+  const { t } = useTranslation()
+  const projects = useQuery({ queryKey: ['projects'], queryFn: listProjects })
+  const chosen = typeof value === 'string' ? value : ''
+  const rows = projects.data ?? []
+  const options =
+    spec.type === 'milestone'
+      ? (rows.find((p) => p.id === projectId)?.milestones ?? []).map((m) => ({ value: String(m.id), label: m.title }))
+      : rows.map((p) => ({ value: String(p.id), label: p.name }))
+  if (spec.type === 'milestone' && !projectId) {
+    return (
+      <Field label={label} help={help}>
+        <p className="text-[12px] text-faint">{t('projects.pickProjectFirst')}</p>
+      </Field>
+    )
+  }
+  if (projects.isPending) {
+    return (
+      <Field label={label} help={help}>
+        <p className="text-[12px] text-faint">{t('common.loading')}</p>
+      </Field>
+    )
+  }
+  if (rows.length === 0) {
+    return (
+      <Field label={label} help={help}>
+        <p className="text-[12px] text-faint">{t('projects.none')}</p>
+      </Field>
+    )
+  }
+  const blank = spec.type === 'milestone' ? t('projects.everyMilestone') : spec.required ? t('widget.choices.unset') : t('projects.everyProject')
+  return (
+    <Field label={label} help={help} htmlFor={`f-${spec.name}`}>
+      <Select id={`f-${spec.name}`} value={chosen} onChange={(next) => onChange(next)} options={[{ value: '', label: blank }, ...options]} />
+    </Field>
+  )
+}
+
 function BoardPicker({ value, onChange, label, help }: { value: unknown; onChange: (value: unknown) => void; label: string; help?: string }) {
   const { t } = useTranslation()
   const boards = useQuery({ queryKey: ['boards', false], queryFn: () => get<BoardSummary[]>('/boards') })
@@ -344,6 +396,9 @@ export function FieldInput({ spec, value, onChange, labelOverride, onFill, items
   }
   if (spec.type === 'board') {
     return <BoardPicker value={value} onChange={onChange} label={label} help={help} />
+  }
+  if (spec.type === 'project' || spec.type === 'milestone') {
+    return <ProjectPicker spec={spec} value={value} onChange={onChange} label={label} help={help} projectId={integrationId} />
   }
   if (spec.type === 'colour') {
     return <ColourPicker value={value} onChange={onChange} label={label} help={help} />

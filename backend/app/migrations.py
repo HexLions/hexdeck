@@ -129,6 +129,13 @@ def _asset_digest_column(connection: Connection) -> None:
     connection.execute(text("CREATE INDEX IF NOT EXISTS ix_assets_digest ON assets (digest)"))
 
 
+def _project_tables(connection: Connection) -> None:
+    """The tables themselves come from ``create_all`` on this same start; the
+    step exists so that a database from before records that it has them."""
+    for table in ("projects", "project_repos", "milestones", "project_items"):
+        connection.execute(text(f"SELECT 1 FROM {table} LIMIT 1"))
+
+
 MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     # (version, description, function). Version 1 is create_all.
     (2, "Nexview widgets get the bundled Nexview logo", _nexview_logo),
@@ -142,6 +149,7 @@ MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     (10, "An e-mail address belongs to one account", _unique_email_index),
     (11, "A page counts its saved layouts", _layout_version_column),
     (12, "An upload knows its own fingerprint", _asset_digest_column),
+    (13, "Projects, milestones and items", _project_tables),
 ]
 
 

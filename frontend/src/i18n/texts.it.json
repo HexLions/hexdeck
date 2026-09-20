@@ -1213,7 +1213,23 @@
     "How much the ping grows while the line is busy, graded from A+ to F.": "Quanto cresce il ping mentre la linea è occupata, con voto da A+ a F.",
     "nexpulse": "nexpulse",
     "Run a speed test": "Esegui un test di velocità",
-    "Nothing to pick, it acts on the whole connection": "Niente da scegliere, agisce sull'intera connessione"
+    "Nothing to pick, it acts on the whole connection": "Niente da scegliere, agisce sull'intera connessione",
+    "Projects": "Progetti",
+    "What is being built: roadmap of milestones, one project's state, and its items to tick off.": "Cosa si sta costruendo: una roadmap delle milestone, lo stato di un progetto e i suoi item da spuntare.",
+    "Roadmap": "Roadmap",
+    "Every milestone of every project on one time line, the late and the imminent ones marked.": "Ogni milestone di ogni progetto su una sola linea del tempo, con quelle in ritardo e quelle imminenti evidenziate.",
+    "Horizon": "Orizzonte",
+    "4 weeks": "4 settimane",
+    "8 weeks": "8 settimane",
+    "12 weeks": "12 settimane",
+    "Milestones due within this are marked as coming up.": "Le milestone in scadenza entro questo periodo sono segnate come imminenti.",
+    "Empty shows every project.": "Vuoto mostra tutti i progetti.",
+    "Show finished milestones": "Mostra le milestone concluse",
+    "One project: its state, the next milestone, how much is done and the repositories it reads.": "Un progetto: il suo stato, la prossima milestone, quanto è fatto e i repository che legge.",
+    "The items of a project, to tick off and reorder on the board.": "Gli item di un progetto, da spuntare e riordinare sulla board.",
+    "Milestone": "Milestone",
+    "Empty shows every item.": "Vuoto mostra tutti gli item.",
+    "Hide finished items": "Nascondi gli item conclusi"
   },
   "labels": {
     "Jobs": "Job",
@@ -1874,6 +1890,12 @@
     "The newest test failed": "Il test più recente è fallito",
     "The newest test failed. The numbers are from the test before it.": "Il test più recente è fallito. I numeri sono del test precedente.",
     "The ping grows a lot while the line is busy": "Il ping cresce molto mentre la linea è occupata",
-    "This test did not measure the ping under load": "Questo test non ha misurato il ping sotto carico"
+    "This test did not measure the ping under load": "Questo test non ha misurato il ping sotto carico",
+    "Milestones open": "Milestone aperte",
+    "No milestones yet": "Ancora nessuna milestone",
+    "Nothing to do": "Niente da fare",
+    "Pick a project in the card settings": "Scegli un progetto nelle impostazioni della card",
+    "No such card": "Nessuna card di questo tipo",
+    "Projects live in this installation.": "I progetti vivono in questa installazione."
   }
 }
