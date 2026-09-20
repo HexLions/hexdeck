@@ -41,7 +41,13 @@
       "nexmail_keys_off": "API-Schlüssel sind in dieser nexmail-Installation abgeschaltet. Einschalten kann sie der Betreiber von nexmail unter Einstellungen → API-Schlüssel.",
       "nexmail_counts_only": "Dieser Schlüssel darf nur Anzahlen lesen. Bearbeite ihn in nexmail und wähle „Zahl, Absender und Betreff“, um die neuesten Mails zu sehen.",
       "nexmail_mailbox_unknown": "Ein auf dieser Karte gewähltes Postfach ist an diesem Schlüssel nicht mehr freigegeben. Wähle die Postfächer in den Karteneinstellungen neu oder gib das Postfach in nexmail am Schlüssel frei.",
-      "nexmail_bad_limit": "nexmail lehnt die Anzahl der Mails ab. Wähle zwischen 1 und 20."
+      "nexmail_bad_limit": "nexmail lehnt die Anzahl der Mails ab. Wähle zwischen 1 und 20.",
+      "nexpulse_key_invalid": "nexpulse kennt diesen API-Schlüssel nicht, oder er wurde widerrufen. Lege in nexpulse unter Einstellungen → API-Schlüssel einen an und trage ihn in dieser Anbindung ein.",
+      "nexpulse_read_only": "Dieser API-Schlüssel darf nur lesen. Lege in nexpulse einen Schlüssel mit „Lesen und Tests starten“ an, um aus HexDeck einen Test zu starten.",
+      "nexpulse_busy": "nexpulse misst gerade schon. Die Karte zeigt das Ergebnis, sobald der Test fertig ist.",
+      "nexpulse_source_off": "Diese Quelle ist in nexpulse abgeschaltet. Schalte sie dort ein oder wähle in den Karteneinstellungen eine andere Quelle.",
+      "nexpulse_source_unknown": "nexpulse kennt diese Quelle nicht. Wähle in den Karteneinstellungen eine andere.",
+      "nexpulse_bad_range": "nexpulse kennt diesen Zeitraum nicht. Wähle in den Karteneinstellungen einen anderen."
     }
   },
   "auth": {
@@ -110,7 +116,7 @@
     "passwordHelp": "Mindestens acht Zeichen.",
     "demo": {
       "label": "Mit einem Vorführ-Board starten",
-      "help": "Jede Anbindung läuft im Vorführmodus mit erfundenen Daten. Später unter Einstellungen > System abschalten."
+      "help": "Jede Anbindung läuft im Vorführmodus mit erfundenen Daten. Später unter System > Anbindungen abschalten."
     },
     "docker": {
       "label": "Einen Docker-Host anbinden",
@@ -254,6 +260,7 @@
       "publicUrlHelp": "So sehen Browser HexDeck. Nötig für Anmeldeanbieter und Web Push.",
       "demo": "Vorführmodus für alles",
       "demoHelp": "Jedes Widget zeigt erfundene Daten. Abschalten, wenn echte Dienste angebunden sind.",
+      "demoForced": "Gesetzt durch HEXDECK_DEMO am Container. Variable entfernen und neu starten, um ihn abzuschalten.",
       "updateCheck": "Nach Updates suchen",
       "updateCheckHelp": "Fragt einmal am Tag bei GitHub, ob es eine neuere Version gibt. Ab Werk aus.",
       "oidc": "Anmeldeanbieter",
@@ -501,6 +508,8 @@
     }
   },
   "board": {
+    "demo": "Vorführmodus: Jede Karte zeigt erfundene Daten, auch bei Anbindungen, die du selbst angelegt hast.",
+    "demoOff": "Abschalten",
     "none": {
       "title": "Noch kein Board",
       "body": "Leg eines an, dann erscheint es hier.",
@@ -759,7 +768,7 @@
     "notifyNote": "Wohin HexDeck schreibt, wenn etwas passiert. Apprise allein spricht mit hundert weiteren.",
     "builtWith": "Gebaut mit",
     "family": "Woher es kommt",
-    "familyNote": "HexDeck ist ein Fork von nexdeck von DerKezorm, einem der nexapps-Werkzeuge neben Nexview und nexmail. Es bleibt unter der AGPL-3.0."
+    "familyNote": "HexDeck ist ein Fork von nexdeck von DerKezorm, einem der nexapps-Werkzeuge neben Nexview, nexmail und nexpulse. Es bleibt unter der AGPL-3.0."
   },
   "status": {
     "ok": "Alles in Ordnung",

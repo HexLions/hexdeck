@@ -41,7 +41,13 @@
       "nexmail_keys_off": "API keys are turned off on this nexmail installation. The operator of nexmail turns them on under Settings → API keys.",
       "nexmail_counts_only": "This key may only read counts. Edit it in nexmail and choose “Count, sender and subject” to see the latest mail.",
       "nexmail_mailbox_unknown": "A mailbox picked on this card is no longer shared with this key. Pick the mailboxes again in the card's settings, or share the mailbox on the key in nexmail.",
-      "nexmail_bad_limit": "nexmail refused the number of messages. Pick between 1 and 20."
+      "nexmail_bad_limit": "nexmail refused the number of messages. Pick between 1 and 20.",
+      "nexpulse_key_invalid": "nexpulse does not know this API key, or it was revoked. Create a key in nexpulse under Settings → API keys and enter it in this connection.",
+      "nexpulse_read_only": "This API key may only read. Create a key with “Read and start tests” in nexpulse to start a test from HexDeck.",
+      "nexpulse_busy": "nexpulse is already running a test. The card shows it as soon as it is done.",
+      "nexpulse_source_off": "This source is turned off in nexpulse. Turn it on there, or pick another source in the card's settings.",
+      "nexpulse_source_unknown": "nexpulse does not know this source. Pick another one in the card's settings.",
+      "nexpulse_bad_range": "nexpulse does not know this period. Pick another one in the card's settings."
     }
   },
   "auth": {
@@ -110,7 +116,7 @@
     "passwordHelp": "At least eight characters.",
     "demo": {
       "label": "Start with a demo board",
-      "help": "Every integration runs in demo mode with fake data. Switch it off later under Settings > System."
+      "help": "Every integration runs in demo mode with fake data. Switch it off later under System > Integrations."
     },
     "docker": {
       "label": "Connect a Docker host",
@@ -254,6 +260,7 @@
       "publicUrlHelp": "As browsers see HexDeck. Needed for identity providers and Web Push.",
       "demo": "Demo mode for everything",
       "demoHelp": "Every widget shows fake data. Switch it off when you connect real services.",
+      "demoForced": "Set by HEXDECK_DEMO on the container. Remove the variable and restart to switch it off.",
       "updateCheck": "Check for updates",
       "updateCheckHelp": "Asks GitHub once a day whether a newer version exists. Off by default.",
       "oidc": "Identity providers",
@@ -501,6 +508,8 @@
     }
   },
   "board": {
+    "demo": "Demo mode: every card shows invented data, also for connections you added yourself.",
+    "demoOff": "Switch off",
     "none": {
       "title": "No board yet",
       "body": "Create one and it appears here.",
@@ -759,7 +768,7 @@
     "notifyNote": "Where HexDeck writes when something happens. Apprise alone speaks to a hundred more.",
     "builtWith": "Built with",
     "family": "Where it comes from",
-    "familyNote": "HexDeck is a fork of nexdeck by DerKezorm, one of the nexapps tools next to Nexview and nexmail. It stays under the AGPL-3.0."
+    "familyNote": "HexDeck is a fork of nexdeck by DerKezorm, one of the nexapps tools next to Nexview, nexmail and nexpulse. It stays under the AGPL-3.0."
   },
   "status": {
     "ok": "Everything is fine",

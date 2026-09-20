@@ -1,6 +1,6 @@
 [project]
 name = "hexdeck-backend"
-version = "0.15.0"
+version = "0.16.0"
 description = "HexDeck backend: the live homelab dashboard of the nexapps family."
 requires-python = ">=3.13"
 license = "AGPL-3.0-or-later"

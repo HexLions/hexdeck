@@ -3,6 +3,32 @@
 All notable changes to nexdeck. The format follows Keep a Changelog; the
 project uses semantic versioning.
 
+## 0.16.0 (2026-09-19)
+
+### New
+
+- **nexpulse.** The speed test tracker of the nexapps family, read through its API keys. Five cards: **Latest result**, download, upload, ping and jitter of the newest test, a running test live as it happens, and yellow when nexpulse finds the line below the plan set there; **History**, download and upload or ping idle and under load over 24 hours to 90 days, as a line or as bars, a failed test drawn as a gap; **Period summary**, average, median, lowest or highest over a period with the tests that failed or fell below the plan; **Recent tests**, failed ones red, those below the plan yellow; **Latency under load**, how much the ping grows while the line is busy, graded A+ to F on the steps the Waveform bufferbloat test uses. When the newest test failed, the latest result says its numbers are from the test before. A key that may also start tests adds a button to test now, on the card and for a button card, and it always names the source it tests with. What a key may do comes from nexpulse's `/api/v1/me` (0.1.1); a key that may only read gets no button, and the connection test says which of the two it is. nexpulse 0.1.0 cannot say: there the button is shown, a key that may only read is told so when it presses it, and the connection test asks for the update. nexdeck never sends a request to find something out that could start a test. Every card and the button ran against nexpulse 0.1.0 and 0.1.1, so the integration starts without the beta badge.
+
+### Changed
+
+- **A button pointed at an action that needs no target says so.** Its target list read "This connection offers nothing to pick here" in yellow, which looked like a fault; it now reads "Nothing to pick, it acts on the whole connection".
+
+## 0.15.1 (2026-09-18)
+
+### New
+
+- **Frigate: a camera's latest picture, today's detections and a health card.** Asked for in issue #1. The camera card shows the latest picture of one camera, fetched through nexdeck every few seconds. Today counts what was detected since midnight, by kind, for one camera or all of them. Health stays empty while everything runs and names a camera that delivers no frames, frames dropped because detection cannot keep up, a detector slower than 100 ms a picture, and recordings above 90% of their disk. The detections card shows each detection's thumbnail. Pictures are fetched through the server by those two paths only, never by any other address of Frigate. Written against Frigate's API documentation, so Frigate stays beta.
+- **The board says when demo mode is on.** Demo mode for everything, which the setup wizard's demo board switches on, shows invented data on every card, also for connections added later, while the connection test asks the real service. A green test beside cards with sample data sent one reporter looking for a bug in an adapter (issue #2). The board now carries a line while demo mode is on, with the way out for administrators, and a passed connection test turns yellow and says the cards still show invented data. Where `NEXDECK_DEMO` holds demo mode, the switch in the settings is locked and names the variable, because switching it off there changed nothing.
+- **The row of small figures under a card wraps on a tall card.** From three rows up it takes a second line instead of scrolling sideways, where values sat out of sight. A smaller card keeps the sideways row: wrapping there printed the number, the title and the figures over each other on a phone.
+
+### Fixed
+
+- **Frigate lists its cameras on current versions.** Newer Frigate keeps the cameras under their own key in `/api/stats`, and the card still read the old layout: it showed "cameras" and "embeddings" as two cameras at 0 fps and missed the real one. Both layouts are read now. Reported as issue #1.
+- **Frigate detections show how sure Frigate was.** Newer Frigate leaves `top_score` empty and keeps the number under `data`, so every detection read 0%. A detection without a number shows none. Reported as issue #1.
+- **Nomad no longer shows healthy jobs as failed.** The job summary's Failed and Lost are a tally that never goes down, even after the allocations behind it are gone: a healthy OpenBao read three failed beside one running. The jobs and cluster cards now count allocations that failed or were lost, that Nomad still wants running and that nothing has replaced. Measured on the reporter's cluster, issue #2.
+- **Radarr's upcoming card shows the next release.** It took the digital release whenever a film had one, so a film listed for its physical release in four days read as a digital release a month ago. It now shows the next of the three dates and names it: in cinemas, digital or physical. Reported as issue #8.
+- **The setup wizard names the right place to switch demo mode off**, System > Integrations.
+
 ## 0.15.0 (2026-09-18)
 
 ### New
