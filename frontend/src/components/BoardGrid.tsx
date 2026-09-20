@@ -1,9 +1,10 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type RefObject } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type RefObject } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Responsive, WidthProvider, type Layout, type Layouts } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
+import { moveGroup } from '../lib/arrange'
 import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns } from '../lib/layout'
 import type { Action, Breakpoint, LayoutItem, WidgetData, WidgetView } from '../lib/types'
 import { WidgetCard } from './WidgetCard'
@@ -97,6 +98,51 @@ export function BoardGrid(props: Props) {
   const host = useRef<HTMLDivElement>(null)
   const rowHeight = useFitRowHeight(host, Boolean(fitScreen) && screen === 'lg', rowsOf(wide), compact ? ROW_HEIGHT_COMPACT : ROW_HEIGHT)
   /**
+   * Several cards at once. Shift or Ctrl and a click adds a card to the
+   * selection; a drag or an arrow key on any of them moves them all by the
+   * same step. Escape lets go. Leaving edit mode lets go as well.
+   */
+  const [selected, setSelected] = useState<Set<string>>(() => new Set())
+  useEffect(() => {
+    if (!editing) setSelected(new Set())
+  }, [editing])
+  /**
+   * ⚠️ On mousedown, not click. The grid starts a drag on mousedown and puts
+   * its placeholder under the pointer, so the mouseup lands on another
+   * element and the browser never fires a click. Stopping the event here,
+   * in the capture phase, also keeps the drag from starting.
+   */
+  const toggle = (event: MouseEvent<HTMLDivElement>, id: string) => {
+    if (!editing || !(event.shiftKey || event.ctrlKey || event.metaKey)) return
+    event.preventDefault()
+    event.stopPropagation()
+    setSelected((current) => {
+      const next = new Set(current)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+  /**
+   * ⚠️ The grid reports a drag twice: first onDragStop with the one card that
+   * was dragged, then onLayoutChange with the layout that has only that card
+   * moved. The group's layout is worked out in the first and handed over in
+   * the second, so the save carries the whole group and not the one card
+   * the grid knows about. A group that cannot move as one goes back to where
+   * it was, the dragged card included.
+   */
+  const pending = useRef<LayoutItem[] | null>(null)
+  const dragStop = (_layout: Layout[], before: Layout, after: Layout) => {
+    if (selected.size < 2 || !selected.has(after.i)) return
+    const moved = moveGroup(wide.map(plain), [...selected], after.x - before.x, after.y - before.y, columns)
+    pending.current = moved ?? wide.map(plain)
+    // A refused move leaves the dragged card where the grid put it, since the
+    // layout it is handed back is the one it already had. A fresh mount
+    // draws the saved arrangement again.
+    if (!moved) setSnapBack((n) => n + 1)
+  }
+  const [snapBack, setSnapBack] = useState(0)
+  /**
    * Move or resize the focused card with the arrow keys.
    *
    * Always in the wide arrangement, since it is the only one; on a phone the
@@ -104,12 +150,24 @@ export function BoardGrid(props: Props) {
    */
   const nudge = (event: KeyboardEvent<HTMLDivElement>, widget: WidgetView) => {
     if (!onLayoutChange || event.altKey || event.ctrlKey || event.metaKey) return
-    if (!event.key.startsWith('Arrow')) return
     // Only when the card itself has the focus, not something inside it.
     if (event.target !== event.currentTarget) return
+    if (event.key === 'Escape' && selected.size) {
+      event.preventDefault()
+      setSelected(new Set())
+      return
+    }
+    if (!event.key.startsWith('Arrow')) return
     event.preventDefault()
     const item = wide.find((one) => one.i === String(widget.id))
     if (!item) return
+    if (selected.size > 1 && selected.has(item.i) && !event.shiftKey) {
+      const step: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }
+      const [dx, dy] = step[event.key] ?? [0, 0]
+      const moved = moveGroup(wide.map(plain), [...selected], dx, dy, columns)
+      if (moved) onLayoutChange('lg', moved)
+      return
+    }
     const next = moved(item as LayoutItem, event.key, event.shiftKey, columns, floorOf(widget, columns))
     if (!next) return
     onLayoutChange('lg', wide.map((one) => plain(one.i === next.i ? next : one)))
@@ -131,7 +189,7 @@ export function BoardGrid(props: Props) {
           were pulled in, the rest pushed down, and edit mode saved that. A
           fresh mount reads both from the props together. */}
       <ResponsiveGrid
-        key={columns}
+        key={`${columns}-${snapBack}`}
         className={`board ${editing ? 'board-editing' : ''}`}
         layouts={gridLayouts}
         breakpoints={BREAKPOINTS}
@@ -158,8 +216,15 @@ export function BoardGrid(props: Props) {
         preventCollision={!autoCompact}
         useCSSTransforms
         onBreakpointChange={(next: string) => setScreen(next === 'sm' ? 'sm' : 'lg')}
+        onDragStop={dragStop}
         onLayoutChange={(_current: Layout[], all: Layouts) => {
           if (!onLayoutChange || !editing) return
+          if (pending.current) {
+            const group = pending.current
+            pending.current = null
+            onLayoutChange('lg', group)
+            return
+          }
           // Only the wide arrangement is kept. When it is still what the board
           // handed in, the change was in the stack, which is worked out from
           // it and never saved.
@@ -177,6 +242,9 @@ export function BoardGrid(props: Props) {
             // by a switch, not by voice control that drives the keyboard. The
             // grid itself never learns about this; the layout is ours to change,
             // and the same save path runs as after a drag.
+            className={selected.has(String(widget.id)) ? 'card-selected' : undefined}
+            onMouseDownCapture={editing ? (event) => toggle(event, String(widget.id)) : undefined}
+            data-selected={selected.has(String(widget.id)) || undefined}
             tabIndex={editing ? 0 : undefined}
             role={editing ? 'application' : undefined}
             aria-label={editing ? t('board.moveWith', { name: widget.title || widget.kind }) : undefined}
