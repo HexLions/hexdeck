@@ -30,8 +30,13 @@ export const BREAKPOINTS = { lg: 700, sm: 0 }
 export const PHONE_COLUMNS = 4
 type Screen = 'lg' | 'sm'
 export const GAP = 12
-/** What the pages leave under the grid: the bottom bar of edit mode and the padding. */
-const BOTTOM_PADDING = 24
+/**
+ * What lies under the last row: the trailing margin react-grid-layout adds
+ * below it, and the page's own bottom padding. Measured on 20.09.2026: with
+ * only the padding counted, fit-to-screen overshot by the margin and the
+ * board scrolled by ten pixels.
+ */
+const BOTTOM_PADDING = 24 + GAP
 
 interface Props {
   widgets: WidgetView[]
