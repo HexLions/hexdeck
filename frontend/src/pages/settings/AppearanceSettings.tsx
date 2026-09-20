@@ -8,7 +8,7 @@ import { Field, Toast } from '../../components/ui'
 import { accentVariables, applyAppearance, type Appearance } from '../../lib/appearance'
 import { SettingsCard } from './SettingsCard'
 
-const EMPTY: Appearance = { preset: 'cyan', accent: '', css: '', colour: '#22d3ee', presets: {} }
+const EMPTY: Appearance = { preset: 'hex', accent: '', css: '', colour: '#3aa0ff', presets: {} }
 
 /**
  * The look of the whole installation: one accent colour and, for whoever
@@ -86,7 +86,7 @@ export function AppearanceSettings() {
             />
             <input
               className="input font-mono w-32"
-              placeholder="#22d3ee"
+              placeholder="#3aa0ff"
               maxLength={7}
               value={form.accent}
               onChange={(e) => setForm((current) => ({ ...current, accent: e.target.value }))}
