@@ -787,7 +787,15 @@
     "pickProjectFirst": "Erst das Projekt wählen.",
     "none": "Noch keine Projekte. Lege eines unter Einstellungen, Projekte an.",
     "everyProject": "Alle Projekte",
-    "everyMilestone": "Alle Meilensteine"
+    "everyMilestone": "Alle Meilensteine",
+    "daysLeft_one": "in {{count}} Tag",
+    "daysLeft_other": "in {{count}} Tagen",
+    "daysLate_one": "{{count}} Tag zu spät",
+    "daysLate_other": "{{count}} Tage zu spät",
+    "noDate": "ohne Datum",
+    "next": "Nächster",
+    "status": { "active": "Aktiv", "paused": "Pausiert", "done": "Fertig" },
+    "item": { "todo": "Offen", "doing": "In Arbeit", "done": "Erledigt" }
   },
   "status": {
     "ok": "Alles in Ordnung",

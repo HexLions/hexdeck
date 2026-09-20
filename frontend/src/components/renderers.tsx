@@ -30,6 +30,7 @@ import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 
 import { fileUrl, mediaUrl } from '../api/client'
+import { orderItems, patchItem } from '../api/projects'
 import { tLabel } from '../i18n/texts'
 import { formatValue, timeAgo } from '../lib/format'
 import { safeUrl } from '../lib/safeUrl'
@@ -81,6 +82,9 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   chart: ChartCard,
   bars: BarsCard,
   timeline: TimelineCard,
+  roadmap: RoadmapCard,
+  project: ProjectCard,
+  items: ItemsCard,
   ring: RingCard,
   app: AppTile,
   button: ButtonCard,
@@ -1309,5 +1313,194 @@ export function AppTile({ widget, data, link }: RenderProps) {
         </div>
       )}
     </Tag>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Projects: a roadmap of milestones, one project's state, the items to tick off.
+// ---------------------------------------------------------------------------
+
+type Grade = 'late' | 'soon' | 'open' | 'done'
+interface RoadmapItem {
+  id: number
+  title: string
+  project: string
+  colour: string
+  date: string | null
+  days: number | null
+  status: Grade
+}
+
+const GRADE_COLOUR: Record<Grade, string> = { late: 'var(--nd-bad)', soon: 'var(--nd-warn)', open: 'var(--nd-accent)', done: 'var(--nd-unknown)' }
+
+function daysText(t: TFunction, days: number | null): string {
+  if (days === null) return t('projects.noDate')
+  return days < 0 ? t('projects.daysLate', { count: -days }) : t('projects.daysLeft', { count: days })
+}
+
+/**
+ * Every milestone on one line from today to the end of the horizon. Late
+ * ones sit at the left edge, undated ones in a row under the line, so
+ * "what is due in the next weeks" is the middle of the picture.
+ */
+export function RoadmapCard({ data }: RenderProps) {
+  const { t } = useTranslation()
+  const items = (data?.items ?? []) as unknown as RoadmapItem[]
+  const meta = (data?.meta ?? {}) as { today?: string; weeks?: number; empty?: string }
+  const span = Number(meta.weeks ?? 4) * 7
+  if (!items.length) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+  const dated = items.filter((m) => m.date)
+  const undated = items.filter((m) => !m.date)
+  const at = (m: RoadmapItem) => Math.max(0, Math.min(100, ((m.days ?? 0) / span) * 100))
+  return (
+    <div className="flex h-full flex-col gap-2 p-3">
+      <div className="flex items-baseline justify-between text-xs text-muted">
+        <span>{tLabel(String(data?.primary?.label ?? ''))}</span>
+        <span className="num text-lg font-semibold text-ink">{String(data?.primary?.value ?? 0)}</span>
+      </div>
+      <div className="relative mt-4 h-px w-full bg-line-strong">
+        <span className="absolute -top-2 left-0 h-4 w-px bg-accent" aria-hidden="true" />
+        {dated.map((m) => (
+          <div key={m.id} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
+            <span className="block h-3 w-3 hex-clip" style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
+            <span className="roadmap-label absolute left-1/2 top-4 -translate-x-1/2 whitespace-nowrap text-[11px]">{m.title}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted">
+        {dated.map((m) => (
+          <span key={m.id} data-grade={m.status} className="flex items-center gap-1">
+            <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR[m.status] }} />
+            <span>{m.title}</span> · {daysText(t, m.days)}
+          </span>
+        ))}
+        {undated.map((m) => (
+          <span key={m.id} data-undated="" className="flex items-center gap-1 opacity-70">
+            <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR.open }} />
+            <span>{m.title}</span> · {t('projects.noDate')}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/** One project: its colour and state, the next milestone, how much is done, the repositories it reads. */
+export function ProjectCard({ data }: RenderProps) {
+  const { t } = useTranslation()
+  const meta = (data?.meta ?? {}) as { name?: string; colour?: string; status?: string; next?: RoadmapItem | null; empty?: string }
+  if (!meta.name) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+  const percent = Number(data?.primary?.value ?? 0)
+  const repos = (data?.items ?? []) as unknown as { repo: string; url: string }[]
+  return (
+    <div className="flex h-full flex-col gap-2 p-3">
+      <div className="flex items-center gap-2">
+        <span className="h-3 w-3 hex-clip" style={{ background: meta.colour || 'var(--nd-accent)' }} />
+        <span className="font-semibold">{meta.name}</span>
+        <span className="chip ml-auto">{t(`projects.status.${meta.status ?? 'active'}`)}</span>
+      </div>
+      {meta.next && (
+        <div className="text-xs text-muted" data-grade={meta.next.status}>
+          {t('projects.next')}: <span className="text-ink">{meta.next.title}</span> · {daysText(t, meta.next.days)}
+        </div>
+      )}
+      <div className="flex items-center gap-2 text-xs">
+        <div className="h-1.5 flex-1 overflow-hidden rounded bg-surface-hover" role="progressbar" aria-valuenow={percent} aria-valuemin={0} aria-valuemax={100}>
+          <div className="h-full bg-accent" style={{ width: `${percent}%` }} />
+        </div>
+        <span className="num">{percent}%</span>
+      </div>
+      <div className="flex flex-wrap gap-1 text-[11px] text-muted">
+        {(data?.secondary ?? []).map((s) => (
+          <span key={String(s.label)} className="chip">
+            {tLabel(String(s.label))} <b>{String(s.value)}</b>
+          </span>
+        ))}
+      </div>
+      {repos.length > 0 && (
+        <div className="mt-auto flex flex-wrap gap-1">
+          {repos.map((r) => (
+            <a key={r.repo} className="chip no-drag" href={r.url} target="_blank" rel="noreferrer">
+              {r.repo}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+type ItemStatus = 'todo' | 'doing' | 'done'
+const NEXT_STATUS: Record<ItemStatus, ItemStatus> = { todo: 'doing', doing: 'done', done: 'todo' }
+const ITEM_COLOUR: Record<ItemStatus, string> = { todo: 'var(--nd-unknown)', doing: 'var(--nd-accent)', done: 'var(--nd-ok)' }
+interface ProjectItemRow {
+  id: number
+  title: string
+  notes: string
+  status: ItemStatus
+  milestone: string
+  issue: string
+  url: string
+}
+
+/**
+ * The items of a project. The mark cycles the state, a drag reorders; both
+ * write through the projects API, and the card fetches itself again once
+ * the server has rescheduled it. Without the right to act the rows are
+ * drawn and nothing on them is a control.
+ */
+export function ItemsCard({ data, canAct }: RenderProps) {
+  const { t } = useTranslation()
+  const rows = (data?.items ?? []) as unknown as ProjectItemRow[]
+  const meta = (data?.meta ?? {}) as { project_id?: number; empty?: string; demo?: boolean }
+  const [dragging, setDragging] = useState<number | null>(null)
+  const [order, setOrder] = useState<number[] | null>(null)
+  const editable = Boolean(canAct) && !meta.demo
+  if (!rows.length) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+  const shown = order ? order.map((id) => rows.find((r) => r.id === id)).filter((r): r is ProjectItemRow => Boolean(r)) : rows
+  const cycle = (row: ProjectItemRow) => {
+    void patchItem(row.id, { status: NEXT_STATUS[row.status] }).catch(() => undefined)
+  }
+  const dropOn = (target: number) => {
+    if (dragging === null || dragging === target) return
+    const ids = shown.map((r) => r.id)
+    ids.splice(ids.indexOf(dragging), 1)
+    ids.splice(ids.indexOf(target), 0, dragging)
+    setOrder(ids)
+    setDragging(null)
+    if (meta.project_id) void orderItems(meta.project_id, ids).catch(() => setOrder(null))
+  }
+  const mark = (row: ProjectItemRow) => <span className="h-3 w-3 flex-none hex-clip" data-status={row.status} style={{ background: ITEM_COLOUR[row.status] }} />
+  return (
+    <ul className="flex h-full flex-col gap-1 overflow-auto p-2">
+      {shown.map((row) => (
+        <li
+          key={row.id}
+          className={`flex items-center gap-2 rounded px-1 py-0.5 text-sm ${row.status === 'done' ? 'opacity-60' : ''}`}
+          draggable={editable}
+          onDragStart={() => setDragging(row.id)}
+          onDragOver={(event) => editable && event.preventDefault()}
+          onDrop={() => dropOn(row.id)}
+        >
+          {editable ? (
+            <button type="button" className="no-drag flex min-w-0 items-center gap-2 text-left" aria-label={`${t(`projects.item.${row.status}`)}: ${row.title}`} onClick={() => cycle(row)}>
+              {mark(row)}
+              <span className={`truncate ${row.status === 'done' ? 'line-through' : ''}`}>{row.title}</span>
+            </button>
+          ) : (
+            <span className="flex min-w-0 items-center gap-2">
+              {mark(row)}
+              <span className={`truncate ${row.status === 'done' ? 'line-through' : ''}`}>{row.title}</span>
+            </span>
+          )}
+          {row.milestone && <span className="ml-auto truncate text-[11px] text-faint">{row.milestone}</span>}
+          {row.url && (
+            <a className="no-drag flex-none text-[11px] text-accent" href={row.url} target="_blank" rel="noreferrer">
+              #{row.issue.split('#')[1]}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
   )
 }

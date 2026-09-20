@@ -787,7 +787,15 @@
     "pickProjectFirst": "Pick the project first.",
     "none": "No projects yet. Create one under Settings, Projects.",
     "everyProject": "Every project",
-    "everyMilestone": "Every milestone"
+    "everyMilestone": "Every milestone",
+    "daysLeft_one": "in {{count}} day",
+    "daysLeft_other": "in {{count}} days",
+    "daysLate_one": "{{count}} day late",
+    "daysLate_other": "{{count}} days late",
+    "noDate": "no date",
+    "next": "Next",
+    "status": { "active": "Active", "paused": "Paused", "done": "Done" },
+    "item": { "todo": "To do", "doing": "Doing", "done": "Done" }
   },
   "status": {
     "ok": "Everything is fine",

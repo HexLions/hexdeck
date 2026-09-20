@@ -254,6 +254,13 @@ body {
   outline-offset: 2px;
 }
 
+/* The title under a milestone on the roadmap line. */
+.roadmap-label {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* A hexagon out of any box: avatars and the like. */
 .hex-clip {
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
