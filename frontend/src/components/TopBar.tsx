@@ -53,7 +53,7 @@ export function TopBar(props: Props) {
       <Link to="/" className="flex items-center gap-2 mr-1" aria-label="HexDeck">
         <LogoMark size={26} />
         <span className="font-semibold tracking-tight hidden lg:inline">
-          nex<span className="text-accent">deck</span>
+          Hex<span className="text-accent">Deck</span>
         </span>
       </Link>
       <span className="w-px h-5 bg-line-strong hidden lg:block" />

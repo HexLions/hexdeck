@@ -44,7 +44,7 @@ export function Logo({ size = 28 }: { size?: number }) {
     <span className="inline-flex items-center gap-2 select-none">
       <LogoMark size={size} />
       <span className="font-semibold tracking-tight" style={{ fontSize: size * 0.62 }}>
-        nex<span className="text-accent">deck</span>
+        Hex<span className="text-accent">Deck</span>
       </span>
     </span>
   )
