@@ -24,8 +24,8 @@ that reads or writes a layout takes the column count from the board:
 - `backend/app/services/boards.py`: `COLUMNS["lg"]` is replaced by the
   board's columns in `place_widget` and its helper class; `md` stays 8 and
   `sm` stays 4 (the phone stacks, the tablet layout is not read).
-- Board export writes `columns: N` at the top level of the YAML. Import and
-  provisioning read it; a file without the key is a 12-column file. A file
+- Board export already carries `board.settings`, so `settings.columns` travels
+  with the file; a file without the key is a 12-column file. A file
   whose layouts overflow its declared columns is clamped, as today.
 - `backend/app/services/demo_board.py` writes its layouts in 24 columns and
   sets `settings.columns = 24`.

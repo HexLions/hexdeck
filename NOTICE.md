@@ -31,3 +31,7 @@ Updated at every milestone.
   key-derivation salts) keep their nexdeck spelling so existing
   installations, backups and board files work unchanged. The adapters under
   `backend/app/adapters/` are as upstream has them.
+- **M2 — Fill the screen.** Columns (12, 24 or 36), maximum width and
+  fit-to-screen row height are settings of each board. No stored layout of
+  an existing board changes; new boards and the demo are created on 24
+  columns. Adapter sizes stay in twelfths and are scaled at the grid.

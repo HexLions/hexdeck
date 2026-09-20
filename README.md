@@ -26,6 +26,8 @@ HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezor
 
 Every card is a widget of one integration, dropped on a free grid and sized by hand. Nothing here is a fixed template.
 
+Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px as before, the whole screen, or a number), and whether the rows stretch so the page fills the window without scrolling. Boards from before keep their 12 columns and look exactly as they did.
+
 ### Media
 
 What is playing, what the library holds, what is on its way in, and the covers of what arrived last. And your own music: a player card plays the library of Plex, Jellyfin or Emby in the browser, keeps playing from board to board, and edits playlists on the server.

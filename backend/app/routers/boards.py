@@ -26,6 +26,7 @@ from ..deps import (
 )
 from ..models import Board, BoardShare, KioskToken, Page, Role, User, Widget, utcnow
 from ..schemas import (
+    BoardColumns,
     BoardCreate,
     BoardOrder,
     BoardPatch,
@@ -42,6 +43,7 @@ from ..services import boards as board_service
 from ..services import history
 from ..services.boards import COLUMNS, ImportError_, board_summary, board_view, slugify, unique_slug
 from ..services.collector import collector
+from ..services.layout import NEW_BOARD_COLUMNS, columns_of, normalise_settings, scale_layout
 from ..services.sse import board_topic, hub
 from .auth import cookie_secure
 
@@ -79,7 +81,8 @@ def list_boards(user: CurrentUser, db: DbSession, all_boards: bool = False) -> l
 @router.post("/boards", status_code=status.HTTP_201_CREATED, summary="Create a board")
 def create_board(body: BoardCreate, user: MemberUser, db: DbSession) -> dict:
     board = Board(slug=unique_slug(db, body.slug or body.name), name=body.name.strip(), icon=body.icon, owner_id=user.id,
-                  background={"kind": "bundled", "value": "aurora"}, position=(db.scalar(select(Board.position).order_by(Board.position.desc())) or 0) + 1)
+                  background={"kind": "bundled", "value": "aurora"}, settings={"columns": NEW_BOARD_COLUMNS},
+                  position=(db.scalar(select(Board.position).order_by(Board.position.desc())) or 0) + 1)
     db.add(board)
     db.flush()
     db.add(Page(board_id=board.id, name="Overview", slug="overview", position=0, layouts={key: [] for key in COLUMNS}))
@@ -172,7 +175,13 @@ def patch_board(slug: str, body: BoardPatch, user: CurrentUser, db: DbSession) -
     if body.background is not None:
         board.background = body.background
     if body.settings is not None:
-        board.settings = body.settings
+        # The columns only change through ``put_columns``, which rescales the
+        # layouts with them; set here they would strand every page in the old unit.
+        settings = normalise_settings(body.settings)
+        before = columns_of(board.settings)
+        if settings.get("columns", before) != before:
+            settings["columns"] = before
+        board.settings = settings
     if body.position is not None:
         board.position = body.position
     if body.in_menu is not None:
@@ -341,6 +350,32 @@ def put_layouts(page_id: int, body: LayoutsBody, user: CurrentUser, db: DbSessio
     db.commit()
     hub.publish(board_topic(board.id), "layout", {"page_id": page.id, "layouts": layouts, "version": page.layout_version})
     return {"layouts": layouts, "version": page.layout_version}
+
+
+@router.put("/boards/{slug}/columns", summary="Change the grid the board is arranged on")
+def put_columns(slug: str, body: BoardColumns, user: CurrentUser, db: DbSession) -> dict:
+    """Rescale every page to the new columns and remember them.
+
+    Growing is exact; shrinking rounds, which the interface says before it
+    asks. Every page's version counts up as it would on a save, so a second
+    browser in edit mode reloads instead of overwriting.
+    """
+    board, _ = require_board(db, slug, user, "edit")
+    before = columns_of(board.settings)
+    pages = db.scalars(select(Page).where(Page.board_id == board.id).order_by(Page.position)).all()
+    answer = []
+    for page in pages:
+        layouts = dict(page.layouts or {})
+        if before != body.columns:
+            layouts["lg"] = scale_layout(list(layouts.get("lg") or []), before, body.columns)
+        page.layouts = layouts
+        page.layout_version = (page.layout_version or 0) + 1
+        answer.append({"id": page.id, "layouts": layouts, "version": page.layout_version})
+    board.settings = {**(board.settings or {}), "columns": body.columns}
+    db.commit()
+    for entry in answer:
+        hub.publish(board_topic(board.id), "layout", {"page_id": entry["id"], "layouts": entry["layouts"], "version": entry["version"]})
+    return {"columns": body.columns, "pages": answer}
 
 
 # -- shares ------------------------------------------------------------------

@@ -42,7 +42,7 @@ export function PreviewPage() {
         user={{ display_name: 'Demo', username: 'demo', role: 'admin', avatar_url: null }}
       />
       <main className="max-w-[1480px] mx-auto px-3 sm:px-4 pt-4">
-        <BoardGrid widgets={DEMO_VIEWS} layouts={DEMO_LAYOUTS} data={DEMO_DATA} series={DEMO_SERIES} editing={editing} canAct onAction={noop} onRefresh={noop} onSettings={noop} onRemove={noop} />
+        <BoardGrid widgets={DEMO_VIEWS} layouts={DEMO_LAYOUTS} data={DEMO_DATA} series={DEMO_SERIES} editing={editing} columns={12} canAct onAction={noop} onRefresh={noop} onSettings={noop} onRemove={noop} />
       </main>
       <MobileTabBar
         boards={[

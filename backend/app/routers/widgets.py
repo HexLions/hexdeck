@@ -33,6 +33,7 @@ from ..services import history
 from ..services.boards import _validate_options, place_widget, remove_from_layouts, widget_view
 from ..services.collector import collector
 from ..services.hass_ws import hass_listener
+from ..services.layout import columns_of
 from ..services.notify import emit
 from ..services.sse import Recheck, board_topic, hub
 from ..services.state import live
@@ -87,7 +88,7 @@ def create_widget(page_id: int, body: WidgetCreate, user: CurrentUser, db: DbSes
     db.add(widget)
     db.flush()
     size = (body.w or widget_type.default_size[0], body.h or widget_type.default_size[1])
-    place_widget(page, widget.id, size, widget_type.min_size)
+    place_widget(page, widget.id, size, widget_type.min_size, columns_of(board.settings))
     health_service.ensure_check_for_widget(db, widget)
     db.commit()
     db.refresh(widget)
@@ -126,7 +127,7 @@ def patch_widget(widget_id: int, body: WidgetPatch, user: CurrentUser, db: DbSes
         remove_from_layouts(page, widget.id)
         widget.page_id = target.id
         adapter, kind = split_widget_kind(widget.kind)
-        place_widget(target, widget.id, adapter.widget(kind).default_size, adapter.widget(kind).min_size)
+        place_widget(target, widget.id, adapter.widget(kind).default_size, adapter.widget(kind).min_size, columns_of(board.settings))
     health_service.ensure_check_for_widget(db, widget)
     db.commit()
     db.refresh(widget)

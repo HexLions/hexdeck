@@ -183,7 +183,7 @@ export function AboutSettings() {
       <div className="flex flex-col items-center gap-2 py-6 text-center">
         <LogoMark size={44} />
         <h1 className="text-2xl font-bold tracking-tight">
-          nex<span className="text-accent">deck</span>
+          Hex<span className="text-accent">Deck</span>
         </h1>
         <p className="max-w-md text-sm leading-relaxed text-muted">{t('about.tagline')}</p>
       </div>

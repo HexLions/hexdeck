@@ -21,6 +21,7 @@ def test_every_card_of_the_demo_has_its_place_saved(client: TestClient) -> None:
     board = client.get("/api/v1/boards").json()[0]
     view = client.get(f"/api/v1/boards/{board['slug']}").json()
     assert [page["name"] for page in view["pages"]] == [name for name, _ in DEMO_PAGES]
+    assert view["settings"]["columns"] == 24
 
     checked = 0
     for page, (name, specs) in zip(view["pages"], DEMO_PAGES, strict=True):
@@ -30,7 +31,9 @@ def test_every_card_of_the_demo_has_its_place_saved(client: TestClient) -> None:
         for widget in page["widgets"]:
             item = saved.get(str(widget["id"]))
             assert item is not None, f"{name}: {widget['title']} has no saved place"
-            assert (item["x"], item["y"], item["w"], item["h"]) == described[(widget["kind"], widget["title"])]
+            # The specs are in twelfths; the demo is a new board and lies on 24 columns.
+            x, y, w, h = described[(widget["kind"], widget["title"])]
+            assert (item["x"], item["y"], item["w"], item["h"]) == (x * 2, y, w * 2, h)
             checked += 1
 
     # A demo without cards would pass the loop above without looking at anything.

@@ -4,7 +4,7 @@
  * never exceeds the columns of the form factor.
  */
 import type { LayoutItem, WidgetView } from '../lib/types'
-import { layoutFor } from './BoardGrid'
+import { layoutFor, stackedFor } from './BoardGrid'
 
 function widget(id: number, size: [number, number], min?: [number, number]): WidgetView {
   return {
@@ -178,5 +178,30 @@ describe('arranging with the keyboard', () => {
     )
     await userEvent.keyboard('{ArrowRight}')
     expect(saved).not.toHaveBeenCalled()
+  })
+})
+
+describe('layoutFor on a 24-column board', () => {
+  it('scales the adapter floor to the board columns', () => {
+    const [item] = layoutFor([{ i: '1', x: 0, y: 0, w: 2, h: 1 }], [widget(1, [4, 2], [2, 1])], 24)
+    expect([item.w, item.minW]).toEqual([4, 4])
+  })
+  it('gives a card with no saved place a default width in board columns', () => {
+    const [item] = layoutFor([], [widget(1, [4, 2], [2, 1])], 24)
+    expect(item.w).toBe(6)
+  })
+})
+
+describe('stackedFor', () => {
+  const wide = (w: number, x: number) => ({ i: String(x), x, y: 0, w, h: 1 })
+  it('pairs two small cards on a 12-column board as before', () => {
+    const stack = stackedFor([wide(2, 0), wide(2, 2)], 4)
+    expect(stack.map((s) => s.w)).toEqual([2, 2])
+  })
+  it('knows that four of twenty-four is as small as two of twelve', () => {
+    const stack = stackedFor([wide(4, 0), wide(4, 4)], 4, 24)
+    expect(stack.map((s) => s.w)).toEqual([2, 2])
+    const wideCards = stackedFor([wide(6, 0), wide(6, 6)], 4, 24)
+    expect(wideCards.map((s) => s.w)).toEqual([4, 4])
   })
 })

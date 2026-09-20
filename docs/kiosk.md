@@ -8,6 +8,8 @@ on the display. It looks like `https://deck.example.com/k/nk_…`. Once the
 display is in, its address shows `/k` alone: the token waits on the display
 itself, not in its browser history.
 
+A display is where a board should fill the screen. In the board settings under Look, turn on "Fit to screen" and set the width to "Whole screen": the rows stretch so the page fills the window without scrolling, and the kiosk shows the board the same way.
+
 | Setting | Effect |
 |---|---|
 | Cycle pages | Switches to the next page every so many seconds. `0` stays on one page. |

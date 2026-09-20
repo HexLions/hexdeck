@@ -24,6 +24,7 @@ from ..services.boards import place_widget, widget_view
 from ..services.collector import collector
 from ..services.icons import guess_from_image
 from ..services.integrations import resolve_config
+from ..services.layout import columns_of
 from ..services.sse import board_topic, hub
 
 router = APIRouter(prefix="/api/v1/discovery", tags=["discovery"])
@@ -105,7 +106,7 @@ async def apply_suggestions(body: ApplyBody, user: CurrentUser, db: DbSession) -
                         options={"description": entry["description"], "check": bool(entry["url"])})
         db.add(widget)
         db.flush()
-        place_widget(page, widget.id, (2, 1), (1, 1))
+        place_widget(page, widget.id, (2, 1), (1, 1), columns_of(board.settings))
         health_service.ensure_check_for_widget(db, widget)
         created.append(widget)
     db.commit()

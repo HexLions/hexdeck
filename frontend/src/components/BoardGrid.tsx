@@ -1,9 +1,10 @@
-import { memo, useCallback, useMemo, useState, type KeyboardEvent } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type RefObject } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Responsive, WidthProvider, type Layout, type Layouts } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
+import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns } from '../lib/layout'
 import type { Action, Breakpoint, LayoutItem, WidgetData, WidgetView } from '../lib/types'
 import { WidgetCard } from './WidgetCard'
 
@@ -25,10 +26,17 @@ const ResponsiveGrid = WidthProvider(Responsive)
  * server still keeps are not read.
  */
 export const BREAKPOINTS = { lg: 700, sm: 0 }
-export const COLUMNS = { lg: 12, sm: 4 }
-type Screen = keyof typeof COLUMNS
-export const ROW_HEIGHT = 68
+/** The phone's columns; the wide board's come from the board itself, see `columnsOf`. */
+export const PHONE_COLUMNS = 4
+type Screen = 'lg' | 'sm'
 export const GAP = 12
+/**
+ * What lies under the last row: the trailing margin react-grid-layout adds
+ * below it, and the page's own bottom padding. Measured on 20.09.2026: with
+ * only the padding counted, fit-to-screen overshot by the margin and the
+ * board scrolled by ten pixels.
+ */
+const BOTTOM_PADDING = 24 + GAP
 
 interface Props {
   widgets: WidgetView[]
@@ -45,6 +53,10 @@ interface Props {
   compact?: boolean
   /** On, every card moves up to fill space. Off, cards stay where they are dropped and gaps are allowed. */
   autoCompact?: boolean
+  /** The columns of the wide board. Twelve for a board from before. */
+  columns?: Columns
+  /** On, the rows stretch or shrink so the page fills the window without scrolling. */
+  fitScreen?: boolean
 }
 
 /** One press of an arrow key: one cell, or one cell of size with Shift. */
@@ -70,7 +82,8 @@ function plain({ i, x, y, w, h }: Layout | LayoutItem): LayoutItem {
 
 /** The board: one arrangement, drawn as it is on a wide screen and stacked on a narrow one. */
 export function BoardGrid(props: Props) {
-  const { widgets, layouts, data, series, editing, canAct, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact } = props
+  const { widgets, layouts, data, series, editing, canAct, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact, fitScreen } = props
+  const columns = props.columns ?? 12
   const { t } = useTranslation()
   // The grid draws at the width WidthProvider assumes before it has measured,
   // which is a wide one; a phone reports itself right after.
@@ -78,8 +91,11 @@ export function BoardGrid(props: Props) {
   // ⚠️ Rebuilt only when the arrangement or the cards change. Without the memo
   // this ran on every widget tick, once or twice a second on a board of
   // thirty, and handed react-grid-layout a new object identity each time.
-  const wide = useMemo(() => layoutFor(layouts.lg, widgets, COLUMNS.lg), [layouts.lg, widgets])
-  const gridLayouts: Layouts = useMemo(() => ({ lg: wide, sm: stackedFor(wide, COLUMNS.sm) }), [wide])
+  const wide = useMemo(() => layoutFor(layouts.lg, widgets, columns), [layouts.lg, widgets, columns])
+  const gridLayouts: Layouts = useMemo(() => ({ lg: wide, sm: stackedFor(wide, PHONE_COLUMNS, columns) }), [wide, columns])
+  const cols = useMemo(() => ({ lg: columns, sm: PHONE_COLUMNS }), [columns])
+  const host = useRef<HTMLDivElement>(null)
+  const rowHeight = useFitRowHeight(host, Boolean(fitScreen) && screen === 'lg', rowsOf(wide), compact ? ROW_HEIGHT_COMPACT : ROW_HEIGHT)
   /**
    * Move or resize the focused card with the arrow keys.
    *
@@ -94,7 +110,7 @@ export function BoardGrid(props: Props) {
     event.preventDefault()
     const item = wide.find((one) => one.i === String(widget.id))
     if (!item) return
-    const next = moved(item as LayoutItem, event.key, event.shiftKey, COLUMNS.lg, floorOf(widget, COLUMNS.lg))
+    const next = moved(item as LayoutItem, event.key, event.shiftKey, columns, floorOf(widget, columns))
     if (!next) return
     onLayoutChange('lg', wide.map((one) => plain(one.i === next.i ? next : one)))
   }
@@ -107,12 +123,13 @@ export function BoardGrid(props: Props) {
           {t('board.stackedHint')}
         </p>
       )}
+      <div ref={host}>
       <ResponsiveGrid
         className={`board ${editing ? 'board-editing' : ''}`}
         layouts={gridLayouts}
         breakpoints={BREAKPOINTS}
-        cols={COLUMNS}
-        rowHeight={compact ? 60 : ROW_HEIGHT}
+        cols={cols}
+        rowHeight={rowHeight}
         margin={[GAP, GAP]}
         containerPadding={[0, 0]}
         isDraggable={Boolean(editing)}
@@ -172,6 +189,7 @@ export function BoardGrid(props: Props) {
           </div>
         ))}
       </ResponsiveGrid>
+      </div>
     </>
   )
 }
@@ -242,7 +260,7 @@ export function layoutFor(layout: LayoutItem[] | undefined, widgets: WidgetView[
       result.push({ ...item, w: Math.max(item.w, minW), h: Math.max(item.h, minH), minW, minH })
       continue
     }
-    const w = Math.min(cols, Math.max(3, minW))
+    const w = Math.min(cols, Math.max(3 * unitOf(cols), minW))
     if (x + w > cols) {
       x = 0
       y += 2
@@ -267,11 +285,11 @@ export function layoutFor(layout: LayoutItem[] | undefined, widgets: WidgetView[
  * Nothing in the stack can be dragged or resized. Its order is the wide
  * board's, and a drag here would have had nowhere to be kept.
  */
-export function stackedFor(wide: Layout[], cols: number): Layout[] {
+export function stackedFor(wide: Layout[], cols: number, wideCols = 12): Layout[] {
   const half = Math.floor(cols / 2)
   const ordered = [...wide].sort((a, b) => a.y - b.y || a.x - b.x)
   const tall = (item: Layout) => Math.max(item.h, item.minH ?? 1)
-  const small = (item: Layout) => item.w <= 2
+  const small = (item: Layout) => item.w <= 2 * unitOf(wideCols)
   const stacked: Layout[] = []
   let y = 0
   for (let index = 0; index < ordered.length; index += 1) {
@@ -302,6 +320,43 @@ function sameArrangement(one: Layout[], other: Layout[]): boolean {
 
 /** The smallest the adapter says this card is still usable at. */
 function floorOf(widget: WidgetView, cols: number): [number, number] {
-  const [w, h] = widget.min_size ?? widget.default_size ?? [1, 1]
+  const [w, h] = scaleFloor(widget.min_size ?? widget.default_size ?? [1, 1], cols)
   return [Math.max(1, Math.min(cols, w)), Math.max(1, h)]
+}
+
+/**
+ * The row height that fills the window, or the fixed one.
+ *
+ * Measures from the top of the grid to the bottom of the window, minus what
+ * the page leaves under it, and again whenever the window changes size. One
+ * animation frame of debounce: a resize fires dozens of times a second.
+ */
+function useFitRowHeight(host: RefObject<HTMLDivElement | null>, enabled: boolean, rows: number, fixed: number): number {
+  const [height, setHeight] = useState(fixed)
+  useEffect(() => {
+    if (!enabled) {
+      setHeight(fixed)
+      return
+    }
+    let frame = 0
+    const measure = () => {
+      frame = 0
+      const top = host.current?.getBoundingClientRect().top ?? 0
+      setHeight(rowHeightFor(window.innerHeight - top - BOTTOM_PADDING, rows, GAP))
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure)
+    }
+    measure()
+    window.addEventListener('resize', schedule)
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(schedule)
+    const parent = host.current?.parentElement
+    if (parent) observer?.observe(parent)
+    return () => {
+      window.removeEventListener('resize', schedule)
+      observer?.disconnect()
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [host, enabled, rows, fixed])
+  return height
 }
