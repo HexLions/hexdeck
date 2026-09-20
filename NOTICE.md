@@ -42,3 +42,5 @@ Updated at every milestone.
   "HexDeck blue" as the default accent preset. Components, layout and the
   operator's own accent and stylesheet are unchanged; nexdeck's cyan stays
   as a preset.
+- **Italian.** The interface, the adapters' texts and the cards' labels in
+  Italian, next to English and German. Release notes stay in English.

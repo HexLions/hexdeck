@@ -11,6 +11,7 @@ import json
 import re
 from pathlib import Path
 
+import pytest
 from fastapi.routing import APIRoute
 
 from app import deps
@@ -337,6 +338,8 @@ def test_error_details_carry_code_and_message() -> None:
 # -- texts the frontend translates by their English wording --------------------
 
 GERMAN_TEXTS = ROOT / "frontend" / "src" / "i18n" / "texts.de.json"
+#: Every language the interface translates the server's texts into.
+TEXT_LANGUAGES = ("de", "it")
 ADAPTERS = BACKEND / "adapters"
 LABEL_LITERAL = re.compile(r'"(?:label|subtitle)": "([^"]+)"')
 ACTION_LABEL = re.compile(r'Action\([^)]*?label="([^"]+)"')
@@ -344,8 +347,8 @@ ACTION_LABEL = re.compile(r'Action\([^)]*?label="([^"]+)"')
 ASK_LABEL = re.compile(r'Ask\([^)]*?label="([^"]+)"')
 
 
-def _german_texts() -> dict[str, dict[str, str]]:
-    return json.loads(GERMAN_TEXTS.read_text(encoding="utf-8"))
+def _texts_in(language: str) -> dict[str, dict[str, str]]:
+    return json.loads((GERMAN_TEXTS.parent / f"texts.{language}.json").read_text(encoding="utf-8"))
 
 
 def _looks_like_data(text: str) -> bool:
@@ -357,10 +360,11 @@ def _looks_like_data(text: str) -> bool:
     return text.islower() and " " not in text and len(text) <= 5
 
 
-def test_every_adapter_text_has_a_german_translation() -> None:
+@pytest.mark.parametrize("language", TEXT_LANGUAGES)
+def test_every_adapter_text_has_a_translation(language: str) -> None:
     """Field labels, help texts, widget names and descriptions are English in the
     adapters; the interface translates them by their English text."""
-    german = _german_texts()["adapter"]
+    german = _texts_in(language)["adapter"]
     missing: set[str] = set()
     checked = 0
     for adapter in all_adapters():
@@ -377,7 +381,7 @@ def test_every_adapter_text_has_a_german_translation() -> None:
                 if text not in german:
                     missing.add(text)
     assert checked > 200
-    assert not missing, f"adapter texts without a German entry: {sorted(missing)}"
+    assert not missing, f"adapter texts without a {language} entry: {sorted(missing)}"
 
 
 def test_every_drawn_symbol_exists_in_the_frontend() -> None:
@@ -421,7 +425,8 @@ def test_every_symbol_on_a_button_exists_in_the_frontend() -> None:
     assert missing == [], "symbols on buttons that the frontend draws as a grey box: " + ", ".join(missing)
 
 
-def test_every_channel_text_has_a_german_translation() -> None:
+@pytest.mark.parametrize("language", TEXT_LANGUAGES)
+def test_every_channel_text_has_a_translation(language: str) -> None:
     """The notification channels are written in English like the adapters, and
     the settings page translates them the same way. Without this guard a new
     field would stand there in English in a German interface, which is exactly
@@ -429,7 +434,7 @@ def test_every_channel_text_has_a_german_translation() -> None:
     from app.services.channels import KINDS
     from app.services.notify import EVENTS
 
-    german = _german_texts()["adapter"]
+    german = _texts_in(language)["adapter"]
     missing: set[str] = set()
     checked = 0
     texts: list[str] = [kind.help for kind in KINDS.values()]
@@ -443,13 +448,14 @@ def test_every_channel_text_has_a_german_translation() -> None:
             if text not in german:
                 missing.add(text)
     assert checked > 25
-    assert not missing, f"channel texts without a German entry: {sorted(missing)}"
+    assert not missing, f"channel texts without a {language} entry: {sorted(missing)}"
 
 
-def test_every_data_label_has_a_german_translation() -> None:
+@pytest.mark.parametrize("language", TEXT_LANGUAGES)
+def test_every_data_label_has_a_translation(language: str) -> None:
     """Labels of values, chips, rows and actions come from the adapters as English
     words; the cards translate them by text."""
-    texts = _german_texts()
+    texts = _texts_in(language)
     # A word that names a widget may also label a value; the frontend falls back the same way.
     german = {**texts["adapter"], **texts["labels"]}
     missing: set[str] = set()
@@ -468,11 +474,12 @@ def test_every_data_label_has_a_german_translation() -> None:
         if text not in german:
             missing.add(text)
     assert checked > 80
-    assert not missing, f"data labels without a German entry: {sorted(missing)}"
+    assert not missing, f"data labels without a {language} entry: {sorted(missing)}"
 
 
-def test_german_texts_are_complete_and_clean() -> None:
-    texts = _german_texts()
+@pytest.mark.parametrize("language", TEXT_LANGUAGES)
+def test_translated_texts_are_complete_and_clean(language: str) -> None:
+    texts = _texts_in(language)
     assert len(texts["adapter"]) > 200 and len(texts["labels"]) > 80
     for section in ("adapter", "labels"):
         for english, german in texts[section].items():

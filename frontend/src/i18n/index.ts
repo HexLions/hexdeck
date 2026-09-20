@@ -9,14 +9,16 @@ import { registerTexts, type TextBundle } from './texts'
  * Adding a language means adding two JSON files here and one line in LANGUAGES:
  * the interface texts, and the server texts translated by their English wording.
  */
-export const LANGUAGES: Record<string, string> = { en: 'English', de: 'Deutsch' }
+export const LANGUAGES: Record<string, string> = { en: 'English', de: 'Deutsch', it: 'Italiano' }
 
 const loaders: Record<string, () => Promise<{ default: Record<string, unknown> }>> = {
   de: () => import('./de.json'),
+  it: () => import('./it.json'),
 }
 
 const textLoaders: Record<string, () => Promise<{ default: unknown }>> = {
   de: () => import('./texts.de.json'),
+  it: () => import('./texts.it.json'),
 }
 
 void i18next.use(initReactI18next).init({
@@ -46,9 +48,15 @@ export async function setLanguage(code: string): Promise<void> {
   }
 }
 
+/** The browser's language when it is one HexDeck speaks, else English. */
+function browserLanguage(): string {
+  const code = navigator.language.slice(0, 2).toLowerCase()
+  return code in LANGUAGES ? code : 'en'
+}
+
 export function storedLanguage(): string {
   try {
-    return localStorage.getItem('nexdeck.language') || (navigator.language.startsWith('de') ? 'de' : 'en')
+    return localStorage.getItem('nexdeck.language') || browserLanguage()
   } catch {
     return 'en'
   }
