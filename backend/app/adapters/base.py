@@ -130,6 +130,7 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "roadmap": (4, 2),
     "project": (3, 2),
     "items": (3, 2),
+    "notepad": (2, 2),
 }
 #: For a renderer nobody listed. Two by two is the smallest that holds a title
 #: and a line under it without one sitting on the other.

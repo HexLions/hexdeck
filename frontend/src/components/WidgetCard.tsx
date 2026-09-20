@@ -15,6 +15,7 @@ interface Props {
   series?: Record<string, number[]>
   editing?: boolean
   canAct?: boolean
+  canEdit?: boolean
   onAction?: (action: Action) => void
   onRefresh?: () => void
   onSettings?: () => void
@@ -24,7 +25,7 @@ interface Props {
 const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], .no-click'
 
 /** The frame every widget shares: header, floating controls, body, error strip. */
-export function WidgetCard({ widget, data, series, editing, canAct, onAction, onRefresh, onSettings, onRemove }: Props) {
+export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove }: Props) {
   const { t, i18n } = useTranslation()
   // A failed fetch is an error state of its own: red, with the server's reason.
   // The server names the reason by code; other languages translate the code,
@@ -121,7 +122,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, onAction, on
       {/* The controls float over the corner: always while editing, on hover otherwise. */}
       {showControls && <div className="card-controls glass">{controls}</div>}
       <div className="flex-1 min-h-0 flex flex-col">
-        {renderWidget({ widget, data, series, canAct, onAction, link, editing })}
+        {renderWidget({ widget, data, series, canAct, canEdit, onAction, link, editing })}
       </div>
       {/* The failure lies over the body: the layout underneath stays as it is, the
           last good values show through, and the red is impossible to miss. */}

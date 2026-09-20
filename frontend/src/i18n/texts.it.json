@@ -1229,7 +1229,13 @@
     "The items of a project, to tick off and reorder on the board.": "Gli item di un progetto, da spuntare e riordinare sulla board.",
     "Milestone": "Milestone",
     "Empty shows every item.": "Vuoto mostra tutti gli item.",
-    "Hide finished items": "Nascondi gli item conclusi"
+    "Hide finished items": "Nascondi gli item conclusi",
+    "Notepad": "Blocco note",
+    "A card to type into, right on the board. Plain text, saved as you write.": "Una card in cui scrivere, direttamente sulla board. Testo semplice, salvato mentre scrivi.",
+    "Write on the board. Whoever may edit the board may write; everyone else reads.": "Scrivi sulla board. Chi può modificare la board scrive; tutti gli altri leggono.",
+    "Typed into the card itself; this is the same text.": "Digitato nella card stessa; questo è lo stesso testo.",
+    "Fixed-width type": "Carattere a larghezza fissa",
+    "For lists, commands and anything that lines up.": "Per liste, comandi e tutto ciò che deve allinearsi."
   },
   "labels": {
     "Jobs": "Job",
@@ -1896,6 +1902,7 @@
     "Nothing to do": "Niente da fare",
     "Pick a project in the card settings": "Scegli un progetto nelle impostazioni della card",
     "No such card": "Nessuna card di questo tipo",
-    "Projects live in this installation.": "I progetti vivono in questa installazione."
+    "Projects live in this installation.": "I progetti vivono in questa installazione.",
+    "The notepad lives on the board.": "Il blocco note vive sulla board."
   }
 }

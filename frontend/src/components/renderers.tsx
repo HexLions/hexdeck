@@ -25,11 +25,11 @@ import {
   Sun,
   type LucideProps,
 } from 'lucide-react'
-import { lazy, Suspense, useEffect, useMemo, useState, type ComponentType, type ReactNode } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ComponentType, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 
-import { fileUrl, mediaUrl } from '../api/client'
+import { fileUrl, mediaUrl, patch } from '../api/client'
 import { orderItems, patchItem } from '../api/projects'
 import { tLabel } from '../i18n/texts'
 import { formatValue, timeAgo } from '../lib/format'
@@ -49,6 +49,8 @@ export interface RenderProps {
   data: WidgetData | undefined
   series?: Record<string, number[]>
   canAct?: boolean
+  /** Whether the viewer may change the board, for cards that write into their own settings. */
+  canEdit?: boolean
   onAction?: (action: Action) => void
   link?: string
   editing?: boolean
@@ -85,6 +87,7 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   roadmap: RoadmapCard,
   project: ProjectCard,
   items: ItemsCard,
+  notepad: NotepadCard,
   ring: RingCard,
   app: AppTile,
   button: ButtonCard,
@@ -1504,5 +1507,60 @@ export function ItemsCard({ data, canAct }: RenderProps) {
         </li>
       ))}
     </ul>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Notepad: a card typed into on the board, kept in the card's own options.
+// ---------------------------------------------------------------------------
+
+/**
+ * The text lives in the widget's options, so a save is an ordinary change
+ * of the card's settings and needs the right to edit the board. While the
+ * card has the focus the local text wins; what the server sends back lands
+ * only once the writer has left, so a save never overwrites a keystroke.
+ */
+export function NotepadCard({ widget, data, canEdit }: RenderProps) {
+  const { t } = useTranslation()
+  const meta = (data?.meta ?? {}) as { content?: string; mono?: boolean; demo?: boolean }
+  const served = String(meta.content ?? widget.options?.content ?? '')
+  const [text, setText] = useState(served)
+  const [dirty, setDirty] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const timer = useRef<number | undefined>(undefined)
+  useEffect(() => {
+    if (!dirty) setText(served)
+  }, [served, dirty])
+  const save = (content: string) => {
+    window.clearTimeout(timer.current)
+    void patch(`/widgets/${widget.id}`, { options: { ...(widget.options ?? {}), content } })
+      .then(() => {
+        setDirty(false)
+        setFailed(false)
+      })
+      .catch(() => setFailed(true))
+  }
+  const change = (content: string) => {
+    setText(content)
+    setDirty(true)
+    window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => save(content), 800)
+  }
+  const font = meta.mono ? 'font-mono' : ''
+  if (!canEdit || meta.demo) {
+    return <pre className={`h-full overflow-auto whitespace-pre-wrap p-3 text-sm ${meta.mono ? '' : 'font-sans'}`}>{text || t('notepad.empty')}</pre>
+  }
+  return (
+    <div className="relative h-full">
+      <textarea
+        className={`no-drag h-full w-full resize-none bg-transparent p-3 text-sm outline-none ${font}`}
+        aria-label={widget.title || t('notepad.title')}
+        placeholder={t('notepad.placeholder')}
+        value={text}
+        onChange={(event) => change(event.target.value)}
+        onBlur={() => dirty && save(text)}
+      />
+      {failed && <span className="absolute bottom-1 right-2 text-[11px] text-bad">{t('notepad.failed')}</span>}
+    </div>
   )
 }

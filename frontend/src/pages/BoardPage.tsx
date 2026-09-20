@@ -401,6 +401,7 @@ export function BoardPage() {
           series={liveSeries}
           editing={editing}
           canAct={canAct}
+          canEdit={canEdit}
           autoCompact={Boolean(settings.compact)}
           // ⚠️ From the saved settings, never the preview: the sheet previews its
           // settings live, and columns that changed before the rescaled layouts

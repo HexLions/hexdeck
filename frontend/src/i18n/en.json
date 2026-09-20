@@ -831,6 +831,12 @@
     },
     "milestone": { "open": "Open", "done": "Done" }
   },
+  "notepad": {
+    "title": "Notepad",
+    "placeholder": "Write here…",
+    "empty": "Nothing written yet.",
+    "failed": "Not saved"
+  },
   "status": {
     "ok": "Everything is fine",
     "warn": "Warning",

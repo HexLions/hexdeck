@@ -831,6 +831,12 @@
     },
     "milestone": { "open": "Offen", "done": "Erledigt" }
   },
+  "notepad": {
+    "title": "Notizblock",
+    "placeholder": "Hier schreiben…",
+    "empty": "Noch nichts geschrieben.",
+    "failed": "Nicht gespeichert"
+  },
   "status": {
     "ok": "Alles in Ordnung",
     "warn": "Warnung",

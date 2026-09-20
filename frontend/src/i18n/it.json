@@ -831,6 +831,12 @@
     },
     "milestone": { "open": "Aperta", "done": "Conclusa" }
   },
+  "notepad": {
+    "title": "Blocco note",
+    "placeholder": "Scrivi qui…",
+    "empty": "Ancora niente scritto.",
+    "failed": "Non salvato"
+  },
   "status": {
     "ok": "Tutto a posto",
     "warn": "Avviso",
