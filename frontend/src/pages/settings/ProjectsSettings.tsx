@@ -5,7 +5,7 @@
  * again, so the page never shows a state the server does not have.
  */
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, CalendarClock, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -296,6 +296,7 @@ function ItemRow({ item, project, first, last, run }: { item: ItemView; project:
   const { t } = useTranslation()
   const [title, setTitle] = useState(item.title)
   const [issue, setIssue] = useState(item.issue)
+  const [every, setEvery] = useState(String(item.repeat_days ?? 0))
   const move = (direction: -1 | 1) => {
     const ids = project.items.map((i) => i.id)
     const index = ids.indexOf(item.id)
@@ -305,7 +306,7 @@ function ItemRow({ item, project, first, last, run }: { item: ItemView; project:
     void run(() => orderItems(project.id, ids))
   }
   return (
-    <li className="grid items-center gap-2 rounded-xl border border-line p-2 text-sm sm:grid-cols-[auto_1fr_auto_auto_auto_auto]">
+    <li className="grid items-center gap-2 rounded-xl border border-line p-2 text-sm sm:grid-cols-[auto_1fr_auto_auto]">
       <select className="input" aria-label={t('projects.page.status')} value={item.status} onChange={(e) => void run(() => patchItem(item.id, { status: e.target.value as ItemStatus }))}>
         {ITEM_STATUSES.map((s) => (
           <option key={s} value={s}>{t(`projects.item.${s}`)}</option>
@@ -337,13 +338,42 @@ function ItemRow({ item, project, first, last, run }: { item: ItemView; project:
         onChange={(e) => setIssue(e.target.value)}
         onBlur={() => issue !== item.issue && void run(() => patchItem(item.id, { issue: issue.trim() }))}
       />
-      <span className="flex gap-1">
-        <button className="btn btn-icon h-7 w-7" disabled={first} onClick={() => move(-1)} aria-label={t('projects.page.moveUp')}><ArrowUp size={14} /></button>
-        <button className="btn btn-icon h-7 w-7" disabled={last} onClick={() => move(1)} aria-label={t('projects.page.moveDown')}><ArrowDown size={14} /></button>
-      </span>
-      <button className="btn btn-icon h-7 w-7 btn-danger" onClick={() => void run(() => deleteItem(item.id))} aria-label={t('common.delete')}>
-        <Trash2 size={14} />
-      </button>
+      {/* When it is due and how often it comes back, with the row's buttons at the end. */}
+      <div className="flex flex-wrap items-center gap-2 text-xs text-muted sm:col-span-4">
+        <label className="flex items-center gap-1" htmlFor={`i-due-${item.id}`}>
+          <CalendarClock size={14} />
+          {t('projects.page.due')}
+        </label>
+        <input
+          id={`i-due-${item.id}`}
+          className="input h-8 w-36 text-xs"
+          type="date"
+          value={item.due_on ?? ''}
+          onChange={(e) => void run(() => (e.target.value ? patchItem(item.id, { due_on: e.target.value }) : patchItem(item.id, { clear_due: true })))}
+        />
+        <label className="ml-2" htmlFor={`i-every-${item.id}`} title={t('projects.page.repeatHelp')}>
+          {t('projects.page.repeat')}
+        </label>
+        <input
+          id={`i-every-${item.id}`}
+          className="input h-8 w-20 text-xs"
+          type="number"
+          min={0}
+          title={t('projects.page.repeatHelp')}
+          value={every}
+          onChange={(e) => setEvery(e.target.value)}
+          onBlur={() => Number(every) !== item.repeat_days && void run(() => patchItem(item.id, { repeat_days: Math.max(0, Number(every) || 0) }))}
+        />
+        <span>{t('projects.page.days')}</span>
+        {item.last_done && <span className="ml-2">{t('projects.page.lastDone', { date: item.last_done })}</span>}
+        <span className="ml-auto flex gap-1">
+          <button className="btn btn-icon h-7 w-7" disabled={first} onClick={() => move(-1)} aria-label={t('projects.page.moveUp')}><ArrowUp size={14} /></button>
+          <button className="btn btn-icon h-7 w-7" disabled={last} onClick={() => move(1)} aria-label={t('projects.page.moveDown')}><ArrowDown size={14} /></button>
+          <button className="btn btn-icon h-7 w-7 btn-danger" onClick={() => void run(() => deleteItem(item.id))} aria-label={t('common.delete')}>
+            <Trash2 size={14} />
+          </button>
+        </span>
+      </div>
     </li>
   )
 }

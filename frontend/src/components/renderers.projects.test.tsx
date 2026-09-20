@@ -38,6 +38,7 @@ const roadmap = {
     { id: 2, title: 'Soon', project: 'HexDeck', colour: '#3aa0ff', date: '2026-09-30', days: 10, status: 'soon' },
     { id: 3, title: 'Far', project: 'Garden', colour: '', date: '2026-11-19', days: 60, status: 'open' },
     { id: 4, title: 'Someday', project: 'HexDeck', colour: '', date: null, days: null, status: 'open' },
+    { id: 7, kind: 'item', title: 'Test the backups', project: 'Homelab', colour: '', date: '2026-09-20', days: 0, status: 'soon', repeat_days: 30 },
   ],
   meta: { today: '2026-09-20', weeks: 4, projects: [{ id: 5, name: 'HexDeck' }, { id: 6, name: 'Garden' }] },
 } as unknown as WidgetData
@@ -62,6 +63,17 @@ describe('RoadmapCard', () => {
     await waitFor(() => expect(calls.post).toEqual([['/projects/6/milestones', { title: 'Ship it', target_date: '2026-10-15' }]]))
     fireEvent.click(screen.getByRole('button', { name: /Mark as done: Soon/ }))
     await waitFor(() => expect(calls.patch).toEqual([['/milestones/2', { status: 'done' }]]))
+  })
+
+  it('lists a dated item among the milestones and ticks a recurring one for now', async () => {
+    calls.patch.length = 0
+    render(<RoadmapCard widget={widget} data={roadmap} canAct />)
+    const legend = screen.getByRole('button', { name: 'Done for now: Test the backups' })
+    expect(legend.getAttribute('data-kind')).toBe('item')
+    expect(legend.textContent).toContain('today')
+    expect(legend.textContent).toContain('every 30 days')
+    fireEvent.click(legend)
+    await waitFor(() => expect(calls.patch).toEqual([['/items/7', { status: 'done' }]]))
   })
 })
 
@@ -107,6 +119,7 @@ describe('ItemsCard', () => {
       { id: 1, title: 'Roadmap card', notes: '', status: 'done', milestone: 'M3', issue: '', url: '' },
       { id: 2, title: 'Items card', notes: '', status: 'doing', milestone: 'M3', issue: 'HexLions/hexdeck#7', url: 'https://github.com/HexLions/hexdeck/issues/7' },
       { id: 3, title: 'Docs', notes: '', status: 'todo', milestone: '', issue: '', url: '' },
+      { id: 4, title: 'Test the backups', notes: '', status: 'todo', milestone: '', issue: '', url: '', due_on: '2026-09-18', days: -2, repeat_days: 30, due: 'late' },
     ],
     meta: { project_id: 5, name: 'HexDeck' },
   } as unknown as WidgetData
@@ -144,12 +157,31 @@ describe('ItemsCard', () => {
     fireEvent.dragStart(rows[2])
     fireEvent.dragOver(rows[0])
     fireEvent.drop(rows[0])
-    await waitFor(() => expect(calls.put).toEqual([['/projects/5/items/order', { ids: [3, 1, 2] }]]))
+    await waitFor(() => expect(calls.put).toEqual([['/projects/5/items/order', { ids: [3, 1, 2, 4] }]]))
+  })
+
+  it('says when an item is due and lets the viewer who may act change the date and the interval', async () => {
+    render(<ItemsCard widget={widget} data={data} canAct />)
+    const due = screen.getByRole('button', { name: 'Due: Test the backups' })
+    expect(due.textContent).toContain('2 days late')
+    expect(due.textContent).toContain('every 30 days')
+    expect(due.querySelector('[data-due]')?.getAttribute('data-due')).toBe('late')
+    fireEvent.click(due)
+    fireEvent.change(screen.getByLabelText('Due'), { target: { value: '2026-10-01' } })
+    fireEvent.change(screen.getByLabelText('Every N days, 0 for once'), { target: { value: '7' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }))
+    await waitFor(() => expect(calls.patch).toEqual([['/items/4', { due_on: '2026-10-01', repeat_days: 7 }]]))
+    // A row without a date offers to set one, and an emptied date clears it.
+    fireEvent.click(screen.getByRole('button', { name: 'Set a due date: Docs' }))
+    fireEvent.change(screen.getByLabelText('Due'), { target: { value: '2026-10-02' } })
+    fireEvent.keyDown(screen.getByLabelText('Due'), { key: 'Enter' })
+    await waitFor(() => expect(calls.patch[1]).toEqual(['/items/3', { due_on: '2026-10-02' }]))
   })
 
   it('draws the marks inert without the right to act', () => {
     render(<ItemsCard widget={widget} data={data} canAct={false} />)
     expect(screen.queryByRole('button')).toBeNull()
+    expect(screen.getByText(/2 days late/).getAttribute('data-due')).toBe('late')
     expect(screen.getByRole('link', { name: /#7/ })).toHaveAttribute('href', 'https://github.com/HexLions/hexdeck/issues/7')
   })
 })

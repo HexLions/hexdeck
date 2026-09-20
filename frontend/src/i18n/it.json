@@ -796,6 +796,7 @@
     "daysLate_one": "{{count}} giorno di ritardo",
     "daysLate_other": "{{count}} giorni di ritardo",
     "noDate": "senza data",
+    "today": "oggi",
     "next": "Prossima",
     "status": { "active": "Attivo", "paused": "In pausa", "done": "Concluso" },
     "item": { "todo": "Da fare", "doing": "In corso", "done": "Fatto" },
@@ -810,7 +811,13 @@
       "reopen": "Riapri",
       "newItem": "Aggiungi un item",
       "addItem": "Aggiungi item",
-      "rename": "Clicca per rinominare"
+      "rename": "Clicca per rinominare",
+      "due": "Scadenza",
+      "setDue": "Imposta una scadenza",
+      "repeat": "Ogni N giorni, 0 per una volta sola",
+      "every_one": "ogni giorno",
+      "every_other": "ogni {{count}} giorni",
+      "tick": "Fatto per ora"
     },
     "page": {
       "title": "Progetti",
@@ -842,7 +849,12 @@
       "noMilestone": "Nessuna milestone",
       "issue": "Issue",
       "moveUp": "Sposta su",
-      "moveDown": "Sposta giù"
+      "moveDown": "Sposta giù",
+      "due": "Scade il",
+      "repeat": "Ripeti",
+      "repeatHelp": "Ogni N giorni, contati dalla scadenza una volta fatto. 0 è una volta sola.",
+      "days": "giorni",
+      "lastDone": "Fatto l'ultima volta il {{date}}"
     },
     "milestone": { "open": "Aperta", "done": "Conclusa" }
   },

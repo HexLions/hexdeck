@@ -796,6 +796,7 @@
     "daysLate_one": "{{count}} day late",
     "daysLate_other": "{{count}} days late",
     "noDate": "no date",
+    "today": "today",
     "next": "Next",
     "status": { "active": "Active", "paused": "Paused", "done": "Done" },
     "item": { "todo": "To do", "doing": "Doing", "done": "Done" },
@@ -810,7 +811,13 @@
       "reopen": "Reopen",
       "newItem": "Add an item",
       "addItem": "Add item",
-      "rename": "Click to rename"
+      "rename": "Click to rename",
+      "due": "Due",
+      "setDue": "Set a due date",
+      "repeat": "Every N days, 0 for once",
+      "every_one": "every day",
+      "every_other": "every {{count}} days",
+      "tick": "Done for now"
     },
     "page": {
       "title": "Projects",
@@ -842,7 +849,12 @@
       "noMilestone": "No milestone",
       "issue": "Issue",
       "moveUp": "Move up",
-      "moveDown": "Move down"
+      "moveDown": "Move down",
+      "due": "Due on",
+      "repeat": "Repeat",
+      "repeatHelp": "Every N days, counted from the due date once it is done. 0 is a one-off.",
+      "days": "days",
+      "lastDone": "Last done {{date}}"
     },
     "milestone": { "open": "Open", "done": "Done" }
   },

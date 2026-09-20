@@ -33,6 +33,11 @@ export interface ItemView {
   issue: string
   url: string
   position: number
+  /** When it is due, or null. */
+  due_on: string | null
+  /** Every how many days it comes back once done; 0 is a one-off. */
+  repeat_days: number
+  last_done: string | null
 }
 
 export interface ProjectView {
@@ -57,7 +62,7 @@ export const removeRepo = (projectId: number, repoId: number) => del(`/projects/
 export const addMilestone = (projectId: number, body: { title: string; target_date?: string | null; status?: MilestoneStatus }) => post<MilestoneView>(`/projects/${projectId}/milestones`, body)
 export const patchMilestone = (id: number, body: { title?: string; target_date?: string; clear_date?: boolean; status?: MilestoneStatus; position?: number }) => patch<MilestoneView>(`/milestones/${id}`, body)
 export const deleteMilestone = (id: number) => del(`/milestones/${id}`)
-export const addItem = (projectId: number, body: { title: string; notes?: string; status?: ItemStatus; milestone_id?: number | null; issue?: string }) => post<ItemView>(`/projects/${projectId}/items`, body)
-export const patchItem = (id: number, body: { title?: string; notes?: string; status?: ItemStatus; milestone_id?: number; clear_milestone?: boolean; issue?: string }) => patch<ItemView>(`/items/${id}`, body)
+export const addItem = (projectId: number, body: { title: string; notes?: string; status?: ItemStatus; milestone_id?: number | null; issue?: string; due_on?: string; repeat_days?: number }) => post<ItemView>(`/projects/${projectId}/items`, body)
+export const patchItem = (id: number, body: { title?: string; notes?: string; status?: ItemStatus; milestone_id?: number; clear_milestone?: boolean; issue?: string; due_on?: string; clear_due?: boolean; repeat_days?: number }) => patch<ItemView>(`/items/${id}`, body)
 export const deleteItem = (id: number) => del(`/items/${id}`)
 export const orderItems = (projectId: number, ids: number[]) => put<ProjectView>(`/projects/${projectId}/items/order`, { ids })

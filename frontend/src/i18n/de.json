@@ -795,7 +795,8 @@
     "daysLeft_other": "in {{count}} Tagen",
     "daysLate_one": "{{count}} Tag zu spät",
     "daysLate_other": "{{count}} Tage zu spät",
-    "noDate": "ohne Datum",
+    "noDate": "kein Datum",
+    "today": "heute",
     "next": "Nächster",
     "status": { "active": "Aktiv", "paused": "Pausiert", "done": "Fertig" },
     "item": { "todo": "Offen", "doing": "In Arbeit", "done": "Erledigt" },
@@ -810,7 +811,13 @@
       "reopen": "Wieder öffnen",
       "newItem": "Aufgabe hinzufügen",
       "addItem": "Aufgabe hinzufügen",
-      "rename": "Klicken zum Umbenennen"
+      "rename": "Klicken zum Umbenennen",
+      "due": "Fällig",
+      "setDue": "Fälligkeit setzen",
+      "repeat": "Alle N Tage, 0 für einmalig",
+      "every_one": "täglich",
+      "every_other": "alle {{count}} Tage",
+      "tick": "Vorerst erledigt"
     },
     "page": {
       "title": "Projekte",
@@ -842,7 +849,12 @@
       "noMilestone": "Kein Meilenstein",
       "issue": "Issue",
       "moveUp": "Nach oben",
-      "moveDown": "Nach unten"
+      "moveDown": "Nach unten",
+      "due": "Fällig am",
+      "repeat": "Wiederholung",
+      "repeatHelp": "Alle N Tage, ab der Fälligkeit gezählt, sobald es erledigt ist. 0 ist einmalig.",
+      "days": "Tage",
+      "lastDone": "Zuletzt erledigt {{date}}"
     },
     "milestone": { "open": "Offen", "done": "Erledigt" }
   },

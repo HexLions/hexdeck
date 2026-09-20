@@ -7,6 +7,7 @@
  * (``tLabel``); the renderers' own words are translation keys.
  */
 import {
+  CalendarClock,
   Cloud,
   CloudDrizzle,
   CloudFog,
@@ -1326,6 +1327,8 @@ export function AppTile({ widget, data, link }: RenderProps) {
 type Grade = 'late' | 'soon' | 'open' | 'done'
 interface RoadmapItem {
   id: number
+  /** A milestone, or a dated item; a recurring item is maintenance. */
+  kind?: 'milestone' | 'item'
   title: string
   project: string
   project_id?: number
@@ -1333,13 +1336,20 @@ interface RoadmapItem {
   date: string | null
   days: number | null
   status: Grade
+  repeat_days?: number
 }
 
 const GRADE_COLOUR: Record<Grade, string> = { late: 'var(--nd-bad)', soon: 'var(--nd-warn)', open: 'var(--nd-accent)', done: 'var(--nd-unknown)' }
 
 function daysText(t: TFunction, days: number | null): string {
   if (days === null) return t('projects.noDate')
+  if (days === 0) return t('projects.today')
   return days < 0 ? t('projects.daysLate', { count: -days }) : t('projects.daysLeft', { count: days })
+}
+
+/** "every 30 days" after a recurring item, or nothing. */
+function repeatText(t: TFunction, days: number | undefined): string {
+  return days ? ` · ↻ ${t('projects.card.every', { count: days })}` : ''
 }
 
 /**
@@ -1432,26 +1442,40 @@ export function RoadmapCard({ data, canAct }: RenderProps) {
   }
   const toggle = (m: RoadmapItem) => {
     if (!editable) return
-    void patchMilestone(m.id, { status: m.status === 'done' ? 'open' : 'done' }).catch(() => undefined)
+    // A dated item is ticked like on the items card: a recurring one comes back with its next date.
+    if (m.kind === 'item') void patchItem(m.id, { status: 'done' }).catch(() => undefined)
+    else void patchMilestone(m.id, { status: m.status === 'done' ? 'open' : 'done' }).catch(() => undefined)
   }
+  const tickLabel = (m: RoadmapItem) => (m.kind === 'item' ? (m.repeat_days ? t('projects.card.tick') : t('projects.card.finish')) : m.status === 'done' ? t('projects.card.reopen') : t('projects.card.finish'))
+  const key = (m: RoadmapItem) => `${m.kind ?? 'milestone'}-${m.id}`
   const dated = items.filter((m) => m.date)
   const undated = items.filter((m) => !m.date)
   // Marks stay inside 3..97 % so a title at either end has room on both sides.
   const at = (m: RoadmapItem) => 3 + Math.max(0, Math.min(94, ((m.days ?? 0) / span) * 94))
   const align = (pct: number) => (pct < 15 ? 'left-0 translate-x-0' : pct > 85 ? 'right-0 translate-x-0' : 'left-1/2 -translate-x-1/2')
+  // Two marks within a label's width of each other put the second label on a lower row, so neither hides the other.
+  const rowOf = new Map<string, number>()
+  const lastAt = [-100, -100]
+  for (const m of dated) {
+    const x = at(m)
+    const row = x - lastAt[0] > 14 ? 0 : 1
+    lastAt[row] = x
+    rowOf.set(key(m), row)
+  }
+  const twoRows = [...rowOf.values()].some((row) => row === 1)
   const legend = (m: RoadmapItem, extra?: string) => {
     const inner = (
       <>
-        <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR[m.status] }} />
-        <span className={m.status === 'done' ? 'line-through' : ''}>{m.title}</span> · {extra ?? daysText(t, m.days)}
+        <span className={`h-2 w-2 ${m.kind === 'item' ? 'rounded-full' : 'hex-clip'}`} style={{ background: GRADE_COLOUR[m.status] }} />
+        <span className={m.status === 'done' ? 'line-through' : ''}>{m.title}</span> · {extra ?? daysText(t, m.days)}{repeatText(t, m.repeat_days)}
       </>
     )
     return editable ? (
-      <button key={m.id} type="button" data-grade={m.status} className="no-drag flex items-center gap-1 text-left" onClick={() => toggle(m)} aria-label={`${m.status === 'done' ? t('projects.card.reopen') : t('projects.card.finish')}: ${m.title}`}>
+      <button key={key(m)} type="button" data-grade={m.status} data-kind={m.kind ?? 'milestone'} className="no-drag flex items-center gap-1 text-left" onClick={() => toggle(m)} aria-label={`${tickLabel(m)}: ${m.title}`}>
         {inner}
       </button>
     ) : (
-      <span key={m.id} data-grade={m.status} className="flex items-center gap-1">
+      <span key={key(m)} data-grade={m.status} data-kind={m.kind ?? 'milestone'} className="flex items-center gap-1">
         {inner}
       </span>
     )
@@ -1469,16 +1493,16 @@ export function RoadmapCard({ data, canAct }: RenderProps) {
           <div className="relative mt-4 h-px w-full bg-line-strong">
             <span className="absolute -top-2 h-4 w-px bg-accent" style={{ left: '3%' }} aria-hidden="true" />
             {dated.map((m) => (
-              <div key={m.id} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
-                <span className="block h-3 w-3 hex-clip" style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
-                <span className={`roadmap-label absolute top-4 whitespace-nowrap text-[11px] ${align(at(m))}`}>{m.title}</span>
+              <div key={key(m)} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
+                <span className={`block h-3 w-3 ${m.kind === 'item' ? 'rounded-full' : 'hex-clip'}`} style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
+                <span className={`roadmap-label absolute whitespace-nowrap text-[11px] ${rowOf.get(key(m)) ? 'top-8' : 'top-4'} ${align(at(m))}`}>{m.title}</span>
               </div>
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted">
+          <div className={`${twoRows ? 'mt-10' : 'mt-6'} flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted`}>
             {dated.map((m) => legend(m))}
             {undated.map((m) => (
-              <span key={m.id} data-undated="" className="opacity-70">{legend(m, t('projects.noDate'))}</span>
+              <span key={key(m)} data-undated="" className="opacity-70">{legend(m, t('projects.noDate'))}</span>
             ))}
           </div>
         </>
@@ -1557,6 +1581,55 @@ interface ProjectItemRow {
   milestone: string
   issue: string
   url: string
+  due_on?: string | null
+  days?: number | null
+  repeat_days?: number
+  due?: Grade
+}
+
+/**
+ * When an item is due and how often it comes back. Read-only it is a
+ * coloured note; whoever may act clicks it (or the calendar on a row
+ * without a date) and gets a date and an "every N days" to fill in.
+ */
+function ItemDue({ row, editable, open, setOpen }: { row: ProjectItemRow; editable: boolean; open: boolean; setOpen: (open: boolean) => void }) {
+  const { t } = useTranslation()
+  const [date, setDate] = useState(row.due_on ?? '')
+  const [every, setEvery] = useState(String(row.repeat_days ?? 0))
+  const grade: Grade = row.due ?? 'open'
+  const note = row.due_on ? (
+    <span className="whitespace-nowrap text-[11px]" data-due={grade} style={{ color: row.status === 'done' ? undefined : GRADE_COLOUR[grade] }}>
+      {daysText(t, row.days ?? null)}{repeatText(t, row.repeat_days)}
+    </span>
+  ) : null
+  if (!editable) return note
+  if (!open) {
+    return note ? (
+      <button type="button" className="no-drag flex-none" title={t('projects.card.due')} aria-label={`${t('projects.card.due')}: ${row.title}`} onClick={() => setOpen(true)}>
+        {note}
+      </button>
+    ) : (
+      <button type="button" className="no-drag flex-none text-faint opacity-0 group-hover:opacity-100 focus:opacity-100" aria-label={`${t('projects.card.setDue')}: ${row.title}`} onClick={() => setOpen(true)}>
+        <CalendarClock size={12} />
+      </button>
+    )
+  }
+  const save = () => {
+    setOpen(false)
+    const repeat = Math.max(0, Number(every) || 0)
+    const body: Parameters<typeof patchItem>[1] = {}
+    if (date && date !== row.due_on) body.due_on = date
+    if (!date && row.due_on) body.clear_due = true
+    if (repeat !== (row.repeat_days ?? 0)) body.repeat_days = repeat
+    if (Object.keys(body).length) void patchItem(row.id, body).catch(() => undefined)
+  }
+  return (
+    <span className="no-drag flex basis-full items-center gap-1 pl-5">
+      <input className="input h-7 w-32 text-xs" type="date" aria-label={t('projects.card.due')} value={date} onChange={(e) => setDate(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && save()} />
+      <input className="input h-7 w-14 text-xs" type="number" min={0} aria-label={t('projects.card.repeat')} title={t('projects.card.repeat')} value={every} onChange={(e) => setEvery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && save()} />
+      <button type="button" className="btn h-7 text-xs" onClick={save}>{t('common.save')}</button>
+    </span>
+  )
 }
 
 /** The title of an item: a click on it opens it for a rename, Enter or leaving saves, Escape gives up. */
@@ -1607,6 +1680,7 @@ export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
   const [dragging, setDragging] = useState<number | null>(null)
   const [order, setOrder] = useState<number[] | null>(null)
   const [title, setTitle] = useState('')
+  const [editing, setEditing] = useState<number | null>(null)
   const editable = Boolean(canAct) && !meta.demo
   if (!meta.name && !meta.demo) return <NoProject widget={widget} canEdit={canEdit} />
   const shown = order ? order.map((id) => rows.find((r) => r.id === id)).filter((r): r is ProjectItemRow => Boolean(r)) : rows
@@ -1639,7 +1713,7 @@ export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
         {shown.map((row) => (
           <li
             key={row.id}
-            className={`group flex items-center gap-2 rounded px-1 py-0.5 text-sm ${row.status === 'done' ? 'opacity-60' : ''}`}
+            className={`group flex items-center gap-2 rounded px-1 py-0.5 text-sm ${editing === row.id ? 'flex-wrap' : ''} ${row.status === 'done' ? 'opacity-60' : ''}`}
             draggable={editable}
             onDragStart={() => setDragging(row.id)}
             onDragOver={(event) => editable && event.preventDefault()}
@@ -1653,7 +1727,9 @@ export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
               mark(row)
             )}
             <ItemTitle row={row} editable={editable} />
-            {row.milestone && <span className="ml-auto truncate text-[11px] text-faint">{row.milestone}</span>}
+            <span className="ml-auto" />
+            <ItemDue row={row} editable={editable} open={editing === row.id} setOpen={(open) => setEditing(open ? row.id : null)} />
+            {row.milestone && <span className="truncate text-[11px] text-faint">{row.milestone}</span>}
             {row.url && (
               <a className="no-drag flex-none text-[11px] text-accent" href={row.url} target="_blank" rel="noreferrer">
                 #{row.issue.split('#')[1]}

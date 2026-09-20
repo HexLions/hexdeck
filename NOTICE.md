@@ -68,3 +68,10 @@ Updated at every milestone.
   and is removed in 26; the card says to use https:// and a user-linked
   read-only key. The README gains a TrueNAS SCALE section and the two
   warnings that must not be buried: the secret key and the Docker socket.
+- **Maintenance.** An item takes a due date and an interval in days.
+  Ticking a recurring item moves its date on by the interval, counted
+  from the date that was due, and it comes back to do; a one-off with a
+  date finishes. The roadmap lists the dated items among the milestones,
+  the items card says when each is due and lets the date be set on the
+  board, and what is due or late is announced once a day through the
+  notification channels (`maintenance_due`).

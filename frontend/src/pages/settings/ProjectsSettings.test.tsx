@@ -11,7 +11,7 @@ import { vi } from 'vitest'
 import type { ProjectView } from '../../api/projects'
 import { ProjectsSettings } from './ProjectsSettings'
 
-const store = vi.hoisted(() => ({ projects: [] as ProjectView[] }))
+const store = vi.hoisted(() => ({ projects: [] as ProjectView[], patched: [] as [number, unknown][] }))
 
 vi.mock('../../api/projects', async (importOriginal) => {
   const original = await importOriginal<typeof import('../../api/projects')>()
@@ -24,8 +24,14 @@ vi.mock('../../api/projects', async (importOriginal) => {
       return project
     }),
     addItem: vi.fn(async (projectId: number, body: { title: string }) => {
-      const item = { id: 9, milestone_id: null, title: body.title, notes: '', status: 'todo' as const, issue: '', url: '', position: 0 }
+      const item = { id: 9, milestone_id: null, title: body.title, notes: '', status: 'todo' as const, issue: '', url: '', position: 0, due_on: null, repeat_days: 0, last_done: null }
       store.projects.find((p) => p.id === projectId)!.items.push(item)
+      return item
+    }),
+    patchItem: vi.fn(async (id: number, body: unknown) => {
+      store.patched.push([id, body])
+      const item = store.projects.flatMap((p) => p.items).find((i) => i.id === id)!
+      Object.assign(item, body)
       return item
     }),
     addMilestone: vi.fn(async (projectId: number, body: { title: string; target_date?: string | null }) => {
@@ -62,6 +68,13 @@ describe('ProjectsSettings', () => {
     await user.type(await screen.findByLabelText(/New item/), 'Roadmap card')
     await user.click(screen.getByRole('button', { name: /Add item/ }))
     expect(await screen.findByDisplayValue('Roadmap card')).toBeInTheDocument()
+    // The item takes a due date and comes back every so many days.
+    await user.type(screen.getByLabelText('Due on'), '2026-10-01')
+    const repeat = screen.getByLabelText('Repeat')
+    await user.clear(repeat)
+    await user.type(repeat, '30')
+    await user.tab()
+    expect(store.patched).toEqual([[9, { due_on: '2026-10-01' }], [9, { repeat_days: 30 }]])
   })
 
   it('says so when there is nothing yet', async () => {
