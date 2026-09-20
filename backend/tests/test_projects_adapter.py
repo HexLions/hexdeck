@@ -48,6 +48,7 @@ async def test_the_roadmap_sorts_by_date_and_grades_each_milestone(seeded, ctx: 
     assert [(i["title"], i["status"]) for i in data.items] == [("Late", "late"), ("Soon", "soon"), ("Far", "open"), ("Someday", "open")]
     assert data.items[0]["days"] == -3 and data.items[1]["project"] == "HexDeck" and data.items[1]["colour"] == "#3aa0ff"
     assert data.primary["value"] == 1, "one milestone is due within four weeks; the late one is late, not due"
+    assert data.items[0]["project_id"] == seeded["p"] and [p["name"] for p in data.meta["projects"]] == ["HexDeck", "Garden"]
     assert data.status == "bad", "a late milestone turns the card red"
 
 

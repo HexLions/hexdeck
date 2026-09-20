@@ -788,6 +788,7 @@
     "pickProjectFirst": "Pick the project first.",
     "none": "No projects yet. Create one under Settings, Projects.",
     "everyProject": "Every project",
+    "newProject": "+ New project…",
     "everyMilestone": "Every milestone",
     "daysLeft_one": "in {{count}} day",
     "daysLeft_other": "in {{count}} days",
@@ -797,6 +798,19 @@
     "next": "Next",
     "status": { "active": "Active", "paused": "Paused", "done": "Done" },
     "item": { "todo": "To do", "doing": "Doing", "done": "Done" },
+    "card": {
+      "noProject": "No project chosen.",
+      "pick": "Pick a project",
+      "newName": "Name of a new project",
+      "create": "Create",
+      "newMilestone": "New milestone",
+      "addMilestone": "Add milestone",
+      "finish": "Mark as done",
+      "reopen": "Reopen",
+      "newItem": "Add an item",
+      "addItem": "Add item",
+      "rename": "Click to rename"
+    },
     "page": {
       "title": "Projects",
       "help": "What is being built, with milestones and items. The cards on the boards read this.",

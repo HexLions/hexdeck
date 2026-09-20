@@ -51,3 +51,8 @@ Updated at every milestone.
   repositories in HexDeck's own database, a settings page to manage them,
   and three cards (`projects.roadmap`, `projects.project`,
   `projects.items`) for any board. GitHub is read only.
+- **On the cards.** Projects are created from a project or items card
+  that has none, or from the card's settings; items are added, renamed,
+  ticked and deleted on the items card; milestones are added and ticked
+  on the roadmap card. A notepad card (`notepad.pad`) is typed into on the
+  board itself.

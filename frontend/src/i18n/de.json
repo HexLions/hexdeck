@@ -788,6 +788,7 @@
     "pickProjectFirst": "Erst das Projekt wählen.",
     "none": "Noch keine Projekte. Lege eines unter Einstellungen, Projekte an.",
     "everyProject": "Alle Projekte",
+    "newProject": "+ Neues Projekt…",
     "everyMilestone": "Alle Meilensteine",
     "daysLeft_one": "in {{count}} Tag",
     "daysLeft_other": "in {{count}} Tagen",
@@ -797,6 +798,19 @@
     "next": "Nächster",
     "status": { "active": "Aktiv", "paused": "Pausiert", "done": "Fertig" },
     "item": { "todo": "Offen", "doing": "In Arbeit", "done": "Erledigt" },
+    "card": {
+      "noProject": "Kein Projekt gewählt.",
+      "pick": "Projekt wählen",
+      "newName": "Name eines neuen Projekts",
+      "create": "Anlegen",
+      "newMilestone": "Neuer Meilenstein",
+      "addMilestone": "Meilenstein hinzufügen",
+      "finish": "Als erledigt markieren",
+      "reopen": "Wieder öffnen",
+      "newItem": "Aufgabe hinzufügen",
+      "addItem": "Aufgabe hinzufügen",
+      "rename": "Klicken zum Umbenennen"
+    },
     "page": {
       "title": "Projekte",
       "help": "Was gerade entsteht, mit Meilensteinen und Aufgaben. Die Karten auf den Boards lesen das hier.",

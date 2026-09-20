@@ -30,7 +30,7 @@ import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 
 import { fileUrl, mediaUrl, patch } from '../api/client'
-import { orderItems, patchItem } from '../api/projects'
+import { addItem, addMilestone, createProject, deleteItem, listProjects, orderItems, patchItem, patchMilestone, type ProjectView } from '../api/projects'
 import { tLabel } from '../i18n/texts'
 import { formatValue, timeAgo } from '../lib/format'
 import { safeUrl } from '../lib/safeUrl'
@@ -1328,6 +1328,7 @@ interface RoadmapItem {
   id: number
   title: string
   project: string
+  project_id?: number
   colour: string
   date: string | null
   days: number | null
@@ -1342,59 +1343,169 @@ function daysText(t: TFunction, days: number | null): string {
 }
 
 /**
- * Every milestone on one line from today to the end of the horizon. Late
- * ones sit at the left edge, undated ones in a row under the line, so
- * "what is due in the next weeks" is the middle of the picture.
+ * A project card with no project yet. Whoever may edit the board picks one
+ * of the existing projects or types the name of a new one; either way the
+ * card's own settings are written, and the card comes back with the data.
+ * Read directly rather than through the query cache: cards live on boards
+ * and kiosk displays alike, and the list is a few rows.
  */
-export function RoadmapCard({ data }: RenderProps) {
+function NoProject({ widget, canEdit }: { widget: WidgetView; canEdit?: boolean }) {
   const { t } = useTranslation()
-  const items = (data?.items ?? []) as unknown as RoadmapItem[]
-  const meta = (data?.meta ?? {}) as { today?: string; weeks?: number; empty?: string }
-  const span = Number(meta.weeks ?? 4) * 7
-  if (!items.length) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
-  const dated = items.filter((m) => m.date)
-  const undated = items.filter((m) => !m.date)
-  // Marks stay inside 3..97 % so a title at either end has room on both sides.
-  const at = (m: RoadmapItem) => 3 + Math.max(0, Math.min(94, ((m.days ?? 0) / span) * 94))
-  const align = (pct: number) => (pct < 15 ? 'left-0 translate-x-0' : pct > 85 ? 'right-0 translate-x-0' : 'left-1/2 -translate-x-1/2')
+  const [existing, setExisting] = useState<ProjectView[] | null>(null)
+  const [name, setName] = useState('')
+  const [busy, setBusy] = useState(false)
+  useEffect(() => {
+    if (!canEdit) return
+    let alive = true
+    void listProjects()
+      .then((rows) => alive && setExisting(rows))
+      .catch(() => alive && setExisting([]))
+    return () => {
+      alive = false
+    }
+  }, [canEdit])
+  const attach = (projectId: number) => {
+    setBusy(true)
+    void patch(`/widgets/${widget.id}`, { options: { ...(widget.options ?? {}), project: String(projectId) } }).finally(() => setBusy(false))
+  }
+  const create = () => {
+    if (!name.trim()) return
+    setBusy(true)
+    void createProject({ name: name.trim() })
+      .then((created) => attach(created.id))
+      .catch(() => setBusy(false))
+  }
+  if (!canEdit) return <Empty>{t('projects.card.noProject')}</Empty>
   return (
-    <div className="flex h-full flex-col gap-2 p-3">
-      <div className="flex items-baseline justify-between text-xs text-muted">
-        <span>{tLabel(String(data?.primary?.label ?? ''))}</span>
-        <span className="num text-lg font-semibold text-ink">{String(data?.primary?.value ?? 0)}</span>
-      </div>
-      <div className="relative mt-4 h-px w-full bg-line-strong">
-        <span className="absolute -top-2 h-4 w-px bg-accent" style={{ left: '3%' }} aria-hidden="true" />
-        {dated.map((m) => (
-          <div key={m.id} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
-            <span className="block h-3 w-3 hex-clip" style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
-            <span className={`roadmap-label absolute top-4 whitespace-nowrap text-[11px] ${align(at(m))}`}>{m.title}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted">
-        {dated.map((m) => (
-          <span key={m.id} data-grade={m.status} className="flex items-center gap-1">
-            <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR[m.status] }} />
-            <span>{m.title}</span> · {daysText(t, m.days)}
-          </span>
-        ))}
-        {undated.map((m) => (
-          <span key={m.id} data-undated="" className="flex items-center gap-1 opacity-70">
-            <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR.open }} />
-            <span>{m.title}</span> · {t('projects.noDate')}
-          </span>
-        ))}
+    <div className="no-drag flex h-full flex-col justify-center gap-2 p-3 text-sm">
+      {existing && existing.length > 0 && (
+        <select className="input" aria-label={t('projects.card.pick')} value="" disabled={busy} onChange={(event) => event.target.value && attach(Number(event.target.value))}>
+          <option value="">{t('projects.card.pick')}</option>
+          {existing.map((p) => (
+            <option key={p.id} value={p.id}>{p.name}</option>
+          ))}
+        </select>
+      )}
+      <div className="flex gap-2">
+        <input
+          className="input"
+          aria-label={t('projects.card.newName')}
+          placeholder={t('projects.card.newName')}
+          value={name}
+          disabled={busy}
+          onChange={(event) => setName(event.target.value)}
+          onKeyDown={(event) => event.key === 'Enter' && create()}
+        />
+        <button type="button" className="btn btn-accent flex-none" disabled={busy || !name.trim()} onClick={create}>
+          {t('projects.card.create')}
+        </button>
       </div>
     </div>
   )
 }
 
+/**
+ * Every milestone on one line from today to the end of the horizon. Late
+ * ones sit at the left edge, undated ones in a row under the line, so
+ * "what is due in the next weeks" is the middle of the picture. Whoever may
+ * act adds a milestone at the bottom and ticks one off by clicking it.
+ */
+export function RoadmapCard({ data, canAct }: RenderProps) {
+  const { t } = useTranslation()
+  const items = (data?.items ?? []) as unknown as RoadmapItem[]
+  const meta = (data?.meta ?? {}) as { today?: string; weeks?: number; empty?: string; projects?: { id: number; name: string }[]; demo?: boolean }
+  const span = Number(meta.weeks ?? 4) * 7
+  const projects = meta.projects ?? []
+  const editable = Boolean(canAct) && !meta.demo && projects.length > 0
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState('')
+  const [projectId, setProjectId] = useState<number>(projects[0]?.id ?? 0)
+  const add = () => {
+    const target = projectId || projects[0]?.id
+    if (!title.trim() || !target) return
+    void addMilestone(target, { title: title.trim(), target_date: date || null })
+      .then(() => {
+        setTitle('')
+        setDate('')
+      })
+      .catch(() => undefined)
+  }
+  const toggle = (m: RoadmapItem) => {
+    if (!editable) return
+    void patchMilestone(m.id, { status: m.status === 'done' ? 'open' : 'done' }).catch(() => undefined)
+  }
+  const dated = items.filter((m) => m.date)
+  const undated = items.filter((m) => !m.date)
+  // Marks stay inside 3..97 % so a title at either end has room on both sides.
+  const at = (m: RoadmapItem) => 3 + Math.max(0, Math.min(94, ((m.days ?? 0) / span) * 94))
+  const align = (pct: number) => (pct < 15 ? 'left-0 translate-x-0' : pct > 85 ? 'right-0 translate-x-0' : 'left-1/2 -translate-x-1/2')
+  const legend = (m: RoadmapItem, extra?: string) => {
+    const inner = (
+      <>
+        <span className="h-2 w-2 hex-clip" style={{ background: GRADE_COLOUR[m.status] }} />
+        <span className={m.status === 'done' ? 'line-through' : ''}>{m.title}</span> · {extra ?? daysText(t, m.days)}
+      </>
+    )
+    return editable ? (
+      <button key={m.id} type="button" data-grade={m.status} className="no-drag flex items-center gap-1 text-left" onClick={() => toggle(m)} aria-label={`${m.status === 'done' ? t('projects.card.reopen') : t('projects.card.finish')}: ${m.title}`}>
+        {inner}
+      </button>
+    ) : (
+      <span key={m.id} data-grade={m.status} className="flex items-center gap-1">
+        {inner}
+      </span>
+    )
+  }
+  return (
+    <div className="flex h-full flex-col gap-2 p-3">
+      {items.length === 0 ? (
+        <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+      ) : (
+        <>
+          <div className="flex items-baseline justify-between text-xs text-muted">
+            <span>{tLabel(String(data?.primary?.label ?? ''))}</span>
+            <span className="num text-lg font-semibold text-ink">{String(data?.primary?.value ?? 0)}</span>
+          </div>
+          <div className="relative mt-4 h-px w-full bg-line-strong">
+            <span className="absolute -top-2 h-4 w-px bg-accent" style={{ left: '3%' }} aria-hidden="true" />
+            {dated.map((m) => (
+              <div key={m.id} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
+                <span className="block h-3 w-3 hex-clip" style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
+                <span className={`roadmap-label absolute top-4 whitespace-nowrap text-[11px] ${align(at(m))}`}>{m.title}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted">
+            {dated.map((m) => legend(m))}
+            {undated.map((m) => (
+              <span key={m.id} data-undated="" className="opacity-70">{legend(m, t('projects.noDate'))}</span>
+            ))}
+          </div>
+        </>
+      )}
+      {editable && (
+        <div className="no-drag mt-auto flex flex-wrap gap-1 text-xs">
+          <input className="input h-8 min-w-0 flex-1 text-xs" aria-label={t('projects.card.newMilestone')} placeholder={t('projects.card.newMilestone')} value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
+          <input className="input h-8 w-36 text-xs" type="date" aria-label={t('projects.page.date')} value={date} onChange={(e) => setDate(e.target.value)} />
+          {projects.length > 1 && (
+            <select className="input h-8 w-32 text-xs" aria-label={t('projects.card.pick')} value={projectId} onChange={(e) => setProjectId(Number(e.target.value))}>
+              {projects.map((p) => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
+            </select>
+          )}
+          <button type="button" className="btn h-8 flex-none" disabled={!title.trim()} onClick={add} aria-label={t('projects.card.addMilestone')}>+</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 /** One project: its colour and state, the next milestone, how much is done, the repositories it reads. */
-export function ProjectCard({ data }: RenderProps) {
+export function ProjectCard({ widget, data, canEdit }: RenderProps) {
   const { t } = useTranslation()
   const meta = (data?.meta ?? {}) as { name?: string; colour?: string; status?: string; next?: RoadmapItem | null; empty?: string }
-  if (!meta.name) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+  if (!meta.name) return <NoProject widget={widget} canEdit={canEdit} />
   const percent = Number(data?.primary?.value ?? 0)
   const repos = (data?.items ?? []) as unknown as { repo: string; url: string }[]
   return (
@@ -1448,23 +1559,68 @@ interface ProjectItemRow {
   url: string
 }
 
+/** The title of an item: a click on it opens it for a rename, Enter or leaving saves, Escape gives up. */
+function ItemTitle({ row, editable }: { row: ProjectItemRow; editable: boolean }) {
+  const { t } = useTranslation()
+  const [draft, setDraft] = useState<string | null>(null)
+  const done = row.status === 'done' ? 'line-through' : ''
+  if (!editable) return <span className={`truncate ${done}`}>{row.title}</span>
+  if (draft === null) {
+    return (
+      <button type="button" className={`no-drag min-w-0 truncate text-left ${done}`} title={t('projects.card.rename')} onClick={() => setDraft(row.title)}>
+        {row.title}
+      </button>
+    )
+  }
+  const commit = () => {
+    const title = draft.trim()
+    setDraft(null)
+    if (title && title !== row.title) void patchItem(row.id, { title }).catch(() => undefined)
+  }
+  return (
+    <input
+      className="input h-7 min-w-0 flex-1 text-sm"
+      aria-label={t('projects.card.rename')}
+      autoFocus
+      value={draft}
+      onChange={(e) => setDraft(e.target.value)}
+      onBlur={commit}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') commit()
+        if (e.key === 'Escape') setDraft(null)
+      }}
+    />
+  )
+}
+
 /**
- * The items of a project. The mark cycles the state, a drag reorders; both
- * write through the projects API, and the card fetches itself again once
- * the server has rescheduled it. Without the right to act the rows are
- * drawn and nothing on them is a control.
+ * The items of a project. The mark cycles the state, a click on the title
+ * renames, a drag reorders, the last row adds; all through the projects
+ * API, and the card fetches itself again once the server has rescheduled
+ * it. Without the right to act the rows are drawn and nothing on them is a
+ * control.
  */
-export function ItemsCard({ data, canAct }: RenderProps) {
+export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
   const { t } = useTranslation()
   const rows = (data?.items ?? []) as unknown as ProjectItemRow[]
-  const meta = (data?.meta ?? {}) as { project_id?: number; empty?: string; demo?: boolean }
+  const meta = (data?.meta ?? {}) as { project_id?: number; name?: string; empty?: string; demo?: boolean }
   const [dragging, setDragging] = useState<number | null>(null)
   const [order, setOrder] = useState<number[] | null>(null)
+  const [title, setTitle] = useState('')
   const editable = Boolean(canAct) && !meta.demo
-  if (!rows.length) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
+  if (!meta.name && !meta.demo) return <NoProject widget={widget} canEdit={canEdit} />
   const shown = order ? order.map((id) => rows.find((r) => r.id === id)).filter((r): r is ProjectItemRow => Boolean(r)) : rows
   const cycle = (row: ProjectItemRow) => {
     void patchItem(row.id, { status: NEXT_STATUS[row.status] }).catch(() => undefined)
+  }
+  const remove = (row: ProjectItemRow) => {
+    void deleteItem(row.id).catch(() => undefined)
+  }
+  const add = () => {
+    if (!title.trim() || !meta.project_id) return
+    void addItem(meta.project_id, { title: title.trim() })
+      .then(() => setTitle(''))
+      .catch(() => undefined)
   }
   const dropOn = (target: number) => {
     if (dragging === null || dragging === target) return
@@ -1477,36 +1633,47 @@ export function ItemsCard({ data, canAct }: RenderProps) {
   }
   const mark = (row: ProjectItemRow) => <span className="h-3 w-3 flex-none hex-clip" data-status={row.status} style={{ background: ITEM_COLOUR[row.status] }} />
   return (
-    <ul className="flex h-full flex-col gap-1 overflow-auto p-2">
-      {shown.map((row) => (
-        <li
-          key={row.id}
-          className={`flex items-center gap-2 rounded px-1 py-0.5 text-sm ${row.status === 'done' ? 'opacity-60' : ''}`}
-          draggable={editable}
-          onDragStart={() => setDragging(row.id)}
-          onDragOver={(event) => editable && event.preventDefault()}
-          onDrop={() => dropOn(row.id)}
-        >
-          {editable ? (
-            <button type="button" className="no-drag flex min-w-0 items-center gap-2 text-left" aria-label={`${t(`projects.item.${row.status}`)}: ${row.title}`} onClick={() => cycle(row)}>
-              {mark(row)}
-              <span className={`truncate ${row.status === 'done' ? 'line-through' : ''}`}>{row.title}</span>
-            </button>
-          ) : (
-            <span className="flex min-w-0 items-center gap-2">
-              {mark(row)}
-              <span className={`truncate ${row.status === 'done' ? 'line-through' : ''}`}>{row.title}</span>
-            </span>
-          )}
-          {row.milestone && <span className="ml-auto truncate text-[11px] text-faint">{row.milestone}</span>}
-          {row.url && (
-            <a className="no-drag flex-none text-[11px] text-accent" href={row.url} target="_blank" rel="noreferrer">
-              #{row.issue.split('#')[1]}
-            </a>
-          )}
-        </li>
-      ))}
-    </ul>
+    <div className="flex h-full flex-col">
+      <ul className="flex flex-1 flex-col gap-1 overflow-auto p-2">
+        {shown.length === 0 && <li className="p-2 text-sm text-muted">{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</li>}
+        {shown.map((row) => (
+          <li
+            key={row.id}
+            className={`group flex items-center gap-2 rounded px-1 py-0.5 text-sm ${row.status === 'done' ? 'opacity-60' : ''}`}
+            draggable={editable}
+            onDragStart={() => setDragging(row.id)}
+            onDragOver={(event) => editable && event.preventDefault()}
+            onDrop={() => dropOn(row.id)}
+          >
+            {editable ? (
+              <button type="button" className="no-drag flex-none" aria-label={`${t(`projects.item.${row.status}`)}: ${row.title}`} onClick={() => cycle(row)}>
+                {mark(row)}
+              </button>
+            ) : (
+              mark(row)
+            )}
+            <ItemTitle row={row} editable={editable} />
+            {row.milestone && <span className="ml-auto truncate text-[11px] text-faint">{row.milestone}</span>}
+            {row.url && (
+              <a className="no-drag flex-none text-[11px] text-accent" href={row.url} target="_blank" rel="noreferrer">
+                #{row.issue.split('#')[1]}
+              </a>
+            )}
+            {editable && (
+              <button type="button" className="no-drag flex-none text-faint opacity-0 hover:text-bad group-hover:opacity-100 focus:opacity-100" aria-label={`${t('common.delete')}: ${row.title}`} onClick={() => remove(row)}>
+                ×
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+      {editable && (
+        <div className="no-drag flex gap-1 border-t border-line p-2">
+          <input className="input h-8 min-w-0 flex-1 text-xs" aria-label={t('projects.card.newItem')} placeholder={t('projects.card.newItem')} value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
+          <button type="button" className="btn h-8 flex-none" disabled={!title.trim()} onClick={add} aria-label={t('projects.card.addItem')}>+</button>
+        </div>
+      )}
+    </div>
   )
 }
 

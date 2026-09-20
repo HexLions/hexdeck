@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { get } from '../api/client'
-import { listProjects } from '../api/projects'
+import { createProject, listProjects } from '../api/projects'
 import type { BoardSummary, FieldSpec, Integration } from '../api/types'
 import { tAdapter } from '../i18n/texts'
 import { PicturePicker } from './PicturePicker'
@@ -261,6 +261,8 @@ function RemoteChoice({ spec, value, onChange, label, help, integrationId }: {
  * project's id arrives as `projectId`, which is what the sheet passes for
  * a field's `from_field`.
  */
+const NEW_PROJECT = '__new__'
+
 function ProjectPicker({ spec, value, onChange, label, help, projectId }: {
   spec: FieldSpec
   value: unknown
@@ -270,8 +272,24 @@ function ProjectPicker({ spec, value, onChange, label, help, projectId }: {
   projectId?: number
 }) {
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
   const projects = useQuery({ queryKey: ['projects'], queryFn: listProjects })
   const chosen = typeof value === 'string' ? value : ''
+  /** "New project…" asks for a name, creates it and picks it, without leaving the sheet. */
+  const pick = (next: string) => {
+    if (next !== NEW_PROJECT) {
+      onChange(next)
+      return
+    }
+    const name = window.prompt(t('projects.card.newName'))?.trim()
+    if (!name) return
+    void createProject({ name })
+      .then((created) => {
+        onChange(String(created.id))
+        return queryClient.invalidateQueries({ queryKey: ['projects'] })
+      })
+      .catch(() => undefined)
+  }
   const rows = projects.data ?? []
   const options =
     spec.type === 'milestone'
@@ -291,7 +309,7 @@ function ProjectPicker({ spec, value, onChange, label, help, projectId }: {
       </Field>
     )
   }
-  if (rows.length === 0) {
+  if (rows.length === 0 && spec.type === 'milestone') {
     return (
       <Field label={label} help={help}>
         <p className="text-[12px] text-faint">{t('projects.none')}</p>
@@ -299,9 +317,10 @@ function ProjectPicker({ spec, value, onChange, label, help, projectId }: {
     )
   }
   const blank = spec.type === 'milestone' ? t('projects.everyMilestone') : spec.required ? t('widget.choices.unset') : t('projects.everyProject')
+  const extra = spec.type === 'project' ? [{ value: NEW_PROJECT, label: t('projects.newProject') }] : []
   return (
     <Field label={label} help={help} htmlFor={`f-${spec.name}`}>
-      <Select id={`f-${spec.name}`} value={chosen} onChange={(next) => onChange(next)} options={[{ value: '', label: blank }, ...options]} />
+      <Select id={`f-${spec.name}`} value={chosen} onChange={pick} options={[{ value: '', label: blank }, ...options, ...extra]} />
     </Field>
   )
 }

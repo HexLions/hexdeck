@@ -788,6 +788,7 @@
     "pickProjectFirst": "Scegli prima il progetto.",
     "none": "Ancora nessun progetto. Creane uno in Impostazioni, Progetti.",
     "everyProject": "Tutti i progetti",
+    "newProject": "+ Nuovo progetto…",
     "everyMilestone": "Tutte le milestone",
     "daysLeft_one": "tra {{count}} giorno",
     "daysLeft_other": "tra {{count}} giorni",
@@ -797,6 +798,19 @@
     "next": "Prossima",
     "status": { "active": "Attivo", "paused": "In pausa", "done": "Concluso" },
     "item": { "todo": "Da fare", "doing": "In corso", "done": "Fatto" },
+    "card": {
+      "noProject": "Nessun progetto scelto.",
+      "pick": "Scegli un progetto",
+      "newName": "Nome di un nuovo progetto",
+      "create": "Crea",
+      "newMilestone": "Nuova milestone",
+      "addMilestone": "Aggiungi milestone",
+      "finish": "Segna come conclusa",
+      "reopen": "Riapri",
+      "newItem": "Aggiungi un item",
+      "addItem": "Aggiungi item",
+      "rename": "Clicca per rinominare"
+    },
     "page": {
       "title": "Progetti",
       "help": "Cosa si sta costruendo, con milestone e item. Le card sulle board leggono da qui.",

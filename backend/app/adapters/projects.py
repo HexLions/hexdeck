@@ -85,21 +85,21 @@ class ProjectsAdapter(Adapter):
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         today = date.today()
         milestones = [
-            {"id": 1, "title": "Fill the screen", "project": "HexDeck", "colour": "#3aa0ff",
+            {"id": 1, "title": "Fill the screen", "project": "HexDeck", "project_id": 0, "colour": "#3aa0ff",
              "date": (today - timedelta(days=2)).isoformat(), "days": -2, "status": "late"},
-            {"id": 2, "title": "Projects and roadmap", "project": "HexDeck", "colour": "#3aa0ff",
+            {"id": 2, "title": "Projects and roadmap", "project": "HexDeck", "project_id": 0, "colour": "#3aa0ff",
              "date": (today + timedelta(days=9)).isoformat(), "days": 9, "status": "soon"},
-            {"id": 3, "title": "GitHub adapter", "project": "HexDeck", "colour": "#3aa0ff",
+            {"id": 3, "title": "GitHub adapter", "project": "HexDeck", "project_id": 0, "colour": "#3aa0ff",
              "date": (today + timedelta(days=40)).isoformat(), "days": 40, "status": "open"},
         ]
         if widget_kind == "roadmap":
             return WidgetData(status="bad", items=milestones, primary={"label": "Due in 4 weeks", "value": 1},
-                              meta={"today": today.isoformat(), "weeks": 4})
+                              meta={"today": today.isoformat(), "weeks": 4, "projects": [], "demo": True})
         if widget_kind == "project":
             return WidgetData(status="ok", primary={"label": "Done", "value": 50, "unit": "%"},
                               secondary=[{"label": "Items", "value": "3 / 6"}, {"label": "Milestones open", "value": 3}],
                               items=[{"repo": "HexLions/hexdeck", "url": "https://github.com/HexLions/hexdeck"}],
-                              meta={"name": "HexDeck", "colour": "#3aa0ff", "status": "active", "next": milestones[1]})
+                              meta={"name": "HexDeck", "colour": "#3aa0ff", "status": "active", "next": milestones[1], "demo": True})
         items = [
             {"id": 1, "title": "Columns per board", "notes": "", "status": "done", "milestone": "Fill the screen", "issue": "", "url": ""},
             {"id": 2, "title": "Fit to screen", "notes": "", "status": "done", "milestone": "Fill the screen", "issue": "", "url": ""},
@@ -139,17 +139,23 @@ def _roadmap(db: Any, options: dict[str, Any], today: date) -> WidgetData:
         status, days = _grade(milestone, today, weeks)
         if status == "done" and not options.get("done"):
             continue
-        rows.append({"id": milestone.id, "title": milestone.title, "project": project.name, "colour": project.colour,
-                     "date": milestone.target_date.isoformat() if milestone.target_date else None, "days": days, "status": status})
+        rows.append({"id": milestone.id, "title": milestone.title, "project": project.name, "project_id": project.id,
+                     "colour": project.colour, "date": milestone.target_date.isoformat() if milestone.target_date else None,
+                     "days": days, "status": status})
     # By date; the undated ones last, and among them by project then title.
     rows.sort(key=lambda r: (r["date"] is None, r["date"] or "", r["project"], r["title"]))
     due = sum(1 for r in rows if r["status"] == "soon")
     late = any(r["status"] == "late" for r in rows)
+    # The projects a milestone may be added to from the card: the chosen one, or all.
+    projects_query = select(Project).order_by(Project.position, Project.id)
+    if only.isdigit():
+        projects_query = projects_query.where(Project.id == int(only))
+    projects = [{"id": p.id, "name": p.name} for p in db.scalars(projects_query)]
     return WidgetData(
         status="bad" if late else "warn" if due else "ok",
         items=rows,
         primary={"label": f"Due in {weeks} weeks", "value": due},
-        meta={"today": today.isoformat(), "weeks": weeks, "empty": "No milestones yet"},
+        meta={"today": today.isoformat(), "weeks": weeks, "projects": projects, "empty": "No milestones yet"},
     )
 
 
@@ -173,7 +179,8 @@ def _project(db: Any, options: dict[str, Any], today: date) -> WidgetData:
         primary={"label": "Done", "value": round(100 * done / total) if total else 0, "unit": "%"},
         secondary=[{"label": "Items", "value": f"{done} / {total}"}, {"label": "Milestones open", "value": len(open_ones)}],
         items=[{"repo": r.repo, "url": f"https://github.com/{r.repo}"} for r in project.repos],
-        meta={"name": project.name, "colour": project.colour, "status": project.status, "description": project.description, "next": nxt},
+        meta={"project_id": project.id, "name": project.name, "colour": project.colour, "status": project.status,
+              "description": project.description, "next": nxt},
     )
 
 
