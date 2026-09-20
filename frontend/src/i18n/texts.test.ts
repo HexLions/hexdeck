@@ -7,11 +7,13 @@ import i18next from 'i18next'
 
 import './index'
 import de from './texts.de.json'
+import italian from './texts.it.json'
 import { registerTexts, translateText, type TextBundle } from './texts'
 
 describe('server texts', () => {
   beforeAll(() => {
     registerTexts('de', de as TextBundle)
+    registerTexts('it', italian as TextBundle)
   })
   afterEach(async () => {
     await i18next.changeLanguage('en')
@@ -28,6 +30,17 @@ describe('server texts', () => {
     expect(translateText('labels', 'Restart')).toBe('Neustarten')
     expect(translateText('adapter', 'Show seconds')).toBe('Sekunden anzeigen')
     expect(translateText('adapter', "Empty means the browser's zone.")).toBe('Leer nimmt die Zeitzone des Browsers.')
+  })
+
+  it('translate known words and patterns in Italian', async () => {
+    await i18next.changeLanguage('it')
+    expect(translateText('labels', 'Used')).toBe('Usato')
+    expect(translateText('labels', 'Restart')).toBe('Riavvia')
+    expect(translateText('adapter', 'Show seconds')).toBe('Mostra i secondi')
+    expect(translateText('labels', '1.1 TB of 3.6 TB · normal')).toBe('1.1 TB di 3.6 TB · normal')
+    expect(translateText('labels', 'Up 3 days')).toBe('Attivo da 3 giorni')
+    expect(translateText('labels', 'UniFi answers · 24 devices online · 76 clients')).toBe('UniFi risponde · 24 dispositivi online · 76 client')
+    expect(translateText('labels', 'restic/restic · Exited (0) 5 months ago')).toBe('restic/restic · Uscito (0) 5 mesi fa')
   })
 
   it('translate phrases with numbers by pattern', async () => {
