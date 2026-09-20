@@ -35,3 +35,10 @@ Updated at every milestone.
   fit-to-screen row height are settings of each board. No stored layout of
   an existing board changes; new boards and the demo are created on 24
   columns. Adapter sizes stay in twelfths and are scaled at the grid.
+- **Restyle.** HexDeck's own look as a theme layer: default colour tokens
+  in both brightnesses, opaque panels instead of glass, a hexagonal mark,
+  favicon and app icons, hexagonal status marks, avatars and spinner, a
+  hexagonal tessellation behind the board, Manrope for the wordmark, and
+  "HexDeck blue" as the default accent preset. Components, layout and the
+  operator's own accent and stylesheet are unchanged; nexdeck's cyan stays
+  as a preset.
