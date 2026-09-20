@@ -375,8 +375,13 @@ def put_columns(slug: str, body: BoardColumns, user: CurrentUser, db: DbSession)
         answer.append({"id": page.id, "layouts": layouts, "version": page.layout_version})
     board.settings = {**(board.settings or {}), "columns": body.columns}
     db.commit()
-    for entry in answer:
-        hub.publish(board_topic(board.id), "layout", {"page_id": entry["id"], "layouts": entry["layouts"], "version": entry["version"]})
+    # ⚠️ One ``board`` event, not a ``layout`` event per page. Reproduced on
+    # 20.09.2026 in edit mode: the per-page event put the rescaled layouts
+    # into the open browser while its settings still said the old columns,
+    # the grid pulled the cards that now hung over the edge back in, pushed
+    # the rest down, and the browser saved that as the arrangement. Settings
+    # and layouts have to arrive together, which a refetch of the board does.
+    hub.publish(board_topic(board.id), "board", {"id": board.id, "changed": True})
     return {"columns": body.columns, "pages": answer}
 
 

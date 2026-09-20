@@ -131,3 +131,22 @@ def test_a_patch_without_the_columns_keeps_them(client: TestClient) -> None:
     client.patch(f"/api/v1/boards/{board['slug']}", json={"settings": {"fit_screen": True}}, headers=CSRF)
     settings = client.get(f"/api/v1/boards/{board['slug']}").json()["settings"]
     assert settings == {"fit_screen": True, "columns": 24}
+
+
+def test_changing_the_columns_tells_browsers_to_reload_the_whole_board(client: TestClient, monkeypatch) -> None:
+    """⚠️ Reproduced in edit mode: a per-page ``layout`` event put the rescaled
+    layouts into the open browser while its settings still said the old columns.
+    The grid corrected the cards that now hung over the edge, pushed the rest
+    down, and the browser saved that as the arrangement. One ``board`` event
+    makes the browser fetch settings and layouts together."""
+    from app.services import sse
+
+    events: list[tuple[str, str]] = []
+    monkeypatch.setattr(sse.hub, "publish", lambda topic, event, payload: events.append((topic, event)))
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Atomic"}, headers=CSRF).json()
+    events.clear()
+    assert client.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 36}, headers=CSRF).status_code == 200
+    kinds = [event for _topic, event in events]
+    assert "layout" not in kinds, "a layout event lands before the settings do"
+    assert kinds == ["board"]

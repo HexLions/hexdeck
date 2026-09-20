@@ -401,7 +401,10 @@ export function BoardPage() {
           editing={editing}
           canAct={canAct}
           autoCompact={Boolean(settings.compact)}
-          columns={columnsOf(settings)}
+          // ⚠️ From the saved settings, never the preview: the sheet previews its
+          // settings live, and columns that changed before the rescaled layouts
+          // arrived tripled every card's floor, pushed the rest down and got saved.
+          columns={columnsOf(data?.settings)}
           fitScreen={Boolean(settings.fit_screen)}
           onLayoutChange={onLayoutChange}
           onAction={onAction}

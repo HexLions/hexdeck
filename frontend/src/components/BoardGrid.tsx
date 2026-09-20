@@ -124,7 +124,14 @@ export function BoardGrid(props: Props) {
         </p>
       )}
       <div ref={host}>
+      {/* ⚠️ Remounted when the columns change. The responsive wrapper hands the
+          inner grid a new layout from its props but the columns from its own
+          state, which catches up one render later: for that render a
+          36-column layout sat on a 24-column grid, the cards past the edge
+          were pulled in, the rest pushed down, and edit mode saved that. A
+          fresh mount reads both from the props together. */}
       <ResponsiveGrid
+        key={columns}
         className={`board ${editing ? 'board-editing' : ''}`}
         layouts={gridLayouts}
         breakpoints={BREAKPOINTS}

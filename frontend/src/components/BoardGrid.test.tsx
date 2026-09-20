@@ -205,3 +205,29 @@ describe('stackedFor', () => {
     expect(wideCards.map((s) => s.w)).toEqual([4, 4])
   })
 })
+
+/**
+ * ⚠️ Changing the columns of a board rearranged it. react-grid-layout's
+ * responsive wrapper hands the inner grid the new layout from its props but
+ * the columns from its own state, which only catches up after the render:
+ * for one render a 36-column layout sat on a 24-column grid, the cards past
+ * the edge were pulled in, the rest pushed down, and edit mode saved that.
+ * Reproduced on 20.09.2026 through the settings sheet.
+ */
+describe('changing the columns', () => {
+  it('never reports a moved card when layout and columns change together', () => {
+    const widgets = [widget(1, [3, 2], [2, 1]), widget(2, [3, 2], [2, 1])]
+    const at24 = { lg: [{ i: '1', x: 12, y: 0, w: 6, h: 2 }, { i: '2', x: 18, y: 0, w: 6, h: 2 }], md: [], sm: [] }
+    const at36 = { lg: [{ i: '1', x: 18, y: 0, w: 9, h: 2 }, { i: '2', x: 27, y: 0, w: 9, h: 2 }], md: [], sm: [] }
+    const saved = vi.fn()
+    const noop = () => {}
+    const props = {
+      widgets, data: {}, editing: true, canAct: true, autoCompact: false,
+      onAction: noop, onRefresh: noop, onSettings: noop, onRemove: noop, onLayoutChange: saved,
+    } as unknown as Parameters<typeof BoardGrid>[0]
+    const view = render(<BoardGrid {...props} layouts={at24} columns={24} />)
+    view.rerender(<BoardGrid {...props} layouts={at36} columns={36} />)
+    const moved = saved.mock.calls.map(([, layout]) => (layout as LayoutItem[]).map(({ i, x, y, w }) => `${i}:${x},${y},${w}`).join(' '))
+    expect(moved.filter((line) => line !== '1:18,0,9 2:27,0,9')).toEqual([])
+  })
+})
