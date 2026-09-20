@@ -74,6 +74,11 @@ DEMO_PAGES: list[tuple[str, list[Spec]]] = [
         ("jsonapi.value", "Server room", "jsonapi", {"label": "Server room", "unit": "°C", "value_path": "temperature"}, (8, 8, 2, 2)),
         ("homeassistant.entities", "House", "homeassistant", {"entity_ids": "light.kitchen\nswitch.garden_pump"}, (10, 8, 2, 3)),
     ]),
+    ("Projects", [
+        ("projects.roadmap", "Roadmap", None, {"weeks": "8"}, (0, 0, 8, 2)),
+        ("projects.project", "HexDeck", None, {}, (8, 0, 4, 2)),
+        ("projects.items", "Items", None, {}, (0, 2, 6, 3)),
+    ]),
 ]
 
 DEMO_ICONS = {"Radarr": "radarr", "Sonarr": "sonarr", "Jellyfin": "jellyfin", "Pi-hole": "pi-hole"}

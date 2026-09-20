@@ -47,3 +47,7 @@ Updated at every milestone.
 - **Arranging.** Several cards can be selected (Shift or Ctrl and a click)
   and moved together by drag or arrow keys; "Tidy up" in edit mode puts
   every card of a page back in reading order without gaps, sizes kept.
+- **M3 — Projects and roadmap.** Projects, milestones, items and linked
+  repositories in HexDeck's own database, a settings page to manage them,
+  and three cards (`projects.roadmap`, `projects.project`,
+  `projects.items`) for any board. GitHub is read only.

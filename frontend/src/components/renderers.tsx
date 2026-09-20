@@ -1351,7 +1351,9 @@ export function RoadmapCard({ data }: RenderProps) {
   if (!items.length) return <Empty>{tLabel(String(meta.empty ?? '')) || t('card.nothing')}</Empty>
   const dated = items.filter((m) => m.date)
   const undated = items.filter((m) => !m.date)
-  const at = (m: RoadmapItem) => Math.max(0, Math.min(100, ((m.days ?? 0) / span) * 100))
+  // Marks stay inside 3..97 % so a title at either end has room on both sides.
+  const at = (m: RoadmapItem) => 3 + Math.max(0, Math.min(94, ((m.days ?? 0) / span) * 94))
+  const align = (pct: number) => (pct < 15 ? 'left-0 translate-x-0' : pct > 85 ? 'right-0 translate-x-0' : 'left-1/2 -translate-x-1/2')
   return (
     <div className="flex h-full flex-col gap-2 p-3">
       <div className="flex items-baseline justify-between text-xs text-muted">
@@ -1359,11 +1361,11 @@ export function RoadmapCard({ data }: RenderProps) {
         <span className="num text-lg font-semibold text-ink">{String(data?.primary?.value ?? 0)}</span>
       </div>
       <div className="relative mt-4 h-px w-full bg-line-strong">
-        <span className="absolute -top-2 left-0 h-4 w-px bg-accent" aria-hidden="true" />
+        <span className="absolute -top-2 h-4 w-px bg-accent" style={{ left: '3%' }} aria-hidden="true" />
         {dated.map((m) => (
           <div key={m.id} data-grade={m.status} className="absolute -top-1.5" style={{ left: `${at(m)}%` }} title={`${m.project} · ${m.date}`}>
             <span className="block h-3 w-3 hex-clip" style={{ background: m.colour || GRADE_COLOUR[m.status], outline: `2px solid ${GRADE_COLOUR[m.status]}`, outlineOffset: 1 }} />
-            <span className="roadmap-label absolute left-1/2 top-4 -translate-x-1/2 whitespace-nowrap text-[11px]">{m.title}</span>
+            <span className={`roadmap-label absolute top-4 whitespace-nowrap text-[11px] ${align(at(m))}`}>{m.title}</span>
           </div>
         ))}
       </div>
