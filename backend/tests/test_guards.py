@@ -698,7 +698,7 @@ def test_the_version_is_the_same_in_every_place_it_is_written() -> None:
 
 #: Adapters that are not a service anybody connects to: the built-in cards,
 #: the generic JSON reader and the calendar that merges other people's.
-NOT_A_SERVICE = {"core", "jsonapi", "calendar"}
+NOT_A_SERVICE = {"core", "jsonapi", "calendar", "projects"}
 
 
 def test_the_readme_counts_the_services_it_has() -> None:

@@ -32,13 +32,16 @@ logger = logging.getLogger("hexdeck.adapters")
 #: kinds that may be picked; the server checks both the kind and whether the
 #: person editing may build on that connection at all.
 FieldType = Literal["text", "password", "url", "number", "bool", "select", "integrations",
-                    "textarea", "timezone", "items", "choices", "colour", "board", "pictures"]
+                    "textarea", "timezone", "items", "choices", "colour", "board", "pictures",
+                    "project", "milestone"]
 #: ``items`` picks among the rows a card is showing; ``choices`` picks among
 #: values the service itself hands out, through ``Adapter.choices``;
 #: ``board`` picks one of this installation's own boards, which no service
 #: knows about; ``pictures`` is a list somebody builds by uploading files
 #: or naming addresses, not a text field with a syntax.
 Status = Literal["ok", "warn", "bad", "unknown"]
+#: ``project`` and ``milestone`` pick among HexDeck's own projects; ``milestone``
+#: reads the project from ``from_field``.
 
 
 @dataclass(frozen=True)
@@ -124,6 +127,9 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "log": (3, 2),
     "timeline": (3, 2),
     "bars": (3, 2),
+    "roadmap": (4, 2),
+    "project": (3, 2),
+    "items": (3, 2),
 }
 #: For a renderer nobody listed. Two by two is the smallest that holds a title
 #: and a line under it without one sitting on the other.
