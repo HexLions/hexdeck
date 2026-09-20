@@ -101,6 +101,10 @@ class BoardPatch(BaseModel):
     in_menu: bool | None = None
 
 
+class BoardColumns(BaseModel):
+    columns: Literal[12, 24, 36]
+
+
 class BoardOrder(BaseModel):
     """The slugs in the order the menu should show them."""
 
@@ -123,7 +127,7 @@ class LayoutItem(BaseModel):
     i: str
     x: int = Field(ge=0)
     y: int = Field(ge=0)
-    w: int = Field(ge=1, le=12)
+    w: int = Field(ge=1, le=36)
     h: int = Field(ge=1, le=40)
 
 

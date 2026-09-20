@@ -16,6 +16,7 @@ from ..adapters import get_adapter, split_widget_kind
 from ..models import Board, Integration, Page, Widget
 from . import health as health_service
 from .boards import COLUMNS, place_widget, unique_slug
+from .layout import NEW_BOARD_COLUMNS
 
 Spec = tuple[str, str, str | None, dict[str, Any], tuple[int, int, int, int]]
 """(widget kind, title, integration kind or None, options, (x, y, w, h) on the large layout)"""
@@ -100,7 +101,10 @@ def _layout_all(page: Page, widget_id: int, lg: tuple[int, int, int, int]) -> No
     """
     x, y, w, h = lg
     layouts = {key: list(value) for key, value in (page.layouts or {}).items()}
-    layouts.setdefault("lg", []).append({"i": str(widget_id), "x": x, "y": y, "w": w, "h": h})
+    # The specs above are in twelfths; the demo board is a new board and has
+    # the columns of one. The phone and tablet rows below keep the twelfths.
+    scale = NEW_BOARD_COLUMNS // 12
+    layouts.setdefault("lg", []).append({"i": str(widget_id), "x": x * scale, "y": y, "w": w * scale, "h": h})
     # Medium and small screens reflow below one another; the grid packs them.
     layouts.setdefault("md", []).append({"i": str(widget_id), "x": (x * 8 // 12) % 8, "y": y, "w": max(2, min(8, round(w * 8 / 12))), "h": h})
     layouts.setdefault("sm", []).append({"i": str(widget_id), "x": 0 if w > 2 else (x % 2) * 2, "y": y * 2, "w": 4 if w > 2 else 2, "h": h})
@@ -109,7 +113,8 @@ def _layout_all(page: Page, widget_id: int, lg: tuple[int, int, int, int]) -> No
 
 def create_demo(db: Session, owner_id: int | None) -> Board:
     cache: dict[str, Integration] = {}
-    board = Board(slug=unique_slug(db, "home"), name="Home", icon="layout-dashboard", owner_id=owner_id, background={"kind": "bundled", "value": "aurora"})
+    board = Board(slug=unique_slug(db, "home"), name="Home", icon="layout-dashboard", owner_id=owner_id, background={"kind": "bundled", "value": "aurora"},
+                  settings={"columns": NEW_BOARD_COLUMNS})
     db.add(board)
     db.flush()
     for position, (page_name, specs) in enumerate(DEMO_PAGES):
@@ -156,6 +161,6 @@ def create_starter(db: Session, owner_id: int | None, docker_host: str = "") -> 
         widget = Widget(page_id=page.id, kind=kind, title=title, icon=adapter.icon if adapter.kind != "core" else "", options=options, integration_id=integration_id)
         db.add(widget)
         db.flush()
-        place_widget(page, widget.id, widget_type.default_size, widget_type.min_size)
+        place_widget(page, widget.id, widget_type.default_size, widget_type.min_size, NEW_BOARD_COLUMNS)
     db.flush()
     return board

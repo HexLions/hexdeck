@@ -16,8 +16,12 @@ from ..deps import error, require_integration
 from ..models import Board, Integration, Page, User, Widget
 from . import health as health_service
 from .integrations import export_config, store_config
+from .layout import columns_of, scale_size
 from .state import live
 
+#: The screens a page keeps a layout for and their columns. ``lg`` is the
+#: board's own, see ``columns_of``; twelve here is the fallback for code that
+#: has no board at hand.
 COLUMNS = {"lg": 12, "md": 8, "sm": 4}
 
 
@@ -59,11 +63,13 @@ class Placer:
     only the bookkeeping moved out of the loop.
     """
 
-    def __init__(self, page: Page) -> None:
+    def __init__(self, page: Page, columns: int = COLUMNS["lg"]) -> None:
         self.page = page
+        #: The columns of each screen; the wide one is the board's own.
+        self.cols = {**COLUMNS, "lg": columns}
         self.layouts: dict[str, list[dict]] = {key: list(value or []) for key, value in (page.layouts or {}).items()}
         self._edge: dict[str, tuple[int, int, int]] = {}
-        for key in COLUMNS:
+        for key in self.cols:
             self.layouts.setdefault(key, [])
             self._edge[key] = self._measure(self.layouts[key])
 
@@ -92,9 +98,13 @@ class Placer:
 
     def add(self, widget_id: int, size: tuple[int, int], min_size: tuple[int, int]) -> None:
         """Give a card a spot at the bottom of every breakpoint."""
-        for key, cols in COLUMNS.items():
+        for key, cols in self.cols.items():
             items = self.layouts[key]
-            w = min(cols, max(1, size[0] if key == "lg" else max(1, round(size[0] * cols / 12)) or 1))
+            # Sizes come in twelfths; the wide screen has the board's columns.
+            if key == "lg":
+                w = min(cols, max(1, scale_size(size, cols)[0]))
+            else:
+                w = min(cols, max(1, round(size[0] * cols / 12)) or 1)
             h = size[1]
             if key == "sm":
                 w = min(cols, max(2, w))
@@ -103,7 +113,8 @@ class Placer:
             # Fill the last row before opening a new one.
             if items and right + w <= cols:
                 x, y = right, top
-            items.append({"i": str(widget_id), "x": x, "y": y, "w": w, "h": h, "minW": min_size[0], "minH": min_size[1]})
+            min_w = scale_size(min_size, cols)[0] if key == "lg" else min_size[0]
+            items.append({"i": str(widget_id), "x": x, "y": y, "w": w, "h": h, "minW": min_w, "minH": min_size[1]})
             self._edge[key] = self._grown(self._edge[key], x, y, w, h)
 
     def add_at(self, widget_id: int, spots: dict[str, dict]) -> None:
@@ -117,9 +128,9 @@ class Placer:
         self.page.layouts = self.layouts
 
 
-def place_widget(page: Page, widget_id: int, size: tuple[int, int], min_size: tuple[int, int]) -> None:
+def place_widget(page: Page, widget_id: int, size: tuple[int, int], min_size: tuple[int, int], columns: int = COLUMNS["lg"]) -> None:
     """Give a single new widget a spot at the bottom of every breakpoint."""
-    placer = Placer(page)
+    placer = Placer(page, columns)
     placer.add(widget_id, size, min_size)
     placer.finish()
 
@@ -527,7 +538,7 @@ def import_board(
         page = Page(board_id=board.id, name=str(page_doc.get("name") or f"Page {position + 1}"), slug=slugify(str(page_doc.get("slug") or page_doc.get("name") or f"page-{position + 1}")), icon=str(page_doc.get("icon") or ""), position=position, layouts={key: [] for key in COLUMNS})
         db.add(page)
         db.flush()
-        placer = Placer(page)
+        placer = Placer(page, columns_of(board.settings))
         for widget_doc in page_doc.get("widgets") or []:
             kind = str(widget_doc.get("kind") or "")
             try:
@@ -546,7 +557,7 @@ def import_board(
                 spots = {}
                 for key in COLUMNS:
                     item = layout.get(key) or layout.get("lg") or {}
-                    spots[key] = {"x": int(item.get("x", 0)), "y": int(item.get("y", 0)), "w": min(COLUMNS[key], int(item.get("w", widget_type.default_size[0]))), "h": int(item.get("h", widget_type.default_size[1]))}
+                    spots[key] = {"x": int(item.get("x", 0)), "y": int(item.get("y", 0)), "w": min(placer.cols[key], int(item.get("w", widget_type.default_size[0]))), "h": int(item.get("h", widget_type.default_size[1]))}
                 placer.add_at(widget.id, spots)
             else:
                 placer.add(widget.id, widget_type.default_size, widget_type.min_size)

@@ -6,7 +6,13 @@ arranged before HexDeck was, so nothing on it moves.
 
 from __future__ import annotations
 
+from fastapi.testclient import TestClient
+
+from app.models import Page
+from app.services.boards import place_widget
 from app.services.layout import columns_of, normalise_settings, scale_layout, scale_size
+
+from .conftest import CSRF, create_user, login, setup_admin
 
 
 def test_a_board_without_the_key_has_twelve_columns() -> None:
@@ -45,3 +51,72 @@ def test_settings_are_normalised_and_the_rest_left_alone() -> None:
     assert normalise_settings({"max_width": 1920}) == {"max_width": 1920}
     assert normalise_settings({"max_width": 100}) == {}
     assert normalise_settings(None) == {}
+
+
+def _page() -> Page:
+    return Page(board_id=1, name="p", slug="p", position=0, layouts={"lg": [], "md": [], "sm": []})
+
+
+def test_a_new_card_on_a_24_column_board_is_twice_as_wide() -> None:
+    page = _page()
+    place_widget(page, 7, (3, 2), (2, 1), columns=24)
+    lg = page.layouts["lg"][0]
+    assert (lg["x"], lg["w"], lg["h"], lg["minW"], lg["minH"]) == (0, 6, 2, 4, 1)
+    # The phone stack is in its own four columns whatever the board has.
+    assert page.layouts["sm"][0]["w"] == 2
+
+
+def test_a_twelve_column_board_places_as_before() -> None:
+    page = _page()
+    place_widget(page, 7, (3, 2), (2, 1))
+    assert page.layouts["lg"][0]["w"] == 3
+
+
+def test_the_last_row_is_filled_in_the_board_columns() -> None:
+    page = _page()
+    place_widget(page, 1, (6, 2), (2, 1), columns=24)
+    place_widget(page, 2, (6, 2), (2, 1), columns=24)
+    one, two = page.layouts["lg"]
+    assert (one["x"], one["w"], two["x"], two["y"]) == (0, 12, 12, 0)
+
+
+def test_switching_a_board_to_24_columns_doubles_every_page(client: TestClient) -> None:
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Old"}, headers=CSRF).json()
+    page_id = board["pages"][0]["id"]
+    # A board from before: no columns in its settings means twelve.
+    assert client.patch(f"/api/v1/boards/{board['slug']}", json={"settings": {}}, headers=CSRF).status_code == 200
+    widget = client.post(f"/api/v1/pages/{page_id}/widgets", json={"kind": "core.clock"}, headers=CSRF).json()["widget"]
+    client.put(f"/api/v1/pages/{page_id}/layouts", json={"lg": [{"i": str(widget["id"]), "x": 3, "y": 0, "w": 3, "h": 2}]}, headers=CSRF)
+
+    answer = client.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 24}, headers=CSRF)
+    assert answer.status_code == 200, answer.text
+    lg = answer.json()["pages"][0]["layouts"]["lg"][0]
+    assert (lg["x"], lg["w"], lg["h"]) == (6, 6, 2)
+    after = client.get(f"/api/v1/boards/{board['slug']}").json()
+    assert after["settings"]["columns"] == 24
+    assert after["pages"][0]["layout_version"] == 2
+
+
+def test_the_columns_have_to_be_one_of_the_three(client: TestClient) -> None:
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Odd"}, headers=CSRF).json()
+    assert client.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 13}, headers=CSRF).status_code == 422
+
+
+def test_the_generic_patch_cannot_change_the_columns(client: TestClient) -> None:
+    """The layouts would be stranded in the old unit; only the endpoint that rescales them may."""
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Stuck"}, headers=CSRF).json()
+    client.patch(f"/api/v1/boards/{board['slug']}", json={"settings": {"columns": 12, "fit_screen": 1, "max_width": "wide"}}, headers=CSRF)
+    settings = client.get(f"/api/v1/boards/{board['slug']}").json()["settings"]
+    assert settings == {"columns": 24, "fit_screen": True}
+
+
+def test_a_viewer_may_not_change_the_columns(client: TestClient) -> None:
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Mine"}, headers=CSRF).json()
+    create_user(client, "kim")
+    other = TestClient(client.app)
+    login(other, "kim", "another-long-password")
+    assert other.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 24}, headers=CSRF).status_code in (403, 404)

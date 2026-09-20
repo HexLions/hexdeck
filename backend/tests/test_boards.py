@@ -429,3 +429,9 @@ def test_the_migration_runs_twice_without_changing_its_mind(client: TestClient) 
         raw = connection.execute(text("SELECT options FROM widgets WHERE id = :i"), {"i": widget["id"]}).scalar()
 
     assert json.loads(raw)["show_findings"] is False
+
+
+def test_a_new_board_is_arranged_on_twenty_four_columns(client: TestClient) -> None:
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Wide"}, headers=CSRF).json()
+    assert board["settings"]["columns"] == 24
