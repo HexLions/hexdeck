@@ -39,8 +39,10 @@ FORBIDDEN = (
     (re.compile(r"<\s*script", re.I), "A script does not belong in a style sheet."),
 )
 
-#: The ready-made colours. The first one is what HexDeck has always looked like.
+#: The ready-made colours. The first one is HexDeck's own; ``cyan`` is what
+#: nexdeck looked like, kept for the installations that chose it.
 PRESETS: dict[str, str] = {
+    "hex": "#3aa0ff",
     "cyan": "#22d3ee",
     "violet": "#a78bfa",
     "emerald": "#34d399",
@@ -49,7 +51,7 @@ PRESETS: dict[str, str] = {
     "sky": "#38bdf8",
     "slate": "#94a3b8",
 }
-DEFAULTS: dict[str, Any] = {"preset": "cyan", "accent": "", "css": ""}
+DEFAULTS: dict[str, Any] = {"preset": "hex", "accent": "", "css": ""}
 
 
 class AppearanceError(Exception):
@@ -63,7 +65,7 @@ def stored(db: DbSessionType) -> dict[str, Any]:
     row = db.get(Setting, KEY)
     value = {**DEFAULTS, **(dict(row.value) if row is not None else {})}
     return {
-        "preset": str(value.get("preset") or "cyan"),
+        "preset": str(value.get("preset") or "hex"),
         "accent": str(value.get("accent") or ""),
         "css": str(value.get("css") or ""),
         "presets": PRESETS,
@@ -75,7 +77,7 @@ def colour_of(config: dict[str, Any]) -> str:
     own = str(config.get("accent") or "").strip()
     if COLOUR.match(own):
         return own.lower()
-    return PRESETS.get(str(config.get("preset") or "cyan"), PRESETS["cyan"])
+    return PRESETS.get(str(config.get("preset") or "hex"), PRESETS["hex"])
 
 
 def check_css(css: str) -> str:
@@ -89,7 +91,7 @@ def check_css(css: str) -> str:
 
 
 def save(db: DbSessionType, incoming: dict[str, Any]) -> dict[str, Any]:
-    preset = str(incoming.get("preset") or "cyan")
+    preset = str(incoming.get("preset") or "hex")
     if preset not in PRESETS:
         raise AppearanceError("There is no such colour.", "no_such_preset")
     accent = str(incoming.get("accent") or "").strip()

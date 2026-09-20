@@ -313,6 +313,7 @@
       "previewChip": "Running",
       "previewText": "Highlighted",
       "colours": {
+        "hex": "HexDeck blue",
         "cyan": "Cyan",
         "violet": "Violet",
         "emerald": "Emerald",

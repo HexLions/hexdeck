@@ -10,6 +10,10 @@ export interface Background {
   dim?: number
 }
 
+/** One hexagon cell of the tessellation, 56 px across, as a mask: white where a line is. */
+const HEX_CELL =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 1 55 16.5v31L28 63 1 47.5v-31zM28 63v34M55 47.5l-27 15.5M1 47.5l27 15.5' fill='none' stroke='white' stroke-width='1'/%3E%3C/svg%3E\")"
+
 export const BUNDLED: Record<string, string> = {
   aurora:
     'radial-gradient(1200px 600px at 8% -10%, var(--nd-aurora-1), transparent 60%), radial-gradient(900px 520px at 92% 8%, var(--nd-aurora-2), transparent 60%), radial-gradient(900px 600px at 50% 115%, var(--nd-aurora-3), transparent 60%)',
@@ -44,13 +48,20 @@ export function BackgroundLayer({ background }: { background?: Background }) {
         <div className="absolute inset-0" style={{ background: gradient }} />
       )}
       {isImage && <div className="absolute inset-0" style={{ background: `rgba(6,9,14,${dim / 100})` }} />}
+      {/* The hexagonal tessellation: the cell drawn once as a mask, the line
+          colour taken from the theme so it holds in both brightnesses. */}
       <div
-        className="absolute inset-0 opacity-[0.35]"
+        className="absolute inset-0"
         style={{
-          backgroundImage:
-            'linear-gradient(color-mix(in srgb, var(--nd-text) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--nd-text) 4%, transparent) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-          maskImage: 'radial-gradient(ellipse at 50% 0%, black 20%, transparent 75%)',
+          backgroundColor: 'color-mix(in srgb, var(--nd-text) 11%, transparent)',
+          maskImage: `${HEX_CELL}, radial-gradient(ellipse at 50% 0%, black 25%, transparent 78%)`,
+          maskComposite: 'intersect',
+          WebkitMaskImage: `${HEX_CELL}, radial-gradient(ellipse at 50% 0%, black 25%, transparent 78%)`,
+          WebkitMaskComposite: 'source-in',
+          maskSize: '56px 97px, 100% 100%',
+          WebkitMaskSize: '56px 97px, 100% 100%',
+          maskRepeat: 'repeat, no-repeat',
+          WebkitMaskRepeat: 'repeat, no-repeat',
         }}
       />
     </div>

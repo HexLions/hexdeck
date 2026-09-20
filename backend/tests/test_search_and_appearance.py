@@ -131,6 +131,7 @@ def test_the_accent_is_the_preset_until_a_colour_of_ones_own_is_set() -> None:
     assert appearance.colour_of({"preset": "cyan", "accent": "#FF00AA"}) == "#ff00aa"
     # Something that is not a colour falls back rather than reaching the page.
     assert appearance.colour_of({"preset": "cyan", "accent": "red"}) == "#22d3ee"
+    assert appearance.colour_of({}) == "#3aa0ff", "the default is HexDeck blue"
 
 
 def test_the_look_is_stored_and_read_back(admin_client: TestClient) -> None:

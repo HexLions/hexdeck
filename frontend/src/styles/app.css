@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/manrope';
 
 /* ⚠️ Our own classes sit in `components`, so a utility written on the same element wins.
    Outside a layer they beat every utility, however specific: measured on 12.09.2026,
@@ -13,52 +14,53 @@
 
 /* ------------------------------------------------------------------------
  * Design tokens. Dark is the default; light redefines the same names.
- * Cinematic: a deep, cool anthracite with a blue tint, glass surfaces over
- * a soft aurora, one electric cyan accent. Green, amber and rose are reserved
- * for states and never used as decoration.
+ * HexDeck: a near-black blue-grey, opaque panels with a one-pixel line, one
+ * blue accent. Green, gold and red are reserved for states and never used
+ * as decoration. The operator's own accent and stylesheet still override
+ * these, see lib/appearance.ts.
  * ---------------------------------------------------------------------- */
 @layer base {
 :root {
-  --nd-bg: #0a0d12;
-  --nd-bg-elev: #0f131a;
-  --nd-surface: rgba(17, 22, 31, 0.64);
-  --nd-surface-strong: rgba(17, 22, 31, 0.92);
-  --nd-surface-hover: rgba(24, 31, 43, 0.78);
-  --nd-border: rgba(255, 255, 255, 0.07);
-  --nd-border-strong: rgba(255, 255, 255, 0.16);
-  --nd-text: #e7eaf0;
-  --nd-text-muted: #94a0b3;
-  --nd-text-faint: #8590a2;
-  --nd-accent: #22d3ee;
+  --nd-bg: #0a0c10;
+  --nd-bg-elev: #14171d;
+  --nd-surface: #14171d;
+  --nd-surface-strong: #14171d;
+  --nd-surface-hover: #1a1f27;
+  --nd-border: #262b34;
+  --nd-border-strong: #343b47;
+  --nd-text: #e9edf2;
+  --nd-text-muted: #8b93a1;
+  --nd-text-faint: #7d8593;
+  --nd-accent: #3aa0ff;
   /* The text that sits on an accent ground. Dark here, white in the light
-     theme, because the accent swaps from a bright cyan to a deep teal. */
-  --nd-on-accent: #041016;
-  --nd-accent-strong: #06b6d4;
-  --nd-accent-soft: rgba(34, 211, 238, 0.14);
-  --nd-accent-glow: rgba(34, 211, 238, 0.35);
-  --nd-ok: #34d399;
-  --nd-warn: #fbbf24;
-  --nd-bad: #fb7185;
+     theme, because the accent swaps from a bright blue to a deep one. */
+  --nd-on-accent: #061423;
+  --nd-accent-strong: #2b8ae6;
+  --nd-accent-soft: rgba(58, 160, 255, 0.14);
+  --nd-accent-glow: rgba(58, 160, 255, 0.35);
+  --nd-ok: #2fbf71;
+  --nd-warn: #ffd23f;
+  --nd-bad: #f0525a;
   --nd-unknown: #7f8b9e;
-  --nd-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-  --nd-radius: 16px;
-  --nd-radius-sm: 10px;
-  --nd-aurora-1: rgba(34, 211, 238, 0.16);
-  --nd-aurora-2: rgba(99, 102, 241, 0.14);
-  --nd-aurora-3: rgba(6, 182, 212, 0.1);
+  --nd-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  --nd-radius: 10px;
+  --nd-radius-sm: 8px;
+  --nd-aurora-1: rgba(58, 160, 255, 0.12);
+  --nd-aurora-2: rgba(99, 102, 241, 0.1);
+  --nd-aurora-3: rgba(58, 160, 255, 0.06);
   color-scheme: dark;
 }
 
 :root[data-theme='light'] {
-  --nd-bg: #eef1f5;
+  --nd-bg: #f4f6f8;
   --nd-bg-elev: #ffffff;
-  --nd-surface: rgba(255, 255, 255, 0.7);
-  --nd-surface-strong: rgba(255, 255, 255, 0.94);
-  --nd-surface-hover: rgba(255, 255, 255, 0.9);
-  --nd-border: rgba(15, 23, 42, 0.08);
-  --nd-border-strong: rgba(15, 23, 42, 0.16);
-  --nd-text: #0f172a;
-  --nd-text-muted: #55627a;
+  --nd-surface: #ffffff;
+  --nd-surface-strong: #ffffff;
+  --nd-surface-hover: #eef1f4;
+  --nd-border: #dfe2e5;
+  --nd-border-strong: #c8ccd1;
+  --nd-text: #1c232b;
+  --nd-text-muted: #5b6470;
   /* ⚠️ Six of these were below 4.5:1 as text in the light theme, measured
      against the page ground #eef1f5, which is the worse of the two surfaces
      they appear on. text-faint sat at 2.67 and unknown at 2.26, which is
@@ -67,19 +69,19 @@
      4.5 or better, because several of them are also badge grounds. Measured,
      not eyeballed; the guard test recomputes both directions. */
   --nd-text-faint: #556072;
-  --nd-accent: #0e7490;
+  --nd-accent: #1b63bd;
   --nd-on-accent: #ffffff;
-  --nd-accent-strong: #0c6b85;
-  --nd-accent-soft: rgba(14, 116, 144, 0.12);
-  --nd-accent-glow: rgba(14, 116, 144, 0.25);
-  --nd-ok: #047857;
-  --nd-warn: #a4560a;
-  --nd-bad: #be123c;
+  --nd-accent-strong: #16529d;
+  --nd-accent-soft: rgba(27, 99, 189, 0.12);
+  --nd-accent-glow: rgba(27, 99, 189, 0.25);
+  --nd-ok: #177a42;
+  --nd-warn: #8a6400;
+  --nd-bad: #c62828;
   --nd-unknown: #556070;
-  --nd-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
-  --nd-aurora-1: rgba(8, 145, 178, 0.14);
-  --nd-aurora-2: rgba(99, 102, 241, 0.1);
-  --nd-aurora-3: rgba(14, 165, 233, 0.1);
+  --nd-shadow: 0 1px 0 rgba(28, 35, 43, 0.08);
+  --nd-aurora-1: rgba(27, 99, 189, 0.1);
+  --nd-aurora-2: rgba(99, 102, 241, 0.08);
+  --nd-aurora-3: rgba(27, 99, 189, 0.06);
   color-scheme: light;
 }
 }
@@ -87,6 +89,7 @@
 @theme inline {
   --font-sans: 'Inter Variable', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Manrope Variable', 'Inter Variable', system-ui, sans-serif;
   --color-bg: var(--nd-bg);
   --color-elev: var(--nd-bg-elev);
   --color-surface: var(--nd-surface);
@@ -141,19 +144,16 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Glass surface used by cards, bars and sheets. */
+/* The panel surface used by cards, bars and sheets. Opaque: the class name
+   is upstream's, the blur is not, so the operator's stylesheets still apply. */
 .glass {
   background: var(--nd-surface);
   border: 1px solid var(--nd-border);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 
 .glass-strong {
   background: var(--nd-surface-strong);
   border: 1px solid var(--nd-border);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
 /* The widget card. */
@@ -197,46 +197,67 @@ body {
   cursor: grabbing;
 }
 
-/* Status dot with a soft halo. */
+/* Status mark: a hexagon in a soft hexagonal halo. The element is the halo
+   and the core is drawn inside it, because a clip-path cuts a box-shadow off.
+   Fourteen pixels with a negative margin, so it takes the room the old
+   eight-pixel dot with its three-pixel halo took. */
 .dot {
+  --dot-colour: var(--nd-unknown);
+  position: relative;
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--nd-unknown);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-unknown) 25%, transparent);
+  width: 14px;
+  height: 14px;
+  margin: -3px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: color-mix(in srgb, var(--dot-colour) 24%, transparent);
   flex: none;
 }
 
+.dot::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--dot-colour);
+}
+
 .dot[data-status='ok'] {
-  background: var(--nd-ok);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-ok) 22%, transparent);
+  --dot-colour: var(--nd-ok);
 }
 
 .dot[data-status='warn'] {
-  background: var(--nd-warn);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-warn) 22%, transparent);
+  --dot-colour: var(--nd-warn);
 }
 
 .dot[data-status='bad'] {
-  background: var(--nd-bad);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-bad) 25%, transparent);
+  --dot-colour: var(--nd-bad);
   animation: pulse 1.6s ease-in-out infinite;
 }
 
 .dot[data-status='accent'] {
-  background: var(--nd-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-accent) 22%, transparent);
+  --dot-colour: var(--nd-accent);
 }
 
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--nd-bad) 25%, transparent);
+    background: color-mix(in srgb, var(--dot-colour) 24%, transparent);
   }
   50% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--nd-bad) 8%, transparent);
+    background: color-mix(in srgb, var(--dot-colour) 55%, transparent);
   }
+}
+
+/* A hexagon out of any box: avatars and the like. */
+.hex-clip {
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+/* The wordmark and nothing else sets in the display face. */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 /* Chips in card footers. */
