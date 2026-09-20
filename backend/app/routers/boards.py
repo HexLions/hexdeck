@@ -179,8 +179,10 @@ def patch_board(slug: str, body: BoardPatch, user: CurrentUser, db: DbSession) -
         # layouts with them; set here they would strand every page in the old unit.
         settings = normalise_settings(body.settings)
         before = columns_of(board.settings)
-        if settings.get("columns", before) != before:
-            settings["columns"] = before
+        # ⚠️ Always written back, not only when the patch tried to change it: a
+        # patch that sent the other settings without this one turned a
+        # 24-column board into a 12-column one with every card twice too wide.
+        settings["columns"] = before
         board.settings = settings
     if body.position is not None:
         board.position = body.position

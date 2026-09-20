@@ -84,8 +84,8 @@ def test_switching_a_board_to_24_columns_doubles_every_page(client: TestClient) 
     setup_admin(client)
     board = client.post("/api/v1/boards", json={"name": "Old"}, headers=CSRF).json()
     page_id = board["pages"][0]["id"]
-    # A board from before: no columns in its settings means twelve.
-    assert client.patch(f"/api/v1/boards/{board['slug']}", json={"settings": {}}, headers=CSRF).status_code == 200
+    # A board from before: twelve columns (the endpoint is the one way down there).
+    assert client.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 12}, headers=CSRF).status_code == 200
     widget = client.post(f"/api/v1/pages/{page_id}/widgets", json={"kind": "core.clock"}, headers=CSRF).json()["widget"]
     client.put(f"/api/v1/pages/{page_id}/layouts", json={"lg": [{"i": str(widget["id"]), "x": 3, "y": 0, "w": 3, "h": 2}]}, headers=CSRF)
 
@@ -95,7 +95,8 @@ def test_switching_a_board_to_24_columns_doubles_every_page(client: TestClient) 
     assert (lg["x"], lg["w"], lg["h"]) == (6, 6, 2)
     after = client.get(f"/api/v1/boards/{board['slug']}").json()
     assert after["settings"]["columns"] == 24
-    assert after["pages"][0]["layout_version"] == 2
+    # One bump for the way down, one for the save, one for the way up.
+    assert after["pages"][0]["layout_version"] == 3
 
 
 def test_the_columns_have_to_be_one_of_the_three(client: TestClient) -> None:
@@ -120,3 +121,13 @@ def test_a_viewer_may_not_change_the_columns(client: TestClient) -> None:
     other = TestClient(client.app)
     login(other, "kim", "another-long-password")
     assert other.put(f"/api/v1/boards/{board['slug']}/columns", json={"columns": 24}, headers=CSRF).status_code in (403, 404)
+
+
+def test_a_patch_without_the_columns_keeps_them(client: TestClient) -> None:
+    """⚠️ Found on the demo board: a patch of the other settings dropped the key and the
+    24-column layouts were drawn on twelve."""
+    setup_admin(client)
+    board = client.post("/api/v1/boards", json={"name": "Keep"}, headers=CSRF).json()
+    client.patch(f"/api/v1/boards/{board['slug']}", json={"settings": {"fit_screen": True}}, headers=CSRF)
+    settings = client.get(f"/api/v1/boards/{board['slug']}").json()["settings"]
+    assert settings == {"fit_screen": True, "columns": 24}
