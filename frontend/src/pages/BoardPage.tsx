@@ -9,6 +9,7 @@ import type { BoardSummary, BoardWithLive } from '../api/types'
 import { ActionSheet, type PendingAction } from '../components/ActionSheet'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { BoardGrid } from '../components/BoardGrid'
+import { columnsOf, maxWidthOf } from '../lib/layout'
 import { BoardSettingsSheet } from '../components/BoardSettingsSheet'
 import { CommandPalette } from '../components/CommandPalette'
 import { DemoNotice } from '../components/DemoNotice'
@@ -363,7 +364,7 @@ export function BoardPage() {
         boards={menuBoards.map((b) => ({ id: b.id, name: b.name, slug: b.slug }))}
         onSwitchBoard={(boardSlug) => navigate(`/b/${boardSlug}`)}
       />
-      <main className="max-w-[1480px] mx-auto px-3 sm:px-4 pt-4">
+      <main className="mx-auto px-3 sm:px-4 pt-4" style={{ maxWidth: maxWidthOf(settings) }}>
         <DemoNotice admin={user?.role === 'admin'} />
         {widgets.length === 0 && (
           <div className="glass rounded-2xl p-8 text-center max-w-md mx-auto mt-10">
@@ -400,6 +401,8 @@ export function BoardPage() {
           editing={editing}
           canAct={canAct}
           autoCompact={Boolean(settings.compact)}
+          columns={columnsOf(settings)}
+          fitScreen={Boolean(settings.fit_screen)}
           onLayoutChange={onLayoutChange}
           onAction={onAction}
           onRefresh={onRefresh}

@@ -7,6 +7,7 @@ import { get, openKioskSession, post } from '../api/client'
 import type { BoardWithLive } from '../api/types'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { BoardGrid } from '../components/BoardGrid'
+import { columnsOf, maxWidthOf } from '../lib/layout'
 import { ActionSheet, type PendingAction } from '../components/ActionSheet'
 import { Spinner } from '../components/ui'
 import { startingValue, unanswered } from '../lib/unanswered'
@@ -173,7 +174,7 @@ export function KioskPage() {
           ))}
         </nav>
       )}
-      <main className="max-w-[1800px] mx-auto px-4 pt-4 pb-6">
+      <main className="mx-auto px-4 pt-4 pb-6" style={{ maxWidth: maxWidthOf(data.settings) }}>
         <BoardGrid
           key={page.id}
           widgets={widgets}
@@ -181,6 +182,8 @@ export function KioskPage() {
           data={liveData}
           series={liveSeries}
           autoCompact={Boolean(data.settings?.compact)}
+          columns={columnsOf(data.settings)}
+          fitScreen={Boolean(data.settings?.fit_screen)}
           canAct={canAct}
           onAction={(widgetId, action) => {
             // The same rule as on the board: a blank nobody filled in opens

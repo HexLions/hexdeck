@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { ApiError, del, get, patch, post, put, upload } from '../api/client'
+import { columnsOf, type Columns } from '../lib/layout'
 import type { BoardSummary, BoardWithLive, KioskToken } from '../api/types'
 import { BUNDLED } from './BackgroundLayer'
 import { Confirm, Field, Select, Sheet, Switch } from './ui'
@@ -54,6 +55,33 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
     if (open) onPreview?.(background, settings)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [background, settings, open])
+
+  const widthChoice = settings.max_width === 'full' ? 'full' : typeof settings.max_width === 'number' ? 'custom' : '1480'
+  const pickWidth = (choice: string) =>
+    setSettings((current) => {
+      const next = { ...current }
+      if (choice === 'full') next.max_width = 'full'
+      else if (choice === 'custom') next.max_width = 1920
+      else delete next.max_width
+      return next
+    })
+  /**
+   * The columns go through their own endpoint, which rescales every page
+   * with them; saved through the look they would strand the layouts.
+   */
+  const changeColumns = async (columns: Columns) => {
+    const before = columnsOf(settings)
+    if (columns === before) return
+    if (columns < before && !window.confirm(t('board.columnsShrink'))) return
+    setError('')
+    try {
+      await put(`/boards/${board.slug}/columns`, { columns })
+      setSettings((current) => ({ ...current, columns }))
+      onChanged()
+    } catch (failure) {
+      setError(failure instanceof ApiError ? failure.message : t('errors.network'))
+    }
+  }
 
   const saveLook = async () => {
     setError('')
@@ -172,6 +200,33 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
             </div>
           )}
           <Switch checked={Boolean(settings.compact)} onChange={(compact) => setSettings((current) => ({ ...current, compact }))} label={t('board.autoCompact')} description={t('board.autoCompactHelp')} />
+          <Field label={t('board.width')} htmlFor="board-width">
+            <select id="board-width" className="input" value={widthChoice} onChange={(e) => pickWidth(e.target.value)}>
+              <option value="1480">{t('board.widthDefault')}</option>
+              <option value="full">{t('board.widthFull')}</option>
+              <option value="custom">{t('board.widthCustom')}</option>
+            </select>
+            {widthChoice === 'custom' && (
+              <input
+                className="input mt-2"
+                type="number"
+                min={320}
+                max={10000}
+                step={10}
+                aria-label={t('board.widthCustom')}
+                value={typeof settings.max_width === 'number' ? settings.max_width : 1920}
+                onChange={(e) => setSettings((current) => ({ ...current, max_width: Number(e.target.value) }))}
+              />
+            )}
+          </Field>
+          <Switch checked={Boolean(settings.fit_screen)} onChange={(fit_screen) => setSettings((current) => ({ ...current, fit_screen }))} label={t('board.fitScreen')} description={t('board.fitScreenHelp')} />
+          <Field label={t('board.columns')} help={t('board.columnsHelp')} htmlFor="board-columns">
+            <select id="board-columns" className="input" value={columnsOf(settings)} onChange={(e) => void changeColumns(Number(e.target.value) as Columns)}>
+              {([12, 24, 36] as const).map((n) => (
+                <option key={n} value={n}>{t('board.columnsOption', { count: n })}</option>
+              ))}
+            </select>
+          </Field>
           <p className="text-[11px] text-faint mb-3">{t('board.previewHint')}</p>
           <button className="btn btn-accent" onClick={() => void saveLook()}>
             {t('common.save')}
