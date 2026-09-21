@@ -20,6 +20,7 @@ from typing import Any
 from sqlalchemy.orm import Session as DbSessionType
 
 from ..models import Setting
+from .themes import THEMES, TOKENS
 
 KEY = "appearance"
 #: Long enough for a real style sheet, short enough not to be a payload.
@@ -51,7 +52,9 @@ PRESETS: dict[str, str] = {
     "sky": "#38bdf8",
     "slate": "#94a3b8",
 }
-DEFAULTS: dict[str, Any] = {"preset": "hex", "accent": "", "css": ""}
+DEFAULTS: dict[str, Any] = {"preset": "hex", "accent": "", "css": "", "theme": None}
+#: A theme of one's own may be named; the name is shown, nothing else.
+MAX_THEME_NAME = 60
 
 
 class AppearanceError(Exception):
@@ -68,7 +71,9 @@ def stored(db: DbSessionType) -> dict[str, Any]:
         "preset": str(value.get("preset") or "hex"),
         "accent": str(value.get("accent") or ""),
         "css": str(value.get("css") or ""),
+        "theme": value.get("theme") or None,
         "presets": PRESETS,
+        "themes": THEMES,
     }
 
 
@@ -90,6 +95,40 @@ def check_css(css: str) -> str:
     return text
 
 
+def check_theme(theme: Any) -> dict[str, Any] | None:
+    """A theme as it may be stored: a name, and known tokens as #rrggbb for
+    dark and for light. Empty means the shipped look. Anything else, even one
+    stray key, is refused with the reason: a theme is pasted in from
+    somewhere, and a typo that silently drops a colour is the worst outcome."""
+    if theme is None or theme == {} or theme == "":
+        return None
+    if not isinstance(theme, dict):
+        raise AppearanceError("A theme is an object with a name, dark and light.", "bad_theme")
+    name = str(theme.get("name") or "").strip()
+    if len(name) > MAX_THEME_NAME:
+        raise AppearanceError(f"The theme's name is longer than {MAX_THEME_NAME} characters.", "bad_theme")
+    unknown = set(theme) - {"name", "dark", "light"}
+    if unknown:
+        raise AppearanceError(f"A theme has no {sorted(unknown)[0]!r}; only name, dark and light.", "bad_theme")
+    clean: dict[str, Any] = {"name": name}
+    for mode in ("dark", "light"):
+        tokens = theme.get(mode) or {}
+        if not isinstance(tokens, dict):
+            raise AppearanceError(f"The {mode} part of a theme is an object of tokens.", "bad_theme")
+        cleaned: dict[str, str] = {}
+        for key, value in tokens.items():
+            token = str(key).removeprefix("--nd-")
+            if token not in TOKENS:
+                raise AppearanceError(f"There is no token {str(key)!r}; the tokens are {', '.join(TOKENS)}.", "bad_theme")
+            if not isinstance(value, str) or not COLOUR.match(value.strip()):
+                raise AppearanceError(f"{token} in {mode} has to read like #22d3ee.", "bad_theme")
+            cleaned[token] = value.strip().lower()
+        clean[mode] = cleaned
+    if not clean["dark"] and not clean["light"]:
+        return None
+    return clean
+
+
 def save(db: DbSessionType, incoming: dict[str, Any]) -> dict[str, Any]:
     preset = str(incoming.get("preset") or "hex")
     if preset not in PRESETS:
@@ -97,7 +136,8 @@ def save(db: DbSessionType, incoming: dict[str, Any]) -> dict[str, Any]:
     accent = str(incoming.get("accent") or "").strip()
     if accent and not COLOUR.match(accent):
         raise AppearanceError("A colour of your own has to read like #22d3ee.", "bad_colour")
-    value = {"preset": preset, "accent": accent.lower(), "css": check_css(incoming.get("css") or "")}
+    value = {"preset": preset, "accent": accent.lower(), "css": check_css(incoming.get("css") or ""),
+             "theme": check_theme(incoming.get("theme"))}
     row = db.get(Setting, KEY)
     if row is None:
         db.add(Setting(key=KEY, value=value))

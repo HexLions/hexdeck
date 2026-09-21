@@ -409,6 +409,9 @@ class AppearanceBody(BaseModel):
     #: reaches the service and gets a sentence back instead of a 422.
     accent: str = Field(default="", max_length=32)
     css: str = Field(default="", max_length=20000)
+    #: A theme: ``{"name", "dark": {token: colour}, "light": {...}}``, or null for the shipped look.
+    #: Loosely typed here so a pasted theme gets a sentence back, not a 422.
+    theme: dict[str, Any] | None = None
 
 
 # -- projects -----------------------------------------------------------------

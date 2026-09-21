@@ -81,3 +81,10 @@ Updated at every milestone.
   the installation's own (or leaves them out with their cards) and goes
   through the ordinary import with the caller's rights; the wide layout is
   drawn, the narrower screens follow.
+- **Themes.** The appearance setting takes a theme: a name and the
+  fifteen colour tokens of the interface for dark and for light, checked
+  on the way in. Four bundled palettes (Nord, Catppuccin, Gruvbox,
+  Dracula) in `backend/app/services/themes.py`, settled so that text
+  clears 4.5:1 in both brightnesses; the page previews, imports and
+  exports a theme as JSON. A theme with its own accent is left alone by
+  the accent preset; a colour of one's own still wins.

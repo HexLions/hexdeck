@@ -298,6 +298,16 @@
       "hint": "Una scorciatoia davanti salta dritto lì: !y per YouTube."
     },
     "appearance": {
+      "themeTitle": "Tema",
+      "themeHelp": "I colori di tutta l'interfaccia, in entrambe le luminosità. Scegli una delle palette incluse, oppure incolla un tema condiviso da qualcuno; esporta il tuo per condividerlo.",
+      "themeShipped": "HexDeck",
+      "themeCustom": "Tema personale",
+      "themePaste": "Incolla un tema come JSON",
+      "themeImport": "Importa",
+      "themeExport": "Esporta",
+      "themeImported": "Tema \"{{name}}\" acquisito; salva per tenerlo.",
+      "themeBad": { "json": "Questo non è JSON.", "shape": "Un tema è un oggetto con name, dark e light." },
+      "themeTokens": "Un tema imposta uno qualsiasi tra: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, come #rrggbb, per scuro e chiaro. Un tema con un accento proprio vince sul colore qui sotto, a meno che tu non ne imposti uno tuo.",
       "title": "Aspetto",
       "help": "HexDeck ha un solo look in due luminosità. Qui imposti il colore d'accento per tutti, e puoi aggiungere un foglio di stile tuo.",
       "accent": "Colore d'accento",

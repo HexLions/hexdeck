@@ -1,14 +1,38 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check } from 'lucide-react'
+import { Check, Download } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ApiError, get, put } from '../../api/client'
 import { Field, Toast } from '../../components/ui'
-import { accentVariables, applyAppearance, type Appearance } from '../../lib/appearance'
+import { accentVariables, applyAppearance, type Appearance, type Theme } from '../../lib/appearance'
 import { SettingsCard } from './SettingsCard'
 
-const EMPTY: Appearance = { preset: 'hex', accent: '', css: '', colour: '#3aa0ff', presets: {} }
+const EMPTY: Appearance = { preset: 'hex', accent: '', css: '', colour: '#3aa0ff', presets: {}, theme: null, themes: {} }
+
+/** A pasted theme, or the reason it is not one. */
+function parseTheme(text: string): Theme | string {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(text)
+  } catch {
+    return 'json'
+  }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return 'shape'
+  const candidate = parsed as Partial<Theme>
+  return { name: String(candidate.name ?? ''), dark: candidate.dark ?? {}, light: candidate.light ?? {} }
+}
+
+/** Hand the theme over as a file, for whoever wants the same look. */
+function download(theme: Theme) {
+  const blob = new Blob([JSON.stringify(theme, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `hexdeck-theme-${(theme.name || 'theme').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.json`
+  link.click()
+  URL.revokeObjectURL(url)
+}
 
 /**
  * The look of the whole installation: one accent colour and, for whoever
@@ -24,10 +48,24 @@ export function AppearanceSettings() {
   const saved = useQuery({ queryKey: ['appearance'], queryFn: () => get<Appearance>('/settings/appearance') })
   const [form, setForm] = useState<Appearance>(EMPTY)
   const [toast, setToast] = useState<{ text: string; level: 'ok' | 'error' } | null>(null)
+  const [pasted, setPasted] = useState('')
 
   useEffect(() => {
     if (saved.data) setForm(saved.data)
   }, [saved.data])
+
+  /** Which bundled theme the form holds, if it holds one unchanged. */
+  const bundled = Object.entries(form.themes ?? {}).find(([, theme]) => JSON.stringify(theme) === JSON.stringify(form.theme))?.[0] ?? (form.theme ? 'custom' : 'shipped')
+  const importTheme = () => {
+    const theme = parseTheme(pasted)
+    if (typeof theme === 'string') {
+      setToast({ text: t(`settings.appearance.themeBad.${theme}`), level: 'error' })
+      return
+    }
+    setForm((current) => ({ ...current, theme }))
+    setPasted('')
+    setToast({ text: t('settings.appearance.themeImported', { name: theme.name || t('settings.appearance.themeCustom') }), level: 'ok' })
+  }
 
   // Show it while it is being chosen, and put the stored look back on leaving.
   const preview = form.accent.trim() || form.presets?.[form.preset] || form.colour
@@ -40,7 +78,7 @@ export function AppearanceSettings() {
 
   const store = async () => {
     try {
-      const answer = await put<Appearance>('/settings/appearance', { preset: form.preset, accent: form.accent, css: form.css })
+      const answer = await put<Appearance>('/settings/appearance', { preset: form.preset, accent: form.accent, css: form.css, theme: form.theme ?? null })
       setForm(answer)
       applyAppearance(answer)
       client.setQueryData(['appearance'], answer)
@@ -51,8 +89,59 @@ export function AppearanceSettings() {
   }
 
   const presets = Object.entries(form.presets ?? {})
+  const themes = Object.entries(form.themes ?? {})
   return (
     <>
+      <SettingsCard title={t('settings.appearance.themeTitle')} description={t('settings.appearance.themeHelp')}>
+        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('settings.appearance.themeTitle')}>
+          {[['shipped', null] as const, ...themes].map(([key, theme]) => {
+            const chosen = bundled === key
+            const swatch = theme ? [theme.dark.bg, theme.dark.accent, theme.light.bg, theme.light.accent] : ['#0a0c10', '#3aa0ff', '#f4f6f8', '#1b63bd']
+            return (
+              <button
+                key={key}
+                type="button"
+                role="radio"
+                aria-checked={chosen}
+                className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${chosen ? 'border-accent bg-accent-soft' : 'border-line hover:bg-surface-hover'}`}
+                onClick={() => setForm((current) => ({ ...current, theme: theme ? { ...theme } : null }))}
+              >
+                <span className="flex overflow-hidden rounded hex-clip" aria-hidden="true">
+                  {swatch.map((colour, index) => (
+                    <span key={index} className="h-5 w-3" style={{ background: colour }} />
+                  ))}
+                </span>
+                {theme ? theme.name : t('settings.appearance.themeShipped')}
+              </button>
+            )
+          })}
+          {bundled === 'custom' && (
+            <span className="flex items-center rounded-xl border border-accent bg-accent-soft px-3 py-2 text-sm" role="radio" aria-checked>
+              {form.theme?.name || t('settings.appearance.themeCustom')}
+            </span>
+          )}
+        </div>
+        <div className="mt-3 flex flex-wrap items-start gap-2">
+          <textarea
+            className="input min-h-20 flex-1 font-mono text-[12px]"
+            spellCheck={false}
+            aria-label={t('settings.appearance.themePaste')}
+            placeholder={t('settings.appearance.themePaste')}
+            value={pasted}
+            onChange={(e) => setPasted(e.target.value)}
+          />
+          <div className="flex flex-col gap-2">
+            <button type="button" className="btn" disabled={!pasted.trim()} onClick={importTheme}>
+              {t('settings.appearance.themeImport')}
+            </button>
+            <button type="button" className="btn" disabled={!form.theme} onClick={() => form.theme && download(form.theme)}>
+              <Download size={14} /> {t('settings.appearance.themeExport')}
+            </button>
+          </div>
+        </div>
+        <p className="mt-2 text-xs text-faint">{t('settings.appearance.themeTokens')}</p>
+      </SettingsCard>
+
       <SettingsCard title={t('settings.appearance.title')} description={t('settings.appearance.help')}>
         <Field label={t('settings.appearance.accent')} help={t('settings.appearance.accentHelp')}>
           <div className="flex flex-wrap gap-2">
@@ -119,7 +208,7 @@ export function AppearanceSettings() {
           <button
             className="btn"
             onClick={() => {
-              setForm({ ...EMPTY, presets: form.presets })
+              setForm({ ...EMPTY, presets: form.presets, themes: form.themes })
             }}
           >
             {t('settings.appearance.reset')}

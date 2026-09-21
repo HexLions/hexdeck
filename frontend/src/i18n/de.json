@@ -298,6 +298,16 @@
       "hint": "Kürzel voran tippen springt direkt: !y für YouTube."
     },
     "appearance": {
+      "themeTitle": "Thema",
+      "themeHelp": "Die Farben der ganzen Oberfläche, in beiden Helligkeiten. Wähle eine der mitgelieferten Paletten oder füge ein geteiltes Thema ein; exportiere deins, um es zu teilen.",
+      "themeShipped": "HexDeck",
+      "themeCustom": "Eigenes Thema",
+      "themePaste": "Ein Thema als JSON einfügen",
+      "themeImport": "Importieren",
+      "themeExport": "Exportieren",
+      "themeImported": "Thema „{{name}}“ übernommen; speichern, um es zu behalten.",
+      "themeBad": { "json": "Das ist kein JSON.", "shape": "Ein Thema ist ein Objekt mit name, dark und light." },
+      "themeTokens": "Ein Thema setzt beliebige von: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, als #rrggbb, für dunkel und hell. Ein Thema mit eigenem Akzent gewinnt gegen die Farbe unten, solange du keine eigene setzt.",
       "title": "Aussehen",
       "help": "HexDeck bringt einen Look in zwei Helligkeiten mit. Hier stellst du die Akzentfarbe für alle ein und kannst ein eigenes Stylesheet dazulegen.",
       "accent": "Akzentfarbe",

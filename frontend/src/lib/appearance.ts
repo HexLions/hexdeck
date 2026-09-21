@@ -8,12 +8,21 @@
  * The accent is written into the four variables the whole interface builds
  * on, in both brightnesses, so a light board follows the same colour.
  */
+/** A theme: the tokens of both brightnesses, as `#rrggbb`, under their names without the `--nd-` prefix. */
+export interface Theme {
+  name: string
+  dark: Record<string, string>
+  light: Record<string, string>
+}
+
 export interface Appearance {
   preset: string
   accent: string
   css: string
   colour: string
   presets?: Record<string, string>
+  theme?: Theme | null
+  themes?: Record<string, Theme>
 }
 
 const STYLE_ID = 'hexdeck-appearance'
@@ -48,20 +57,56 @@ export function accentVariables(colour: string): Record<string, string> {
 }
 
 /**
+ * A theme as a style sheet: the dark tokens on the root, the light ones
+ * under the light attribute, the same two blocks the shipped sheet has, so
+ * a token the theme leaves out keeps its shipped value. An accent brings
+ * its derived shades with it.
+ */
+export function themeCss(theme: Theme | null | undefined): string {
+  if (!theme) return ''
+  const blocks: string[] = []
+  for (const [mode, selector] of [['dark', ':root'], ['light', ":root[data-theme='light']"]] as const) {
+    const tokens = theme[mode] ?? {}
+    const lines: string[] = []
+    for (const [token, value] of Object.entries(tokens)) {
+      if (!HEX.test(value)) continue
+      lines.push(`  --nd-${token.replace(/^--nd-/, '')}: ${value};`)
+    }
+    if (tokens.accent && HEX.test(tokens.accent)) {
+      for (const [name, value] of Object.entries(accentVariables(tokens.accent))) {
+        if (name !== '--nd-accent') lines.push(`  ${name}: ${value};`)
+      }
+    }
+    if (lines.length) blocks.push(`${selector} {\n${lines.join('\n')}\n}`)
+  }
+  return blocks.join('\n')
+}
+
+/** Whether the theme sets the accent itself, in either brightness. */
+export function themeHasAccent(theme: Theme | null | undefined): boolean {
+  return Boolean(theme && (HEX.test(theme.dark?.accent ?? '') || HEX.test(theme.light?.accent ?? '')))
+}
+
+/**
  * Paint it on. The accent goes onto the root element, where it beats the
- * style sheet's own value in both brightnesses; the operator's style sheet
- * goes into one tag of its own at the end of the head, so it wins over
- * everything HexDeck ships and nothing else has to move.
+ * style sheet's own value in both brightnesses; the theme and the operator's
+ * style sheet go into one tag of their own at the end of the head, so they
+ * win over everything HexDeck ships and nothing else has to move.
+ *
+ * A theme that brings its own accent is left alone by the chosen preset, so
+ * it may differ between the brightnesses; a colour of one's own still wins.
  */
 export function applyAppearance(look: Appearance | null | undefined): void {
   const root = document.documentElement
-  const variables = accentVariables(look?.colour ?? '')
+  const own = HEX.test(look?.accent ?? '') ? look!.accent : ''
+  const inline = own || (themeHasAccent(look?.theme) ? '' : (look?.colour ?? ''))
+  const variables = accentVariables(inline)
   for (const name of ['--nd-accent', '--nd-accent-strong', '--nd-accent-soft', '--nd-accent-glow', '--nd-aurora-1']) {
     if (variables[name]) root.style.setProperty(name, variables[name])
     else root.style.removeProperty(name)
   }
 
-  const css = (look?.css ?? '').trim()
+  const css = [themeCss(look?.theme), (look?.css ?? '').trim()].filter(Boolean).join('\n')
   let tag = document.getElementById(STYLE_ID) as HTMLStyleElement | null
   if (!css) {
     tag?.remove()

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { accentVariables, applyAppearance, channels, darker } from './appearance'
+import { accentVariables, applyAppearance, channels, darker, themeCss, themeHasAccent } from './appearance'
 
 describe('the accent colour', () => {
   it('reads the three parts of a colour', () => {
@@ -61,5 +61,39 @@ describe('painting it on', () => {
     applyAppearance({ preset: 'violet', accent: '', colour: '#a78bfa', css: '' })
     applyAppearance(null)
     expect(document.documentElement.style.getPropertyValue('--nd-accent')).toBe('')
+  })
+})
+
+describe('a theme', () => {
+  const nord = { name: 'Nord', dark: { bg: '#2e3440', accent: '#88c0d0' }, light: { bg: '#eceff4', 'text-muted': '#4c566a' } }
+
+  beforeEach(() => {
+    document.documentElement.removeAttribute('style')
+    document.getElementById('hexdeck-appearance')?.remove()
+  })
+
+  it('becomes the two blocks of the shipped sheet, with the accent shades derived', () => {
+    const css = themeCss(nord)
+    expect(css).toContain(':root {\n  --nd-bg: #2e3440;\n  --nd-accent: #88c0d0;\n  --nd-accent-strong: #709dab;')
+    expect(css).toContain("--nd-accent-soft: rgba(136, 192, 208, 0.14)")
+    expect(css).toContain(":root[data-theme='light'] {\n  --nd-bg: #eceff4;\n  --nd-text-muted: #4c566a;\n}")
+    expect(themeCss(null)).toBe('')
+    expect(themeCss({ name: 'x', dark: { bg: 'red' }, light: {} })).toBe('')
+  })
+
+  it('leaves the accent to the theme unless a colour of one\'s own is set', () => {
+    applyAppearance({ preset: 'hex', accent: '', colour: '#3aa0ff', css: '', theme: nord })
+    expect(document.documentElement.style.getPropertyValue('--nd-accent')).toBe('')
+    expect(document.getElementById('hexdeck-appearance')?.textContent).toContain('--nd-bg: #2e3440')
+    applyAppearance({ preset: 'hex', accent: '#ff8800', colour: '#ff8800', css: '', theme: nord })
+    expect(document.documentElement.style.getPropertyValue('--nd-accent')).toBe('#ff8800')
+    expect(themeHasAccent(nord)).toBe(true)
+    expect(themeHasAccent({ name: 'x', dark: { bg: '#000000' }, light: {} })).toBe(false)
+  })
+
+  it('goes into the same tag as the style sheet, the sheet last', () => {
+    applyAppearance({ preset: 'hex', accent: '', colour: '#3aa0ff', css: '.card { border-radius: 4px; }', theme: nord })
+    const text = document.getElementById('hexdeck-appearance')?.textContent ?? ''
+    expect(text.indexOf('--nd-bg')).toBeLessThan(text.indexOf('.card'))
   })
 })

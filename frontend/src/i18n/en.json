@@ -298,6 +298,16 @@
       "hint": "A shortcut in front jumps straight there: !y for YouTube."
     },
     "appearance": {
+      "themeTitle": "Theme",
+      "themeHelp": "The colours of the whole interface, in both brightnesses. Pick one of the bundled palettes, or paste a theme somebody shared; export yours to share it.",
+      "themeShipped": "HexDeck",
+      "themeCustom": "Own theme",
+      "themePaste": "Paste a theme as JSON",
+      "themeImport": "Import",
+      "themeExport": "Export",
+      "themeImported": "Theme \"{{name}}\" taken over; save to keep it.",
+      "themeBad": { "json": "That is not JSON.", "shape": "A theme is an object with a name, dark and light." },
+      "themeTokens": "A theme sets any of: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, as #rrggbb, for dark and for light. A theme with its own accent wins over the colour below unless you set one of your own.",
       "title": "Appearance",
       "help": "HexDeck ships one look in two brightnesses. Here you set the accent colour for everyone, and you may add a style sheet of your own.",
       "accent": "Accent colour",

@@ -218,3 +218,60 @@ def test_a_wall_display_may_not_change_them(client: TestClient) -> None:
     display.post("/api/v1/kiosk/session", json={"token": made.json()["token"]}, headers=CSRF)
     refused = display.put("/api/v1/settings/search", json={"enabled": False, "targets": []}, headers=CSRF)
     assert refused.status_code == 401
+
+
+# -- themes --------------------------------------------------------------------
+
+
+def _luminance(colour: str) -> float:
+    parts = [int(colour[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    linear = [p / 12.92 if p <= 0.03928 else ((p + 0.055) / 1.055) ** 2.4 for p in parts]
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+
+def _contrast(a: str, b: str) -> float:
+    high, low = sorted((_luminance(a), _luminance(b)), reverse=True)
+    return (high + 0.05) / (low + 0.05)
+
+
+def test_every_bundled_theme_is_complete_and_readable() -> None:
+    """The same rules the shipped stylesheet is held to, in both brightnesses:
+    text at 4.5:1 on the page and on a card, the text on the accent likewise."""
+    from app.services.themes import THEMES, TOKENS
+
+    assert {"nord", "catppuccin", "gruvbox", "dracula"} <= set(THEMES)
+    for key, theme in THEMES.items():
+        assert theme["name"]
+        for mode in ("dark", "light"):
+            tokens = theme[mode]
+            assert set(tokens) == set(TOKENS), f"{key} {mode} is missing tokens"
+            for text in ("text", "text-muted", "text-faint", "accent", "ok", "warn", "bad", "unknown"):
+                for ground in ("bg", "bg-elev", "surface"):
+                    seen = _contrast(tokens[text], tokens[ground])
+                    assert seen >= 4.5, f"{key} {mode}: {text} on {ground} is {seen:.2f}:1"
+            assert _contrast(tokens["on-accent"], tokens["accent"]) >= 4.5, f"{key} {mode}: on-accent over accent"
+
+
+def test_a_theme_is_stored_read_back_and_cleared(admin_client: TestClient) -> None:
+    theme = {"name": "Mine", "dark": {"bg": "#101010", "--nd-accent": "#FF8800"}, "light": {}}
+    answer = admin_client.put("/api/v1/settings/appearance", headers=CSRF, json={"preset": "hex", "accent": "", "css": "", "theme": theme})
+    assert answer.status_code == 200, answer.text
+    stored = answer.json()["theme"]
+    assert stored == {"name": "Mine", "dark": {"bg": "#101010", "accent": "#ff8800"}, "light": {}}, "prefix dropped, colour lowered"
+    read = admin_client.get("/api/v1/settings/appearance").json()
+    assert read["theme"] == stored and "nord" in read["themes"] and read["themes"]["nord"]["dark"]["bg"]
+    cleared = admin_client.put("/api/v1/settings/appearance", headers=CSRF, json={"preset": "hex", "accent": "", "css": "", "theme": None})
+    assert cleared.json()["theme"] is None
+
+
+@pytest.mark.parametrize("theme, why", [
+    ({"name": "x", "dark": {"paper": "#101010"}}, "no token"),
+    ({"name": "x", "dark": {"bg": "red"}}, "not a colour"),
+    ({"name": "x", "dark": {"bg": "#101010"}, "extra": 1}, "a stray key"),
+    ({"name": "x" * 61, "dark": {"bg": "#101010"}}, "a name too long"),
+    ({"name": "x", "dark": "#101010"}, "dark is not an object"),
+])
+def test_a_theme_that_is_not_one_is_refused_with_the_reason(theme: object, why: str, admin_client: TestClient) -> None:
+    answer = admin_client.put("/api/v1/settings/appearance", headers=CSRF, json={"preset": "hex", "accent": "", "css": "", "theme": theme})
+    assert answer.status_code == 400, why
+    assert answer.json()["detail"]["code"] == "bad_theme", why
