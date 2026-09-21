@@ -872,6 +872,13 @@
     },
     "milestone": { "open": "Aperta", "done": "Conclusa" }
   },
+  "demo": {
+    "leave": "Esci dalla modalità demo",
+    "leaveTitle": "Uscire dalla modalità demo?",
+    "leaveBody": "Le connessioni demo vengono rimosse, con ogni card che le leggeva e ogni board fatta solo di quelle. Una board con una connessione vera tiene tutto il resto. Poi ogni card mostra quello che dice davvero il suo servizio.",
+    "leaveHelp": "Spegnere soltanto lascia le connessioni demo al loro posto, che continuano a inventare dati. Questo le rimuove insieme a ciò che ci era costruito sopra.",
+    "left": "Modalità demo terminata: rimosse {{integrations_removed}} connessioni, {{widgets_removed}} card e {{boards_removed}} board."
+  },
   "templates": {
     "title": "Parti da un modello",
     "help": "Una board pronta per un angolo del lab. Scegli quali delle tue connessioni prendono il posto dei segnaposto; una lasciata fuori porta via le sue card.",

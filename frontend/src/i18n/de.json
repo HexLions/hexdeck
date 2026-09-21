@@ -872,6 +872,13 @@
     },
     "milestone": { "open": "Offen", "done": "Erledigt" }
   },
+  "demo": {
+    "leave": "Demo-Modus verlassen",
+    "leaveTitle": "Demo-Modus verlassen?",
+    "leaveBody": "Die Demo-Verbindungen gehen, mit jeder Karte, die sie gelesen hat, und jedem Board, das nur aus solchen bestand. Ein Board mit einer echten Verbindung behält alles andere. Danach zeigt jede Karte, was ihr Dienst wirklich sagt.",
+    "leaveHelp": "Nur abschalten lässt die Demo-Verbindungen stehen, die weiter Daten erfinden. Das hier entfernt sie und was darauf gebaut war.",
+    "left": "Demo-Modus verlassen: {{integrations_removed}} Verbindung(en), {{widgets_removed}} Karte(n) und {{boards_removed}} Board(s) entfernt."
+  },
   "templates": {
     "title": "Mit einer Vorlage beginnen",
     "help": "Ein fertiges Board für eine Ecke des Labs. Wähle, welche deiner Verbindungen für die Platzhalter stehen; eine ausgelassene nimmt ihre Karten mit.",

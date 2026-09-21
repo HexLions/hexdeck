@@ -88,3 +88,10 @@ Updated at every milestone.
   clears 4.5:1 in both brightnesses; the page previews, imports and
   exports a theme as JSON. A theme with its own accent is left alone by
   the accent preset; a colour of one's own still wins.
+- **Polish.** Appearance and language moved into the account menu; a
+  card's headline number is kept as history even without a declared
+  metric; Ctrl+Z puts the last arrangement back; four preset sizes on
+  every card; *Leave demo mode* (`POST /api/v1/settings/demo/leave`)
+  removes the demo connections, the cards that read them and the boards
+  that were nothing but those. README rewritten with HexDeck's own
+  pictures.

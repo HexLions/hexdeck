@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { get } from '../api/client'
 import type { About } from '../api/types'
+import { LeaveDemo } from './LeaveDemo'
 
 /**
  * A line above the cards while the whole installation shows invented data.
@@ -28,9 +29,12 @@ export function DemoNotice({ admin }: { admin: boolean }) {
     <p className="rounded-xl border border-warn/40 bg-warn/10 px-3 py-2 text-sm mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
       <span>{t('board.demo')}</span>
       {admin && !about.data.demo_forced && (
-        <Link to="/system/integrations" className="text-accent font-medium">
-          {t('board.demoOff')}
-        </Link>
+        <>
+          <LeaveDemo className="btn h-7 text-xs" />
+          <Link to="/system/integrations" className="text-accent font-medium">
+            {t('board.demoOff')}
+          </Link>
+        </>
       )}
     </p>
   )

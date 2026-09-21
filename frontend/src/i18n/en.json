@@ -872,6 +872,13 @@
     },
     "milestone": { "open": "Open", "done": "Done" }
   },
+  "demo": {
+    "leave": "Leave demo mode",
+    "leaveTitle": "Leave demo mode?",
+    "leaveBody": "The demo connections go, with every card that read them and every board that was nothing but those. A board with a real connection keeps everything else. Then every card shows what its service really says.",
+    "leaveHelp": "Switching off alone leaves the demo connections in place, still inventing data. This removes them and what was built on them.",
+    "left": "Demo mode left: {{integrations_removed}} connection(s), {{widgets_removed}} card(s) and {{boards_removed}} board(s) removed."
+  },
   "templates": {
     "title": "Start from a template",
     "help": "A ready-made board for a corner of the lab. Pick which of your connections stand in for its placeholders; one left out takes its cards with it.",

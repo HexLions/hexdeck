@@ -10,6 +10,7 @@ import { FieldInput } from '../../components/FieldInput'
 import { ServiceIcon } from '../../components/ServiceIcon'
 import { Confirm, Field, Select, Sheet, Switch } from '../../components/ui'
 import { useAuth } from '../../stores/auth'
+import { LeaveDemo } from '../../components/LeaveDemo'
 import { SettingsCard } from './SettingsCard'
 
 /** Configured connections, and a sheet to add or edit one with a live test. */
@@ -63,6 +64,12 @@ export function IntegrationsSettings() {
             label={t('settings.system.demo')}
             description={about.data.demo_forced ? t('settings.system.demoForced') : t('settings.system.demoHelp')}
           />
+          {about.data.demo && !about.data.demo_forced && (
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted">
+              <LeaveDemo />
+              <span>{t('demo.leaveHelp')}</span>
+            </div>
+          )}
         </SettingsCard>
       )}
       <SettingsCard title={t('settings.integrations.title')} description={t('settings.integrations.help')}>

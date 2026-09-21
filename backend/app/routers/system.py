@@ -17,7 +17,7 @@ from ..deps import AdminUser, CurrentUser, DbSession
 from ..models import Board, Integration, Setting, User, Widget
 from ..schemas import SettingsBody
 from ..services import collector as collector_module
-from ..services import two_factor
+from ..services import demo_exit, two_factor
 from ..services.collector import collector, demo_flag, set_demo_flag
 from ..services.notify import emit
 from ..services.public_url import public_url
@@ -76,6 +76,15 @@ def get_setting(db: DbSession, key: str, default: dict | None = None) -> dict:
 
 def put_setting(db: DbSession, key: str, value: dict) -> None:
     db.merge(Setting(key=key, value=value))
+
+
+@router.post("/api/v1/settings/demo/leave", summary="Leave demo mode and remove what the demo made")
+def leave_demo(user: AdminUser, db: DbSession) -> dict:
+    """The demo connections, the cards that read them and the boards that
+    were nothing but those go; a board with a real connection keeps the rest."""
+    summary = demo_exit.leave(db)
+    logger.info("Demo mode left by %s.", user.username)
+    return summary
 
 
 @router.get("/api/v1/about", summary="Version, counts and settings overview")

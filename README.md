@@ -90,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
-Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything.
+Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays.
 
 Mount `/var/run/docker.sock` (already in the compose file) to see this host's containers, act on them and follow their logs. On Synology the same socket serves Container Manager.
 
