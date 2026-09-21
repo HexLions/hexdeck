@@ -635,6 +635,8 @@
     "stackedHint": "On a narrow screen the cards follow the order of the wide board. To move them, open the board on a wider screen."
   },
   "widget": {
+    "size": "Size",
+    "sizes": { "S": "Small: as small as it is still usable", "M": "Medium: the size it was created with", "L": "Large: one and a half times", "XL": "Extra large: twice the size" },
     "remove": {
       "title": "Remove this widget?",
       "body": "Its history goes with it.",

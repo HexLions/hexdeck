@@ -1,4 +1,4 @@
-import { columnsOf, maxWidthOf, rowHeightFor, rowsOf, scaleFloor } from './layout'
+import { columnsOf, maxWidthOf, presetSizes, rowHeightFor, rowsOf, scaleFloor } from './layout'
 
 describe('columnsOf', () => {
   it('is twelve for a board from before, and what the setting says otherwise', () => {
@@ -47,5 +47,22 @@ describe('scaleFloor', () => {
   })
   it('never shrinks a floor on a grid narrower than twelve', () => {
     expect(scaleFloor([6, 4], 4)).toEqual([6, 4])
+  })
+})
+
+describe('the size presets', () => {
+  it('go from the floor to twice the default, capped at the grid', () => {
+    const sizes = presetSizes({ default_size: [3, 2], min_size: [2, 1] }, 12)
+    expect(sizes).toEqual({ S: [2, 1], M: [3, 2], L: [5, 3], XL: [6, 4] })
+    expect(presetSizes({ default_size: [8, 3], min_size: [4, 2] }, 12).XL).toEqual([12, 6])
+  })
+
+  it('scale with the columns of the board', () => {
+    expect(presetSizes({ default_size: [3, 2], min_size: [2, 1] }, 24).M).toEqual([6, 2])
+    expect(presetSizes({ default_size: [3, 2], min_size: [2, 1] }, 24).S).toEqual([4, 1])
+  })
+
+  it('never go below the floor even when the default is smaller', () => {
+    expect(presetSizes({ default_size: [2, 1], min_size: [3, 2] }, 12).M).toEqual([3, 2])
   })
 })

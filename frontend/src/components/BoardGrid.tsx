@@ -5,7 +5,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import { moveGroup } from '../lib/arrange'
-import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns } from '../lib/layout'
+import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, presetSizes, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns, type SizePreset } from '../lib/layout'
 import type { Action, Breakpoint, LayoutItem, WidgetData, WidgetView } from '../lib/types'
 import { WidgetCard } from './WidgetCard'
 
@@ -152,6 +152,21 @@ export function BoardGrid(props: Props) {
    * Always in the wide arrangement, since it is the only one; on a phone the
    * stack follows it.
    */
+  /** A card put to one of the preset sizes, pulled in from the right edge if it would stick out. */
+  const resize = useCallback(
+    (widgetId: number, preset: SizePreset) => {
+      if (!onLayoutChange) return
+      const widget = widgets.find((one) => one.id === widgetId)
+      const item = wide.find((one) => one.i === String(widgetId))
+      if (!widget || !item) return
+      const [w, h] = presetSizes(widget, columns)[preset]
+      const next = { ...plain(item), w, h, x: Math.max(0, Math.min(item.x, columns - w)) }
+      onLayoutChange('lg', wide.map((one) => (one.i === next.i ? next : plain(one))))
+      // A fresh mount draws the new size at once, instead of a render later.
+      setSnapBack((n) => n + 1)
+    },
+    [onLayoutChange, widgets, wide, columns],
+  )
   const nudge = (event: KeyboardEvent<HTMLDivElement>, widget: WidgetView) => {
     if (!onLayoutChange || event.altKey || event.ctrlKey || event.metaKey) return
     // Only when the card itself has the focus, not something inside it.
@@ -265,6 +280,7 @@ export function BoardGrid(props: Props) {
               onRefresh={onRefresh}
               onSettings={onSettings}
               onRemove={onRemove}
+              onResize={editing && onLayoutChange ? resize : undefined}
             />
           </div>
         ))}
@@ -285,6 +301,7 @@ interface CardProps {
   onRefresh?: (widgetId: number) => void
   onSettings?: (widgetId: number) => void
   onRemove?: (widgetId: number) => void
+  onResize?: (widgetId: number, preset: SizePreset) => void
 }
 
 /**
@@ -297,8 +314,9 @@ interface CardProps {
  * the memo anyway. So the closures are made here, from props that are stable
  * for as long as the card is, and the wrapper is what the grid renders.
  */
-const GridCard = memo(function GridCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove }: CardProps) {
+const GridCard = memo(function GridCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize }: CardProps) {
   const act = useCallback((action: Action) => onAction?.(widget.id, action), [onAction, widget.id])
+  const size = useCallback((preset: SizePreset) => onResize?.(widget.id, preset), [onResize, widget.id])
   const refresh = useCallback(() => onRefresh?.(widget.id), [onRefresh, widget.id])
   const settings = useCallback(() => onSettings?.(widget.id), [onSettings, widget.id])
   const remove = useCallback(() => onRemove?.(widget.id), [onRemove, widget.id])
@@ -314,6 +332,7 @@ const GridCard = memo(function GridCard({ widget, data, series, editing, canAct,
       onRefresh={onRefresh && !editing && !widget.client_only ? refresh : undefined}
       onSettings={onSettings ? settings : undefined}
       onRemove={onRemove ? remove : undefined}
+      onResize={onResize ? size : undefined}
     />
   )
 })

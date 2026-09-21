@@ -49,3 +49,24 @@ export function unitOf(columns: number): number {
 export function scaleFloor(size: [number, number], columns: number): [number, number] {
   return [size[0] * unitOf(columns), size[1]]
 }
+
+export type SizePreset = 'S' | 'M' | 'L' | 'XL'
+export const SIZE_PRESETS: SizePreset[] = ['S', 'M', 'L', 'XL']
+
+/**
+ * Four sizes a card can be put to without dragging its corner: the smallest
+ * the adapter says is usable, the size it was created with, and one and a
+ * half and twice that. Width is capped at the grid; nothing goes below the
+ * floor.
+ */
+export function presetSizes(widget: { default_size?: [number, number]; min_size?: [number, number] }, columns: number): Record<SizePreset, [number, number]> {
+  const [floorW, floorH] = scaleFloor(widget.min_size ?? widget.default_size ?? [1, 1], columns)
+  const [baseW, baseH] = scaleFloor(widget.default_size ?? widget.min_size ?? [3, 2], columns)
+  const clamp = (w: number, h: number): [number, number] => [Math.max(1, Math.min(columns, Math.max(floorW, Math.round(w)))), Math.max(1, Math.max(floorH, Math.round(h)))]
+  return {
+    S: clamp(floorW, floorH),
+    M: clamp(baseW, baseH),
+    L: clamp(baseW * 1.5, baseH * 1.5),
+    XL: clamp(baseW * 2, baseH * 2),
+  }
+}

@@ -635,6 +635,8 @@
     "stackedHint": "Su uno schermo stretto le card seguono l'ordine della board larga. Per spostarle, apri la board su uno schermo più largo."
   },
   "widget": {
+    "size": "Dimensione",
+    "sizes": { "S": "Piccola: la più piccola ancora usabile", "M": "Media: la dimensione con cui è stata creata", "L": "Grande: una volta e mezza", "XL": "Molto grande: il doppio" },
     "remove": {
       "title": "Rimuovere questa card?",
       "body": "La sua cronologia sparisce con lei.",

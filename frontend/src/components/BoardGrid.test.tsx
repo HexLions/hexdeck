@@ -58,7 +58,7 @@ describe('layoutFor', () => {
  * changes nothing: the card was not memoised, and it was handed four freshly
  * made closures on every render, which defeats a memo. So this test counts.
  */
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 
@@ -68,9 +68,13 @@ import { BoardGrid } from './BoardGrid'
 const drawn = vi.fn()
 
 vi.mock('./WidgetCard', () => ({
-  WidgetCard: ({ widget }: { widget: WidgetView }) => {
+  WidgetCard: ({ widget, onResize }: { widget: WidgetView; onResize?: (preset: string) => void }) => {
     drawn(widget.id)
-    return <div data-testid={`card-${widget.id}`} />
+    return (
+      <div data-testid={`card-${widget.id}`}>
+        {onResize && <button onClick={() => onResize('XL')}>XL</button>}
+      </div>
+    )
   },
 }))
 
@@ -285,5 +289,20 @@ describe('a selection of cards', () => {
     one.focus()
     await userEvent.keyboard('{Escape}')
     expect(chosen(view)).toBe(0)
+  })
+})
+
+describe('the size presets', () => {
+  it('puts a card to a preset and pulls it in from the edge', async () => {
+    const saved = vi.fn()
+    const widgets = [widget(1, [3, 2], [2, 1])]
+    const layouts = { lg: [{ i: '1', x: 10, y: 0, w: 2, h: 2 }], md: [], sm: [] }
+    render(<BoardGrid {...({ widgets, layouts, data: {}, editing: true, canAct: true, autoCompact: false, onLayoutChange: saved } as unknown as Parameters<typeof BoardGrid>[0])} />)
+    await userEvent.click(screen.getByRole('button', { name: 'XL' }))
+    const lg = saved.mock.calls.find(([bp]) => bp === 'lg')
+    expect(lg).toBeTruthy()
+    const item = (lg![1] as LayoutItem[]).find((one) => one.i === '1')!
+    // Twice the default of 3×2 on twelve columns is 6×4; at x=10 it would stick out, so it moves to x=6.
+    expect([item.w, item.h, item.x]).toEqual([6, 4, 6])
   })
 })

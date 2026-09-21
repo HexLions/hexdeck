@@ -635,6 +635,8 @@
     "stackedHint": "Auf einem schmalen Bildschirm folgen die Karten der Reihenfolge des breiten Boards. Verschieben geht auf einem breiteren Bildschirm."
   },
   "widget": {
+    "size": "Größe",
+    "sizes": { "S": "Klein: so klein, wie sie noch brauchbar ist", "M": "Mittel: die Größe, mit der sie angelegt wurde", "L": "Groß: anderthalbfach", "XL": "Sehr groß: doppelt so groß" },
     "remove": {
       "title": "Dieses Widget entfernen?",
       "body": "Sein Verlauf geht mit.",

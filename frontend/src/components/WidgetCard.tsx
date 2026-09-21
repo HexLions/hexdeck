@@ -1,7 +1,8 @@
-import { AlertTriangle, ExternalLink, RefreshCw, Settings2, Trash2 } from 'lucide-react'
-import type { MouseEvent, ReactNode } from 'react'
+import { AlertTriangle, ExternalLink, Proportions, RefreshCw, Settings2, Trash2 } from 'lucide-react'
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { SIZE_PRESETS, type SizePreset } from '../lib/layout'
 import { safeUrl } from '../lib/safeUrl'
 
 import { tLabel } from '../i18n/texts'
@@ -20,12 +21,54 @@ interface Props {
   onRefresh?: () => void
   onSettings?: () => void
   onRemove?: () => void
+  /** Put the card to one of four sizes; offered while editing. */
+  onResize?: (preset: SizePreset) => void
+}
+
+/** S, M, L, XL behind one button, so a card is sized without dragging its corner. */
+function SizeMenu({ onResize }: { onResize: (preset: SizePreset) => void }) {
+  const { t } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const box = useRef<HTMLSpanElement>(null)
+  useEffect(() => {
+    if (!open) return
+    const onDown = (event: globalThis.MouseEvent) => {
+      if (!box.current?.contains(event.target as Node)) setOpen(false)
+    }
+    window.addEventListener('mousedown', onDown)
+    return () => window.removeEventListener('mousedown', onDown)
+  }, [open])
+  return (
+    <span className="relative" ref={box}>
+      <button className="btn btn-icon h-6 w-6 btn-flat" onClick={() => setOpen((value) => !value)} aria-label={t('widget.size')} title={t('widget.size')} aria-expanded={open} aria-haspopup="menu">
+        <Proportions size={13} />
+      </button>
+      {open && (
+        <span role="menu" className="glass-strong absolute right-0 top-7 z-30 flex gap-0.5 rounded-lg p-0.5 shadow-xl">
+          {SIZE_PRESETS.map((preset) => (
+            <button
+              key={preset}
+              role="menuitem"
+              className="btn btn-flat h-6 min-w-7 px-1.5 text-[11px] font-semibold"
+              aria-label={t(`widget.sizes.${preset}`)}
+              onClick={() => {
+                setOpen(false)
+                onResize(preset)
+              }}
+            >
+              {preset}
+            </button>
+          ))}
+        </span>
+      )}
+    </span>
+  )
 }
 
 const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], .no-click'
 
 /** The frame every widget shares: header, floating controls, body, error strip. */
-export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove }: Props) {
+export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize }: Props) {
   const { t, i18n } = useTranslation()
   // A failed fetch is an error state of its own: red, with the server's reason.
   // The server names the reason by code; other languages translate the code,
@@ -77,6 +120,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
           <ExternalLink size={13} />
         </a>
       )}
+      {editing && onResize && <SizeMenu onResize={onResize} />}
       {editing && onSettings && (
         <button className="btn btn-icon h-6 w-6 btn-flat" onClick={onSettings} aria-label={t('widget.settings')} title={t('widget.settings')}>
           <Settings2 size={13} />
@@ -89,7 +133,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
       )}
     </>
   )
-  const showControls = editing ? Boolean(onSettings || onRemove) : Boolean(onRefresh || link)
+  const showControls = editing ? Boolean(onSettings || onRemove || onResize) : Boolean(onRefresh || link)
 
   return (
     <section

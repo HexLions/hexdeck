@@ -5,6 +5,7 @@
  */
 import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { vi } from 'vitest'
 
 import { DEMO_DATA, DEMO_VIEWS } from '../demo/board'
 import { WidgetCard } from './WidgetCard'
@@ -35,6 +36,18 @@ describe('WidgetCard', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Refresh now' }))
     expect(opened).toHaveLength(1)
     expect(screen.getByRole('link', { name: 'Open the service' })).toHaveAttribute('href', 'https://example.com/service')
+  })
+
+  it('offers four sizes behind one button while editing', () => {
+    const view = valueView()
+    const resized = vi.fn()
+    render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} editing onResize={resized} />)
+    expect(screen.queryByRole('menu')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Size' }))
+    expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual(['S', 'M', 'L', 'XL'])
+    fireEvent.click(screen.getByRole('menuitem', { name: /Large: one and a half/ }))
+    expect(resized).toHaveBeenCalledWith('L')
+    expect(screen.queryByRole('menu')).toBeNull()
   })
 
   it('does not open the link while editing', () => {
