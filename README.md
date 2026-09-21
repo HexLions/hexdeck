@@ -36,7 +36,7 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 - **Templates to start from.** Homelab overview, media stack, Proxmox rack, network and projects. Pick which of your connections stand in for the template's; one left out takes its cards with it.
 - **Themes to share.** A theme is fifteen colour tokens for dark and for light, checked for contrast on the way in; export yours, paste somebody else's.
 - **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token makes it five thousand.
-- **TrueNAS, the current way.** The card speaks the JSON-RPC API TrueNAS 25.04 and later expect, and refuses the deprecated REST API on those versions instead of tripping an alert on the NAS with every refresh.
+- **TrueNAS, the current way.** The card speaks the JSON-RPC API TrueNAS 25.04 and later expect, and sends nothing over the deprecated REST API where the current one exists: TrueNAS 25.10 counts every REST call in an alert on the NAS, and TrueNAS 26 removes it.
 - **Sign in your way, or not at all at home.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens. On the networks you name, a browser is signed in as the account you choose without a password; everywhere else the sign-in page stays.
 
 ## A board is whatever you put on it
@@ -173,7 +173,7 @@ services:
 - The Docker socket's group is detected at start. When that fails (the log says so), set `DOCKER_GID` to the group id of `/var/run/docker.sock` on the host, or leave the socket out.
 - `:main` is the newest build; a release tag such as `:0.17.0` stays put.
 
-For the **TrueNAS card itself**, use `https://` and an API key **linked to a user** with the Read-Only Administrator role, not a full administrator's. Over https HexDeck speaks the current JSON-RPC API, which is what TrueNAS 25.04 and later expect; the old REST API is refused on those versions, because every call to it raises a deprecation alert on the NAS and TrueNAS 26 removes it.
+For the **TrueNAS card itself**, use `https://` and an API key **linked to a user** with the Read-Only Administrator role, not a full administrator's. Over https HexDeck speaks the current JSON-RPC API, which is what TrueNAS 25.04 and later expect; the old REST API is not called at all where the current one exists, because TrueNAS 25.10 counts every call to it in a deprecation alert on the NAS and TrueNAS 26 removes it. Behind a reverse proxy, the proxy has to pass WebSockets on.
 
 ## The services it speaks to
 

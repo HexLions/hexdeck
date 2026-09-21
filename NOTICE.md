@@ -63,10 +63,12 @@ Updated at every milestone.
   rate limit headers are honoured, a used-up limit is a clear message with
   the reset time and the last answer is shown meanwhile. An optional
   personal access token raises the limit from sixty to five thousand.
-- **M5 — TrueNAS.** The REST API fallback is refused on TrueNAS 25.04 and
-  later, where it is deprecated, raises an alert on every call from 25.10.1
-  and is removed in 26; the card says to use https:// and a user-linked
-  read-only key. The README gains a TrueNAS SCALE section and the two
+- **M5 — TrueNAS.** No REST call where TrueNAS has the current API. First
+  done here and sent upstream as DerKezorm/nexdeck#9; DerKezorm measured it
+  on a real 25.10.7 and built the final design on nexdeck's main (0.16.1),
+  which HexDeck takes over: a plain GET of `/api/current` tells the current
+  API apart without a key, only the version is remembered for the hour, and
+  behind a proxy the hint names the proxy. The README gains a TrueNAS SCALE section and the two
   warnings that must not be buried: the secret key and the Docker socket.
 - **Maintenance.** An item takes a due date and an interval in days.
   Ticking a recurring item moves its date on by the interval, counted

@@ -4,7 +4,7 @@
     "Shows": "Mostra",
     "What": "Cosa",
     "Top-right user menu > API Keys. A user with the Read-Only Administrator role is enough.": "Menu utente in alto a destra > API Keys. Basta un utente con il ruolo Read-Only Administrator.",
-    "Use https://. Over http:// a read-only key is refused.": "Usa https://. Su http:// una chiave in sola lettura viene rifiutata.",
+    "Use https://. Over http:// only a TrueNAS before 25.04 is read, and only with a full administrator's key.": "Usa https://. Su http:// viene letto solo un TrueNAS precedente alla 25.04, e solo con la chiave di un amministratore completo.",
     "Jobs": "Job",
     "The jobs of a Nomad cluster, the nodes under them, and buttons to stop or scale a job.": "I job di un cluster Nomad, i nodi sotto di essi e pulsanti per fermare o scalare un job.",
     "The address of a Nomad server, port 4646 by default.": "L'indirizzo di un server Nomad, porta 4646 di default.",
