@@ -102,3 +102,10 @@ Updated at every milestone.
   has no equivalent. `POST /api/v1/imports/preview` shows it,
   `/apply` makes it, through the ordinary untrusted board import; pasted
   values are never read as environment references.
+- **No sign-in at home.** `backend/app/services/auto_login.py`: an
+  administrator names trusted networks and one account; a browser from
+  those addresses without a session gets one as that account on
+  `GET /auth/me`, and a sign-out on purpose holds it off until the next
+  sign-in (`/auth/auto` offers the way back). `HEXDECK_TRUSTED_PROXIES`
+  says whose `X-Forwarded-For` is believed; the whole Internet is refused
+  as a network. Set under System › Sign-in providers.

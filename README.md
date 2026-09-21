@@ -37,7 +37,7 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 - **Themes to share.** A theme is fifteen colour tokens for dark and for light, checked for contrast on the way in; export yours, paste somebody else's.
 - **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token makes it five thousand.
 - **TrueNAS, the current way.** The card speaks the JSON-RPC API TrueNAS 25.04 and later expect, and refuses the deprecated REST API on those versions instead of tripping an alert on the NAS with every refresh.
-- **Sign in your way.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens.
+- **Sign in your way, or not at all at home.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens. On the networks you name, a browser is signed in as the account you choose without a password; everywhere else the sign-in page stays.
 
 ## A board is whatever you put on it
 
@@ -91,7 +91,7 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
-Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays.
+Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays. For a dashboard at home that should not ask for a password at all, make a guest account and, under System › Sign-in providers, sign browsers on your network in as it by themselves; the password is then only for changing things.
 
 Mount `/var/run/docker.sock` (already in the compose file) to see this host's containers, act on them and follow their logs. On Synology the same socket serves Container Manager.
 
@@ -130,6 +130,7 @@ Rarely needed, but real:
 | `HEXDECK_OUTAGE_THRESHOLD_SECONDS` | `120` | How long a service must be down before an outage is announced. |
 | `HEXDECK_ICON_CACHE_DAYS` | `30` | How long a fetched logo is kept. |
 | `HEXDECK_UPDATE_CHECK` | `0` | Ask GitHub whether a newer HexDeck exists. Off by default: it is an outbound call. |
+| `HEXDECK_TRUSTED_PROXIES` | empty | Reverse proxies whose `X-Forwarded-For` is believed, as addresses or networks, comma separated. Only the automatic sign-in on trusted networks reads it; without it the header is ignored, since anybody could send one. |
 | `HEXDECK_CORS_ORIGINS` | empty | Origins allowed to call the API from a browser. `*` is refused at start-up, because with credentials it would let any site act as the signed-in user. |
 | `HEXDECK_BACKUP_EVERY_HOURS` | `24` | How often a snapshot is written by itself. `0` switches it off. |
 

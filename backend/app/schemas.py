@@ -377,6 +377,14 @@ class OidcProviderBody(BaseModel):
     trusts_second_factor: bool = False
 
 
+class AutoLoginBody(BaseModel):
+    """Which account a browser on which networks is signed in as without a password."""
+
+    enabled: bool = False
+    user_id: int | None = None
+    networks: list[str] = Field(default_factory=list, max_length=50)
+
+
 class SettingsBody(BaseModel):
     public_url: str | None = Field(default=None, max_length=300)
     update_check: bool | None = None

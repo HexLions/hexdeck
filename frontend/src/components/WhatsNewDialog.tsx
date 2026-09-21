@@ -15,7 +15,8 @@ export function WhatsNewDialog() {
   const { user, update } = useAuth()
   const [closed, setClosed] = useState(false)
   const version = latestVersion()
-  if (closed || !user || !version || user.seen_version === version) return null
+  // A browser signed in by itself is a shared account on a wall or a desk: no release notes there.
+  if (closed || !user || !version || user.seen_version === version || user.auth_kind === 'auto') return null
   const entry = entriesFor(i18n.language)[version]
   if (!entry) return null
   // ⚠️ Gone at once, and the note to the server follows. Every way out used to

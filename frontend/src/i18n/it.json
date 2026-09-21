@@ -101,7 +101,8 @@
       "done": "La password è impostata. Ogni browser e ogni token API dell'account sono stati disconnessi.",
       "stale": "Questo link è già stato usato o è troppo vecchio. Chiedine uno nuovo dalla pagina di accesso.",
       "toSignIn": "Alla pagina di accesso"
-    }
+    },
+    "continueAs": "Continua come {{name}} senza password"
   },
   "setup": {
     "step": {
@@ -129,6 +130,19 @@
     "passwordShort": "Almeno otto caratteri: ne mancano {{missing}}."
   },
   "settings": {
+    "autoLogin": {
+      "title": "Niente login in casa",
+      "help": "Un browser dalle reti indicate qui entra come un account senza password. Chiunque su quelle reti è quell'account: un guest per guardare, un utente per agire anche, un amministratore solo se sai cosa comporta. Ovunque altrove resta la pagina di accesso; e chi esce apposta viene richiesto della password finché non rientra.",
+      "enabled": "Fai entrare da soli i browser di queste reti",
+      "enabledHelp": "Spento, e tutti accedono come prima.",
+      "account": "Come questo account",
+      "accountHelp": "Un guest vede le board condivise con i guest e non tocca nulla; creane uno sotto Utenti.",
+      "adminWarning": "Un amministratore: chiunque su queste reti può cambiare tutto, cancellare board e leggere l'indirizzo di ogni connessione. Scegli un guest o un utente, a meno che sulla rete ci sia davvero solo tu.",
+      "noAccount": "Nessun account scelto",
+      "networks": "Reti fidate",
+      "networksHelp": "Una per riga, come indirizzo o rete: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Tutta Internet viene rifiutata.",
+      "proxyNote": "Dietro un reverse proxy l'indirizzo visto è quello del proxy, a meno che HEXDECK_TRUSTED_PROXIES non lo indichi; allora conta l'indirizzo inoltrato."
+    },
     "title": "Le mie impostazioni",
     "systemTitle": "Sistema",
     "nav": {
@@ -306,7 +320,10 @@
       "themeImport": "Importa",
       "themeExport": "Esporta",
       "themeImported": "Tema \"{{name}}\" acquisito; salva per tenerlo.",
-      "themeBad": { "json": "Questo non è JSON.", "shape": "Un tema è un oggetto con name, dark e light." },
+      "themeBad": {
+        "json": "Questo non è JSON.",
+        "shape": "Un tema è un oggetto con name, dark e light."
+      },
       "themeTokens": "Un tema imposta uno qualsiasi tra: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, come #rrggbb, per scuro e chiaro. Un tema con un accento proprio vince sul colore qui sotto, a meno che tu non ne imposti uno tuo.",
       "title": "Aspetto",
       "help": "HexDeck ha un solo look in due luminosità. Qui imposti il colore d'accento per tutti, e puoi aggiungere un foglio di stile tuo.",
@@ -431,7 +448,8 @@
   "menu": {
     "settings": "Le mie impostazioni",
     "system": "Sistema",
-    "signOut": "Esci"
+    "signOut": "Esci",
+    "signIn": "Accedi"
   },
   "users": {
     "role": {
@@ -636,7 +654,12 @@
   },
   "widget": {
     "size": "Dimensione",
-    "sizes": { "S": "Piccola: la più piccola ancora usabile", "M": "Media: la dimensione con cui è stata creata", "L": "Grande: una volta e mezza", "XL": "Molto grande: il doppio" },
+    "sizes": {
+      "S": "Piccola: la più piccola ancora usabile",
+      "M": "Media: la dimensione con cui è stata creata",
+      "L": "Grande: una volta e mezza",
+      "XL": "Molto grande: il doppio"
+    },
     "remove": {
       "title": "Rimuovere questa card?",
       "body": "La sua cronologia sparisce con lei.",
@@ -812,8 +835,16 @@
     "noDate": "senza data",
     "today": "oggi",
     "next": "Prossima",
-    "status": { "active": "Attivo", "paused": "In pausa", "done": "Concluso" },
-    "item": { "todo": "Da fare", "doing": "In corso", "done": "Fatto" },
+    "status": {
+      "active": "Attivo",
+      "paused": "In pausa",
+      "done": "Concluso"
+    },
+    "item": {
+      "todo": "Da fare",
+      "doing": "In corso",
+      "done": "Fatto"
+    },
     "card": {
       "noProject": "Nessun progetto scelto.",
       "pick": "Scegli un progetto",
@@ -870,7 +901,10 @@
       "days": "giorni",
       "lastDone": "Fatto l'ultima volta il {{date}}"
     },
-    "milestone": { "open": "Aperta", "done": "Conclusa" }
+    "milestone": {
+      "open": "Aperta",
+      "done": "Conclusa"
+    }
   },
   "demo": {
     "leave": "Esci dalla modalità demo",
@@ -883,9 +917,21 @@
     "title": "Importa da un'altra dashboard",
     "help": "Porta qui una dashboard Homepage o Homarr: i gruppi diventano pagine, i servizi diventano tile, e i servizi che quelle dashboard leggevano diventano connessioni e card. Vedi cosa verrebbe creato prima che succeda.",
     "source": "Proviene da",
-    "sources": { "auto": "Capiscilo dai file" },
-    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Configurazione Homarr (JSON)" },
-    "filesHelp": { "services": "Homepage: i gruppi e i servizi.", "bookmarks": "Homepage: i segnalibri, facoltativo.", "widgets": "Homepage: la barra informativa (orologio, meteo, ricerca), facoltativo.", "config": "Homarr fino alla 0.15: data/configs/default.json, oppure il file di una board dall'export di migrazione alla 1.0." },
+    "sources": {
+      "auto": "Capiscilo dai file"
+    },
+    "files": {
+      "services": "services.yaml",
+      "bookmarks": "bookmarks.yaml",
+      "widgets": "widgets.yaml",
+      "config": "Configurazione Homarr (JSON)"
+    },
+    "filesHelp": {
+      "services": "Homepage: i gruppi e i servizi.",
+      "bookmarks": "Homepage: i segnalibri, facoltativo.",
+      "widgets": "Homepage: la barra informativa (orologio, meteo, ricerca), facoltativo.",
+      "config": "Homarr fino alla 0.15: data/configs/default.json, oppure il file di una board dall'export di migrazione alla 1.0."
+    },
     "pick": "Scegli il file {{name}}",
     "preview": "Leggi i file",
     "connections_one": "{{count}} connessione da creare",

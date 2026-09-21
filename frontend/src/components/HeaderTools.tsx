@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, LogOut, Moon, Server, Sun, UserRound } from 'lucide-react'
+import { Bell, ChevronDown, LogIn, LogOut, Moon, Server, Sun, UserRound } from 'lucide-react'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,7 +13,7 @@ import { Avatar } from './Avatar'
 const HeaderPill = lazy(() => import('./player/HeaderPill').then((module) => ({ default: module.HeaderPill })))
 
 /** What the tools need to know about the account; the preview page invents one. */
-export type HeaderUser = Pick<User, 'display_name' | 'username' | 'role' | 'avatar_url'>
+export type HeaderUser = Pick<User, 'display_name' | 'username' | 'role' | 'avatar_url'> & { auth_kind?: string }
 
 interface Props {
   user: HeaderUser | null
@@ -192,14 +192,16 @@ function UserMenu({ user, signedIn }: { user: HeaderUser; signedIn: boolean }) {
               {entry.label}
             </Link>
           ))}
+          {/* Signed in by itself from a trusted network: the way to one's own
+              account is a real sign-in, which first ends the automatic session. */}
           <button
             type="button"
             role="menuitem"
             className="mt-1 flex w-full items-center gap-2 rounded-lg border-t border-line px-3 py-2 text-left text-sm text-muted transition-colors hover:bg-surface-hover hover:text-ink"
             onClick={() => void logout().then(() => navigate('/login'))}
           >
-            <LogOut size={15} />
-            {t('menu.signOut')}
+            {user.auth_kind === 'auto' ? <LogIn size={15} /> : <LogOut size={15} />}
+            {user.auth_kind === 'auto' ? t('menu.signIn') : t('menu.signOut')}
           </button>
         </div>
       )}

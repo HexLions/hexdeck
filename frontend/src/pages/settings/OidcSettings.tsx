@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { ApiError, del, get, post } from '../../api/client'
 import type { About } from '../../api/types'
 import { Field, Select, Switch, Toast } from '../../components/ui'
+import { AutoLoginSettings } from './AutoLoginSettings'
 import { SettingsCard } from './SettingsCard'
 
 interface Provider {
@@ -35,6 +36,7 @@ export function OidcSettings() {
   const base = about.data?.public_url || window.location.origin
   return (
     <>
+      <AutoLoginSettings />
       <SettingsCard title={t('settings.system.oidc')} description={t('settings.system.oidcHelp')}>
         <ul className="space-y-1.5 mb-4">
           {(providers.data ?? []).map((provider) => (

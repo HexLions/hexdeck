@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
-import { ApiError, post } from '../api/client'
+import { ApiError, get, post } from '../api/client'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { Logo } from '../components/Logo'
 import { Field, PasswordInput } from '../components/ui'
@@ -28,6 +28,23 @@ export function LoginPage() {
   const [useRecovery, setUseRecovery] = useState(false)
   const [forgetting, setForgetting] = useState(false)
   const [sent, setSent] = useState(false)
+  // Whether this address may be signed in by itself, offered as a button.
+  const [auto, setAuto] = useState<{ available: boolean; name: string } | null>(null)
+  useEffect(() => {
+    void get<{ available: boolean; name: string }>('/auth/auto').then(setAuto).catch(() => setAuto(null))
+  }, [])
+  const { refresh } = useAuth()
+  const continueAuto = async () => {
+    setBusy(true)
+    try {
+      await post('/auth/auto')
+      await refresh()
+    } catch (failure) {
+      setError(failure instanceof ApiError ? failure.message : t('errors.network'))
+    } finally {
+      setBusy(false)
+    }
+  }
   const oidcError = new URLSearchParams(location.search).get('oidc_error')
   // The provider proved who this is; it did not prove the second factor. The
   // ticket for that is in a short-lived cookie, not in the address, so an
@@ -193,6 +210,13 @@ export function LoginPage() {
         <button className="mt-3 block mx-auto text-xs text-accent underline underline-offset-2" type="button" onClick={() => { setForgetting(true); setError('') }}>
           {t('auth.forgot.link')}
         </button>
+      )}
+      {auto?.available && (
+        <div className="mt-4 pt-4 border-t border-line">
+          <button type="button" className="btn w-full h-9" disabled={busy} onClick={() => void continueAuto()}>
+            {t('auth.continueAs', { name: auto.name })}
+          </button>
+        </div>
       )}
       {status?.providers?.length ? (
         <div className="mt-4 pt-4 border-t border-line space-y-2">

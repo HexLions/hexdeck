@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException, Request, Response, UploadFile, sta
 from sqlalchemy import func, select
 
 from ..config import get_settings
-from ..deps import COOKIE_NAME, CurrentUser, DbSession, error
+from ..deps import COOKIE_NAME, CurrentUser, DbSession, OptionalUser, error
 from ..models import Notice, OidcProvider, Session, User, utcnow
 from ..schemas import (
     LoginBody,
@@ -32,7 +32,7 @@ from ..security import (
     read_step_token,
     verify_password,
 )
-from ..services import avatars, login_guard, mail, password_reset, two_factor
+from ..services import auto_login, avatars, login_guard, mail, password_reset, two_factor
 from ..uploads import read_at_most
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
@@ -77,6 +77,8 @@ def open_session(db: DbSession, user: User, request: Request, response: Response
     db.add(session)
     db.commit()
     set_session_cookie(response, request, create_session_token(user.id, session.id))
+    if request.cookies.get(auto_login.MANUAL_COOKIE):
+        response.delete_cookie(auto_login.MANUAL_COOKIE, path="/")
 
 
 @router.post("/login", response_model=UserPublic, summary="Sign in with user name and password")
@@ -189,6 +191,9 @@ def logout(request: Request, response: Response, db: DbSession) -> None:
             db.commit()
             logger.info("A browser session was signed out.")
     clear_session_cookie(response)
+    # Signed out means signed out, also on a trusted network: for a while
+    # the browser is not signed in again by itself.
+    response.set_cookie(auto_login.MANUAL_COOKIE, "1", max_age=auto_login.MANUAL_SECONDS, path="/", httponly=True, samesite="lax", secure=cookie_secure(request))
 
 
 def own_address(db: DbSession, user: User, value: str) -> str:
@@ -209,7 +214,38 @@ def own_address(db: DbSession, user: User, value: str) -> str:
 
 
 @router.get("/me", response_model=UserPublic, summary="Who am I")
-def me(user: CurrentUser, request: Request) -> UserPublic:
+def me(user: OptionalUser, request: Request, response: Response, db: DbSession) -> UserPublic:
+    """Signed in, the account. Not signed in but on a trusted network, and
+    not signed out on purpose just now: signed in as the account the operator
+    chose, with a session like any other from here on."""
+    if user is None:
+        if request.cookies.get(auto_login.MANUAL_COOKIE):
+            raise error("unauthenticated", "Sign in first.", status.HTTP_401_UNAUTHORIZED)
+        user = auto_login.account_for(db, request)
+        if user is None:
+            raise error("unauthenticated", "Sign in first.", status.HTTP_401_UNAUTHORIZED)
+        open_session(db, user, request, response)
+        request.state.auth_kind = "auto"
+        logger.info("Signed in as %s by itself, from a trusted network.", user.username)
+    return user_public(user, request)
+
+
+@router.get("/auto", summary="Whether this browser could be signed in without a password")
+def auto_offer(request: Request, db: DbSession) -> dict:
+    """Public: the sign-in page offers the way back in after a sign-out on purpose."""
+    user = auto_login.account_for(db, request)
+    return {"available": user is not None, "name": user.username if user else ""}
+
+
+@router.post("/auto", response_model=UserPublic, summary="Sign in as the trusted network's account")
+def auto_sign_in(request: Request, response: Response, db: DbSession) -> UserPublic:
+    user = auto_login.account_for(db, request)
+    if user is None:
+        raise error("not_trusted", "This address is not on a trusted network.", status.HTTP_403_FORBIDDEN)
+    open_session(db, user, request, response)
+    response.delete_cookie(auto_login.MANUAL_COOKIE, path="/")
+    request.state.auth_kind = "auto"
+    logger.info("Signed in as %s from a trusted network, on request.", user.username)
     return user_public(user, request)
 
 

@@ -13,11 +13,11 @@ from sqlalchemy import func, select
 from .. import __version__
 from ..adapters.base import outbound_client
 from ..config import get_settings
-from ..deps import AdminUser, CurrentUser, DbSession
+from ..deps import AdminUser, CurrentUser, DbSession, error
 from ..models import Board, Integration, Setting, User, Widget
-from ..schemas import SettingsBody
+from ..schemas import AutoLoginBody, SettingsBody
+from ..services import auto_login, demo_exit, two_factor
 from ..services import collector as collector_module
-from ..services import demo_exit, two_factor
 from ..services.collector import collector, demo_flag, set_demo_flag
 from ..services.notify import emit
 from ..services.public_url import public_url
@@ -76,6 +76,22 @@ def get_setting(db: DbSession, key: str, default: dict | None = None) -> dict:
 
 def put_setting(db: DbSession, key: str, value: dict) -> None:
     db.merge(Setting(key=key, value=value))
+
+
+@router.get("/api/v1/settings/auto-login", summary="Which account browsers on trusted networks are signed in as")
+def read_auto_login(user: AdminUser, db: DbSession) -> dict:
+    return auto_login.stored(db)
+
+
+@router.put("/api/v1/settings/auto-login", summary="Sign browsers on trusted networks in as one account, without a password")
+def write_auto_login(body: AutoLoginBody, user: AdminUser, db: DbSession) -> dict:
+    try:
+        stored = auto_login.save(db, body.model_dump())
+    except auto_login.AutoLoginError as failure:
+        raise error(failure.code, failure.message) from failure
+    logger.info("Automatic sign-in %s by %s: account %s on %s.", "enabled" if stored["enabled"] else "disabled", user.username,
+                stored["user_id"], ", ".join(stored["networks"]) or "no network")
+    return stored
 
 
 @router.post("/api/v1/settings/demo/leave", summary="Leave demo mode and remove what the demo made")

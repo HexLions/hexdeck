@@ -101,7 +101,8 @@
       "done": "Das Passwort steht. Alle Browser und alle API-Marken des Kontos wurden abgemeldet.",
       "stale": "Dieser Link ist verbraucht oder zu alt. Auf der Anmeldeseite einen neuen anfordern.",
       "toSignIn": "Zur Anmeldung"
-    }
+    },
+    "continueAs": "Ohne Passwort als {{name}} weiter"
   },
   "setup": {
     "step": {
@@ -129,6 +130,19 @@
     "passwordShort": "Mindestens acht Zeichen, es fehlen noch {{missing}}."
   },
   "settings": {
+    "autoLogin": {
+      "title": "Zu Hause ohne Anmeldung",
+      "help": "Ein Browser aus den hier genannten Netzen wird ohne Passwort als ein Konto angemeldet. Jeder in diesen Netzen ist dieses Konto: ein Gast zum Schauen, ein Benutzer, der auch handeln darf, ein Administrator nur, wenn du weißt, was das heißt. Überall sonst bleibt die Anmeldeseite; und wer sich absichtlich abmeldet, wird bis zur nächsten Anmeldung nach dem Passwort gefragt.",
+      "enabled": "Browser aus diesen Netzen von selbst anmelden",
+      "enabledHelp": "Aus, und alle melden sich an wie bisher.",
+      "account": "Als dieses Konto",
+      "accountHelp": "Ein Gast sieht die mit Gästen geteilten Boards und rührt nichts an; lege einen unter Benutzer an.",
+      "adminWarning": "Ein Administrator: jeder in diesen Netzen kann alles ändern, Boards löschen und die Adresse jeder Verbindung lesen. Wähle einen Gast oder Benutzer, außer das Netz bist wirklich nur du.",
+      "noAccount": "Kein Konto gewählt",
+      "networks": "Vertrauenswürdige Netze",
+      "networksHelp": "Eines pro Zeile, als Adresse oder Netz: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Das ganze Internet wird abgelehnt.",
+      "proxyNote": "Hinter einem Reverse-Proxy ist die gesehene Adresse die des Proxys, außer HEXDECK_TRUSTED_PROXIES nennt ihn; dann zählt die weitergereichte Adresse."
+    },
     "title": "Meine Einstellungen",
     "systemTitle": "System",
     "nav": {
@@ -306,7 +320,10 @@
       "themeImport": "Importieren",
       "themeExport": "Exportieren",
       "themeImported": "Thema „{{name}}“ übernommen; speichern, um es zu behalten.",
-      "themeBad": { "json": "Das ist kein JSON.", "shape": "Ein Thema ist ein Objekt mit name, dark und light." },
+      "themeBad": {
+        "json": "Das ist kein JSON.",
+        "shape": "Ein Thema ist ein Objekt mit name, dark und light."
+      },
       "themeTokens": "Ein Thema setzt beliebige von: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, als #rrggbb, für dunkel und hell. Ein Thema mit eigenem Akzent gewinnt gegen die Farbe unten, solange du keine eigene setzt.",
       "title": "Aussehen",
       "help": "HexDeck bringt einen Look in zwei Helligkeiten mit. Hier stellst du die Akzentfarbe für alle ein und kannst ein eigenes Stylesheet dazulegen.",
@@ -431,7 +448,8 @@
   "menu": {
     "settings": "Meine Einstellungen",
     "system": "System",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "signIn": "Anmelden"
   },
   "users": {
     "role": {
@@ -636,7 +654,12 @@
   },
   "widget": {
     "size": "Größe",
-    "sizes": { "S": "Klein: so klein, wie sie noch brauchbar ist", "M": "Mittel: die Größe, mit der sie angelegt wurde", "L": "Groß: anderthalbfach", "XL": "Sehr groß: doppelt so groß" },
+    "sizes": {
+      "S": "Klein: so klein, wie sie noch brauchbar ist",
+      "M": "Mittel: die Größe, mit der sie angelegt wurde",
+      "L": "Groß: anderthalbfach",
+      "XL": "Sehr groß: doppelt so groß"
+    },
     "remove": {
       "title": "Dieses Widget entfernen?",
       "body": "Sein Verlauf geht mit.",
@@ -812,8 +835,16 @@
     "noDate": "kein Datum",
     "today": "heute",
     "next": "Nächster",
-    "status": { "active": "Aktiv", "paused": "Pausiert", "done": "Fertig" },
-    "item": { "todo": "Offen", "doing": "In Arbeit", "done": "Erledigt" },
+    "status": {
+      "active": "Aktiv",
+      "paused": "Pausiert",
+      "done": "Fertig"
+    },
+    "item": {
+      "todo": "Offen",
+      "doing": "In Arbeit",
+      "done": "Erledigt"
+    },
     "card": {
       "noProject": "Kein Projekt gewählt.",
       "pick": "Projekt wählen",
@@ -870,7 +901,10 @@
       "days": "Tage",
       "lastDone": "Zuletzt erledigt {{date}}"
     },
-    "milestone": { "open": "Offen", "done": "Erledigt" }
+    "milestone": {
+      "open": "Offen",
+      "done": "Erledigt"
+    }
   },
   "demo": {
     "leave": "Demo-Modus verlassen",
@@ -883,9 +917,21 @@
     "title": "Aus einem anderen Dashboard übernehmen",
     "help": "Ein Homepage- oder Homarr-Dashboard herüberholen: Gruppen werden Seiten, Dienste werden Kacheln, und Dienste, die jene Dashboards ausgelesen haben, werden Verbindungen und Karten. Du siehst, was entstehen würde, bevor etwas entsteht.",
     "source": "Kommt von",
-    "sources": { "auto": "Aus den Dateien erkennen" },
-    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Homarr-Konfiguration (JSON)" },
-    "filesHelp": { "services": "Homepage: die Gruppen und Dienste.", "bookmarks": "Homepage: die Lesezeichen, optional.", "widgets": "Homepage: die Informationsleiste (Uhr, Wetter, Suche), optional.", "config": "Homarr bis 0.15: data/configs/default.json, oder die Datei eines Boards aus dem 1.0-Migrationsexport." },
+    "sources": {
+      "auto": "Aus den Dateien erkennen"
+    },
+    "files": {
+      "services": "services.yaml",
+      "bookmarks": "bookmarks.yaml",
+      "widgets": "widgets.yaml",
+      "config": "Homarr-Konfiguration (JSON)"
+    },
+    "filesHelp": {
+      "services": "Homepage: die Gruppen und Dienste.",
+      "bookmarks": "Homepage: die Lesezeichen, optional.",
+      "widgets": "Homepage: die Informationsleiste (Uhr, Wetter, Suche), optional.",
+      "config": "Homarr bis 0.15: data/configs/default.json, oder die Datei eines Boards aus dem 1.0-Migrationsexport."
+    },
     "pick": "Datei {{name}} wählen",
     "preview": "Dateien lesen",
     "connections_one": "{{count}} Verbindung anzulegen",

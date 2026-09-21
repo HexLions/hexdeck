@@ -100,6 +100,10 @@ class Settings(BaseSettings):
     #: Allowed origins for API calls from other origins. Empty means only the
     #: dashboard itself may call the API from a browser.
     cors_origins: str = ""
+    #: Reverse proxies whose ``X-Forwarded-For`` is believed, as addresses or
+    #: networks, comma separated. Empty means the header is ignored. Only the
+    #: automatic sign-in on trusted networks reads it.
+    trusted_proxies: str = ""
     #: How often a snapshot is written by itself, in hours. ``0`` switches it
     #: off.
     #:

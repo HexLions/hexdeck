@@ -101,7 +101,8 @@
       "done": "The password is set. Every browser and every API token of the account was signed out.",
       "stale": "This link is used up or too old. Ask for a new one on the sign-in page.",
       "toSignIn": "To the sign-in page"
-    }
+    },
+    "continueAs": "Continue as {{name}} without a password"
   },
   "setup": {
     "step": {
@@ -129,6 +130,19 @@
     "passwordShort": "At least eight characters: {{missing}} more to go."
   },
   "settings": {
+    "autoLogin": {
+      "title": "No sign-in at home",
+      "help": "A browser on the networks named here is signed in as one account without a password. Everybody on those networks is that account, so choose a guest to look, a user to also act, and an administrator only if you know what that means. Everywhere else the sign-in page stays; and whoever signs out on purpose is asked for a password until they sign in again.",
+      "enabled": "Sign browsers on these networks in by themselves",
+      "enabledHelp": "Off, and everybody signs in as before.",
+      "account": "As this account",
+      "accountHelp": "A guest sees the boards shared with guests and touches nothing; make one under Users.",
+      "adminWarning": "An administrator: everybody on these networks can change everything, delete boards and read every connection's address. Choose a guest or a user unless the network really is only you.",
+      "noAccount": "No account chosen",
+      "networks": "Trusted networks",
+      "networksHelp": "One per line, as an address or a network: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. The whole Internet is refused.",
+      "proxyNote": "Behind a reverse proxy the address seen is the proxy's, unless HEXDECK_TRUSTED_PROXIES names it; then the forwarded address counts."
+    },
     "title": "My settings",
     "systemTitle": "System",
     "nav": {
@@ -306,7 +320,10 @@
       "themeImport": "Import",
       "themeExport": "Export",
       "themeImported": "Theme \"{{name}}\" taken over; save to keep it.",
-      "themeBad": { "json": "That is not JSON.", "shape": "A theme is an object with a name, dark and light." },
+      "themeBad": {
+        "json": "That is not JSON.",
+        "shape": "A theme is an object with a name, dark and light."
+      },
       "themeTokens": "A theme sets any of: bg, bg-elev, surface, surface-hover, border, border-strong, text, text-muted, text-faint, accent, on-accent, ok, warn, bad, unknown, as #rrggbb, for dark and for light. A theme with its own accent wins over the colour below unless you set one of your own.",
       "title": "Appearance",
       "help": "HexDeck ships one look in two brightnesses. Here you set the accent colour for everyone, and you may add a style sheet of your own.",
@@ -431,7 +448,8 @@
   "menu": {
     "settings": "My settings",
     "system": "System",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "signIn": "Sign in"
   },
   "users": {
     "role": {
@@ -636,7 +654,12 @@
   },
   "widget": {
     "size": "Size",
-    "sizes": { "S": "Small: as small as it is still usable", "M": "Medium: the size it was created with", "L": "Large: one and a half times", "XL": "Extra large: twice the size" },
+    "sizes": {
+      "S": "Small: as small as it is still usable",
+      "M": "Medium: the size it was created with",
+      "L": "Large: one and a half times",
+      "XL": "Extra large: twice the size"
+    },
     "remove": {
       "title": "Remove this widget?",
       "body": "Its history goes with it.",
@@ -812,8 +835,16 @@
     "noDate": "no date",
     "today": "today",
     "next": "Next",
-    "status": { "active": "Active", "paused": "Paused", "done": "Done" },
-    "item": { "todo": "To do", "doing": "Doing", "done": "Done" },
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "done": "Done"
+    },
+    "item": {
+      "todo": "To do",
+      "doing": "Doing",
+      "done": "Done"
+    },
     "card": {
       "noProject": "No project chosen.",
       "pick": "Pick a project",
@@ -870,7 +901,10 @@
       "days": "days",
       "lastDone": "Last done {{date}}"
     },
-    "milestone": { "open": "Open", "done": "Done" }
+    "milestone": {
+      "open": "Open",
+      "done": "Done"
+    }
   },
   "demo": {
     "leave": "Leave demo mode",
@@ -883,9 +917,21 @@
     "title": "Import from another dashboard",
     "help": "Bring a Homepage or Homarr dashboard over: groups become pages, services become tiles, and services those dashboards read become connections and cards. You see what would be made before anything is.",
     "source": "Coming from",
-    "sources": { "auto": "Work it out from the files" },
-    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Homarr config (JSON)" },
-    "filesHelp": { "services": "Homepage: the groups and services.", "bookmarks": "Homepage: the bookmarks, optional.", "widgets": "Homepage: the information bar (clock, weather, search), optional.", "config": "Homarr up to 0.15: data/configs/default.json, or a board's file from the 1.0 migration export." },
+    "sources": {
+      "auto": "Work it out from the files"
+    },
+    "files": {
+      "services": "services.yaml",
+      "bookmarks": "bookmarks.yaml",
+      "widgets": "widgets.yaml",
+      "config": "Homarr config (JSON)"
+    },
+    "filesHelp": {
+      "services": "Homepage: the groups and services.",
+      "bookmarks": "Homepage: the bookmarks, optional.",
+      "widgets": "Homepage: the information bar (clock, weather, search), optional.",
+      "config": "Homarr up to 0.15: data/configs/default.json, or a board's file from the 1.0 migration export."
+    },
     "pick": "Pick the {{name}} file",
     "preview": "Read the files",
     "connections_one": "{{count}} connection to make",

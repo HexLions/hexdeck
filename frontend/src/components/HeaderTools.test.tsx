@@ -60,6 +60,13 @@ describe('HeaderTools', () => {
     expect(screen.queryByRole('menu')).toBeNull()
   })
 
+  it('offers a sign-in, not a sign-out, to a browser that was signed in by itself', async () => {
+    show({ ...USER, auth_kind: 'auto' })
+    await userEvent.click(screen.getByRole('button', { name: 'Ada Lovelace' }))
+    expect(screen.getByRole('menuitem', { name: 'Sign in' })).toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: 'Sign out' })).toBeNull()
+  })
+
   it('leaves out the account menu where nobody is signed in, and shows the pills instead', () => {
     show(null)
     expect(screen.queryByRole('button', { name: 'Ada Lovelace' })).toBeNull()
