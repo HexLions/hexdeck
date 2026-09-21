@@ -1,54 +1,86 @@
 # HexDeck
 
-**The live homelab dashboard.** Cards that move, actions on the cards, boards for the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and twenty-nine services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3fb6d4)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-129-3fb6d4)](#the-services-it-speaks-to)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
+[![Integrations](https://img.shields.io/badge/integrations-129-3aa0ff)](#the-services-it-speaks-to)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
 
-![A HexDeck board: clock, search, weather, Docker load, Pi-hole, what is playing on Plex, monitors, app tiles and feeds](docs/screenshot-overview.png)
+![The Home board: clock, weather, Docker load, containers, what is playing, the Radarr queue, app tiles, Proxmox, Pi-hole, Uptime Kuma, the calendar, news, speedtest, NAS storage and a room temperature](docs/screenshot-overview.png)
+
+## Why a fork
+
+nexdeck gets the hard part right: the server talks to every service in its own rhythm and pushes what changed to every open browser, so ten tabs cost a service one request. HexDeck keeps that engine and changes what sits on top of it, for a lab that is run and built at the same time:
+
+- **The screen is the board.** Twelve, twenty-four or thirty-six columns per board, any width, and rows that stretch so the page fills the window without scrolling. A 4K monitor is not a 1480-pixel strip with margins.
+- **What you are building is on the board too.** Projects with milestones, items and linked repositories live in HexDeck itself. A roadmap card shows what is due in the next weeks, an items card what to tick off, and GitHub issues, pull requests and workflow runs sit next to them.
+- **What needs doing again is not forgotten.** An item can be maintenance that comes back every so many days: test the backup restore, renew the certificate, clean the filters. Tick it and it returns with its next date; what is due is announced once a day through the same channels as an outage.
+- **A look of its own.** Hexagons, one blue, opaque panels and a quiet tessellation behind them, in dark and light. Four bundled themes (Nord, Catppuccin, Gruvbox, Dracula) and your own as a JSON file to share.
+- **Faster to a useful board.** Five templates for the usual corners of a lab, sized presets on every card, undo for the arrangement, a tidy-up button, multi-select to move cards together.
+- **English, German and Italian**, throughout.
 
 ## What it does
 
-- **Live, not polled by your browser.** The server asks every service in its own rhythm and pushes changes to every open browser. Ten tabs cost a service one request.
-- **A hundred and twenty-seven integrations,** listed in full [further down](#the-services-it-speaks-to). Generic building blocks for everything else: a JSON API widget, a calendar that merges several sources, iframes, notes and bookmarks.
+- **Live, not polled by your browser.** The server asks every service in its own rhythm and pushes changes to every open browser.
+- **A hundred and twenty-nine integrations,** listed in full [further down](#the-services-it-speaks-to). Generic building blocks for everything else: a JSON API widget, a calendar that merges several sources, iframes, notes, bookmarks and a notepad you type into on the board.
 - **Actions where the data is.** Restart a container, start a VM, pause downloads, approve a request, wake a machine, flip a light. Destructive actions confirm once. Everything is logged.
-- **Three screens.** A free grid you arrange once: a tablet shows it as arranged, a phone stacks the cards in the same order. An installable phone app with a bottom bar, and kiosk links for wall tablets that cycle pages and dim at night.
+- **A history for every number.** Each card that shows a number keeps its history and draws it behind the number, whether the adapter declared a metric or not.
+- **Three screens, one arrangement.** A free grid you arrange once: a tablet shows it as arranged, a phone stacks the cards in the same order. An installable phone app with a bottom bar, and kiosk links for wall tablets that cycle pages and dim at night.
 - **Users, roles and sharing.** Administrators, users and guests. Boards are private, shared with people or with a whole role, at view, edit or act level.
-- **Reachability and notifications.** App tiles carry a check with uptime bars; outages reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
+- **Reachability and notifications.** App tiles carry a check with uptime bars; outages and due maintenance reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
 - **Boards as files.** Export a board as YAML, keep it in Git, drop it into `data/boards/` to provision it. Docker labels create tiles.
-- **Themes to share.** Nord, Catppuccin, Gruvbox and Dracula ship with it, each in both brightnesses and checked for contrast; a theme is fifteen colour tokens as JSON, exported to share and pasted to take over.
-- **Templates to start from.** Five ready-made boards (homelab overview, media stack, Proxmox rack, network, projects) under Settings › Boards. Pick which of your connections stand in for the template's; one left out takes its cards with it.
-- **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token in the GitHub connection makes it five thousand.
-- **Projects and a roadmap.** Milestones, items and linked repositories kept in HexDeck itself; a roadmap card shows what is due in the next weeks, a project card its state, an items card what to tick off, on any board. An item can be maintenance that comes back every so many days: tick it, and it returns with its next date; what is due is announced once a day.
+- **Templates to start from.** Homelab overview, media stack, Proxmox rack, network and projects. Pick which of your connections stand in for the template's; one left out takes its cards with it.
+- **Themes to share.** A theme is fifteen colour tokens for dark and for light, checked for contrast on the way in; export yours, paste somebody else's.
+- **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token makes it five thousand.
+- **TrueNAS, the current way.** The card speaks the JSON-RPC API TrueNAS 25.04 and later expect, and refuses the deprecated REST API on those versions instead of tripping an alert on the NAS with every refresh.
 - **Sign in your way.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens.
 
 ## A board is whatever you put on it
 
-Every card is a widget of one integration, dropped on a free grid and sized by hand. The templates are a starting point, not a mould: what they make is an ordinary board.
+Every card is a widget of one integration, dropped on a free grid and sized by hand, or put to one of four sizes from its menu. The templates are a starting point, not a mould: what they make is an ordinary board.
 
-Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px as before, the whole screen, or a number), and whether the rows stretch so the page fills the window without scrolling. Boards from before keep their 12 columns and look exactly as they did.
+Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px, the whole screen, or a number), and whether the rows stretch so the page fills the window. Ctrl+Z puts the last arrangement back; *Tidy up* puts every card in reading order; Shift and a click select several cards to move together.
 
 ### Media
 
-What is playing, what the library holds, what is on its way in, and the covers of what arrived last. And your own music: a player card plays the library of Plex, Jellyfin or Emby in the browser, keeps playing from board to board, and edits playlists on the server.
+What is playing, what the library holds, what was asked for, what is on its way in, and what airs next. This is the *Media stack* template with the demo's invented data.
 
-![A media board: what is playing on Plex, the size of the library, open requests, a row of recently added covers, and the queues of Radarr, Sonarr and SABnzbd](docs/screenshot-media.png)
+![The media board: now playing on Plex, streams, pending requests, download speed, recently added covers, the Sonarr calendar, requests, the Sonarr and Radarr queues, the qBittorrent queue and the most watched titles](docs/screenshot-media.png)
 
 ### Infrastructure
 
-The same grid, a different question. Hosts, containers, pools, disks, certificates and what answers.
+The *Proxmox rack* template: the node and its guests, TrueNAS pools and alerts, the backup server, the UPS and the disks.
 
-![An infrastructure board: Proxmox and Docker counts, Synology load, node and pool usage, containers, UniFi devices, disk temperatures, certificate expiry and reachability](docs/screenshot-infrastructure.png)
+![The infrastructure board: Proxmox node load, guest counts, TrueNAS system and pools, UPS, alerts, backup datastores and tasks, and disk health](docs/screenshot-infrastructure.png)
+
+### Projects and maintenance
+
+The roadmap draws milestones as hexagons and dated items as dots on one line, the late ones red, the imminent ones yellow. A recurring item says how often it comes back. Next to it a notepad, a page of notes and the releases of the tools you run.
+
+![The projects board: a roadmap with milestones and recurring maintenance, a notepad, a read-me card and the latest releases](docs/screenshot-projects.png)
+
+### Themes
+
+The same *Network* board in Nord, and in Gruvbox's light side. Themes are chosen under System › Appearance and apply to everyone; each account still picks dark or light.
+
+![The network board in the Nord theme: UniFi summary, OPNsense, speedtest, AdGuard protection, devices, findings, gateways, Tailscale, certificates, top blocked domains and the speed history](docs/screenshot-theme-nord.png)
+
+![The same board in the Gruvbox theme, light](docs/screenshot-theme-gruvbox.png)
+
+### Templates
+
+Settings › Boards › *Start from a template*. Each placeholder is mapped to one of your connections of that kind; the first one is picked for you.
+
+![The template picker: five tiles, the media stack chosen, and a row per connection with the installation's own to choose from](docs/screenshot-templates.png)
 
 ### On the wall
 
 A kiosk link opens one board without a sign-in, read-only unless you say otherwise. It cycles through the pages and dims at night. The token is handed in once at the door and never rides in an address afterwards.
 
-![The same board as a kiosk display, without the top bar and without a sign-in](docs/screenshot-kiosk.png)
+![The Home board as a kiosk display, without the top bar and without a sign-in](docs/screenshot-kiosk.png)
 
 ## Quick start
 
