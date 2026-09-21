@@ -117,10 +117,12 @@ function LanguagePill({ signedIn }: { signedIn: boolean }) {
 /**
  * The account menu behind the picture.
  *
- * Everything that belongs to a person hangs here, and next to it the way into
- * the system, so the two are never the same list again.
+ * Everything that belongs to a person hangs here: the two brightnesses and
+ * the language as one row each, the own settings, and next to it the way
+ * into the system, so the two are never the same list again. The bar itself
+ * keeps only what is looked at all day.
  */
-function UserMenu({ user }: { user: HeaderUser }) {
+function UserMenu({ user, signedIn }: { user: HeaderUser; signedIn: boolean }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const logout = useAuth((s) => s.logout)
@@ -169,6 +171,15 @@ function UserMenu({ user }: { user: HeaderUser }) {
               <p className="truncate text-[11px] text-muted">{t(`users.role.${user.role}`)}</p>
             </div>
           </div>
+          <div className="flex items-center justify-between gap-2 px-3 py-1.5 text-[11px] text-faint">
+            <span>{t('settings.profile.theme')}</span>
+            <ThemePill signedIn={signedIn} />
+          </div>
+          <div className="flex items-center justify-between gap-2 px-3 py-1.5 text-[11px] text-faint">
+            <span>{t('settings.profile.language')}</span>
+            <LanguagePill signedIn={signedIn} />
+          </div>
+          <div className="mb-1 border-b border-line" />
           {entries.map((entry) => (
             <Link
               key={entry.to}
@@ -197,7 +208,9 @@ function UserMenu({ user }: { user: HeaderUser }) {
 }
 
 /**
- * The right-hand end of every bar: notices, appearance, language, account.
+ * The right-hand end of every bar: notices and the account. Appearance and
+ * language live in the account menu; only a bar with nobody signed in shows
+ * them on its own, because there is no menu to put them in.
  *
  * One component for both bars. They drifted apart once already, and a bar that
  * looks different depending on the page reads as a different app.
@@ -213,11 +226,13 @@ export function HeaderTools({ user, unread, onNotices }: Props) {
         </Suspense>
       )}
       <NoticeButton unread={unread} onClick={onNotices} />
-      <span className="hidden sm:flex items-center gap-1.5">
-        <ThemePill signedIn={signedIn} />
-        <LanguagePill signedIn={signedIn} />
-      </span>
-      {user && <UserMenu user={user} />}
+      {!user && (
+        <span className="hidden sm:flex items-center gap-1.5">
+          <ThemePill signedIn={signedIn} />
+          <LanguagePill signedIn={signedIn} />
+        </span>
+      )}
+      {user && <UserMenu user={user} signedIn={signedIn} />}
     </div>
   )
 }

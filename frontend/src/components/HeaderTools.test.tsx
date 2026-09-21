@@ -1,7 +1,8 @@
 /**
- * The right-hand end of the bar: the bell with its count, dark and light as
- * two segments, the language, and the account menu that keeps the own
- * settings apart from the system.
+ * The right-hand end of the bar: the bell with its count and the account
+ * menu, which holds dark and light as two segments, the language, and keeps
+ * the own settings apart from the system. Signed out, the two pills stand in
+ * the bar itself.
  */
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -36,6 +37,7 @@ describe('HeaderTools', () => {
 
   it('says which appearance is on, not what a click would do', async () => {
     show()
+    await userEvent.click(screen.getByRole('button', { name: 'Ada Lovelace' }))
     const dark = screen.getByRole('button', { name: 'Dark' })
     const light = screen.getByRole('button', { name: 'Light' })
     expect(dark).toHaveAttribute('aria-pressed', 'true')
@@ -58,14 +60,23 @@ describe('HeaderTools', () => {
     expect(screen.queryByRole('menu')).toBeNull()
   })
 
-  it('leaves out the account menu where nobody is signed in', () => {
+  it('leaves out the account menu where nobody is signed in, and shows the pills instead', () => {
     show(null)
     expect(screen.queryByRole('button', { name: 'Ada Lovelace' })).toBeNull()
     expect(screen.getByRole('button', { name: 'Notices' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Dark' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'English' })).toBeInTheDocument()
   })
 
-  it('switches the language and marks the one that is on', async () => {
+  it('keeps the bar to the bell and the account once somebody is signed in', () => {
     show()
+    expect(screen.queryByRole('button', { name: 'Dark' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'English' })).toBeNull()
+  })
+
+  it('switches the language from the menu and marks the one that is on', async () => {
+    show()
+    await userEvent.click(screen.getByRole('button', { name: 'Ada Lovelace' }))
     expect(screen.getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'true')
     await userEvent.click(screen.getByRole('button', { name: 'Deutsch' }))
     // The texts of a language are fetched when it is first chosen, so the rest
