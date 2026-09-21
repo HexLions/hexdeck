@@ -858,6 +858,17 @@
     },
     "milestone": { "open": "Offen", "done": "Erledigt" }
   },
+  "templates": {
+    "title": "Mit einer Vorlage beginnen",
+    "help": "Ein fertiges Board für eine Ecke des Labs. Wähle, welche deiner Verbindungen für die Platzhalter stehen; eine ausgelassene nimmt ihre Karten mit.",
+    "link": "Oder mit einer Vorlage beginnen…",
+    "cards_one": "{{count}} Karte",
+    "cards_other": "{{count}} Karten",
+    "connectionsHelp": "Welche Verbindung liest jede Karte?",
+    "leaveOut": "Auslassen",
+    "none": "Noch keine Verbindung dieser Art, ihre Karten werden ausgelassen",
+    "create": "Board anlegen"
+  },
   "notepad": {
     "title": "Notizblock",
     "placeholder": "Hier schreiben…",

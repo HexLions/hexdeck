@@ -1251,7 +1251,22 @@
     "The open milestones of the repositories, with their due date and how far along they are.": "Le milestone aperte dei repository, con la scadenza e a che punto sono.",
     "The items of a project, to tick off and reorder on the board; the dated ones say when they are due.": "Gli item di un progetto, da spuntare e riordinare sulla board; quelli con una data dicono quando scadono.",
     "Show dated items": "Mostra gli item con una data",
-    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Gli item con una scadenza, tra cui le manutenzioni ricorrenti, accanto alle milestone."
+    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Gli item con una scadenza, tra cui le manutenzioni ricorrenti, accanto alle milestone.",
+    "Homelab overview": "Panoramica homelab",
+    "The first board of a homelab: what is down, what is running, what the line does, with a notepad and your bookmarks.": "La prima board di un homelab: cosa è giù, cosa gira, cosa fa la linea, con un blocco note e i tuoi segnalibri.",
+    "Media stack": "Stack media",
+    "Plex with the *arr family: what is playing, what arrived, what was asked for, what is downloading and what airs next.": "Plex con la famiglia *arr: cosa è in riproduzione, cosa è arrivato, cosa è stato richiesto, cosa sta scaricando e cosa va in onda dopo.",
+    "Proxmox rack": "Rack Proxmox",
+    "A rack around Proxmox: the node and its guests, the TrueNAS pools and alerts, the backup server, the UPS and the disks.": "Un rack attorno a Proxmox: il nodo e i suoi guest, i pool e gli avvisi di TrueNAS, il server di backup, l'UPS e i dischi.",
+    "The edge of the lab: UniFi and OPNsense, DNS filtering, the line's speed over time, the tailnet and the certificates that run out.": "Il confine del lab: UniFi e OPNsense, il filtro DNS, la velocità della linea nel tempo, la tailnet e i certificati in scadenza.",
+    "What is being built and maintained: the roadmap with what is due, a notepad, the releases of the tools you run, and a page of notes.": "Cosa si costruisce e si mantiene: la roadmap con le scadenze, un blocco note, le release degli strumenti che usi e una pagina di appunti.",
+    "overview": "panoramica",
+    "monitoring": "monitoraggio",
+    "media": "media",
+    "virtualisation": "virtualizzazione",
+    "storage": "storage",
+    "network": "rete",
+    "projects": "progetti"
   },
   "labels": {
     "Jobs": "Job",

@@ -201,6 +201,12 @@ class KioskSession(BaseModel):
     token: str = Field(max_length=200)
 
 
+class TemplateInstall(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=80)
+    #: Template connection name -> id of one of this installation's connections, or null to leave its cards out.
+    connections: dict[str, int | None] = Field(default_factory=dict)
+
+
 class ImportBody(BaseModel):
     yaml_text: str = Field(min_length=1, max_length=2_000_000)
     slug: str | None = Field(default=None, max_length=80, pattern=r"^[a-z0-9-]*$")

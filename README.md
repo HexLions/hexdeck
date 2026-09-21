@@ -20,13 +20,14 @@ HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezor
 - **Users, roles and sharing.** Administrators, users and guests. Boards are private, shared with people or with a whole role, at view, edit or act level.
 - **Reachability and notifications.** App tiles carry a check with uptime bars; outages reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
 - **Boards as files.** Export a board as YAML, keep it in Git, drop it into `data/boards/` to provision it. Docker labels create tiles.
+- **Templates to start from.** Five ready-made boards (homelab overview, media stack, Proxmox rack, network, projects) under Settings › Boards. Pick which of your connections stand in for the template's; one left out takes its cards with it.
 - **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token in the GitHub connection makes it five thousand.
 - **Projects and a roadmap.** Milestones, items and linked repositories kept in HexDeck itself; a roadmap card shows what is due in the next weeks, a project card its state, an items card what to tick off, on any board. An item can be maintenance that comes back every so many days: tick it, and it returns with its next date; what is due is announced once a day.
 - **Sign in your way.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens.
 
 ## A board is whatever you put on it
 
-Every card is a widget of one integration, dropped on a free grid and sized by hand. Nothing here is a fixed template.
+Every card is a widget of one integration, dropped on a free grid and sized by hand. The templates are a starting point, not a mould: what they make is an ordinary board.
 
 Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px as before, the whole screen, or a number), and whether the rows stretch so the page fills the window without scrolling. Boards from before keep their 12 columns and look exactly as they did.
 

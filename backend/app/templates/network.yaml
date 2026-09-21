@@ -1,0 +1,122 @@
+nexdeck: 1
+template:
+  id: network
+  name: Network
+  description: 'The edge of the lab: UniFi and OPNsense, DNS filtering, the line''s speed over time, the tailnet and the certificates
+    that run out.'
+  tags:
+  - network
+board:
+  name: Network
+  icon: network
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: UniFi
+  kind: unifi
+- name: OPNsense
+  kind: opnsense
+- name: Speedtest
+  kind: speedtest
+- name: AdGuard Home
+  kind: adguard
+- name: Tailscale
+  kind: tailscale
+- name: Nginx Proxy Manager
+  kind: npm
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: unifi.summary
+    integration: UniFi
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 8
+        h: 3
+  - kind: opnsense.system
+    integration: OPNsense
+    layout:
+      lg:
+        x: 8
+        y: 0
+        w: 4
+        h: 3
+  - kind: speedtest.latest
+    integration: Speedtest
+    layout:
+      lg:
+        x: 12
+        y: 0
+        w: 6
+        h: 3
+  - kind: adguard.summary
+    integration: AdGuard Home
+    layout:
+      lg:
+        x: 18
+        y: 0
+        w: 6
+        h: 3
+  - kind: unifi.devices
+    integration: UniFi
+    layout:
+      lg:
+        x: 0
+        y: 3
+        w: 8
+        h: 4
+  - kind: unifi.findings
+    integration: UniFi
+    layout:
+      lg:
+        x: 8
+        y: 3
+        w: 8
+        h: 4
+  - kind: opnsense.gateways
+    integration: OPNsense
+    layout:
+      lg:
+        x: 16
+        y: 3
+        w: 8
+        h: 4
+  - kind: tailscale.devices
+    integration: Tailscale
+    layout:
+      lg:
+        x: 0
+        y: 7
+        w: 8
+        h: 4
+  - kind: npm.certificates
+    integration: Nginx Proxy Manager
+    layout:
+      lg:
+        x: 8
+        y: 7
+        w: 8
+        h: 4
+  - kind: adguard.top
+    integration: AdGuard Home
+    layout:
+      lg:
+        x: 16
+        y: 7
+        w: 8
+        h: 4
+  - kind: speedtest.history
+    integration: Speedtest
+    options:
+      days: '30'
+    layout:
+      lg:
+        x: 0
+        y: 11
+        w: 24
+        h: 3

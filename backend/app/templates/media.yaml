@@ -1,0 +1,120 @@
+nexdeck: 1
+template:
+  id: media
+  name: Media stack
+  description: 'Plex with the *arr family: what is playing, what arrived, what was asked for, what is downloading and what
+    airs next.'
+  tags:
+  - media
+board:
+  name: Media stack
+  icon: clapperboard
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: Plex
+  kind: plex
+- name: Sonarr
+  kind: sonarr
+- name: Radarr
+  kind: radarr
+- name: Overseerr
+  kind: overseerr
+- name: qBittorrent
+  kind: qbittorrent
+- name: Tautulli
+  kind: tautulli
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: plex.nowplaying
+    integration: Plex
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 10
+        h: 3
+  - kind: tautulli.counts
+    integration: Tautulli
+    layout:
+      lg:
+        x: 10
+        y: 0
+        w: 4
+        h: 3
+  - kind: overseerr.counts
+    integration: Overseerr
+    layout:
+      lg:
+        x: 14
+        y: 0
+        w: 4
+        h: 3
+  - kind: qbittorrent.speed
+    integration: qBittorrent
+    layout:
+      lg:
+        x: 18
+        y: 0
+        w: 6
+        h: 3
+  - kind: plex.recent
+    integration: Plex
+    layout:
+      lg:
+        x: 0
+        y: 3
+        w: 12
+        h: 3
+  - kind: sonarr.calendar
+    integration: Sonarr
+    layout:
+      lg:
+        x: 12
+        y: 3
+        w: 12
+        h: 3
+  - kind: overseerr.requests
+    integration: Overseerr
+    layout:
+      lg:
+        x: 0
+        y: 6
+        w: 8
+        h: 4
+  - kind: sonarr.queue
+    integration: Sonarr
+    layout:
+      lg:
+        x: 8
+        y: 6
+        w: 8
+        h: 4
+  - kind: radarr.queue
+    integration: Radarr
+    layout:
+      lg:
+        x: 16
+        y: 6
+        w: 8
+        h: 4
+  - kind: qbittorrent.queue
+    integration: qBittorrent
+    layout:
+      lg:
+        x: 0
+        y: 10
+        w: 12
+        h: 4
+  - kind: tautulli.top
+    integration: Tautulli
+    layout:
+      lg:
+        x: 12
+        y: 10
+        w: 12
+        h: 4

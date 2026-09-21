@@ -1,0 +1,67 @@
+nexdeck: 1
+template:
+  id: projects
+  name: Projects
+  description: 'What is being built and maintained: the roadmap with what is due, a notepad, the releases of the tools you
+    run, and a page of notes.'
+  tags:
+  - projects
+board:
+  name: Projects
+  icon: map
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations: []
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: projects.roadmap
+    options:
+      weeks: '8'
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 16
+        h: 3
+  - kind: core.clock
+    layout:
+      lg:
+        x: 16
+        y: 0
+        w: 8
+        h: 3
+  - kind: notepad.pad
+    layout:
+      lg:
+        x: 0
+        y: 3
+        w: 8
+        h: 4
+  - kind: core.markdown
+    title: Read me
+    options:
+      content: '## How this board works
+
+
+        - Projects, milestones and items live under **Settings › Projects**, or are created from a card that has none.
+
+        - An item with a due date is on the roadmap; give it *every N days* and it comes back once ticked.
+
+        - The notepad keeps what does not fit anywhere else.'
+    layout:
+      lg:
+        x: 8
+        y: 3
+        w: 8
+        h: 4
+  - kind: github.releases
+    layout:
+      lg:
+        x: 16
+        y: 3
+        w: 8
+        h: 4

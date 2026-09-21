@@ -858,6 +858,17 @@
     },
     "milestone": { "open": "Aperta", "done": "Conclusa" }
   },
+  "templates": {
+    "title": "Parti da un modello",
+    "help": "Una board pronta per un angolo del lab. Scegli quali delle tue connessioni prendono il posto dei segnaposto; una lasciata fuori porta via le sue card.",
+    "link": "Oppure parti da un modello…",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} card",
+    "connectionsHelp": "Quale connessione legge ogni card?",
+    "leaveOut": "Lascia fuori",
+    "none": "Ancora nessuna connessione di questo tipo, le sue card restano fuori",
+    "create": "Crea la board"
+  },
   "notepad": {
     "title": "Blocco note",
     "placeholder": "Scrivi qui…",

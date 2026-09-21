@@ -1,0 +1,124 @@
+nexdeck: 1
+template:
+  id: homelab
+  name: Homelab overview
+  description: 'The first board of a homelab: what is down, what is running, what the line does, with a notepad and your bookmarks.'
+  tags:
+  - overview
+  - monitoring
+board:
+  name: Homelab overview
+  icon: home
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: Uptime Kuma
+  kind: uptimekuma
+- name: Docker
+  kind: docker
+- name: Speedtest
+  kind: speedtest
+- name: Pi-hole
+  kind: pihole
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: core.clock
+    options:
+      label: Home
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 6
+        h: 2
+  - kind: core.problems
+    layout:
+      lg:
+        x: 6
+        y: 0
+        w: 6
+        h: 2
+  - kind: uptimekuma.summary
+    integration: Uptime Kuma
+    layout:
+      lg:
+        x: 12
+        y: 0
+        w: 4
+        h: 2
+  - kind: docker.summary
+    integration: Docker
+    layout:
+      lg:
+        x: 16
+        y: 0
+        w: 4
+        h: 2
+  - kind: speedtest.latest
+    integration: Speedtest
+    layout:
+      lg:
+        x: 20
+        y: 0
+        w: 4
+        h: 2
+  - kind: uptimekuma.monitors
+    integration: Uptime Kuma
+    layout:
+      lg:
+        x: 0
+        y: 2
+        w: 8
+        h: 4
+  - kind: docker.containers
+    integration: Docker
+    options:
+      show_stopped: false
+    layout:
+      lg:
+        x: 8
+        y: 2
+        w: 8
+        h: 4
+  - kind: pihole.summary
+    integration: Pi-hole
+    layout:
+      lg:
+        x: 16
+        y: 2
+        w: 4
+        h: 4
+  - kind: notepad.pad
+    layout:
+      lg:
+        x: 20
+        y: 2
+        w: 4
+        h: 4
+  - kind: core.bookmarks
+    layout:
+      lg:
+        x: 0
+        y: 6
+        w: 8
+        h: 3
+  - kind: pihole.top
+    integration: Pi-hole
+    layout:
+      lg:
+        x: 8
+        y: 6
+        w: 8
+        h: 3
+  - kind: speedtest.history
+    integration: Speedtest
+    layout:
+      lg:
+        x: 16
+        y: 6
+        w: 8
+        h: 3

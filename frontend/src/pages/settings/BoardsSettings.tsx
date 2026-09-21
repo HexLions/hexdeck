@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { ApiError, del, get, patch, post, put } from '../../api/client'
 import type { BoardSummary } from '../../api/types'
+import { TemplatePicker } from '../../components/TemplatePicker'
 import { Confirm, Field, Toast } from '../../components/ui'
 import { useHandleReorder } from '../../lib/useHandleReorder'
 import { useAuth } from '../../stores/auth'
@@ -175,8 +176,13 @@ export function BoardsSettings() {
           </div>
         </Field>
       </SettingsCard>
+      <div id="templates">
+        <SettingsCard title={t('templates.title')} description={t('templates.help')}>
+          <TemplatePicker />
+        </SettingsCard>
+      </div>
       <SettingsCard title={t('board.import')} description={t('board.importHelp')}>
-        <textarea className="input mb-2" rows={8} aria-label={t('board.import')} value={yamlText} onChange={(e) => setYamlText(e.target.value)} placeholder="HexDeck: 1&#10;board:&#10;  name: …" />
+        <textarea className="input mb-2" rows={8} aria-label={t('board.import')} value={yamlText} onChange={(e) => setYamlText(e.target.value)} placeholder="nexdeck: 1&#10;board:&#10;  name: …" />
         {error && (
           <p className="text-sm text-bad mb-2" role="alert">
             {error}

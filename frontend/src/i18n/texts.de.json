@@ -1251,7 +1251,22 @@
     "The open milestones of the repositories, with their due date and how far along they are.": "Die offenen Meilensteine der Repositories, mit Fälligkeit und Fortschritt.",
     "The items of a project, to tick off and reorder on the board; the dated ones say when they are due.": "Die Aufgaben eines Projekts, auf dem Board abzuhaken und umzusortieren; die datierten sagen, wann sie fällig sind.",
     "Show dated items": "Datierte Aufgaben zeigen",
-    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Aufgaben mit Fälligkeit, darunter wiederkehrende Wartung, neben den Meilensteinen."
+    "Items with a due date, maintenance that comes back among them, next to the milestones.": "Aufgaben mit Fälligkeit, darunter wiederkehrende Wartung, neben den Meilensteinen.",
+    "Homelab overview": "Homelab-Überblick",
+    "The first board of a homelab: what is down, what is running, what the line does, with a notepad and your bookmarks.": "Das erste Board eines Homelabs: was ausgefallen ist, was läuft, was die Leitung leistet, mit Notizblock und deinen Lesezeichen.",
+    "Media stack": "Medien-Stack",
+    "Plex with the *arr family: what is playing, what arrived, what was asked for, what is downloading and what airs next.": "Plex mit der *arr-Familie: was läuft, was angekommen ist, was gewünscht wurde, was lädt und was als Nächstes ausgestrahlt wird.",
+    "Proxmox rack": "Proxmox-Rack",
+    "A rack around Proxmox: the node and its guests, the TrueNAS pools and alerts, the backup server, the UPS and the disks.": "Ein Rack um Proxmox: der Node und seine Gäste, die TrueNAS-Pools und -Alarme, der Backup-Server, die USV und die Platten.",
+    "The edge of the lab: UniFi and OPNsense, DNS filtering, the line's speed over time, the tailnet and the certificates that run out.": "Der Rand des Labs: UniFi und OPNsense, DNS-Filter, die Leitung im Zeitverlauf, das Tailnet und die Zertifikate, die ablaufen.",
+    "What is being built and maintained: the roadmap with what is due, a notepad, the releases of the tools you run, and a page of notes.": "Was gebaut und gewartet wird: die Roadmap mit dem, was fällig ist, ein Notizblock, die Releases deiner Werkzeuge und eine Seite Notizen.",
+    "overview": "Überblick",
+    "monitoring": "Monitoring",
+    "media": "Medien",
+    "virtualisation": "Virtualisierung",
+    "storage": "Speicher",
+    "network": "Netzwerk",
+    "projects": "Projekte"
   },
   "labels": {
     "Jobs": "Jobs",

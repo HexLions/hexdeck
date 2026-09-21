@@ -1,0 +1,111 @@
+nexdeck: 1
+template:
+  id: proxmox
+  name: Proxmox rack
+  description: 'A rack around Proxmox: the node and its guests, the TrueNAS pools and alerts, the backup server, the UPS and
+    the disks.'
+  tags:
+  - virtualisation
+  - storage
+board:
+  name: Proxmox rack
+  icon: server
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: Proxmox
+  kind: proxmox
+- name: TrueNAS
+  kind: truenas
+- name: Proxmox Backup Server
+  kind: pbs
+- name: PeaNUT
+  kind: peanut
+- name: Scrutiny
+  kind: scrutiny
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: proxmox.node
+    integration: Proxmox
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 8
+        h: 3
+  - kind: proxmox.summary
+    integration: Proxmox
+    layout:
+      lg:
+        x: 8
+        y: 0
+        w: 4
+        h: 3
+  - kind: truenas.system
+    integration: TrueNAS
+    layout:
+      lg:
+        x: 12
+        y: 0
+        w: 8
+        h: 3
+  - kind: peanut.ups
+    integration: PeaNUT
+    layout:
+      lg:
+        x: 20
+        y: 0
+        w: 4
+        h: 3
+  - kind: proxmox.guests
+    integration: Proxmox
+    layout:
+      lg:
+        x: 0
+        y: 3
+        w: 10
+        h: 4
+  - kind: truenas.pools
+    integration: TrueNAS
+    layout:
+      lg:
+        x: 10
+        y: 3
+        w: 7
+        h: 4
+  - kind: truenas.alerts
+    integration: TrueNAS
+    layout:
+      lg:
+        x: 17
+        y: 3
+        w: 7
+        h: 4
+  - kind: pbs.datastores
+    integration: Proxmox Backup Server
+    layout:
+      lg:
+        x: 0
+        y: 7
+        w: 8
+        h: 4
+  - kind: pbs.tasks
+    integration: Proxmox Backup Server
+    layout:
+      lg:
+        x: 8
+        y: 7
+        w: 8
+        h: 4
+  - kind: scrutiny.disks
+    integration: Scrutiny
+    layout:
+      lg:
+        x: 16
+        y: 7
+        w: 8
+        h: 4

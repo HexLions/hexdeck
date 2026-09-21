@@ -858,6 +858,17 @@
     },
     "milestone": { "open": "Open", "done": "Done" }
   },
+  "templates": {
+    "title": "Start from a template",
+    "help": "A ready-made board for a corner of the lab. Pick which of your connections stand in for its placeholders; one left out takes its cards with it.",
+    "link": "Or start from a template…",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} cards",
+    "connectionsHelp": "Which connection does each card read?",
+    "leaveOut": "Leave out",
+    "none": "No connection of this kind yet, its cards are left out",
+    "create": "Create the board"
+  },
   "notepad": {
     "title": "Notepad",
     "placeholder": "Write here…",

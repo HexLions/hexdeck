@@ -452,6 +452,21 @@ def test_every_channel_text_has_a_translation(language: str) -> None:
 
 
 @pytest.mark.parametrize("language", TEXT_LANGUAGES)
+def test_every_template_text_has_a_translation(language: str) -> None:
+    """A template's name, description and tags are English like the adapters;
+    the picker translates them by text."""
+    from app.services.templates import list_templates
+
+    german = _texts_in(language)["adapter"]
+    missing: set[str] = set()
+    for template in list_templates():
+        for text in (template["name"], template["description"], *template["tags"]):
+            if text not in german:
+                missing.add(text)
+    assert not missing, f"template texts without a {language} entry: {sorted(missing)}"
+
+
+@pytest.mark.parametrize("language", TEXT_LANGUAGES)
 def test_every_data_label_has_a_translation(language: str) -> None:
     """Labels of values, chips, rows and actions come from the adapters as English
     words; the cards translate them by text."""

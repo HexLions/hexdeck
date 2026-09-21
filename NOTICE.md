@@ -75,3 +75,9 @@ Updated at every milestone.
   the items card says when each is due and lets the date be set on the
   board, and what is due or late is announced once a day through the
   notification channels (`maintenance_due`).
+- **Templates.** Five board templates under `backend/app/templates/`, in
+  the export's own YAML with a `template` section on top, offered under
+  Settings › Boards. Installing one maps its placeholder connections to
+  the installation's own (or leaves them out with their cards) and goes
+  through the ordinary import with the caller's rights; the wide layout is
+  drawn, the narrower screens follow.

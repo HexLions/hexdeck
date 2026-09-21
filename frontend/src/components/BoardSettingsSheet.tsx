@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Copy, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { ApiError, del, get, patch, post, put, upload } from '../api/client'
 import { columnsOf, type Columns } from '../lib/layout'
@@ -147,6 +147,9 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
               {t('common.create')}
             </button>
           </div>
+          <Link className="mt-3 inline-block text-sm text-accent" to="/settings/boards#templates" onClick={onClose}>
+            {t('templates.link')}
+          </Link>
         </div>
       )}
 
