@@ -72,7 +72,12 @@ vi.mock('./WidgetCard', () => ({
     drawn(widget.id)
     return (
       <div data-testid={`card-${widget.id}`}>
-        {onResize && <button onClick={() => onResize('XL')}>XL</button>}
+        {/* Inside .card-controls like the real controls, which the grid does not drag by. */}
+        {onResize && (
+          <div className="card-controls">
+            <button onClick={() => onResize('XL')}>XL</button>
+          </div>
+        )}
       </div>
     )
   },
@@ -298,7 +303,7 @@ describe('the size presets', () => {
     const widgets = [widget(1, [3, 2], [2, 1])]
     const layouts = { lg: [{ i: '1', x: 10, y: 0, w: 2, h: 2 }], md: [], sm: [] }
     render(<BoardGrid {...({ widgets, layouts, data: {}, editing: true, canAct: true, autoCompact: false, onLayoutChange: saved } as unknown as Parameters<typeof BoardGrid>[0])} />)
-    await userEvent.click(screen.getByRole('button', { name: 'XL' }))
+    fireEvent.click(screen.getByRole('button', { name: 'XL' }))
     const lg = saved.mock.calls.find(([bp]) => bp === 'lg')
     expect(lg).toBeTruthy()
     const item = (lg![1] as LayoutItem[]).find((one) => one.i === '1')!
