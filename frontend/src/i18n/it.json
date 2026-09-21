@@ -879,6 +879,24 @@
     "leaveHelp": "Spegnere soltanto lascia le connessioni demo al loro posto, che continuano a inventare dati. Questo le rimuove insieme a ciò che ci era costruito sopra.",
     "left": "Modalità demo terminata: rimosse {{integrations_removed}} connessioni, {{widgets_removed}} card e {{boards_removed}} board."
   },
+  "dashboardImport": {
+    "title": "Importa da un'altra dashboard",
+    "help": "Porta qui una dashboard Homepage o Homarr: i gruppi diventano pagine, i servizi diventano tile, e i servizi che quelle dashboard leggevano diventano connessioni e card. Vedi cosa verrebbe creato prima che succeda.",
+    "source": "Proviene da",
+    "sources": { "auto": "Capiscilo dai file" },
+    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Configurazione Homarr (JSON)" },
+    "filesHelp": { "services": "Homepage: i gruppi e i servizi.", "bookmarks": "Homepage: i segnalibri, facoltativo.", "widgets": "Homepage: la barra informativa (orologio, meteo, ricerca), facoltativo.", "config": "Homarr fino alla 0.15: data/configs/default.json, oppure il file di una board dall'export di migrazione alla 1.0." },
+    "pick": "Scegli il file {{name}}",
+    "preview": "Leggi i file",
+    "connections_one": "{{count}} connessione da creare",
+    "connections_other": "{{count}} connessioni da creare",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} card",
+    "missing": "{{field}} (manca)",
+    "disabledUntilFilled": "creata spenta finché non viene compilato",
+    "tile": "tile",
+    "create": "Crea la board"
+  },
   "templates": {
     "title": "Parti da un modello",
     "help": "Una board pronta per un angolo del lab. Scegli quali delle tue connessioni prendono il posto dei segnaposto; una lasciata fuori porta via le sue card.",

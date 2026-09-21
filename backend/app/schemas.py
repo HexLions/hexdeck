@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import date
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # -- users -------------------------------------------------------------------
 
@@ -205,6 +205,26 @@ class TemplateInstall(BaseModel):
     name: str | None = Field(default=None, min_length=1, max_length=80)
     #: Template connection name -> id of one of this installation's connections, or null to leave its cards out.
     connections: dict[str, int | None] = Field(default_factory=dict)
+
+
+class ImportPreview(BaseModel):
+    """Another dashboard's files, pasted: Homepage's services/bookmarks/widgets YAML, or a Homarr config."""
+
+    source: Literal["auto", "homepage", "homarr"] = "auto"
+    files: dict[str, str] = Field(default_factory=dict)
+
+    @field_validator("files")
+    @classmethod
+    def _bounded(cls, files: dict[str, str]) -> dict[str, str]:
+        if not any(text.strip() for text in files.values()):
+            raise ValueError("Paste at least one file.")
+        if sum(len(text) for text in files.values()) > 2_000_000:
+            raise ValueError("The files are larger than two megabytes together.")
+        return {str(k)[:40]: v for k, v in files.items()}
+
+
+class ImportApply(BaseModel):
+    plan: dict[str, Any]
 
 
 class ImportBody(BaseModel):

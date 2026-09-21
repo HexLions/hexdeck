@@ -1,0 +1,12 @@
+- Developer:
+    - Github:
+        - abbr: GH
+          href: https://github.com/
+    - Docs:
+        - icon: si-readthedocs
+          href: https://docs.example.com/
+          description: The docs
+- Social:
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/

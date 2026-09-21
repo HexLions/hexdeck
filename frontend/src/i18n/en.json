@@ -879,6 +879,24 @@
     "leaveHelp": "Switching off alone leaves the demo connections in place, still inventing data. This removes them and what was built on them.",
     "left": "Demo mode left: {{integrations_removed}} connection(s), {{widgets_removed}} card(s) and {{boards_removed}} board(s) removed."
   },
+  "dashboardImport": {
+    "title": "Import from another dashboard",
+    "help": "Bring a Homepage or Homarr dashboard over: groups become pages, services become tiles, and services those dashboards read become connections and cards. You see what would be made before anything is.",
+    "source": "Coming from",
+    "sources": { "auto": "Work it out from the files" },
+    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Homarr config (JSON)" },
+    "filesHelp": { "services": "Homepage: the groups and services.", "bookmarks": "Homepage: the bookmarks, optional.", "widgets": "Homepage: the information bar (clock, weather, search), optional.", "config": "Homarr up to 0.15: data/configs/default.json, or a board's file from the 1.0 migration export." },
+    "pick": "Pick the {{name}} file",
+    "preview": "Read the files",
+    "connections_one": "{{count}} connection to make",
+    "connections_other": "{{count}} connections to make",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} cards",
+    "missing": "{{field}} (missing)",
+    "disabledUntilFilled": "made switched off until this is filled in",
+    "tile": "tile",
+    "create": "Create the board"
+  },
   "templates": {
     "title": "Start from a template",
     "help": "A ready-made board for a corner of the lab. Pick which of your connections stand in for its placeholders; one left out takes its cards with it.",

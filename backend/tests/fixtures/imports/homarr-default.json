@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "configProperties": { "name": "Lab" },
+  "categories": [ { "id": "cat-media", "name": "Media", "position": 1 } ],
+  "wrappers": [ { "id": "wrap-default", "position": 0 } ],
+  "apps": [
+    {
+      "id": "app-sonarr", "name": "Sonarr", "url": "http://sonarr.lan:8989",
+      "behaviour": { "externalUrl": "https://sonarr.example.com", "isOpeningNewTab": true, "tooltipDescription": "Series" },
+      "network": { "enabledStatusChecker": true, "okStatus": [200], "statusCodes": ["200"] },
+      "appearance": { "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/sonarr.png", "appNameStatus": "normal", "positionAppName": "column", "appNameFontSize": 16, "lineClampAppName": 1 },
+      "integration": { "type": "sonarr", "properties": [ { "type": "private", "field": "apiKey", "value": "sonarr-key", "isDefined": true } ] },
+      "area": { "type": "category", "properties": { "id": "cat-media" } },
+      "shape": { "lg": { "location": { "x": 0, "y": 0 }, "size": { "width": 2, "height": 1 } }, "md": { "location": { "x": 0, "y": 0 }, "size": { "width": 2, "height": 1 } } }
+    },
+    {
+      "id": "app-qbit", "name": "qBittorrent", "url": "http://qbit.lan:8080",
+      "behaviour": { "externalUrl": "", "isOpeningNewTab": true, "tooltipDescription": "" },
+      "network": { "enabledStatusChecker": true, "okStatus": [200], "statusCodes": ["200"] },
+      "appearance": { "iconUrl": "/imgs/app-icons/qbittorrent.png", "appNameStatus": "normal", "positionAppName": "column", "appNameFontSize": 16, "lineClampAppName": 1 },
+      "integration": { "type": "qBittorrent", "properties": [
+        { "type": "public", "field": "username", "value": "admin", "isDefined": true },
+        { "type": "private", "field": "password", "value": "adminadmin", "isDefined": true } ] },
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } },
+      "shape": { "lg": { "location": { "x": 2, "y": 0 }, "size": { "width": 2, "height": 1 } } }
+    },
+    {
+      "id": "app-omv", "name": "OMV", "url": "http://omv.lan",
+      "behaviour": { "externalUrl": "", "isOpeningNewTab": true, "tooltipDescription": "" },
+      "network": { "enabledStatusChecker": false, "okStatus": [200], "statusCodes": ["200"] },
+      "appearance": { "iconUrl": "openmediavault.png", "appNameStatus": "normal", "positionAppName": "column", "appNameFontSize": 16, "lineClampAppName": 1 },
+      "integration": { "type": "openmediavault", "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } },
+      "shape": { "lg": { "location": { "x": 4, "y": 0 }, "size": { "width": 2, "height": 1 } } }
+    }
+  ],
+  "widgets": [
+    { "id": "w-date", "type": "date", "properties": { "display24HourFormat": true, "timezone": "Europe/Rome", "customTitle": "", "dateFormat": "dddd, MMMM D", "titleState": "none" },
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } }, "shape": { "lg": { "location": { "x": 0, "y": 1 }, "size": { "width": 2, "height": 2 } } } },
+    { "id": "w-weather", "type": "weather", "properties": { "displayInFahrenheit": false, "displayCityName": true, "location": { "name": "Rome", "latitude": 41.9, "longitude": 12.5 } },
+      "area": { "type": "category", "properties": { "id": "cat-media" } }, "shape": { "lg": { "location": { "x": 2, "y": 0 }, "size": { "width": 2, "height": 2 } } } },
+    { "id": "w-rss", "type": "rss", "properties": { "rssFeedUrl": ["https://example.com/feed.xml"], "maximumAmountOfPosts": 5 },
+      "area": { "type": "category", "properties": { "id": "cat-media" } }, "shape": { "lg": { "location": { "x": 4, "y": 0 }, "size": { "width": 4, "height": 3 } } } },
+    { "id": "w-torrents", "type": "torrents-status", "properties": {},
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } }, "shape": { "lg": { "location": { "x": 2, "y": 1 }, "size": { "width": 4, "height": 3 } } } },
+    { "id": "w-media", "type": "media-server", "properties": {},
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } }, "shape": { "lg": { "location": { "x": 6, "y": 1 }, "size": { "width": 4, "height": 3 } } } },
+    { "id": "w-notes", "type": "notebook", "properties": { "content": "# Rack\n\n- UPS battery" },
+      "area": { "type": "category", "properties": { "id": "cat-media" } }, "shape": { "lg": { "location": { "x": 0, "y": 2 }, "size": { "width": 4, "height": 3 } } } },
+    { "id": "w-books", "type": "bookmark", "properties": { "name": "Links", "layout": "autoGrid", "items": [ { "id": "b1", "name": "GitHub", "href": "https://github.com", "iconUrl": "github.png", "openNewTab": true, "hideHostname": false, "hideIcon": false } ] },
+      "area": { "type": "wrapper", "properties": { "id": "wrap-default" } }, "shape": { "lg": { "location": { "x": 0, "y": 4 }, "size": { "width": 2, "height": 2 } } } }
+  ],
+  "settings": {}
+}

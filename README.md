@@ -32,6 +32,7 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 - **Users, roles and sharing.** Administrators, users and guests. Boards are private, shared with people or with a whole role, at view, edit or act level.
 - **Reachability and notifications.** App tiles carry a check with uptime bars; outages and due maintenance reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
 - **Boards as files.** Export a board as YAML, keep it in Git, drop it into `data/boards/` to provision it. Docker labels create tiles.
+- **Coming from Homepage or Homarr?** Paste their files under Settings › Boards: groups become pages, services become tiles, and the services those dashboards read become connections and cards, with what would be made shown first and anything that cannot be carried over said in words.
 - **Templates to start from.** Homelab overview, media stack, Proxmox rack, network and projects. Pick which of your connections stand in for the template's; one left out takes its cards with it.
 - **Themes to share.** A theme is fifteen colour tokens for dark and for light, checked for contrast on the way in; export yours, paste somebody else's.
 - **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token makes it five thousand.

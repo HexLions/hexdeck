@@ -879,6 +879,24 @@
     "leaveHelp": "Nur abschalten lässt die Demo-Verbindungen stehen, die weiter Daten erfinden. Das hier entfernt sie und was darauf gebaut war.",
     "left": "Demo-Modus verlassen: {{integrations_removed}} Verbindung(en), {{widgets_removed}} Karte(n) und {{boards_removed}} Board(s) entfernt."
   },
+  "dashboardImport": {
+    "title": "Aus einem anderen Dashboard übernehmen",
+    "help": "Ein Homepage- oder Homarr-Dashboard herüberholen: Gruppen werden Seiten, Dienste werden Kacheln, und Dienste, die jene Dashboards ausgelesen haben, werden Verbindungen und Karten. Du siehst, was entstehen würde, bevor etwas entsteht.",
+    "source": "Kommt von",
+    "sources": { "auto": "Aus den Dateien erkennen" },
+    "files": { "services": "services.yaml", "bookmarks": "bookmarks.yaml", "widgets": "widgets.yaml", "config": "Homarr-Konfiguration (JSON)" },
+    "filesHelp": { "services": "Homepage: die Gruppen und Dienste.", "bookmarks": "Homepage: die Lesezeichen, optional.", "widgets": "Homepage: die Informationsleiste (Uhr, Wetter, Suche), optional.", "config": "Homarr bis 0.15: data/configs/default.json, oder die Datei eines Boards aus dem 1.0-Migrationsexport." },
+    "pick": "Datei {{name}} wählen",
+    "preview": "Dateien lesen",
+    "connections_one": "{{count}} Verbindung anzulegen",
+    "connections_other": "{{count}} Verbindungen anzulegen",
+    "cards_one": "{{count}} Karte",
+    "cards_other": "{{count}} Karten",
+    "missing": "{{field}} (fehlt)",
+    "disabledUntilFilled": "wird abgeschaltet angelegt, bis das ausgefüllt ist",
+    "tile": "Kachel",
+    "create": "Board anlegen"
+  },
   "templates": {
     "title": "Mit einer Vorlage beginnen",
     "help": "Ein fertiges Board für eine Ecke des Labs. Wähle, welche deiner Verbindungen für die Platzhalter stehen; eine ausgelassene nimmt ihre Karten mit.",

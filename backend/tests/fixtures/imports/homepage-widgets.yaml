@@ -1,0 +1,17 @@
+- search:
+    provider: duckduckgo
+    target: _blank
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: short
+      timeStyle: short
+      hour12: true
+- openmeteo:
+    label: Rome
+    latitude: 41.9
+    longitude: 12.5
+    units: metric
+- resources:
+    cpu: true
+    memory: true

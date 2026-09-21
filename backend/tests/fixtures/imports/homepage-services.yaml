@@ -1,0 +1,64 @@
+- Media:
+    - Sonarr:
+        icon: sonarr.png
+        href: http://sonarr.lan:8989/
+        description: Series management
+        widget:
+          type: sonarr
+          url: http://sonarr.lan:8989
+          key: sonarr-api-key
+    - Plex:
+        icon: plex.png
+        href: http://plex.lan:32400/web
+        widgets:
+          - type: plex
+            url: http://plex.lan:32400
+            key: plex-token
+          - type: uptime-kuma
+            url: http://kuma.lan:3001
+            slug: plex
+    - Downloads:
+        - qBittorrent:
+            href: http://qbit.lan:8080/
+            widget:
+              type: qbittorrent
+              url: http://qbit.lan:8080
+              username: admin
+              password: adminadmin
+
+- Infrastructure:
+    - Proxmox:
+        icon: proxmox.png
+        href: https://pve.lan:8006/
+        widget:
+          type: proxmox
+          url: https://pve.lan:8006
+          username: api@pam!homepage
+          password: proxmox-secret
+    - Grafana:
+        icon: grafana.png
+        href: http://grafana.lan:3000/
+        description: Dashboards
+        widget:
+          type: grafana
+          url: http://grafana.lan:3000
+          username: admin
+          password: grafana-pass
+    - Immich:
+        href: http://immich.lan:2283/
+        widget:
+          type: immich
+          url: http://immich.lan:2283
+          key: immich-key
+          version: 2
+    - Something Odd:
+        href: http://odd.lan/
+        widget:
+          type: nonexistent-widget
+          url: http://odd.lan
+    - Pi-hole:
+        href: http://pi.hole/admin
+        widget:
+          type: pihole
+          url: http://pi.hole
+          key: pihole-app-password

@@ -95,3 +95,10 @@ Updated at every milestone.
   removes the demo connections, the cards that read them and the boards
   that were nothing but those. README rewritten with HexDeck's own
   pictures.
+- **From other dashboards.** `backend/app/services/imports/` reads
+  Homepage's `services.yaml`, `bookmarks.yaml` and `widgets.yaml`, and
+  Homarr's (up to 0.15) config JSON, into a plan: connections with what
+  is still missing, cards with a tick to leave out, warnings for what
+  has no equivalent. `POST /api/v1/imports/preview` shows it,
+  `/apply` makes it, through the ordinary untrusted board import; pasted
+  values are never read as environment references.
