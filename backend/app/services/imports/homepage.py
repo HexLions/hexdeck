@@ -67,6 +67,10 @@ def _service(plan: Plan, page: str, name: str, body: dict[str, Any]) -> None:
         if not isinstance(widget, dict):
             continue
         kind = str(widget.get("type") or "")
+        if kind == "customapi":
+            if _custom_api(plan, page, name, widget):
+                made_card = True
+            continue
         adapter = adapter_for(TYPES.get(kind, kind))
         if adapter is None:
             if kind:
@@ -86,6 +90,32 @@ def _service(plan: Plan, page: str, name: str, body: dict[str, Any]) -> None:
         icon = guessed.icon if guessed else ""
     if href or not made_card:
         plan.tile(page, name, href, icon, description)
+
+
+def _custom_api(plan: Plan, page: str, name: str, widget: dict[str, Any]) -> bool:
+    """Homepage's customapi: one JSON address, several fields read out of the
+    answer. HexDeck's JSON API card shows one value, so every mapping becomes
+    a card on one connection."""
+    adapter = adapter_for("jsonapi")
+    url = str(widget.get("url") or "")
+    mappings = [m for m in (widget.get("mappings") or []) if isinstance(m, dict) and m.get("field")]
+    if adapter is None or not url or not mappings:
+        plan.warn(f"{name}: the customapi widget has no address or no mappings, so only a tile was made.")
+        return False
+    given: dict[str, Any] = {"url": url}
+    headers = widget.get("headers") if isinstance(widget.get("headers"), dict) else {}
+    if headers:
+        given["headers"] = "\n".join(f"{k}: {v}" for k, v in headers.items())
+    key = plan.connection(adapter, name, given)
+    for mapping in mappings:
+        label = str(mapping.get("label") or mapping["field"])
+        options: dict[str, Any] = {"value_path": str(mapping["field"]), "label": label}
+        if mapping.get("format") == "percent":
+            options["unit"] = "%"
+        if mapping.get("suffix"):
+            options["unit"] = str(mapping["suffix"])
+        plan.card(page, "jsonapi.value", f"{name} · {label}", icon=adapter.icon, connection=key, options=options)
+    return True
 
 
 def _walk(plan: Plan, group: str, items: Any) -> None:

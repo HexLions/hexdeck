@@ -62,3 +62,23 @@
           type: pihole
           url: http://pi.hole
           key: pihole-app-password
+    - Server Stats:
+        href: http://stats.lan:9000
+        icon: prometheus.svg
+        widget:
+          type: customapi
+          url: http://stats.lan:9000/stats
+          mappings:
+            - field: cpu_pct
+              label: CPU
+              format: percent
+            - field: ram_pct
+              label: RAM
+              format: percent
+    - Portainer:
+        href: https://portainer.lan:9443/
+        widget:
+          type: portainer
+          url: https://portainer.lan:9443
+          env: 3
+          key: ptr_key

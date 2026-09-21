@@ -46,6 +46,15 @@ def test_homepage_services_become_pages_tiles_connections_and_cards() -> None:
     assert any("nonexistent-widget" in w for w in plan["warnings"])
     qbit = next(c for c in plan["connections"] if c["kind"] == "qbittorrent")
     assert qbit["config"]["username"] == "admin" and qbit["config"]["password"] == "adminadmin"
+    infra = _cards(plan, "Infrastructure")
+    stats = [c for c in infra if c["kind"] == "jsonapi.value"]
+    assert [(c["title"], c["options"]) for c in stats] == [
+        ("Server Stats · CPU", {"value_path": "cpu_pct", "label": "CPU", "unit": "%"}),
+        ("Server Stats · RAM", {"value_path": "ram_pct", "label": "RAM", "unit": "%"}),
+    ], "a customapi widget is one JSON API connection and a card per mapping"
+    assert next(c for c in plan["connections"] if c["kind"] == "jsonapi")["config"] == {"url": "http://stats.lan:9000/stats"}
+    portainer = next(c for c in plan["connections"] if c["kind"] == "portainer")
+    assert portainer["config"] == {"url": "https://portainer.lan:9443", "api_key": "ptr_key", "endpoint_id": 3}
 
 
 def test_homepage_bookmarks_and_information_widgets_come_along() -> None:

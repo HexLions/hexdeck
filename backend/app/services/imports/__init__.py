@@ -48,6 +48,7 @@ FIELD_SOURCES: dict[str, tuple[str, ...]] = {
     "token_id": ("username", "token_id"),
     "token_secret": ("password", "key", "token_secret"),
     "email": ("username", "email"),
+    "endpoint_id": ("env", "endpoint_id", "endpoint"),
 }
 
 
