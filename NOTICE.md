@@ -109,3 +109,5 @@ Updated at every milestone.
   sign-in (`/auth/auto` offers the way back). `HEXDECK_TRUSTED_PROXIES`
   says whose `X-Forwarded-For` is believed; the whole Internet is refused
   as a network. Set under System › Sign-in providers.
+- **Reset from the shell.** `python -m app.tools.reset_password <user>` sets
+  a new password for an account and ends its sessions; in docs/operating.md.

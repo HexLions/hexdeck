@@ -106,8 +106,19 @@ DOCKER_GID=999                      # into .env
 
 ## Getting back in
 
-If the last administrator account is locked out and there is no mail server
-configured, start the container once with a way back in:
+A forgotten password is set anew from the shell of the machine, with the
+container running (Portainer: Containers → hexdeck → Console → `/bin/sh`):
+
+```
+docker exec -it hexdeck python -m app.tools.reset_password admin
+```
+
+That prints a new password once; sign in with it and change it under My
+settings. `--password 'your own'` sets one of your choice. Every browser
+session of the account is ended; its second factor is left alone.
+
+Without shell access to the running container, start it once with a way
+back in instead:
 
 ```
 docker compose run --rm -e HEXDECK_RESCUE=1 HexDeck
