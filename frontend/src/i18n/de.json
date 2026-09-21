@@ -650,7 +650,9 @@
     "moveWithHandle": "{{name}} mit dem Griff verschieben",
     "chooseBeforeAction": "Dafür muss vorher etwas ausgewählt werden.",
     "pickOne": "Bitte auswählen",
-    "stackedHint": "Auf einem schmalen Bildschirm folgen die Karten der Reihenfolge des breiten Boards. Verschieben geht auf einem breiteren Bildschirm."
+    "stackedHint": "Auf einem schmalen Bildschirm folgen die Karten der Reihenfolge des breiten Boards. Verschieben geht auf einem breiteren Bildschirm.",
+    "moved_one": "{{count}} Karte nach {{page}} verschoben.",
+    "moved_other": "{{count}} Karten nach {{page}} verschoben."
   },
   "widget": {
     "size": "Größe",
@@ -738,7 +740,9 @@
     "pictureMove": "Bild {{at}} verschieben",
     "pictureBadAddress": "Aus dieser Adresse lässt sich kein Bild laden.",
     "pictureLibrary": "Aus den Medien",
-    "pictureLibraryEmpty": "Noch nichts hochgeladen. Lade zuerst eine Datei hoch."
+    "pictureLibraryEmpty": "Noch nichts hochgeladen. Lade zuerst eine Datei hoch.",
+    "move": "Auf eine andere Seite verschieben",
+    "moveTo": "Verschieben nach…"
   },
   "library": {
     "title": "Widget hinzufügen",

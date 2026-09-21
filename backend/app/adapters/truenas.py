@@ -71,6 +71,16 @@ from .base import (
 )
 
 #: What each card reads: the JSON-RPC method and the same thing on REST v2.
+#: The live numbers TrueNAS publishes as an event, not a method: CPU usage
+#: and memory in use. Subscribed to for one event and let go again. Over
+#: REST there is nothing like it, so the card falls back to the load average
+#: and the memory size there. Shapes read from the middleware's source:
+#: 25.x sends ``cpu.cpu.usage`` and ``memory.physical_memory_total`` /
+#: ``physical_memory_available``; 24.10 sends ``cpu.average.usage`` and
+#: ``memory.classes.unused``.
+REALTIME = "reporting.realtime"
+REALTIME_WAIT = 8.0
+
 READS = {
     "system.info": "/system/info",
     "pool.query": "/pool",
@@ -171,7 +181,8 @@ class TruenasAdapter(Adapter):
             raise _rest_refused(label, base_url(config), turned_down)
         for method in methods:
             if method not in fresh:
-                fresh[method] = await self._get(config, ctx, READS[method], cache=cache)
+                # The live statistics are an event of the current API; REST has none.
+                fresh[method] = None if method == REALTIME else await self._get(config, ctx, READS[method], cache=cache)
         return {method: fresh[method] for method in methods}
 
     # -- the current API -------------------------------------------------------
@@ -213,8 +224,28 @@ class TruenasAdapter(Adapter):
                     raise AdapterError(f"TrueNAS answered {method} with an error: {reason}", code="rpc_error")
                 return message.get("result")
 
+        async def realtime(socket: Any) -> dict[str, Any] | None:
+            """One event of the live statistics, or None if none came in time.
+
+            ⚠️ The subscription is an event source with an argument, written
+            ``name:{json}`` in the event name; the event itself arrives as a
+            ``collection_update`` notification with ``msg`` "added" and the
+            numbers under ``fields``. The socket is closed right after, which
+            ends the subscription on TrueNAS' side.
+            """
+            await call(socket, "core.subscribe", f"{REALTIME}:{json.dumps({'interval': 2})}")
+            try:
+                async with asyncio.timeout(REALTIME_WAIT):
+                    while True:
+                        message = json.loads(await socket.recv())
+                        params = message.get("params") or {}
+                        if message.get("method") == "collection_update" and params.get("collection") == REALTIME and params.get("msg") == "added":
+                            return params.get("fields") or None
+            except TimeoutError:
+                return None
+
         try:
-            async with asyncio.timeout(20):
+            async with asyncio.timeout(30):
                 socket = await self._open_socket(url, config)
                 try:
                     if await call(socket, "auth.login_with_api_key", str(config.get("api_key") or "")) is not True:
@@ -222,7 +253,10 @@ class TruenasAdapter(Adapter):
                             "TrueNAS refused the API key.", code="auth_failed",
                             hint="Check the key. TrueNAS revokes a key for good once it was sent over plain http; then only a new one helps.",
                         )
-                    return {method: await call(socket, method) for method in methods}
+                    answers: dict[str, Any] = {}
+                    for method in methods:
+                        answers[method] = await realtime(socket) if method == REALTIME else await call(socket, method)
+                    return answers
                 finally:
                     await socket.close()
         except InvalidStatus as error:
@@ -287,18 +321,34 @@ class TruenasAdapter(Adapter):
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         if widget_kind == "system":
-            read = await self._read(config, ctx, ["system.info", "alert.list"])
+            read = await self._read(config, ctx, ["system.info", "alert.list", REALTIME])
             info = read["system.info"] or {}
             alerts = [a for a in read["alert.list"] or [] if not a.get("dismissed")]
-            load = float((info.get("loadavg") or [0])[0])
-            cores = int(info.get("cores") or 1)
-            load_percent = round(100.0 * load / cores, 1)
             memory_total = float(info.get("physmem") or 0)
+            cpu, memory_used = _live_numbers(read.get(REALTIME))
+            if cpu is None:
+                # Over REST, or no event in time: the load average per core stands in.
+                load = float((info.get("loadavg") or [0])[0])
+                cores = int(info.get("cores") or 1)
+                cpu = round(100.0 * load / cores, 1)
+                cpu_label = "Load"
+            else:
+                cpu_label = "CPU"
+            if memory_used is not None and memory_total:
+                memory_percent = round(100.0 * memory_used / memory_total, 1)
+                memory = {"label": "Memory", "value": memory_percent, "unit": "%", "metric": "memory",
+                          "text": f"{human_bytes(memory_used)} / {human_bytes(memory_total)}"}
+                metrics = {"load": cpu, "memory": memory_percent}
+                worst = max(cpu, memory_percent)
+            else:
+                memory = {"label": "Memory", "value": human_bytes(memory_total)}
+                metrics = {"load": cpu}
+                worst = cpu
             return WidgetData(
-                status="bad" if any(a.get("level") in ("CRITICAL", "ERROR") for a in alerts) else ("warn" if alerts else status_from_percent(load_percent)),
-                primary={"label": "Load", "value": load_percent, "unit": "%"},
-                secondary=[{"label": "Memory", "value": human_bytes(memory_total)}, {"label": "Uptime", "value": duration_short(info.get("uptime_seconds"))}, {"label": "Alerts", "value": len(alerts)}],
-                metrics={"load": load_percent},
+                status="bad" if any(a.get("level") in ("CRITICAL", "ERROR") for a in alerts) else ("warn" if alerts else status_from_percent(worst)),
+                primary={"label": cpu_label, "value": cpu, "unit": "%"},
+                secondary=[memory, {"label": "Uptime", "value": duration_short(info.get("uptime_seconds"))}, {"label": "Alerts", "value": len(alerts)}],
+                metrics=metrics,
             )
         if widget_kind == "pools":
             items = []
@@ -367,6 +417,32 @@ class _NoCurrentApi(Exception):
     def __init__(self, status: int) -> None:
         super().__init__(status)
         self.status = status
+
+
+def _live_numbers(event: Any) -> tuple[float | None, float | None]:
+    """CPU usage in percent and memory in use in bytes, out of one
+    ``reporting.realtime`` event of either shape TrueNAS has sent."""
+    if not isinstance(event, dict):
+        return None, None
+    cpu_block = event.get("cpu") or {}
+    cpu = None
+    for key in ("cpu", "average"):
+        usage = (cpu_block.get(key) or {}).get("usage") if isinstance(cpu_block.get(key), dict) else None
+        if isinstance(usage, (int, float)):
+            cpu = round(float(usage), 1)
+            break
+    memory_block = event.get("memory") or {}
+    used = None
+    total, available = memory_block.get("physical_memory_total"), memory_block.get("physical_memory_available")
+    if isinstance(total, (int, float)) and isinstance(available, (int, float)) and total > 0:
+        used = float(total - available)
+    else:
+        classes = memory_block.get("classes") or {}
+        # 24.10: what is not unused is in use, the ARC included, which is what the NAS itself shows.
+        parts = [classes.get(key) for key in ("apps", "cache", "buffers", "arc", "page_tables", "slab_cache")]
+        if any(isinstance(part, (int, float)) for part in parts):
+            used = float(sum(part for part in parts if isinstance(part, (int, float))))
+    return cpu, used
 
 
 def _version(label: str) -> tuple[int, int]:

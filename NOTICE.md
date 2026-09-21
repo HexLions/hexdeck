@@ -113,3 +113,11 @@ Updated at every milestone.
   as a network. Set under System › Sign-in providers.
 - **Reset from the shell.** `python -m app.tools.reset_password <user>` sets
   a new password for an account and ends its sessions; in docs/operating.md.
+- **Moving cards.** `POST /api/v1/widgets/move` puts cards on another page,
+  of the same board or of another one the caller may edit; the selection
+  goes together. Card menus are drawn through a portal, so they are not
+  cut at the card's edge.
+- **TrueNAS live numbers.** The system card subscribes to
+  `reporting.realtime` for one event and shows CPU usage and memory in use
+  of the total (shapes read from the middleware's source, 25.x and 24.10);
+  over REST the load average and the memory size stand in.

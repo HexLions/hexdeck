@@ -7,7 +7,7 @@ import 'react-resizable/css/styles.css'
 import { moveGroup } from '../lib/arrange'
 import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, presetSizes, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns, type SizePreset } from '../lib/layout'
 import type { Action, Breakpoint, LayoutItem, WidgetData, WidgetView } from '../lib/types'
-import { WidgetCard } from './WidgetCard'
+import { WidgetCard, type MoveTarget } from './WidgetCard'
 
 const ResponsiveGrid = WidthProvider(Responsive)
 
@@ -55,6 +55,9 @@ interface Props {
   onRefresh?: (widgetId: number) => void
   onSettings?: (widgetId: number) => void
   onRemove?: (widgetId: number) => void
+  /** Where a card may be moved to, and the move; the selected cards go together. */
+  moveTargets?: MoveTarget[]
+  onMove?: (widgetIds: number[], pageId: number) => void
   compact?: boolean
   /** On, every card moves up to fill space. Off, cards stay where they are dropped and gaps are allowed. */
   autoCompact?: boolean
@@ -87,7 +90,7 @@ function plain({ i, x, y, w, h }: Layout | LayoutItem): LayoutItem {
 
 /** The board: one arrangement, drawn as it is on a wide screen and stacked on a narrow one. */
 export function BoardGrid(props: Props) {
-  const { widgets, layouts, data, series, editing, canAct, canEdit, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact, fitScreen } = props
+  const { widgets, layouts, data, series, editing, canAct, canEdit, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact, fitScreen, moveTargets, onMove } = props
   const columns = props.columns ?? 12
   const { t } = useTranslation()
   // The grid draws at the width WidthProvider assumes before it has measured,
@@ -152,6 +155,16 @@ export function BoardGrid(props: Props) {
    * Always in the wide arrangement, since it is the only one; on a phone the
    * stack follows it.
    */
+  /** A move takes the selected cards along when the moved one is among them. */
+  const move = useCallback(
+    (widgetId: number, pageId: number) => {
+      if (!onMove) return
+      const ids = selected.size > 1 && selected.has(String(widgetId)) ? [...selected].map(Number) : [widgetId]
+      setSelected(new Set())
+      onMove(ids, pageId)
+    },
+    [onMove, selected],
+  )
   /** A card put to one of the preset sizes, pulled in from the right edge if it would stick out. */
   const resize = useCallback(
     (widgetId: number, preset: SizePreset) => {
@@ -281,6 +294,8 @@ export function BoardGrid(props: Props) {
               onSettings={onSettings}
               onRemove={onRemove}
               onResize={editing && onLayoutChange ? resize : undefined}
+              moveTargets={moveTargets}
+              onMove={editing && onMove ? move : undefined}
             />
           </div>
         ))}
@@ -302,6 +317,8 @@ interface CardProps {
   onSettings?: (widgetId: number) => void
   onRemove?: (widgetId: number) => void
   onResize?: (widgetId: number, preset: SizePreset) => void
+  moveTargets?: MoveTarget[]
+  onMove?: (widgetId: number, pageId: number) => void
 }
 
 /**
@@ -314,7 +331,8 @@ interface CardProps {
  * the memo anyway. So the closures are made here, from props that are stable
  * for as long as the card is, and the wrapper is what the grid renders.
  */
-const GridCard = memo(function GridCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize }: CardProps) {
+const GridCard = memo(function GridCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize, moveTargets, onMove }: CardProps) {
+  const moveTo = useCallback((pageId: number) => onMove?.(widget.id, pageId), [onMove, widget.id])
   const act = useCallback((action: Action) => onAction?.(widget.id, action), [onAction, widget.id])
   const size = useCallback((preset: SizePreset) => onResize?.(widget.id, preset), [onResize, widget.id])
   const refresh = useCallback(() => onRefresh?.(widget.id), [onRefresh, widget.id])
@@ -333,6 +351,8 @@ const GridCard = memo(function GridCard({ widget, data, series, editing, canAct,
       onSettings={onSettings ? settings : undefined}
       onRemove={onRemove ? remove : undefined}
       onResize={onResize ? size : undefined}
+      moveTargets={moveTargets}
+      onMove={onMove ? moveTo : undefined}
     />
   )
 })

@@ -72,6 +72,8 @@ export interface Secondary {
   metric?: string
   /** Which of the card's declared pieces this row is; see {@link Primary.part}. */
   part?: string
+  /** Shown in place of the value, when a bar drawn from the value says less than words: "9.2 / 15.6 GB" next to a memory bar. */
+  text?: string
 }
 
 export interface WidgetData {

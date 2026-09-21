@@ -650,7 +650,9 @@
     "moveWithHandle": "Trascina per spostare {{name}}",
     "chooseBeforeAction": "Serve una scelta prima di eseguire.",
     "pickOne": "Scegline uno",
-    "stackedHint": "Su uno schermo stretto le card seguono l'ordine della board larga. Per spostarle, apri la board su uno schermo più largo."
+    "stackedHint": "Su uno schermo stretto le card seguono l'ordine della board larga. Per spostarle, apri la board su uno schermo più largo.",
+    "moved_one": "{{count}} card spostata in {{page}}.",
+    "moved_other": "{{count}} card spostate in {{page}}."
   },
   "widget": {
     "size": "Dimensione",
@@ -738,7 +740,9 @@
     "pictureMove": "Sposta l'immagine {{at}}",
     "pictureBadAddress": "Questo non è un indirizzo da cui si possa caricare un'immagine.",
     "pictureLibrary": "Dai media",
-    "pictureLibraryEmpty": "Ancora niente caricato. Carica prima un file."
+    "pictureLibraryEmpty": "Ancora niente caricato. Carica prima un file.",
+    "move": "Sposta su un'altra pagina",
+    "moveTo": "Sposta in…"
   },
   "library": {
     "title": "Aggiungi una card",

@@ -650,7 +650,9 @@
     "moveWithHandle": "Drag to move {{name}}",
     "chooseBeforeAction": "This needs a choice before it runs.",
     "pickOne": "Pick one",
-    "stackedHint": "On a narrow screen the cards follow the order of the wide board. To move them, open the board on a wider screen."
+    "stackedHint": "On a narrow screen the cards follow the order of the wide board. To move them, open the board on a wider screen.",
+    "moved_one": "{{count}} card moved to {{page}}.",
+    "moved_other": "{{count}} cards moved to {{page}}."
   },
   "widget": {
     "size": "Size",
@@ -738,7 +740,9 @@
     "pictureMove": "Move picture {{at}}",
     "pictureBadAddress": "That is not an address a picture can be loaded from.",
     "pictureLibrary": "From the media",
-    "pictureLibraryEmpty": "Nothing uploaded yet. Upload a file first."
+    "pictureLibraryEmpty": "Nothing uploaded yet. Upload a file first.",
+    "move": "Move to another page",
+    "moveTo": "Move to…"
   },
   "library": {
     "title": "Add a widget",

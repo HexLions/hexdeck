@@ -1,5 +1,6 @@
-import { AlertTriangle, ExternalLink, Proportions, RefreshCw, Settings2, Trash2 } from 'lucide-react'
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
+import { AlertTriangle, ArrowRightLeft, ExternalLink, Proportions, RefreshCw, Settings2, Trash2 } from 'lucide-react'
+import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
 import { SIZE_PRESETS, type SizePreset } from '../lib/layout'
@@ -23,28 +24,98 @@ interface Props {
   onRemove?: () => void
   /** Put the card to one of four sizes; offered while editing. */
   onResize?: (preset: SizePreset) => void
+  /** The pages a card may be moved to, and the move itself; offered while editing. */
+  moveTargets?: MoveTarget[]
+  onMove?: (pageId: number) => void
+}
+
+export interface MoveTarget {
+  id: number
+  label: string
+}
+
+/** The other pages, of this board and of the boards one may edit, behind one button. */
+function MoveMenu({ targets, onMove }: { targets: MoveTarget[]; onMove: (pageId: number) => void }) {
+  const { t } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null)
+  return (
+    <span className="relative">
+      <button ref={setAnchor} className="btn btn-icon h-6 w-6 btn-flat" onClick={() => setOpen((value) => !value)} aria-label={t('widget.move')} title={t('widget.move')} aria-expanded={open} aria-haspopup="menu">
+        <ArrowRightLeft size={13} />
+      </button>
+      <CardMenu anchor={anchor} open={open} onClose={() => setOpen(false)} className="flex max-h-56 w-56 flex-col overflow-auto p-1">
+          <span className="px-2 py-1 text-[10px] uppercase tracking-wide text-faint">{t('widget.moveTo')}</span>
+          {targets.map((target) => (
+            <button
+              key={target.id}
+              role="menuitem"
+              className="rounded px-2 py-1 text-left text-xs text-muted hover:bg-surface-hover hover:text-ink"
+              onClick={() => {
+                setOpen(false)
+                onMove(target.id)
+              }}
+            >
+              {target.label}
+            </button>
+          ))}
+      </CardMenu>
+    </span>
+  )
+}
+
+/**
+ * A small menu under one of the card's buttons.
+ *
+ * ⚠️ Drawn on the body, not inside the card. The grid puts every card in a
+ * transformed, clipped box, so a menu that hung under the button was cut at
+ * the card's edge and a fixed one was placed against the card instead of the
+ * window. The portal escapes both; the place is measured from the button.
+ */
+function CardMenu({ anchor, open, onClose, className, children }: { anchor: HTMLElement | null; open: boolean; onClose: () => void; className: string; children: ReactNode }) {
+  const box = useRef<HTMLSpanElement>(null)
+  const [at, setAt] = useState<{ top: number; right: number }>({ top: 0, right: 0 })
+  useLayoutEffect(() => {
+    if (!open || !anchor) return
+    const rect = anchor.getBoundingClientRect()
+    setAt({ top: rect.bottom + 4, right: Math.max(8, window.innerWidth - rect.right) })
+  }, [open, anchor])
+  useEffect(() => {
+    if (!open) return
+    const onDown = (event: globalThis.MouseEvent) => {
+      const target = event.target as Node
+      if (!box.current?.contains(target) && !anchor?.contains(target)) onClose()
+    }
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('mousedown', onDown)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('mousedown', onDown)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open, anchor, onClose])
+  if (!open) return null
+  return createPortal(
+    <span ref={box} role="menu" className={`glass-strong fixed z-50 rounded-lg shadow-xl ${className}`} style={{ top: at.top, right: at.right }}>
+      {children}
+    </span>,
+    document.body,
+  )
 }
 
 /** S, M, L, XL behind one button, so a card is sized without dragging its corner. */
 function SizeMenu({ onResize }: { onResize: (preset: SizePreset) => void }) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
-  const box = useRef<HTMLSpanElement>(null)
-  useEffect(() => {
-    if (!open) return
-    const onDown = (event: globalThis.MouseEvent) => {
-      if (!box.current?.contains(event.target as Node)) setOpen(false)
-    }
-    window.addEventListener('mousedown', onDown)
-    return () => window.removeEventListener('mousedown', onDown)
-  }, [open])
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null)
   return (
-    <span className="relative" ref={box}>
-      <button className="btn btn-icon h-6 w-6 btn-flat" onClick={() => setOpen((value) => !value)} aria-label={t('widget.size')} title={t('widget.size')} aria-expanded={open} aria-haspopup="menu">
+    <span className="relative">
+      <button ref={setAnchor} className="btn btn-icon h-6 w-6 btn-flat" onClick={() => setOpen((value) => !value)} aria-label={t('widget.size')} title={t('widget.size')} aria-expanded={open} aria-haspopup="menu">
         <Proportions size={13} />
       </button>
-      {open && (
-        <span role="menu" className="glass-strong absolute right-0 top-7 z-30 flex gap-0.5 rounded-lg p-0.5 shadow-xl">
+      <CardMenu anchor={anchor} open={open} onClose={() => setOpen(false)} className="flex gap-0.5 p-0.5">
           {SIZE_PRESETS.map((preset) => (
             <button
               key={preset}
@@ -59,8 +130,7 @@ function SizeMenu({ onResize }: { onResize: (preset: SizePreset) => void }) {
               {preset}
             </button>
           ))}
-        </span>
-      )}
+      </CardMenu>
     </span>
   )
 }
@@ -68,7 +138,7 @@ function SizeMenu({ onResize }: { onResize: (preset: SizePreset) => void }) {
 const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], .no-click'
 
 /** The frame every widget shares: header, floating controls, body, error strip. */
-export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize }: Props) {
+export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize, moveTargets, onMove }: Props) {
   const { t, i18n } = useTranslation()
   // A failed fetch is an error state of its own: red, with the server's reason.
   // The server names the reason by code; other languages translate the code,
@@ -121,6 +191,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
         </a>
       )}
       {editing && onResize && <SizeMenu onResize={onResize} />}
+      {editing && onMove && moveTargets && moveTargets.length > 0 && <MoveMenu targets={moveTargets} onMove={onMove} />}
       {editing && onSettings && (
         <button className="btn btn-icon h-6 w-6 btn-flat" onClick={onSettings} aria-label={t('widget.settings')} title={t('widget.settings')}>
           <Settings2 size={13} />
@@ -133,7 +204,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
       )}
     </>
   )
-  const showControls = editing ? Boolean(onSettings || onRemove || onResize) : Boolean(onRefresh || link)
+  const showControls = editing ? Boolean(onSettings || onRemove || onResize || onMove) : Boolean(onRefresh || link)
 
   return (
     <section

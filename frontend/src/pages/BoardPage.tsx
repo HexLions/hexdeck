@@ -350,6 +350,26 @@ export function BoardPage() {
   const onRefresh = useCallback((id: number) => void post(`/widgets/${id}/refresh`), [])
   const onSettings = useCallback((id: number) => setSettingsFor(id), [])
   const onRemove = useCallback((id: number) => setRemoving(id), [])
+  // The other pages of this board first, then the pages of every board one may edit.
+  const moveTargets = useMemo(() => {
+    const here = (data?.pages ?? []).filter((p) => p.id !== activePage?.id).map((p) => ({ id: p.id, label: p.name }))
+    const elsewhere = (boards.data ?? [])
+      .filter((b) => b.slug !== slug && (b.permission === 'owner' || b.permission === 'edit'))
+      .flatMap((b) => b.pages.map((p) => ({ id: p.id, label: `${b.name} › ${p.name}` })))
+    return [...here, ...elsewhere]
+  }, [data?.pages, activePage?.id, boards.data, slug])
+  const onMove = useCallback(
+    (ids: number[], pageId: number) => {
+      const target = moveTargets.find((t) => t.id === pageId)
+      void post<{ moved: number }>('/widgets/move', { ids, page_id: pageId })
+        .then((answer) => {
+          setToast({ text: t('board.moved', { count: answer.moved, page: target?.label ?? '' }), level: 'ok' })
+          return board.refetch()
+        })
+        .catch((failure) => setToast({ text: failure instanceof ApiError ? failure.message : t('errors.network'), level: 'error' }))
+    },
+    [moveTargets, board, t],
+  )
 
   const allActions = useMemo(() => {
     const list: { widget: WidgetView; action: Action }[] = []
@@ -466,6 +486,8 @@ export function BoardPage() {
           onRefresh={onRefresh}
           onSettings={onSettings}
           onRemove={onRemove}
+          moveTargets={moveTargets}
+          onMove={onMove}
         />
       </main>
 

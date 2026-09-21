@@ -382,7 +382,7 @@ export function StatsCard({ data, series }: RenderProps) {
                   </div>
                 )}
               </div>
-              <div className="num text-[13px] font-semibold text-right whitespace-nowrap min-w-[3.5rem]">{formatValue(row.value, row.unit)}</div>
+              <div className="num text-[13px] font-semibold text-right whitespace-nowrap min-w-[3.5rem]" title={row.text ? formatValue(row.value, row.unit) : undefined}>{row.text ?? formatValue(row.value, row.unit)}</div>
             </div>
           )
         })}

@@ -50,6 +50,17 @@ describe('WidgetCard', () => {
     expect(screen.queryByRole('menu')).toBeNull()
   })
 
+  it('offers the other pages behind one button while editing, the selection going along', () => {
+    const view = valueView()
+    const moved = vi.fn()
+    render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} editing moveTargets={[{ id: 7, label: 'Media' }, { id: 9, label: 'Lab › Overview' }]} onMove={moved} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Move to another page' }))
+    expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual(['Media', 'Lab › Overview'])
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Lab › Overview' }))
+    expect(moved).toHaveBeenCalledWith(9)
+    expect(screen.queryByRole('menu')).toBeNull()
+  })
+
   it('does not open the link while editing', () => {
     const view = valueView()
     render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} editing onSettings={() => undefined} />)

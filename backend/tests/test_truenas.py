@@ -7,6 +7,7 @@ plain http is revoked by TrueNAS for good (issue #4).
 
 from __future__ import annotations
 
+import asyncio
 import json
 import time
 from typing import Any
@@ -34,14 +35,24 @@ OLD_INFO = {**INFO, "version": "TrueNAS-SCALE-24.10.2"}
 #: What a plain GET of /api/current, without a key, said on 25.10.7 on 21.09.2026.
 NEEDS_UPGRADE = 'No WebSocket UPGRADE hdr: None\n Can "Upgrade" only to "WebSocket".'
 ANSWERS = {"system.info": INFO, "pool.query": POOLS, "alert.list": ALERTS}
+#: One ``reporting.realtime`` event as 25.x sends it: CPU usage in percent, memory in bytes.
+LIVE = {"cpu": {"cpu": {"usage": 37.25, "temp": None}, "cpu0": {"usage": 40.0, "temp": None}},
+        "memory": {"arc_size": 2_000_000_000, "arc_free_memory": 0, "arc_available_memory": 0,
+                   "physical_memory_total": 8_333_570_048, "physical_memory_available": 4_166_785_024},
+        "disks": {}, "interfaces": {}, "zfs": {}, "pools": {}}
+#: The same event from 24.10: the average across cores, memory in classes.
+LIVE_24_10 = {"cpu": {"0": {"usage": 10.0}, "average": {"user": 5, "system": 3, "idle": 90, "iowait": 2, "usage": 8.0}},
+              "memory": {"classes": {"page_tables": 100_000_000, "slab_cache": 200_000_000, "cache": 1_000_000_000, "buffers": 100_000_000,
+                                     "unused": 2_000_000_000, "arc": 2_000_000_000, "apps": 3_000_000_000}, "extra": {}}}
 
 
 class FakeTruenas:
     """A WebSocket that speaks JSON-RPC like TrueNAS, one per connection."""
 
-    def __init__(self, key: str = KEY, refuse: dict[str, str] | None = None) -> None:
+    def __init__(self, key: str = KEY, refuse: dict[str, str] | None = None, live: dict[str, Any] | None = LIVE) -> None:
         self.key = key
         self.refuse = refuse or {}
+        self.live = live
         self.sent: list[dict[str, Any]] = []
         self.opened: list[str] = []
         self.closed = 0
@@ -66,6 +77,12 @@ class FakeTruenas:
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "error": {"code": -32001, "message": "Method call error", "data": {"errname": "ENOTAUTHENTICATED", "reason": "[ENOTAUTHENTICATED] Not authenticated"}}}))
         elif method in self.refuse:
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "error": {"code": -32001, "message": "Method call error", "data": {"errname": self.refuse[method], "reason": "Not permitted"}}}))
+        elif method == "core.subscribe":
+            # The event source with its argument, then the first event a moment later, as TrueNAS does it.
+            assert message["params"] == ['reporting.realtime:{"interval": 2}'], message["params"]
+            self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": "sub-1"}))
+            if self.live is not None:
+                self._pending.append(json.dumps({"jsonrpc": "2.0", "method": "collection_update", "params": {"msg": "added", "collection": "reporting.realtime", "fields": self.live}}))
         else:
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": ANSWERS[method]}))
 
@@ -119,8 +136,11 @@ async def test_https_reads_everything_through_the_current_api(ctx: Context, true
 
     fake.sent.clear()
     system = await adapter.fetch("system", config, {}, ctx)
-    assert fake.methods() == ["auth.login_with_api_key", "system.info", "alert.list"], "one connection for both"
-    assert system.primary == {"label": "Load", "value": 12.5, "unit": "%"}
+    assert fake.methods() == ["auth.login_with_api_key", "system.info", "alert.list", "core.subscribe"], "one connection for everything"
+    assert system.primary == {"label": "CPU", "value": 37.2, "unit": "%"}, "the CPU usage TrueNAS itself shows, not the load average"
+    memory = next(entry for entry in system.secondary if entry["label"] == "Memory")
+    assert memory["value"] == 50.0 and memory["unit"] == "%" and memory["text"] == "3.9 GB / 7.8 GB", "memory in use, of the total"
+    assert system.metrics == {"load": 37.2, "memory": 50.0}
     assert [entry["value"] for entry in system.secondary if entry["label"] == "Alerts"] == [1]
     assert system.status == "warn"
 
@@ -348,3 +368,33 @@ async def test_a_proxy_without_websockets_is_named_when_rest_refuses_too(ctx: Co
         await adapter.test({"url": "https://truenas.example.com", "api_key": KEY}, ctx)
     assert "HTTP 400" in refused.value.message
     assert "reverse proxy" in refused.value.hint
+
+
+async def test_the_live_numbers_of_a_24_10_come_in_their_own_shape(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(live=LIVE_24_10)
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert system.primary == {"label": "CPU", "value": 8.0, "unit": "%"}
+    memory = next(entry for entry in system.secondary if entry["label"] == "Memory")
+    # Everything but the unused part: apps, cache, buffers, ARC, page tables and slab.
+    assert memory["text"] == "6.0 GB / 7.8 GB" and memory["value"] == 76.8
+
+
+async def test_without_a_live_event_the_load_average_stands_in(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(live=None)
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    monkeypatch.setattr("app.adapters.truenas.REALTIME_WAIT", 0.05)
+    # No event ever comes; recv would block for good on a real socket, so the fake raises what a timeout does.
+    original = fake.recv
+
+    async def recv() -> str:
+        if not fake._pending:
+            await asyncio.sleep(1)
+        return await original()
+
+    fake.recv = recv  # type: ignore[method-assign]
+    system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert system.primary == {"label": "Load", "value": 12.5, "unit": "%"}
+    assert next(entry for entry in system.secondary if entry["label"] == "Memory") == {"label": "Memory", "value": "7.8 GB"}

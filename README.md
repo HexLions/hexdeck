@@ -43,7 +43,7 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 
 Every card is a widget of one integration, dropped on a free grid and sized by hand, or put to one of four sizes from its menu. The templates are a starting point, not a mould: what they make is an ordinary board.
 
-Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px, the whole screen, or a number), and whether the rows stretch so the page fills the window. Ctrl+Z puts the last arrangement back; *Tidy up* puts every card in reading order; Shift and a click select several cards to move together.
+Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px, the whole screen, or a number), and whether the rows stretch so the page fills the window. Ctrl+Z puts the last arrangement back; *Tidy up* puts every card in reading order; Shift and a click select several cards to move together, or to another page or board from the card's menu.
 
 ### Media
 

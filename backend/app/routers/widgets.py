@@ -27,7 +27,7 @@ from ..deps import (
     require_board_id,
 )
 from ..models import HealthCheck, Integration, Page, Role, User, Widget
-from ..schemas import ActionBody, HealthBody, WidgetCreate, WidgetPatch, WidgetPreview
+from ..schemas import ActionBody, HealthBody, WidgetCreate, WidgetMove, WidgetPatch, WidgetPreview
 from ..services import health as health_service
 from ..services import history
 from ..services.boards import _validate_options, place_widget, remove_from_layouts, widget_view
@@ -137,6 +137,40 @@ def patch_widget(widget_id: int, body: WidgetPatch, user: CurrentUser, db: DbSes
         health_service.health.reset(widget.health_check.id)
     hub.publish(board_topic(board.id), "board", {"id": board.id, "changed": True})
     return widget_view(db, widget)
+
+
+@router.post("/widgets/move", summary="Put cards on another page")
+def move_widgets(body: WidgetMove, user: CurrentUser, db: DbSession) -> dict:
+    """The cards keep their settings, their history and their size; they get
+    a new place at the bottom of the page they land on. Edit is needed on
+    the board each card leaves and on the one it lands on."""
+    target = db.get(Page, body.page_id)
+    if target is None:
+        raise error("not_found", "There is no such page.", status.HTTP_404_NOT_FOUND)
+    to_board, _ = require_board_id(db, target.board_id, user, "edit")
+    boards: set[int] = {to_board.id}
+    moved = 0
+    for widget_id in dict.fromkeys(body.ids):
+        widget, page = _widget(db, widget_id)
+        if page.id == target.id:
+            continue
+        from_board, _ = require_board_id(db, page.board_id, user, "edit")
+        boards.add(from_board.id)
+        size = next(((item["w"], item["h"]) for item in (page.layouts or {}).get("lg", []) if item.get("i") == str(widget.id)), None)
+        remove_from_layouts(page, widget.id)
+        widget.page_id = target.id
+        adapter, widget_kind = split_widget_kind(widget.kind)
+        widget_type = adapter.widget(widget_kind)
+        # The size in the old board's columns, put into the new board's twelfths.
+        old_columns = columns_of(from_board.settings)
+        wide = (round(size[0] * 12 / old_columns), size[1]) if size else widget_type.default_size
+        place_widget(target, widget.id, (max(1, wide[0]), max(1, wide[1])), widget_type.min_size, columns_of(to_board.settings))
+        moved += 1
+    db.commit()
+    for board_id in boards:
+        hub.publish(board_topic(board_id), "board", {"id": board_id, "changed": True})
+    logger.info("%d card(s) moved to page %r by %s.", moved, target.name, user.username)
+    return {"moved": moved, "page_id": target.id}
 
 
 @router.delete("/widgets/{widget_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Remove a widget")

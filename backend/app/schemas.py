@@ -247,6 +247,13 @@ class WidgetCreate(BaseModel):
     h: int | None = Field(default=None, ge=1, le=40)
 
 
+class WidgetMove(BaseModel):
+    """Cards to put on another page, of this board or of another one the caller may edit."""
+
+    ids: list[int] = Field(min_length=1, max_length=200)
+    page_id: int
+
+
 class WidgetPatch(BaseModel):
     title: str | None = Field(default=None, max_length=120)
     icon: str | None = Field(default=None, max_length=200)
