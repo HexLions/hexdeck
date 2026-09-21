@@ -27,6 +27,15 @@ describe('renderers', () => {
     expect(screen.getByRole('heading', { name: view.title })).toBeInTheDocument()
   })
 
+  it('draws the history of a headline number the adapter declared no metric for', () => {
+    const view = DEMO_VIEWS.find((v) => v.renderer === 'value')!
+    const data = { ...DEMO_DATA[view.id], metrics: {} } as WidgetData
+    const { container, rerender } = render(<WidgetCard widget={view} data={data} series={{ primary: [1, 2, 3, 4, 5, 6] }} />)
+    expect(container.querySelector('[title="History of the last 24 hours"] svg')).not.toBeNull()
+    rerender(<WidgetCard widget={view} data={data} series={{}} />)
+    expect(container.querySelector('[title="History of the last 24 hours"]')).toBeNull()
+  })
+
   it('offers list actions only when acting is allowed', () => {
     const view = DEMO_VIEWS.find((v) => v.kind === 'docker.containers')!
     const received: Action[] = []

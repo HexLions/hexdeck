@@ -230,8 +230,9 @@ function statusOf(value: unknown): Status {
 export function ValueCard({ data, series, onAction, canAct }: RenderProps) {
   const { t } = useTranslation()
   const primary = data?.primary
-  const metric = Object.keys(data?.metrics ?? {})[0]
-  const points = metric ? series?.[metric] : undefined
+  // The declared metric, or the headline number the server keeps under 'primary' when there is none.
+  const metric = Object.keys(data?.metrics ?? {})[0] ?? 'primary'
+  const points = series?.[metric]
   const hasFooter = Boolean(data?.secondary?.length || data?.actions?.length)
   return (
     <div className="flex-1 flex flex-col min-h-0 relative">

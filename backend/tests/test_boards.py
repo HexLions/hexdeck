@@ -173,6 +173,18 @@ def test_history_endpoint_lists_metrics_of_live_widgets(client: TestClient) -> N
     assert isinstance(response.json(), dict)
 
 
+def test_a_headline_number_is_kept_as_history_when_the_adapter_declares_no_metric() -> None:
+    from app.adapters.base import WidgetData
+    from app.services.history import implied_metrics
+
+    assert implied_metrics(WidgetData(status="ok", primary={"label": "Queries", "value": 1234})) == {"primary": 1234.0}
+    assert implied_metrics(WidgetData(status="ok", primary={"value": 3}, metrics={"down": 1})) == {"down": 1}, "declared metrics win"
+    assert implied_metrics(WidgetData(status="ok", primary={"value": "3 / 6"})) == {}
+    assert implied_metrics(WidgetData(status="ok", primary={"value": True})) == {}, "a boolean is not a number"
+    assert implied_metrics(WidgetData(status="bad", primary={"value": 1}, error="down")) == {}
+    assert implied_metrics(None) == {}
+
+
 def test_widget_preview_shows_draft_options_without_saving(client: TestClient) -> None:
     setup_admin(client)
     board = _board(client)

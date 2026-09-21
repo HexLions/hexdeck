@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import time
 from collections import defaultdict
+from typing import Any
 
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
@@ -23,6 +24,30 @@ MAX_POINTS = 240
 
 def key_for(widget_id: int, metric: str) -> str:
     return f"{widget_id}:{metric}"
+
+
+#: The metric a card's headline number is kept under when the adapter
+#: declares none of its own.
+PRIMARY = "primary"
+
+
+def implied_metrics(data: Any) -> dict[str, float]:
+    """What a widget's answer is worth keeping: the metrics it declares, or,
+    failing those, its headline number under ``primary``.
+
+    Most value cards declare a metric and get a sparkline; the ones that do
+    not showed a bare number with no idea of where it came from. The number
+    is the same either way, so it is kept the same way. Booleans are not
+    numbers here, and an answer that failed keeps nothing.
+    """
+    if data is None or getattr(data, "error", None):
+        return {}
+    if data.metrics:
+        return dict(data.metrics)
+    value = (data.primary or {}).get("value") if isinstance(data.primary, dict) else None
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return {}
+    return {PRIMARY: float(value)}
 
 
 def record(db: Session, widget_id: int, metrics: dict[str, float], ts: int | None = None) -> None:

@@ -157,7 +157,7 @@ def board_history(slug: str, request: Request, user: OptionalUser, db: DbSession
     ).all()
     for widget in widgets:
         data = live.get(widget.id)
-        names = list(data.metrics.keys()) if data and data.metrics else []
+        names = list(history.implied_metrics(data))
         if widget.health_check is not None:
             names.extend(["latency", "up"])
         if names:
