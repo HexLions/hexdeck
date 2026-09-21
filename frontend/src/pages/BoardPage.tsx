@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, LayoutGrid, Plus, Settings2, Wand2 } from 'lucide-react'
+import { Check, LayoutGrid, Plus, Settings2, Undo2, Wand2 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -10,6 +10,7 @@ import { ActionSheet, type PendingAction } from '../components/ActionSheet'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { BoardGrid } from '../components/BoardGrid'
 import { tidy } from '../lib/arrange'
+import { remember } from '../lib/undo'
 import { columnsOf, maxWidthOf } from '../lib/layout'
 import { BoardSettingsSheet } from '../components/BoardSettingsSheet'
 import { CommandPalette } from '../components/CommandPalette'
@@ -117,7 +118,10 @@ export function BoardPage() {
       const moved = payload as { page_id: number; layouts: unknown; version?: number }
       if (typeof moved.version === 'number') versions.current[moved.page_id] = moved.version
       queryClient.setQueryData<BoardWithLive>(['board', slug], (old) =>
-        old ? { ...old, pages: old.pages.map((p) => (p.id === payload.page_id ? { ...p, layouts: payload.layouts as typeof p.layouts } : p)) } : old,
+        // ⚠️ The version too. The pages effect below reads it back into the
+        // ref whenever the pages change, so a page whose version was left
+        // behind here put the stale one back, and the next save was refused.
+        old ? { ...old, pages: old.pages.map((p) => (p.id === payload.page_id ? { ...p, layouts: payload.layouts as typeof p.layouts, layout_version: moved.version ?? p.layout_version } : p)) } : old,
       )
     },
   })
@@ -138,7 +142,11 @@ export function BoardPage() {
       delete draft.current[pageId]
       void put<{ version?: number }>(`/pages/${pageId}/layouts`, { ...body, version: versions.current[pageId] })
         .then((answer) => {
-          if (typeof answer?.version === 'number') versions.current[pageId] = answer.version
+          if (typeof answer?.version !== 'number') return
+          versions.current[pageId] = answer.version
+          queryClient.setQueryData<BoardWithLive>(['board', slug], (old) =>
+            old ? { ...old, pages: old.pages.map((p) => (p.id === pageId ? { ...p, layout_version: answer.version } : p)) } : old,
+          )
         })
         .catch((failure) => {
           if (failure instanceof ApiError && failure.code === 'layout_moved_on') {
@@ -148,18 +156,52 @@ export function BoardPage() {
           setToast({ text: t('board.saveFailed'), level: 'error' })
         })
     },
-    [t],
+    [t, queryClient, slug],
   )
-  const onLayoutChange = useCallback(
-    (breakpoint: Breakpoint, layout: LayoutItem[]) => {
-      if (!activePage) return
-      const pageId = activePage.id
+  const queue = useCallback(
+    (pageId: number, breakpoint: Breakpoint, layout: LayoutItem[]) => {
       draft.current[pageId] = { ...(draft.current[pageId] ?? {}), [breakpoint]: layout }
       window.clearTimeout(timers.current[pageId])
       timers.current[pageId] = window.setTimeout(() => save(pageId), 700)
     },
-    [activePage, save],
+    [save],
   )
+  // What each page looked like before every change, for Ctrl+Z. The wide
+  // arrangement only; the current one is the draft not yet saved, else the
+  // page as the server has it.
+  const undo = useRef<Record<number, LayoutItem[][]>>({})
+  const [epoch, setEpoch] = useState(0)
+  // How many steps back the open page has, kept as state so the button can read it.
+  const [undoable, setUndoable] = useState(0)
+  const onLayoutChange = useCallback(
+    (breakpoint: Breakpoint, layout: LayoutItem[]) => {
+      if (!activePage) return
+      const pageId = activePage.id
+      if (breakpoint === 'lg') {
+        const before = draft.current[pageId]?.lg ?? activePage.layouts.lg ?? []
+        undo.current[pageId] = remember(undo.current[pageId] ?? [], before, layout)
+        setUndoable(undo.current[pageId].length)
+      }
+      queue(pageId, breakpoint, layout)
+    },
+    [activePage, queue],
+  )
+  const undoLayout = useCallback(() => {
+    if (!activePage) return
+    const pageId = activePage.id
+    const stack = undo.current[pageId] ?? []
+    const previous = stack[stack.length - 1]
+    if (!previous) return
+    undo.current[pageId] = stack.slice(0, -1)
+    setUndoable(stack.length - 1)
+    // On screen at once, then saved like any other change; the grid is
+    // remounted so it reads the arrangement from its props again.
+    queryClient.setQueryData<BoardWithLive>(['board', slug], (old) =>
+      old ? { ...old, pages: old.pages.map((p) => (p.id === pageId ? { ...p, layouts: { ...p.layouts, lg: previous } } : p)) } : old,
+    )
+    queue(pageId, 'lg', previous)
+    setEpoch((value) => value + 1)
+  }, [activePage, queryClient, slug, queue])
   // Leaving a page, or the board, writes what is still waiting.
   const flush = useCallback(() => {
     for (const [pageId, timer] of Object.entries(timers.current)) {
@@ -169,6 +211,9 @@ export function BoardPage() {
     timers.current = {}
   }, [save])
   useEffect(() => flush, [flush, activePage?.id])
+  useEffect(() => {
+    setUndoable(activePage ? (undo.current[activePage.id]?.length ?? 0) : 0)
+  }, [activePage])
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -176,10 +221,17 @@ export function BoardPage() {
         event.preventDefault()
         setPalette((v) => !v)
       }
+      // Ctrl+Z puts the last arrangement back while editing, unless somebody is typing.
+      if (editing && (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key.toLowerCase() === 'z') {
+        const target = event.target as HTMLElement | null
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return
+        event.preventDefault()
+        undoLayout()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [editing, undoLayout])
 
   // The player's bar sits where the edit bar does; it steps aside while editing.
   useEffect(() => {
@@ -409,6 +461,7 @@ export function BoardPage() {
           columns={columnsOf(data?.settings)}
           fitScreen={Boolean(settings.fit_screen)}
           onLayoutChange={onLayoutChange}
+          epoch={epoch}
           onAction={onAction}
           onRefresh={onRefresh}
           onSettings={onSettings}
@@ -435,6 +488,9 @@ export function BoardPage() {
           {/* Every card of the page put back in reading order, sizes kept.
               The one action here that moves cards the person did not touch,
               so it asks first. */}
+          <button className="btn btn-flat" onClick={undoLayout} disabled={undoable === 0} aria-label={t('board.undo')} title={t('board.undoHint')}>
+            <Undo2 size={15} /> <span className="hidden sm:inline">{t('board.undo')}</span>
+          </button>
           <button
             className="btn btn-flat"
             onClick={() => {

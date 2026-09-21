@@ -619,6 +619,8 @@
     "autoCompact": "Karten nach oben rücken",
     "autoCompactHelp": "Aus: Karten bleiben, wo du sie ablegst, Lücken sind erlaubt und keine Karte bewegt sich von selbst. An: Alles rückt nach oben auf, und Karten machen beim Ziehen Platz.",
     "tidy": "Aufräumen",
+    "undo": "Rückgängig",
+    "undoHint": "Die letzte Anordnung zurückholen (Strg+Z)",
     "tidyConfirm": "Jede Karte dieser Seite wird in Lesereihenfolge neu gesetzt, ohne Lücken. Die Größen bleiben. Fortfahren?",
     "editHint": "Ziehen verschiebt eine Karte. Die Ecke unten rechts ändert die Größe. Umschalt und ein Klick wählt mehrere Karten aus; sie bewegen sich zusammen.",
     "deletePage": "Seite löschen",

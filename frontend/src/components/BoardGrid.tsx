@@ -49,6 +49,8 @@ interface Props {
   /** Whether the viewer may change the board; cards that write into their own settings need to know. */
   canEdit?: boolean
   onLayoutChange?: (breakpoint: Breakpoint, layout: LayoutItem[]) => void
+  /** Bumped by the page when it puts an arrangement back (undo), so the grid reads it fresh. */
+  epoch?: number
   onAction?: (widgetId: number, action: Action) => void
   onRefresh?: (widgetId: number) => void
   onSettings?: (widgetId: number) => void
@@ -191,7 +193,7 @@ export function BoardGrid(props: Props) {
           were pulled in, the rest pushed down, and edit mode saved that. A
           fresh mount reads both from the props together. */}
       <ResponsiveGrid
-        key={`${columns}-${snapBack}`}
+        key={`${columns}-${snapBack}-${props.epoch ?? 0}`}
         className={`board ${editing ? 'board-editing' : ''}`}
         layouts={gridLayouts}
         breakpoints={BREAKPOINTS}
