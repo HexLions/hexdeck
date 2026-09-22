@@ -121,3 +121,9 @@ Updated at every milestone.
   `reporting.realtime` for one event and shows CPU usage and memory in use
   of the total (shapes read from the middleware's source, 25.x and 24.10);
   over REST the load average and the memory size stand in.
+- **A notepad for everyone.** A notepad card can say that everyone who may
+  see the board may write in it; `POST /api/v1/widgets/{id}/notepad`
+  writes its text and nothing else, so a viewer reaches nothing else
+  through it. A percentage row of a stats card keeps its bar and draws
+  its history as a thin line above it, instead of the bar being replaced
+  by a filled sparkline that read as a hundred per cent.

@@ -30,7 +30,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ComponentTyp
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 
-import { fileUrl, mediaUrl, patch } from '../api/client'
+import { fileUrl, mediaUrl, patch, post } from '../api/client'
 import { addItem, addMilestone, createProject, deleteItem, listProjects, orderItems, patchItem, patchMilestone, type ProjectView } from '../api/projects'
 import { tLabel } from '../i18n/texts'
 import { formatValue, timeAgo } from '../lib/format'
@@ -369,13 +369,28 @@ export function StatsCard({ data, series }: RenderProps) {
               <div className="text-[11px] text-muted min-w-[4.6rem] max-w-[10rem] truncate" title={tLabel(row.label)}>
                 {tLabel(row.label)}
               </div>
+              {/* ⚠️ A percentage keeps its bar, however much history there is.
+                  The sparkline used to take the bar's place once five samples
+                  had come in, about two minutes after a card was added:
+                  sixteen pixels of filled area read as a bar at a hundred per
+                  cent, and a card that had been telling the truth suddenly
+                  looked alarming. The trend is drawn as a thin line above the
+                  same track instead; a row that is not a percentage has no bar
+                  to keep and still gets the sparkline. */}
               <div className="min-w-0">
-                {worthDrawing(points) ? (
-                  <Sparkline values={points} height={16} min={isPercent ? 0 : undefined} max={isPercent ? 100 : undefined} />
-                ) : isPercent && numeric !== null ? (
-                  <div className="bar" data-status={numeric >= 90 ? 'bad' : numeric >= 75 ? 'warn' : 'ok'}>
-                    <i style={{ width: `${Math.min(100, numeric)}%` }} />
+                {isPercent && numeric !== null ? (
+                  <div className="relative">
+                    {worthDrawing(points) && (
+                      <span className="pointer-events-none absolute inset-x-0 -top-2.5 opacity-40">
+                        <Sparkline values={points} height={12} fill={false} min={0} max={100} />
+                      </span>
+                    )}
+                    <div className="bar relative" data-status={numeric >= 90 ? 'bad' : numeric >= 75 ? 'warn' : 'ok'}>
+                      <i style={{ width: `${Math.min(100, numeric)}%` }} />
+                    </div>
                   </div>
+                ) : worthDrawing(points) ? (
+                  <Sparkline values={points} height={16} />
                 ) : (
                   <div className="bar">
                     <i style={{ width: 0 }} />
@@ -1766,7 +1781,7 @@ export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
  */
 export function NotepadCard({ widget, data, canEdit }: RenderProps) {
   const { t } = useTranslation()
-  const meta = (data?.meta ?? {}) as { content?: string; mono?: boolean; demo?: boolean }
+  const meta = (data?.meta ?? {}) as { content?: string; mono?: boolean; open?: boolean; demo?: boolean }
   const served = String(meta.content ?? widget.options?.content ?? '')
   const [text, setText] = useState(served)
   const [dirty, setDirty] = useState(false)
@@ -1777,7 +1792,8 @@ export function NotepadCard({ widget, data, canEdit }: RenderProps) {
   }, [served, dirty])
   const save = (content: string) => {
     window.clearTimeout(timer.current)
-    void patch(`/widgets/${widget.id}`, { options: { ...(widget.options ?? {}), content } })
+    // Its own address: it writes the text and nothing else, so a viewer may use it where the card says so.
+    void post(`/widgets/${widget.id}/notepad`, { content })
       .then(() => {
         setDirty(false)
         setFailed(false)
@@ -1791,7 +1807,9 @@ export function NotepadCard({ widget, data, canEdit }: RenderProps) {
     timer.current = window.setTimeout(() => save(content), 800)
   }
   const font = meta.mono ? 'font-mono' : ''
-  if (!canEdit || meta.demo) {
+  // Open to everyone who may see the board, or the usual right to edit.
+  const mayWrite = (meta.open ?? Boolean(widget.options?.open)) || Boolean(canEdit)
+  if (!mayWrite || meta.demo) {
     return <pre className={`h-full overflow-auto whitespace-pre-wrap p-3 text-sm ${meta.mono ? '' : 'font-sans'}`}>{text || t('notepad.empty')}</pre>
   }
   return (

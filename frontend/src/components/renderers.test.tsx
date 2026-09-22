@@ -36,6 +36,18 @@ describe('renderers', () => {
     expect(container.querySelector('[title="History of the last 24 hours"]')).toBeNull()
   })
 
+  it('keeps the bar of a percentage row once its history could be drawn', () => {
+    const view = DEMO_VIEWS.find((v) => v.renderer === 'stats')!
+    const data = { status: 'ok', primary: { label: 'CPU', value: 41, unit: '%' }, secondary: [{ label: 'Memory', value: 57, unit: '%', metric: 'memory' }], metrics: { cpu: 41, memory: 57 } } as unknown as WidgetData
+    const series = { cpu: [10, 20, 30, 40, 41], memory: [50, 52, 54, 56, 57] }
+    const { container } = render(<WidgetCard widget={view} data={data} series={series} />)
+    const bars = container.querySelectorAll('.bar')
+    expect(bars).toHaveLength(2)
+    expect((bars[1].firstChild as HTMLElement).style.width).toBe('57%')
+    // The trend is still drawn, above the bar.
+    expect(container.querySelectorAll('svg').length).toBeGreaterThan(0)
+  })
+
   it('offers list actions only when acting is allowed', () => {
     const view = DEMO_VIEWS.find((v) => v.kind === 'docker.containers')!
     const received: Action[] = []

@@ -103,6 +103,7 @@ GUESTS_MAY_CHANGE: dict[str, str] = {
     "POST /api/v1/auth/login/second-step": "its other half",
     "POST /api/v1/auth/logout": "leaving",
     "POST /api/v1/auth/auto": "signing in from a trusted network",
+    "POST /api/v1/widgets/{widget_id}/notepad": "the text of a notepad card that says everyone who may see the board may write; nothing else about the card, and edit is needed where the card does not say so",
     "POST /api/v1/auth/forgot": "somebody who forgot their password",
     "POST /api/v1/auth/reset": "the same link, redeemed",
     "POST /api/v1/kiosk/session": "a wall display at the door",

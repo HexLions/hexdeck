@@ -27,7 +27,15 @@ from ..deps import (
     require_board_id,
 )
 from ..models import HealthCheck, Integration, Page, Role, User, Widget
-from ..schemas import ActionBody, HealthBody, WidgetCreate, WidgetMove, WidgetPatch, WidgetPreview
+from ..schemas import (
+    ActionBody,
+    HealthBody,
+    NotepadBody,
+    WidgetCreate,
+    WidgetMove,
+    WidgetPatch,
+    WidgetPreview,
+)
 from ..services import health as health_service
 from ..services import history
 from ..services.boards import _validate_options, place_widget, remove_from_layouts, widget_view
@@ -137,6 +145,27 @@ def patch_widget(widget_id: int, body: WidgetPatch, user: CurrentUser, db: DbSes
         health_service.health.reset(widget.health_check.id)
     hub.publish(board_topic(board.id), "board", {"id": board.id, "changed": True})
     return widget_view(db, widget)
+
+
+@router.post("/widgets/{widget_id}/notepad", summary="Write in a notepad card")
+def write_notepad(widget_id: int, body: NotepadBody, user: CurrentUser, db: DbSession) -> dict:
+    """The one thing a viewer may change on a board, and only where the card
+    says so: the text of a notepad. A card that is not open to everyone needs
+    edit, like any other change.
+
+    ⚠️ Only ``content`` is written. The rest of the options stays as it is, so
+    a viewer cannot reach the board through this address.
+    """
+    widget, page = _widget(db, widget_id)
+    if widget.kind != "notepad.pad":
+        raise error("not_a_notepad", "This card is not a notepad.")
+    options = dict(widget.options or {})
+    require_board_id(db, page.board_id, user, "view" if options.get("open") else "edit")
+    options["content"] = body.content
+    widget.options = options
+    db.commit()
+    collector.schedule(widget.id)
+    return {"content": body.content}
 
 
 @router.post("/widgets/move", summary="Put cards on another page")

@@ -1232,7 +1232,6 @@
     "Hide finished items": "Nascondi gli item conclusi",
     "Notepad": "Blocco note",
     "A card to type into, right on the board. Plain text, saved as you write.": "Una card in cui scrivere, direttamente sulla board. Testo semplice, salvato mentre scrivi.",
-    "Write on the board. Whoever may edit the board may write; everyone else reads.": "Scrivi sulla board. Chi può modificare la board scrive; tutti gli altri leggono.",
     "Typed into the card itself; this is the same text.": "Digitato nella card stessa; questo è lo stesso testo.",
     "Fixed-width type": "Carattere a larghezza fissa",
     "For lists, commands and anything that lines up.": "Per liste, comandi e tutto ciò che deve allinearsi.",
@@ -1266,7 +1265,10 @@
     "virtualisation": "virtualizzazione",
     "storage": "storage",
     "network": "rete",
-    "projects": "progetti"
+    "projects": "progetti",
+    "Anyone who may see the board may write": "Chiunque possa vedere la board può scrivere",
+    "For a shared list at home: guests and viewers type in this card, and change nothing else on the board.": "Per una lista condivisa in casa: guest e spettatori scrivono in questa card e non cambiano altro sulla board.",
+    "Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.": "Scrivi sulla board. Chi può modificarla scrive, e chiunque possa vederla quando la card lo dice."
   },
   "labels": {
     "Jobs": "Job",

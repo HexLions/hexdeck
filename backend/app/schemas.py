@@ -247,6 +247,12 @@ class WidgetCreate(BaseModel):
     h: int | None = Field(default=None, ge=1, le=40)
 
 
+class NotepadBody(BaseModel):
+    """The text of a notepad card, and nothing else about it."""
+
+    content: str = Field(default="", max_length=20000)
+
+
 class WidgetMove(BaseModel):
     """Cards to put on another page, of this board or of another one the caller may edit."""
 

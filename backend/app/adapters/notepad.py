@@ -25,7 +25,7 @@ class NotepadAdapter(Adapter):
         WidgetType(
             kind="pad",
             label="Notepad",
-            description="Write on the board. Whoever may edit the board may write; everyone else reads.",
+            description="Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.",
             renderer="notepad",
             default_size=(3, 3),
             min_size=(2, 2),
@@ -33,6 +33,8 @@ class NotepadAdapter(Adapter):
             options=(
                 Field("content", "Text", type="textarea", default="", help="Typed into the card itself; this is the same text."),
                 Field("mono", "Fixed-width type", type="bool", default=False, help="For lists, commands and anything that lines up."),
+                Field("open", "Anyone who may see the board may write", type="bool", default=False,
+                      help="For a shared list at home: guests and viewers type in this card, and change nothing else on the board."),
             ),
         ),
     )
@@ -41,7 +43,7 @@ class NotepadAdapter(Adapter):
         return "The notepad lives on the board."
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
-        return WidgetData(meta={"content": str(options.get("content") or ""), "mono": bool(options.get("mono"))})
+        return WidgetData(meta={"content": str(options.get("content") or ""), "mono": bool(options.get("mono")), "open": bool(options.get("open"))})
 
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         return WidgetData(meta={"content": "Rack notes\n\n- UPS battery replaced 2026-08\n- Switch firmware due\n- Ask about the second NAS", "mono": False, "demo": True})
