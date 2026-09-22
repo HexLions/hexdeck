@@ -1,7 +1,89 @@
 # Changelog
 
-All notable changes to nexdeck. The format follows Keep a Changelog; the
-project uses semantic versioning.
+All notable changes to HexDeck, which carries on the numbering of
+[nexdeck](https://github.com/DerKezorm/nexdeck) it was forked from: everything
+up to and including 0.16.0 is nexdeck's own history, kept here as it was.
+The format follows Keep a Changelog; the project uses semantic versioning.
+
+## 0.17.0 (2026-09-22)
+
+The first release of HexDeck, a fork of nexdeck 0.16.0. It keeps the engine
+that collects every service once and pushes what changed to every browser, and
+adds what a lab that is run and built at the same time needs. Upstream's
+0.16.1 TrueNAS work is in here as well.
+
+### New
+
+- **The board fills the screen.** Each board chooses 12, 24 or 36 columns, a
+  width (1480 px, the whole screen, or a number of pixels) and whether the rows
+  stretch so the page fills the window without scrolling. Boards from before
+  keep their twelve columns and look exactly as they did.
+- **Projects, milestones and items,** kept in HexDeck itself. A roadmap card
+  draws them on one line with the late ones red and the imminent ones yellow, a
+  project card shows one project's state, an items card what to tick off.
+  Projects are made from the cards themselves or under Settings, Projects.
+- **Maintenance that comes back.** An item takes a due date and an interval:
+  test the backup restore every 30 days, renew the certificate every 90. Tick
+  it and it returns with its next date, counted from the date that was due;
+  what is due or late is announced once a day through the notification
+  channels.
+- **Templates to start from.** Five ready-made boards (homelab overview, media
+  stack, Proxmox rack, network, projects). Each placeholder connection is
+  mapped to one of yours; one left out takes its cards with it.
+- **Import from Homepage or Homarr.** Their files become a board: groups and
+  categories become pages, services become tiles, and a service those
+  dashboards read becomes a connection and a card. The plan is shown first,
+  with what is missing and what has no equivalent here.
+- **Themes to share.** Nord, Catppuccin, Gruvbox and Dracula ship with it, each
+  in both brightnesses and checked for contrast; a theme is fifteen colour
+  tokens as JSON, exported to share and pasted to take over.
+- **No sign-in at home.** Name the networks of the house and one account, and a
+  browser from there is signed in without a password; everywhere else the
+  sign-in page stays. Signing out on purpose holds it off until the next
+  sign-in.
+- **A notepad card,** typed into on the board itself, and one that anyone who
+  may see the board may write in, for a shared list at home.
+- **GitHub, properly.** Issues, pull requests with their review state, workflow
+  runs and milestones, from a list of repositories or from a project's linked
+  ones. Answers are kept with their ETag, so the sixty requests an hour GitHub
+  allows without a token go a long way; a token makes it five thousand.
+- **Italian,** next to English and German, throughout.
+- **Arranging a board:** Ctrl+Z puts the last arrangement back, *Tidy up* puts
+  every card in reading order, Shift and a click select several cards to move
+  together, four preset sizes sit behind a button on every card, and a card
+  moves to another page — or to another board — from its own menu.
+- **A history for every number.** A card that shows a number keeps it even when
+  its adapter declares no metric, and draws it behind the number.
+- **Leaving demo mode takes the demo with it:** the invented connections, the
+  cards that read them and the boards that were nothing but those.
+- **A password reset from the shell**, `python -m app.tools.reset_password
+  <user>`, for the day the administrator's password is gone.
+
+### Changed
+
+- **A look of its own:** hexagons, one blue, opaque panels, a quiet
+  tessellation behind them, in dark and light.
+- **TrueNAS sends no REST call where it has the current API** (from nexdeck
+  0.16.1, measured on 25.10.7 by DerKezorm): TrueNAS counts every REST call in
+  an alert on the NAS, and TrueNAS 26 removes the API. Its system card shows
+  the CPU usage and the memory in use that TrueNAS itself shows, read from the
+  live statistics.
+- **A percentage row of a card is a bar and nothing else.** The sparkline used
+  to take the bar's place once a few samples had come in, and read as a bar at
+  a hundred per cent.
+- **Appearance and language moved into the account menu**, so the bar keeps
+  only what is looked at all day.
+
+### Fixed
+
+- **Changing a board's columns no longer scatters the cards.** Three things at
+  once: a layout event that arrived before the settings, the page reading the
+  columns from the settings sheet's preview, and the grid being handed a new
+  layout with the old column count for one render.
+- **A page's layout version is carried along after every save**, so the next
+  save is not refused as "changed by somebody else".
+- **The card that fills the screen stops at the window's edge**, instead of
+  eight to eleven pixels past it.
 
 ## 0.16.0 (2026-09-19)
 

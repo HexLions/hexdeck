@@ -626,6 +626,39 @@
         "nexpulse 0.1.1 or newer tells HexDeck what a key may do. On 0.1.0 the button is always shown, and a key that may only read is told so when it presses it.",
         "A button pointed at an action that needs no target says so, instead of a yellow \"offers nothing\"."
       ]
+    },
+    "0.17.0": {
+      "lead": "HexDeck 0.17.0: the board fills the screen, projects and recurring maintenance live on it, and a dashboard from Homepage or Homarr comes over in one go.",
+      "sections": [
+        {
+          "title": "The board fills the screen",
+          "body": "Each board chooses 12, 24 or 36 columns, its width, and whether the rows stretch so the page fills the window. Ctrl+Z puts the last arrangement back, four preset sizes sit behind a button on every card, and a card moves to another page from its own menu.",
+          "path": "Edit mode (pencil) > Board settings"
+        },
+        {
+          "title": "Projects and maintenance",
+          "body": "Milestones, items and linked repositories in HexDeck itself. An item takes a due date and an interval: tick it and it comes back with its next date, and what is due is announced once a day.",
+          "path": "Settings > Projects"
+        },
+        {
+          "title": "Templates, themes and importing",
+          "body": "Five ready-made boards, four bundled themes in both brightnesses and your own as JSON, and a Homepage or Homarr dashboard read into a board with everything it would make shown first.",
+          "path": "Settings > Boards"
+        },
+        {
+          "title": "No sign-in at home",
+          "body": "Name the networks of the house and one account, and a browser from there is signed in without a password. Everywhere else the sign-in page stays.",
+          "path": "System > Sign-in providers"
+        }
+      ],
+      "smallTitle": "Also in this version",
+      "small": [
+        "A notepad card typed into on the board, and one anyone who may see the board may write in.",
+        "TrueNAS sends no REST call where it has the current API, and its card shows the CPU usage and memory in use TrueNAS itself shows.",
+        "GitHub reads issues, pull requests, workflow runs and milestones, cached with ETags.",
+        "Italian, next to English and German.",
+        "Leaving demo mode takes the demo's connections, cards and boards with it."
+      ]
     }
   }
 }

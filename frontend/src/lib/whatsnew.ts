@@ -1,5 +1,6 @@
 import de from '../i18n/whatsnew.de.json'
 import en from '../i18n/whatsnew.en.json'
+import it from '../i18n/whatsnew.it.json'
 
 export interface WhatsNewEntry {
   lead: string
@@ -8,10 +9,11 @@ export interface WhatsNewEntry {
   small: string[]
 }
 
-const FILES: Record<string, { entries: Record<string, WhatsNewEntry> }> = { en, de }
+const FILES: Record<string, { entries: Record<string, WhatsNewEntry> }> = { en, de, it }
 
+/** The entries of a language, with English standing in for the versions it does not have. */
 export function entriesFor(language: string): Record<string, WhatsNewEntry> {
-  return (FILES[language] ?? FILES.en).entries
+  return { ...FILES.en.entries, ...(FILES[language] ?? FILES.en).entries }
 }
 
 /** The newest version that has an entry, by semantic order. */

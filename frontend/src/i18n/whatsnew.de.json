@@ -626,6 +626,39 @@
         "nexpulse ab 0.1.1 sagt HexDeck, was ein Schlüssel darf. Bei 0.1.0 steht der Knopf immer da, und ein Schlüssel, der nur lesen darf, erfährt es beim Drücken.",
         "Ein Knopf, der auf eine Aktion ohne Ziel zeigt, sagt das jetzt, statt gelb „bietet nichts an“ zu zeigen."
       ]
+    },
+    "0.17.0": {
+      "lead": "HexDeck 0.17.0: das Board füllt den Bildschirm, Projekte und wiederkehrende Wartung leben darauf, und ein Dashboard aus Homepage oder Homarr kommt in einem Zug herüber.",
+      "sections": [
+        {
+          "title": "Das Board füllt den Bildschirm",
+          "body": "Jedes Board wählt 12, 24 oder 36 Spalten, seine Breite und ob die Zeilen sich dehnen, bis die Seite das Fenster füllt. Strg+Z holt die letzte Anordnung zurück, vier Größen liegen hinter einem Knopf auf jeder Karte, und eine Karte zieht aus ihrem eigenen Menü auf eine andere Seite um.",
+          "path": "Bearbeiten (Stift) > Board-Einstellungen"
+        },
+        {
+          "title": "Projekte und Wartung",
+          "body": "Meilensteine, Aufgaben und verknüpfte Repositories in HexDeck selbst. Eine Aufgabe bekommt Fälligkeit und Intervall: abgehakt kommt sie mit dem nächsten Datum wieder, und was fällig ist, wird einmal am Tag gemeldet.",
+          "path": "Einstellungen > Projekte"
+        },
+        {
+          "title": "Vorlagen, Themen und Übernahme",
+          "body": "Fünf fertige Boards, vier mitgelieferte Themen in beiden Helligkeiten und ein eigenes als JSON, und ein Homepage- oder Homarr-Dashboard, das als Board eingelesen wird; vorher siehst du, was entstehen würde.",
+          "path": "Einstellungen > Boards"
+        },
+        {
+          "title": "Zu Hause ohne Anmeldung",
+          "body": "Nenne die Netze des Hauses und ein Konto, und ein Browser von dort ist ohne Passwort angemeldet. Überall sonst bleibt die Anmeldeseite.",
+          "path": "System > Anmeldeanbieter"
+        }
+      ],
+      "smallTitle": "Außerdem in dieser Fassung",
+      "small": [
+        "Eine Notizkarte, die auf dem Board selbst beschrieben wird, und eine, in die jeder schreiben darf, der das Board sehen darf.",
+        "TrueNAS bekommt keine REST-Aufrufe mehr, wo es die aktuelle API hat, und die Karte zeigt CPU-Auslastung und belegten Speicher wie TrueNAS selbst.",
+        "GitHub liest Issues, Pull Requests, Workflow-Läufe und Meilensteine, mit ETags zwischengespeichert.",
+        "Italienisch, neben Englisch und Deutsch.",
+        "Der Demo-Modus nimmt beim Verlassen seine Verbindungen, Karten und Boards mit."
+      ]
     }
   }
 }

@@ -1,0 +1,37 @@
+{
+  "entries": {
+    "0.17.0": {
+      "lead": "HexDeck 0.17.0: la board riempie lo schermo, progetti e manutenzioni ricorrenti ci vivono sopra, e una dashboard da Homepage o Homarr arriva qui in un colpo solo.",
+      "sections": [
+        {
+          "title": "La board riempie lo schermo",
+          "body": "Ogni board sceglie 12, 24 o 36 colonne, la sua larghezza e se le righe si allungano fino a riempire la finestra. Ctrl+Z riporta l'ultima disposizione, quattro dimensioni stanno dietro un bottone su ogni card, e una card si sposta su un'altra pagina dal proprio menu.",
+          "path": "Modifica (matita) > Impostazioni board"
+        },
+        {
+          "title": "Progetti e manutenzioni",
+          "body": "Milestone, item e repository collegati dentro HexDeck. Un item prende una scadenza e un intervallo: lo spunti e torna con la data successiva, e ciò che scade viene annunciato una volta al giorno.",
+          "path": "Impostazioni > Progetti"
+        },
+        {
+          "title": "Modelli, temi e importazione",
+          "body": "Cinque board pronte, quattro temi inclusi in entrambe le luminosità e il tuo come JSON, e una dashboard Homepage o Homarr letta dentro una board, con l'anteprima di tutto ciò che verrebbe creato.",
+          "path": "Impostazioni > Board"
+        },
+        {
+          "title": "Niente login in casa",
+          "body": "Indica le reti di casa e un account, e un browser da lì entra senza password. Ovunque altrove resta la pagina di accesso.",
+          "path": "Sistema > Provider di accesso"
+        }
+      ],
+      "smallTitle": "Inoltre in questa versione",
+      "small": [
+        "Un blocco note scritto direttamente sulla board, e uno in cui può scrivere chiunque possa vedere la board.",
+        "TrueNAS non riceve più chiamate REST dove ha l'API attuale, e la card mostra CPU e memoria in uso come li mostra TrueNAS.",
+        "GitHub legge issue, pull request, esecuzioni dei workflow e milestone, con cache ETag.",
+        "L'italiano, accanto a inglese e tedesco.",
+        "Uscire dalla modalità demo porta via connessioni, card e board del demo."
+      ]
+    }
+  }
+}
