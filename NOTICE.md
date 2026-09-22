@@ -127,3 +127,8 @@ Updated at every milestone.
   through it. A percentage row of a stats card is a bar and nothing
   else: the sparkline that used to take its place read as a hundred per
   cent, and drawn over the bar it was a stretched line across the row.
+- **YouTube: from your subscriptions.** A second card reads the channels an
+  account follows, through the data API with a key, and their videos from
+  the free channel feeds. YouTube serves no home feed to any API
+  (`activities.list` says the home page data is not available), so this is
+  as close as it goes without keeping somebody's Google cookies.

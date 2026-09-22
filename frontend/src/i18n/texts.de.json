@@ -1268,7 +1268,14 @@
     "projects": "Projekte",
     "Anyone who may see the board may write": "Jeder, der das Board sehen darf, darf schreiben",
     "For a shared list at home: guests and viewers type in this card, and change nothing else on the board.": "Für eine gemeinsame Liste zu Hause: Gäste und Betrachter tippen in diese Karte und ändern sonst nichts am Board.",
-    "Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.": "Auf dem Board schreiben. Wer das Board bearbeiten darf, schreibt; und jeder, der es sehen darf, wenn die Karte es sagt."
+    "Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.": "Auf dem Board schreiben. Wer das Board bearbeiten darf, schreibt; und jeder, der es sehen darf, wenn die Karte es sagt.",
+    "YouTube Data API key": "YouTube-Data-API-Schlüssel",
+    "Only for the card that follows an account's subscriptions. A key of a Google Cloud project with the YouTube Data API v3 turned on; it reads public data and nothing else.": "Nur für die Karte, die den Abos eines Kontos folgt. Ein Schlüssel eines Google-Cloud-Projekts mit aktivierter YouTube Data API v3; er liest öffentliche Daten und sonst nichts.",
+    "From your subscriptions": "Aus deinen Abos",
+    "The newest videos of every channel an account follows. The account's subscription list has to be public, and the connection needs a data API key.": "Die neuesten Videos aller Kanäle, denen ein Konto folgt. Die Abo-Liste des Kontos muss öffentlich sein, und die Verbindung braucht einen Data-API-Schlüssel.",
+    "Whose subscriptions to follow: your own handle, or the channel ID starting with UC.": "Wessen Abos gefolgt wird: dein eigenes Handle oder die Kanal-ID, die mit UC beginnt.",
+    "Channels to read": "Kanäle je Abruf",
+    "How many of the subscriptions are read each time, at most 50. The newest videos of those channels are shown.": "Wie viele der Abos jedes Mal gelesen werden, höchstens 50. Gezeigt werden die neuesten Videos dieser Kanäle."
   },
   "labels": {
     "Jobs": "Jobs",

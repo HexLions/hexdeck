@@ -1268,7 +1268,14 @@
     "projects": "progetti",
     "Anyone who may see the board may write": "Chiunque possa vedere la board può scrivere",
     "For a shared list at home: guests and viewers type in this card, and change nothing else on the board.": "Per una lista condivisa in casa: guest e spettatori scrivono in questa card e non cambiano altro sulla board.",
-    "Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.": "Scrivi sulla board. Chi può modificarla scrive, e chiunque possa vederla quando la card lo dice."
+    "Write on the board. Whoever may edit the board may write, and everyone who may see it when the card says so.": "Scrivi sulla board. Chi può modificarla scrive, e chiunque possa vederla quando la card lo dice.",
+    "YouTube Data API key": "Chiave API YouTube Data",
+    "Only for the card that follows an account's subscriptions. A key of a Google Cloud project with the YouTube Data API v3 turned on; it reads public data and nothing else.": "Serve solo alla card che segue le iscrizioni di un account. Una chiave di un progetto Google Cloud con la YouTube Data API v3 attiva; legge dati pubblici e nient'altro.",
+    "From your subscriptions": "Dalle tue iscrizioni",
+    "The newest videos of every channel an account follows. The account's subscription list has to be public, and the connection needs a data API key.": "I video più recenti di tutti i canali seguiti da un account. La lista delle iscrizioni deve essere pubblica e la connessione ha bisogno di una chiave API.",
+    "Whose subscriptions to follow: your own handle, or the channel ID starting with UC.": "Di chi seguire le iscrizioni: il tuo handle, oppure l'ID del canale che inizia con UC.",
+    "Channels to read": "Canali letti ogni volta",
+    "How many of the subscriptions are read each time, at most 50. The newest videos of those channels are shown.": "Quante iscrizioni vengono lette ogni volta, al massimo 50. Vengono mostrati i video più recenti di quei canali."
   },
   "labels": {
     "Jobs": "Job",

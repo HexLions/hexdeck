@@ -321,3 +321,86 @@ def test_every_feed_adapter_has_demo_data_for_every_widget(kind: str) -> None:
         for tick in (0, 7, 41):
             data = adapter.demo(widget.kind, options, tick)
             assert data.items or data.primary or data.secondary, f"{kind}/{widget.kind} at tick {tick} is empty"
+
+
+# -- youtube: the videos of the channels an account follows ---------------------
+
+API = "https://www.googleapis.com/youtube/v3"
+SECOND_ATOM = ATOM.replace("Homelab Diary", "Rack Notes").replace("One small box", "A silent switch").replace("aaa", "bbb").replace("2026-09-04", "2026-09-06")
+
+
+def _subscriptions(*channels: tuple[str, str], token: str | None = None) -> dict:
+    return {
+        "items": [{"snippet": {"title": title, "resourceId": {"channelId": channel}}} for channel, title in channels],
+        **({"nextPageToken": token} if token else {}),
+    }
+
+
+@respx.mock
+async def test_youtube_reads_the_channels_an_account_follows(ctx: Context) -> None:
+    """A public subscription list, then the free channel feeds: the card shows
+    what is new from the channels somebody follows, without an account here."""
+    respx.get(f"{API}/channels").mock(return_value=httpx.Response(200, json={"items": [{"id": "UCmemememememememememem"}]}))
+    subs = respx.get(f"{API}/subscriptions").mock(return_value=httpx.Response(200, json=_subscriptions(
+        ("UCaaaaaaaaaaaaaaaaaaaaaa", "Homelab Diary"), ("UCbbbbbbbbbbbbbbbbbbbbbb", "Rack Notes"),
+    )))
+    feeds = respx.get("https://www.youtube.com/feeds/videos.xml").mock(side_effect=[
+        httpx.Response(200, text=ATOM), httpx.Response(200, text=SECOND_ATOM),
+    ])
+    data = await get_adapter("youtube").fetch("subscriptions", {"api_key": "key"}, {"account": "@me", "limit": 5}, ctx)
+    assert [item["title"] for item in data.items] == ["A silent switch", "One small box"], "newest first, across channels"
+    assert {item["source"] for item in data.items} == {"Homelab Diary", "Rack Notes"}
+    assert dict(respx.calls[0].request.url.params)["forHandle"] == "@me"
+    assert dict(subs.calls[0].request.url.params)["channelId"] == "UCmemememememememememem"
+    assert feeds.call_count == 2 and data.meta["channels"] == 2
+
+
+@respx.mock
+async def test_youtube_says_what_to_do_when_the_subscriptions_are_private(ctx: Context) -> None:
+    respx.get(f"{API}/channels").mock(return_value=httpx.Response(200, json={"items": [{"id": "UCmemememememememememem"}]}))
+    respx.get(f"{API}/subscriptions").mock(return_value=httpx.Response(403, json={"error": {"errors": [{"reason": "subscriptionForbidden"}], "message": "forbidden"}}))
+    with pytest.raises(AdapterError) as refused:
+        await get_adapter("youtube").fetch("subscriptions", {"api_key": "key"}, {"account": "@me"}, ctx)
+    assert refused.value.code == "subscriptions_private"
+    assert "subscriptions private" in refused.value.hint.lower(), "it says which switch to flip"
+
+
+@respx.mock
+async def test_youtube_walks_the_pages_of_a_long_subscription_list(ctx: Context) -> None:
+    respx.get(f"{API}/channels").mock(return_value=httpx.Response(200, json={"items": [{"id": "UCmemememememememememem"}]}))
+    respx.get(f"{API}/subscriptions").mock(side_effect=[
+        httpx.Response(200, json=_subscriptions(("UCaaaaaaaaaaaaaaaaaaaaaa", "Homelab Diary"), token="more")),
+        httpx.Response(200, json=_subscriptions(("UCbbbbbbbbbbbbbbbbbbbbbb", "Rack Notes"))),
+    ])
+    respx.get("https://www.youtube.com/feeds/videos.xml").mock(side_effect=[
+        httpx.Response(200, text=ATOM), httpx.Response(200, text=SECOND_ATOM),
+    ])
+    data = await get_adapter("youtube").fetch("subscriptions", {"api_key": "key"}, {"account": "@me", "channels_read": 10}, ctx)
+    assert data.meta["channels"] == 2
+    assert dict(respx.calls[2].request.url.params)["pageToken"] == "more"
+
+
+@respx.mock
+async def test_youtube_asks_for_a_key_and_an_account_before_anything_else(ctx: Context) -> None:
+    youtube = get_adapter("youtube")
+    with pytest.raises(AdapterError) as without_key:
+        await youtube.fetch("subscriptions", {}, {"account": "@me"}, ctx)
+    assert without_key.value.code == "missing_key"
+    with pytest.raises(AdapterError) as without_account:
+        await youtube.fetch("subscriptions", {"api_key": "key"}, {}, ctx)
+    assert without_account.value.code == "missing_account"
+
+
+@respx.mock
+async def test_youtube_remembers_the_subscription_list_for_the_day(ctx: Context) -> None:
+    """The list changes rarely and the quota is not free, so it is read once a
+    day; the videos come from the free feeds, cached for half an hour like
+    everywhere else."""
+    channels = respx.get(f"{API}/channels").mock(return_value=httpx.Response(200, json={"items": [{"id": "UCmemememememememememem"}]}))
+    subs = respx.get(f"{API}/subscriptions").mock(return_value=httpx.Response(200, json=_subscriptions(("UCaaaaaaaaaaaaaaaaaaaaaa", "Homelab Diary"))))
+    feeds = respx.get("https://www.youtube.com/feeds/videos.xml").mock(return_value=httpx.Response(200, text=ATOM))
+    youtube = get_adapter("youtube")
+    await youtube.fetch("subscriptions", {"api_key": "key"}, {"account": "@me"}, ctx)
+    await youtube.fetch("subscriptions", {"api_key": "key"}, {"account": "@me"}, ctx)
+    assert channels.call_count == 1 and subs.call_count == 1, "the quota is spent once"
+    assert feeds.call_count == 1, "and the feed within its own half hour"
