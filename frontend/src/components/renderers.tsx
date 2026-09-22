@@ -369,25 +369,18 @@ export function StatsCard({ data, series }: RenderProps) {
               <div className="text-[11px] text-muted min-w-[4.6rem] max-w-[10rem] truncate" title={tLabel(row.label)}>
                 {tLabel(row.label)}
               </div>
-              {/* ⚠️ A percentage keeps its bar, however much history there is.
-                  The sparkline used to take the bar's place once five samples
-                  had come in, about two minutes after a card was added:
-                  sixteen pixels of filled area read as a bar at a hundred per
-                  cent, and a card that had been telling the truth suddenly
-                  looked alarming. The trend is drawn as a thin line above the
-                  same track instead; a row that is not a percentage has no bar
-                  to keep and still gets the sparkline. */}
+              {/* ⚠️ A percentage is a bar and nothing else, however much
+                  history there is. The sparkline used to take the bar's place
+                  once five samples had come in, about two minutes after a card
+                  was added: sixteen pixels of filled area read as a bar at a
+                  hundred per cent. Drawn over the bar instead it was worse, a
+                  stretched line with an arrow head crossing the whole row. A
+                  row that is not a percentage has no bar to draw and keeps the
+                  sparkline; the value card draws the same history in full. */}
               <div className="min-w-0">
                 {isPercent && numeric !== null ? (
-                  <div className="relative">
-                    {worthDrawing(points) && (
-                      <span className="pointer-events-none absolute inset-x-0 -top-2.5 opacity-40">
-                        <Sparkline values={points} height={12} fill={false} min={0} max={100} />
-                      </span>
-                    )}
-                    <div className="bar relative" data-status={numeric >= 90 ? 'bad' : numeric >= 75 ? 'warn' : 'ok'}>
-                      <i style={{ width: `${Math.min(100, numeric)}%` }} />
-                    </div>
+                  <div className="bar" data-status={numeric >= 90 ? 'bad' : numeric >= 75 ? 'warn' : 'ok'}>
+                    <i style={{ width: `${Math.min(100, numeric)}%` }} />
                   </div>
                 ) : worthDrawing(points) ? (
                   <Sparkline values={points} height={16} />

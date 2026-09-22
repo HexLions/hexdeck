@@ -124,6 +124,6 @@ Updated at every milestone.
 - **A notepad for everyone.** A notepad card can say that everyone who may
   see the board may write in it; `POST /api/v1/widgets/{id}/notepad`
   writes its text and nothing else, so a viewer reaches nothing else
-  through it. A percentage row of a stats card keeps its bar and draws
-  its history as a thin line above it, instead of the bar being replaced
-  by a filled sparkline that read as a hundred per cent.
+  through it. A percentage row of a stats card is a bar and nothing
+  else: the sparkline that used to take its place read as a hundred per
+  cent, and drawn over the bar it was a stretched line across the row.

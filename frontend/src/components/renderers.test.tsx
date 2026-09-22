@@ -36,7 +36,7 @@ describe('renderers', () => {
     expect(container.querySelector('[title="History of the last 24 hours"]')).toBeNull()
   })
 
-  it('keeps the bar of a percentage row once its history could be drawn', () => {
+  it('keeps the bar of a percentage row, whatever history there is', () => {
     const view = DEMO_VIEWS.find((v) => v.renderer === 'stats')!
     const data = { status: 'ok', primary: { label: 'CPU', value: 41, unit: '%' }, secondary: [{ label: 'Memory', value: 57, unit: '%', metric: 'memory' }], metrics: { cpu: 41, memory: 57 } } as unknown as WidgetData
     const series = { cpu: [10, 20, 30, 40, 41], memory: [50, 52, 54, 56, 57] }
@@ -44,8 +44,8 @@ describe('renderers', () => {
     const bars = container.querySelectorAll('.bar')
     expect(bars).toHaveLength(2)
     expect((bars[1].firstChild as HTMLElement).style.width).toBe('57%')
-    // The trend is still drawn, above the bar.
-    expect(container.querySelectorAll('svg').length).toBeGreaterThan(0)
+    // No sparkline in its place: a percentage is the bar.
+    expect(container.querySelector('.bar svg')).toBeNull()
   })
 
   it('offers list actions only when acting is allowed', () => {
