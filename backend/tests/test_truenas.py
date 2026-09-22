@@ -82,7 +82,9 @@ class FakeTruenas:
             assert message["params"] == ['reporting.realtime:{"interval": 2}'], message["params"]
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": "sub-1"}))
             if self.live is not None:
-                self._pending.append(json.dumps({"jsonrpc": "2.0", "method": "collection_update", "params": {"msg": "added", "collection": "reporting.realtime", "fields": self.live}}))
+                # ⚠️ The collection carries the argument, as TrueNAS sends it.
+                self._pending.append(json.dumps({"jsonrpc": "2.0", "method": "collection_update",
+                                                 "params": {"msg": "added", "collection": 'reporting.realtime:{"interval": 2}', "fields": self.live}}))
         else:
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": ANSWERS[method]}))
 
@@ -398,3 +400,25 @@ async def test_without_a_live_event_the_load_average_stands_in(ctx: Context, mon
     system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
     assert system.primary == {"label": "Load", "value": 12.5, "unit": "%"}
     assert next(entry for entry in system.secondary if entry["label"] == "Memory") == {"label": "Memory", "value": "7.8 GB"}
+
+
+async def test_a_key_that_may_not_read_the_statistics_does_not_hold_the_card_up(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    """TrueNAS says the subscription ended; the card takes the load average at
+    once rather than waiting out the timeout on every refresh."""
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(live=None)
+    original = fake.send
+
+    async def send(text: str) -> None:
+        await original(text)
+        if json.loads(text)["method"] == "core.subscribe":
+            fake._pending.append(json.dumps({"jsonrpc": "2.0", "method": "notify_unsubscribed",
+                                             "params": {"collection": 'reporting.realtime:{"interval": 2}', "error": {"error": "EACCES"}}}))
+
+    fake.send = send  # type: ignore[method-assign]
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    monkeypatch.setattr("app.adapters.truenas.REALTIME_WAIT", 30.0)
+    started = time.monotonic()
+    system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert time.monotonic() - started < 5, "it did not wait for an event that will not come"
+    assert system.primary == {"label": "Load", "value": 12.5, "unit": "%"}

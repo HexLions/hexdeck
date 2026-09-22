@@ -232,6 +232,11 @@ class TruenasAdapter(Adapter):
             ``collection_update`` notification with ``msg`` "added" and the
             numbers under ``fields``. The socket is closed right after, which
             ends the subscription on TrueNAS' side.
+
+            ⚠️ The ``collection`` of the event is that whole name, argument
+            and all: ``reporting.realtime:{"interval": 2}``. Compared for
+            equality with the bare name it never matched, no event was ever
+            recognised, and the card quietly fell back to the load average.
             """
             await call(socket, "core.subscribe", f"{REALTIME}:{json.dumps({'interval': 2})}")
             try:
@@ -239,8 +244,16 @@ class TruenasAdapter(Adapter):
                     while True:
                         message = json.loads(await socket.recv())
                         params = message.get("params") or {}
-                        if message.get("method") == "collection_update" and params.get("collection") == REALTIME and params.get("msg") == "added":
+                        collection = str(params.get("collection") or "")
+                        if collection.split(":", 1)[0] != REALTIME:
+                            continue
+                        if message.get("method") == "collection_update" and params.get("msg") == "added":
                             return params.get("fields") or None
+                        if message.get("method") == "notify_unsubscribed":
+                            # The key's role may not read the statistics. Waiting
+                            # the whole timeout for an event that will not come
+                            # would cost the card eight seconds on every refresh.
+                            return None
             except TimeoutError:
                 return None
 
