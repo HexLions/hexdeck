@@ -6,6 +6,7 @@
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
 [![Integrations](https://img.shields.io/badge/integrations-129-3aa0ff)](#the-services-it-speaks-to)
+[![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
 
@@ -91,6 +92,8 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
+The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.17.0` stays where it is. [What changed in each release](CHANGELOG.md).
+
 Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays. For a dashboard at home that should not ask for a password at all, make a guest account and, under System › Sign-in providers, sign browsers on your network in as it by themselves; the password is then only for changing things.
 
 Mount `/var/run/docker.sock` (already in the compose file) to see this host's containers, act on them and follow their logs. On Synology the same socket serves Container Manager.
@@ -153,7 +156,7 @@ Install HexDeck as a Custom App (Apps → Discover Apps → Install via YAML) wi
 ```yaml
 services:
   hexdeck:
-    image: ghcr.io/hexlions/hexdeck:main
+    image: ghcr.io/hexlions/hexdeck:latest
     container_name: hexdeck
     restart: unless-stopped
     ports:
@@ -171,7 +174,7 @@ services:
 - Paths are absolute, under `/mnt/<pool>/…`; make the dataset first, or Docker creates the directory as root and `PUID`/`PGID` fix its ownership on the first start.
 - `PUID`/`PGID` are the owner of the files in the data volume; use the user that owns the dataset.
 - The Docker socket's group is detected at start. When that fails (the log says so), set `DOCKER_GID` to the group id of `/var/run/docker.sock` on the host, or leave the socket out.
-- `:main` is the newest build; a release tag such as `:0.17.0` stays put.
+- `:latest` is the newest release, `:0.17.0` that one release for good, and `:main` every build of the main branch. A release is built for amd64 and arm64; `:main` for amd64 only.
 
 For the **TrueNAS card itself**, use `https://` and an API key **linked to a user** with the Read-Only Administrator role, not a full administrator's. Over https HexDeck speaks the current JSON-RPC API, which is what TrueNAS 25.04 and later expect; the old REST API is not called at all where the current one exists, because TrueNAS 25.10 counts every call to it in a deprecation alert on the NAS and TrueNAS 26 removes it. Behind a reverse proxy, the proxy has to pass WebSockets on.
 
