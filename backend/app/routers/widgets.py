@@ -31,6 +31,7 @@ from ..schemas import (
     ActionBody,
     HealthBody,
     NotepadBody,
+    TodoBody,
     WidgetCreate,
     WidgetMove,
     WidgetPatch,
@@ -166,6 +167,25 @@ def write_notepad(widget_id: int, body: NotepadBody, user: CurrentUser, db: DbSe
     db.commit()
     collector.schedule(widget.id)
     return {"content": body.content}
+
+
+@router.post("/widgets/{widget_id}/todo", summary="Write the list of a to-do card")
+def write_todo(widget_id: int, body: TodoBody, user: CurrentUser, db: DbSession) -> dict:
+    """Ticking a box and adding a line, on the same terms as the notepad: the
+    card may say that everyone who may see the board writes in it, and this
+    address writes the list and nothing else."""
+    from ..adapters.core import todo_items, todo_text
+
+    widget, page = _widget(db, widget_id)
+    if widget.kind != "core.todo":
+        raise error("not_a_todo", "This card is not a to-do list.")
+    options = dict(widget.options or {})
+    require_board_id(db, page.board_id, user, "view" if options.get("open") else "edit")
+    options["items"] = todo_text([item.model_dump() for item in body.items])
+    widget.options = options
+    db.commit()
+    collector.schedule(widget.id)
+    return {"left": sum(1 for item in todo_items(options["items"]) if not item["done"])}
 
 
 @router.post("/widgets/move", summary="Put cards on another page")

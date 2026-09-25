@@ -103,6 +103,7 @@ GUESTS_MAY_CHANGE: dict[str, str] = {
     "POST /api/v1/auth/login/second-step": "its other half",
     "POST /api/v1/auth/logout": "leaving",
     "POST /api/v1/auth/auto": "signing in from a trusted network",
+    "POST /api/v1/widgets/{widget_id}/todo": "the items of a to-do card that says everyone who may see the board may tick; nothing else about the card, and edit is needed where the card does not say so",
     "POST /api/v1/widgets/{widget_id}/notepad": "the text of a notepad card that says everyone who may see the board may write; nothing else about the card, and edit is needed where the card does not say so",
     "POST /api/v1/auth/forgot": "somebody who forgot their password",
     "POST /api/v1/auth/reset": "the same link, redeemed",
@@ -508,9 +509,9 @@ def test_translated_texts_are_complete_and_clean(language: str) -> None:
 
 def test_client_only_widgets_are_exactly_the_basics() -> None:
     """The settings sheet hides the refresh interval for widgets that draw themselves."""
-    from_the_server = {"problems", "status", "notices"}
+    from_the_server = {"problems", "status", "notices", "todo"}
     assert all(widget.client_only or widget.kind in from_the_server for widget in get_adapter("core").widgets), (
-        "problems, the status page and the notices read what the server knows"
+        "problems, the status page, the notices and the to-do list read what the server knows"
     )
     others = [f"{adapter.kind}.{widget.kind}" for adapter in all_adapters() if adapter.kind != "core" for widget in adapter.widgets if widget.client_only]
     assert others == []

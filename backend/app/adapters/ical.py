@@ -17,7 +17,14 @@ _FOLD = re.compile(r"\r?\n[ \t]")
 
 
 def parse_ics(text: str) -> list[dict[str, Any]]:
-    """Return VEVENTs as ``{summary, start (date), end, all_day, rrule}``."""
+    """Return VEVENTs as ``{summary, start (date), end, all_day, minute, rrule}``.
+
+    ``minute`` is the time of day the event starts, in minutes from midnight,
+    and is absent for an all-day event. A time with ``Z`` is UTC and is turned
+    into this machine's wall clock; a time without one is already wall clock
+    somewhere, and is taken as it stands. Nothing here guesses a time zone the
+    file does not name.
+    """
     text = _FOLD.sub("", text)
     events: list[dict[str, Any]] = []
     current: dict[str, Any] | None = None
@@ -36,8 +43,13 @@ def parse_ics(text: str) -> list[dict[str, Any]]:
             elif name in ("DTSTART", "DTEND"):
                 parsed = _parse_date(value)
                 if parsed is not None:
+                    all_day = "VALUE=DATE" in params or len(value.strip()) == 8
                     current["start" if name == "DTSTART" else "end"] = parsed
-                    current["all_day"] = "VALUE=DATE" in params or len(value) == 8
+                    current["all_day"] = all_day
+                    if name == "DTSTART" and not all_day:
+                        minute = _parse_minute(value)
+                        if minute is not None:
+                            current["minute"] = minute
             elif name == "RRULE":
                 current["rrule"] = dict(part.split("=", 1) for part in value.split(";") if "=" in part)
             elif name == "LOCATION":
@@ -51,9 +63,24 @@ def _parse_date(value: str) -> date | None:
         if len(value) == 8:
             return datetime.strptime(value, "%Y%m%d").date()
         stamp = value.rstrip("Z")[:15]
-        return datetime.strptime(stamp, "%Y%m%dT%H%M%S").date()
+        moment = datetime.strptime(stamp, "%Y%m%dT%H%M%S")
+        if value.endswith("Z"):
+            moment = moment.replace(tzinfo=UTC).astimezone()
+        return moment.date()
     except ValueError:
         return None
+
+
+def _parse_minute(value: str) -> int | None:
+    """The time of day an event starts, in minutes from midnight, on this machine's clock."""
+    value = value.strip()
+    try:
+        moment = datetime.strptime(value.rstrip("Z")[:15], "%Y%m%dT%H%M%S")
+    except ValueError:
+        return None
+    if value.endswith("Z"):
+        moment = moment.replace(tzinfo=UTC).astimezone()
+    return moment.hour * 60 + moment.minute
 
 
 def occurrences(event: dict[str, Any], start: date, end: date) -> list[date]:
@@ -131,8 +158,16 @@ class IcalAdapter(Adapter):
         items = []
         for event in await self._events(config, ctx):
             for day in occurrences(event, start, end):
-                items.append({"date": day.isoformat(), "title": event.get("summary", "(untitled)"), "subtitle": event.get("location", "") or ("all day" if event.get("all_day") else ""), "status": "ok", "source": config.get("name") or "Calendar"})
-        items.sort(key=lambda i: i["date"])
+                items.append({
+                    "date": day.isoformat(),
+                    "title": event.get("summary", "(untitled)"),
+                    "subtitle": event.get("location", "") or ("all day" if event.get("all_day") else ""),
+                    "status": "ok",
+                    "source": config.get("name") or "Calendar",
+                    # Minutes from midnight; absent for an all-day event, which sorts first.
+                    "minute": event.get("minute"),
+                })
+        items.sort(key=lambda i: (i["date"], 0 if i.get("minute") is None else 1, i.get("minute") or 0))
         return items
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
@@ -142,7 +177,7 @@ class IcalAdapter(Adapter):
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         today = datetime.now(UTC).date()
         names = [("Dentist", "Main street 1"), ("Team call", ""), ("Garbage collection", "all day"), ("Birthday party", "Home")]
-        return WidgetData(items=[{"date": (today + timedelta(days=i * 2)).isoformat(), "title": n, "subtitle": s, "status": "ok", "source": "Family"} for i, (n, s) in enumerate(names)])
+        return WidgetData(items=[{"date": (today + timedelta(days=i * 2)).isoformat(), "title": n, "subtitle": s, "status": "ok", "source": "Family", "minute": None if s == "all day" else 9 * 60 + 30 + i * 95} for i, (n, s) in enumerate(names)])
 
 
 class CalendarAdapter(Adapter):
@@ -163,8 +198,9 @@ class CalendarAdapter(Adapter):
             refresh_seconds=600,
             options=(
                 Field("sources", "Sources", type="integrations", options=(("ical", "iCal"), ("radarr", "Radarr"), ("sonarr", "Sonarr"), ("lidarr", "Lidarr"), ("readarr", "Readarr")), help="Pick the calendars and instances to merge.", default=[]),
-                Field("days", "Days ahead", type="number", default=7),
+                Field("days", "Days ahead", type="number", default=7, help="1 is today alone, 2 today and tomorrow."),
                 Field("limit", "Entries", type="number", default=20),
+                Field("hide_past", "Hide what is over", type="bool", default=True, help="An entry of today whose time has passed is left out."),
             ),
         ),
     )
@@ -194,13 +230,23 @@ class CalendarAdapter(Adapter):
                 items.extend(await upcoming(config_of, source_ctx, days))
             except (AdapterError, ValueError, KeyError) as error:
                 failures.append(str(getattr(error, "message", error)))
-        items.sort(key=lambda i: i.get("date") or "")
+        # By day, and inside a day by the clock; an all-day entry comes first.
+        items.sort(key=lambda i: (i.get("date") or "", 0 if i.get("minute") is None else 1, i.get("minute") or 0))
+        if options.get("hide_past"):
+            # What is over is not upcoming: on an agenda for today, the morning
+            # should not still be at the top at six in the evening.
+            now = datetime.now().astimezone()
+            today, minute_now = now.date().isoformat(), now.hour * 60 + now.minute
+            items = [i for i in items if (i.get("date") or "") > today or i.get("minute") is None or int(i["minute"]) >= minute_now]
         return WidgetData(status="warn" if failures else "ok", items=items[: int(options.get("limit") or 20)], error=("; ".join(failures) if failures and not items else None))
 
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         today = datetime.now(UTC).date()
         rows = [("Harbour Lights", "S03E05", "Sonarr", 0), ("Copper Sky", "Digital release", "Radarr", 0), ("Dentist", "Main street 1", "Family", 1), ("Orbital Decay", "S01E09", "Sonarr", 1), ("Nightshift", "Digital release", "Radarr", 2), ("Team call", "", "Work", 3)]
-        return WidgetData(items=[{"date": (today + timedelta(days=d)).isoformat(), "title": t, "subtitle": s, "source": src, "status": "ok" if src not in ("Sonarr", "Radarr") else "warn"} for t, s, src, d in rows])
+        return WidgetData(items=[{"date": (today + timedelta(days=d)).isoformat(), "title": t, "subtitle": s, "source": src,
+                                  "status": "ok" if src not in ("Sonarr", "Radarr") else "warn",
+                                  "minute": None if src in ("Sonarr", "Radarr") else 9 * 60 + 30 + index * 75}
+                                 for index, (t, s, src, d) in enumerate(rows)])
 
 
 ADAPTER = IcalAdapter()

@@ -1202,5 +1202,8 @@
     "search": "Suche",
     "notices": "Hinweise",
     "more": "Mehr"
+  },
+  "todo": {
+    "add": "Eintrag hinzufügen"
   }
 }

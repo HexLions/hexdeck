@@ -1292,7 +1292,27 @@
     "Which ones": "Welche",
     "Warnings and errors": "Warnungen und Fehler",
     "Errors only": "Nur Fehler",
-    "Only unread": "Nur ungelesene"
+    "Only unread": "Nur ungelesene",
+    "Hide what is over": "Vergangenes ausblenden",
+    "An entry of today whose time has passed is left out.": "Ein Eintrag von heute, dessen Uhrzeit vorbei ist, wird weggelassen.",
+    "1 is today alone, 2 today and tomorrow.": "1 ist nur heute, 2 heute und morgen.",
+    "To do": "Zu tun",
+    "A list to tick off, kept on the server: the same list on every browser and every screen.": "Eine Liste zum Abhaken, auf dem Server gespeichert: dieselbe Liste in jedem Browser und auf jedem Bildschirm.",
+    "One per line. A line that begins with 'x ' is already done; ticking a box on the card writes the same thing.": "Einer pro Zeile. Eine Zeile, die mit 'x ' beginnt, ist erledigt; ein Haken auf der Karte schreibt dasselbe.",
+    "Hide what is done": "Erledigtes ausblenden",
+    "Anyone who may see the board may tick": "Jeder, der das Board sehen darf, darf abhaken",
+    "For a shopping list at home: guests and viewers tick and add, and change nothing else on the board.": "Für eine Einkaufsliste zu Hause: Gäste und Betrachter haken ab und ergänzen, und ändern sonst nichts am Board.",
+    "Public address": "Öffentliche Adresse",
+    "The address your line shows to the world, the provider behind it, and a word when it changes.": "Die Adresse, mit der deine Leitung nach außen auftritt, der Anbieter dahinter und ein Wort, wenn sie sich ändert.",
+    "The address the house is seen at, with the provider and the place the service names.": "Die Adresse, unter der das Haus gesehen wird, mit Anbieter und dem Ort, den der Dienst nennt.",
+    "Asked of": "Gefragt wird",
+    "ipapi.co": "ipapi.co",
+    "ipwho.is": "ipwho.is",
+    "Both are free and need no account. Only the address is asked for; nothing about this installation is sent.": "Beide sind kostenlos und brauchen kein Konto. Gefragt wird nur nach der Adresse; über diese Installation wird nichts gesendet.",
+    "Ask again after (minutes)": "Erneut fragen nach (Minuten)",
+    "A home address rarely moves. 0 asks on every refresh.": "Eine Hausadresse wechselt selten. 0 fragt bei jeder Aktualisierung.",
+    "Hide the address itself": "Die Adresse selbst verbergen",
+    "For a board on a wall: the provider and the place are shown, the number is not.": "Für ein Board an der Wand: Anbieter und Ort werden gezeigt, die Nummer nicht."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -1969,6 +1989,9 @@
     "No open milestones": "Keine offenen Meilensteine",
     "Nothing open": "Nichts offen",
     "GitHub answers, without a token: sixty requests an hour.": "GitHub antwortet, ohne Token: sechzig Anfragen pro Stunde.",
-    "Homelab, today": "Homelab, heute"
+    "Homelab, today": "Homelab, heute",
+    "Provider": "Anbieter",
+    "Place": "Ort",
+    "hidden": "verborgen"
   }
 }

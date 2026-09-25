@@ -89,6 +89,7 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   project: ProjectCard,
   items: ItemsCard,
   notepad: NotepadCard,
+  todo: TodoCard,
   ring: RingCard,
   app: AppTile,
   button: ButtonCard,
@@ -637,6 +638,11 @@ export function CalendarCard({ data }: RenderProps) {
           {entries.map((entry, index) => (
             <div key={index} className="flex items-center gap-2 py-1">
               <span className="dot" data-status={statusOf(entry.status)} />
+              {/* The clock the entry starts at, in minutes from midnight; an
+                  all-day entry has none and keeps the space for the title. */}
+              {typeof entry.minute === 'number' && (
+                <span className="num text-[11px] text-muted tabular-nums shrink-0">{clockOf(entry.minute)}</span>
+              )}
               <span className="text-[13px] font-medium truncate flex-1">{String(entry.title ?? '')}</span>
               <span className="text-[11px] text-muted truncate max-w-[45%]">{tLabel(String(entry.subtitle ?? ''))}</span>
             </div>
@@ -645,6 +651,12 @@ export function CalendarCard({ data }: RenderProps) {
       ))}
     </ul>
   )
+}
+
+/** Minutes from midnight as a clock: 570 is 09:30. */
+function clockOf(minute: number): string {
+  const safe = Math.max(0, Math.min(1439, Math.round(minute)))
+  return `${String(Math.floor(safe / 60)).padStart(2, '0')}:${String(safe % 60).padStart(2, '0')}`
 }
 
 function dayLabel(date: string, t: TFunction): string {
@@ -1770,6 +1782,98 @@ export function ItemsCard({ widget, data, canAct, canEdit }: RenderProps) {
         <div className="no-drag flex gap-1 border-t border-line p-2">
           <input className="input h-8 min-w-0 flex-1 text-xs" aria-label={t('projects.card.newItem')} placeholder={t('projects.card.newItem')} value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
           <button type="button" className="btn h-8 flex-none" disabled={!title.trim()} onClick={add} aria-label={t('projects.card.addItem')}>+</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * A list to tick off. The items live in the card's own options and are
+ * written back through an address of the card's own, like the notepad: a
+ * viewer may tick where the card says so, and reaches nothing else.
+ */
+export function TodoCard({ widget, data, canEdit }: RenderProps) {
+  const { t } = useTranslation()
+  const meta = (data?.meta ?? {}) as { empty?: string; open?: boolean; hide_done?: boolean; demo?: boolean }
+  const served = (data?.items ?? []) as { title?: unknown; done?: unknown }[]
+  const [items, setItems] = useState<{ title: string; done: boolean }[]>([])
+  // ⚠️ The local list stands until the server says the same thing back.
+  // Dropping it as soon as the save answered put the card back to the list of
+  // the last fetch: a line just typed in flickered away and returned half a
+  // minute later, when the card next refreshed.
+  const [dirty, setDirty] = useState(false)
+  const [adding, setAdding] = useState('')
+  const fromServer = served.map((row) => ({ title: String(row.title ?? ''), done: Boolean(row.done) }))
+  const rows = dirty ? items : fromServer
+  /** The list as one string, so two of them can be compared in a dependency list. */
+  const written = (list: { title: string; done: boolean }[]) => list.map((one) => (one.done ? 'x ' : '') + one.title).join('\n')
+  const stamp = written(fromServer)
+  const mine = written(items)
+  useEffect(() => {
+    setDirty((waiting) => (waiting && stamp === mine ? false : waiting))
+  }, [stamp, mine])
+  const mayWrite = (meta.open ?? Boolean(widget.options?.open)) || Boolean(canEdit)
+  const save = (next: { title: string; done: boolean }[]) => {
+    setItems(next)
+    setDirty(true)
+    void post(`/widgets/${widget.id}/todo`, { items: next }).catch(() => undefined)
+  }
+  if (!rows.length && !mayWrite) return <Empty>{meta.empty ? tLabel(meta.empty) : t('card.nothing')}</Empty>
+  return (
+    <div className="flex-1 min-h-0 flex flex-col">
+      <ul className="flex-1 min-h-0 scroll px-1.5 pb-1">
+        {rows.map((row, index) => (
+          <li key={index} className="group/row flex items-center gap-2 px-1.5 py-1 rounded-lg hover:bg-surface-hover">
+            <input
+              type="checkbox"
+              className="no-drag accent-accent"
+              checked={row.done}
+              disabled={!mayWrite || meta.demo}
+              aria-label={row.title}
+              onChange={(event) => save(rows.map((one, at) => (at === index ? { ...one, done: event.target.checked } : one)))}
+            />
+            <span className={`flex-1 truncate text-[13px] ${row.done ? 'text-muted line-through' : ''}`}>{row.title}</span>
+            {mayWrite && !meta.demo && (
+              <button
+                type="button"
+                className="no-drag flex-none text-faint opacity-0 hover:text-bad group-hover/row:opacity-100 focus:opacity-100"
+                aria-label={`${t('common.delete')}: ${row.title}`}
+                onClick={() => save(rows.filter((_one, at) => at !== index))}
+              >
+                ×
+              </button>
+            )}
+          </li>
+        ))}
+        {!rows.length && <li className="p-2 text-sm text-muted">{meta.empty ? tLabel(meta.empty) : t('card.nothing')}</li>}
+      </ul>
+      {mayWrite && !meta.demo && (
+        <div className="no-drag flex gap-1 border-t border-line p-2">
+          <input
+            className="input h-8 min-w-0 flex-1 text-xs"
+            aria-label={t('todo.add')}
+            placeholder={t('todo.add')}
+            value={adding}
+            onChange={(event) => setAdding(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key !== 'Enter' || !adding.trim()) return
+              save([...rows, { title: adding.trim(), done: false }])
+              setAdding('')
+            }}
+          />
+          <button
+            type="button"
+            className="btn h-8 flex-none"
+            disabled={!adding.trim()}
+            aria-label={t('todo.add')}
+            onClick={() => {
+              save([...rows, { title: adding.trim(), done: false }])
+              setAdding('')
+            }}
+          >
+            +
+          </button>
         </div>
       )}
     </div>

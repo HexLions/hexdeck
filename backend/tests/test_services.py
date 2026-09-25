@@ -202,6 +202,19 @@ def test_ics_parser_and_recurrence() -> None:
     assert occurrences(events[2], *window) == [date(2026, 9, 12)], "a yearly rule from 1990 lands on this year's date"
 
 
+def test_the_ics_parser_keeps_the_time_of_day() -> None:
+    """An agenda says when, not only what. A time with Z is UTC and is turned
+    into this machine's clock; an all-day event has no time at all."""
+    from datetime import datetime as _datetime
+
+    events = parse_ics(ICS)
+    assert "minute" not in events[0], "an all-day event has no time"
+    here = _datetime(2026, 9, 1, 9, 0, tzinfo=UTC).astimezone()
+    assert events[1]["minute"] == here.hour * 60 + here.minute
+    floating = parse_ics("BEGIN:VCALENDAR\nBEGIN:VEVENT\nSUMMARY:Local\nDTSTART:20260901T183000\nEND:VEVENT\nEND:VCALENDAR")
+    assert floating[0]["minute"] == 18 * 60 + 30, "a time without Z is taken as it stands"
+
+
 # -- prometheus text ---------------------------------------------------------
 
 

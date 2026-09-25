@@ -9,6 +9,28 @@ from sqlalchemy import func
 from .base import Action, Adapter, AdapterError, Context, Field, WidgetData, WidgetType, ago
 
 
+def todo_items(text: str) -> list[dict[str, Any]]:
+    """The lines of a to-do list as ``{title, done}``.
+
+    A line that begins with ``x`` and a space is done; the marker is written
+    back the same way, so the list stays a list somebody can edit by hand in
+    the card's settings.
+    """
+    items: list[dict[str, Any]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        done = stripped[:2].lower() in ("x ", "- ") and stripped[:2].lower() == "x "
+        items.append({"title": stripped[2:].strip() if done else stripped, "done": done})
+    return items
+
+
+def todo_text(items: list[dict[str, Any]]) -> str:
+    """The lines a list of items is stored as."""
+    return "\n".join(("x " if item.get("done") else "") + str(item.get("title") or "").strip() for item in items if str(item.get("title") or "").strip())
+
+
 class CoreAdapter(Adapter):
     kind = "core"
     label = "Basics"
@@ -173,6 +195,22 @@ class CoreAdapter(Adapter):
             refresh_seconds=15,
         ),
         WidgetType(
+            kind="todo",
+            label="To do",
+            description="A list to tick off, kept on the server: the same list on every browser and every screen.",
+            renderer="todo",
+            default_size=(3, 3),
+            min_size=(2, 2),
+            refresh_seconds=3600,
+            options=(
+                Field("items", "Items", type="textarea", default="",
+                      help="One per line. A line that begins with 'x ' is already done; ticking a box on the card writes the same thing."),
+                Field("hide_done", "Hide what is done", type="bool", default=False),
+                Field("open", "Anyone who may see the board may tick", type="bool", default=False,
+                      help="For a shopping list at home: guests and viewers tick and add, and change nothing else on the board."),
+            ),
+        ),
+        WidgetType(
             kind="status",
             label="Status page",
             description="Every card with a reachability check, what it answers and how it has been doing.",
@@ -288,6 +326,8 @@ class CoreAdapter(Adapter):
             return self._status(ctx, options)
         if widget_kind == "notices":
             return self._notices(options)
+        if widget_kind == "todo":
+            return self._todo(options)
         return self.demo(widget_kind, options, 0)
 
     @staticmethod
@@ -352,6 +392,26 @@ class CoreAdapter(Adapter):
             primary={"label": "Up", "value": f"{up} / {len(items)}"},
             metrics={"up": float(up), "down": float(down)},
             meta={"empty": "Everything answers", "bars": window},
+        )
+
+    @staticmethod
+    def _todo(options: dict[str, Any]) -> WidgetData:
+        """The list as the card draws it. The items live in the card's own
+        options, as one line each, a done one marked with ``x``; the card
+        writes them back through ``POST /widgets/{id}/todo``."""
+        items = todo_items(str(options.get("items") or ""))
+        left = sum(1 for item in items if not item["done"])
+        shown = [item for item in items if not (options.get("hide_done") and item["done"])]
+        return WidgetData(
+            status="ok",
+            items=[{
+                "id": index,
+                "title": item["title"],
+                "status": "ok" if item["done"] else "unknown",
+                "done": item["done"],
+            } for index, item in enumerate(shown)],
+            primary={"label": "Left", "value": left},
+            meta={"empty": "Nothing to do", "open": bool(options.get("open")), "hide_done": bool(options.get("hide_done"))},
         )
 
     @staticmethod
@@ -521,6 +581,17 @@ class CoreAdapter(Adapter):
                     {"title": "UniFi Network", "subtitle": "1 device(s) offline", "status": "warn", "value": ""},
                 ],
                 meta={"empty": "Everything is fine"},
+            )
+        if widget_kind == "todo":
+            return WidgetData(
+                status="ok",
+                primary={"label": "Left", "value": 2},
+                items=[
+                    {"id": 0, "title": "Order the rack rails", "status": "unknown", "done": False},
+                    {"id": 1, "title": "Label the cables", "status": "unknown", "done": False},
+                    {"id": 2, "title": "Replace the UPS battery", "status": "ok", "done": True},
+                ],
+                meta={"empty": "Nothing to do", "open": False, "hide_done": False},
             )
         if widget_kind == "status":
             bars = [1.0] * 40 + [0.0, 0.0] + [1.0] * 6

@@ -137,3 +137,10 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **A to-do card, the time of day on the agenda, and the public address.**
+  The to-do list is kept on the server in the card's own options, with an
+  address of its own like the notepad, and may be ticked by everyone who
+  may see the board when the card says so. The iCal parser keeps the time
+  of day, so the calendar card shows when, sorts inside a day and can
+  leave out what is over. The public address card asks one keyless
+  service once an hour and says when the address has changed.

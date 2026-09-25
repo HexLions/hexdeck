@@ -247,6 +247,17 @@ class WidgetCreate(BaseModel):
     h: int | None = Field(default=None, ge=1, le=40)
 
 
+class TodoItem(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    done: bool = False
+
+
+class TodoBody(BaseModel):
+    """The whole list of a to-do card, as the card holds it."""
+
+    items: list[TodoItem] = Field(default_factory=list, max_length=200)
+
+
 class NotepadBody(BaseModel):
     """The text of a notepad card, and nothing else about it."""
 
