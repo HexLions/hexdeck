@@ -137,6 +137,11 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **One updates card over several sources.** WUD, Cup and Watchtower gained an
+  `updates()` hook that hands the rows they already build to a card that
+  merges them with the newest release of the repositories somebody follows
+  and with HexDeck's own version. Each source is asked on its own and a
+  failure becomes a line of warning on the card, never the whole card.
 - **A to-do card, the time of day on the agenda, and the public address.**
   The to-do list is kept on the server in the card's own options, with an
   address of its own like the notepad, and may be ticked by everyone who

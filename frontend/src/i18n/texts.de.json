@@ -1312,7 +1312,17 @@
     "Ask again after (minutes)": "Erneut fragen nach (Minuten)",
     "A home address rarely moves. 0 asks on every refresh.": "Eine Hausadresse wechselt selten. 0 fragt bei jeder Aktualisierung.",
     "Hide the address itself": "Die Adresse selbst verbergen",
-    "For a board on a wall: the provider and the place are shown, the number is not.": "Für ein Board an der Wand: Anbieter und Ort werden gezeigt, die Nummer nicht."
+    "For a board on a wall: the provider and the place are shown, the number is not.": "Für ein Board an der Wand: Anbieter und Ort werden gezeigt, die Nummer nicht.",
+    "Updates": "Aktualisierungen",
+    "One list of what has a newer version: the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.": "Eine Liste von allem, was eine neuere Fassung hat: die Container, die WUD, Cup oder Watchtower beobachten, die Releases, denen du folgst, und HexDeck selbst.",
+    "Connections": "Verbindungen",
+    "What's Up Docker": "What's Up Docker",
+    "Cup": "Cup",
+    "Watchtower": "Watchtower",
+    "The services that watch your images.": "Die Dienste, die deine Images beobachten.",
+    "One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker.": "Eines pro Zeile, als owner/name auf GitHub. Gezeigt wird das neueste Release, ob es in Docker läuft oder nicht.",
+    "HexDeck itself": "HexDeck selbst",
+    "Needs the update check under System; without it HexDeck asks GitHub nothing.": "Braucht die Aktualisierungsprüfung unter System; ohne sie fragt HexDeck GitHub nichts."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -1992,6 +2002,8 @@
     "Homelab, today": "Homelab, heute",
     "Provider": "Anbieter",
     "Place": "Ort",
-    "hidden": "verborgen"
+    "hidden": "verborgen",
+    "Newest release": "Neuestes Release",
+    "A newer version is out": "Eine neuere Fassung ist da"
   }
 }

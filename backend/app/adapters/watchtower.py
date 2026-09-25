@@ -100,6 +100,23 @@ class WatchtowerAdapter(Adapter):
             raise AdapterError("This address answers, but not the way Watchtower does.", code="not_watchtower")
         return answer
 
+    async def updates(self, config: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
+        """Watchtower keeps no list of what is waiting; it updates and reports.
+        So the merged card carries what its last run did, and nothing else."""
+        status = await self._status(config, ctx, cache=60)
+        if status is None:
+            return []
+        summary = status.get("summary") or {}
+        updated, failed = int(summary.get("updated") or 0), int(summary.get("failed") or 0)
+        if not updated and not failed:
+            return []
+        return [{
+            "title": "Watchtower",
+            "subtitle": "Last run",
+            "value": f"{updated} updated, {failed} failed" if failed else f"{updated} updated",
+            "status": "bad" if failed else "ok",
+        }]
+
     async def test(self, config: dict[str, Any], ctx: Context) -> str:
         status = await self._status(config, ctx, cache=0)
         if status is None:

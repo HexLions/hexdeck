@@ -236,6 +236,18 @@ class WudAdapter(Adapter):
 
     # -- the cards -----------------------------------------------------------
 
+    async def updates(self, config: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
+        """What has a newer image, for a card that merges several sources."""
+        rows = []
+        for container in _pending(await self._containers(config, ctx, cache=60)):
+            _order, word = _step(container)
+            kind = _kind(container)
+            row: dict[str, Any] = {"title": _name(container), "subtitle": " · ".join(part for part in (word, _image(container)) if part), "status": "warn"}
+            if kind.get("kind") != "digest" and kind.get("localValue") and kind.get("remoteValue"):
+                row["value"] = f"{kind['localValue']} → {kind['remoteValue']}"
+            rows.append(row)
+        return rows
+
     @staticmethod
     def _updates(containers: list[dict[str, Any]], triggers: dict[str, tuple[str, str]], limit: int) -> WidgetData:
         items: list[dict[str, Any]] = []

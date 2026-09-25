@@ -195,6 +195,25 @@ class CoreAdapter(Adapter):
             refresh_seconds=15,
         ),
         WidgetType(
+            kind="updates",
+            label="Updates",
+            description="One list of what has a newer version: the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.",
+            renderer="list",
+            default_size=(3, 3),
+            min_size=(2, 2),
+            refresh_seconds=900,
+            options=(
+                Field("sources", "Connections", type="integrations",
+                      options=(("wud", "What's Up Docker"), ("cup", "Cup"), ("watchtower", "Watchtower")),
+                      default=[], help="The services that watch your images."),
+                Field("repos", "Repositories", type="textarea", placeholder="owner/name",
+                      help="One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker."),
+                Field("hexdeck", "HexDeck itself", type="bool", default=True,
+                      help="Needs the update check under System; without it HexDeck asks GitHub nothing."),
+                Field("limit", "Entries", type="number", default=12),
+            ),
+        ),
+        WidgetType(
             kind="todo",
             label="To do",
             description="A list to tick off, kept on the server: the same list on every browser and every screen.",
@@ -328,6 +347,8 @@ class CoreAdapter(Adapter):
             return self._notices(options)
         if widget_kind == "todo":
             return self._todo(options)
+        if widget_kind == "updates":
+            return await self._updates(ctx, options)
         return self.demo(widget_kind, options, 0)
 
     @staticmethod
@@ -392,6 +413,78 @@ class CoreAdapter(Adapter):
             primary={"label": "Up", "value": f"{up} / {len(items)}"},
             metrics={"up": float(up), "down": float(down)},
             meta={"empty": "Everything answers", "bars": window},
+        )
+
+    @staticmethod
+    async def _updates(ctx: Context, options: dict[str, Any]) -> WidgetData:
+        """Everything that has a newer version, in one list.
+
+        Three kinds of source, asked in turn and never allowed to take the card
+        down: a connection whose adapter knows about updates, the releases of
+        the repositories somebody follows, and HexDeck's own version.
+        """
+        from .. import __version__
+        from . import get_adapter
+
+        items: list[dict[str, Any]] = []
+        failures: list[str] = []
+        sources = options.get("sources") or []
+        if isinstance(sources, str):
+            sources = [part for part in sources.split(",") if part.strip()]
+        for source in sources:
+            try:
+                adapter, config_of, source_ctx = await ctx.resolve_integration(int(source)) if ctx.resolve_integration else (None, {}, None)
+                hook = getattr(adapter, "updates", None)
+                if adapter is None or hook is None:
+                    continue
+                for row in await hook(config_of, source_ctx):
+                    items.append({**row, "source": adapter.label, "icon": adapter.icon})
+            except Exception as error:  # noqa: BLE001 - one source that fails is one line of warning
+                name = getattr(adapter, "label", "A connection") if "adapter" in dir() else "A connection"
+                failures.append(f"{name}: {getattr(error, 'message', str(error))}")
+        repos = [line.strip() for line in str(options.get("repos") or "").splitlines() if line.strip()]
+        if repos:
+            try:
+                github = get_adapter("github")
+                data = await github.fetch("releases", {}, {"repos": "\n".join(repos[:10]), "preset": "", "limit": 10}, ctx)
+                for row in data.items:
+                    items.append({
+                        "title": str(row.get("source") or row.get("title") or ""),
+                        "subtitle": "Newest release",
+                        "value": str(row.get("title") or ""),
+                        "status": "ok",
+                        "url": str(row.get("url") or ""),
+                        "icon": github.icon,
+                    })
+            except Exception as error:  # noqa: BLE001 - the same
+                failures.append(f"GitHub: {getattr(error, 'message', str(error))}")
+        if options.get("hexdeck", True):
+            try:
+                from ..routers.system import latest_version
+
+                newest = await latest_version()
+                if newest and newest != __version__:
+                    items.append({
+                        "title": "HexDeck",
+                        "subtitle": "A newer version is out",
+                        "value": f"{__version__} → {newest}",
+                        "status": "warn",
+                        "url": "https://github.com/HexLions/hexdeck/releases/latest",
+                        "icon": "lucide:layout-dashboard",
+                    })
+            except Exception as error:  # noqa: BLE001 - the same
+                failures.append(f"HexDeck: {error}")
+        # What waits first, then what only reports; inside each by name.
+        order = {"bad": 0, "warn": 1, "ok": 2}
+        items.sort(key=lambda item: (order.get(str(item.get("status")), 3), str(item.get("title", "")).lower()))
+        limit = max(1, min(50, int(options.get("limit") or 12)))
+        waiting = sum(1 for item in items if item.get("status") == "warn")
+        return WidgetData(
+            status="warn" if waiting or failures else "ok",
+            items=items[:limit],
+            primary={"label": "Waiting", "value": len(items)},
+            metrics={"updates": float(waiting)},
+            meta={"empty": "Everything is up to date", "failures": failures},
         )
 
     @staticmethod
@@ -581,6 +674,17 @@ class CoreAdapter(Adapter):
                     {"title": "UniFi Network", "subtitle": "1 device(s) offline", "status": "warn", "value": ""},
                 ],
                 meta={"empty": "Everything is fine"},
+            )
+        if widget_kind == "updates":
+            return WidgetData(
+                status="warn",
+                primary={"label": "Waiting", "value": 3},
+                items=[
+                    {"title": "radarr", "subtitle": "Minor", "value": "5.2.0 → 5.3.0", "status": "warn", "icon": "lucide:package", "url": ""},
+                    {"title": "HexDeck", "subtitle": "A newer version is out", "value": "0.17.0 → 0.18.0", "status": "warn", "icon": "lucide:layout-dashboard", "url": ""},
+                    {"title": "jellyfin/jellyfin", "subtitle": "Newest release", "value": "10.11.12", "status": "ok", "icon": "lucide:package", "url": ""},
+                ],
+                meta={"empty": "Everything is up to date", "failures": []},
             )
         if widget_kind == "todo":
             return WidgetData(

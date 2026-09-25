@@ -145,6 +145,21 @@ class CupAdapter(Adapter):
             metrics={"updates": float(updates), "major": float(count("major_updates"))},
         )
 
+    async def updates(self, config: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
+        """What has a newer image, for a card that merges several sources."""
+        answer = await self._answer(config, ctx, cache=60)
+        rows = []
+        for image in answer.get("images") or []:
+            result = (image.get("result") or {}) if isinstance(image, dict) else {}
+            if not result.get("has_update"):
+                continue
+            info = result.get("info") or {}
+            row: dict[str, Any] = {"title": str(image.get("reference") or "?"), "subtitle": _kind(result), "status": "warn"}
+            if info.get("current_version") and info.get("new_version"):
+                row["value"] = f"{info['current_version']} → {info['new_version']}"
+            rows.append(row)
+        return rows
+
     @staticmethod
     def _updates(answer: dict[str, Any], options: dict[str, Any]) -> WidgetData:
         only_used = bool(options.get("in_use"))
