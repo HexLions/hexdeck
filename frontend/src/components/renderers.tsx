@@ -382,13 +382,19 @@ export function StatsCard({ data, series }: RenderProps) {
   rows.push(...(data?.secondary ?? []))
   return (
     <div className="flex-1 flex flex-col px-3 pb-2.5 min-h-0 scroll">
+      {data?.meta?.notice ? (
+        // One sentence about the card as a whole, as the list card carries it:
+        // the host card says here when it is reading the container, not the
+        // machine, because the numbers themselves look perfectly reasonable.
+        <div className="mb-1.5 text-[11px] text-muted border-l-2 border-[var(--nd-warn,theme(colors.amber.400))] pl-2">{tLabel(String(data.meta.notice))}</div>
+      ) : null}
       <div className="my-auto flex flex-col gap-1.5">
         {rows.map((row, index) => {
           const numeric = typeof row.value === 'number' ? row.value : null
           const isPercent = row.unit === '%'
           const points = row.metric ? series?.[row.metric] : undefined
           return (
-            <div key={index} className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3">
+            <div key={index} className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3" title={row.hint || undefined}>
               {/* Labels grow with the language, values never wrap: "WAN eingehend" and "95.8 MB/s" must both fit. */}
               <div className="text-[11px] text-muted min-w-[4.6rem] max-w-[10rem] truncate" title={tLabel(row.label)}>
                 {tLabel(row.label)}

@@ -6,7 +6,18 @@ from typing import Any
 
 from sqlalchemy import func
 
-from .base import Action, Adapter, AdapterError, Context, Field, WidgetData, WidgetType, ago
+from . import demo as fake
+from .base import (
+    Action,
+    Adapter,
+    AdapterError,
+    Context,
+    Field,
+    WidgetData,
+    WidgetType,
+    ago,
+    status_from_percent,
+)
 
 
 def todo_items(text: str) -> list[dict[str, Any]]:
@@ -195,6 +206,22 @@ class CoreAdapter(Adapter):
             refresh_seconds=15,
         ),
         WidgetType(
+            kind="host",
+            label="Host",
+            description="CPU, memory, load, uptime and the warmest sensor of the machine HexDeck runs on.",
+            renderer="stats",
+            default_size=(4, 2),
+            min_size=(2, 2),
+            refresh_seconds=15,
+            metrics=("cpu", "memory"),
+            options=(
+                Field("disk", "File system", default="/", placeholder="/",
+                      help="The path whose usage is shown. Inside a container this is the container's own file system unless the volume is mounted."),
+                Field("show_temperature", "Show the temperature", type="bool", default=True,
+                      help="The warmest sensor the machine offers. Needs /sys, which a container has only when it is mounted."),
+            ),
+        ),
+        WidgetType(
             kind="updates",
             label="Updates",
             description="One list of what has a newer version: the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.",
@@ -349,6 +376,8 @@ class CoreAdapter(Adapter):
             return self._todo(options)
         if widget_kind == "updates":
             return await self._updates(ctx, options)
+        if widget_kind == "host":
+            return self._host(ctx, options)
         return self.demo(widget_kind, options, 0)
 
     @staticmethod
@@ -413,6 +442,63 @@ class CoreAdapter(Adapter):
             primary={"label": "Up", "value": f"{up} / {len(items)}"},
             metrics={"up": float(up), "down": float(down)},
             meta={"empty": "Everything answers", "bars": window},
+        )
+
+    @staticmethod
+    def _host(ctx: Context, options: dict[str, Any]) -> WidgetData:
+        """What the machine HexDeck runs on is doing.
+
+        The processor share is a difference between two looks, so the previous
+        sample is kept in the cache this card is given; the first fetch after a
+        restart reports the average since boot rather than nothing.
+        """
+        from ..services import hoststats
+
+        previous = ctx.cache.get("host:cpu")
+        reading = hoststats.read(previous, str(options.get("disk") or "/"))
+        if not reading.get("available"):
+            raise AdapterError(
+                "This card reads /proc, which only exists on Linux.",
+                code="not_linux",
+                hint="On a machine without /proc, use the Glances, Netdata or Beszel adapter instead.",
+            )
+        if reading.get("cpu_sample"):
+            ctx.cache["host:cpu"] = reading["cpu_sample"]
+        cpu, memory = reading.get("cpu"), reading.get("memory") or {}
+        secondary: list[dict[str, Any]] = []
+        if memory:
+            secondary.append({"label": "Memory", "value": memory["percent"], "unit": "%", "metric": "memory",
+                              "hint": f"{hoststats.gigabytes(memory['used'])} of {hoststats.gigabytes(memory['total'])}"})
+            if memory["swap_total"]:
+                secondary.append({"label": "Swap", "value": memory["swap_percent"], "unit": "%"})
+        if reading.get("load"):
+            one, five, fifteen = reading["load"]
+            secondary.append({"label": "Load", "value": f"{one:.2f} {five:.2f} {fifteen:.2f}",
+                              "hint": f"{reading.get('cores', 1)} cores"})
+        if options.get("show_temperature", True) and reading.get("temperature"):
+            celsius, sensor = reading["temperature"]
+            secondary.append({"label": "Temp", "value": celsius, "unit": "°C", "hint": sensor})
+        if reading.get("disk"):
+            spare = reading["disk"]
+            secondary.append({"label": "Disk", "value": spare["percent"], "unit": "%",
+                              "hint": f"{hoststats.gigabytes(spare['free'])} free"})
+        if reading.get("uptime") is not None:
+            secondary.append({"label": "Up", "value": hoststats.duration(reading["uptime"])})
+        worst = max([value for value in (cpu, memory.get("percent"), (reading.get("disk") or {}).get("percent")) if value is not None], default=None)
+        metrics = {"cpu": float(cpu)} if cpu is not None else {}
+        if memory:
+            metrics["memory"] = float(memory["percent"])
+        # Whether these are the machine's numbers or the container's is not a
+        # detail: without the mounts the memory is the container's limit.
+        return WidgetData(
+            status=status_from_percent(worst),
+            primary={"label": "CPU", "value": cpu if cpu is not None else "-", "unit": "%" if cpu is not None else ""},
+            secondary=secondary,
+            metrics=metrics,
+            meta={
+                "host": bool(reading.get("host")),
+                "notice": "" if reading.get("host") else "These are the container's numbers. Mount /proc:/host/proc:ro and /sys:/host/sys:ro to read the machine.",
+            },
         )
 
     @staticmethod
@@ -674,6 +760,21 @@ class CoreAdapter(Adapter):
                     {"title": "UniFi Network", "subtitle": "1 device(s) offline", "status": "warn", "value": ""},
                 ],
                 meta={"empty": "Everything is fine"},
+            )
+        if widget_kind == "host":
+            cpu = round(fake.walk("host-cpu", tick, 8, 46), 1)
+            return WidgetData(
+                status="ok",
+                primary={"label": "CPU", "value": cpu, "unit": "%"},
+                secondary=[
+                    {"label": "Memory", "value": 41.0, "unit": "%", "metric": "memory", "hint": "12.9 GB of 31.3 GB"},
+                    {"label": "Load", "value": "0.42 0.51 0.60", "hint": "8 cores"},
+                    {"label": "Temp", "value": 46.0, "unit": "°C", "hint": "Package id 0"},
+                    {"label": "Disk", "value": 63.0, "unit": "%", "hint": "138.4 GB free"},
+                    {"label": "Up", "value": "13d 4h"},
+                ],
+                metrics={"cpu": cpu, "memory": 41.0},
+                meta={"host": True, "notice": ""},
             )
         if widget_kind == "updates":
             return WidgetData(

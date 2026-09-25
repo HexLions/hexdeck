@@ -29,6 +29,7 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 - **A hundred and thirty integrations,** listed in full [further down](#the-services-it-speaks-to). Generic building blocks for everything else: a JSON API widget, a calendar that merges several sources, iframes, notes, bookmarks and a notepad you type into on the board.
 - **Actions where the data is.** Restart a container, start a VM, pause downloads, approve a request, wake a machine, flip a light. Destructive actions confirm once. Everything is logged.
 - **Lists, notes and an agenda.** A to-do card kept on the server, so it is the same list on every screen and, where you say so, one the whole house may tick; a notepad typed into on the board; a calendar that merges iCal feeds and *arr release dates, with the time of day and what is already over left out.
+- **The machine itself, without an agent.** A host card reads `/proc` and `/sys` directly: processors, memory, swap, load, uptime, the warmest sensor and one file system. Mount `/proc:/host/proc:ro` and `/sys:/host/sys:ro` and it reads the machine; without them it reads the container and says so on the card instead of showing you the wrong numbers quietly.
 - **A status page of your own.** Every card with a reachability check in one list, with its latency, its availability bars and its uptime, and a card of the notices HexDeck has sent. No second service to run for it.
 - **One list of what has a newer version.** The containers What's Up Docker or Cup watch, what Watchtower's last run did, the newest release of the repositories you follow, and HexDeck itself, merged into one card. A source that will not answer puts a line of warning on the card instead of taking it down.
 - **A history for every number.** Each card that shows a number keeps its history and draws it behind the number, whether the adapter declared a metric or not.
@@ -167,6 +168,8 @@ services:
     volumes:
       - /mnt/POOL/apps/hexdeck/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
     environment:
       - HEXDECK_SECRET_KEY=generate-one-and-keep-it
       - HEXDECK_PUBLIC_URL=http://truenas.lan:5175
@@ -176,6 +179,7 @@ services:
 
 - Paths are absolute, under `/mnt/<pool>/…`; make the dataset first, or Docker creates the directory as root and `PUID`/`PGID` fix its ownership on the first start.
 - `PUID`/`PGID` are the owner of the files in the data volume; use the user that owns the dataset.
+- `/host/proc` and `/host/sys` are what the **Host card** reads; they are read-only views of what the kernel already publishes. Leave them out and the card shows the container's own processors and memory, with a line on the card saying so.
 - The Docker socket's group is detected at start. When that fails (the log says so), set `DOCKER_GID` to the group id of `/var/run/docker.sock` on the host, or leave the socket out.
 - `:latest` is the newest release, `:0.17.0` that one release for good, and `:main` every build of the main branch. A release is built for amd64 and arm64; `:main` for amd64 only.
 

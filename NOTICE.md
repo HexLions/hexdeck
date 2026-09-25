@@ -137,6 +137,12 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **A host card that reads /proc itself.** Processors, memory, swap, load,
+  uptime, the warmest sensor and one file system, out of the files the
+  kernel writes, with no library and no agent. The processor share is the
+  difference between two looks, kept in the card's cache. When
+  `/host/proc` is mounted the numbers are the machine's; when it is not,
+  the card says on its face that it is reading the container.
 - **One updates card over several sources.** WUD, Cup and Watchtower gained an
   `updates()` hook that hands the rows they already build to a card that
   merges them with the newest release of the repositories somebody follows

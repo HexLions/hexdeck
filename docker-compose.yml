@@ -41,3 +41,9 @@ services:
       # those is an administrator's decision inside HexDeck. Leave the line out
       # if you do not want the Docker cards.
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Optional as well, and harmless: read-only views of what the kernel
+      # already publishes, so the Host card shows the machine's processors,
+      # memory and sensors instead of the container's own view. Without
+      # these two lines the card still works and says what it is reading.
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro

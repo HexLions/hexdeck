@@ -1322,7 +1322,12 @@
     "The services that watch your images.": "Die Dienste, die deine Images beobachten.",
     "One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker.": "Eines pro Zeile, als owner/name auf GitHub. Gezeigt wird das neueste Release, ob es in Docker läuft oder nicht.",
     "HexDeck itself": "HexDeck selbst",
-    "Needs the update check under System; without it HexDeck asks GitHub nothing.": "Braucht die Aktualisierungsprüfung unter System; ohne sie fragt HexDeck GitHub nichts."
+    "Needs the update check under System; without it HexDeck asks GitHub nothing.": "Braucht die Aktualisierungsprüfung unter System; ohne sie fragt HexDeck GitHub nichts.",
+    "CPU, memory, load, uptime and the warmest sensor of the machine HexDeck runs on.": "CPU, Speicher, Last, Laufzeit und der wärmste Sensor der Maschine, auf der HexDeck läuft.",
+    "File system": "Dateisystem",
+    "Show the temperature": "Temperatur zeigen",
+    "The path whose usage is shown. Inside a container this is the container's own file system unless the volume is mounted.": "Der Pfad, dessen Belegung gezeigt wird. In einem Container ist das dessen eigenes Dateisystem, solange das Volume nicht eingehängt ist.",
+    "The warmest sensor the machine offers. Needs /sys, which a container has only when it is mounted.": "Der wärmste Sensor, den die Maschine anbietet. Braucht /sys, das ein Container nur eingehängt hat."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2004,6 +2009,10 @@
     "Place": "Ort",
     "hidden": "verborgen",
     "Newest release": "Neuestes Release",
-    "A newer version is out": "Eine neuere Fassung ist da"
+    "A newer version is out": "Eine neuere Fassung ist da",
+    "These are the container's numbers. Mount /proc:/host/proc:ro and /sys:/host/sys:ro to read the machine.": "Das sind die Zahlen des Containers. Hänge /proc:/host/proc:ro und /sys:/host/sys:ro ein, um die Maschine zu lesen.",
+    "cores": "Kerne",
+    "free": "frei",
+    "Swap": "Swap"
   }
 }

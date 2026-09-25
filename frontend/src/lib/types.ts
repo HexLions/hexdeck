@@ -74,6 +74,8 @@ export interface Secondary {
   part?: string
   /** Shown in place of the value, when a bar drawn from the value says less than words: "9.2 / 15.6 GB" next to a memory bar. */
   text?: string
+  /** What the row would say if there were room: hovering a memory bar tells how many gigabytes it is. */
+  hint?: string
 }
 
 export interface WidgetData {

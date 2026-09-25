@@ -1322,7 +1322,12 @@
     "The services that watch your images.": "I servizi che sorvegliano le tue immagini.",
     "One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker.": "Uno per riga, come owner/name su GitHub. Viene mostrata la release più recente, che giri in Docker o no.",
     "HexDeck itself": "HexDeck stesso",
-    "Needs the update check under System; without it HexDeck asks GitHub nothing.": "Richiede il controllo aggiornamenti in Sistema; senza, HexDeck non chiede nulla a GitHub."
+    "Needs the update check under System; without it HexDeck asks GitHub nothing.": "Richiede il controllo aggiornamenti in Sistema; senza, HexDeck non chiede nulla a GitHub.",
+    "CPU, memory, load, uptime and the warmest sensor of the machine HexDeck runs on.": "CPU, memoria, carico, tempo di attività e il sensore più caldo della macchina su cui gira HexDeck.",
+    "File system": "File system",
+    "Show the temperature": "Mostra la temperatura",
+    "The path whose usage is shown. Inside a container this is the container's own file system unless the volume is mounted.": "Il percorso di cui si mostra l'occupazione. Dentro un container è il file system del container stesso, a meno che il volume sia montato.",
+    "The warmest sensor the machine offers. Needs /sys, which a container has only when it is mounted.": "Il sensore più caldo che la macchina espone. Serve /sys, che un container ha solo se lo monti."
   },
   "labels": {
     "Jobs": "Job",
@@ -2004,6 +2009,10 @@
     "Place": "Luogo",
     "hidden": "nascosto",
     "Newest release": "Release più recente",
-    "A newer version is out": "È uscita una versione nuova"
+    "A newer version is out": "È uscita una versione nuova",
+    "These are the container's numbers. Mount /proc:/host/proc:ro and /sys:/host/sys:ro to read the machine.": "Questi sono i numeri del container. Monta /proc:/host/proc:ro e /sys:/host/sys:ro per leggere la macchina.",
+    "cores": "core",
+    "free": "liberi",
+    "Swap": "Swap"
   }
 }
