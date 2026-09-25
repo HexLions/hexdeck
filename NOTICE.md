@@ -132,3 +132,8 @@ Updated at every milestone.
   the free channel feeds. YouTube serves no home feed to any API
   (`activities.list` says the home page data is not available), so this is
   as close as it goes without keeping somebody's Google cookies.
+- **A status page and a notices card.** Two cards of what HexDeck already
+  knows: every card with a reachability check, with its latency, its
+  availability bars and its uptime in the window, down first; and the
+  notices it has sent, newest first. The availability row the app tile
+  has always drawn is now a component any list row may carry.

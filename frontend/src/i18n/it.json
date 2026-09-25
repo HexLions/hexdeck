@@ -1025,7 +1025,8 @@
       "noField": "Questa card non ha niente da compilare.",
       "notAllowed": "Non puoi avviare niente da questa board."
     },
-    "saveFile": "Salva {{name}}"
+    "saveFile": "Salva {{name}}",
+    "uptime": "Disponibilità nel periodo"
   },
   "player": {
     "title": "Musica",

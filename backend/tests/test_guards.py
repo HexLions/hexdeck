@@ -508,7 +508,10 @@ def test_translated_texts_are_complete_and_clean(language: str) -> None:
 
 def test_client_only_widgets_are_exactly_the_basics() -> None:
     """The settings sheet hides the refresh interval for widgets that draw themselves."""
-    assert all(widget.client_only or widget.kind == "problems" for widget in get_adapter("core").widgets), "problems reads the server's live state"
+    from_the_server = {"problems", "status", "notices"}
+    assert all(widget.client_only or widget.kind in from_the_server for widget in get_adapter("core").widgets), (
+        "problems, the status page and the notices read what the server knows"
+    )
     others = [f"{adapter.kind}.{widget.kind}" for adapter in all_adapters() if adapter.kind != "core" for widget in adapter.widgets if widget.client_only]
     assert others == []
 

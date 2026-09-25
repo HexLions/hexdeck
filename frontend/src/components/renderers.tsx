@@ -219,6 +219,29 @@ function SaveLink({ widgetId, file }: { widgetId: number; file: Saveable }) {
   )
 }
 
+/**
+ * Availability over time: one bar per slice, green up, red down, grey
+ * unknown. The app tile has drawn this since the beginning; a list row may
+ * bring the same `bars` now, which is what the status page is made of.
+ */
+export function AvailabilityBars({ bars, title, className = '' }: { bars: (number | null)[]; title?: string; className?: string }) {
+  if (!bars.length) return null
+  return (
+    <div className={`flex gap-[2px] h-[6px] ${className}`} title={title} aria-hidden="true">
+      {bars.map((bar, index) => (
+        <span
+          key={index}
+          className="flex-1 rounded-sm"
+          style={{
+            background: bar === null ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)' : bar >= 0.99 ? 'var(--nd-ok)' : bar > 0.5 ? 'var(--nd-warn)' : 'var(--nd-bad)',
+            opacity: bar === null ? 1 : 0.85,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
 function statusOf(value: unknown): Status {
   return value === 'ok' || value === 'warn' || value === 'bad' ? value : 'unknown'
 }
@@ -434,6 +457,8 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
           const status = statusOf(item.status)
           const progress = typeof item.progress === 'number' ? item.progress : null
           const memory = typeof item.memory_percent === 'number' ? item.memory_percent : null
+          const bars = Array.isArray(item.bars) ? (item.bars as (number | null)[]) : []
+          const uptime = typeof item.uptime === 'number' ? item.uptime : null
           return (
             <li key={String(item.id ?? index)} className="group/row flex items-center gap-2.5 px-1.5 py-1.5 rounded-lg hover:bg-surface-hover">
               {item.art ? (
@@ -465,7 +490,9 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
                     <i style={{ width: `${memory}%`, background: 'color-mix(in srgb, var(--nd-accent) 55%, transparent)' }} />
                   </div>
                 )}
+                <AvailabilityBars bars={bars} className="mt-1.5" title={t(`card.bars.${String(data?.meta?.bars ?? '24h')}`, { defaultValue: t('card.bars.24h') })} />
               </div>
+              {uptime !== null && <span className="num text-[11px] text-muted shrink-0" title={t('card.uptime')}>{uptime}%</span>}
               {(item.file || (item.actions && canAct)) ? (
                 // ⚠️ Hidden until hovered, on most lists: a restart button on
                 // every container row would be noise. A card whose rows exist
@@ -1311,20 +1338,7 @@ export function AppTile({ widget, data, link }: RenderProps) {
           {health?.last_latency_ms !== null && health?.last_latency_ms !== undefined && <span className="num text-[10px] text-faint">{health.last_latency_ms} ms</span>}
         </div>
       </div>
-      {bars.length > 0 && (
-        <div className="flex gap-[2px] mt-2 h-[6px]" title={t(`card.bars.${window}`, { defaultValue: t('card.bars.24h') })} aria-hidden="true">
-          {bars.map((bar, index) => (
-            <span
-              key={index}
-              className="flex-1 rounded-sm"
-              style={{
-                background: bar === null ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)' : bar >= 0.99 ? 'var(--nd-ok)' : bar > 0.5 ? 'var(--nd-warn)' : 'var(--nd-bad)',
-                opacity: bar === null ? 1 : 0.85,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      <AvailabilityBars bars={bars} className="mt-2" title={t(`card.bars.${window}`, { defaultValue: t('card.bars.24h') })} />
     </Tag>
   )
 }

@@ -1275,7 +1275,24 @@
     "The newest videos of every channel an account follows. The account's subscription list has to be public, and the connection needs a data API key.": "I video più recenti di tutti i canali seguiti da un account. La lista delle iscrizioni deve essere pubblica e la connessione ha bisogno di una chiave API.",
     "Whose subscriptions to follow: your own handle, or the channel ID starting with UC.": "Di chi seguire le iscrizioni: il tuo handle, oppure l'ID del canale che inizia con UC.",
     "Channels to read": "Canali letti ogni volta",
-    "How many of the subscriptions are read each time, at most 50. The newest videos of those channels are shown.": "Quante iscrizioni vengono lette ogni volta, al massimo 50. Vengono mostrati i video più recenti di quei canali."
+    "How many of the subscriptions are read each time, at most 50. The newest videos of those channels are shown.": "Quante iscrizioni vengono lette ogni volta, al massimo 50. Vengono mostrati i video più recenti di quei canali.",
+    "Status page": "Pagina di stato",
+    "Every card with a reachability check, what it answers and how it has been doing.": "Ogni card con un controllo di raggiungibilità, cosa risponde e come è andata.",
+    "Which cards": "Quali card",
+    "This board": "Questa board",
+    "Every board": "Tutte le board",
+    "Only cards whose reachability check is switched on are listed.": "Sono elencate solo le card con il controllo di raggiungibilità attivo.",
+    "Last 24 hours": "Ultime 24 ore",
+    "Last 6 hours": "Ultime 6 ore",
+    "Last 48 checks": "Ultimi 48 controlli",
+    "The row under each service.": "La riga sotto ogni servizio.",
+    "Only what is down": "Solo ciò che è giù",
+    "Notices": "Notifiche",
+    "What HexDeck has announced: outages, maintenance that is due, and everything else it sends.": "Cosa ha annunciato HexDeck: disservizi, manutenzioni in scadenza e tutto il resto che invia.",
+    "Which ones": "Quali",
+    "Warnings and errors": "Avvisi ed errori",
+    "Errors only": "Solo errori",
+    "Only unread": "Solo non lette"
   },
   "labels": {
     "Jobs": "Job",
@@ -1951,6 +1968,7 @@
     "No workflow run yet": "Ancora nessuna esecuzione",
     "No open milestones": "Nessuna milestone aperta",
     "Nothing open": "Niente di aperto",
-    "GitHub answers, without a token: sixty requests an hour.": "GitHub risponde, senza token: sessanta richieste all'ora."
+    "GitHub answers, without a token: sixty requests an hour.": "GitHub risponde, senza token: sessanta richieste all'ora.",
+    "Homelab, today": "Homelab, oggi"
   }
 }

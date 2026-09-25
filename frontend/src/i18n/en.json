@@ -1025,7 +1025,8 @@
       "noField": "This card has nothing to fill in.",
       "notAllowed": "You may not start anything from this board."
     },
-    "saveFile": "Save {{name}}"
+    "saveFile": "Save {{name}}",
+    "uptime": "Uptime in the window"
   },
   "player": {
     "title": "Music",

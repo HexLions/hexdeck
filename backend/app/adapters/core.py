@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from .base import Action, Adapter, AdapterError, Context, Field, WidgetData, WidgetType
+from sqlalchemy import func
+
+from .base import Action, Adapter, AdapterError, Context, Field, WidgetData, WidgetType, ago
 
 
 class CoreAdapter(Adapter):
@@ -171,6 +173,39 @@ class CoreAdapter(Adapter):
             refresh_seconds=15,
         ),
         WidgetType(
+            kind="status",
+            label="Status page",
+            description="Every card with a reachability check, what it answers and how it has been doing.",
+            renderer="list",
+            default_size=(4, 3),
+            min_size=(3, 2),
+            refresh_seconds=30,
+            options=(
+                Field("scope", "Which cards", type="select", default="board",
+                      options=(("board", "This board"), ("all", "Every board")),
+                      help="Only cards whose reachability check is switched on are listed."),
+                Field("bars", "Availability bars", type="select", default="24h",
+                      options=(("24h", "Last 24 hours"), ("6h", "Last 6 hours"), ("1h", "Last hour"), ("live", "Last 48 checks"), ("", "None")),
+                      help="The row under each service."),
+                Field("only_down", "Only what is down", type="bool", default=False),
+            ),
+        ),
+        WidgetType(
+            kind="notices",
+            label="Notices",
+            description="What HexDeck has announced: outages, maintenance that is due, and everything else it sends.",
+            renderer="list",
+            default_size=(3, 3),
+            min_size=(2, 2),
+            refresh_seconds=60,
+            options=(
+                Field("level", "Which ones", type="select", default="",
+                      options=(("", "Everything"), ("warning", "Warnings and errors"), ("error", "Errors only"))),
+                Field("limit", "Entries", type="number", default=10),
+                Field("unread_only", "Only unread", type="bool", default=False),
+            ),
+        ),
+        WidgetType(
             kind="app",
             label="App tile",
             description="A launcher tile: icon, name, link and an optional reachability check.",
@@ -249,7 +284,115 @@ class CoreAdapter(Adapter):
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         if widget_kind == "problems":
             return self._problems(ctx)
+        if widget_kind == "status":
+            return self._status(ctx, options)
+        if widget_kind == "notices":
+            return self._notices(options)
         return self.demo(widget_kind, options, 0)
+
+    @staticmethod
+    def _status(ctx: Context, options: dict[str, Any]) -> WidgetData:
+        """Every checked card, what it answered last and how it has been doing.
+
+        The checks, their latency and their history are HexDeck's own: the loop
+        in ``services/health`` writes ``up`` and ``latency`` for each of them,
+        which is what the tiles draw as their bars. This card puts the same
+        thing in one list, so a board does not have to carry thirty tiles to
+        say whether the house is up.
+        """
+        from sqlalchemy import select
+
+        from ..db import db_session
+        from ..models import HealthCheck, Page, Widget
+        from ..services import health as health_service
+
+        window = str(options.get("bars", "24h") or "")
+        empty = WidgetData(status="warn", items=[], meta={"empty": "No card on this board has a reachability check"})
+        with db_session() as db:
+            me = db.get(Widget, ctx.widget_id) if ctx.widget_id else None
+            page = db.get(Page, me.page_id) if me is not None else None
+            if me is None or page is None:
+                return empty
+            widgets = select(Widget).join(Page)
+            if str(options.get("scope") or "board") != "all":
+                widgets = widgets.where(Page.board_id == page.board_id)
+            rows = {widget.id: widget for widget in db.scalars(widgets)}
+            checks = [
+                check for check in db.scalars(select(HealthCheck).where(HealthCheck.enabled.is_(True)))
+                if check.widget_id in rows
+            ]
+            if not checks:
+                return empty
+            bars = health_service.bars_for(db, {check.widget_id: window for check in checks}) if window else {}
+            items: list[dict[str, Any]] = []
+            for check in checks:
+                widget = rows[check.widget_id]
+                row = bars.get(check.widget_id) or []
+                known = [value for value in row if value is not None]
+                items.append({
+                    "id": widget.id,
+                    "title": widget.title or widget.kind,
+                    # What it said, or how fast it said it: the one is a reason, the other a number.
+                    "subtitle": check.last_error if check.last_ok is False else (f"{check.last_latency_ms} ms" if check.last_latency_ms is not None else ""),
+                    "status": "unknown" if check.last_ok is None else ("ok" if check.last_ok else "bad"),
+                    "url": widget.link or "",
+                    "bars": row,
+                    "uptime": round(100.0 * sum(known) / len(known), 1) if known else None,
+                })
+        if options.get("only_down"):
+            items = [item for item in items if item["status"] != "ok"]
+        # Down first, then unknown, then by name: a status page is read from the top.
+        order = {"bad": 0, "unknown": 1, "ok": 2}
+        items.sort(key=lambda item: (order.get(str(item["status"]), 3), str(item["title"]).lower()))
+        up = sum(1 for item in items if item["status"] == "ok")
+        down = sum(1 for item in items if item["status"] == "bad")
+        return WidgetData(
+            status="bad" if down else ("warn" if up < len(items) else "ok"),
+            items=items,
+            primary={"label": "Up", "value": f"{up} / {len(items)}"},
+            metrics={"up": float(up), "down": float(down)},
+            meta={"empty": "Everything answers", "bars": window},
+        )
+
+    @staticmethod
+    def _notices(options: dict[str, Any]) -> WidgetData:
+        """What HexDeck has announced, newest first.
+
+        The notice centre is a drawer behind a bell; on a wall display nobody
+        opens it. The same messages as a card say what happened while nobody
+        was looking.
+        """
+        from sqlalchemy import select
+
+        from ..db import db_session
+        from ..models import Notice
+        from ..services.notify import EVENTS
+
+        wanted = str(options.get("level") or "")
+        levels = {"error": ["error"], "warning": ["error", "warning"]}.get(wanted)
+        limit = max(1, min(50, int(options.get("limit") or 10)))
+        with db_session() as db:
+            query = select(Notice).order_by(Notice.created_at.desc(), Notice.id.desc())
+            if levels:
+                query = query.where(Notice.level.in_(levels))
+            if options.get("unread_only"):
+                query = query.where(Notice.read_at.is_(None))
+            found = list(db.scalars(query.limit(limit)))
+            unread = db.scalar(select(func.count()).select_from(Notice).where(Notice.read_at.is_(None))) or 0
+            items = [{
+                "id": notice.id,
+                "title": notice.title,
+                "subtitle": notice.body or EVENTS.get(notice.event, notice.event),
+                "status": {"error": "bad", "warning": "warn"}.get(notice.level, "unknown"),
+                "url": notice.link or "",
+                "value": ago(notice.created_at),
+            } for notice in found]
+        return WidgetData(
+            status="bad" if any(item["status"] == "bad" for item in items) else ("warn" if any(item["status"] == "warn" for item in items) else "ok"),
+            items=items,
+            primary={"label": "Unread", "value": int(unread)},
+            meta={"empty": "Nothing has happened"},
+        )
 
     @staticmethod
     def _problems(ctx: Context) -> WidgetData:
@@ -378,6 +521,30 @@ class CoreAdapter(Adapter):
                     {"title": "UniFi Network", "subtitle": "1 device(s) offline", "status": "warn", "value": ""},
                 ],
                 meta={"empty": "Everything is fine"},
+            )
+        if widget_kind == "status":
+            bars = [1.0] * 40 + [0.0, 0.0] + [1.0] * 6
+            return WidgetData(
+                status="bad",
+                primary={"label": "Up", "value": "3 / 4"},
+                items=[
+                    {"id": 1, "title": "Radarr", "subtitle": "The service could not be reached.", "status": "bad", "bars": bars[:30] + [0.0] * 18, "uptime": 62.5, "url": ""},
+                    {"id": 2, "title": "Jellyfin", "subtitle": "31 ms", "status": "ok", "bars": bars, "uptime": 95.8, "url": ""},
+                    {"id": 3, "title": "Pi-hole", "subtitle": "8 ms", "status": "ok", "bars": [1.0] * 48, "uptime": 100.0, "url": ""},
+                    {"id": 4, "title": "Proxmox", "subtitle": "12 ms", "status": "ok", "bars": [1.0] * 48, "uptime": 100.0, "url": ""},
+                ],
+                meta={"empty": "Everything answers", "bars": options.get("bars", "24h")},
+            )
+        if widget_kind == "notices":
+            return WidgetData(
+                status="bad",
+                primary={"label": "Unread", "value": 3},
+                items=[
+                    {"id": 1, "title": "Radarr is down", "subtitle": "No answer since 21:40", "status": "bad", "value": "12m", "url": ""},
+                    {"id": 2, "title": "Test the backup restore", "subtitle": "Homelab, today", "status": "warn", "value": "3h", "url": ""},
+                    {"id": 3, "title": "A new HexDeck version", "subtitle": "0.17.0 is out", "status": "unknown", "value": "1d", "url": ""},
+                ],
+                meta={"empty": "Nothing has happened"},
             )
         if widget_kind == "app":
             return WidgetData(meta={

@@ -1025,7 +1025,8 @@
       "noField": "Diese Kachel hat nichts zum Ausfüllen.",
       "notAllowed": "Von diesem Brett aus darfst du nichts starten."
     },
-    "saveFile": "{{name}} speichern"
+    "saveFile": "{{name}} speichern",
+    "uptime": "Verfügbarkeit im Zeitraum"
   },
   "player": {
     "title": "Musik",
