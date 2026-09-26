@@ -28,10 +28,6 @@ nexdeck gets the hard part right: the server talks to every service in its own r
 - **Live, not polled by your browser.** The server asks every service in its own rhythm and pushes changes to every open browser.
 - **A hundred and thirty-eight integrations,** listed in full [further down](#the-services-it-speaks-to). Generic building blocks for everything else: a JSON API widget, a calendar that merges several sources, iframes, notes, bookmarks and a notepad you type into on the board.
 - **Actions where the data is.** Restart a container, start a VM, pause downloads, approve a request, wake a machine, flip a light. Destructive actions confirm once. Everything is logged.
-- **Game servers, not only containers.** A CubeCoders AMP panel, with every instance of every target in one list and start, stop and restart on the rows; one server's processor, memory and players; and Minecraft servers read by the ping their own client sends, Java and Bedrock, with no plugin and no account. Steam says what has been played in the last fortnight.
-- **Clusters, routers and search.** Kubernetes with a read-only view role: nodes, pods that are not running, deployments that are short of replicas, and usage where metrics-server reports it. OpenWrt over the same bus LuCI itself talks to. Elasticsearch and OpenSearch by the colour the cluster names itself.
-- **Backups you can see are late.** UrBackup next to Kopia, Duplicati, Backrest and Proxmox Backup Server: which machine was backed up when, which one has fallen behind, and how many days count as late is yours to set, because a laptop that is away for a week is not a fault.
-- **Power at the socket.** Shelly relays on your own network, never through their cloud: what a device draws right now, its counter, its temperature, and one button that does the opposite of what the relay is doing.
 - **Lists, notes and an agenda.** A to-do card kept on the server, so it is the same list on every screen and, where you say so, one the whole house may tick; a notepad typed into on the board; a calendar that merges iCal feeds and *arr release dates, with the time of day and what is already over left out.
 - **The machine itself, without an agent.** A host card reads `/proc` and `/sys` directly: processors, memory, swap, load, uptime, the warmest sensor and one file system. Mount `/proc:/host/proc:ro` and `/sys:/host/sys:ro` and it reads the machine; without them it reads the container and says so on the card instead of showing you the wrong numbers quietly.
 - **A status page of your own.** Every card with a reachability check in one list, with its latency, its availability bars and its uptime, and a card of the notices HexDeck has sent. No second service to run for it.
@@ -203,50 +199,62 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 Adapters that have not been confirmed against a live instance yet carry a *beta* badge in the interface. If one misbehaves, please open an issue with the service's version.
 
-## Everything this fork adds
+## What this fork changes
 
-HexDeck was forked from nexdeck 0.15.0 and takes upstream's 0.16.1 TrueNAS work
-over. Everything below is this fork's own; each item is written out in full in
-[NOTICE.md](NOTICE.md), and every release in [CHANGELOG.md](CHANGELOG.md).
+Forked from nexdeck 0.15.0; upstream's 0.16.1 TrueNAS work is taken over. Item by
+item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.md).
 
-**Nine integrations of its own.** AMP (CubeCoders), Kubernetes,
-OpenWrt, UrBackup, Elasticsearch and OpenSearch, Shelly, Steam, Minecraft, and your
-public address. All nine carry a *beta* badge until each has been seen against a
-live instance.
+### Integrations added
 
-**Four integrations reworked.** TrueNAS speaks the current JSON-RPC API and makes
-no call to the deprecated REST one where the current exists, with live processor
-and memory use over `reporting.realtime`; that work was done here first and sent
-upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9). GitHub reads
-issues, pull requests with their review state, workflow runs and milestones, with
-ETag caching and the rate limit honoured. YouTube gained a card for the channels an
-account follows. What's Up Docker, Cup and Watchtower gained an `updates()` hook
-that feeds one merged card.
+| Service | The cards read |
+| --- | --- |
+| AMP (CubeCoders) | Instances across every target, one server's CPU, memory and players. Start, stop, restart |
+| Kubernetes | Nodes, pods that are not running, deployments short of replicas, usage via metrics-server |
+| OpenWrt | Load, memory, uptime, WAN address, stations per radio |
+| UrBackup | Last backup per client, who has fallen behind, storage used. Start a backup |
+| Elasticsearch, OpenSearch | Cluster colour, shards, indices by size and health |
+| Shelly | Power now, energy counter, temperature. Switch a relay |
+| Steam | State and what is being played, the last fortnight, the library |
+| Minecraft | Players, slots, version, message of the day. Java and Bedrock |
+| Public address | The address the line shows to the world, and when it changed |
 
-**Nine cards that need no service.** A roadmap, a project and an items card for the
-projects HexDeck keeps itself; a notepad typed into on the board; a to-do list kept
-on the server; a status page of every reachability check; the notices HexDeck has
-sent; one list of everything with a newer version; and a host card that reads
-`/proc` and `/sys` directly.
+All nine are *beta* until seen against a live instance.
 
-**The board.** Columns (12, 24 or 36), width and fit-to-screen per board. Several
-cards selected and moved together, a tidy-up button, four preset sizes on every
-card, Ctrl+Z for the arrangement, card menus drawn through a portal so they are not
-cut off, and cards moved to another page or another board. Five board templates,
-four bundled themes with import and export as JSON, and a history kept behind every
-headline number whether the adapter declared a metric or not.
+### Integrations reworked
 
-**Running it.** No sign-in on the networks you trust, a password reset from the
-shell, *Leave demo mode*, and an import that reads Homepage's and Homarr's own files
-into connections and cards. Where a card says so, everyone who may see the board may
-tick a to-do item or write in a notepad, and nothing else. Recurring maintenance
-items announce themselves once a day through the notification channels. A logo that
-the icon collections carry only as a PNG is served anyway, instead of drawing a grey
-box.
+| Service | Change |
+| --- | --- |
+| TrueNAS | The current JSON-RPC API, no call to the deprecated REST one where it exists; live processor and memory use. Contributed upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9) |
+| GitHub | Issues, pull requests with review state, workflow runs and milestones, cached with ETags |
+| YouTube | A card for the channels an account follows |
+| What's Up Docker, Cup, Watchtower | An `updates()` hook that feeds one merged updates card |
 
-**Look and language.** HexDeck's own look as a theme layer: hexagons, opaque panels,
-a tessellation behind the board, its own mark and icons. Italian throughout, next to
-English and German.
+### Cards that need no service
+
+Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Updates · Host
+
+### The board
+
+| | |
+| --- | --- |
+| Layout | 12, 24 or 36 columns per board, chosen width, rows that fit the screen |
+| Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved to another page or board |
+| Starting points | Five board templates, four bundled themes, themes as JSON |
+| Numbers | History behind every headline number, declared metric or not |
+
+### Operating
+
+| | |
+| --- | --- |
+| Sign-in | No password on the networks you trust; a reset from the shell |
+| Migrating | Import from Homepage and Homarr; leave demo mode |
+| Sharing | Where a card allows it, viewers tick a to-do or write a notepad, and nothing else |
+| Upkeep | Recurring maintenance items, announced once a day through the notification channels |
+
+### Look and language
+
+HexDeck's own theme layer: hexagons, opaque panels, its own mark and icons. Italian
+throughout, next to English and German.
 
 ## Documentation
 
