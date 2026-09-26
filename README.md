@@ -210,19 +210,14 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 
 ### Integrations added
 
-| Service | The cards read |
-| --- | --- |
-| AMP (CubeCoders) | Instances across every target, one server's CPU, memory and players. Start, stop, restart |
-| Kubernetes | Nodes, pods that are not running, deployments short of replicas, usage via metrics-server |
-| OpenWrt | Load, memory, uptime, WAN address, stations per radio |
-| UrBackup | Last backup per client, who has fallen behind, storage used. Start a backup |
-| Elasticsearch, OpenSearch | Cluster colour, shards, indices by size and health |
-| Shelly | Power now, energy counter, temperature. Switch a relay |
-| Steam | State and what is being played, the last fortnight, the library |
-| Minecraft | Players, slots, version, message of the day. Java and Bedrock |
-| Public address | The address the line shows to the world, and when it changed |
+| | | |
+| :--: | :--: | :--: |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/minecraft.svg" width="26" height="26" alt=""><br>**Minecraft**<br><sub>Players, slots, version, MOTD.<br>Java and Bedrock, no plugin</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/amp.png" width="26" height="26" alt=""><br>**AMP**<br><sub>Game server instances.<br>Start, stop, restart</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/steam.svg" width="26" height="26" alt=""><br>**Steam**<br><sub>What is being played,<br>the fortnight, the library</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kubernetes.svg" width="26" height="26" alt=""><br>**Kubernetes**<br><sub>Nodes, pods, deployments.<br>Usage via metrics-server</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/openwrt.svg" width="26" height="26" alt=""><br>**OpenWrt**<br><sub>Load, memory, WAN,<br>stations per radio</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/elasticsearch.svg" width="26" height="26" alt=""><br>**Elasticsearch**<br><sub>Cluster colour, shards,<br>indices. Also OpenSearch</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/urbackup.png" width="26" height="26" alt=""><br>**UrBackup**<br><sub>Last backup per client,<br>who has fallen behind</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/shelly.svg" width="26" height="26" alt=""><br>**Shelly**<br><sub>Power, energy, temperature.<br>Switch a relay</sub> | <img src="docs/icons/public-address.svg" width="26" height="26" alt=""><br>**Public address**<br><sub>The address your line shows,<br>and when it changed</sub> |
 
-All nine are *beta* until seen against a live instance.
+All nine are *beta* until each has been seen against a live instance. Every card they
+offer is in [docs/adapters.md](docs/adapters.md).
 
 ### Integrations reworked
 
