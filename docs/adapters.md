@@ -120,7 +120,7 @@ that one of thirty-one renderers draws.
 | evcc | energy, charging | | none; the state is readable without a password |
 | BookOrbit | reading now, recently added, library | | user and password; BookOrbit has no API keys and allows five sign-ins a minute, so the token is kept |
 | Ghostfolio | portfolio, holdings | | security token of the account from Settings > Access; it is exchanged for a JWT that lasts 180 days |
-| Homebox | inventory, warranties | | API key from Profile > API Keys; Homebox shows it only once |
+| Homebox | inventory, warranties | | API key from Profile > API Keys, on Homebox 0.26 and later; Homebox shows it only once. On 0.25 and older, which has no API keys, a user name and password. The item export is at /entities/export from 0.26 and /items/export before it, and whichever answers is remembered |
 | PhotoPrism | photo library, recently added | start indexing | app password from Settings > Account > Apps and Devices; a client access token cannot list photos |
 | Tandoor Recipes | meal plan, shopping list | tick an entry off | API token from Settings > API; the scope read is enough to look, ticking off needs read write |
 | Wallos | next payments, subscription costs | | API key from the profile; it goes in the body of a POST, never in the address |

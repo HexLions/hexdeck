@@ -1419,7 +1419,10 @@
     "How many servers are up, and what the panel's own machine is doing.": "Quanti server sono su e cosa sta facendo la macchina del pannello.",
     "Start a server": "Avvia un server",
     "Stop a server": "Ferma un server",
-    "Restart a server": "Riavvia un server"
+    "Restart a server": "Riavvia un server",
+    "Profile > API Keys > Create API Key, on Homebox 0.26 and later. Homebox shows the key only once.": "Profilo > API Keys > Create API Key, da Homebox 0.26. Homebox mostra la chiave una volta sola.",
+    "Instead of a key, and the only way on Homebox 0.25 and older, which has no API keys.": "Al posto della chiave, e l'unica via su Homebox 0.25 e precedenti, che non ha API key.",
+    "Signs in as that account. The token is kept until shortly before it runs out.": "Accede con quell'account. Il token è tenuto fino a poco prima che scada."
   },
   "labels": {
     "Jobs": "Job",

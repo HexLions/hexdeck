@@ -137,6 +137,22 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Homebox, both generations of its API.** API keys exist from Homebox 0.26
+  onwards, so on an older installation the key field could not work at all
+  and the card only said the key was rejected. Such an installation now
+  signs in with an account instead, and the token, which the answer hands
+  over with the word Bearer already on it, is kept until shortly before it
+  runs out. The item export moved from ``/items/export`` to
+  ``/entities/export`` in the same release: both are tried and the one that
+  answers is remembered, because a 404 there is a version rather than a
+  wrong address. ``AuthFailed`` may now carry a hint of its own, so the
+  message can name the version that has what somebody is looking for. A
+  refusal also repeats what Homebox itself said, because its two sentences
+  mean different things: "authorization header or query is required" means
+  no header arrived and a proxy is eating it, while "valid authorization
+  token is required" means the key is unknown to that installation, which
+  happens when the key has expired and when ``HBOX_AUTH_API_KEY_PEPPER``
+  has been changed, since every key is stored as an HMAC under it.
 - **AMP (CubeCoders), controller and single server alike.** Every call is
   ``POST /API/<Module>/<Method>`` with the session in the body. The
   instances of every target are flattened into one list; one server's

@@ -787,8 +787,12 @@ class AdapterError(Exception):
 
 
 class AuthFailed(AdapterError):
-    def __init__(self, message: str = "The service rejected the credentials.") -> None:
-        super().__init__(message, code="auth_failed", hint="Check the API key or the password.")
+    #: ⚠️ The hint can be replaced. "Check the API key or the password" is right
+    #: until the service has no API keys at all in the version somebody is
+    #: running, and then it sends them looking for a setting that is not there.
+    def __init__(self, message: str = "The service rejected the credentials.",
+                 hint: str = "Check the API key or the password.") -> None:
+        super().__init__(message, code="auth_failed", hint=hint)
 
 
 class Unreachable(AdapterError):

@@ -120,3 +120,141 @@ async def test_the_connection_test(ctx: Context) -> None:
         "latest": {"version": "v0.26.3", "date": "2026-06-14 01:57:51 +0000 UTC"}, "demo": False, "allowRegistration": True}))
     respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
     assert await get_adapter("homebox").test(CONFIG, ctx) == "Homebox v0.26.2 answers with 6 items."
+
+
+# -- the older generation of the API -------------------------------------------
+#
+# Homebox renamed its items to entities in 0.26 and gained API keys in the same
+# release. Everything below is about an installation that has neither.
+
+OLD = {"url": HB, "username": "you@example.com", "password": "secret"}
+
+
+def _sign_in(token: str = "Bearer made-up-token") -> respx.Route:
+    return respx.post(f"{HB}/api/v1/users/login").mock(
+        return_value=httpx.Response(200, json={"token": token, "expiresAt": "2026-09-18T21:32:44Z",
+                                               "attachmentToken": "made-up-attachment"}))
+
+
+@respx.mock
+async def test_an_older_homebox_is_read_through_its_own_export(ctx: Context) -> None:
+    """⚠️ /entities/export is a 404 before 0.26; /items/export is the same CSV."""
+    _sign_in()
+    respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(404, json={"error": "not found"}))
+    items = respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=EXPORT))
+    data = await get_adapter("homebox").fetch("warranties", OLD, {"days": 60}, ctx)
+    assert items.call_count == 1
+    assert [item["title"] for item in data.items] == ["Wifi Router", "Cordless Drill"]
+
+
+@respx.mock
+async def test_the_address_that_answered_is_not_looked_for_again(ctx: Context) -> None:
+    _sign_in()
+    entities = respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(404))
+    respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=EXPORT))
+    await get_adapter("homebox").fetch("warranties", OLD, {}, ctx)
+    await get_adapter("homebox").fetch("warranties", OLD, {}, ctx)
+    assert entities.call_count == 1, "the version does not change between two refreshes"
+
+
+@respx.mock
+async def test_the_token_is_taken_as_it_comes_and_kept(ctx: Context) -> None:
+    """⚠️ The sign-in answers "Bearer <token>" already. A second Bearer is a 401."""
+    login = _sign_in()
+    statistics = respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
+    respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    await get_adapter("homebox").fetch("inventory", OLD, {}, ctx)
+    assert statistics.calls[0].request.headers["authorization"] == "Bearer made-up-token"
+    assert login.calls[0].request.headers["content-type"] == "application/json"
+    await get_adapter("homebox").fetch("inventory", OLD, {}, ctx)
+    assert login.call_count == 1, "one sign-in serves every card"
+
+
+@respx.mock
+async def test_a_token_that_has_run_out_is_taken_up_again(ctx: Context) -> None:
+    login = _sign_in()
+    answers = [httpx.Response(401, json={"error": "valid authorization token is required"}),
+               httpx.Response(200, json=STATISTICS)]
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(side_effect=answers)
+    respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    data = await get_adapter("homebox").fetch("inventory", OLD, {}, ctx)
+    assert data.primary["value"] == 6 and login.call_count == 2, "it signed in again rather than going blank"
+
+
+@respx.mock
+async def test_a_wrong_password_says_so_and_names_the_other_way_in(ctx: Context) -> None:
+    respx.post(f"{HB}/api/v1/users/login").mock(return_value=httpx.Response(401, json={"error": "unauthorized"}))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", OLD, {}, ctx)
+    assert "API key" in failure.value.hint
+
+
+@respx.mock
+async def test_a_rejected_key_names_the_version_that_has_keys(ctx: Context) -> None:
+    """The error somebody on 0.25 sees, with what to do about it."""
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(401, json={"error": "unauthorized"}))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", CONFIG, {}, ctx)
+    assert "0.26" in failure.value.hint and "user name and password" in failure.value.hint
+
+
+@respx.mock
+async def test_a_key_pasted_with_the_word_bearer_is_not_given_a_second_one(ctx: Context) -> None:
+    statistics = respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
+    respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": "Bearer hb_made_up_key"}, {}, ctx)
+    assert statistics.calls[0].request.headers["authorization"] == "Bearer hb_made_up_key"
+
+
+@respx.mock
+async def test_a_connection_with_no_credentials_at_all_says_which_two_there_are(ctx: Context) -> None:
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("homebox").fetch("inventory", {"url": HB}, {}, ctx)
+    assert failure.value.code == "no_credentials"
+    assert not respx.calls, "nothing was sent"
+
+
+# -- why Homebox refused --------------------------------------------------------
+#
+# The two refusals of v0.26.2 mean different things, and repeating the one that
+# came back is the difference between looking at a proxy and looking at a key.
+
+KEY = "hb_" + "x" * 43
+
+
+@respx.mock
+async def test_a_header_that_never_arrived_points_at_the_proxy_not_the_key(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(
+        401, json={"error": "authorization header or query is required"}))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": KEY}, {}, ctx)
+    assert "authorization header" in str(failure.value), "Homebox's own words are repeated"
+    assert "proxy" in failure.value.hint and "dropping Authorization" in failure.value.hint
+
+
+@respx.mock
+async def test_a_key_homebox_does_not_know_names_expiry_and_the_pepper(ctx: Context) -> None:
+    """Both of these invalidate a key that was right when it was made."""
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(
+        401, json={"error": "valid authorization token is required"}))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": KEY}, {}, ctx)
+    assert "valid authorization token" in str(failure.value)
+    assert "expired" in failure.value.hint and "HBOX_AUTH_API_KEY_PEPPER" in failure.value.hint
+
+
+@respx.mock
+async def test_something_that_is_not_a_key_at_all_is_said_to_be_one(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(
+        401, json={"error": "valid authorization token is required"}))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": "eyJhbGciOi-not-a-homebox-key"}, {}, ctx)
+    assert "43 more characters" in failure.value.hint, "a truncated paste is the likeliest cause"
+
+
+@respx.mock
+async def test_a_refusal_without_json_still_says_something(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(403, text="<html>Forbidden</html>"))
+    with pytest.raises(AuthFailed) as failure:
+        await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": KEY}, {}, ctx)
+    assert "HTTP 403" in str(failure.value)

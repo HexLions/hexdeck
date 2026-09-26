@@ -1419,7 +1419,10 @@
     "How many servers are up, and what the panel's own machine is doing.": "Wie viele Server laufen und was die Maschine des Panels selbst tut.",
     "Start a server": "Server starten",
     "Stop a server": "Server stoppen",
-    "Restart a server": "Server neu starten"
+    "Restart a server": "Server neu starten",
+    "Profile > API Keys > Create API Key, on Homebox 0.26 and later. Homebox shows the key only once.": "Profil > API Keys > Create API Key, ab Homebox 0.26. Homebox zeigt den Schlüssel nur einmal.",
+    "Instead of a key, and the only way on Homebox 0.25 and older, which has no API keys.": "Statt eines Schlüssels, und der einzige Weg bei Homebox 0.25 und älter, das keine API-Schlüssel hat.",
+    "Signs in as that account. The token is kept until shortly before it runs out.": "Meldet sich als dieses Konto an. Das Token wird bis kurz vor seinem Ablauf behalten."
   },
   "labels": {
     "Jobs": "Jobs",

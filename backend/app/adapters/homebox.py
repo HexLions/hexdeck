@@ -6,10 +6,33 @@ Measured against Homebox v0.26.2 (ghcr.io/sysadminsmedia/homebox) on
 lifetime warranty, one without, and four batteries at 5.00 each.
 
 ⚠️ An API key from Profile > API Keys works as ``Authorization: Bearer <key>``
-and without the word Bearer as well. A missing one gets 401 "authorization
-header or query is required", a made-up one 401 "valid authorization token is
-required". (The image refuses to start without ``HBOX_AUTH_API_KEY_PEPPER``,
-which is what those keys are signed with.)
+and without the word Bearer as well. The two refusals mean different things, and
+which one came back is the whole diagnosis, so the card repeats it:
+
+* "authorization header or query is required" means no header arrived. The key is
+  not the problem; something between HexDeck and Homebox dropped the header.
+* "valid authorization token is required" means the header arrived and the key is
+  not one Homebox knows. Read from its source (v0.26.2,
+  ``app/api/middleware.go`` and ``internal/data/repo/repo_api_keys.go``), a key is
+  looked up as ``HMAC-SHA256(pepper, key)`` and refused when it has expired or
+  when the hash is not in the table. Since rotating
+  ``HBOX_AUTH_API_KEY_PEPPER`` changes every hash, a stack rebuilt with a new
+  pepper invalidates every key ever issued, including the one in your hand.
+
+⚠️ A key made by Homebox is ``hb_`` and 43 more characters. Anything else in that
+field is a session token at best, and a truncated paste at worst; the card says so
+rather than leaving somebody to count characters.
+
+⚠️ API keys exist from Homebox 0.26 onwards and not before: ``/users/self/api-keys``
+is not a route on 0.25 and older, so whatever is put in the key field there is refused
+with 401. Those installations sign in with an account instead (``POST /users/login``,
+which answers a token that already carries the word Bearer), and the token is kept
+until shortly before it runs out.
+
+⚠️ The items were renamed to entities in 0.26, and so was their export:
+``/entities/export`` from 0.26, ``/items/export`` before it. Whichever answers is
+remembered, because a 404 there is a version and not a wrong address, and "check the
+URL" would send somebody after the wrong thing entirely.
 
 ⚠️ Items are "entities" in this version, and the summary the list hands out
 has no warranty at all. The CSV export has it for every item in one request,
@@ -29,6 +52,7 @@ from __future__ import annotations
 
 import csv
 import io
+import time
 from datetime import UTC, date, datetime, timedelta
 from typing import Any
 
@@ -45,6 +69,26 @@ from .base import (
 
 #: How long an ended warranty stays on the card.
 ENDED_DAYS = 30
+#: What every key Homebox issues begins with, and 43 characters follow it.
+KEY_PREFIX = "hb_"
+#: Where the CSV of every item lives, by the name this version gives it.
+EXPORTS = ("/entities/export", "/items/export")
+#: How long a sign-in token is kept. ``stayLoggedIn`` buys a week; stopping short of
+#: it costs one request and never uses a token that has just run out.
+SIGN_IN_SECONDS = 6 * 86400
+
+
+def _said(response: Any) -> str:
+    """Homebox's own words for a refusal, which name the cause precisely."""
+    try:
+        answer = response.json()
+    except ValueError:
+        return f"HTTP {response.status_code}"
+    if isinstance(answer, dict):
+        for key in ("error", "message", "detail"):
+            if answer.get(key):
+                return " ".join(str(answer[key]).split())[:120]
+    return f"HTTP {response.status_code}"
 
 
 def _warranty_rows(text: str) -> list[dict[str, str]]:
@@ -66,8 +110,12 @@ class HomeboxAdapter(Adapter):
     docs_url = "https://homebox.software/"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="http://homebox:7745"),
-        Field("api_key", "API key", type="password", secret=True, required=True,
-              help="Profile > API Keys > Create API Key. Homebox shows the key only once."),
+        Field("api_key", "API key", type="password", secret=True,
+              help="Profile > API Keys > Create API Key, on Homebox 0.26 and later. Homebox shows the key only once."),
+        Field("username", "User name", placeholder="you@example.com",
+              help="Instead of a key, and the only way on Homebox 0.25 and older, which has no API keys."),
+        Field("password", "Password", type="password", secret=True,
+              help="Signs in as that account. The token is kept until shortly before it runs out."),
         Field("insecure", "Ignore TLS errors", type="bool", default=False),
     )
     widgets = (
@@ -79,20 +127,114 @@ class HomeboxAdapter(Adapter):
                             Field("limit", "Entries", type="number", default=8))),
     )
 
-    def _headers(self, config: dict[str, Any]) -> dict[str, str]:
-        return {"Authorization": f"Bearer {config.get('api_key') or ''}"}
+    @staticmethod
+    def _why(config: dict[str, Any], response: Any) -> str:
+        """What to look at, decided by what Homebox said and what was given."""
+        said = _said(response).lower()
+        if "header" in said:
+            return ("The header never reached Homebox. A proxy in front of it is dropping Authorization; "
+                    "point the connection at Homebox directly to tell the two apart.")
+        key = str(config.get("api_key") or "").strip()
+        if key and not key.startswith(KEY_PREFIX) and not key.lower().startswith("bearer "):
+            return (f"A key made by Homebox reads {KEY_PREFIX} and 43 more characters. This one does not, "
+                    "so it is probably not the key, or not all of it.")
+        return ("The key is not one this Homebox knows. Either it has expired, or it was issued before "
+                "HBOX_AUTH_API_KEY_PEPPER was changed, which invalidates every key at once. Make a new key "
+                "under Profile > API Keys. Before 0.26 there are no API keys at all: use a user name and "
+                "password instead.")
 
-    async def _get(self, config: dict[str, Any], ctx: Context, path: str, cache: float = 60) -> Any:
+    @staticmethod
+    def _key_header(config: dict[str, Any]) -> str:
+        """An API key as the header Homebox wants it.
+
+        ⚠️ A key pasted with the word Bearer in front of it is not given a second
+        one; two of them are a 401 and nothing says why.
+        """
+        key = str(config.get("api_key") or "").strip()
+        return key if key.lower().startswith("bearer ") else f"Bearer {key}"
+
+    async def _sign_in(self, config: dict[str, Any], ctx: Context) -> str:
+        """The token of an account, for a Homebox that has no API keys."""
         response = await ctx.request(
-            "GET", f"{base_url(config)}/api/v1{path}", headers=self._headers(config),
+            "POST", f"{base_url(config)}/api/v1/users/login",
+            # ⚠️ Homebox picks the decoder by Content-Type and refuses what it does
+            # not recognise, so the body has to be JSON.
+            json_body={"username": str(config.get("username") or ""),
+                       "password": str(config.get("password") or ""), "stayLoggedIn": True},
+            verify=not config.get("insecure"), auth_errors=False,
+        )
+        if response.status_code in (401, 403):
+            raise AuthFailed("Homebox refused this user name and password.",
+                             hint="A Homebox with local sign-in switched off cannot be used this way; "
+                                  "on 0.26 and later use an API key instead.")
+        if response.status_code >= 400:
+            raise AdapterError(f"Homebox answered with HTTP {response.status_code} to the sign-in.", code="http_error")
+        try:
+            answer = response.json()
+        except ValueError as failure:
+            raise AdapterError("The sign-in did not answer with JSON.", code="not_json",
+                               hint="The URL probably points at something else than Homebox.") from failure
+        # ⚠️ The answer already reads "Bearer <token>". Prefixing it again is a 401.
+        token = str((answer or {}).get("token") or "")
+        if not token:
+            raise AuthFailed("Homebox answered the sign-in without a token.")
+        return token
+
+    async def _authorization(self, config: dict[str, Any], ctx: Context) -> str:
+        """Whichever of the two ways in this connection was given."""
+        if config.get("api_key"):
+            return self._key_header(config)
+        if not config.get("username"):
+            raise AdapterError("This connection has no way in.", code="no_credentials",
+                               hint="An API key on Homebox 0.26 and later, or a user name and password on any version.")
+        kept = ctx.cache.get("homebox:token")
+        if kept and kept[0] > time.monotonic():
+            return str(kept[1])
+        token = await self._sign_in(config, ctx)
+        ctx.cache["homebox:token"] = (time.monotonic() + SIGN_IN_SECONDS, token)
+        return token
+
+    async def _get(self, config: dict[str, Any], ctx: Context, path: str, cache: float = 60,
+                   again: bool = True) -> Any:
+        response = await ctx.request(
+            "GET", f"{base_url(config)}/api/v1{path}",
+            headers={"Authorization": await self._authorization(config, ctx)},
             verify=not config.get("insecure"), cache_seconds=cache, auth_errors=False,
         )
         if response.status_code in (401, 403):
-            raise AuthFailed("Homebox rejected the API key.")
+            if config.get("api_key"):
+                raise AuthFailed(f"Homebox rejected the API key: {_said(response)}",
+                                 hint=self._why(config, response))
+            # A token that has run out looks exactly like a wrong one, so the only
+            # way to tell them apart is to sign in again and try once more.
+            if again:
+                ctx.cache.pop("homebox:token", None)
+                # ⚠️ Without cache=0 the retry reads the 401 back out of the
+                # response cache, because a fresh token can be the same string.
+                return await self._get(config, ctx, path, 0, again=False)
+            raise AuthFailed(f"Homebox rejected these credentials: {_said(response)}",
+                             hint="The user name is the e-mail address the account signs in with. A Homebox with "
+                                  "local sign-in switched off refuses this way in altogether.")
         if response.status_code >= 400:
             raise AdapterError(f"Homebox answered with HTTP {response.status_code}.", code="http_error",
                                hint="Check the URL; it is the address of Homebox itself, without /api.")
         return response
+
+    async def _export(self, config: dict[str, Any], ctx: Context) -> Any:
+        """The CSV of every item, from the address this version keeps it at."""
+        known = str(ctx.cache.get("homebox:export") or "")
+        for path in ([known] if known in EXPORTS else []) + [one for one in EXPORTS if one != known]:
+            try:
+                answer = await self._get(config, ctx, path, cache=600)
+            except AdapterError as failure:
+                if failure.code != "http_error" or "404" not in str(failure):
+                    raise
+                continue
+            ctx.cache["homebox:export"] = path
+            return answer
+        raise AdapterError("This Homebox offers no export of its items.", code="no_export",
+                           hint="The warranty card reads the CSV export, at /entities/export from 0.26 "
+                                "and /items/export before it.")
 
     async def _json(self, config: dict[str, Any], ctx: Context, path: str, cache: float = 60) -> dict[str, Any]:
         response = await self._get(config, ctx, path, cache)
@@ -113,7 +255,7 @@ class HomeboxAdapter(Adapter):
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         if widget_kind == "warranties":
-            export = await self._get(config, ctx, "/entities/export", cache=600)
+            export = await self._export(config, ctx)
             return self._warranties(_warranty_rows(export.text), datetime.now(UTC).date(), base_url(config), options)
         statistics = await self._json(config, ctx, "/groups/statistics")
         group = await self._json(config, ctx, "/groups", cache=3600)
