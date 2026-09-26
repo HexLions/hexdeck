@@ -137,6 +137,11 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Minecraft, by the ping its own client uses.** Both editions: the Java
+  server list ping over TCP, framed with VarInts written out by hand, and
+  Bedrock's unconnected RakNet ping over UDP. Players, slots, version and
+  the message of the day flattened out of the chat components it arrives
+  in. No credential exists in either protocol, so none is asked for.
 - **A host card that reads /proc itself.** Processors, memory, swap, load,
   uptime, the warmest sensor and one file system, out of the files the
   kernel writes, with no library and no agent. The processor share is the

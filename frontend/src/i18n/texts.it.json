@@ -1327,7 +1327,18 @@
     "File system": "File system",
     "Show the temperature": "Mostra la temperatura",
     "The path whose usage is shown. Inside a container this is the container's own file system unless the volume is mounted.": "Il percorso di cui si mostra l'occupazione. Dentro un container è il file system del container stesso, a meno che il volume sia montato.",
-    "The warmest sensor the machine offers. Needs /sys, which a container has only when it is mounted.": "Il sensore più caldo che la macchina espone. Serve /sys, che un container ha solo se lo monti."
+    "The warmest sensor the machine offers. Needs /sys, which a container has only when it is mounted.": "Il sensore più caldo che la macchina espone. Serve /sys, che un container ha solo se lo monti.",
+    "Who is on the server, its message of the day, its version and how fast it answers.": "Chi è sul server, il messaggio del giorno, la versione e quanto è veloce a rispondere.",
+    "The name or address players use. A server behind a proxy routes by it, so use the same one.": "Il nome o l'indirizzo che usano i giocatori. Un server dietro un proxy instrada in base a quello, quindi usa lo stesso.",
+    "25565 for Java, 19132 for Bedrock.": "25565 per Java, 19132 per Bedrock.",
+    "Edition": "Edizione",
+    "Java": "Java",
+    "Bedrock": "Bedrock",
+    "Java answers over TCP, Bedrock over UDP. They speak different pings, so this has to be right.": "Java risponde su TCP, Bedrock su UDP. Parlano ping diversi, quindi questo deve essere giusto.",
+    "Server": "Server",
+    "Players online, the message of the day, the version and the round trip.": "Giocatori online, messaggio del giorno, versione e tempo di risposta.",
+    "Players": "Giocatori",
+    "The names the server hands out, which is a sample of at most twelve.": "I nomi che il server espone: un campione di dodici al massimo."
   },
   "labels": {
     "Jobs": "Job",
@@ -2013,6 +2024,11 @@
     "These are the container's numbers. Mount /proc:/host/proc:ro and /sys:/host/sys:ro to read the machine.": "Questi sono i numeri del container. Monta /proc:/host/proc:ro e /sys:/host/sys:ro per leggere la macchina.",
     "cores": "core",
     "free": "liberi",
-    "Swap": "Swap"
+    "Swap": "Swap",
+    "Players": "Giocatori",
+    "Slots": "Posti",
+    "Message": "Messaggio",
+    "The server hides its player list.": "Il server non mostra la lista dei giocatori.",
+    "Nobody is online.": "Nessuno è online."
   }
 }

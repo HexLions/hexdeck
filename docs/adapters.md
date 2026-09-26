@@ -125,6 +125,7 @@ that one of thirty-one renderers draws.
 | Tandoor Recipes | meal plan, shopping list | tick an entry off | API token from Settings > API; the scope read is enough to look, ticking off needs read write |
 | Wallos | next payments, subscription costs | | API key from the profile; it goes in the body of a POST, never in the address |
 | Weather (Open-Meteo), RSS feeds, Calendar, Basics | current, headlines, upcoming, clock, notes, bookmarks, iframe, app tile, host, updates, status, notices, to-do | | none; the host card reads /proc, and the machine's own when /proc and /sys are mounted under /host |
+| Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |
 | Miniflux | unread, failing feeds, feed reader | | API key from Settings > API Keys |
 | Karakeep | recent bookmarks, reading list | | API key from Settings > API Keys |
