@@ -87,7 +87,7 @@ async def fetch_icon(name: str, ext: str) -> tuple[bytes, str] | None:
     if cached.exists() and time.time() - cached.stat().st_mtime < max_age:
         return cached.read_bytes(), _content_type(ext)
     if _negative.get(key, 0) > time.monotonic():
-        return None
+        return await _png_instead(name, ext)
     client = http_client()
     for _source, pattern, _tree in SOURCES:
         url = pattern.format(ext=ext, name=name)
@@ -99,7 +99,21 @@ async def fetch_icon(name: str, ext: str) -> tuple[bytes, str] | None:
             cached.write_bytes(response.content)
             return response.content, _content_type(ext)
     _remember_miss(key)
-    return None
+    return await _png_instead(name, ext)
+
+
+async def _png_instead(name: str, ext: str) -> tuple[bytes, str] | None:
+    """A logo both collections carry only as a PNG, for a browser asking for SVG.
+
+    ⚠️ The interface builds every logo address as ``<name>.svg``, and a service
+    that exists in the collections as a PNG only (UrBackup, AMP, and a few
+    dozen others) therefore drew the grey box that means "no such logo". The
+    answer carries its own content type, so the browser neither knows nor cares
+    that the address said svg.
+    """
+    if ext != "svg":
+        return None
+    return await fetch_icon(name, "png")
 
 
 #: How many names the "we looked and there is none" list may hold.

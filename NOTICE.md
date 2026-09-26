@@ -137,6 +137,19 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **AMP (CubeCoders), controller and single server alike.** Every call is
+  ``POST /API/<Module>/<Method>`` with the session in the body. The
+  instances of every target are flattened into one list; one server's
+  numbers come through a login the controller proxies to it, at
+  ``/API/ADSModule/Servers/<id>/API/...``. An installation without a
+  controller has no ADSModule and is itself the game server, and that case
+  falls back to its own status rather than showing nothing. AMP reports a
+  failure as a 200 with a stack trace in it, which read as data looks like
+  a server with no metrics, so it is recognised and raised.
+- **A logo the collections carry only as a PNG is served anyway.** Every
+  logo address the interface builds ends in ``.svg``, so a PNG-only service
+  drew the grey box that means "no such logo". The proxy now falls back to
+  the PNG and says what it really is in the answer.
 - **Kubernetes, read-only, with a view role and nothing more.** Nodes,
   pods, deployments, the version, and the node metrics when metrics-server
   is there; when it is not, the usage rows are dropped and the card says
