@@ -1346,7 +1346,16 @@
     "Online, away or in a game, with the hours of the last two weeks and the size of the library.": "Online, abwesend oder im Spiel, mit den Stunden der letzten zwei Wochen und der Größe der Sammlung.",
     "Recently played": "Zuletzt gespielt",
     "The games of the last two weeks, with the hours in them.": "Die Spiele der letzten zwei Wochen, mit den Stunden darin.",
-    "How many games the account owns and how many it has ever started.": "Wie viele Spiele das Konto besitzt und wie viele es je gestartet hat."
+    "How many games the account owns and how many it has ever started.": "Wie viele Spiele das Konto besitzt und wie viele es je gestartet hat.",
+    "What a Shelly relay is doing, what it draws right now, and a button to switch it.": "Was ein Shelly-Relais tut, was es gerade zieht, und ein Knopf zum Schalten.",
+    "The device on your own network. Shelly's cloud is not used and no account is needed.": "Das Gerät im eigenen Netz. Shellys Cloud wird nicht benutzt, ein Konto braucht es nicht.",
+    "Only for a Gen 1 device with authentication on; its user name is always admin. Gen 2 and later want digest, which is not supported yet.": "Nur für ein Gen-1-Gerät mit Anmeldung; sein Benutzername ist immer admin. Gen 2 und neuer wollen Digest, das noch nicht unterstützt wird.",
+    "Power now, the energy counter, the temperature and a button to switch the relay.": "Leistung jetzt, der Zähler, die Temperatur und ein Knopf für das Relais.",
+    "0 for a single relay. A Shelly 2.5 or Pro 4PM counts its outputs from 0.": "0 für ein einzelnes Relais. Ein Shelly 2.5 oder Pro 4PM zählt seine Ausgänge ab 0.",
+    "Offer the switch": "Schalter anbieten",
+    "Off makes the card read-only, which is what a card on a wall tablet usually wants.": "Aus macht die Karte nur lesbar, was eine Karte auf einem Wandtablet meist will.",
+    "Outputs": "Ausgänge",
+    "Every output of the device with its state and what it draws, each with its own button.": "Jeder Ausgang des Geräts mit seinem Zustand und seiner Leistung, jeder mit eigenem Knopf."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2040,6 +2049,9 @@
     "Nobody is online.": "Niemand ist online.",
     "Two weeks": "Zwei Wochen",
     "Started": "Gestartet",
-    "Hours": "Stunden"
+    "Hours": "Stunden",
+    "Relay": "Relais",
+    "Switch on": "Einschalten",
+    "Switch off": "Ausschalten"
   }
 }

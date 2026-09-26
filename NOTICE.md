@@ -137,6 +137,13 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Shelly, both generations, on the local network.** ``/shelly`` decides
+  which dialect a device speaks and the answer is kept for an hour. Gen 1
+  counts energy in watt-minutes and Gen 2 in watt-hours, so the same
+  device reads the same on either; a card that got that wrong would be
+  sixty times out. One button that does the opposite of what the relay is
+  doing, a read-only setting for a wall tablet, and clamps with nothing to
+  switch get no button at all.
 - **Steam, read-only and without artwork.** Three calls of the Web API:
   who the player is, what they played in the last fortnight, and how large
   the library is. A custom profile name is resolved once and kept for a

@@ -1346,7 +1346,16 @@
     "Online, away or in a game, with the hours of the last two weeks and the size of the library.": "Online, assente o in gioco, con le ore delle ultime due settimane e la dimensione della libreria.",
     "Recently played": "Giocati di recente",
     "The games of the last two weeks, with the hours in them.": "I giochi delle ultime due settimane, con le ore passate dentro.",
-    "How many games the account owns and how many it has ever started.": "Quanti giochi possiede l'account e quanti ne ha mai avviati."
+    "How many games the account owns and how many it has ever started.": "Quanti giochi possiede l'account e quanti ne ha mai avviati.",
+    "What a Shelly relay is doing, what it draws right now, and a button to switch it.": "Cosa sta facendo un relè Shelly, quanto assorbe adesso e un pulsante per commutarlo.",
+    "The device on your own network. Shelly's cloud is not used and no account is needed.": "Il dispositivo sulla tua rete. Il cloud di Shelly non viene usato e non serve nessun account.",
+    "Only for a Gen 1 device with authentication on; its user name is always admin. Gen 2 and later want digest, which is not supported yet.": "Solo per un dispositivo Gen 1 con autenticazione attiva; il suo utente è sempre admin. Gen 2 e successivi vogliono digest, non ancora supportato.",
+    "Power now, the energy counter, the temperature and a button to switch the relay.": "Potenza adesso, il contatore di energia, la temperatura e un pulsante per il relè.",
+    "0 for a single relay. A Shelly 2.5 or Pro 4PM counts its outputs from 0.": "0 per un relè singolo. Uno Shelly 2.5 o Pro 4PM conta le sue uscite da 0.",
+    "Offer the switch": "Mostra il pulsante",
+    "Off makes the card read-only, which is what a card on a wall tablet usually wants.": "Disattivato rende la card di sola lettura, che è quello che serve su un tablet a muro.",
+    "Outputs": "Uscite",
+    "Every output of the device with its state and what it draws, each with its own button.": "Ogni uscita del dispositivo con il suo stato e il suo assorbimento, ognuna col suo pulsante."
   },
   "labels": {
     "Jobs": "Job",
@@ -2040,6 +2049,9 @@
     "Nobody is online.": "Nessuno è online.",
     "Two weeks": "Due settimane",
     "Started": "Avviati",
-    "Hours": "Ore"
+    "Hours": "Ore",
+    "Relay": "Relè",
+    "Switch on": "Accendi",
+    "Switch off": "Spegni"
   }
 }
