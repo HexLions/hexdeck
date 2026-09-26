@@ -203,6 +203,51 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 Adapters that have not been confirmed against a live instance yet carry a *beta* badge in the interface. If one misbehaves, please open an issue with the service's version.
 
+## Everything this fork adds
+
+HexDeck was forked from nexdeck 0.15.0 and takes upstream's 0.16.1 TrueNAS work
+over. Everything below is this fork's own; each item is written out in full in
+[NOTICE.md](NOTICE.md), and every release in [CHANGELOG.md](CHANGELOG.md).
+
+**Nine integrations of its own.** AMP (CubeCoders), Kubernetes,
+OpenWrt, UrBackup, Elasticsearch and OpenSearch, Shelly, Steam, Minecraft, and your
+public address. All nine carry a *beta* badge until each has been seen against a
+live instance.
+
+**Four integrations reworked.** TrueNAS speaks the current JSON-RPC API and makes
+no call to the deprecated REST one where the current exists, with live processor
+and memory use over `reporting.realtime`; that work was done here first and sent
+upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9). GitHub reads
+issues, pull requests with their review state, workflow runs and milestones, with
+ETag caching and the rate limit honoured. YouTube gained a card for the channels an
+account follows. What's Up Docker, Cup and Watchtower gained an `updates()` hook
+that feeds one merged card.
+
+**Nine cards that need no service.** A roadmap, a project and an items card for the
+projects HexDeck keeps itself; a notepad typed into on the board; a to-do list kept
+on the server; a status page of every reachability check; the notices HexDeck has
+sent; one list of everything with a newer version; and a host card that reads
+`/proc` and `/sys` directly.
+
+**The board.** Columns (12, 24 or 36), width and fit-to-screen per board. Several
+cards selected and moved together, a tidy-up button, four preset sizes on every
+card, Ctrl+Z for the arrangement, card menus drawn through a portal so they are not
+cut off, and cards moved to another page or another board. Five board templates,
+four bundled themes with import and export as JSON, and a history kept behind every
+headline number whether the adapter declared a metric or not.
+
+**Running it.** No sign-in on the networks you trust, a password reset from the
+shell, *Leave demo mode*, and an import that reads Homepage's and Homarr's own files
+into connections and cards. Where a card says so, everyone who may see the board may
+tick a to-do item or write in a notepad, and nothing else. Recurring maintenance
+items announce themselves once a day through the notification channels. A logo that
+the icon collections carry only as a PNG is served anyway, instead of drawing a grey
+box.
+
+**Look and language.** HexDeck's own look as a theme layer: hexagons, opaque panels,
+a tessellation behind the board, its own mark and icons. Italian throughout, next to
+English and German.
+
 ## Documentation
 
 - [Running HexDeck: backups, restoring, updating](docs/operating.md)
