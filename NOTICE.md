@@ -137,6 +137,12 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Elasticsearch and OpenSearch, by the colour they name themselves.**
+  The health call, the index catalogue and the version, all read-only. The
+  cards pass green, yellow and red through instead of inventing a verdict,
+  and a one node cluster is told why it is yellow forever: a single node
+  cannot place a replica anywhere. An API key and basic credentials at
+  once is refused before anything is sent.
 - **Shelly, both generations, on the local network.** ``/shelly`` decides
   which dialect a device speaks and the answer is kept for an hour. Gen 1
   counts energy in watt-minutes and Gen 2 in watt-hours, so the same

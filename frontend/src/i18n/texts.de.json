@@ -1355,7 +1355,15 @@
     "Offer the switch": "Schalter anbieten",
     "Off makes the card read-only, which is what a card on a wall tablet usually wants.": "Aus macht die Karte nur lesbar, was eine Karte auf einem Wandtablet meist will.",
     "Outputs": "Ausgänge",
-    "Every output of the device with its state and what it draws, each with its own button.": "Jeder Ausgang des Geräts mit seinem Zustand und seiner Leistung, jeder mit eigenem Knopf."
+    "Every output of the device with its state and what it draws, each with its own button.": "Jeder Ausgang des Geräts mit seinem Zustand und seiner Leistung, jeder mit eigenem Knopf.",
+    "The colour of the cluster, its shards and its indices. OpenSearch answers the same calls.": "Die Farbe des Clusters, seine Shards und seine Indizes. OpenSearch antwortet auf dieselben Aufrufe.",
+    "An encoded API key, which is the narrowest way in: the cluster privileges monitor and view_index_metadata are enough.": "Ein kodierter API-Schlüssel, der schmalste Weg hinein: die Cluster-Rechte monitor und view_index_metadata reichen.",
+    "Only if you have no API key. Leave both empty for a cluster without security.": "Nur ohne API-Schlüssel. Für ein Cluster ohne Sicherheit beides leer lassen.",
+    "Elasticsearch generates its own certificate on the first start, and nothing outside the cluster trusts it.": "Elasticsearch erzeugt beim ersten Start sein eigenes Zertifikat, dem außerhalb des Clusters nichts vertraut.",
+    "The colour, the nodes, the shards that are not placed and how much is stored.": "Die Farbe, die Knoten, die nicht platzierten Shards und wie viel gespeichert ist.",
+    "Every index with its documents and its size, the unhealthy ones first.": "Jeder Index mit seinen Dokumenten und seiner Größe, die kranken zuerst.",
+    "Include system indices": "Systemindizes einschließen",
+    "The indices whose name begins with a dot, which the cluster keeps for itself.": "Die Indizes, deren Name mit einem Punkt beginnt und die das Cluster für sich behält."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2052,6 +2060,10 @@
     "Hours": "Stunden",
     "Relay": "Relais",
     "Switch on": "Einschalten",
-    "Switch off": "Ausschalten"
+    "Switch off": "Ausschalten",
+    "Shards": "Shards",
+    "Unplaced": "Nicht platziert",
+    "Moving": "In Bewegung",
+    "Stored": "Gespeichert"
   }
 }

@@ -1355,7 +1355,15 @@
     "Offer the switch": "Mostra il pulsante",
     "Off makes the card read-only, which is what a card on a wall tablet usually wants.": "Disattivato rende la card di sola lettura, che è quello che serve su un tablet a muro.",
     "Outputs": "Uscite",
-    "Every output of the device with its state and what it draws, each with its own button.": "Ogni uscita del dispositivo con il suo stato e il suo assorbimento, ognuna col suo pulsante."
+    "Every output of the device with its state and what it draws, each with its own button.": "Ogni uscita del dispositivo con il suo stato e il suo assorbimento, ognuna col suo pulsante.",
+    "The colour of the cluster, its shards and its indices. OpenSearch answers the same calls.": "Il colore del cluster, i suoi shard e i suoi indici. OpenSearch risponde alle stesse chiamate.",
+    "An encoded API key, which is the narrowest way in: the cluster privileges monitor and view_index_metadata are enough.": "Una API key codificata, la via più stretta: bastano i privilegi di cluster monitor e view_index_metadata.",
+    "Only if you have no API key. Leave both empty for a cluster without security.": "Solo se non hai una API key. Lascia entrambi vuoti per un cluster senza sicurezza.",
+    "Elasticsearch generates its own certificate on the first start, and nothing outside the cluster trusts it.": "Elasticsearch genera il proprio certificato al primo avvio, e fuori dal cluster nessuno si fida.",
+    "The colour, the nodes, the shards that are not placed and how much is stored.": "Il colore, i nodi, gli shard non collocati e quanto è archiviato.",
+    "Every index with its documents and its size, the unhealthy ones first.": "Ogni indice con i suoi documenti e la sua dimensione, prima quelli malati.",
+    "Include system indices": "Includi gli indici di sistema",
+    "The indices whose name begins with a dot, which the cluster keeps for itself.": "Gli indici il cui nome inizia con un punto, che il cluster tiene per sé."
   },
   "labels": {
     "Jobs": "Job",
@@ -2052,6 +2060,10 @@
     "Hours": "Ore",
     "Relay": "Relè",
     "Switch on": "Accendi",
-    "Switch off": "Spegni"
+    "Switch off": "Spegni",
+    "Shards": "Shard",
+    "Unplaced": "Non collocati",
+    "Moving": "In movimento",
+    "Stored": "Archiviato"
   }
 }

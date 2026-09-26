@@ -125,6 +125,7 @@ that one of thirty-one renderers draws.
 | Tandoor Recipes | meal plan, shopping list | tick an entry off | API token from Settings > API; the scope read is enough to look, ticking off needs read write |
 | Wallos | next payments, subscription costs | | API key from the profile; it goes in the body of a POST, never in the address |
 | Weather (Open-Meteo), RSS feeds, Calendar, Basics | current, headlines, upcoming, clock, notes, bookmarks, iframe, app tile, host, updates, status, notices, to-do | | none; the host card reads /proc, and the machine's own when /proc and /sys are mounted under /host |
+| Elasticsearch | cluster, indices | | an encoded API key with the cluster privileges monitor and view_index_metadata, or basic credentials, or nothing on a cluster without security. OpenSearch answers the same calls |
 | Shelly | device, outputs | switch an output on or off | none on a device without authentication; a Gen 1 device takes its admin password. Gen 2 and later use digest, which is not supported yet. Local address only, never the cloud |
 | Steam | player, recently played, library | | Web API key from steamcommunity.com/dev, plus the 64-bit id or custom profile name. The profile's game details have to be public, or Steam answers an empty list |
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
