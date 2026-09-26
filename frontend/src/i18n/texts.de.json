@@ -1390,7 +1390,20 @@
     "Interface": "Schnittstelle",
     "The name in /etc/config/network. wan6 for the IPv6 side of the same line.": "Der Name in /etc/config/network. wan6 für die IPv6-Seite derselben Leitung.",
     "Wireless": "Funknetz",
-    "Every radio with the stations associated to it.": "Jedes Funkmodul mit den Stationen, die daran hängen."
+    "Every radio with the stations associated to it.": "Jedes Funkmodul mit den Stationen, die daran hängen.",
+    "Nodes, pods and deployments of a cluster, with usage where metrics-server reports it.": "Knoten, Pods und Deployments eines Clusters, mit Auslastung, wo metrics-server sie meldet.",
+    "The API server. kubectl cluster-info names it.": "Der API-Server. kubectl cluster-info nennt ihn.",
+    "Token": "Token",
+    "A service account token. A ClusterRole of view is enough, and nothing here writes.": "Ein Token eines Dienstkontos. Eine ClusterRole view reicht, und hier schreibt nichts.",
+    "The API server's certificate is signed by the cluster's own authority, which nothing outside the cluster trusts.": "Das Zertifikat des API-Servers ist von der eigenen Stelle des Clusters unterschrieben, der außerhalb nichts vertraut.",
+    "Nodes ready, pods running, what is degraded, and usage where it is measured.": "Bereite Knoten, laufende Pods, was leidet, und Auslastung, wo sie gemessen wird.",
+    "Every node with its state, its usage and its kubelet, the unhealthy ones first.": "Jeder Knoten mit Zustand, Auslastung und kubelet, die kranken zuerst.",
+    "Pods": "Pods",
+    "The pods that are not running, with their phase and their restarts.": "Die Pods, die nicht laufen, mit ihrer Phase und ihren Neustarts.",
+    "Empty means every namespace the token may see.": "Leer heißt jeder Namensraum, den das Token sehen darf.",
+    "Only what is not running": "Nur was nicht läuft",
+    "Off lists every pod, which on a real cluster is a long list.": "Aus listet jeden Pod, was auf einem echten Cluster eine lange Liste ist.",
+    "Every deployment with the replicas it wants and the replicas it has.": "Jedes Deployment mit den Repliken, die es will, und denen, die es hat."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2095,6 +2108,9 @@
     "Oldest": "Älteste",
     "Protocol": "Protokoll",
     "Release": "Fassung",
-    "Stations": "Stationen"
+    "Stations": "Stationen",
+    "Pods": "Pods",
+    "Ready": "Bereit",
+    "Degraded": "Leidend"
   }
 }

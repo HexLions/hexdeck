@@ -137,6 +137,13 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Kubernetes, read-only, with a view role and nothing more.** Nodes,
+  pods, deployments, the version, and the node metrics when metrics-server
+  is there; when it is not, the usage rows are dropped and the card says
+  why instead of drawing zeroes. Quantities are parsed as the units they
+  are, so ``250m`` is a quarter of a core and ``1000M`` is not a gibibyte.
+  A cordoned node is not a healthy node, a pod that has Succeeded is not a
+  broken one, and a deployment scaled to nothing is not degraded.
 - **OpenWrt, over the bus LuCI itself talks to.** JSON-RPC against
   ``/ubus``: the board, the system numbers, one interface's status and the
   stations on each radio, all read-only. The load averages are fixed-point

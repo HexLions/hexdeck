@@ -1390,7 +1390,20 @@
     "Interface": "Interfaccia",
     "The name in /etc/config/network. wan6 for the IPv6 side of the same line.": "Il nome in /etc/config/network. wan6 per il lato IPv6 della stessa linea.",
     "Wireless": "Wifi",
-    "Every radio with the stations associated to it.": "Ogni radio con le stazioni associate."
+    "Every radio with the stations associated to it.": "Ogni radio con le stazioni associate.",
+    "Nodes, pods and deployments of a cluster, with usage where metrics-server reports it.": "Nodi, pod e deployment di un cluster, con l'utilizzo dove lo riporta metrics-server.",
+    "The API server. kubectl cluster-info names it.": "Il server API. kubectl cluster-info lo indica.",
+    "Token": "Token",
+    "A service account token. A ClusterRole of view is enough, and nothing here writes.": "Un token di service account. Basta una ClusterRole view, e qui niente scrive.",
+    "The API server's certificate is signed by the cluster's own authority, which nothing outside the cluster trusts.": "Il certificato del server API è firmato dall'autorità del cluster stesso, di cui fuori dal cluster nessuno si fida.",
+    "Nodes ready, pods running, what is degraded, and usage where it is measured.": "Nodi pronti, pod in esecuzione, cosa è degradato e l'utilizzo dove è misurato.",
+    "Every node with its state, its usage and its kubelet, the unhealthy ones first.": "Ogni nodo con il suo stato, il suo utilizzo e il suo kubelet, prima quelli malati.",
+    "Pods": "Pod",
+    "The pods that are not running, with their phase and their restarts.": "I pod che non sono in esecuzione, con la loro fase e i loro riavvii.",
+    "Empty means every namespace the token may see.": "Vuoto significa ogni namespace che il token può vedere.",
+    "Only what is not running": "Solo quello che non gira",
+    "Off lists every pod, which on a real cluster is a long list.": "Disattivato elenca ogni pod, che su un cluster vero è una lista lunga.",
+    "Every deployment with the replicas it wants and the replicas it has.": "Ogni deployment con le repliche che vuole e quelle che ha."
   },
   "labels": {
     "Jobs": "Job",
@@ -2095,6 +2108,9 @@
     "Oldest": "Più vecchio",
     "Protocol": "Protocollo",
     "Release": "Versione",
-    "Stations": "Stazioni"
+    "Stations": "Stazioni",
+    "Pods": "Pod",
+    "Ready": "Pronti",
+    "Degraded": "Degradati"
   }
 }
