@@ -14,41 +14,45 @@ HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezor
 
 ## Why a fork
 
-nexdeck gets the hard part right: the server talks to every service in its own rhythm and pushes what changed to every open browser, so ten tabs cost a service one request. HexDeck keeps that engine and changes what sits on top of it, for a lab that is run and built at the same time:
+nexdeck gets the hard part right: the server asks each service in its own rhythm and
+pushes what changed, so ten open tabs cost a service one request. HexDeck keeps that
+engine and rebuilds what sits on top, for a lab that is run and built at the same time.
 
-- **The screen is the board.** Twelve, twenty-four or thirty-six columns per board, any width, and rows that stretch so the page fills the window without scrolling. A 4K monitor is not a 1480-pixel strip with margins.
-- **What you are building is on the board too.** Projects with milestones, items and linked repositories live in HexDeck itself. A roadmap card shows what is due in the next weeks, an items card what to tick off, and GitHub issues, pull requests and workflow runs sit next to them.
-- **What needs doing again is not forgotten.** An item can be maintenance that comes back every so many days: test the backup restore, renew the certificate, clean the filters. Tick it and it returns with its next date; what is due is announced once a day through the same channels as an outage.
-- **A look of its own.** Hexagons, one blue, opaque panels and a quiet tessellation behind them, in dark and light. Four bundled themes (Nord, Catppuccin, Gruvbox, Dracula) and your own as a JSON file to share.
-- **Faster to a useful board.** Five templates for the usual corners of a lab, sized presets on every card, undo for the arrangement, a tidy-up button, multi-select to move cards together.
-- **English, German and Italian**, throughout.
+| | |
+| --- | --- |
+| 🖥️ **The screen is the board** | 12, 24 or 36 columns, any width, rows that stretch to fill the window |
+| 🗺️ **What you build is on it** | Projects, milestones, items and their repositories, kept in HexDeck |
+| 🔁 **Upkeep comes back** | Maintenance every so many days, announced like an outage |
+| ⬡ **A look of its own** | Hexagons, opaque panels, four bundled themes, dark and light |
+| ⚡ **Useful in minutes** | Templates, preset sizes, undo, tidy up, multi-select |
+| 🌐 **Three languages** | English, German and Italian, throughout |
 
 ## What it does
 
-- **Live, not polled by your browser.** The server asks every service in its own rhythm and pushes changes to every open browser.
-- **A hundred and thirty-eight integrations,** listed in full [further down](#the-services-it-speaks-to). Generic building blocks for everything else: a JSON API widget, a calendar that merges several sources, iframes, notes, bookmarks and a notepad you type into on the board.
-- **Actions where the data is.** Restart a container, start a VM, pause downloads, approve a request, wake a machine, flip a light. Destructive actions confirm once. Everything is logged.
-- **Lists, notes and an agenda.** A to-do card kept on the server, so it is the same list on every screen and, where you say so, one the whole house may tick; a notepad typed into on the board; a calendar that merges iCal feeds and *arr release dates, with the time of day and what is already over left out.
-- **The machine itself, without an agent.** A host card reads `/proc` and `/sys` directly: processors, memory, swap, load, uptime, the warmest sensor and one file system. Mount `/proc:/host/proc:ro` and `/sys:/host/sys:ro` and it reads the machine; without them it reads the container and says so on the card instead of showing you the wrong numbers quietly.
-- **A status page of your own.** Every card with a reachability check in one list, with its latency, its availability bars and its uptime, and a card of the notices HexDeck has sent. No second service to run for it.
-- **One list of what has a newer version.** The containers What's Up Docker or Cup watch, what Watchtower's last run did, the newest release of the repositories you follow, and HexDeck itself, merged into one card. A source that will not answer puts a line of warning on the card instead of taking it down.
-- **A history for every number.** Each card that shows a number keeps its history and draws it behind the number, whether the adapter declared a metric or not.
-- **Three screens, one arrangement.** A free grid you arrange once: a tablet shows it as arranged, a phone stacks the cards in the same order. An installable phone app with a bottom bar, and kiosk links for wall tablets that cycle pages and dim at night.
-- **Users, roles and sharing.** Administrators, users and guests. Boards are private, shared with people or with a whole role, at view, edit or act level.
-- **Reachability and notifications.** App tiles carry a check with uptime bars; outages and due maintenance reach you through Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack or Apprise.
-- **Boards as files.** Export a board as YAML, keep it in Git, drop it into `data/boards/` to provision it. Docker labels create tiles.
-- **Coming from Homepage or Homarr?** Paste their files under Settings › Boards: groups become pages, services become tiles, and the services those dashboards read become connections and cards, with what would be made shown first and anything that cannot be carried over said in words.
-- **Templates to start from.** Homelab overview, media stack, Proxmox rack, network and projects. Pick which of your connections stand in for the template's; one left out takes its cards with it.
-- **Themes to share.** A theme is fifteen colour tokens for dark and for light, checked for contrast on the way in; export yours, paste somebody else's.
-- **GitHub, properly.** Issues, pull requests and their review state, workflow runs and milestones of the repositories you watch, or of the ones a project links. Answers are cached with ETags so the sixty requests an hour GitHub allows without a token go a long way; a token makes it five thousand.
-- **TrueNAS, the current way.** The card speaks the JSON-RPC API TrueNAS 25.04 and later expect, and sends nothing over the deprecated REST API where the current one exists: TrueNAS 25.10 counts every REST call in an alert on the NAS, and TrueNAS 26 removes it.
-- **Sign in your way, or not at all at home.** Local accounts, OpenID Connect (authentik, Keycloak, Authelia, Pocket ID and friends), personal API tokens. On the networks you name, a browser is signed in as the account you choose without a password; everywhere else the sign-in page stays.
+| | |
+| --- | --- |
+| 📡 **Live, not polled** | One request per service, pushed to every open browser |
+| 🔌 **138 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
+| 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
+| 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
+| ⚙️ **The machine itself** | `/proc` and `/sys` read directly: processors, memory, load, sensors. No agent to install |
+| 📝 **Lists, notes, an agenda** | A to-do kept on the server, a notepad on the board, a calendar that merges feeds and release dates |
+| 📈 **History for every number** | Kept and drawn behind the number, whether the adapter declared a metric or not |
+| 📱 **Three screens, one arrangement** | Desk, tablet, an installable phone app, and kiosk links that cycle pages and dim at night |
+| 👥 **Users, roles, sharing** | Administrators, users and guests; boards shared at view, edit or act level |
+| 🔔 **Notifications** | Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack, Apprise |
+| 📄 **Boards as files** | YAML export, provisioning from `data/boards/`, tiles from Docker labels |
+| 📥 **Coming from Homepage or Homarr** | Paste their files: groups become pages, their services become connections and cards |
+| 🔑 **Sign in your way** | Local accounts, OpenID Connect, API tokens, or no password at all on the networks you trust |
 
 ## A board is whatever you put on it
 
-Every card is a widget of one integration, dropped on a free grid and sized by hand, or put to one of four sizes from its menu. The templates are a starting point, not a mould: what they make is an ordinary board.
+Every card is one integration's widget on a free grid: dragged, sized by hand, or set
+to one of four sizes from its menu. A template is a starting point, not a mould.
 
-Each board chooses its own grid: 12, 24 or 36 columns for how finely cards can be placed, a width (1480 px, the whole screen, or a number), and whether the rows stretch so the page fills the window. Ctrl+Z puts the last arrangement back; *Tidy up* puts every card in reading order; Shift and a click select several cards to move together, or to another page or board from the card's menu.
+`Ctrl+Z` puts the last arrangement back · *Tidy up* sorts a page into reading order ·
+Shift and a click select several cards · a card's menu moves it to another page or board.
 
 ### Media
 
