@@ -1378,7 +1378,19 @@
     "Adds a button per machine that asks the server for an incremental file backup.": "Aggiunge a ogni macchina un pulsante che chiede al server un backup incrementale dei file.",
     "How many machines are backed up, how many are late, and how much storage they occupy.": "Quante macchine sono salvate, quante sono in ritardo e quanto spazio occupano.",
     "Running now": "In corso adesso",
-    "The backups, restores and index runs in progress, with how far along they are.": "I backup, i ripristini e le indicizzazioni in corso, con il loro avanzamento."
+    "The backups, restores and index runs in progress, with how far along they are.": "I backup, i ripristini e le indicizzazioni in corso, con il loro avanzamento.",
+    "Load, memory and uptime of the router, its WAN address, and who is on the wireless.": "Carico, memoria e tempo di attività del router, il suo indirizzo WAN e chi è sul wifi.",
+    "The router's web interface. Its bus is at /ubus, which is added for you.": "L'interfaccia web del router. Il suo bus sta su /ubus, che viene aggiunto da noi.",
+    "A stock LuCI installation lets root read everything. A user made by hand needs a read role in /etc/config/rpcd.": "Un'installazione LuCI di serie lascia leggere tutto a root. Un utente creato a mano serve un ruolo di lettura in /etc/config/rpcd.",
+    "A router serving https usually does it with a certificate it made itself.": "Un router che serve https lo fa quasi sempre con un certificato che si è fatto da solo.",
+    "Router": "Router",
+    "Load, memory, uptime and what the box calls itself.": "Carico, memoria, tempo di attività e come si chiama l'apparato.",
+    "WAN": "WAN",
+    "Whether the uplink is up, the address it has and how long it has held it.": "Se la linea è su, quale indirizzo ha e da quanto lo tiene.",
+    "Interface": "Interfaccia",
+    "The name in /etc/config/network. wan6 for the IPv6 side of the same line.": "Il nome in /etc/config/network. wan6 per il lato IPv6 della stessa linea.",
+    "Wireless": "Wifi",
+    "Every radio with the stations associated to it.": "Ogni radio con le stazioni associate."
   },
   "labels": {
     "Jobs": "Job",
@@ -2080,6 +2092,9 @@
     "Unplaced": "Non collocati",
     "Moving": "In movimento",
     "Stored": "Archiviato",
-    "Oldest": "Più vecchio"
+    "Oldest": "Più vecchio",
+    "Protocol": "Protocollo",
+    "Release": "Versione",
+    "Stations": "Stazioni"
   }
 }

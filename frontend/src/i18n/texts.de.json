@@ -1378,7 +1378,19 @@
     "Adds a button per machine that asks the server for an incremental file backup.": "Gibt jeder Maschine einen Knopf, der den Server um eine inkrementelle Dateisicherung bittet.",
     "How many machines are backed up, how many are late, and how much storage they occupy.": "Wie viele Maschinen gesichert sind, wie viele spät sind und wie viel Platz sie belegen.",
     "Running now": "Läuft jetzt",
-    "The backups, restores and index runs in progress, with how far along they are.": "Die laufenden Sicherungen, Wiederherstellungen und Indexläufe, mit ihrem Fortschritt."
+    "The backups, restores and index runs in progress, with how far along they are.": "Die laufenden Sicherungen, Wiederherstellungen und Indexläufe, mit ihrem Fortschritt.",
+    "Load, memory and uptime of the router, its WAN address, and who is on the wireless.": "Last, Speicher und Laufzeit des Routers, seine WAN-Adresse und wer im Funknetz ist.",
+    "The router's web interface. Its bus is at /ubus, which is added for you.": "Die Weboberfläche des Routers. Sein Bus liegt unter /ubus, das wird angehängt.",
+    "A stock LuCI installation lets root read everything. A user made by hand needs a read role in /etc/config/rpcd.": "Eine unveränderte LuCI-Installation lässt root alles lesen. Ein selbst angelegter Benutzer braucht eine Leserolle in /etc/config/rpcd.",
+    "A router serving https usually does it with a certificate it made itself.": "Ein Router mit https benutzt meist ein Zertifikat, das er selbst erzeugt hat.",
+    "Router": "Router",
+    "Load, memory, uptime and what the box calls itself.": "Last, Speicher, Laufzeit und wie sich das Gerät nennt.",
+    "WAN": "WAN",
+    "Whether the uplink is up, the address it has and how long it has held it.": "Ob die Leitung steht, welche Adresse sie hat und wie lange schon.",
+    "Interface": "Schnittstelle",
+    "The name in /etc/config/network. wan6 for the IPv6 side of the same line.": "Der Name in /etc/config/network. wan6 für die IPv6-Seite derselben Leitung.",
+    "Wireless": "Funknetz",
+    "Every radio with the stations associated to it.": "Jedes Funkmodul mit den Stationen, die daran hängen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2080,6 +2092,9 @@
     "Unplaced": "Nicht platziert",
     "Moving": "In Bewegung",
     "Stored": "Gespeichert",
-    "Oldest": "Älteste"
+    "Oldest": "Älteste",
+    "Protocol": "Protokoll",
+    "Release": "Fassung",
+    "Stations": "Stationen"
   }
 }

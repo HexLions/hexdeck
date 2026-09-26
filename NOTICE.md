@@ -137,6 +137,14 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **OpenWrt, over the bus LuCI itself talks to.** JSON-RPC against
+  ``/ubus``: the board, the system numbers, one interface's status and the
+  stations on each radio, all read-only. The load averages are fixed-point
+  and scaled by 65536, so a quiet router would otherwise read as a load of
+  six thousand, and memory is judged by what is available rather than by
+  what is free, because the page cache is not really in use. Permission
+  denied arrives as ``[6]`` in a perfectly valid answer, which is also what
+  an expired session looks like, so a denied call logs in again once.
 - **UrBackup, through the exchange its own interface uses.** Salt, md5,
   PBKDF2 over the rounds the server names, md5 again with the random value:
   the password itself never leaves the process. An expired session is
