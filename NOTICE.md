@@ -137,6 +137,17 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **The version where somebody is already looking.** The account menu and both
+  settings navigations carry the version, with a link to the releases when a
+  newer one is out. The line fetches by hand rather than through react-query,
+  because the same bar is drawn on the kiosk and in the preview, where a
+  component that demanded a query client would take the page down.
+- **Homebox: a value that can stay off the wall, and a card per place.** The
+  inventory card can leave its total out and can be told which currency to
+  write, since one Homebox holds one. A second card draws what the things in
+  each location are worth, or under each tag, largest first with a share of
+  the whole. Homebox leaves out a place whose contents add up to nothing, so
+  the card counts what it was given rather than implying that is all of them.
 - **Homebox, both generations of its API.** API keys exist from Homebox 0.26
   onwards, so on an older installation the key field could not work at all
   and the card only said the key was rejected. Such an installation now

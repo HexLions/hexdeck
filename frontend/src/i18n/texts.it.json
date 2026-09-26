@@ -1422,7 +1422,15 @@
     "Restart a server": "Riavvia un server",
     "Profile > API Keys > Create API Key, on Homebox 0.26 and later. Homebox shows the key only once.": "Profilo > API Keys > Create API Key, da Homebox 0.26. Homebox mostra la chiave una volta sola.",
     "Instead of a key, and the only way on Homebox 0.25 and older, which has no API keys.": "Al posto della chiave, e l'unica via su Homebox 0.25 e precedenti, che non ha API key.",
-    "Signs in as that account. The token is kept until shortly before it runs out.": "Accede con quell'account. Il token è tenuto fino a poco prima che scada."
+    "Signs in as that account. The token is kept until shortly before it runs out.": "Accede con quell'account. Il token è tenuto fino a poco prima che scada.",
+    "Hide what it is worth": "Nascondi il valore",
+    "For a board on a wall: the count and the locations stay, the total value goes.": "Per una board a muro: restano il conteggio e i luoghi, sparisce il valore totale.",
+    "Empty takes the currency of the Homebox group. Set it when the prices in there are kept in another.": "Vuoto prende la valuta del gruppo Homebox. Impostala se i prezzi là dentro sono in un'altra.",
+    "Value by place": "Valore per luogo",
+    "What the things in each location are worth, or in each tag, largest first.": "Quanto valgono le cose in ogni luogo, o sotto ogni tag, dal più grande.",
+    "Grouped by": "Raggruppato per",
+    "Location": "Luogo",
+    "Homebox counts the purchase prices of what each one holds.": "Homebox somma i prezzi d'acquisto di quello che ognuno contiene."
   },
   "labels": {
     "Jobs": "Job",
@@ -2130,6 +2138,8 @@
     "Stations": "Stazioni",
     "Pods": "Pod",
     "Ready": "Pronti",
-    "Degraded": "Degradati"
+    "Degraded": "Degradati",
+    "Together": "In tutto",
+    "Places": "Luoghi"
   }
 }

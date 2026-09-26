@@ -8,6 +8,7 @@ import { LANGUAGES, setLanguage } from '../i18n'
 import { applyTheme, currentTheme, useAuth } from '../stores/auth'
 import { usePlayer } from '../stores/player'
 import { Avatar } from './Avatar'
+import { VersionLine } from './VersionLine'
 
 /** Loaded only once something plays and the viewer put the player in the top bar. */
 const HeaderPill = lazy(() => import('./player/HeaderPill').then((module) => ({ default: module.HeaderPill })))
@@ -203,6 +204,7 @@ function UserMenu({ user, signedIn }: { user: HeaderUser; signedIn: boolean }) {
             {user.auth_kind === 'auto' ? <LogIn size={15} /> : <LogOut size={15} />}
             {user.auth_kind === 'auto' ? t('menu.signIn') : t('menu.signOut')}
           </button>
+          <VersionLine className="justify-center border-t border-line px-3 pt-2 pb-1" />
         </div>
       )}
     </div>

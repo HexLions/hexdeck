@@ -249,6 +249,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | Migrating | Import from Homepage and Homarr; leave demo mode |
 | Sharing | Where a card allows it, viewers tick a to-do or write a notepad, and nothing else |
 | Upkeep | Recurring maintenance items, announced once a day through the notification channels |
+| Version | In the account menu and under both settings navigations, with a link to the releases when a newer one is out |
 
 ### Look and language
 

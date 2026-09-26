@@ -258,3 +258,66 @@ async def test_a_refusal_without_json_still_says_something(ctx: Context) -> None
     with pytest.raises(AuthFailed) as failure:
         await get_adapter("homebox").fetch("inventory", {"url": HB, "api_key": KEY}, {}, ctx)
     assert "HTTP 403" in str(failure.value)
+
+
+# -- the value, and where it sits ------------------------------------------------
+
+@respx.mock
+async def test_the_total_can_be_left_off_a_card_on_a_wall(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
+    respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    plain = await get_adapter("homebox").fetch("inventory", CONFIG, {}, ctx)
+    assert [row["label"] for row in plain.secondary] == ["Total value", "Locations"]
+    quiet = await get_adapter("homebox").fetch("inventory", CONFIG, {"hide_value": True}, ctx)
+    assert [row["label"] for row in quiet.secondary] == ["Locations"]
+    assert quiet.primary["value"] == 6, "the count stays"
+
+
+@respx.mock
+async def test_a_card_may_name_the_currency_itself(ctx: Context) -> None:
+    statistics = respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
+    group = respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    data = await get_adapter("homebox").fetch("inventory", CONFIG, {"currency": "EUR"}, ctx)
+    assert data.secondary[0]["value"] == "1,147.49 EUR"
+    assert group.call_count == 0, "the group is not asked when the card says which currency"
+    assert statistics.call_count == 1
+    theirs = await get_adapter("homebox").fetch("inventory", CONFIG, {}, ctx)
+    assert theirs.secondary[0]["value"].endswith("USD"), "empty takes what the group says"
+
+
+LOCATIONS = [{"id": "a", "name": "Garage", "total": 4812.0}, {"id": "b", "name": "Office", "total": 1203.0},
+             {"id": "c", "name": "Attic", "total": 985.0}]
+
+
+@respx.mock
+async def test_the_breakdown_is_largest_first_with_a_share_each(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics/locations").mock(return_value=httpx.Response(200, json=LOCATIONS))
+    data = await get_adapter("homebox").fetch("breakdown", CONFIG, {"currency": "EUR"}, ctx)
+    assert [item["title"] for item in data.items] == ["Garage", "Office", "Attic"]
+    assert data.items[0]["value"] == "4,812.00 EUR"
+    assert data.items[0]["progress"] == 68.7, "the share of the whole, not of the largest"
+    assert data.primary["value"] == "7,000.00 EUR"
+    assert data.secondary[0] == {"label": "Places", "value": 3}
+    assert data.metrics["value"] == 7000.0
+
+
+@respx.mock
+async def test_the_same_card_groups_by_tag(ctx: Context) -> None:
+    tags = respx.get(f"{HB}/api/v1/groups/statistics/tags").mock(return_value=httpx.Response(
+        200, json=[{"id": "t", "name": "Tools", "total": 500.0}]))
+    data = await get_adapter("homebox").fetch("breakdown", CONFIG, {"by": "tags", "currency": "EUR"}, ctx)
+    assert tags.call_count == 1
+    assert data.secondary[0]["label"] == "Tags" and data.items[0]["title"] == "Tools"
+
+
+@respx.mock
+async def test_a_homebox_where_nothing_has_a_price_says_so(ctx: Context) -> None:
+    respx.get(f"{HB}/api/v1/groups/statistics/locations").mock(return_value=httpx.Response(200, json=[]))
+    respx.get(f"{HB}/api/v1/groups").mock(return_value=httpx.Response(200, json=GROUP))
+    data = await get_adapter("homebox").fetch("breakdown", CONFIG, {}, ctx)
+    assert data.items == [] and "price" in data.meta["empty"]
+
+
+def test_both_new_cards_draw_in_the_demo() -> None:
+    assert get_adapter("homebox").demo("breakdown", {}, 0).items
+    assert get_adapter("homebox").demo("inventory", {"hide_value": True}, 0).secondary

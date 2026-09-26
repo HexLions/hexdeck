@@ -45,7 +45,14 @@ statistics. ``totalWithWarranty`` counts a warranty that already ended and
 not a lifetime one.
 
 ⚠️ ``/v1/currency`` is in the API documentation and answers 404. The currency
-is on ``/v1/groups``.
+is on ``/v1/groups``, and a card may override it: one Homebox holds one currency,
+and somebody who keeps prices in another reads the wrong symbol otherwise.
+
+⚠️ ``/v1/groups/statistics/locations`` and ``.../tags`` answer
+``[{id, name, total}]``, the total being the purchase prices of what is in each.
+Read from the query in ``repo_group.go`` (v0.26.2): a location whose contents add
+up to nothing is left out of the answer altogether, so the card says how many it
+was given rather than implying that is every location there is.
 """
 
 from __future__ import annotations
@@ -120,7 +127,22 @@ class HomeboxAdapter(Adapter):
     )
     widgets = (
         WidgetType(kind="inventory", label="Inventory", description="How many items there are, what they are worth together and how many locations.",
-                   renderer="value", default_size=(3, 2), refresh_seconds=900, metrics=("items",)),
+                   renderer="value", default_size=(3, 2), refresh_seconds=900, metrics=("items",),
+                   options=(
+                       Field("hide_value", "Hide what it is worth", type="bool", default=False,
+                             help="For a board on a wall: the count and the locations stay, the total value goes."),
+                       Field("currency", "Currency", placeholder="EUR",
+                             help="Empty takes the currency of the Homebox group. Set it when the prices in there are kept in another."),
+                   )),
+        WidgetType(kind="breakdown", label="Value by place", description="What the things in each location are worth, or in each tag, largest first.",
+                   renderer="list", default_size=(3, 3), refresh_seconds=900, metrics=("value",),
+                   options=(
+                       Field("by", "Grouped by", type="select", default="locations",
+                             options=(("locations", "Location"), ("tags", "Tag")),
+                             help="Homebox counts the purchase prices of what each one holds."),
+                       Field("currency", "Currency", placeholder="EUR"),
+                       Field("limit", "Entries", type="number", default=8),
+                   )),
         WidgetType(kind="warranties", label="Warranties", description="The warranties that end within the chosen days, and those that ended in the last 30.",
                    renderer="list", default_size=(3, 3), refresh_seconds=3600,
                    options=(Field("days", "Days ahead", type="number", default=60),
@@ -257,24 +279,76 @@ class HomeboxAdapter(Adapter):
         if widget_kind == "warranties":
             export = await self._export(config, ctx)
             return self._warranties(_warranty_rows(export.text), datetime.now(UTC).date(), base_url(config), options)
+        if widget_kind == "breakdown":
+            by = "tags" if str(options.get("by") or "locations") == "tags" else "locations"
+            answer = await self._get(config, ctx, f"/groups/statistics/{by}", cache=600)
+            try:
+                totals = answer.json()
+            except ValueError as failure:
+                raise AdapterError("Homebox did not answer with JSON.", code="not_json") from failure
+            return self._breakdown(totals if isinstance(totals, list) else [],
+                                   await self._currency(config, ctx, options), by, options)
         statistics = await self._json(config, ctx, "/groups/statistics")
+        return self._inventory(statistics, await self._currency(config, ctx, options), options)
+
+    async def _currency(self, config: dict[str, Any], ctx: Context, options: dict[str, Any]) -> str:
+        """What to write after a number: the card's own word, or the group's."""
+        chosen = str(options.get("currency") or "").strip()
+        if chosen:
+            return chosen
         group = await self._json(config, ctx, "/groups", cache=3600)
-        return self._inventory(statistics, str(group.get("currency") or ""))
+        return str(group.get("currency") or "")
 
     # -- the cards -----------------------------------------------------------
 
     @staticmethod
-    def _inventory(statistics: dict[str, Any], currency: str) -> WidgetData:
-        items = int(statistics.get("totalItems") or 0)
+    def _money(amount: Any, currency: str) -> str:
         try:
-            worth = f"{float(statistics.get('totalItemPrice') or 0):,.2f} {currency}".strip()
+            return f"{float(amount or 0):,.2f} {currency}".strip()
         except (TypeError, ValueError):
-            worth = ""
+            return ""
+
+    @classmethod
+    def _inventory(cls, statistics: dict[str, Any], currency: str, options: dict[str, Any]) -> WidgetData:
+        items = int(statistics.get("totalItems") or 0)
+        secondary: list[dict[str, Any]] = []
+        # ⚠️ What the house is worth is the one number somebody may not want on a
+        # screen in the hall, so it can be left out without losing the card.
+        if not options.get("hide_value"):
+            secondary.append({"label": "Total value", "value": cls._money(statistics.get("totalItemPrice"), currency)})
+        secondary.append({"label": "Locations", "value": int(statistics.get("totalLocations") or 0)})
         return WidgetData(
             status="ok",
             primary={"label": "Things", "value": items},
-            secondary=[{"label": "Total value", "value": worth}, {"label": "Locations", "value": int(statistics.get("totalLocations") or 0)}],
+            secondary=secondary,
             metrics={"items": float(items)},
+            meta={"currency": currency},
+        )
+
+    @classmethod
+    def _breakdown(cls, totals: list[Any], currency: str, by: str, options: dict[str, Any]) -> WidgetData:
+        rows = [one for one in totals if isinstance(one, dict)]
+        counted = sorted(rows, key=lambda one: -float(one.get("total") or 0))
+        whole = sum(float(one.get("total") or 0) for one in rows)
+        items = []
+        for one in counted[: max(1, int(options.get("limit") or 8))]:
+            total = float(one.get("total") or 0)
+            items.append({
+                "title": str(one.get("name") or "?"),
+                "value": cls._money(total, currency),
+                "status": "ok",
+                # The bar says how much of the whole each place holds, which is
+                # what somebody is looking for in a list like this.
+                "progress": round(100.0 * total / whole, 1) if whole else None,
+            })
+        return WidgetData(
+            status="ok",
+            items=items,
+            primary={"label": "Together", "value": cls._money(whole, currency)},
+            secondary=[{"label": "Places" if by == "locations" else "Tags", "value": len(rows)}],
+            metrics={"value": whole},
+            meta={"currency": currency,
+                  "empty": "Nothing in here has a price yet." if by == "locations" else "No tag holds anything with a price."},
         )
 
     @staticmethod
@@ -319,7 +393,15 @@ class HomeboxAdapter(Adapter):
                 {"HB.name": "Wifi Router", "HB.location": "Office", "HB.url": "/item/demo-router", "HB.warranty_expires": (today - timedelta(days=10)).isoformat()},
             ]
             return self._warranties(rows, today, "https://homebox.example.com", options)
-        return self._inventory({"totalItems": 214 + tick % 3, "totalItemPrice": 18_430.5, "totalLocations": 9}, "EUR")
+        if widget_kind == "breakdown":
+            return self._breakdown([
+                {"id": "a", "name": "Garage", "total": 4_812.0},
+                {"id": "b", "name": "Office", "total": 3_940.5},
+                {"id": "c", "name": "Kitchen", "total": 2_180.0},
+                {"id": "d", "name": "Attic", "total": 640.0},
+            ], str(options.get("currency") or "EUR"), str(options.get("by") or "locations"), options)
+        return self._inventory({"totalItems": 214 + tick % 3, "totalItemPrice": 18_430.5, "totalLocations": 9},
+                               str(options.get("currency") or "EUR"), options)
 
 
 ADAPTER = HomeboxAdapter()

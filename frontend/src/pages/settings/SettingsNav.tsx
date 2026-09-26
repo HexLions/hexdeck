@@ -1,6 +1,8 @@
 import type { LucideIcon } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
+import { VersionLine } from '../../components/VersionLine'
+
 export interface NavEntry {
   /** Path below the base; the empty string is the index page. */
   to: string
@@ -10,7 +12,11 @@ export interface NavEntry {
   show?: boolean
 }
 
-/** The left-hand list shared by the account settings and the system settings. */
+/**
+ * The left-hand list shared by the account settings and the system settings, with
+ * the version under it: both pages are where somebody goes to look something up,
+ * and "which version is this" is the question they end up asking.
+ */
 export function SettingsNav({ base, entries, label }: { base: string; entries: NavEntry[]; label: string }) {
   return (
     <nav className="flex md:flex-col gap-1 overflow-x-auto" aria-label={label}>
@@ -29,6 +35,7 @@ export function SettingsNav({ base, entries, label }: { base: string; entries: N
             {entry.label}
           </NavLink>
         ))}
+      <VersionLine className="hidden md:flex mt-3 px-3" />
     </nav>
   )
 }
