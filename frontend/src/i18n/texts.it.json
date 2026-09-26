@@ -1363,7 +1363,22 @@
     "The colour, the nodes, the shards that are not placed and how much is stored.": "Il colore, i nodi, gli shard non collocati e quanto è archiviato.",
     "Every index with its documents and its size, the unhealthy ones first.": "Ogni indice con i suoi documenti e la sua dimensione, prima quelli malati.",
     "Include system indices": "Includi gli indici di sistema",
-    "The indices whose name begins with a dot, which the cluster keeps for itself.": "Gli indici il cui nome inizia con un punto, che il cluster tiene per sé."
+    "The indices whose name begins with a dot, which the cluster keeps for itself.": "Gli indici il cui nome inizia con un punto, che il cluster tiene per sé.",
+    "Which machine was backed up when, which one has fallen behind, and what is running now.": "Quale macchina è stata salvata e quando, quale è rimasta indietro e cosa sta girando adesso.",
+    "The web interface. Its API lives under /x, which is added for you.": "L'interfaccia web. La sua API sta sotto /x, che viene aggiunto da noi.",
+    "Leave empty for a server that has no users yet; it lets anybody in until the first one is made.": "Lascia vuoto per un server senza utenti; fa entrare chiunque finché non se ne crea uno.",
+    "Folded into a hash before it is sent, the way the server's own interface does it.": "Viene ridotta a un hash prima di essere inviata, come fa l'interfaccia stessa del server.",
+    "Clients": "Client",
+    "Every machine with its last file and image backup, the ones in trouble first.": "Ogni macchina con il suo ultimo backup di file e di immagine, prima quelle nei guai.",
+    "Call it late after (days)": "Considera in ritardo dopo (giorni)",
+    "A machine that has not been backed up for this long turns yellow. A laptop that is away for a week is not a fault, so keep it generous.": "Una macchina non salvata per questo tempo diventa gialla. Un portatile via per una settimana non è un guasto, quindi sii generoso.",
+    "Count image backups too": "Conta anche i backup di immagine",
+    "Off judges a client by its file backups alone, which is what a server without image backups wants.": "Disattivato giudica un client solo dai backup di file, che è quello che serve a un server senza immagini.",
+    "Offer a backup button": "Mostra il pulsante di backup",
+    "Adds a button per machine that asks the server for an incremental file backup.": "Aggiunge a ogni macchina un pulsante che chiede al server un backup incrementale dei file.",
+    "How many machines are backed up, how many are late, and how much storage they occupy.": "Quante macchine sono salvate, quante sono in ritardo e quanto spazio occupano.",
+    "Running now": "In corso adesso",
+    "The backups, restores and index runs in progress, with how far along they are.": "I backup, i ripristini e le indicizzazioni in corso, con il loro avanzamento."
   },
   "labels": {
     "Jobs": "Job",
@@ -2064,6 +2079,7 @@
     "Shards": "Shard",
     "Unplaced": "Non collocati",
     "Moving": "In movimento",
-    "Stored": "Archiviato"
+    "Stored": "Archiviato",
+    "Oldest": "Più vecchio"
   }
 }

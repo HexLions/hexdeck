@@ -137,6 +137,14 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **UrBackup, through the exchange its own interface uses.** Salt, md5,
+  PBKDF2 over the rounds the server names, md5 again with the random value:
+  the password itself never leaves the process. An expired session is
+  answered with a document that merely lacks the key that was asked for,
+  so every call logs in again once before it gives up. A client whose image
+  backups are switched off is not a client with a missing image backup, and
+  how many days count as late is a setting, because a laptop that is away
+  for a week is not a fault.
 - **Elasticsearch and OpenSearch, by the colour they name themselves.**
   The health call, the index catalogue and the version, all read-only. The
   cards pass green, yellow and red through instead of inventing a verdict,
