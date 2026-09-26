@@ -1338,7 +1338,15 @@
     "Server": "Server",
     "Players online, the message of the day, the version and the round trip.": "Spieler online, die Nachricht des Tages, die Fassung und die Umlaufzeit.",
     "Players": "Spieler",
-    "The names the server hands out, which is a sample of at most twelve.": "Die Namen, die der Server herausgibt: eine Auswahl von höchstens zwölf."
+    "The names the server hands out, which is a sample of at most twelve.": "Die Namen, die der Server herausgibt: eine Auswahl von höchstens zwölf.",
+    "What an account has been playing, what it is playing now, and how big the library is.": "Was ein Konto gespielt hat, was es gerade spielt und wie groß die Sammlung ist.",
+    "From steamcommunity.com/dev. It is read-only and belongs to the account that takes it out, not to the profile being watched.": "Von steamcommunity.com/dev. Der Schlüssel liest nur und gehört dem Konto, das ihn holt, nicht dem beobachteten Profil.",
+    "The 64-bit id, or the custom name from the profile address. Steam Profile > Edit Profile shows both.": "Die 64-Bit-Id oder der eigene Name aus der Profiladresse. Steam Profil > Profil bearbeiten zeigt beides.",
+    "Player": "Spieler",
+    "Online, away or in a game, with the hours of the last two weeks and the size of the library.": "Online, abwesend oder im Spiel, mit den Stunden der letzten zwei Wochen und der Größe der Sammlung.",
+    "Recently played": "Zuletzt gespielt",
+    "The games of the last two weeks, with the hours in them.": "Die Spiele der letzten zwei Wochen, mit den Stunden darin.",
+    "How many games the account owns and how many it has ever started.": "Wie viele Spiele das Konto besitzt und wie viele es je gestartet hat."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2029,6 +2037,9 @@
     "Slots": "Plätze",
     "Message": "Nachricht",
     "The server hides its player list.": "Der Server zeigt seine Spielerliste nicht.",
-    "Nobody is online.": "Niemand ist online."
+    "Nobody is online.": "Niemand ist online.",
+    "Two weeks": "Zwei Wochen",
+    "Started": "Gestartet",
+    "Hours": "Stunden"
   }
 }

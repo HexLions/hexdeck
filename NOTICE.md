@@ -137,6 +137,13 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Steam, read-only and without artwork.** Three calls of the Web API:
+  who the player is, what they played in the last fortnight, and how large
+  the library is. A custom profile name is resolved once and kept for a
+  day. No game picture is put in a row, because an address in a card is
+  fetched by the browser and would tell Valve who is looking at the board.
+  A private profile answers an empty list rather than an error, so the
+  cards say that in words.
 - **Minecraft, by the ping its own client uses.** Both editions: the Java
   server list ping over TCP, framed with VarInts written out by hand, and
   Bedrock's unconnected RakNet ping over UDP. Players, slots, version and
