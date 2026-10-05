@@ -1430,7 +1430,22 @@
     "What the things in each location are worth, or in each tag, largest first.": "Was die Dinge an jedem Ort wert sind, oder unter jedem Tag, das Größte zuerst.",
     "Grouped by": "Gruppiert nach",
     "Location": "Ort",
-    "Homebox counts the purchase prices of what each one holds.": "Homebox zählt die Kaufpreise dessen, was jeder enthält."
+    "Homebox counts the purchase prices of what each one holds.": "Homebox zählt die Kaufpreise dessen, was jeder enthält.",
+    "The health checks, disks, sensors and guests of a Proxmox node, as ProxMenux Monitor sees them.": "Die Prüfungen, Platten, Sensoren und Gäste eines Proxmox-Knotens, wie ProxMenux Monitor sie sieht.",
+    "ProxMenux Monitor on the node, port 8008 by default.": "ProxMenux Monitor auf dem Knoten, standardmäßig Port 8008.",
+    "From the monitor's own Settings: an API token for external integrations, read-only. Leave empty when the monitor has no authentication.": "Aus den Einstellungen des Monitors: ein API-Token für externe Integrationen, nur lesend. Leer lassen, wenn der Monitor keine Anmeldung verlangt.",
+    "The monitor serves https with a certificate it made itself, so this is usually needed.": "Der Monitor liefert https mit einem selbst erzeugten Zertifikat, das wird hier also meist gebraucht.",
+    "The monitor's own verdict on the node, with how many checks are unhappy.": "Das eigene Urteil des Monitors über den Knoten, mit der Zahl der unzufriedenen Prüfungen.",
+    "Health checks": "Prüfungen",
+    "Every category the monitor checks, the unhappy ones first, with its reason.": "Jede Kategorie, die der Monitor prüft, die unzufriedenen zuerst, mit seiner Begründung.",
+    "Only what is not well": "Nur was nicht in Ordnung ist",
+    "Off lists all ten categories, which is a long and mostly green list.": "Aus listet alle zehn Kategorien, was eine lange und meist grüne Liste ist.",
+    "Processor, memory, temperature, load and uptime of the node itself.": "Prozessor, Speicher, Temperatur, Last und Laufzeit des Knotens selbst.",
+    "Guests": "Gäste",
+    "The virtual machines and containers on this node, stopped ones last.": "Die virtuellen Maschinen und Container dieses Knotens, gestoppte zuletzt.",
+    "Which": "Welche",
+    "Machines and containers": "Maschinen und Container",
+    "Every physical disk with its SMART verdict and its temperature.": "Jede physische Platte mit ihrem SMART-Urteil und ihrer Temperatur."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2140,6 +2155,10 @@
     "Ready": "Bereit",
     "Degraded": "Leidend",
     "Together": "Zusammen",
-    "Places": "Orte"
+    "Places": "Orte",
+    "Warnings": "Warnungen",
+    "Well": "In Ordnung",
+    "Not well": "Nicht in Ordnung",
+    "Warmest": "Wärmste"
   }
 }

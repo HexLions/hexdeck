@@ -1430,7 +1430,22 @@
     "What the things in each location are worth, or in each tag, largest first.": "Quanto valgono le cose in ogni luogo, o sotto ogni tag, dal più grande.",
     "Grouped by": "Raggruppato per",
     "Location": "Luogo",
-    "Homebox counts the purchase prices of what each one holds.": "Homebox somma i prezzi d'acquisto di quello che ognuno contiene."
+    "Homebox counts the purchase prices of what each one holds.": "Homebox somma i prezzi d'acquisto di quello che ognuno contiene.",
+    "The health checks, disks, sensors and guests of a Proxmox node, as ProxMenux Monitor sees them.": "I controlli, i dischi, i sensori e gli ospiti di un nodo Proxmox, come li vede ProxMenux Monitor.",
+    "ProxMenux Monitor on the node, port 8008 by default.": "ProxMenux Monitor sul nodo, porta 8008 per impostazione predefinita.",
+    "From the monitor's own Settings: an API token for external integrations, read-only. Leave empty when the monitor has no authentication.": "Dalle impostazioni del monitor: un token API per integrazioni esterne, in sola lettura. Lascia vuoto se il monitor non chiede l'accesso.",
+    "The monitor serves https with a certificate it made itself, so this is usually needed.": "Il monitor serve https con un certificato che si è fatto da solo, quindi qui serve quasi sempre.",
+    "The monitor's own verdict on the node, with how many checks are unhappy.": "Il giudizio del monitor sul nodo, con quanti controlli non sono contenti.",
+    "Health checks": "Controlli",
+    "Every category the monitor checks, the unhappy ones first, with its reason.": "Ogni categoria che il monitor controlla, prima quelle non contente, con la sua motivazione.",
+    "Only what is not well": "Solo quello che non va",
+    "Off lists all ten categories, which is a long and mostly green list.": "Disattivato elenca tutte e dieci le categorie, una lista lunga e quasi tutta verde.",
+    "Processor, memory, temperature, load and uptime of the node itself.": "Processore, memoria, temperatura, carico e tempo di attività del nodo stesso.",
+    "Guests": "Ospiti",
+    "The virtual machines and containers on this node, stopped ones last.": "Le macchine virtuali e i container di questo nodo, quelli fermi per ultimi.",
+    "Which": "Quali",
+    "Machines and containers": "Macchine e container",
+    "Every physical disk with its SMART verdict and its temperature.": "Ogni disco fisico con il suo giudizio SMART e la sua temperatura."
   },
   "labels": {
     "Jobs": "Job",
@@ -2140,6 +2155,10 @@
     "Ready": "Pronti",
     "Degraded": "Degradati",
     "Together": "In tutto",
-    "Places": "Luoghi"
+    "Places": "Luoghi",
+    "Warnings": "Avvisi",
+    "Well": "In ordine",
+    "Not well": "Non in ordine",
+    "Warmest": "Il più caldo"
   }
 }

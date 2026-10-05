@@ -137,6 +137,15 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **ProxMenux Monitor, for what the Proxmox API does not carry.** HexDeck
+  already speaks the Proxmox API; the monitor on the node adds its ten
+  categories of health check with a reason in words, the physical disks with
+  their SMART verdict and temperature, the node's sensors, and the guests as
+  it already collects them. Five read-only GETs. The verdicts are passed
+  through as the monitor's own words rather than recomputed, because where
+  its thresholds sit is a question for its settings page. Its API tokens,
+  which it mints for exactly this purpose, stop verifying when its JWT
+  secret is rotated, and the refusal says so.
 - **The version where somebody is already looking.** The account menu and both
   settings navigations carry the version, with a link to the releases when a
   newer one is out. The line fetches by hand rather than through react-query,
