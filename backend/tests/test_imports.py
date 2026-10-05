@@ -93,7 +93,12 @@ def test_homarr_apps_widgets_categories_and_places_come_along() -> None:
     assert qbit["config"] == {"url": "http://qbit.lan:8080", "username": "admin", "password": "adminadmin"}
     sonarr = next(c for c in plan["connections"] if c["kind"] == "sonarr")
     assert sonarr["config"]["api_key"] == "sonarr-key"
-    assert any("openmediavault" in w for w in plan["warnings"])
+    # ⚠️ This was a warning until the openmediavault adapter came over from
+    # upstream with the twenty-three others. A Homarr config that names a
+    # service HexDeck now speaks makes a connection out of it, and says which
+    # field it could not read out of the file.
+    omv = next(c for c in plan["connections"] if c["kind"] == "openmediavault")
+    assert omv["config"] == {"url": "http://omv.lan"} and omv["missing"] == ["password"]
 
 
 def test_a_file_that_is_neither_is_refused() -> None:

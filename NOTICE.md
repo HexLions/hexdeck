@@ -137,6 +137,28 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Twenty-three adapters taken over from upstream, with their tests.**
+  nexdeck had reached 0.30.0 and 241 commits this fork did not have, so the
+  adapters it owns were brought over as they are: Arcane, Dockhand,
+  FileBrowser Quantum, FreshRSS, IMAP, Linkding, Mailpit, NeutArr, nexbeat,
+  nexcrate, nexlore, nexsift, nextrmnl, OctoPrint, openmediavault, Pangolin,
+  PatchMon, Qui, ReadMeABook, Real-Debrid, rTorrent, SNMP and Tracearr, with
+  their 432 tests, their fixtures, their documentation rows and their German
+  and Italian texts, plus the ``nexcrate`` pairing route, ``pysnmp`` and the
+  ``bars`` flag on ``WidgetType`` that several of them declare.
+
+  ⚠️ The ``bars`` flag is an upstream fix worth naming: the "Rows / Bars"
+  switch used to be offered on every list card, and upstream counted that 14
+  of 157 could draw it, so on the other 143 the switch changed nothing.
+
+  ⚠️ Twelve of the twenty-three are out of beta because **upstream**
+  confirmed them against a live instance. This fork has not seen them, and
+  the guard that holds the list says so where somebody will read it.
+
+  ⚠️ Seven adapters this fork wrote first exist upstream as well, written
+  independently: NetBird, Kubernetes, Minecraft, UrBackup, the public
+  address, Elasticsearch and OpenWrt. This fork keeps its own, which are
+  the ones its tests cover.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which

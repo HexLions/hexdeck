@@ -213,6 +213,7 @@ CREDENTIAL_STEMS = ("key", "token", "secret", "password", "passwd", "auth", "hea
 NOT_A_CREDENTIAL: dict[tuple[str, str], str] = {
     ("proxmox", "token_id"): "names which token is used, like a user name; the secret is token_secret",
     ("pbs", "token_id"): "the same, next to its own token_secret",
+    ("snmp", "auth_protocol"): "names which digest SNMPv3 authentication uses (SHA, MD5); the secret is auth_password",
 }
 
 
@@ -532,7 +533,13 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         "karakeep", "kavita", "kimai", "komga", "kopia", "lidarr", "linkwarden", "mealie", "meilisearch", "metube", "miniflux", "n8n", "navidrome", "netbox", "nextcloud", "nexview", "npm", "ntfy", "nzbget",
         "paperless", "pihole", "plex", "portainer", "prometheus", "prowlarr", "proxmox", "qbittorrent", "radarr", "reolink", "romm", "sabnzbd", "seerr", "semaphore",
         "shlink", "sonarr", "speedtest", "syncthing", "synology", "tautulli", "tdarr", "technitium", "traefik", "transmission", "unifi", "unmanic", "vikunja", "wgeasy", "wger",
-        "backrest", "blocky", "bookorbit", "gatus", "ghostfolio", "homebox", "komodo", "netalertx", "netdata", "ollama", "openwebui", "photoprism", "pocketid", "sportarr", "tandoor", "tubearchivist", "wallos", "watchtower", "wud", "zabbix", "truenas", "nexmail", "nexpulse"}
+        "backrest", "blocky", "bookorbit", "gatus", "ghostfolio", "homebox", "komodo", "netalertx", "netdata", "ollama", "openwebui", "photoprism", "pocketid", "sportarr", "tandoor", "tubearchivist", "wallos", "watchtower", "wud", "zabbix", "truenas", "nexmail", "nexpulse",
+        # ⚠️ Taken over from upstream with the adapters themselves, and the
+        # confirmation is upstream's rather than ours: it saw each of these
+        # against a live instance, this fork has not. Said plainly here because
+        # the badge in the interface will not say whose instance it was.
+        "arcane", "dockhand", "freshrss", "imap", "linkding", "nexbeat", "nexcrate", "nextrmnl",
+        "octoprint", "openmediavault", "patchmon", "rtorrent"}
 
 
 #: Routers whose changing addresses deliberately write nothing, with the reason.

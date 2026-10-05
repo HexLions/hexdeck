@@ -692,6 +692,32 @@
         "A logo that only exists as a PNG is no longer a grey box.",
         "TrueNAS shows live processor and memory use again."
       ]
+    },
+    "0.19.0": {
+      "lead": "HexDeck 0.19.0: twenty-three integrations taken over from nexdeck, NetBird, and a weekly note on what else upstream has.",
+      "sections": [
+        {
+          "title": "Twenty-three integrations more",
+          "body": "Arcane, Dockhand, FileBrowser Quantum, FreshRSS, IMAP, Linkding, Mailpit, NeutArr, nexbeat, nexcrate, nexlore, nexsift, nextrmnl, OctoPrint, openmediavault, Pangolin, PatchMon, Qui, ReadMeABook, Real-Debrid, rTorrent, SNMP and Tracearr, brought over from nexdeck with their own tests and documentation.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "NetBird",
+          "body": "The mesh with the logins that have run out and the machines waiting for approval, the machines with what needs attention first, and the setup keys with what is left of them. NetBird Cloud and a self-hosted management server alike.",
+          "path": "System > Connections > NetBird"
+        },
+        {
+          "title": "A Homarr import that knows more services",
+          "body": "A config that names openmediavault now becomes a connection instead of a warning that the service has no equivalent here.",
+          "path": "System > Boards > Import"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A hundred and sixty-three integrations in all.",
+        "Twelve of the new ones are out of beta on upstream's word, not this fork's.",
+        "A weekly job lists the commits nexdeck has that this fork does not."
+      ]
     }
   }
 }

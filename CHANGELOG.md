@@ -5,6 +5,56 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.19.0 (2026-10-05)
+
+Twenty-three adapters taken over from upstream, NetBird, and a weekly job that
+says what else upstream has.
+
+⚠️ **About the numbering.** This changelog carries nexdeck's history up to
+0.16.0 and HexDeck's own from 0.17.0, and from here the two cannot be compared:
+nexdeck is at 0.30.0 with its own releases, and these numbers are this fork's.
+A HexDeck version being lower than a nexdeck version says nothing about which
+contains what.
+
+### Taken over from upstream
+
+- **Twenty-three adapters, with their tests.** Arcane, Dockhand, FileBrowser
+  Quantum, FreshRSS, IMAP, Linkding, Mailpit, NeutArr, nexbeat, nexcrate,
+  nexlore, nexsift, nextrmnl, OctoPrint, openmediavault, Pangolin, PatchMon,
+  Qui, ReadMeABook, Real-Debrid, rTorrent, SNMP and Tracearr, as upstream wrote
+  them: 432 tests, the fixtures they read, their rows in the adapter document
+  and their German and Italian texts. With them came the `nexcrate` pairing
+  route, `pysnmp`, and the `bars` flag on `WidgetType`.
+- **A Homarr config that names openmediavault** now makes a connection out of
+  it instead of warning that the service has no equivalent here.
+- ⚠️ Twelve of the twenty-three are out of beta because **upstream** confirmed
+  them against a live instance. This fork has not seen them; the guard that
+  holds that list says so, and the badge in the interface cannot.
+- ⚠️ Seven adapters this fork wrote first exist upstream as well, written
+  independently: NetBird, Kubernetes, Minecraft, UrBackup, the public address,
+  Elasticsearch and OpenWrt. The fork keeps its own, which its tests cover.
+
+### New
+
+- **NetBird**, cloud and self-hosted: the mesh with the logins that have run
+  out and the machines waiting for approval, the machines themselves with what
+  needs attention first, and the setup keys, where one that still works but not
+  for much longer is worth a colour. The token goes in as
+  `Authorization: Token nbp_...`, which is the one detail that is easy to get
+  wrong.
+- **Following upstream without merging it.** A weekly workflow counts the
+  commits nexdeck has that this fork does not and keeps one issue up to date
+  with them, split into the adapters upstream owns and the files this fork has
+  rewritten. It merges nothing and opens no pull request.
+
+### Still behind upstream
+
+The renderers nexdeck added after 0.15.0 — `strips`, `inout`, `flow`,
+`heatmap`, `tabs`, `group` and `topology` — and the `cards` field type. No
+adapter in this release needs them. The `bars` flag is accepted and inert for
+the same reason: the rule behind it lives on each adapter, and the ~140
+adapters shared with upstream carry it only in upstream's newer copies.
+
 ## 0.18.0 (2026-10-05)
 
 Eleven integrations and nine cards more than 0.17.0, and every one of them is

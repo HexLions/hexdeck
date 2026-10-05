@@ -179,6 +179,15 @@ class WidgetType:
     #: only place that knows what the whole is, and this flag only decides
     #: whether the choice appears at all.
     ring: bool = False
+    #: Whether a list can be drawn as bars. Declared rather than assumed, like
+    #: the ring: the drawing needs rows that carry numbers, and ``as_bars``
+    #: refuses it for rows of text.
+    #:
+    #: ⚠️ Taken from upstream, which counted it on 22.09.2026: the switch was
+    #: offered on every list, 14 of 157 could draw it, and on the other 143
+    #: "Rows / Bars" changed nothing. It was reported on a list of GitHub
+    #: issues whose values read "1 h".
+    bars: bool = False
 
     def __post_init__(self) -> None:
         """Never smaller than the drawing can bear.
@@ -208,6 +217,13 @@ class WidgetType:
         # are can be drawn as a ring. Written here once rather than into the
         # eighty list cards, which is eighty chances to word it differently.
         extra: tuple[tuple[str, str], ...] = ()
+        # ⚠️ Upstream narrowed this to ``self.bars`` and counted why: of 157 list
+        # cards, 14 could draw bars and on the other 143 the switch did nothing.
+        # The rule is right, and taking it alone would be wrong here: the
+        # declaration lives on each adapter, and the ~140 adapters this fork
+        # shares with upstream carry the flag only in upstream's newer copies of
+        # them. Until those come over, the flag is accepted and the offer stays
+        # where it was, so none of the 14 that work loses it.
         if self.renderer == "list":
             extra += (("bars", "Bars"),)
         if self.ring:
