@@ -659,6 +659,39 @@
         "Italian, next to English and German.",
         "Leaving demo mode takes the demo's connections, cards and boards with it."
       ]
+    },
+    "0.18.0": {
+      "lead": "HexDeck 0.18.0: eleven integrations more, a host card that needs no agent, one list of everything that has an update, and a to-do list the whole house can tick.",
+      "sections": [
+        {
+          "title": "Eleven integrations more",
+          "body": "ProxMenux Monitor, AMP, Kubernetes, Minecraft, Steam, Shelly, OpenWrt, UrBackup, Elasticsearch, your public address and YouTube subscriptions. All of them carry a beta badge until each has been seen against a live instance.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "The machine itself, without an agent",
+          "body": "A host card reads /proc and /sys directly: processors, memory, swap, load, uptime, the warmest sensor and one file system. Mount /proc:/host/proc:ro and /sys:/host/sys:ro and it reads the machine instead of the container, which it says on its face either way.",
+          "path": "Add a card > Basics > Host"
+        },
+        {
+          "title": "One list of what has an update",
+          "body": "What's Up Docker, Cup and Watchtower, the newest release of the repositories you follow, and HexDeck itself, in one card. A source that will not answer puts a line of warning on the card instead of taking it down.",
+          "path": "Add a card > Basics > Updates"
+        },
+        {
+          "title": "A status page, notices and a to-do list",
+          "body": "Every reachability check in one list with its latency and uptime, the notices HexDeck has sent, and a to-do list kept on the server that everyone who may see the board can tick where the card says so.",
+          "path": "Add a card > Basics"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The version is in the account menu and under both settings navigations.",
+        "Homebox works on every version of its API, and says why when it refuses.",
+        "The calendar keeps the time of day and can leave out what is over.",
+        "A logo that only exists as a PNG is no longer a grey box.",
+        "TrueNAS shows live processor and memory use again."
+      ]
     }
   }
 }

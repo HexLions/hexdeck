@@ -43,6 +43,25 @@ def _rows() -> list[dict[str, str]]:
     return _warranty_rows(EXPORT)
 
 
+def _export_today() -> str:
+    """The same export, with its warranty dates where they were when it was measured.
+
+    ⚠️ The dates above are a real export of 11.09.2026, and the tests that read
+    them pass that date in by hand. A test that goes through ``fetch`` cannot:
+    the card asks the clock. Two of them therefore quietly changed meaning as the
+    months passed, until a warranty that had "just ended" was a month gone and
+    the card stopped showing it. Relative dates keep them saying what they said.
+    """
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    return (EXPORT
+            .replace("2026-09-01", (today - timedelta(days=10)).isoformat())   # just ended
+            .replace("2026-10-01", (today + timedelta(days=20)).isoformat())   # ending soon
+            .replace("2027-03-30", (today + timedelta(days=200)).isoformat())  # far off
+            .replace("2026-07-01", (today - timedelta(days=80)).isoformat()))  # long gone
+
+
 @respx.mock
 async def test_the_inventory_in_numbers(ctx: Context) -> None:
     statistics = respx.get(f"{HB}/api/v1/groups/statistics").mock(return_value=httpx.Response(200, json=STATISTICS))
@@ -92,7 +111,7 @@ def test_a_location_is_not_an_item_even_with_a_date() -> None:
 
 @respx.mock
 async def test_the_warranty_card_reads_the_export(ctx: Context) -> None:
-    export = respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(200, text=EXPORT, headers={"Content-Type": "text/csv"}))
+    export = respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(200, text=_export_today(), headers={"Content-Type": "text/csv"}))
     data = await get_adapter("homebox").fetch("warranties", CONFIG, {"days": 3650}, ctx)
     assert export.calls.last.request.headers["Authorization"] == "Bearer hb_made_up_key"
     assert {row["title"] for row in data.items} == {"Wifi Router", "Cordless Drill", "Coffee Machine"}
@@ -141,7 +160,7 @@ async def test_an_older_homebox_is_read_through_its_own_export(ctx: Context) -> 
     """⚠️ /entities/export is a 404 before 0.26; /items/export is the same CSV."""
     _sign_in()
     respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(404, json={"error": "not found"}))
-    items = respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=EXPORT))
+    items = respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=_export_today()))
     data = await get_adapter("homebox").fetch("warranties", OLD, {"days": 60}, ctx)
     assert items.call_count == 1
     assert [item["title"] for item in data.items] == ["Wifi Router", "Cordless Drill"]
@@ -151,7 +170,7 @@ async def test_an_older_homebox_is_read_through_its_own_export(ctx: Context) -> 
 async def test_the_address_that_answered_is_not_looked_for_again(ctx: Context) -> None:
     _sign_in()
     entities = respx.get(f"{HB}/api/v1/entities/export").mock(return_value=httpx.Response(404))
-    respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=EXPORT))
+    respx.get(f"{HB}/api/v1/items/export").mock(return_value=httpx.Response(200, text=_export_today()))
     await get_adapter("homebox").fetch("warranties", OLD, {}, ctx)
     await get_adapter("homebox").fetch("warranties", OLD, {}, ctx)
     assert entities.call_count == 1, "the version does not change between two refreshes"

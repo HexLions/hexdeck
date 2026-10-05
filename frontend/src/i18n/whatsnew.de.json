@@ -659,6 +659,39 @@
         "Italienisch, neben Englisch und Deutsch.",
         "Der Demo-Modus nimmt beim Verlassen seine Verbindungen, Karten und Boards mit."
       ]
+    },
+    "0.18.0": {
+      "lead": "HexDeck 0.18.0: elf Integrationen mehr, eine Host-Karte ohne Agent, eine Liste mit allem, was ein Update hat, und eine Aufgabenliste, die das ganze Haus abhaken darf.",
+      "sections": [
+        {
+          "title": "Elf Integrationen mehr",
+          "body": "ProxMenux Monitor, AMP, Kubernetes, Minecraft, Steam, Shelly, OpenWrt, UrBackup, Elasticsearch, die eigene öffentliche Adresse und YouTube-Abos. Alle tragen ein Beta-Abzeichen, bis sie je gegen eine echte Instanz gesehen wurden.",
+          "path": "System > Verbindungen"
+        },
+        {
+          "title": "Die Maschine selbst, ohne Agent",
+          "body": "Eine Host-Karte liest /proc und /sys direkt: Prozessoren, Speicher, Swap, Last, Laufzeit, den wärmsten Sensor und ein Dateisystem. Hänge /proc:/host/proc:ro und /sys:/host/sys:ro ein, und sie liest die Maschine statt des Containers; was von beidem, sagt sie selbst.",
+          "path": "Karte hinzufügen > Grundlagen > Host"
+        },
+        {
+          "title": "Eine Liste mit allem, was ein Update hat",
+          "body": "What's Up Docker, Cup und Watchtower, das neueste Release der Repositories, die du verfolgst, und HexDeck selbst, in einer Karte. Eine Quelle, die nicht antwortet, wird eine Zeile Warnung und nimmt nicht die Karte mit.",
+          "path": "Karte hinzufügen > Grundlagen > Updates"
+        },
+        {
+          "title": "Statusseite, Meldungen und eine Aufgabenliste",
+          "body": "Jede Erreichbarkeitsprüfung in einer Liste, mit Latenz und Verfügbarkeit, die Meldungen, die HexDeck geschickt hat, und eine Aufgabenliste auf dem Server, die jeder abhaken darf, der das Board sehen darf, wenn die Karte es sagt.",
+          "path": "Karte hinzufügen > Grundlagen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die Fassung steht im Konto-Menü und unter beiden Einstellungs-Navigationen.",
+        "Homebox läuft mit jeder Fassung seiner API und sagt, warum es ablehnt.",
+        "Der Kalender behält die Uhrzeit und kann Vergangenes weglassen.",
+        "Ein Logo, das es nur als PNG gibt, ist keine graue Kiste mehr.",
+        "TrueNAS zeigt Prozessor und Speicher wieder in Echtzeit."
+      ]
     }
   }
 }

@@ -32,6 +32,39 @@
         "L'italiano, accanto a inglese e tedesco.",
         "Uscire dalla modalità demo porta via connessioni, card e board del demo."
       ]
+    },
+    "0.18.0": {
+      "lead": "HexDeck 0.18.0: undici integrazioni in più, una card dell'host senza agent, una lista con tutto quello che ha un aggiornamento e una lista di cose da fare che può spuntare tutta la casa.",
+      "sections": [
+        {
+          "title": "Undici integrazioni in più",
+          "body": "ProxMenux Monitor, AMP, Kubernetes, Minecraft, Steam, Shelly, OpenWrt, UrBackup, Elasticsearch, il tuo indirizzo pubblico e le iscrizioni YouTube. Tutte hanno il bollino beta finché non sono state provate contro un'istanza vera.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "La macchina stessa, senza agent",
+          "body": "Una card legge /proc e /sys direttamente: processori, memoria, swap, carico, tempo di attività, il sensore più caldo e un file system. Monta /proc:/host/proc:ro e /sys:/host/sys:ro e legge la macchina invece del container; quale dei due, lo dice lei.",
+          "path": "Aggiungi una card > Base > Host"
+        },
+        {
+          "title": "Una lista di quello che ha un aggiornamento",
+          "body": "What's Up Docker, Cup e Watchtower, l'ultima release dei repository che segui e HexDeck stesso, in una sola card. Una fonte che non risponde diventa una riga di avviso e non si porta via la card.",
+          "path": "Aggiungi una card > Base > Aggiornamenti"
+        },
+        {
+          "title": "Pagina di stato, notifiche e lista da fare",
+          "body": "Ogni controllo di raggiungibilità in una lista, con latenza e disponibilità, le notifiche che HexDeck ha mandato, e una lista di cose da fare tenuta sul server che può spuntare chiunque veda la board, dove la card lo consente.",
+          "path": "Aggiungi una card > Base"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "La versione è nel menu dell'account e sotto entrambe le navigazioni delle impostazioni.",
+        "Homebox funziona con ogni versione della sua API e dice perché rifiuta.",
+        "Il calendario tiene l'ora e può lasciare fuori quello che è passato.",
+        "Un logo che esiste solo in PNG non è più un quadrato grigio.",
+        "TrueNAS mostra di nuovo processore e memoria in tempo reale."
+      ]
     }
   }
 }

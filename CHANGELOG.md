@@ -5,6 +5,81 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.18.0 (2026-10-05)
+
+Eleven integrations and nine cards more than 0.17.0, and every one of them is
+something this fork wanted rather than something upstream had. The release also
+carries two fixes that made correct configurations look broken.
+
+### New integrations
+
+- **ProxMenux Monitor** for what the Proxmox API does not carry: ten categories
+  of health check with a reason in words, the physical disks with their SMART
+  verdict and temperature, the node's sensors, and its guests. Read-only, with
+  the API token the monitor mints for exactly this.
+- **AMP (CubeCoders)**: every game server instance of every target in one list,
+  one server's processor, memory and players, and start, stop and restart from
+  a row. An installation without a controller is itself the game server and is
+  read that way.
+- **Kubernetes**, with a `view` role and nothing more: nodes, pods that are not
+  running, deployments short of replicas, and usage where metrics-server
+  reports it.
+- **Minecraft**, by the ping its own client sends, Java over TCP and Bedrock
+  over UDP. No plugin, no account, and no credential exists in either protocol.
+- **Steam**: the state of an account, the games of the last fortnight and the
+  size of the library.
+- **Shelly**, on the local network and never through their cloud: power now,
+  the energy counter, the temperature, and a button that switches the relay.
+- **OpenWrt**, over `/ubus`, the same bus LuCI talks to: load, memory, uptime,
+  the WAN address and the stations on each radio.
+- **UrBackup**: the last backup of every client, who has fallen behind, the
+  storage in use, and a backup that can be asked for from a row.
+- **Elasticsearch and OpenSearch**: the colour the cluster gives itself, its
+  shards, and its indices by size and health.
+- **Your public address**: what the line shows to the world, from one keyless
+  service once an hour, and a word when it changes.
+- **YouTube, from your subscriptions**: the channels an account follows and
+  their newest videos.
+
+### New cards
+
+- **Host**: processors, memory, swap, load, uptime, the warmest sensor and one
+  file system, read straight out of `/proc` and `/sys`. Mount them under
+  `/host` and the card reads the machine; without the mounts it reads the
+  container and says so on its face.
+- **Updates**: one list of what has a newer version, merging What's Up Docker,
+  Cup and Watchtower with the releases of the repositories you follow and
+  HexDeck itself. A source that will not answer becomes a line of warning
+  rather than an error that takes the card down.
+- **Status page** and **Notices**: every reachability check in one list with
+  its latency, availability bars and uptime, and the notices HexDeck has sent.
+- **To-do**: a list kept on the server, the same on every screen, which
+  everyone who may see the board can tick where the card says so.
+- **Value by place** (Homebox): what the things in each location are worth, or
+  under each tag, largest first with a share of the whole.
+- The **calendar** keeps the time of day, sorts inside a day and can leave out
+  what is already over.
+- The **notepad** can be written in by everyone who may see the board.
+- The **version** is in the account menu and under both settings navigations,
+  with a link to the releases when a newer one is out.
+
+### Fixed
+
+- **Homebox could not work at all on 0.25 and older**, which has no API keys:
+  that address is simply not a route there. Those installations now sign in
+  with an account. The item export also moved from `/items/export` to
+  `/entities/export` in 0.26, and only the new address was called, so an older
+  Homebox answered 404 and the card blamed the URL. Both are tried now, and a
+  refusal repeats what Homebox itself said, which tells a proxy eating the
+  header apart from a key the installation does not know.
+- **A logo that the icon collections carry only as a PNG** drew the grey box
+  that means "no such logo", because every logo address the interface builds
+  ends in `.svg`. The proxy falls back to the PNG.
+- **TrueNAS live numbers**: the realtime subscription's events carry the
+  argument in their name, so the card never matched them and showed nothing.
+- **A percentage row of a stats card is a bar and nothing else.** The sparkline
+  that took its place after a few minutes read as a hundred per cent.
+
 ## 0.17.0 (2026-09-22)
 
 The first release of HexDeck, a fork of nexdeck 0.16.0. It keeps the engine
