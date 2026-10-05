@@ -63,6 +63,17 @@ carries two fixes that made correct configurations look broken.
 - The **version** is in the account menu and under both settings navigations,
   with a link to the releases when a newer one is out.
 
+### Dependencies
+
+- **PyJWT to 2.15.0** (thirteen advisories, among them empty HMAC keys being
+  accepted and a claim-verification bypass through a reused options dict) and
+  **oauthlib to 4.0.0** (a JSONP injection and a timing attack in the PKCE
+  comparison). oauthlib is nobody's choice here: it arrives through apprise, by
+  way of requests-oauthlib, and is pinned so that it cannot drift back.
+- **brace-expansion, DOMPurify, fast-uri and serialize-javascript** in the
+  frontend lockfile, all transitive, all denial of service or cross-site
+  scripting.
+
 ### Fixed
 
 - **Homebox could not work at all on 0.25 and older**, which has no API keys:

@@ -8,7 +8,13 @@ sqlalchemy==2.0.44
 pydantic==2.12.4
 pydantic-settings==2.14.2
 bcrypt==5.0.0
-pyjwt==2.13.0
+pyjwt==2.15.0
+# ⚠️ Not ours to want: oauthlib arrives through apprise, by way of
+# requests-oauthlib, and 3.3.1 carries a JSONP injection and a timing
+# attack in PKCE comparison. Pinned here because nothing else would raise
+# it, and the audit counts every installed package, not only the asked-for
+# ones.
+oauthlib==4.0.0
 httpx==0.28.1
 cryptography==50.0.1
 # Web Push: py-vapid signs each message for the push service (RFC 8292),
