@@ -1445,7 +1445,23 @@
     "The virtual machines and containers on this node, stopped ones last.": "Le macchine virtuali e i container di questo nodo, quelli fermi per ultimi.",
     "Which": "Quali",
     "Machines and containers": "Macchine e container",
-    "Every physical disk with its SMART verdict and its temperature.": "Ogni disco fisico con il suo giudizio SMART e la sua temperatura."
+    "Every physical disk with its SMART verdict and its temperature.": "Ogni disco fisico con il suo giudizio SMART e la sua temperatura.",
+    "The machines on the mesh, the logins that have run out, and the setup keys that still work.": "Le macchine sulla mesh, gli accessi scaduti e le setup key che funzionano ancora.",
+    "NetBird Cloud answers at https://api.netbird.io. A self-hosted management server answers the same API at its own address.": "NetBird Cloud risponde su https://api.netbird.io. Un management server self-hosted risponde con la stessa API al suo indirizzo.",
+    "A personal access token from Team > Users > your account > Access tokens. It begins with nbp_ and NetBird shows it once.": "Un token di accesso personale da Team > Users > il tuo account > Access tokens. Inizia con nbp_ e NetBird lo mostra una volta sola.",
+    "For a self-hosted server behind a certificate of its own.": "Per un server self-hosted con un certificato suo.",
+    "Mesh": "Mesh",
+    "How many machines are connected, how many have a login that ran out, and the server's version.": "Quante macchine sono connesse, quante hanno l'accesso scaduto e la versione del server.",
+    "Machines": "Macchine",
+    "Every machine on the mesh with its system, its version and when it was last seen.": "Ogni macchina sulla mesh con il suo sistema, la sua versione e quando è stata vista.",
+    "What needs attention first": "Prima quello che richiede attenzione",
+    "An expired login or a machine waiting for approval before the rest. Off sorts by name.": "Un accesso scaduto o una macchina in attesa di approvazione prima del resto. Disattivato ordina per nome.",
+    "Only what is not connected": "Solo quello che non è connesso",
+    "Group": "Gruppo",
+    "Only the machines in this group, by its name. Empty means all of them.": "Solo le macchine di questo gruppo, per nome. Vuoto significa tutte.",
+    "Setup keys": "Setup key",
+    "The keys that enrol machines, with what is left of them and when they expire.": "Le chiavi con cui si aggiungono le macchine, con quanto ne resta e quando scadono.",
+    "Hide revoked keys": "Nascondi le chiavi revocate"
   },
   "labels": {
     "Jobs": "Job",
@@ -2159,6 +2175,10 @@
     "Warnings": "Avvisi",
     "Well": "In ordine",
     "Not well": "Non in ordine",
-    "Warmest": "Il più caldo"
+    "Warmest": "Il più caldo",
+    "Machines": "Macchine",
+    "Login expired": "Accesso scaduto",
+    "To approve": "Da approvare",
+    "Keys": "Chiavi"
   }
 }

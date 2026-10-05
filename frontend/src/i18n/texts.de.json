@@ -1445,7 +1445,23 @@
     "The virtual machines and containers on this node, stopped ones last.": "Die virtuellen Maschinen und Container dieses Knotens, gestoppte zuletzt.",
     "Which": "Welche",
     "Machines and containers": "Maschinen und Container",
-    "Every physical disk with its SMART verdict and its temperature.": "Jede physische Platte mit ihrem SMART-Urteil und ihrer Temperatur."
+    "Every physical disk with its SMART verdict and its temperature.": "Jede physische Platte mit ihrem SMART-Urteil und ihrer Temperatur.",
+    "The machines on the mesh, the logins that have run out, and the setup keys that still work.": "Die Maschinen im Mesh, die abgelaufenen Anmeldungen und die Setup-Keys, die noch gelten.",
+    "NetBird Cloud answers at https://api.netbird.io. A self-hosted management server answers the same API at its own address.": "NetBird Cloud antwortet auf https://api.netbird.io. Ein selbst betriebener Management-Server antwortet mit derselben API auf seiner eigenen Adresse.",
+    "A personal access token from Team > Users > your account > Access tokens. It begins with nbp_ and NetBird shows it once.": "Ein persönliches Zugriffstoken aus Team > Users > dein Konto > Access tokens. Es beginnt mit nbp_ und NetBird zeigt es einmal.",
+    "For a self-hosted server behind a certificate of its own.": "Für einen selbst betriebenen Server mit eigenem Zertifikat.",
+    "Mesh": "Mesh",
+    "How many machines are connected, how many have a login that ran out, and the server's version.": "Wie viele Maschinen verbunden sind, wie viele eine abgelaufene Anmeldung haben, und die Fassung des Servers.",
+    "Machines": "Maschinen",
+    "Every machine on the mesh with its system, its version and when it was last seen.": "Jede Maschine im Mesh mit System, Fassung und wann sie zuletzt gesehen wurde.",
+    "What needs attention first": "Was Aufmerksamkeit braucht, zuerst",
+    "An expired login or a machine waiting for approval before the rest. Off sorts by name.": "Eine abgelaufene Anmeldung oder eine Maschine, die auf Freigabe wartet, vor dem Rest. Aus sortiert nach Namen.",
+    "Only what is not connected": "Nur was nicht verbunden ist",
+    "Group": "Gruppe",
+    "Only the machines in this group, by its name. Empty means all of them.": "Nur die Maschinen dieser Gruppe, nach ihrem Namen. Leer heißt alle.",
+    "Setup keys": "Setup-Keys",
+    "The keys that enrol machines, with what is left of them and when they expire.": "Die Keys, mit denen Maschinen aufgenommen werden, mit ihrem Rest und ihrem Ablauf.",
+    "Hide revoked keys": "Zurückgezogene Keys verbergen"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -2159,6 +2175,10 @@
     "Warnings": "Warnungen",
     "Well": "In Ordnung",
     "Not well": "Nicht in Ordnung",
-    "Warmest": "Wärmste"
+    "Warmest": "Wärmste",
+    "Machines": "Maschinen",
+    "Login expired": "Anmeldung abgelaufen",
+    "To approve": "Freizugeben",
+    "Keys": "Keys"
   }
 }

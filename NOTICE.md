@@ -137,6 +137,22 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **NetBird, cloud and self-hosted alike.** The management API with a
+  personal access token, which goes in as ``Authorization: Token nbp_...``
+  and not as Bearer: sent as Bearer it is refused and nothing says which
+  word was wrong. Three cards: the mesh with the logins that have run out
+  and the machines waiting for approval, the machines themselves with what
+  needs attention first, and the setup keys, where one that still works but
+  not for much longer is worth a colour because what stops working is the
+  machine enrolled with it, days later. A peer that is merely asleep is not
+  a fault, and one that was never seen carries the zero time, which would
+  otherwise read as the year one.
+- **Following upstream without merging it.** ``.github/workflows/upstream.yml``
+  runs weekly, counts what nexdeck has that this fork does not, and keeps one
+  issue up to date with it. The report is split in two: the adapters upstream
+  owns, which come over as they are, and the files this fork has its own
+  version of, where a blind merge would undo work. Nothing is merged or
+  cherry-picked by the machine.
 - **ProxMenux Monitor, for what the Proxmox API does not carry.** HexDeck
   already speaks the Proxmox API; the monitor on the node adds its ten
   categories of health check with a reason in words, the physical disks with
