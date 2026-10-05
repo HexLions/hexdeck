@@ -127,12 +127,35 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "log": (3, 2),
     "timeline": (3, 2),
     "bars": (3, 2),
+    # A strip of bars needs its width; two rows of services is the least worth showing.
+    "strips": (3, 2),
+    "inout": (3, 2),
+    # A title or a line; one row high, and a column wide over a single column of cards.
+    "heading": (1, 1),
+    # Five places round a house need room to stand apart.
+    "flow": (3, 3),
+    # Thirteen weeks of seven squares and a line of numbers under them.
+    "heatmap": (3, 2),
     "roadmap": (4, 2),
     "project": (3, 2),
     "items": (3, 2),
     "notepad": (2, 2),
     "todo": (2, 2),
 }
+#: Pairs of metrics that are one line going in and one going out. A card that
+#: records both can draw them mirrored on one axis, in above and out below.
+#: Taken from upstream with the drawing.
+INOUT_PAIRS: tuple[tuple[str, str], ...] = (
+    ("wan_down", "wan_up"), ("down", "up"), ("download", "upload"), ("rx", "tx"), ("sync_down", "sync_up"),
+)
+
+
+def inout_pair(metrics: tuple[str, ...] | list[str] | Any) -> tuple[str, str] | None:
+    """The first pair of in and out among a card's metrics, if it has one."""
+    names = set(metrics or ())
+    return next((pair for pair in INOUT_PAIRS if pair[0] in names and pair[1] in names), None)
+
+
 #: For a renderer nobody listed. Two by two is the smallest that holds a title
 #: and a line under it without one sitting on the other.
 DEFAULT_MIN = (2, 2)
@@ -188,6 +211,10 @@ class WidgetType:
     #: "Rows / Bars" changed nothing. It was reported on a list of GitHub
     #: issues whose values read "1 h".
     bars: bool = False
+    #: Whether a pair of metrics named like in and out (``down`` and ``up``)
+    #: really is traffic. False where the pair counts things: Gatus's ``up`` and
+    #: ``down`` are endpoints, and a mirror of those would be nonsense.
+    inout: bool = True
 
     def __post_init__(self) -> None:
         """Never smaller than the drawing can bear.
@@ -235,6 +262,11 @@ class WidgetType:
         # sparkline inside the card it belongs to.
         if len(self.metrics) >= 2 and self.renderer != "chart" and not self.client_only:
             extra += (("chart", "A chart"),)
+        # A line in and a line out, mirrored on one axis: what a router or a
+        # download client is about, in one picture rather than two lines that
+        # cross because they live on scales a hundred times apart.
+        if self.inout and inout_pair(self.metrics) and not self.client_only:
+            extra += (("inout", "In and out, mirrored"),)
         if extra:
             object.__setattr__(self, "options", offer_views(self.options, self.renderer, extra))
         if self.parts:

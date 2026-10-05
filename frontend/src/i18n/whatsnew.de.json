@@ -718,6 +718,32 @@
         "Zwölf der neuen sind auf upstreams Wort aus der Beta, nicht auf das dieses Forks.",
         "Ein wöchentlicher Lauf listet die Commits, die nexdeck hat und dieser Fork nicht."
       ]
+    },
+    "0.20.0": {
+      "lead": "HexDeck 0.20.0: eine Überschrift-Karte, die Statusseite als breite Streifen, Verkehr gespiegelt gezeichnet, und der Energiefluss.",
+      "sections": [
+        {
+          "title": "Eine Überschrift-Karte",
+          "body": "Ein Titel über die Seite, eine Linie, oder beides, um ein Board in Abschnitte zu teilen. Sie hat keinen eigenen Grund: sie steht zwischen den Karten, nicht unter ihnen.",
+          "path": "Karte hinzufügen > Grundlagen > Überschrift"
+        },
+        {
+          "title": "Die Statusseite als Streifen",
+          "body": "Ein breiter Streifen Verfügbarkeit pro Dienst statt Zeilen mit je einem kleinen: das Aussehen einer öffentlichen Statusseite, und was man quer durch den Raum liest.",
+          "path": "Statusseite > Einstellungen > Aussehen"
+        },
+        {
+          "title": "Hinein und hinaus, gespiegelt",
+          "body": "Eine Karte, die ein Paar wie Verkehr benannter Metriken aufzeichnet, kann sie auf einer Achse zeichnen, hinein oben und hinaus unten, statt zweier Linien, die sich kreuzen, weil ihre Maßstäbe hundertfach auseinanderliegen.",
+          "path": "Jede Karte mit so einem Paar > Einstellungen > Ansicht"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Wohin der Strom fließt, als Fluss ums Haus, mit evcc.",
+        "Dreizehn Wochen Tage als Quadrate, mit Tautulli.",
+        "nexdeck nimmt keine Pull Requests, also nimmt der Fork und nennt es, und schickt nichts zurück."
+      ]
     }
   }
 }

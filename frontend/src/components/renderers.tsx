@@ -38,6 +38,9 @@ import { safeUrl } from '../lib/safeUrl'
 import type { Action, Saveable, Secondary, Status, WidgetData, WidgetView } from '../lib/types'
 import { AskCard } from './AskCard'
 import { ButtonCard } from './ButtonCard'
+import { HeadingCard } from './HeadingCard'
+import { FlowCard } from './FlowCard'
+import { HeatmapCard } from './HeatmapCard'
 import { CameraCard } from './CameraCard'
 import { ImageCard } from './ImageCard'
 import { SearchCard } from './SearchCard'
@@ -72,6 +75,11 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   value: ValueCard,
   gauge: GaugeCard,
   stats: StatsCard,
+  strips: StripsCard,
+  inout: InOutCard,
+  heading: HeadingCard,
+  flow: FlowCard,
+  heatmap: HeatmapCard,
   list: ListCard,
   nowplaying: NowPlayingCard,
   calendar: CalendarCard,
@@ -422,6 +430,157 @@ export function StatsCard({ data, series }: RenderProps) {
               </div>
               <div className="num text-[13px] font-semibold text-right whitespace-nowrap min-w-[3.5rem]" title={row.text ? formatValue(row.value, row.unit) : undefined}>{row.text ?? formatValue(row.value, row.unit)}</div>
             </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Strips: the same rows, one wide strip of availability each
+// ---------------------------------------------------------------------------
+
+/**
+ * One service's window of availability, wide enough to read across a room.
+ * Taken from upstream, which added it for its own status page.
+ */
+function Strip({ bars, label }: { bars: (number | null)[]; label: string }) {
+  return (
+    <div className="flex gap-[2px] h-5 min-w-0" role="img" aria-label={label} data-testid="strip">
+      {bars.map((bar, index) => (
+        <span
+          key={index}
+          className="flex-1 rounded-[2px] bar-in"
+          style={{
+            background:
+              bar === null
+                ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)'
+                : bar >= 0.99
+                  ? 'var(--nd-ok)'
+                  : bar > 0.5
+                    ? 'var(--nd-warn)'
+                    : 'var(--nd-bad)',
+            opacity: bar === null ? 1 : 0.85,
+            animationDelay: `${index * 10}ms`,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/**
+ * A list whose rows carry availability bars, drawn as one strip per row rather
+ * than as rows with a small strip in them: what a wall shows best.
+ *
+ * ⚠️ Asked for by the card's data (`meta.renderer`), not by its renderer, so
+ * the same card can be rows on a desk and strips on a wall.
+ */
+export function StripsCard({ data }: RenderProps) {
+  const { t } = useTranslation()
+  const items = data?.items ?? []
+  if (!items.length) return <Empty>{data?.meta?.empty ? tLabel(String(data.meta.empty)) : t('card.nothing')}</Empty>
+  const span = t(`card.bars.${String(data?.meta?.bars || '24h')}`, { defaultValue: t('card.bars.24h') })
+  return (
+    <ul className="flex-1 min-h-0 scroll px-3 pb-2.5 flex flex-col gap-2 justify-center" data-testid="strips">
+      {items.map((item, index) => {
+        const bars = Array.isArray(item.bars) ? (item.bars as (number | null)[]) : []
+        const name = String(item.title ?? '')
+        return (
+          <li
+            key={String(item.id ?? index)}
+            className="grid grid-cols-[minmax(4.5rem,9rem)_1fr_auto] items-center gap-3"
+            title={item.subtitle ? tLabel(String(item.subtitle)) : undefined}
+          >
+            <span className="flex items-center gap-2 min-w-0">
+              <span className="dot" data-status={statusOf(item.status)} />
+              <span className="text-[13px] truncate">{name}</span>
+            </span>
+            <Strip bars={bars} label={`${name}: ${span}`} />
+            <span className="num text-[12px] text-muted text-right min-w-[3.2rem]">
+              {item.value !== undefined && item.value !== '' ? formatValue(item.value as number | string, String(item.unit ?? '')) : ''}
+            </span>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// In and out: two lines mirrored on one axis
+// ---------------------------------------------------------------------------
+
+/** Half of the mirrored chart: a line and the area under it, up or down. */
+function half(points: number[], width: number, mid: number, room: number, downward: boolean): { line: string; area: string } {
+  const top = Math.max(...points, 0) || 1
+  const step = points.length > 1 ? width / (points.length - 1) : width
+  const place = (value: number, index: number) => {
+    const reach = (Math.max(0, value) / top) * room
+    return [index * step, downward ? mid + reach : mid - reach] as const
+  }
+  const line = points.map((value, index) => {
+    const [x, y] = place(value, index)
+    return `${index ? 'L' : 'M'}${x.toFixed(2)},${y.toFixed(2)}`
+  }).join(' ')
+  return { line, area: `${line} L${width},${mid} L0,${mid} Z` }
+}
+
+/**
+ * One line going in above the axis and one going out below it: what a router
+ * or a download client is about, in one picture instead of two lines that
+ * cross because they live on scales a hundred times apart.
+ *
+ * ⚠️ Which two metrics they are comes from the card's data (`meta.inout`); the
+ * server decides, because it knows which pairs really are traffic.
+ */
+export function InOutCard({ data, series }: RenderProps) {
+  const { t } = useTranslation()
+  const [inside, outside] = (Array.isArray(data?.meta?.inout) ? data.meta.inout : []) as string[]
+  const down = (inside && series?.[inside]) || []
+  const up = (outside && series?.[outside]) || []
+  const row = (metric: string) =>
+    [data?.primary, ...(data?.secondary ?? [])].find((one) => one && 'metric' in one && one.metric === metric) as Secondary | undefined
+  const width = 100
+  const height = 60
+  const mid = height * 0.58
+  const drawn = down.length > 1 && up.length > 1
+  const top = drawn ? half(down, width, mid, mid - 2, false) : null
+  const bottom = drawn ? half(up, width, mid, height - mid - 2, true) : null
+  return (
+    <div className="flex-1 flex flex-col min-h-0 px-3 pb-2.5">
+      <div className="relative flex-1 min-h-[40px]" title={t('card.history')}>
+        {top && bottom ? (
+          <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" className="nd-reveal absolute inset-0 w-full h-full" aria-hidden="true" data-testid="inout">
+            <defs>
+              <linearGradient id="nd-in" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor="var(--nd-accent)" stopOpacity="0.45" />
+                <stop offset="1" stopColor="var(--nd-accent)" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="nd-out" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stopColor="#818cf8" stopOpacity="0.45" />
+                <stop offset="1" stopColor="#818cf8" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path d={top.area} fill="url(#nd-in)" />
+            <path d={bottom.area} fill="url(#nd-out)" />
+            <path d={top.line} fill="none" stroke="var(--nd-accent)" strokeWidth="1.6" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+            <path d={bottom.line} fill="none" stroke="#818cf8" strokeWidth="1.6" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+            <line x1="0" x2={width} y1={mid} y2={mid} stroke="var(--nd-border-strong)" strokeDasharray="2 3" vectorEffect="non-scaling-stroke" />
+          </svg>
+        ) : (
+          <Empty>{t('card.collecting')}</Empty>
+        )}
+      </div>
+      <div className="flex gap-1.5 mt-1.5">
+        {[inside, outside].map((metric, index) => {
+          const one = metric ? row(metric) : undefined
+          return (
+            <span key={metric || index} className="chip" style={{ color: index ? '#a5b4fc' : 'var(--nd-accent)' }}>
+              {index ? '↑' : '↓'} {one ? tLabel(one.label) : metric}
+              <b className="num">{formatValue(one?.value ?? '', one?.unit)}</b>
+            </span>
           )
         })}
       </div>

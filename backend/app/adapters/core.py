@@ -257,6 +257,28 @@ class CoreAdapter(Adapter):
             ),
         ),
         WidgetType(
+            kind="heading",
+            label="Heading",
+            description="A title across the page with an optional line, to split the cards into sections. With the line alone it is a divider.",
+            renderer="heading",
+            # The whole row and one row high: a heading stands above its group.
+            # Narrower is allowed, for a heading over one column of cards.
+            default_size=(12, 1),
+            min_size=(1, 1),
+            refresh_seconds=3600,
+            client_only=True,
+            options=(
+                Field("style", "What it shows", type="select", default="both",
+                      options=(("both", "Title and line"), ("title", "Title only"), ("line", "Line only"))),
+                Field("align", "Alignment", type="select", default="left",
+                      options=(("left", "Left"), ("center", "Centred"))),
+                Field("size", "Text size", type="select", default="normal",
+                      options=(("small", "Small"), ("normal", "Normal"), ("large", "Large"))),
+                Field("colour", "Colour", type="colour", default="",
+                      help="Empty keeps the look of every other card."),
+            ),
+        ),
+        WidgetType(
             kind="status",
             label="Status page",
             description="Every card with a reachability check, what it answers and how it has been doing.",
@@ -272,6 +294,11 @@ class CoreAdapter(Adapter):
                       options=(("24h", "Last 24 hours"), ("6h", "Last 6 hours"), ("1h", "Last hour"), ("live", "Last 48 checks"), ("", "None")),
                       help="The row under each service."),
                 Field("only_down", "Only what is down", type="bool", default=False),
+                # ⚠️ The same rows drawn as one wide strip of bars per service:
+                # the look of a public status page, and what reads from across a
+                # room. Taken from upstream, which drew it first.
+                Field("look", "Look", type="select", default="rows",
+                      options=(("rows", "Rows with small bars"), ("strips", "A wide strip of bars per service"))),
             ),
         ),
         WidgetType(
@@ -378,6 +405,10 @@ class CoreAdapter(Adapter):
             return await self._updates(ctx, options)
         if widget_kind == "host":
             return self._host(ctx, options)
+        if widget_kind == "heading":
+            # Drawn from the card's own options, so a change shows while the
+            # settings sheet is still open.
+            return WidgetData()
         return self.demo(widget_kind, options, 0)
 
     @staticmethod
@@ -441,7 +472,10 @@ class CoreAdapter(Adapter):
             items=items,
             primary={"label": "Up", "value": f"{up} / {len(items)}"},
             metrics={"up": float(up), "down": float(down)},
-            meta={"empty": "Everything answers", "bars": window},
+            meta={"empty": "Everything answers", "bars": window,
+                  # Only when there is something to draw: a strip without bars
+                  # is an empty row, and the rows at least carry their words.
+                  **({"renderer": "strips"} if str(options.get("look") or "rows") == "strips" and window else {})},
         )
 
     @staticmethod
@@ -822,6 +856,10 @@ class CoreAdapter(Adapter):
                 ],
                 meta={"empty": "Nothing has happened"},
             )
+        if widget_kind == "heading":
+            # ⚠️ Nothing to invent: a heading is drawn from its own options, and
+            # the demo board carries the same options a real one does.
+            return WidgetData()
         if widget_kind == "app":
             return WidgetData(meta={
                 "description": options.get("description") or "",

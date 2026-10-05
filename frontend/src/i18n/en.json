@@ -1026,7 +1026,8 @@
       "notAllowed": "You may not start anything from this board."
     },
     "saveFile": "Save {{name}}",
-    "uptime": "Uptime in the window"
+    "uptime": "Uptime in the window",
+    "flow": "Where the power goes"
   },
   "player": {
     "title": "Music",

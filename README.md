@@ -100,7 +100,7 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
-The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.19.0` stays where it is. [What changed in each release](CHANGELOG.md).
+The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.20.0` stays where it is. [What changed in each release](CHANGELOG.md).
 
 Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays. For a dashboard at home that should not ask for a password at all, make a guest account and, under System › Sign-in providers, sign browsers on your network in as it by themselves; the password is then only for changing things.
 
@@ -251,7 +251,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | Sharing | Where a card allows it, viewers tick a to-do or write a notepad, and nothing else |
 | Upkeep | Recurring maintenance items, announced once a day through the notification channels |
 | Version | In the account menu and under both settings navigations, with a link to the releases when a newer one is out |
-| Upstream | A weekly workflow opens one issue with the commits nexdeck has and this fork does not, split into the adapters upstream owns and the files this fork has rewritten. It merges nothing |
+| Upstream | A weekly workflow opens one issue with the commits nexdeck has and this fork does not, split into the adapters upstream owns and the files this fork has rewritten. It merges nothing. nexdeck takes no pull requests, so this goes one way: taken, and named |
 
 ### Look and language
 

@@ -1026,7 +1026,8 @@
       "notAllowed": "Von diesem Brett aus darfst du nichts starten."
     },
     "saveFile": "{{name}} speichern",
-    "uptime": "Verfügbarkeit im Zeitraum"
+    "uptime": "Verfügbarkeit im Zeitraum",
+    "flow": "Wohin der Strom fließt"
   },
   "player": {
     "title": "Musik",

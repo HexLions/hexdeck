@@ -91,6 +91,32 @@
         "Dodici delle nuove sono fuori beta sulla parola di upstream, non sulla nostra.",
         "Un lavoro settimanale elenca i commit che nexdeck ha e questo fork no."
       ]
+    },
+    "0.20.0": {
+      "lead": "HexDeck 0.20.0: una card titolo, la pagina di stato a strisce larghe, il traffico disegnato specchiato, e il flusso dell'energia.",
+      "sections": [
+        {
+          "title": "Una card titolo",
+          "body": "Un titolo per tutta la pagina, una linea, o entrambi, per dividere una board in sezioni. Non ha un fondo suo: sta fra le card, non in mezzo a loro.",
+          "path": "Aggiungi una card > Base > Titolo"
+        },
+        {
+          "title": "La pagina di stato a strisce",
+          "body": "Una striscia larga di disponibilità per servizio invece di righe con una strisciolina ciascuna: il look di una status page pubblica, e quello che si legge dall'altra parte della stanza.",
+          "path": "Pagina di stato > impostazioni > Look"
+        },
+        {
+          "title": "Dentro e fuori, specchiati",
+          "body": "Una card che registra una coppia di metriche con nomi da traffico può disegnarle su un solo asse, dentro sopra e fuori sotto, invece di due linee che si incrociano perché le loro scale stanno cento volte distanti.",
+          "path": "Qualsiasi card con quella coppia > impostazioni > Vista"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Dove va l'energia, come flusso attorno alla casa, con evcc.",
+        "Tredici settimane di giorni come quadratini, con Tautulli.",
+        "nexdeck non accetta pull request, quindi il fork prende e lo dichiara, e non manda indietro niente."
+      ]
     }
   }
 }

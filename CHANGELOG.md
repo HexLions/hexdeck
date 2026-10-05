@@ -5,6 +5,46 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.20.0 (2026-10-05)
+
+Five drawings taken over from upstream, and the fork's relationship with
+upstream settled in writing.
+
+### New
+
+- **A heading card.** A title across the page, a line, or both, to split a
+  board into sections. It has no ground of its own: it stands between the
+  cards rather than among them.
+- **The status page as strips.** One wide strip of availability bars per
+  service instead of rows with a small strip each: the look of a public status
+  page, and what reads from across a room. Under the card's *Look*.
+- **In and out, mirrored.** A card that records a pair of metrics named like
+  traffic (`wan_down` and `wan_up`, `rx` and `tx`, and three more pairs) can
+  draw them on one axis, in above and out below, instead of two lines that
+  cross because they live on scales a hundred times apart.
+- **The energy flow and the heatmap**, with upstream's newer evcc and
+  Tautulli: where the power goes round a house, and thirteen weeks of days as
+  squares.
+
+### Changed
+
+- **nexdeck takes no pull requests.** Its author said so plainly, and that the
+  fork is welcome to keep taking what is useful under the AGPL. So the
+  relationship is one way now, and NOTICE.md says it: this fork takes from
+  nexdeck and names what it took, and sends nothing back. The TrueNAS work of
+  0.16.1 was contributed before that and remains the one exception.
+- **About "nexapps" in the contributor list.** 103 commits of this history are
+  DerKezorm's own, from before he rewrote nexdeck's history, and they carry an
+  author address that GitHub maps to an unrelated account. The history is left
+  as it is rather than rewritten, because that would change every commit and
+  every tag of a published repository; NOTICE.md carries the correction
+  instead.
+
+### Still behind upstream
+
+`tabs`, `group` and `topology`, which are a feature rather than a drawing: a
+card that holds other cards, and the `cards` field type they need.
+
 ## 0.19.0 (2026-10-05)
 
 Twenty-three adapters taken over from upstream, NetBird, and a weekly job that

@@ -718,6 +718,32 @@
         "Twelve of the new ones are out of beta on upstream's word, not this fork's.",
         "A weekly job lists the commits nexdeck has that this fork does not."
       ]
+    },
+    "0.20.0": {
+      "lead": "HexDeck 0.20.0: a heading card, the status page as wide strips, traffic drawn mirrored, and the energy flow.",
+      "sections": [
+        {
+          "title": "A heading card",
+          "body": "A title across the page, a line, or both, to split a board into sections. It has no ground of its own: it stands between the cards rather than among them.",
+          "path": "Add a card > Basics > Heading"
+        },
+        {
+          "title": "The status page as strips",
+          "body": "One wide strip of availability bars per service instead of rows with a small strip each: the look of a public status page, and what reads from across a room.",
+          "path": "Status page card > settings > Look"
+        },
+        {
+          "title": "In and out, mirrored",
+          "body": "A card that records a pair of metrics named like traffic can draw them on one axis, in above and out below, instead of two lines that cross because their scales are a hundred times apart.",
+          "path": "Any card with such a pair > settings > View"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Where the power goes, as a flow round the house, with evcc.",
+        "Thirteen weeks of days as squares, with Tautulli.",
+        "nexdeck takes no pull requests, so the fork takes and names, and sends nothing back."
+      ]
     }
   }
 }

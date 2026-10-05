@@ -19,6 +19,18 @@ source available under the AGPL-3.0.
 The original copyright and attribution are kept in full. Nothing here
 replaces them.
 
+⚠️ **About "nexapps" in this repository's contributor list.** 103 commits in
+this history are DerKezorm's own, made before he rewrote nexdeck's history on
+21.09.2026, and they carry the author address he used then,
+`nexapps@users.noreply.github.com`. GitHub maps that address to an unrelated
+account, so it shows up here as a contributor. It is not one: that work is
+DerKezorm's, he signs as `188376159+DerKezorm@users.noreply.github.com` today,
+and he told us where the entry comes from himself
+([nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30)). The history is
+left as it is rather than rewritten, because rewriting it would change every
+commit of a published repository and every tag with it; this note is the
+correction.
+
 ## What HexDeck changes
 
 Updated at every milestone.
@@ -137,6 +149,16 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Five of upstream's drawings, each with something that uses it.** The
+  heading card (a title, a line or both, without the glass ground the other
+  cards have, so it stands between them rather than among them); the status
+  page as one wide strip of bars per service, which is what reads from
+  across a room; a pair of metrics named like traffic drawn mirrored on one
+  axis, in above and out below, offered wherever a card records such a pair;
+  and the energy flow and the heatmap, which came with upstream's newer evcc
+  and Tautulli. ``tabs``, ``group`` and ``topology`` are deliberately left
+  for later: those are not drawings but a feature, a card that holds other
+  cards, and they need the ``cards`` field type with them.
 - **Twenty-three adapters taken over from upstream, with their tests.**
   nexdeck had reached 0.30.0 and 241 commits this fork did not have, so the
   adapters it owns were brought over as they are: Arcane, Dockhand,
@@ -169,6 +191,13 @@ Updated at every milestone.
   machine enrolled with it, days later. A peer that is merely asleep is not
   a fault, and one that was never seen carries the zero time, which would
   otherwise read as the year one.
+- **The relationship with upstream, as upstream wants it.** DerKezorm said on
+  [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
+  stays a solo project and takes no pull requests for adapters or engine work,
+  and that this fork is welcome to keep taking what is useful under the AGPL.
+  So it goes one way: this fork takes from nexdeck and names what it took, and
+  sends nothing back. The TrueNAS work of 0.16.1 was contributed before that
+  and remains the one exception there will be.
 - **Following upstream without merging it.** ``.github/workflows/upstream.yml``
   runs weekly, counts what nexdeck has that this fork does not, and keeps one
   issue up to date with it. The report is split in two: the adapters upstream

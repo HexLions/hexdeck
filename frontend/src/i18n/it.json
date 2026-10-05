@@ -1026,7 +1026,8 @@
       "notAllowed": "Non puoi avviare niente da questa board."
     },
     "saveFile": "Salva {{name}}",
-    "uptime": "Disponibilità nel periodo"
+    "uptime": "Disponibilità nel periodo",
+    "flow": "Dove va l'energia"
   },
   "player": {
     "title": "Musica",
