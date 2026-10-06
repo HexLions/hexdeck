@@ -33,12 +33,13 @@ logger = logging.getLogger("hexdeck.adapters")
 #: person editing may build on that connection at all.
 FieldType = Literal["text", "password", "url", "number", "bool", "select", "integrations",
                     "textarea", "timezone", "items", "choices", "colour", "board", "pictures",
-                    "project", "milestone"]
+                    "project", "milestone", "cards"]
 #: ``items`` picks among the rows a card is showing; ``choices`` picks among
 #: values the service itself hands out, through ``Adapter.choices``;
 #: ``board`` picks one of this installation's own boards, which no service
 #: knows about; ``pictures`` is a list somebody builds by uploading files
-#: or naming addresses, not a text field with a syntax.
+#: or naming addresses, not a text field with a syntax. ``cards`` picks other
+#: cards of the same page, for a card that holds them.
 Status = Literal["ok", "warn", "bad", "unknown"]
 #: ``project`` and ``milestone`` pick among HexDeck's own projects; ``milestone``
 #: reads the project from ``from_field``.
@@ -136,6 +137,12 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "flow": (3, 3),
     # Thirteen weeks of seven squares and a line of numbers under them.
     "heatmap": (3, 2),
+    # A row of tabs and the card under it.
+    "tabs": (2, 2),
+    # A title and at least one row of cards inside.
+    "group": (3, 2),
+    # A tree needs room to branch: three levels and a few boxes side by side.
+    "topology": (4, 3),
     "roadmap": (4, 2),
     "project": (3, 2),
     "items": (3, 2),

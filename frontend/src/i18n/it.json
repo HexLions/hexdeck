@@ -1027,7 +1027,8 @@
     },
     "saveFile": "Salva {{name}}",
     "uptime": "Disponibilità nel periodo",
-    "flow": "Dove va l'energia"
+    "flow": "Dove va l'energia",
+    "topology": "Come sono collegati i punti"
   },
   "player": {
     "title": "Musica",
@@ -1206,5 +1207,14 @@
   },
   "todo": {
     "add": "Aggiungi una voce"
+  },
+  "groups": {
+    "empty": "Ancora nessuna card qui dentro.",
+    "emptyEditing": "Apri le impostazioni di questa card e spunta le card che deve contenere.",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} card",
+    "down_one": "{{count}} giù",
+    "down_other": "{{count}} giù",
+    "none": "Su questa pagina non ci sono ancora altre card."
   }
 }

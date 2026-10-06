@@ -744,6 +744,31 @@
         "Dreizehn Wochen Tage als Quadrate, mit Tautulli.",
         "nexdeck nimmt keine Pull Requests, also nimmt der Fork und nennt es, und schickt nichts zurück."
       ]
+    },
+    "0.21.0": {
+      "lead": "HexDeck 0.21.0: eine Karte, die andere Karten hält, eine Übersicht, was an was hängt, und Spanisch.",
+      "sections": [
+        {
+          "title": "Reiter und Gruppen",
+          "body": "Eine Reiterkarte zeigt mehrere Karten in einer, je einen Reiter, und kann sie selbst umblättern. Eine Gruppe ist ein benannter Kasten, der Karten nebeneinander hält, sich in deinem Browser allein wegklappt und als eines bewegt wird. Die angehakten Karten verlassen das Gitter und leben darin; nimmt man den Halter weg, kommen sie zurück.",
+          "path": "Karte hinzufügen > Grundlagen > Reiter oder Gruppe"
+        },
+        {
+          "title": "Eine Netzübersicht",
+          "body": "Jedes Gerät unter dem, an dem es hängt, mit seinen Clients und seinem Zustand. Von Proxmox und von UniFi.",
+          "path": "Karte hinzufügen > UniFi > Netzübersicht"
+        },
+        {
+          "title": "Spanisch",
+          "body": "Die ganze Oberfläche und jeder Adaptertext auf Spanisch, neben Englisch, Deutsch und Italienisch. Unter denselben Wächtern: ein Text ohne Übersetzung lässt den Build scheitern.",
+          "path": "Konto-Menü > Sprache"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Upstreams neuere Proxmox, UniFi, evcc und Tautulli kamen mit den Zeichnungen mit, die sie verlangen.",
+        "Das Spanische ist die Arbeit dieses Forks; kein Muttersprachler hat es gelesen."
+      ]
     }
   }
 }

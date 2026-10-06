@@ -744,6 +744,31 @@
         "Thirteen weeks of days as squares, with Tautulli.",
         "nexdeck takes no pull requests, so the fork takes and names, and sends nothing back."
       ]
+    },
+    "0.21.0": {
+      "lead": "HexDeck 0.21.0: a card that holds other cards, a map of what hangs on what, and Spanish.",
+      "sections": [
+        {
+          "title": "Tabs and groups",
+          "body": "A tabs card shows several cards in one, a tab each, and can turn them by itself. A group is a titled box that holds cards side by side, folds away in your browser alone, and moves as one. The cards you tick leave the grid and live inside; removing the holder brings them back.",
+          "path": "Add a card > Basics > Tabs or Group"
+        },
+        {
+          "title": "A network map",
+          "body": "Each device hung under the one it uplinks to, with its clients and how it stands. From Proxmox and from UniFi.",
+          "path": "Add a card > UniFi > Network map"
+        },
+        {
+          "title": "Spanish",
+          "body": "The whole interface and every adapter text in Spanish, next to English, German and Italian. It is under the same guards, so a text without its translation fails the build.",
+          "path": "Account menu > Language"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Upstream's newer Proxmox, UniFi, evcc and Tautulli came over with the drawings they ask for.",
+        "The Spanish is this fork's own work; no native speaker has read it yet."
+      ]
     }
   }
 }

@@ -257,6 +257,38 @@ class CoreAdapter(Adapter):
             ),
         ),
         WidgetType(
+            kind="tabs",
+            label="Tabs",
+            description="Several cards in one, a tab each: more on a small screen, and a wall that turns the pages itself.",
+            renderer="tabs",
+            default_size=(4, 3),
+            min_size=(2, 2),
+            refresh_seconds=3600,
+            client_only=True,
+            options=(
+                Field("cards", "Cards in it", type="cards", default=[],
+                      help="Cards of this page. They leave the board and live in this card until it is removed."),
+                Field("turn", "Turn the tabs", type="select", default="0",
+                      options=(("0", "By hand"), ("10", "Every 10 seconds"), ("20", "Every 20 seconds"), ("60", "Every minute"))),
+            ),
+        ),
+        WidgetType(
+            kind="group",
+            label="Group",
+            description="A titled box that holds cards side by side, folds away and moves as one.",
+            renderer="group",
+            default_size=(12, 3),
+            min_size=(3, 2),
+            refresh_seconds=3600,
+            client_only=True,
+            options=(
+                Field("cards", "Cards in it", type="cards", default=[],
+                      help="Cards of this page. They leave the board and live in this box until it is removed."),
+                Field("columns", "Cards side by side", type="select", default="auto",
+                      options=(("auto", "As many as fit"), ("2", "Two"), ("3", "Three"), ("4", "Four"), ("6", "Six"))),
+            ),
+        ),
+        WidgetType(
             kind="heading",
             label="Heading",
             description="A title across the page with an optional line, to split the cards into sections. With the line alone it is a divider.",
@@ -409,6 +441,13 @@ class CoreAdapter(Adapter):
             # Drawn from the card's own options, so a change shows while the
             # settings sheet is still open.
             return WidgetData()
+        if widget_kind in ("tabs", "group"):
+            # ⚠️ A holder draws the data its cards already have; its own answer
+            # only says what it is and how many it holds, which keeps it apart
+            # from a heading, that answers nothing at all.
+            held = options.get("cards") if isinstance(options.get("cards"), list) else []
+            own = {"turn": str(options.get("turn") or "0")} if widget_kind == "tabs"                 else {"columns": str(options.get("columns") or "auto")}
+            return WidgetData(meta={"holder": widget_kind, "holds": len(held), **own})
         return self.demo(widget_kind, options, 0)
 
     @staticmethod
@@ -860,6 +899,10 @@ class CoreAdapter(Adapter):
             # ⚠️ Nothing to invent: a heading is drawn from its own options, and
             # the demo board carries the same options a real one does.
             return WidgetData()
+        if widget_kind in ("tabs", "group"):
+            held = options.get("cards") if isinstance(options.get("cards"), list) else []
+            own = {"turn": str(options.get("turn") or "0")} if widget_kind == "tabs"                 else {"columns": str(options.get("columns") or "auto")}
+            return WidgetData(meta={"holder": widget_kind, "holds": len(held), **own})
         if widget_kind == "app":
             return WidgetData(meta={
                 "description": options.get("description") or "",

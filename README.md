@@ -25,7 +25,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | 🔁 **Upkeep comes back** | Maintenance every so many days, announced like an outage |
 | ⬡ **A look of its own** | Hexagons, opaque panels, four bundled themes, dark and light |
 | ⚡ **Useful in minutes** | Templates, preset sizes, undo, tidy up, multi-select |
-| 🌐 **Three languages** | English, German and Italian, throughout |
+| 🌐 **Four languages** | English, German, Italian and Spanish, throughout |
 
 ## What it does
 
@@ -100,7 +100,7 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
-The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.20.0` stays where it is. [What changed in each release](CHANGELOG.md).
+The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.21.0` stays where it is. [What changed in each release](CHANGELOG.md).
 
 Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays. For a dashboard at home that should not ask for a password at all, make a guest account and, under System › Sign-in providers, sign browsers on your network in as it by themselves; the password is then only for changing things.
 
@@ -240,6 +240,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | Layout | 12, 24 or 36 columns per board, chosen width, rows that fit the screen |
 | Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved to another page or board |
 | Starting points | Five board templates, four bundled themes, themes as JSON |
+| Holders | A tabs card and a group: cards leave the grid and live inside one, which folds away and moves as one |
 | Numbers | History behind every headline number, declared metric or not |
 
 ### Operating
@@ -256,7 +257,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 ### Look and language
 
 HexDeck's own theme layer: hexagons, opaque panels, its own mark and icons. Italian
-throughout, next to English and German.
+and Spanish throughout, next to English and German.
 
 ## Documentation
 

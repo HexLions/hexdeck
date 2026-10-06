@@ -1027,7 +1027,8 @@
     },
     "saveFile": "Save {{name}}",
     "uptime": "Uptime in the window",
-    "flow": "Where the power goes"
+    "flow": "Where the power goes",
+    "topology": "How the places hang together"
   },
   "player": {
     "title": "Music",
@@ -1206,5 +1207,14 @@
   },
   "todo": {
     "add": "Add an item"
+  },
+  "groups": {
+    "empty": "No cards in here yet.",
+    "emptyEditing": "Open the settings of this card and tick the cards it should hold.",
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} cards",
+    "down_one": "{{count}} down",
+    "down_other": "{{count}} down",
+    "none": "There are no other cards on this page yet."
   }
 }

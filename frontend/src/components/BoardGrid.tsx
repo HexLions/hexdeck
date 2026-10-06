@@ -7,6 +7,7 @@ import 'react-resizable/css/styles.css'
 import { moveGroup } from '../lib/arrange'
 import { ROW_HEIGHT, ROW_HEIGHT_COMPACT, presetSizes, rowHeightFor, rowsOf, scaleFloor, unitOf, type Columns, type SizePreset } from '../lib/layout'
 import type { Action, Breakpoint, LayoutItem, WidgetData, WidgetView } from '../lib/types'
+import { PageCardsContext, tucked } from '../lib/groups'
 import { WidgetCard, type MoveTarget } from './WidgetCard'
 
 const ResponsiveGrid = WidthProvider(Responsive)
@@ -90,7 +91,13 @@ function plain({ i, x, y, w, h }: Layout | LayoutItem): LayoutItem {
 
 /** The board: one arrangement, drawn as it is on a wide screen and stacked on a narrow one. */
 export function BoardGrid(props: Props) {
-  const { widgets, layouts, data, series, editing, canAct, canEdit, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact, fitScreen, moveTargets, onMove } = props
+  const { widgets: everyCard, layouts, data, series, editing, canAct, canEdit, onLayoutChange, onAction, onRefresh, onSettings, onRemove, compact, autoCompact, fitScreen, moveTargets, onMove } = props
+  // ⚠️ A card that lives inside a tabs card or a group is not on the grid: its
+  // holder draws it, from the whole page handed down through the context below.
+  // Everything else here works on the cards that remain.
+  const inside = useMemo(() => tucked(everyCard), [everyCard])
+  const widgets = useMemo(() => everyCard.filter((widget) => !inside.has(widget.id)), [everyCard, inside])
+  const pageCards = useMemo(() => ({ widgets: everyCard, canAct, editing, onAction }), [everyCard, canAct, editing, onAction])
   const columns = props.columns ?? 12
   const { t } = useTranslation()
   // The grid draws at the width WidthProvider assumes before it has measured,
@@ -206,7 +213,7 @@ export function BoardGrid(props: Props) {
   }
 
   return (
-    <>
+    <PageCardsContext.Provider value={pageCards}>
       {/* On a phone a card cannot be dragged, so edit mode says where it can. */}
       {editing && screen === 'sm' && (
         <p role="note" className="text-xs text-muted px-1 pb-3">
@@ -301,7 +308,7 @@ export function BoardGrid(props: Props) {
         ))}
       </ResponsiveGrid>
       </div>
-    </>
+    </PageCardsContext.Provider>
   )
 }
 

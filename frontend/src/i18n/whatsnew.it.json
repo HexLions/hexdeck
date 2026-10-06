@@ -117,6 +117,31 @@
         "Tredici settimane di giorni come quadratini, con Tautulli.",
         "nexdeck non accetta pull request, quindi il fork prende e lo dichiara, e non manda indietro niente."
       ]
+    },
+    "0.21.0": {
+      "lead": "HexDeck 0.21.0: una card che contiene altre card, una mappa di cosa è appeso a cosa, e lo spagnolo.",
+      "sections": [
+        {
+          "title": "Schede e gruppi",
+          "body": "Una card a schede mostra più card in una, una scheda ciascuna, e può girarle da sola. Un gruppo è una scatola con un titolo che tiene le card una accanto all'altra, si richiude solo nel tuo browser e si muove come una cosa sola. Le card che spunti escono dalla griglia e vivono dentro; togliendo il contenitore tornano al loro posto.",
+          "path": "Aggiungi una card > Base > Schede o Gruppo"
+        },
+        {
+          "title": "Una mappa della rete",
+          "body": "Ogni dispositivo appeso a quello da cui prende la linea, con i suoi client e come sta. Da Proxmox e da UniFi.",
+          "path": "Aggiungi una card > UniFi > Mappa della rete"
+        },
+        {
+          "title": "Spagnolo",
+          "body": "Tutta l'interfaccia e ogni testo degli adapter in spagnolo, accanto a inglese, tedesco e italiano. È sotto gli stessi guard: un testo senza traduzione fa fallire la build.",
+          "path": "Menu account > Lingua"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Proxmox, UniFi, evcc e Tautulli nelle versioni nuove di upstream, con i disegni che richiedono.",
+        "Lo spagnolo è lavoro di questo fork; nessun madrelingua l'ha ancora letto."
+      ]
     }
   }
 }

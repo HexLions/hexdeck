@@ -5,6 +5,7 @@
  */
 import de from './de.json'
 import en from './en.json'
+import spanish from './es.json'
 import italian from './it.json'
 
 function paths(value: unknown, prefix = ''): string[] {
@@ -17,7 +18,7 @@ function lookup(data: unknown, path: string): unknown {
 }
 
 const english = new Set(paths(en))
-const OTHERS = [['de', de], ['it', italian]] as const
+const OTHERS = [['de', de], ['it', italian], ['es', spanish]] as const
 
 describe('language files', () => {
   it.each(OTHERS)('know the same keys: %s', (language, data) => {

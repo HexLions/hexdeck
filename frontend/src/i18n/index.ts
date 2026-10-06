@@ -9,16 +9,18 @@ import { registerTexts, type TextBundle } from './texts'
  * Adding a language means adding two JSON files here and one line in LANGUAGES:
  * the interface texts, and the server texts translated by their English wording.
  */
-export const LANGUAGES: Record<string, string> = { en: 'English', de: 'Deutsch', it: 'Italiano' }
+export const LANGUAGES: Record<string, string> = { en: 'English', de: 'Deutsch', it: 'Italiano', es: 'Español' }
 
 const loaders: Record<string, () => Promise<{ default: Record<string, unknown> }>> = {
   de: () => import('./de.json'),
   it: () => import('./it.json'),
+  es: () => import('./es.json'),
 }
 
 const textLoaders: Record<string, () => Promise<{ default: unknown }>> = {
   de: () => import('./texts.de.json'),
   it: () => import('./texts.it.json'),
+  es: () => import('./texts.es.json'),
 }
 
 void i18next.use(initReactI18next).init({

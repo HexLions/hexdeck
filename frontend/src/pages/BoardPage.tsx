@@ -28,6 +28,7 @@ import { nextPreview, type HeldPreview } from '../lib/previewHold'
 import { startingValue, unanswered } from '../lib/unanswered'
 import { sameSettings } from '../lib/savedYet'
 import type { Action, Breakpoint, LayoutItem, WidgetView } from '../lib/types'
+import { useEditedPage } from '../lib/groups'
 import { useAuth } from '../stores/auth'
 import { useLive } from '../stores/live'
 import { useNotices } from '../stores/notices'
@@ -260,6 +261,14 @@ export function BoardPage() {
       }),
     [activePage, liveHealth, draftWidget],
   )
+
+  // The cards of the page in view, for the picker in a tabs card or a group:
+  // a holder's settings sheet has to offer the cards next to it, and the sheet
+  // is drawn far from here.
+  const setEditedPage = useEditedPage((state) => state.setWidgets)
+  useEffect(() => {
+    setEditedPage(widgets)
+  }, [widgets, setEditedPage])
   /**
    * True between a save and the moment the board really carries the new
    * options.

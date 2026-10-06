@@ -5,6 +5,32 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.21.0 (2026-10-05)
+
+A card that holds other cards, a map of what hangs on what, and Spanish.
+
+### New
+
+- **Tabs and groups.** A tabs card shows several cards in one, a tab each, and
+  can turn them by itself; a group is a titled box that holds cards side by
+  side, folds away in your browser alone and moves as one. The cards picked
+  leave the grid and live inside the holder; removing it brings them back. A
+  `cards` field in the holder's settings ticks the cards of that page, in the
+  order they will appear.
+- **A network map.** The `topology` drawing, with upstream's newer Proxmox and
+  UniFi: each device hung under the one it uplinks to, with its clients and how
+  it stands.
+- **Spanish**, throughout: 1008 interface keys and the server's own texts,
+  which is every adapter name, field label and help sentence. Upstream's
+  Spanish covered what upstream has; the 421 strings this fork added were
+  translated here. It is under the same guards as German and Italian, so a
+  text added without its Spanish fails the build.
+
+### Changed
+
+- Upstream's newer Proxmox, UniFi, evcc and Tautulli came over with the
+  drawings they ask for.
+
 ## 0.20.0 (2026-10-05)
 
 Five drawings taken over from upstream, and the fork's relationship with

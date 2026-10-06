@@ -345,7 +345,10 @@ def test_error_details_carry_code_and_message() -> None:
 
 GERMAN_TEXTS = ROOT / "frontend" / "src" / "i18n" / "texts.de.json"
 #: Every language the interface translates the server's texts into.
-TEXT_LANGUAGES = ("de", "it")
+# ⚠️ A language is on this list or it rots: every guard below walks each of
+# them, so a text added without its translation fails the build rather than
+# showing an English sentence in a Spanish interface.
+TEXT_LANGUAGES = ("de", "it", "es")
 ADAPTERS = BACKEND / "adapters"
 LABEL_LITERAL = re.compile(r'"(?:label|subtitle)": "([^"]+)"')
 ACTION_LABEL = re.compile(r'Action\([^)]*?label="([^"]+)"')

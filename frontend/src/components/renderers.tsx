@@ -38,7 +38,9 @@ import { safeUrl } from '../lib/safeUrl'
 import type { Action, Saveable, Secondary, Status, WidgetData, WidgetView } from '../lib/types'
 import { AskCard } from './AskCard'
 import { ButtonCard } from './ButtonCard'
+import { GroupCard, TabsCard } from './GroupCards'
 import { HeadingCard } from './HeadingCard'
+import { TopologyCard } from './TopologyCard'
 import { FlowCard } from './FlowCard'
 import { HeatmapCard } from './HeatmapCard'
 import { CameraCard } from './CameraCard'
@@ -80,6 +82,11 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   heading: HeadingCard,
   flow: FlowCard,
   heatmap: HeatmapCard,
+  topology: TopologyCard,
+  // ⚠️ Wrapped, not named: the holders draw their cards with this very
+  // file, and a module still loading would hand over its names as undefined.
+  tabs: (props: RenderProps) => <TabsCard {...props} />,
+  group: (props: RenderProps) => <GroupCard {...props} />,
   list: ListCard,
   nowplaying: NowPlayingCard,
   calendar: CalendarCard,

@@ -149,6 +149,20 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **Cards that hold cards, and a map.** The tabs card and the group came
+  over with the ``cards`` field type, the two libraries behind them and the
+  four lines in the grid that let a held card leave it. The topology drawing
+  came with upstream's newer Proxmox and UniFi, which are what ask for it.
+  Both drawings were adapted on the way in: upstream's "showcase" mode,
+  which invents names for a public demo, does not exist in this fork, so the
+  calls into it were taken out rather than the mode faked.
+- **Spanish.** Upstream's Spanish covers what upstream has; the 421 strings
+  this fork added on top (150 interface keys, 222 adapter texts, 49 labels)
+  were translated here, and the 234 keys for features this fork does not
+  have were taken out rather than left to rot. Spanish is now on the same
+  guard list as German and Italian: a text without its translation fails
+  the build. ⚠️ The translation is this fork's own work and no native
+  speaker has read it.
 - **Five of upstream's drawings, each with something that uses it.** The
   heading card (a title, a line or both, without the glass ground the other
   cards have, so it stands between them rather than among them); the status
