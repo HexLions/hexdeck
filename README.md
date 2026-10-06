@@ -273,6 +273,17 @@ and Spanish throughout, next to English and German.
 
 Backend: Python 3.13, FastAPI, SQLAlchemy, SQLite. Frontend: React 19, Vite 7, Tailwind 4.
 
+On a machine that has nothing yet, one command does all of it and ends by
+running the whole CI set, so that "set up" means "green here":
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/scripts/dev-setup.sh | bash -s -- --install
+```
+
+Read it first if you would rather: [scripts/dev-setup.sh](scripts/dev-setup.sh).
+Without `--install` it touches nothing outside the repository and names the
+system packages it needs instead. By hand:
+
 ```bash
 # backend
 cd backend
