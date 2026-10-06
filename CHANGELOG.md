@@ -31,6 +31,13 @@ A card that holds other cards, a map of what hangs on what, and Spanish.
 - Upstream's newer Proxmox, UniFi, evcc and Tautulli came over with the
   drawings they ask for.
 
+### Dependencies
+
+- **source-map-js to 1.2.2** in the frontend lockfile, transitive, for an
+  event-loop denial of service through indexed source-map section offsets. The
+  advisory landed between the local run and the release build, which is what
+  that step is for.
+
 ## 0.20.0 (2026-10-05)
 
 Five drawings taken over from upstream, and the fork's relationship with
