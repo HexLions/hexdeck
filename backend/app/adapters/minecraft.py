@@ -230,7 +230,8 @@ class MinecraftAdapter(Adapter):
     category = "media"
     description = "Who is on the server, its message of the day, its version and how fast it answers."
     icon = "minecraft"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://minecraft.wiki/w/Java_Edition_protocol/Server_List_Ping"
     fields = (
         Field("host", "Address", required=True, placeholder="minecraft.lan",

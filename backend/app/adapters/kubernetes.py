@@ -94,7 +94,8 @@ class KubernetesAdapter(Adapter):
     category = "hosts"
     description = "Nodes, pods and deployments of a cluster, with usage where metrics-server reports it."
     icon = "kubernetes"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://kubernetes.io/docs/reference/kubernetes-api/"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="https://10.0.0.10:6443",

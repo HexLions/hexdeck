@@ -142,6 +142,20 @@
         "Proxmox, UniFi, evcc e Tautulli nelle versioni nuove di upstream, con i disegni che richiedono.",
         "Lo spagnolo è lavoro di questo fork; nessun madrelingua l'ha ancora letto."
       ]
+    },
+    "0.22.0": {
+      "lead": "HexDeck 0.22.0: le dieci integrazioni scritte da questo fork escono dal beta, provate contro istanze vere.",
+      "sections": [
+        {
+          "title": "Via i bollini beta",
+          "body": "AMP, ProxMenux Monitor, UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt ed Elasticsearch sono stati visti rispondere su istanze vere, quindi il bollino sparisce. Voleva dire una cosa sola: nessuno l'aveva ancora visto funzionare.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "La card dell'indirizzo pubblico non l'ha mai avuto: interroga un servizio pubblico, non c'è nessuna istanza da confermare."
+      ]
     }
   }
 }

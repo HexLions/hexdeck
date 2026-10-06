@@ -542,7 +542,13 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         # against a live instance, this fork has not. Said plainly here because
         # the badge in the interface will not say whose instance it was.
         "arcane", "dockhand", "freshrss", "imap", "linkding", "nexbeat", "nexcrate", "nextrmnl",
-        "octoprint", "openmediavault", "patchmon", "rtorrent"}
+        "octoprint", "openmediavault", "patchmon", "rtorrent",
+        # The ten this fork wrote itself, confirmed on 2026-10-06 against the
+        # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
+        # Kubernetes in his rack, and Minecraft, Steam, Shelly, NetBird,
+        # OpenWrt and Elasticsearch besides. This confirmation is ours.
+        "amp", "proxmenux", "shelly", "steam", "netbird", "kubernetes", "minecraft", "openwrt",
+        "urbackup", "elasticsearch"}
 
 
 #: Routers whose changing addresses deliberately write nothing, with the reason.

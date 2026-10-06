@@ -84,7 +84,8 @@ class UrBackupAdapter(Adapter):
     category = "hosts"
     description = "Which machine was backed up when, which one has fallen behind, and what is running now."
     icon = "urbackup"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://www.urbackup.org/administration_manual.html"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="http://urbackup:55414",

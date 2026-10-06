@@ -5,6 +5,16 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.22.0 (2026-10-06)
+
+### Changed
+
+- **The ten adapters this fork wrote are out of beta.** AMP, ProxMenux Monitor,
+  UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt and
+  Elasticsearch were confirmed against live instances on 2026-10-06. Beta here
+  means "nobody has seen it answer", and it comes off for that reason alone;
+  the guard that holds the list says whose confirmation it is.
+
 ## 0.21.0 (2026-10-05)
 
 A card that holds other cards, a map of what hangs on what, and Spanish.

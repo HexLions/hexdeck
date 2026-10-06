@@ -769,6 +769,20 @@
         "Upstreams neuere Proxmox, UniFi, evcc und Tautulli kamen mit den Zeichnungen mit, die sie verlangen.",
         "Das Spanische ist die Arbeit dieses Forks; kein Muttersprachler hat es gelesen."
       ]
+    },
+    "0.22.0": {
+      "lead": "HexDeck 0.22.0: die zehn Integrationen dieses Forks sind aus der Beta, an echten Instanzen bestätigt.",
+      "sections": [
+        {
+          "title": "Keine Beta-Abzeichen mehr",
+          "body": "AMP, ProxMenux Monitor, UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt und Elasticsearch wurden an echten Instanzen gesehen, also fällt das Abzeichen weg. Es hieß immer nur eines: niemand hatte es arbeiten gesehen.",
+          "path": "System > Verbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die Karte für die öffentliche Adresse trug es nie: sie fragt einen öffentlichen Dienst, da gibt es keine Instanz zu bestätigen."
+      ]
     }
   }
 }

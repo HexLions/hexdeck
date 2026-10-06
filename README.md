@@ -217,8 +217,9 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/urbackup.png" width="26" height="26" alt=""><br>**UrBackup**<br><sub>Last backup per client,<br>who has fallen behind</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/shelly.svg" width="26" height="26" alt=""><br>**Shelly**<br><sub>Power, energy, temperature.<br>Switch a relay</sub> | <img src="docs/icons/public-address.svg" width="26" height="26" alt=""><br>**Public address**<br><sub>The address your line shows,<br>and when it changed</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmenux.svg" width="26" height="26" alt=""><br>**ProxMenux**<br><sub>Proxmox health checks,<br>disks, sensors, guests</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/netbird.svg" width="26" height="26" alt=""><br>**NetBird**<br><sub>Peers, expired logins,<br>setup keys</sub> | |
 
-All eleven are *beta* until each has been seen against a live instance. Every card they
-offer is in [docs/adapters.md](docs/adapters.md).
+The ten services here were confirmed against live instances on 2026-10-06 and carry no
+*beta* badge; the public address card asks a public service and has no instance to
+confirm. Every card they offer is in [docs/adapters.md](docs/adapters.md).
 
 ### Integrations reworked
 

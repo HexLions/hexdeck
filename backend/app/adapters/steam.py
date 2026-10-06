@@ -68,7 +68,8 @@ class SteamAdapter(Adapter):
     category = "media"
     description = "What an account has been playing, what it is playing now, and how big the library is."
     icon = "steam"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://steamcommunity.com/dev"
     fields = (
         Field("api_key", "API key", type="password", secret=True, required=True,

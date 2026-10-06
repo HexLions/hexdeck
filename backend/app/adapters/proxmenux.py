@@ -67,7 +67,8 @@ class ProxMenuxAdapter(Adapter):
     category = "hosts"
     description = "The health checks, disks, sensors and guests of a Proxmox node, as ProxMenux Monitor sees them."
     icon = "proxmenux"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://macrimi.github.io/ProxMenux/docs/monitor/api"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="https://proxmox.lan:8008",

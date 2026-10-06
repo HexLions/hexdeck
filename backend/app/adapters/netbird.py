@@ -77,7 +77,8 @@ class NetBirdAdapter(Adapter):
     category = "network"
     description = "The machines on the mesh, the logins that have run out, and the setup keys that still work."
     icon = "netbird"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://docs.netbird.io/api"
     fields = (
         Field("url", "URL", type="url", required=True, default="https://api.netbird.io",

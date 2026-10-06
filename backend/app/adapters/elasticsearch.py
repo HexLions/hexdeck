@@ -45,7 +45,8 @@ class ElasticsearchAdapter(Adapter):
     category = "hosts"
     description = "The colour of the cluster, its shards and its indices. OpenSearch answers the same calls."
     icon = "elasticsearch"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="https://elasticsearch:9200"),

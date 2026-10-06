@@ -769,6 +769,20 @@
         "Upstream's newer Proxmox, UniFi, evcc and Tautulli came over with the drawings they ask for.",
         "The Spanish is this fork's own work; no native speaker has read it yet."
       ]
+    },
+    "0.22.0": {
+      "lead": "HexDeck 0.22.0: the ten integrations this fork wrote are out of beta, confirmed against real instances.",
+      "sections": [
+        {
+          "title": "No more beta badges",
+          "body": "AMP, ProxMenux Monitor, UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt and Elasticsearch have been seen answering real instances, so the badge is gone. It only ever meant one thing: nobody had watched it work yet.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The public address card never carried the badge: it asks a public service, so there is no instance to confirm."
+      ]
     }
   }
 }

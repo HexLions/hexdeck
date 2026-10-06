@@ -1,0 +1,18 @@
+{
+  "entries": {
+    "0.22.0": {
+      "lead": "HexDeck 0.22.0: las diez integraciones escritas por este fork salen de beta, comprobadas contra instancias reales.",
+      "sections": [
+        {
+          "title": "Fuera los distintivos de beta",
+          "body": "AMP, ProxMenux Monitor, UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt y Elasticsearch se han visto responder en instancias reales, así que el distintivo desaparece. Solo quería decir una cosa: nadie lo había visto funcionar todavía.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "La tarjeta de la dirección pública nunca lo llevó: pregunta a un servicio público, así que no hay instancia que comprobar."
+      ]
+    }
+  }
+}

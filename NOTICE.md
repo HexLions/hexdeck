@@ -149,6 +149,12 @@ Updated at every milestone.
   availability bars and its uptime in the window, down first; and the
   notices it has sent, newest first. The availability row the app tile
   has always drawn is now a component any list row may carry.
+- **The ten adapters this fork wrote are out of beta.** AMP, ProxMenux
+  Monitor, UrBackup, Kubernetes, Minecraft, Steam, Shelly, NetBird, OpenWrt
+  and Elasticsearch were confirmed against live instances on 2026-10-06, and
+  the guard that holds the list records that this confirmation is ours, not
+  upstream's. Beta here has always meant one thing, "nobody has seen it
+  answer", and it comes off for that reason and no other.
 - **Cards that hold cards, and a map.** The tabs card and the group came
   over with the ``cards`` field type, the two libraries behind them and the
   four lines in the grid that let a held card leave it. The topology drawing

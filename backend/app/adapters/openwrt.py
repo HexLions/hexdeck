@@ -64,7 +64,8 @@ class OpenWrtAdapter(Adapter):
     category = "network"
     description = "Load, memory and uptime of the router, its WAN address, and who is on the wireless."
     icon = "openwrt"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://openwrt.org/docs/techref/ubus"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="http://192.168.1.1",

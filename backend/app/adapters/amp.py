@@ -98,7 +98,8 @@ class AmpAdapter(Adapter):
     category = "hosts"
     description = "Every game server on a CubeCoders AMP panel, what it is doing, and buttons to start and stop it."
     icon = "amp"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://discourse.cubecoders.com/t/amp-api-basics/4699"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="http://amp.lan:8080",

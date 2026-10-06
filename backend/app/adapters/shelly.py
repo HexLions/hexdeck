@@ -72,7 +72,8 @@ class ShellyAdapter(Adapter):
     category = "home"
     description = "What a Shelly relay is doing, what it draws right now, and a button to switch it."
     icon = "shelly"
-    beta = True
+    #: Confirmed against a live instance on 2026-10-06.
+    beta = False
     docs_url = "https://shelly-api-docs.shelly.cloud/"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="http://192.168.1.50",
