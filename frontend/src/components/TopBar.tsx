@@ -108,13 +108,14 @@ export function TopBar(props: Props) {
       </nav>
       <div className="flex-1 flex justify-center px-2">
         <button
-          className="hidden sm:flex items-center gap-2 h-8 w-full max-w-[420px] px-3 rounded-lg border border-line bg-bg/40 text-muted text-[13px] hover:border-line-strong transition-colors"
+          className="hidden sm:flex items-center gap-2 h-8 w-full min-w-0 max-w-[420px] px-3 rounded-lg border border-line bg-bg/40 text-muted text-[13px] hover:border-line-strong transition-colors"
           onClick={onSearch}
           aria-label={t('palette.title')}
         >
-          <Search size={14} />
-          <span className="flex-1 text-left">{t('palette.placeholder')}</span>
-          <kbd className="num text-[10px] px-1.5 py-0.5 rounded border border-line text-faint">Ctrl K</kbd>
+          <Search size={14} className="flex-none" />
+          {/* One line, cut short: on a tablet with five pages the box is narrow and the text ran to three lines. */}
+          <span className="flex-1 min-w-0 text-left truncate">{t('palette.placeholder')}</span>
+          <kbd className="flex-none num text-[10px] px-1.5 py-0.5 rounded border border-line text-faint">Ctrl K</kbd>
         </button>
       </div>
       <div className="flex items-center gap-1.5">
