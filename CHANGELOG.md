@@ -27,6 +27,13 @@ a demo board with each of them, on a desktop, a tablet and a phone.
 - **The search box on a tablet** ran its placeholder over three lines. It
   stays on one and is cut short.
 
+### Documentation
+
+- **The README's pictures are new**, taken from this version in demo mode.
+  They were from 0.17.0, before the host card, the status page, the updates
+  list and the drawings. Two are added: a page of the drawings and a page with
+  the machine, its problems and its updates.
+
 ## 0.22.0 (2026-10-06)
 
 ### Changed

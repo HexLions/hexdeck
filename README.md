@@ -72,6 +72,18 @@ The roadmap draws milestones as hexagons and dated items as dots on one line, th
 
 ![The projects board: a roadmap with milestones and recurring maintenance, a notepad, a read-me card and the latest releases](docs/screenshot-projects.png)
 
+### Drawings
+
+A heading splits a page into sections. The status page can be drawn as strips, one wide bar of availability per service. A card that carries a traffic pair, like UniFi or a FRITZ!Box, can show it mirrored on one axis, in above and out below. Proxmox and UniFi draw a map of what hangs on what, evcc where the power goes round the house, Tautulli thirteen weeks of plays as squares. A group holds cards side by side and folds away; a tabs card shows several in one.
+
+![A page of drawings: a heading, the status page as strips, UniFi and FRITZ!Box traffic mirrored in and out, the energy flow of a house, a UniFi network map, a Proxmox cluster map and a heatmap of plays per day](docs/screenshot-drawings.png)
+
+### The machine and its updates
+
+The host card reads the machine HexDeck runs on, with no agent. Next to it every card that is yellow or red with its reason, one list of updates merged from WUD, Cup, Watchtower and the releases you follow, and the status page with its uptime bars.
+
+![A system page: the host card with processor, memory, load, temperature, disk and uptime, the problems on the board, the merged updates list, the status page as strips and the container updates](docs/screenshot-system.png)
+
 ### Themes
 
 The same *Network* board in Nord, and in Gruvbox's light side. Themes are chosen under System › Appearance and apply to everyone; each account still picks dark or light.
