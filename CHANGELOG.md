@@ -5,6 +5,28 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
+a demo board with each of them, on a desktop, a tablet and a phone.
+
+### Fixed
+
+- **"In and out, mirrored" did nothing.** The choice was offered on every card
+  with a traffic pair, and no step between the service and the board took it:
+  the card stayed what it was. It now draws, and a FRITZ!Box, whose rows do
+  not say which metric they are, shows its two numbers under the drawing
+  instead of a dash each.
+- **A group said its title twice**, once on the card and once on its own
+  header. The card's is gone; the group's carries the fold and the count.
+- **A group on a phone drew its cards over one another.** They wrap to one a
+  row there, inside a box only as tall as the wide board made it. Each card
+  now keeps a floor of height, and the box scrolls.
+- **The network map let a long detail run past its box**, as with a switch
+  and its clients. The line is cut to what fits.
+- **The search box on a tablet** ran its placeholder over three lines. It
+  stays on one and is cut short.
+
 ## 0.22.0 (2026-10-06)
 
 ### Changed
