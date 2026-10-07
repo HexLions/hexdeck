@@ -221,6 +221,15 @@ Updated at every milestone.
   its target. The count of merge requests comes from the ``x-total`` header,
   because a page holds a hundred at most. Read from GitLab's own API
   documentation and checked against a public project on GitLab.com.
+- **Alertmanager, without its configuration.** API v2, read-only, with basic
+  authentication only where its web configuration or a proxy asks for it.
+  ``/api/v2/status`` carries the whole configuration, webhook tokens and SMTP
+  password included; only the version and the cluster are read from it, and
+  a test holds that nothing else reaches a card. Three cards: the summary,
+  the firing alerts with the critical ones first and an alert without a
+  severity ranked as a warning, and the silences with their matchers written
+  as Alertmanager writes them. Read from its OpenAPI spec at v0.34.1 and
+  checked against that release running locally.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

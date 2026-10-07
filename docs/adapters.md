@@ -107,6 +107,7 @@ that one of thirty-one renderers draws.
 | Gotify | messages, message count | | client token (an application token may only write) |
 | ntfy | messages | | topic, and a token for a protected one |
 | Prometheus | query value, query list | | optional basic auth |
+| Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | JSON API | value, list | | optional bearer token |
 | iCal feed | events | | feed address |

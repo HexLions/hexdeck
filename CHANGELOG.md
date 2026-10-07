@@ -8,7 +8,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ## Unreleased
 
 The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
-a demo board with each of them, on a desktop, a tablet and a phone. And GitLab.
+a demo board with each of them, on a desktop, a tablet and a phone. And GitLab
+and Alertmanager.
 
 ### New
 
@@ -18,6 +19,10 @@ a demo board with each of them, on a desktop, a tablet and a phone. And GitLab.
   its target, a conflict marked. The token goes in as `PRIVATE-TOKEN`, and a
   public project on GitLab.com needs none. ⚠️ Beta until somebody has seen it
   answer a GitLab of their own.
+- **Alertmanager**: what is firing with the critical alerts first, what is
+  silenced, and the silences with what they match and when they end. Only
+  the version and the cluster are read from its status, never the
+  configuration with its secrets that the same answer carries. ⚠️ Beta.
 
 ### Fixed
 
