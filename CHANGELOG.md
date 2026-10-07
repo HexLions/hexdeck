@@ -8,7 +8,16 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ## Unreleased
 
 The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
-a demo board with each of them, on a desktop, a tablet and a phone.
+a demo board with each of them, on a desktop, a tablet and a phone. And GitLab.
+
+### New
+
+- **GitLab**, on GitLab.com or a GitLab of your own: the project with the last
+  pipeline on its default branch and what is open, the pipelines with how
+  each ended, and the merge requests with what still stands between each and
+  its target, a conflict marked. The token goes in as `PRIVATE-TOKEN`, and a
+  public project on GitLab.com needs none. ⚠️ Beta until somebody has seen it
+  answer a GitLab of their own.
 
 ### Fixed
 

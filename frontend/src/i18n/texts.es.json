@@ -1960,7 +1960,21 @@
     "Only the machines in this group, by its name. Empty means all of them.": "Solo las máquinas de este grupo, por su nombre. Vacío significa todas.",
     "Setup keys": "Setup keys",
     "The keys that enrol machines, with what is left of them and when they expire.": "Las claves con las que se dan de alta las máquinas, con lo que les queda y cuándo caducan.",
-    "Hide revoked keys": "Ocultar las claves revocadas"
+    "Hide revoked keys": "Ocultar las claves revocadas",
+    "The pipelines, the open merge requests and the open issues of a project on GitLab.com or your own GitLab.": "Los pipelines, las merge requests abiertas y las incidencias abiertas de un proyecto en GitLab.com o en tu propio GitLab.",
+    "GitLab.com, or the address of your own GitLab without /api.": "GitLab.com, o la dirección de tu propio GitLab sin /api.",
+    "A personal, project or group access token with the read_api scope. A public project on GitLab.com answers without one.": "Un token de acceso personal, de proyecto o de grupo con el ámbito read_api. Un proyecto público en GitLab.com responde también sin él.",
+    "The project's path as in its address, group/name, or its number. A card can name another one.": "La ruta del proyecto tal como aparece en su dirección, grupo/nombre, o su número. Una tarjeta puede indicar otro.",
+    "For a GitLab of your own behind a certificate of its own.": "Para un GitLab propio detrás de un certificado propio.",
+    "Empty takes the connection's project.": "Vacío usa el proyecto de la conexión.",
+    "The last pipeline on the default branch, the open merge requests and the open issues.": "El último pipeline en la rama predeterminada, las merge requests abiertas y las incidencias abiertas.",
+    "Pipelines": "Pipelines",
+    "The latest pipelines with their branch and how they ended, a red one marked.": "Los últimos pipelines con su rama y cómo terminaron, el rojo marcado.",
+    "Branch or tag": "Rama o etiqueta",
+    "Only the pipelines of this branch or tag. Empty means all of them.": "Solo los pipelines de esta rama o etiqueta. Vacío significa todos.",
+    "Merge requests": "Merge requests",
+    "The open merge requests, with what still stands between each and the target branch.": "Las merge requests abiertas, con lo que aún se interpone entre cada una y la rama de destino.",
+    "Hide drafts": "Ocultar borradores"
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3042,6 +3056,8 @@
     "Warmest": "El más caliente",
     "Machines": "Máquinas",
     "To approve": "Por aprobar",
-    "Keys": "Claves"
+    "Keys": "Claves",
+    "Pipeline": "Pipeline",
+    "Branch": "Rama"
   }
 }

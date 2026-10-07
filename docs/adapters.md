@@ -21,6 +21,7 @@ that one of thirty-one renderers draws.
 | Cup | image updates, updates waiting | check now | none; Cup has no sign-in, so its port stays inside the network |
 | Coolify | applications, deployments, status | | API token; the API has to be switched on in Coolify |
 | Gitea, Forgejo | open issues or pull requests, Actions jobs, repositories | | access token with read access to repositories, issues and the user |
+| GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |
 | Semaphore UI | last runs, automation | | API token of a user; the cards see the projects that user sees |
 | Meilisearch | indexes, search | | a key of its own with stats.get, indexes.get, tasks.get and version |
 | Synology DSM | system, volumes, disks, containers, vms | start, stop, restart; power on, shut down, reboot | user and password; containers and VM details through DSM's own interface calls |
