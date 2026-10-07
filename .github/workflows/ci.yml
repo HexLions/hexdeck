@@ -17,6 +17,10 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
+# Read-only unless a job says otherwise; only the image job does.
+permissions:
+  contents: read
+
 concurrency:
   group: docker-image
   cancel-in-progress: false
@@ -126,6 +130,12 @@ jobs:
             frontend/test-results/
           retention-days: 7
 
+  # ⚠️ The actions of this job are pinned to a commit, not a tag. It is the
+  # one job that can publish: its token writes the image Watchtower pulls onto
+  # the operator's server, and a tag can be moved by whoever controls the
+  # action's repository, as tj-actions/changed-files showed in 2025. The
+  # comment after each pin names the release it is; whoever updates one
+  # moves both together. First-party actions/* stay on their major tags.
   image:
     name: Docker image
     runs-on: ubuntu-latest
@@ -136,11 +146,11 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - uses: docker/setup-qemu-action@v3
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
 
       - name: Sign in to the registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -148,7 +158,7 @@ jobs:
 
       - name: Names and labels
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -158,7 +168,7 @@ jobs:
             type=raw,value=main,enable=${{ github.ref == 'refs/heads/main' }}
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           context: .
           # arm64 is built under QEMU and takes ten minutes on its own. A push
