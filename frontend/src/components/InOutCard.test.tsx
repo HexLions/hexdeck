@@ -30,4 +30,17 @@ describe('in and out, mirrored', () => {
     render(<>{renderWidget({ widget: view, data, series: { wan_down: [100] } })}</>)
     expect(screen.queryByTestId('inout')).toBeNull()
   })
+
+  it('finds a row by its label when the service does not say which metric it is', () => {
+    const fritz = {
+      status: 'ok',
+      primary: { label: 'Down', value: '3.2 MB/s' },
+      secondary: [{ label: 'Up', value: '721.7 KB/s' }],
+      metrics: { down: 3_200_000, up: 721_700 },
+      meta: { renderer: 'inout', inout: ['down', 'up'] },
+    } as unknown as WidgetData
+    render(<>{renderWidget({ widget: view, data: fritz, series: { down: [1, 3, 2], up: [1, 2, 1] } })}</>)
+    expect(screen.getByText('3.2 MB/s')).toBeInTheDocument()
+    expect(screen.getByText('721.7 KB/s')).toBeInTheDocument()
+  })
 })

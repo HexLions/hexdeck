@@ -547,8 +547,12 @@ export function InOutCard({ data, series }: RenderProps) {
   const [inside, outside] = (Array.isArray(data?.meta?.inout) ? data.meta.inout : []) as string[]
   const down = (inside && series?.[inside]) || []
   const up = (outside && series?.[outside]) || []
+  // ⚠️ By the metric a row names, or else by its label: a FRITZ!Box writes
+  // "Down" and "Up" without saying which metric they are, and its two chips
+  // came out as "down –" and "up –" under a drawing that knew both numbers.
+  const rows = [data?.primary, ...(data?.secondary ?? [])].filter(Boolean) as Secondary[]
   const row = (metric: string) =>
-    [data?.primary, ...(data?.secondary ?? [])].find((one) => one && 'metric' in one && one.metric === metric) as Secondary | undefined
+    rows.find((one) => 'metric' in one && one.metric === metric) ?? rows.find((one) => String(one.label ?? '').toLowerCase() === metric.toLowerCase())
   const width = 100
   const height = 60
   const mid = height * 0.58
@@ -580,11 +584,11 @@ export function InOutCard({ data, series }: RenderProps) {
           <Empty>{t('card.collecting')}</Empty>
         )}
       </div>
-      <div className="flex gap-1.5 mt-1.5">
+      <div className="flex gap-1.5 mt-1.5 min-w-0 overflow-hidden">
         {[inside, outside].map((metric, index) => {
           const one = metric ? row(metric) : undefined
           return (
-            <span key={metric || index} className="chip" style={{ color: index ? '#a5b4fc' : 'var(--nd-accent)' }}>
+            <span key={metric || index} className="chip min-w-0 truncate" style={{ color: index ? '#a5b4fc' : 'var(--nd-accent)' }}>
               {index ? '↑' : '↓'} {one ? tLabel(one.label) : metric}
               <b className="num">{formatValue(one?.value ?? '', one?.unit)}</b>
             </span>

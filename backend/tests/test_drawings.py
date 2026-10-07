@@ -15,6 +15,7 @@ from app.adapters.base import (
     WidgetType,
     as_bars,
     as_chart,
+    as_inout,
     as_ring,
     offer_views,
     ring_of,
@@ -241,6 +242,27 @@ def test_the_chart_is_offered_wherever_two_metrics_are_declared() -> None:
     )
     assert offered == declared
     assert declared > 20, f"only {declared} cards measure two things; the walk is broken"
+
+
+def test_a_card_switched_to_in_and_out_is_drawn_so_and_names_its_pair() -> None:
+    data = as_inout(WidgetData(metrics={"clients": 12.0, "wan_down": 40.0, "wan_up": 8.0}), {"view": "inout"})
+    assert data.meta["renderer"] == "inout"
+    assert data.meta["inout"] == ["wan_down", "wan_up"]
+
+
+def test_in_and_out_needs_both_halves_reported_right_now() -> None:
+    """A fetch that found the download but not the upload is not a pair."""
+    data = as_inout(WidgetData(metrics={"wan_down": 40.0}), {"view": "inout"})
+    assert data.meta.get("renderer") is None
+
+
+def test_in_and_out_is_applied_on_the_way_to_the_screen() -> None:
+    """⚠️ The choice was offered for a release and nothing took it: no pass
+    on the way from the fetch to the board set the drawing."""
+    adapter = get_adapter("unifi")
+    data = WidgetData(metrics={"clients": 12.0, "wan_down": 40.0, "wan_up": 8.0})
+    shaped = shape_for_display(data, adapter, "summary", {"view": "inout"})
+    assert shaped.meta["renderer"] == "inout"
 
 
 # ---------------------------------------------------------------------------
