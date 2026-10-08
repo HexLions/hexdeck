@@ -156,6 +156,38 @@
       "small": [
         "La card dell'indirizzo pubblico non l'ha mai avuto: interroga un servizio pubblico, non c'è nessuna istanza da confermare."
       ]
+    },
+    "0.23.0": {
+      "lead": "HexDeck 0.23.0: GitLab, Alertmanager e Cloudflare, e i nuovi disegni corretti dopo un primo sguardo su uno schermo vero.",
+      "sections": [
+        {
+          "title": "GitLab",
+          "body": "Le pipeline e com'è finita ciascuna, le merge request aperte con quello che ancora le blocca, e il progetto a colpo d'occhio. GitLab.com o il tuo; un progetto pubblico non chiede token.",
+          "path": "Sistema > Connessioni > GitLab"
+        },
+        {
+          "title": "Alertmanager",
+          "body": "Cosa sta scattando, prima gli avvisi critici, cosa è silenziato, e i silenzi con la loro fine. Dal suo stato si legge solo la versione, mai la configurazione con i suoi segreti.",
+          "path": "Sistema > Connessioni > Alertmanager"
+        },
+        {
+          "title": "Cloudflare",
+          "body": "Se ogni tunnel raggiunge Cloudflare e attraverso quali data center, le tue zone con quella in pausa evidenziata, e le richieste e gli eventi di sicurezza dell'ultimo giorno.",
+          "path": "Sistema > Connessioni > Cloudflare"
+        },
+        {
+          "title": "I disegni, corretti",
+          "body": "Entrata e uscita, a specchio ora disegna quando lo scegli. Un gruppo dice il suo titolo una volta sola e sul telefono non sovrappone più le card, e la mappa della rete tiene le parole dentro i riquadri.",
+          "path": "Impostazioni di una card > Vista"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Le tre nuove integrazioni hanno il bollino beta finché qualcuno non le vede rispondere su un'istanza vera.",
+        "La tastiera ora vede in quale campo si trova: nella card di ricerca, nella libreria del player, nel blocco note e nella scelta della pagina sul telefono.",
+        "La casella di ricerca non va più a capo su tre righe su un tablet.",
+        "Immagini nuove nel README, di questa versione."
+      ]
     }
   }
 }

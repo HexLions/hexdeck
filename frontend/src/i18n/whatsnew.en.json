@@ -783,6 +783,38 @@
       "small": [
         "The public address card never carried the badge: it asks a public service, so there is no instance to confirm."
       ]
+    },
+    "0.23.0": {
+      "lead": "HexDeck 0.23.0: GitLab, Alertmanager and Cloudflare, and the new drawings fixed after a first look on a real screen.",
+      "sections": [
+        {
+          "title": "GitLab",
+          "body": "The pipelines with how each ended, the open merge requests with what still stands in their way, and the project at a glance. GitLab.com or your own; a public project needs no token.",
+          "path": "System > Connections > GitLab"
+        },
+        {
+          "title": "Alertmanager",
+          "body": "What is firing, the critical alerts first, what is silenced, and the silences with when they end. Only the version is read from its status, never the configuration with its secrets.",
+          "path": "System > Connections > Alertmanager"
+        },
+        {
+          "title": "Cloudflare",
+          "body": "Whether each tunnel reaches Cloudflare and through which data centres, your zones with a paused one marked, and the requests and security events of the last day.",
+          "path": "System > Connections > Cloudflare"
+        },
+        {
+          "title": "The drawings, fixed",
+          "body": "In and out, mirrored now draws when you choose it. A group says its title once and no longer stacks its cards on a phone, and the network map keeps its words inside the boxes.",
+          "path": "A card's settings > View"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The three new integrations carry the beta badge until somebody has seen them answer a real instance.",
+        "A keyboard now sees which field it is in, in the search card, the player's library, the notepad and the phone's page picker.",
+        "The search box no longer wraps over three lines on a tablet.",
+        "New pictures in the README, of this version."
+      ]
     }
   }
 }
