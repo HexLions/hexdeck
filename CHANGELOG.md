@@ -5,7 +5,7 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.23.0 (2026-10-08)
 
 The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
 a demo board with each of them, on a desktop, a tablet and a phone. And GitLab,
@@ -43,6 +43,21 @@ Alertmanager and Cloudflare.
   and its clients. The line is cut to what fits.
 - **The search box on a tablet** ran its placeholder over three lines. It
   stays on one and is cut short.
+- **A keyboard could not see which field it was in.** The search card and the
+  player's library showed nothing when the keyboard reached their search
+  field, and the notepad and the phone's page picker had switched their focus
+  outline off. All four show the accent ring now.
+
+### Changed
+
+- **The image build's actions are pinned to a commit.** The job that
+  publishes the image used five docker/* actions on major tags, which whoever
+  controls those repositories can move. Each is pinned to the commit its tag
+  pointed at, so what runs is the same and can no longer change underneath.
+- **Pull requests no longer cancel each other's tests.** The workflow held
+  every run to one at a time, and GitHub keeps only one waiting: a second pull
+  request cancelled the first one's tests before they started. Only the image
+  build is held to one at a time now.
 
 ### Documentation
 

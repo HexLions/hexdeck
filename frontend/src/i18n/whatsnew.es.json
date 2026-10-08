@@ -13,6 +13,38 @@
       "small": [
         "La tarjeta de la dirección pública nunca lo llevó: pregunta a un servicio público, así que no hay instancia que comprobar."
       ]
+    },
+    "0.23.0": {
+      "lead": "HexDeck 0.23.0: GitLab, Alertmanager y Cloudflare, y los nuevos dibujos corregidos tras una primera mirada en una pantalla real.",
+      "sections": [
+        {
+          "title": "GitLab",
+          "body": "Los pipelines y cómo terminó cada uno, las merge requests abiertas con lo que aún las frena, y el proyecto de un vistazo. GitLab.com o el tuyo; un proyecto público no necesita token.",
+          "path": "Sistema > Conexiones > GitLab"
+        },
+        {
+          "title": "Alertmanager",
+          "body": "Lo que está saltando, primero las alertas críticas, lo que está silenciado, y los silencios con su final. De su estado solo se lee la versión, nunca la configuración con sus secretos.",
+          "path": "Sistema > Conexiones > Alertmanager"
+        },
+        {
+          "title": "Cloudflare",
+          "body": "Si cada túnel llega a Cloudflare y a través de qué centros de datos, tus zonas con la pausada marcada, y las solicitudes y los eventos de seguridad del último día.",
+          "path": "Sistema > Conexiones > Cloudflare"
+        },
+        {
+          "title": "Los dibujos, corregidos",
+          "body": "Entrada y salida, en espejo ahora dibuja cuando lo eliges. Un grupo dice su título una sola vez y ya no amontona sus tarjetas en el teléfono, y el mapa de red mantiene sus palabras dentro de las cajas.",
+          "path": "Ajustes de una tarjeta > Vista"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Las tres nuevas integraciones llevan la insignia beta hasta que alguien las vea responder en una instancia real.",
+        "El teclado ahora ve en qué campo está: en la tarjeta de búsqueda, la biblioteca del reproductor, el bloc de notas y el selector de página del teléfono.",
+        "La caja de búsqueda ya no se parte en tres líneas en una tableta.",
+        "Imágenes nuevas en el README, de esta versión."
+      ]
     }
   }
 }

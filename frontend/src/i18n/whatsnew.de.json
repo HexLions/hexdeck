@@ -783,6 +783,38 @@
       "small": [
         "Die Karte für die öffentliche Adresse trug es nie: sie fragt einen öffentlichen Dienst, da gibt es keine Instanz zu bestätigen."
       ]
+    },
+    "0.23.0": {
+      "lead": "HexDeck 0.23.0: GitLab, Alertmanager und Cloudflare, und die neuen Darstellungen, korrigiert nach einem ersten Blick auf einen echten Bildschirm.",
+      "sections": [
+        {
+          "title": "GitLab",
+          "body": "Die Pipelines und wie sie endeten, die offenen Merge Requests mit dem, was ihnen noch im Weg steht, und das Projekt auf einen Blick. GitLab.com oder dein eigenes; ein öffentliches Projekt braucht kein Token.",
+          "path": "System > Verbindungen > GitLab"
+        },
+        {
+          "title": "Alertmanager",
+          "body": "Was gerade auslöst, die kritischen Alarme zuerst, was stummgeschaltet ist, und die Stummschaltungen mit ihrem Ende. Aus seinem Status wird nur die Version gelesen, nie die Konfiguration mit ihren Geheimnissen.",
+          "path": "System > Verbindungen > Alertmanager"
+        },
+        {
+          "title": "Cloudflare",
+          "body": "Ob jeder Tunnel Cloudflare erreicht und über welche Rechenzentren, deine Zonen mit einer pausierten markiert, und die Anfragen und Sicherheitsereignisse des letzten Tages.",
+          "path": "System > Verbindungen > Cloudflare"
+        },
+        {
+          "title": "Die Darstellungen, korrigiert",
+          "body": "Rein und raus, gespiegelt zeichnet jetzt, wenn du es wählst. Eine Gruppe nennt ihren Titel einmal und stapelt ihre Karten auf dem Telefon nicht mehr übereinander, und die Netzwerkkarte hält ihre Wörter in den Kästen.",
+          "path": "Einstellungen einer Karte > Ansicht"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die drei neuen Integrationen tragen das Beta-Abzeichen, bis jemand sie an einer echten Instanz antworten gesehen hat.",
+        "Eine Tastatur sieht jetzt, in welchem Feld sie ist: in der Suchkarte, der Bibliothek des Players, dem Notizblock und der Seitenauswahl auf dem Telefon.",
+        "Das Suchfeld bricht auf einem Tablet nicht mehr über drei Zeilen um.",
+        "Neue Bilder im README, von dieser Version."
+      ]
     }
   }
 }
