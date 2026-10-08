@@ -8,8 +8,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ## Unreleased
 
 The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
-a demo board with each of them, on a desktop, a tablet and a phone. And GitLab
-and Alertmanager.
+a demo board with each of them, on a desktop, a tablet and a phone. And GitLab,
+Alertmanager and Cloudflare.
 
 ### New
 
@@ -23,6 +23,9 @@ and Alertmanager.
   silenced, and the silences with what they match and when they end. Only
   the version and the cluster are read from its status, never the
   configuration with its secrets that the same answer carries. ⚠️ Beta.
+- **Cloudflare**: whether each tunnel reaches the edge and through which data
+  centres, the zones with a paused or moved one marked, and the requests and
+  security events of one zone over the last 24 hours. ⚠️ Beta.
 
 ### Fixed
 

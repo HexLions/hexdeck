@@ -1983,7 +1983,19 @@
     "Receiver": "Destinatario",
     "Only the alerts routed to this receiver, by its name. Empty means all of them.": "Solo gli avvisi instradati a questo destinatario, per nome. Vuoto significa tutti.",
     "Silences": "Silenzi",
-    "The silences that are on or about to be, what they match, who set them and when they end.": "I silenzi attivi o in arrivo, a cosa si applicano, chi li ha impostati e quando finiscono."
+    "The silences that are on or about to be, what they match, who set them and when they end.": "I silenzi attivi o in arrivo, a cosa si applicano, chi li ha impostati e quando finiscono.",
+    "Whether your tunnels reach the edge, how your zones stand, and the requests and security events of the last day.": "Se i tuoi tunnel raggiungono l'edge, come stanno le tue zone, e le richieste e gli eventi di sicurezza dell'ultimo giorno.",
+    "A custom API token with Zone: Zone Read, Account: Cloudflare Tunnel Read and, for the traffic card, Account Analytics Read.": "Un token API personalizzato con Zone: Zone Read, Account: Cloudflare Tunnel Read e, per la card del traffico, Account Analytics Read.",
+    "Account ID": "ID account",
+    "For the tunnels. Empty takes the account of the first zone the token can read.": "Per i tunnel. Vuoto usa l'account della prima zona che il token può leggere.",
+    "Tunnels": "Tunnel",
+    "Every tunnel with whether it reaches the edge, through how many connections and which data centres.": "Ogni tunnel, se raggiunge l'edge, con quante connessioni e attraverso quali data center.",
+    "Hide tunnels that never ran": "Nascondi i tunnel mai avviati",
+    "Zones": "Zone",
+    "The domains on Cloudflare with their status and plan, a paused one marked.": "I domini su Cloudflare con il loro stato e il piano, quelli in pausa evidenziati.",
+    "Requests and security events of one zone over the last 24 hours.": "Richieste ed eventi di sicurezza di una zona nelle ultime 24 ore.",
+    "Zone": "Zona",
+    "The domain. Empty takes the first zone the token can read.": "Il dominio. Vuoto usa la prima zona che il token può leggere."
   },
   "labels": {
     "Jobs": "Job",
@@ -3068,6 +3080,8 @@
     "dead": "morto",
     "Pipeline": "Pipeline",
     "Branch": "Branch",
-    "Silenced": "Silenziati"
+    "Silenced": "Silenziati",
+    "Requests in 24 h": "Richieste in 24 h",
+    "Security events": "Eventi di sicurezza"
   }
 }
