@@ -508,6 +508,20 @@ body {
   background: transparent;
 }
 
+/* The big number of a value card stays on one line and shrinks with the card.
+ *
+ * ⚠️ A value arrives as one string with its unit, "535.7 KB/s", and the
+ * browser broke it after the slash: on a FRITZ!Box card two columns wide the
+ * "s" stood alone on the line below. 12% of the card's width keeps ten
+ * characters of the monospaced figures inside a card of that size, and 30px
+ * is the size it always had on a wider one. */
+.value-number {
+  font-size: clamp(18px, 12cqi, 30px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Inputs. */
 .input {
   width: 100%;
