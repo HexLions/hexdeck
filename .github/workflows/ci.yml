@@ -1,8 +1,4 @@
 # Tests on every push and pull request; the Docker image on main and on tags.
-#
-# One run at a time: a tag and a push to main within the same minute would
-# otherwise fetch the same layers twice and trip GitHub's rate limit. Running
-# jobs are never cancelled; a half-published image is worse than a wait.
 name: CI
 
 on:
@@ -20,10 +16,6 @@ env:
 # Read-only unless a job says otherwise; only the image job does.
 permissions:
   contents: read
-
-concurrency:
-  group: docker-image
-  cancel-in-progress: false
 
 jobs:
   tests:
@@ -141,6 +133,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     if: github.event_name != 'pull_request'
+    # One image build at a time: a tag and a push to main within the same
+    # minute would otherwise fetch the same layers twice and trip GitHub's rate
+    # limit. Running builds are never cancelled; a half-published image is
+    # worse than a wait.
+    #
+    # ⚠️ On this job, not on the workflow. On the workflow it held the tests
+    # of every pull request to one at a time as well, and GitHub keeps only one
+    # waiting run in a group: a second pull request cancelled the first one's
+    # run before it started. Found on 2026-10-07 with five open at once.
+    concurrency:
+      group: docker-image
+      cancel-in-progress: false
     permissions:
       contents: read
       packages: write
