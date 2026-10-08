@@ -209,7 +209,7 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
       }
     >
       <p className="text-xs text-muted mb-1">
-        {adapter?.label} · {tAdapter(spec?.label)}
+        {tAdapter(adapter?.label)} · {tAdapter(spec?.label)}
         {adapter?.beta && (
           <span className="chip ml-1.5 !py-0 text-[10px] cursor-help" title={t('widget.betaHelp')}>
             beta

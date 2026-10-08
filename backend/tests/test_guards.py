@@ -378,6 +378,11 @@ def test_every_adapter_text_has_a_translation(language: str) -> None:
     checked = 0
     for adapter in all_adapters():
         texts = [adapter.description]
+        # ⚠️ An adapter's name is a product's and stays as it is, except the
+        # basics', which is a word: the card settings said "Basics · Gruppo" in
+        # an Italian interface whose library calls the same cards "Base".
+        if adapter.kind == "core":
+            texts.append(adapter.label)
         for field in adapter.fields:
             texts += [field.label, field.help, *(label for _value, label in field.options)]
         for widget in adapter.widgets:

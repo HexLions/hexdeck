@@ -1995,7 +1995,8 @@
     "The domains on Cloudflare with their status and plan, a paused one marked.": "Die Domains bei Cloudflare mit Status und Tarif, eine pausierte markiert.",
     "Requests and security events of one zone over the last 24 hours.": "Anfragen und Sicherheitsereignisse einer Zone in den letzten 24 Stunden.",
     "Zone": "Zone",
-    "The domain. Empty takes the first zone the token can read.": "Die Domain. Leer nimmt die erste Zone, die das Token lesen kann."
+    "The domain. Empty takes the first zone the token can read.": "Die Domain. Leer nimmt die erste Zone, die das Token lesen kann.",
+    "Basics": "Grundlagen"
   },
   "labels": {
     "Jobs": "Jobs",
