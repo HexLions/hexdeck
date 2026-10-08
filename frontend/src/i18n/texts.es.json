@@ -1974,7 +1974,16 @@
     "Only the pipelines of this branch or tag. Empty means all of them.": "Solo los pipelines de esta rama o etiqueta. Vacío significa todos.",
     "Merge requests": "Merge requests",
     "The open merge requests, with what still stands between each and the target branch.": "Las merge requests abiertas, con lo que aún se interpone entre cada una y la rama de destino.",
-    "Hide drafts": "Ocultar borradores"
+    "Hide drafts": "Ocultar borradores",
+    "The alerts that are firing, worst first, the ones that are silenced, and the silences.": "Las alertas que están saltando, las más graves primero, las silenciadas y los silencios.",
+    "How many alerts are firing and how many are silenced, with the version and the cluster.": "Cuántas alertas están saltando y cuántas están silenciadas, con la versión y el clúster.",
+    "Firing alerts": "Alertas activas",
+    "The alerts that are firing, the critical ones first, with what they are about and since when.": "Las alertas que están saltando, las críticas primero, con de qué tratan y desde cuándo.",
+    "Show silenced and inhibited alerts": "Mostrar las alertas silenciadas e inhibidas",
+    "Receiver": "Receptor",
+    "Only the alerts routed to this receiver, by its name. Empty means all of them.": "Solo las alertas dirigidas a este receptor, por su nombre. Vacío significa todas.",
+    "Silences": "Silencios",
+    "The silences that are on or about to be, what they match, who set them and when they end.": "Los silencios activos o a punto de empezar, a qué se aplican, quién los puso y cuándo terminan."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3058,6 +3067,7 @@
     "To approve": "Por aprobar",
     "Keys": "Claves",
     "Pipeline": "Pipeline",
-    "Branch": "Rama"
+    "Branch": "Rama",
+    "Silenced": "Silenciadas"
   }
 }

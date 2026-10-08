@@ -1974,7 +1974,16 @@
     "Only the pipelines of this branch or tag. Empty means all of them.": "Solo le pipeline di questo branch o tag. Vuoto significa tutte.",
     "Merge requests": "Merge request",
     "The open merge requests, with what still stands between each and the target branch.": "Le merge request aperte, con quello che ancora separa ciascuna dal branch di destinazione.",
-    "Hide drafts": "Nascondi le bozze"
+    "Hide drafts": "Nascondi le bozze",
+    "The alerts that are firing, worst first, the ones that are silenced, and the silences.": "Gli avvisi che stanno scattando, i più gravi per primi, quelli silenziati e i silenzi.",
+    "How many alerts are firing and how many are silenced, with the version and the cluster.": "Quanti avvisi stanno scattando e quanti sono silenziati, con la versione e il cluster.",
+    "Firing alerts": "Avvisi attivi",
+    "The alerts that are firing, the critical ones first, with what they are about and since when.": "Gli avvisi che stanno scattando, i critici per primi, con di cosa si tratta e da quando.",
+    "Show silenced and inhibited alerts": "Mostra gli avvisi silenziati e inibiti",
+    "Receiver": "Destinatario",
+    "Only the alerts routed to this receiver, by its name. Empty means all of them.": "Solo gli avvisi instradati a questo destinatario, per nome. Vuoto significa tutti.",
+    "Silences": "Silenzi",
+    "The silences that are on or about to be, what they match, who set them and when they end.": "I silenzi attivi o in arrivo, a cosa si applicano, chi li ha impostati e quando finiscono."
   },
   "labels": {
     "Jobs": "Job",
@@ -3058,6 +3067,7 @@
     "uploading": "caricamento",
     "dead": "morto",
     "Pipeline": "Pipeline",
-    "Branch": "Branch"
+    "Branch": "Branch",
+    "Silenced": "Silenziati"
   }
 }
