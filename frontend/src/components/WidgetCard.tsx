@@ -159,7 +159,9 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
   // javascript: address here would run as part of HexDeck.
   const link = safeUrl(widget.link || data?.link || widget.service_link) || undefined
   // Clocks and app tiles draw themselves without a header; the player's cover runs to the edge.
-  const bare = ['app', 'clock', 'button', 'image', 'player', 'heading'].includes(widget.renderer)
+  // ⚠️ A group too: its own header carries the title, the fold and the count,
+  // and with the card's above it the title stood on the board twice.
+  const bare = ['app', 'clock', 'button', 'image', 'player', 'heading', 'group'].includes(widget.renderer)
   // ⚠️ A heading has no ground at all: it stands between the cards rather
   // than among them, so it keeps neither the glass nor the status dot.
   const plain = widget.renderer === 'heading'

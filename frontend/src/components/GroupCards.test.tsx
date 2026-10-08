@@ -5,7 +5,8 @@ import { DEMO_VIEWS } from '../demo/board'
 import { cardsOf, PageCardsContext, tucked, useFolded } from '../lib/groups'
 import type { WidgetData, WidgetView } from '../lib/types'
 import { useLive } from '../stores/live'
-import { GroupCard, TabsCard } from './GroupCards'
+import { GROUP_ROW_FLOOR, GroupCard, TabsCard } from './GroupCards'
+import { WidgetCard } from './WidgetCard'
 
 const card = (id: number, kind: string, title: string, options: Record<string, unknown> = {}, renderer = 'value') =>
   ({ ...DEMO_VIEWS[0], id, kind, title, renderer, options }) as WidgetView
@@ -59,5 +60,29 @@ describe('the group', () => {
     expect(useFolded.getState().folded).toEqual([4])
     expect(screen.getByRole('button', { expanded: false })).toBeInTheDocument()
     expect(screen.queryByRole('region', { name: 'Speed' })).toBeNull()
+  })
+})
+
+describe('the group on a narrow screen', () => {
+  it('gives each card a floor of height and scrolls, rather than drawing one over the next', () => {
+    render(
+      <PageCardsContext.Provider value={{ widgets: [clock, notes, group] }}>
+        <GroupCard widget={group} data={undefined} />
+      </PageCardsContext.Provider>,
+    )
+    const grid = screen.getByRole('region', { name: 'Speed' }).parentElement!.parentElement!
+    expect(grid.style.gridAutoRows).toBe(`minmax(${GROUP_ROW_FLOOR}px, 1fr)`)
+    expect(grid.className).toContain('overflow-y-auto')
+  })
+})
+
+describe('the group in its card', () => {
+  it('says its title once: its own header carries it, the card adds none', () => {
+    render(
+      <PageCardsContext.Provider value={{ widgets: [clock, notes, group] }}>
+        <WidgetCard widget={group} data={undefined} />
+      </PageCardsContext.Provider>,
+    )
+    expect(screen.getAllByText('Media')).toHaveLength(1)
   })
 })

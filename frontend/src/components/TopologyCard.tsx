@@ -147,7 +147,7 @@ export function TopologyCard({ data }: { data: WidgetData | undefined }) {
               </text>
               {box.place.detail && (
                 <text x={box.x + 19} y={box.y + (small ? 24 : 28)} fontSize={small ? 9 : 10} className="num fill-[var(--nd-text-faint)]">
-                  {clip(box.place.detail, small ? Math.floor(box.w / 5.6) - 3 : Math.floor(box.w / 6) - 3)}
+                  {clip(box.place.detail, detailRoom(box.w, small ? 9 : 10))}
                 </text>
               )}
               <title>{[box.place.name, box.place.detail].filter(Boolean).join(' · ')}</title>
@@ -157,6 +157,18 @@ export function TopologyCard({ data }: { data: WidgetData | undefined }) {
       </svg>
     </div>
   )
+}
+
+/**
+ * How many characters of the detail line fit its box: the box less the dot
+ * on the left and a margin on the right, in characters of a monospaced font.
+ *
+ * ⚠️ It was the box's width over a guessed character width, less three. On
+ * the large boxes that allowed 22 characters where 20 fit, and a switch's
+ * "USW-24-PoE · 9 clients" ran over the right edge of its box.
+ */
+export function detailRoom(boxWidth: number, fontSize: number): number {
+  return Math.floor((boxWidth - 25) / (fontSize * 0.62))
 }
 
 /** A name cut to what fits its box, with an ellipsis. */

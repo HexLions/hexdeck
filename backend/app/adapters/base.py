@@ -784,6 +784,24 @@ def as_chart(data: WidgetData, options: dict[str, Any]) -> WidgetData:
     return data
 
 
+def as_inout(data: WidgetData, options: dict[str, Any]) -> WidgetData:
+    """Draw a pair of traffic metrics mirrored on one axis, when asked.
+
+    ⚠️ The choice was offered and nothing took it: no pass set the renderer
+    or named the pair, so a card switched to "In and out, mirrored" stayed
+    exactly what it was. Found on 2026-10-07 with a UniFi and a FRITZ!Box card
+    side by side on a screen. The pair is read from what the card reports
+    right now, like the chart: a fetch that found one of the two is not a pair.
+    """
+    if str(options.get("view") or "value") != "inout":
+        return data
+    pair = inout_pair(list(data.metrics))
+    if pair is None:
+        return data
+    data.meta = {**(data.meta or {}), "renderer": "inout", "inout": list(pair)}
+    return data
+
+
 def as_ring(data: WidgetData, options: dict[str, Any]) -> WidgetData:
     """Draw the slices the fetch worked out, when the card is asked to be one.
 
@@ -828,6 +846,7 @@ def shape_for_display(data: WidgetData, adapter: Adapter, widget_kind: str, opti
     data = as_bars(data, options)
     data = as_ring(data, options)
     data = as_chart(data, options)
+    data = as_inout(data, options)
     return as_gauge(data, options)
 
 
