@@ -188,6 +188,20 @@
         "La casella di ricerca non va più a capo su tre righe su un tablet.",
         "Immagini nuove nel README, di questa versione."
       ]
+    },
+    "0.23.1": {
+      "lead": "HexDeck 0.23.1: tre cose viste su una board vera il giorno in cui è uscita la 0.23.0.",
+      "sections": [
+        {
+          "title": "Il numero grande resta su una riga",
+          "body": "Su una card stretta un valore come 535.7 KB/s andava a capo, con l'ultima lettera dell'unità sulla riga sotto. Ora resta su una riga e si rimpicciolisce un po' per starci."
+        }
+      ],
+      "smallTitle": "Corretto",
+      "small": [
+        "Nelle impostazioni di gruppo e schede le card si chiamano card: «Card contenute», «Card affiancate».",
+        "Le impostazioni della card dicono «Base» invece di «Basics»."
+      ]
     }
   }
 }

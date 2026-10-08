@@ -815,6 +815,19 @@
         "Das Suchfeld bricht auf einem Tablet nicht mehr über drei Zeilen um.",
         "Neue Bilder im README, von dieser Version."
       ]
+    },
+    "0.23.1": {
+      "lead": "HexDeck 0.23.1: kleine Korrekturen, gesehen auf einem echten Board am Tag von 0.23.0.",
+      "sections": [
+        {
+          "title": "Die große Zahl bleibt auf einer Zeile",
+          "body": "Auf einer schmalen Karte brach ein Wert wie 535.7 KB/s um, und der letzte Buchstabe der Einheit stand auf der nächsten Zeile. Er bleibt jetzt auf einer Zeile und wird etwas kleiner, damit er passt."
+        }
+      ],
+      "smallTitle": "Behoben",
+      "small": [
+        "Die Karteneinstellungen nennen die Grundlagen in deiner Sprache."
+      ]
     }
   }
 }
