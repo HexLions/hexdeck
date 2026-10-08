@@ -522,7 +522,11 @@ body {
   transition: border-color 120ms ease;
 }
 
-.input:focus {
+/* ⚠️ And when the field sits inside: the search card and the player's library
+   wear .input on the form or label around a bare field, which never takes the
+   focus itself, so a keyboard reached the field and nothing on screen said so. */
+.input:focus,
+.input:focus-within {
   border-color: var(--nd-accent);
   box-shadow: 0 0 0 3px var(--nd-accent-soft);
 }

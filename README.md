@@ -276,7 +276,6 @@ and Spanish throughout, next to English and German.
 
 ## Documentation
 
-- [What is left to do](TODO.md), and [how this project is worked on](CLAUDE.md)
 - [Running HexDeck: backups, restoring, updating](docs/operating.md)
 - [Integrations and widgets](docs/adapters.md)
 - [Docker labels](docs/labels.md)
