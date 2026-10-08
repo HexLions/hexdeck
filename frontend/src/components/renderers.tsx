@@ -2098,7 +2098,7 @@ export function NotepadCard({ widget, data, canEdit }: RenderProps) {
   return (
     <div className="relative h-full">
       <textarea
-        className={`no-drag h-full w-full resize-none bg-transparent p-3 text-sm outline-none ${font}`}
+        className={`no-drag h-full w-full resize-none bg-transparent p-3 text-sm outline-none rounded-[inherit] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent/50 ${font}`}
         aria-label={widget.title || t('notepad.title')}
         placeholder={t('notepad.placeholder')}
         value={text}
