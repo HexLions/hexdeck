@@ -211,6 +211,16 @@ Updated at every milestone.
   machine enrolled with it, days later. A peer that is merely asleep is not
   a fault, and one that was never seen carries the zero time, which would
   otherwise read as the year one.
+- **GitLab, on GitLab.com or a GitLab of one's own.** REST API v4, read-only,
+  with a token that goes in as ``PRIVATE-TOKEN`` and none at all for a public
+  project. A project is named by its path, which goes into the address
+  URL-encoded: sent with its slashes, GitLab answers 404, which reads exactly
+  like a project that does not exist. Three cards: the project with the last
+  pipeline on its default branch and what is open, the pipelines with how
+  each ended, and the merge requests with what still stands between each and
+  its target. The count of merge requests comes from the ``x-total`` header,
+  because a page holds a hundred at most. Read from GitLab's own API
+  documentation and checked against a public project on GitLab.com.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

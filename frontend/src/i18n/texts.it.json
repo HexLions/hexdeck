@@ -1960,7 +1960,21 @@
     "Active only": "Solo attivi",
     "All": "Tutti",
     "Latest downloads": "Ultimi download",
-    "The links unrestricted last, newest first, with their hoster and size.": "Gli ultimi link sbloccati, i più recenti per primi, con il loro hoster e la dimensione."
+    "The links unrestricted last, newest first, with their hoster and size.": "Gli ultimi link sbloccati, i più recenti per primi, con il loro hoster e la dimensione.",
+    "The pipelines, the open merge requests and the open issues of a project on GitLab.com or your own GitLab.": "Le pipeline, le merge request aperte e le issue aperte di un progetto su GitLab.com o sul tuo GitLab.",
+    "GitLab.com, or the address of your own GitLab without /api.": "GitLab.com, oppure l'indirizzo del tuo GitLab senza /api.",
+    "A personal, project or group access token with the read_api scope. A public project on GitLab.com answers without one.": "Un token di accesso personale, di progetto o di gruppo con lo scope read_api. Un progetto pubblico su GitLab.com risponde anche senza.",
+    "The project's path as in its address, group/name, or its number. A card can name another one.": "Il percorso del progetto come nel suo indirizzo, gruppo/nome, oppure il suo numero. Una card può indicarne un altro.",
+    "For a GitLab of your own behind a certificate of its own.": "Per un GitLab tuo dietro un certificato proprio.",
+    "Empty takes the connection's project.": "Vuoto usa il progetto della connessione.",
+    "The last pipeline on the default branch, the open merge requests and the open issues.": "L'ultima pipeline sul branch predefinito, le merge request aperte e le issue aperte.",
+    "Pipelines": "Pipeline",
+    "The latest pipelines with their branch and how they ended, a red one marked.": "Le ultime pipeline con il loro branch e com'è finita, quella rossa in evidenza.",
+    "Branch or tag": "Branch o tag",
+    "Only the pipelines of this branch or tag. Empty means all of them.": "Solo le pipeline di questo branch o tag. Vuoto significa tutte.",
+    "Merge requests": "Merge request",
+    "The open merge requests, with what still stands between each and the target branch.": "Le merge request aperte, con quello che ancora separa ciascuna dal branch di destinazione.",
+    "Hide drafts": "Nascondi le bozze"
   },
   "labels": {
     "Jobs": "Job",
@@ -3042,6 +3056,8 @@
     "virus found": "virus trovato",
     "compressing": "compressione",
     "uploading": "caricamento",
-    "dead": "morto"
+    "dead": "morto",
+    "Pipeline": "Pipeline",
+    "Branch": "Branch"
   }
 }

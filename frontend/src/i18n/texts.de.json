@@ -1960,7 +1960,21 @@
     "Active only": "Nur aktive",
     "All": "Alle",
     "Latest downloads": "Letzte Downloads",
-    "The links unrestricted last, newest first, with their hoster and size.": "Die zuletzt freigeschalteten Links, die neuesten zuerst, mit Hoster und Größe."
+    "The links unrestricted last, newest first, with their hoster and size.": "Die zuletzt freigeschalteten Links, die neuesten zuerst, mit Hoster und Größe.",
+    "The pipelines, the open merge requests and the open issues of a project on GitLab.com or your own GitLab.": "Die Pipelines, die offenen Merge Requests und die offenen Issues eines Projekts auf GitLab.com oder deinem eigenen GitLab.",
+    "GitLab.com, or the address of your own GitLab without /api.": "GitLab.com oder die Adresse deines eigenen GitLab, ohne /api.",
+    "A personal, project or group access token with the read_api scope. A public project on GitLab.com answers without one.": "Ein persönliches, Projekt- oder Gruppen-Zugriffstoken mit dem Bereich read_api. Ein öffentliches Projekt auf GitLab.com antwortet auch ohne.",
+    "The project's path as in its address, group/name, or its number. A card can name another one.": "Der Pfad des Projekts wie in seiner Adresse, gruppe/name, oder seine Nummer. Eine Karte kann ein anderes nennen.",
+    "For a GitLab of your own behind a certificate of its own.": "Für ein eigenes GitLab hinter einem eigenen Zertifikat.",
+    "Empty takes the connection's project.": "Leer nimmt das Projekt der Verbindung.",
+    "The last pipeline on the default branch, the open merge requests and the open issues.": "Die letzte Pipeline auf dem Standard-Branch, die offenen Merge Requests und die offenen Issues.",
+    "Pipelines": "Pipelines",
+    "The latest pipelines with their branch and how they ended, a red one marked.": "Die letzten Pipelines mit ihrem Branch und wie sie endeten, eine rote markiert.",
+    "Branch or tag": "Branch oder Tag",
+    "Only the pipelines of this branch or tag. Empty means all of them.": "Nur die Pipelines dieses Branches oder Tags. Leer heißt alle.",
+    "Merge requests": "Merge Requests",
+    "The open merge requests, with what still stands between each and the target branch.": "Die offenen Merge Requests, mit dem, was jeweils noch zwischen ihnen und dem Ziel-Branch steht.",
+    "Hide drafts": "Entwürfe ausblenden"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3042,6 +3056,8 @@
     "virus found": "Virus gefunden",
     "compressing": "packt",
     "uploading": "lädt hoch",
-    "dead": "tot"
+    "dead": "tot",
+    "Pipeline": "Pipeline",
+    "Branch": "Branch"
   }
 }
