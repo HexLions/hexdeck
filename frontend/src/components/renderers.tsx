@@ -281,7 +281,7 @@ export function ValueCard({ data, series, onAction, canAct }: RenderProps) {
         </div>
       )}
       <div className="flex-1 flex flex-col justify-center px-3 min-h-0 relative">
-        <div className="num text-[30px] leading-none font-semibold tracking-tight rise" key={String(primary?.value)}>
+        <div className="num value-number leading-none font-semibold tracking-tight rise" key={String(primary?.value)}>
           {formatValue(primary?.value)}
           {primary?.unit && <span className="text-sm text-muted font-medium ml-1.5">{primary.unit}</span>}
         </div>
