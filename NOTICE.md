@@ -230,6 +230,15 @@ Updated at every milestone.
   severity ranked as a warning, and the silences with their matchers written
   as Alertmanager writes them. Read from its OpenAPI spec at v0.34.1 and
   checked against that release running locally.
+- **Cloudflare: tunnels, zones and a day of traffic.** API v4 with a custom
+  API token as Bearer, and the GraphQL Analytics API for the requests and the
+  security events of the last 24 hours, whose adaptive datasets are sampled
+  and keep 31 days on every plan. The tunnels belong to an account, which is
+  taken from the first zone when none is typed. A token Cloudflare cannot read
+  comes back as HTTP 400 with its own error codes, and GraphQL refuses with
+  200 and a list of errors; both are read as what they are. Read from
+  Cloudflare's OpenAPI schema and its analytics documentation; the refusals
+  were measured against api.cloudflare.com.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

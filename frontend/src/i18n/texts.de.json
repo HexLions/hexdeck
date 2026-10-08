@@ -1983,7 +1983,19 @@
     "Receiver": "Empfänger",
     "Only the alerts routed to this receiver, by its name. Empty means all of them.": "Nur die Alarme, die an diesen Empfänger gehen, nach seinem Namen. Leer heißt alle.",
     "Silences": "Stummschaltungen",
-    "The silences that are on or about to be, what they match, who set them and when they end.": "Die Stummschaltungen, die aktiv sind oder gleich beginnen, worauf sie passen, wer sie gesetzt hat und wann sie enden."
+    "The silences that are on or about to be, what they match, who set them and when they end.": "Die Stummschaltungen, die aktiv sind oder gleich beginnen, worauf sie passen, wer sie gesetzt hat und wann sie enden.",
+    "Whether your tunnels reach the edge, how your zones stand, and the requests and security events of the last day.": "Ob deine Tunnel das Edge-Netz erreichen, wie deine Zonen stehen, und die Anfragen und Sicherheitsereignisse des letzten Tages.",
+    "A custom API token with Zone: Zone Read, Account: Cloudflare Tunnel Read and, for the traffic card, Account Analytics Read.": "Ein eigenes API-Token mit Zone: Zone Read, Account: Cloudflare Tunnel Read und, für die Traffic-Karte, Account Analytics Read.",
+    "Account ID": "Konto-ID",
+    "For the tunnels. Empty takes the account of the first zone the token can read.": "Für die Tunnel. Leer nimmt das Konto der ersten Zone, die das Token lesen kann.",
+    "Tunnels": "Tunnel",
+    "Every tunnel with whether it reaches the edge, through how many connections and which data centres.": "Jeder Tunnel, ob er das Edge-Netz erreicht, über wie viele Verbindungen und welche Rechenzentren.",
+    "Hide tunnels that never ran": "Nie gestartete Tunnel ausblenden",
+    "Zones": "Zonen",
+    "The domains on Cloudflare with their status and plan, a paused one marked.": "Die Domains bei Cloudflare mit Status und Tarif, eine pausierte markiert.",
+    "Requests and security events of one zone over the last 24 hours.": "Anfragen und Sicherheitsereignisse einer Zone in den letzten 24 Stunden.",
+    "Zone": "Zone",
+    "The domain. Empty takes the first zone the token can read.": "Die Domain. Leer nimmt die erste Zone, die das Token lesen kann."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3068,6 +3080,8 @@
     "dead": "tot",
     "Pipeline": "Pipeline",
     "Branch": "Branch",
-    "Silenced": "Stummgeschaltet"
+    "Silenced": "Stummgeschaltet",
+    "Requests in 24 h": "Anfragen in 24 h",
+    "Security events": "Sicherheitsereignisse"
   }
 }

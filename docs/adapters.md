@@ -54,6 +54,7 @@ that one of thirty-one renderers draws.
 | FRITZ!Box | connection, line | | none; TR-064 on port 49000, the part of it that answers without credentials |
 | Tailscale | devices, status | | API access token from the admin console |
 | Headscale | nodes, status | | API key from `headscale apikeys create` |
+| Cloudflare | tunnels, zones, traffic | | a custom API token with Zone: Zone Read, Account: Cloudflare Tunnel Read and, for the traffic card, Account Analytics Read. The account ID is taken from the first zone when it is left empty. The traffic card reads the last 24 hours from the GraphQL Analytics API; its counts are sampled estimates |
 | wg-easy | WireGuard clients, VPN | | user and password; wg-easy 15 or newer |
 | NetBox | devices, prefixes, inventory | | API token, read-only is enough; a v2 token is pasted whole, starting with nbt_ |
 | Gluetun | tunnel | | none, or the API key if the control server has roles |
