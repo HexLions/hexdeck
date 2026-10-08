@@ -45,6 +45,19 @@
         "La caja de búsqueda ya no se parte en tres líneas en una tableta.",
         "Imágenes nuevas en el README, de esta versión."
       ]
+    },
+    "0.23.1": {
+      "lead": "HexDeck 0.23.1: pequeñas correcciones vistas en un tablero real el día en que salió la 0.23.0.",
+      "sections": [
+        {
+          "title": "El número grande se queda en una línea",
+          "body": "En una tarjeta estrecha, un valor como 535.7 KB/s se partía en dos, con la última letra de la unidad en la línea siguiente. Ahora se queda en una línea y se reduce un poco para caber."
+        }
+      ],
+      "smallTitle": "Corregido",
+      "small": [
+        "Los ajustes de la tarjeta nombran los básicos en tu idioma."
+      ]
     }
   }
 }

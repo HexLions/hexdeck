@@ -815,6 +815,19 @@
         "The search box no longer wraps over three lines on a tablet.",
         "New pictures in the README, of this version."
       ]
+    },
+    "0.23.1": {
+      "lead": "HexDeck 0.23.1: small fixes seen on a real board the day 0.23.0 came out.",
+      "sections": [
+        {
+          "title": "The big number stays on one line",
+          "body": "On a narrow card a value like 535.7 KB/s broke in two, with the unit's last letter on the next line. It stays on one line now and shrinks a little to fit."
+        }
+      ],
+      "smallTitle": "Fixed",
+      "small": [
+        "The card settings name the basics in your language."
+      ]
     }
   }
 }

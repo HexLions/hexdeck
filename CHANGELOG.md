@@ -5,6 +5,22 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.23.1 (2026-10-08)
+
+Three things seen on a real board the day 0.23.0 came out.
+
+### Fixed
+
+- **A value card broke its number in two.** "535.7 KB/s" on a FRITZ!Box card
+  two columns wide came out as "535.7 KB/" with the "s" on the line below.
+  The number stays on one line now and shrinks a little on a narrow card.
+- **Italian called the cards "schede"**, which are the tabs, in the settings
+  of the group and tabs cards, and the board "bacheca". They read "Card
+  contenute" and "Card affiancate" now.
+- **The card settings named the basics in English**, "Basics · Gruppo", in
+  every language. The name is translated now, as are Calendar, Notepad,
+  Projects, Weather and Public address.
+
 ## 0.23.0 (2026-10-08)
 
 The drawings of 0.20.0 and 0.21.0, looked at on a screen for the first time:
