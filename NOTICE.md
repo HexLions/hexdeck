@@ -239,6 +239,13 @@ Updated at every milestone.
   200 and a list of errors; both are read as what they are. Read from
   Cloudflare's OpenAPI schema and its analytics documentation; the refusals
   were measured against api.cloudflare.com.
+- **Caddy, through its admin API and only with GET.** The sites are read from
+  the configuration, subroutes followed so a Caddyfile's sites are found, and
+  the upstreams from /reverse_proxy/upstreams. That answer reports active
+  requests and the failures passive health checks remember, not whether an
+  upstream is up, so the cards say what was reported and colour remembered
+  failures without calling anything down. Checked against Caddy v2.11.7
+  running locally.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

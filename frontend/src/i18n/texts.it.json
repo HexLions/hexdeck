@@ -1996,7 +1996,13 @@
     "Requests and security events of one zone over the last 24 hours.": "Richieste ed eventi di sicurezza di una zona nelle ultime 24 ore.",
     "Zone": "Zona",
     "The domain. Empty takes the first zone the token can read.": "Il dominio. Vuoto usa la prima zona che il token può leggere.",
-    "Basics": "Base"
+    "Basics": "Base",
+    "Every host Caddy answers for, with what answers it: a proxy and its upstreams, files or a fixed response.": "Ogni host per cui Caddy risponde, e cosa lo serve: un proxy con i suoi upstream, dei file o una risposta fissa.",
+    "How many sites and upstreams there are, and how many upstreams remember failures.": "Quanti siti e upstream ci sono, e quanti upstream ricordano dei fallimenti.",
+    "The admin API, on port 2019. It listens on localhost unless the Caddyfile says admin 0.0.0.0:2019; keep it on an internal network.": "L'API di amministrazione, sulla porta 2019. Ascolta su localhost a meno che il Caddyfile dica admin 0.0.0.0:2019; tienila su una rete interna.",
+    "The proxied backends with their active requests and the failures passive health checks remember.": "I backend dietro il proxy con le richieste attive e i fallimenti ricordati dai controlli passivi.",
+    "The sites Caddy serves, what answers each, and the upstreams it proxies to with their failures.": "I siti che Caddy serve, cosa risponde per ciascuno, e gli upstream dietro il proxy con i loro fallimenti.",
+    "Upstreams": "Upstream"
   },
   "labels": {
     "Jobs": "Job",
@@ -3083,6 +3089,8 @@
     "Branch": "Branch",
     "Silenced": "Silenziati",
     "Requests in 24 h": "Richieste in 24 h",
-    "Security events": "Eventi di sicurezza"
+    "Security events": "Eventi di sicurezza",
+    "Active requests": "Richieste attive",
+    "With failures": "Con fallimenti"
   }
 }

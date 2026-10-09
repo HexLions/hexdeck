@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and sixty-six services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and sixty-seven services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-166-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-167-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -205,7 +205,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 **Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
-**Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, Traefik, Nginx Proxy Manager, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, Shlink, Speedtest Tracker, nexpulse, Uptime Kuma, Healthchecks, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
+**Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, Traefik, Caddy, Nginx Proxy Manager, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, Shlink, Speedtest Tracker, nexpulse, Uptime Kuma, Healthchecks, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
 **Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, Seerr, Overseerr, Jellyseerr, Nexview, Maintainerr, Tdarr, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, Minecraft, AMP, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
 
@@ -228,7 +228,7 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kubernetes.svg" width="26" height="26" alt=""><br>**Kubernetes**<br><sub>Nodes, pods, deployments.<br>Usage via metrics-server</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/openwrt.svg" width="26" height="26" alt=""><br>**OpenWrt**<br><sub>Load, memory, WAN,<br>stations per radio</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/elasticsearch.svg" width="26" height="26" alt=""><br>**Elasticsearch**<br><sub>Cluster colour, shards,<br>indices. Also OpenSearch</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/urbackup.png" width="26" height="26" alt=""><br>**UrBackup**<br><sub>Last backup per client,<br>who has fallen behind</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/shelly.svg" width="26" height="26" alt=""><br>**Shelly**<br><sub>Power, energy, temperature.<br>Switch a relay</sub> | <img src="docs/icons/public-address.svg" width="26" height="26" alt=""><br>**Public address**<br><sub>The address your line shows,<br>and when it changed</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmenux.svg" width="26" height="26" alt=""><br>**ProxMenux**<br><sub>Proxmox health checks,<br>disks, sensors, guests</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/netbird.svg" width="26" height="26" alt=""><br>**NetBird**<br><sub>Peers, expired logins,<br>setup keys</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitlab.svg" width="26" height="26" alt=""><br>**GitLab**<br><sub>Pipelines, merge requests,<br>open issues</sub> |
-| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/alertmanager.svg" width="26" height="26" alt=""><br>**Alertmanager**<br><sub>Firing alerts, worst first,<br>silences</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg" width="26" height="26" alt=""><br>**Cloudflare**<br><sub>Tunnels, zones,<br>a day of traffic</sub> | |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/alertmanager.svg" width="26" height="26" alt=""><br>**Alertmanager**<br><sub>Firing alerts, worst first,<br>silences</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg" width="26" height="26" alt=""><br>**Cloudflare**<br><sub>Tunnels, zones,<br>a day of traffic</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/caddy.svg" width="26" height="26" alt=""><br>**Caddy**<br><sub>Sites, what answers each,<br>upstream failures</sub> |
 
 The ten services here were confirmed against live instances on 2026-10-06 and carry no
 *beta* badge; the public address card asks a public service and has no instance to

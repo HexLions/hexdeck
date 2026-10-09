@@ -5,6 +5,13 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Caddy**: the sites it serves with what answers each, and the upstreams it
+  proxies to with their active requests and remembered failures. ⚠️ Beta.
+
 ## 0.23.1 (2026-10-08)
 
 Three things seen on a real board the day 0.23.0 came out.
