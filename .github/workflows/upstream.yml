@@ -71,7 +71,10 @@ jobs:
             echo
             echo "Read these before taking anything: a merge here can undo work."
             echo
-            if [ -s /tmp/ours.txt ]; then sed 's/^/- `/; s/$/`/' /tmp/ours.txt | head -60; else echo "_None._"; fi
+            # ⚠️ head reads the file and sed the head, not the other way round:
+            # with pipefail, sed killed by the pipe head closed failed the step
+            # whenever upstream had changed more than 60 of our files.
+            if [ -s /tmp/ours.txt ]; then head -60 /tmp/ours.txt | sed 's/^/- `/; s/$/`/'; else echo "_None._"; fi
             echo
             echo "### The commits"
             echo
@@ -89,13 +92,18 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: "Upstream: commits not in this fork"
+        # ⚠️ The REST API, not gh issue create: that one goes through GraphQL,
+        # and with this workflow's token it was refused with "Resource not
+        # accessible by integration" on its first run, on 2026-10-09.
         run: |
           set -euo pipefail
-          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          REPO="$GITHUB_REPOSITORY"
+          EXISTING=$(gh api "repos/$REPO/issues?state=open&per_page=100" \
+            --jq "[.[] | select(.pull_request == null and .title == \"$TITLE\")][0].number // empty")
           if [ -n "$EXISTING" ]; then
-            gh issue edit "$EXISTING" --body-file /tmp/body.md
+            gh api -X PATCH "repos/$REPO/issues/$EXISTING" -F body=@/tmp/body.md > /dev/null
             echo "Updated issue #$EXISTING."
           else
-            gh issue create --title "$TITLE" --body-file /tmp/body.md --label upstream 2>/dev/null \
-              || gh issue create --title "$TITLE" --body-file /tmp/body.md
+            CREATED=$(gh api -X POST "repos/$REPO/issues" -f title="$TITLE" -F body=@/tmp/body.md --jq .number)
+            echo "Opened issue #$CREATED."
           fi
