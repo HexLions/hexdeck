@@ -252,6 +252,13 @@ Updated at every milestone.
   (has_incomplete_tasks), not the answer's. The instance profile answers any
   caller, so the connection test asks for a memo. Checked against Memos
   v0.31.0 running locally.
+- **Mastodon, the server card without a token.** The instance and its weekly
+  activity are public and asked for without the token; the account and the
+  notifications need a user token with the read scopes. The activity's first
+  row is the week in progress and its counts are strings, so the card calls
+  it this week. A server before 4.3 has no unread count, and the card leaves
+  that line out. Read from Mastodon's documentation and checked against
+  mastodon.social's public answers.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

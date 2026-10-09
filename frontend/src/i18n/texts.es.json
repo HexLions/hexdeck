@@ -2009,7 +2009,15 @@
     "Open tasks": "Tareas abiertas",
     "The latest memos, pinned ones first, with their tags.": "Las últimas notas, primero las fijadas, con sus etiquetas.",
     "The memos with a task list that still has something unticked.": "Las notas con una lista de tareas en la que aún queda algo por marcar.",
-    "Your latest memos with their tags, and the ones with tasks still to tick.": "Tus últimas notas con sus etiquetas, y las que tienen tareas por marcar."
+    "Your latest memos with their tags, and the ones with tasks still to tick.": "Tus últimas notas con sus etiquetas, y las que tienen tareas por marcar.",
+    "For the account and notification cards: Preferences > Development > New application, with read:accounts and read:notifications. The server card needs none.": "Para las tarjetas de cuenta y notificaciones: Preferencias > Desarrollo > Nueva aplicación, con read:accounts y read:notifications. La tarjeta del servidor no lo necesita.",
+    "Mentions only": "Solo menciones",
+    "Notifications": "Notificaciones",
+    "The address of the server, yours or the one your account is on.": "La dirección del servidor, el tuyo o aquel en el que está tu cuenta.",
+    "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Las últimas notificaciones: quién te mencionó, te siguió, impulsó o marcó como favorito, y qué.",
+    "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "La versión del servidor, sus usuarios activos del mes, si acepta registros, y las publicaciones e inicios de sesión de esta semana.",
+    "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Tu servidor de Mastodon con sus usuarios activos y las publicaciones de esta semana, tu cuenta y tus notificaciones.",
+    "Your followers, who you follow, your posts and the notifications you have not read.": "Tus seguidores, a quién sigues, tus publicaciones y las notificaciones sin leer."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3098,6 +3106,12 @@
     "Requests in 24 h": "Solicitudes en 24 h",
     "Security events": "Eventos de seguridad",
     "Active requests": "Solicitudes activas",
-    "With failures": "Con fallos"
+    "With failures": "Con fallos",
+    "Active this month": "Activos este mes",
+    "Followers": "Seguidores",
+    "Following": "Siguiendo",
+    "Logins this week": "Inicios de sesión esta semana",
+    "Posts this week": "Publicaciones esta semana",
+    "Sign-ups": "Registros"
   }
 }

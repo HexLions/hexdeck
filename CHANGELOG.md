@@ -13,6 +13,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   proxies to with their active requests and remembered failures. ⚠️ Beta.
 - **Memos**: the latest memos with their tags, pinned ones first, and the
   memos with tasks still to tick. ⚠️ Beta.
+- **Mastodon**: your server with its active users and this week's posts, your
+  account with followers and unread notifications, and the notifications
+  themselves. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

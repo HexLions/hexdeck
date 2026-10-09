@@ -2009,7 +2009,15 @@
     "Open tasks": "Offene Aufgaben",
     "The latest memos, pinned ones first, with their tags.": "Die neuesten Memos, angeheftete zuerst, mit ihren Tags.",
     "The memos with a task list that still has something unticked.": "Die Memos mit einer Aufgabenliste, in der noch etwas nicht abgehakt ist.",
-    "Your latest memos with their tags, and the ones with tasks still to tick.": "Deine neuesten Memos mit ihren Tags und die mit noch offenen Aufgaben."
+    "Your latest memos with their tags, and the ones with tasks still to tick.": "Deine neuesten Memos mit ihren Tags und die mit noch offenen Aufgaben.",
+    "For the account and notification cards: Preferences > Development > New application, with read:accounts and read:notifications. The server card needs none.": "Für die Konto- und Benachrichtigungskarten: Einstellungen > Entwicklung > Neue Anwendung, mit read:accounts und read:notifications. Die Serverkarte braucht keins.",
+    "Mentions only": "Nur Erwähnungen",
+    "Notifications": "Benachrichtigungen",
+    "The address of the server, yours or the one your account is on.": "Die Adresse des Servers, deines oder des Servers, auf dem dein Konto ist.",
+    "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Die neuesten Benachrichtigungen: wer dich erwähnt, dir gefolgt ist, geteilt oder favorisiert hat, und was.",
+    "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "Die Version des Servers, seine aktiven Nutzer des Monats, ob er Anmeldungen annimmt, und die Beiträge und Anmeldungen dieser Woche.",
+    "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Dein Mastodon-Server mit seinen aktiven Nutzern und den Beiträgen dieser Woche, dein Konto und deine Benachrichtigungen.",
+    "Your followers, who you follow, your posts and the notifications you have not read.": "Deine Follower, wem du folgst, deine Beiträge und die ungelesenen Benachrichtigungen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3098,6 +3106,12 @@
     "Requests in 24 h": "Anfragen in 24 h",
     "Security events": "Sicherheitsereignisse",
     "Active requests": "Aktive Anfragen",
-    "With failures": "Mit Fehlern"
+    "With failures": "Mit Fehlern",
+    "Active this month": "Aktiv diesen Monat",
+    "Followers": "Follower",
+    "Following": "Folgt",
+    "Logins this week": "Anmeldungen diese Woche",
+    "Posts this week": "Beiträge diese Woche",
+    "Sign-ups": "Registrierungen"
   }
 }

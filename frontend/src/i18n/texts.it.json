@@ -2009,7 +2009,15 @@
     "Open tasks": "Compiti aperti",
     "The latest memos, pinned ones first, with their tags.": "Gli ultimi memo, prima quelli fissati, con i loro tag.",
     "The memos with a task list that still has something unticked.": "I memo con una lista di compiti in cui resta qualcosa da spuntare.",
-    "Your latest memos with their tags, and the ones with tasks still to tick.": "I tuoi ultimi memo con i loro tag, e quelli con compiti ancora da spuntare."
+    "Your latest memos with their tags, and the ones with tasks still to tick.": "I tuoi ultimi memo con i loro tag, e quelli con compiti ancora da spuntare.",
+    "For the account and notification cards: Preferences > Development > New application, with read:accounts and read:notifications. The server card needs none.": "Per le card account e notifiche: Preferenze > Sviluppo > Nuova applicazione, con read:accounts e read:notifications. La card del server non ne ha bisogno.",
+    "Mentions only": "Solo menzioni",
+    "Notifications": "Notifiche",
+    "The address of the server, yours or the one your account is on.": "L'indirizzo del server, il tuo o quello su cui hai l'account.",
+    "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Le ultime notifiche: chi ti ha menzionato, seguito, condiviso o messo nei preferiti, e cosa.",
+    "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "La versione del server, gli utenti attivi del mese, se accetta iscrizioni, e i post e gli accessi di questa settimana.",
+    "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Il tuo server Mastodon con gli utenti attivi e i post di questa settimana, il tuo account e le tue notifiche.",
+    "Your followers, who you follow, your posts and the notifications you have not read.": "I tuoi follower, chi segui, i tuoi post e le notifiche non lette."
   },
   "labels": {
     "Jobs": "Job",
@@ -3098,6 +3106,12 @@
     "Requests in 24 h": "Richieste in 24 h",
     "Security events": "Eventi di sicurezza",
     "Active requests": "Richieste attive",
-    "With failures": "Con fallimenti"
+    "With failures": "Con fallimenti",
+    "Active this month": "Attivi questo mese",
+    "Followers": "Follower",
+    "Following": "Seguiti",
+    "Logins this week": "Accessi questa settimana",
+    "Posts this week": "Post questa settimana",
+    "Sign-ups": "Iscrizioni"
   }
 }
