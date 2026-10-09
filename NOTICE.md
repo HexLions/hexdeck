@@ -259,6 +259,12 @@ Updated at every milestone.
   it this week. A server before 4.3 has no unread count, and the card leaves
   that line out. Read from Mastodon's documentation and checked against
   mastodon.social's public answers.
+- **Spoolman, the emptiest spool first.** The spools in use sorted by what
+  is left, with a bar against their starting weight and the total from the
+  x-total-count header. A spool whose weight Spoolman does not know has no
+  bar and is never called running out. Read from its own OpenAPI document
+  and checked against Spoolman v0.27.0 running locally, verified by the
+  digest GitHub publishes for its release.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

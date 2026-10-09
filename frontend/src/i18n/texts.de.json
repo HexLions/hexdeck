@@ -2017,7 +2017,13 @@
     "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Die neuesten Benachrichtigungen: wer dich erwähnt, dir gefolgt ist, geteilt oder favorisiert hat, und was.",
     "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "Die Version des Servers, seine aktiven Nutzer des Monats, ob er Anmeldungen annimmt, und die Beiträge und Anmeldungen dieser Woche.",
     "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Dein Mastodon-Server mit seinen aktiven Nutzern und den Beiträgen dieser Woche, dein Konto und deine Benachrichtigungen.",
-    "Your followers, who you follow, your posts and the notifications you have not read.": "Deine Follower, wem du folgst, deine Beiträge und die ungelesenen Benachrichtigungen."
+    "Your followers, who you follow, your posts and the notifications you have not read.": "Deine Follower, wem du folgst, deine Beiträge und die ungelesenen Benachrichtigungen.",
+    "How many spools are in use, how much filament is left in all, and how many are running out.": "Wie viele Spulen in Gebrauch sind, wie viel Filament insgesamt übrig ist und wie viele zur Neige gehen.",
+    "Only the spools in this place. Empty means all of them.": "Nur die Spulen an diesem Ort. Leer heißt alle.",
+    "Running out below (g)": "Geht zur Neige unter (g)",
+    "Spools": "Spulen",
+    "The filament spools in use with what is left on each, the ones about to run out first.": "Die Filamentspulen in Gebrauch mit dem, was auf jeder übrig ist, die fast leeren zuerst.",
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Die Spulen in Gebrauch mit dem, was auf jeder übrig ist, die leerste zuerst, mit Material und Ort."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3112,6 +3118,8 @@
     "Following": "Folgt",
     "Logins this week": "Anmeldungen diese Woche",
     "Posts this week": "Beiträge diese Woche",
-    "Sign-ups": "Registrierungen"
+    "Sign-ups": "Registrierungen",
+    "Running out": "Geht zur Neige",
+    "Spools in use": "Spulen in Gebrauch"
   }
 }

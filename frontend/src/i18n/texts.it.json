@@ -2017,7 +2017,13 @@
     "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Le ultime notifiche: chi ti ha menzionato, seguito, condiviso o messo nei preferiti, e cosa.",
     "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "La versione del server, gli utenti attivi del mese, se accetta iscrizioni, e i post e gli accessi di questa settimana.",
     "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Il tuo server Mastodon con gli utenti attivi e i post di questa settimana, il tuo account e le tue notifiche.",
-    "Your followers, who you follow, your posts and the notifications you have not read.": "I tuoi follower, chi segui, i tuoi post e le notifiche non lette."
+    "Your followers, who you follow, your posts and the notifications you have not read.": "I tuoi follower, chi segui, i tuoi post e le notifiche non lette.",
+    "How many spools are in use, how much filament is left in all, and how many are running out.": "Quante bobine sono in uso, quanto filamento resta in tutto e quante stanno per finire.",
+    "Only the spools in this place. Empty means all of them.": "Solo le bobine in questo posto. Vuoto significa tutte.",
+    "Running out below (g)": "In esaurimento sotto (g)",
+    "Spools": "Bobine",
+    "The filament spools in use with what is left on each, the ones about to run out first.": "Le bobine di filamento in uso con quanto resta su ciascuna, prima quelle che stanno per finire.",
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Le bobine in uso con quanto resta su ciascuna, la più vuota per prima, con materiale e posto."
   },
   "labels": {
     "Jobs": "Job",
@@ -3112,6 +3118,8 @@
     "Following": "Seguiti",
     "Logins this week": "Accessi questa settimana",
     "Posts this week": "Post questa settimana",
-    "Sign-ups": "Iscrizioni"
+    "Sign-ups": "Iscrizioni",
+    "Running out": "In esaurimento",
+    "Spools in use": "Bobine in uso"
   }
 }

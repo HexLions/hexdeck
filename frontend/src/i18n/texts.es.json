@@ -2017,7 +2017,13 @@
     "The latest notifications: who mentioned, followed, boosted or favourited you, and what.": "Las últimas notificaciones: quién te mencionó, te siguió, impulsó o marcó como favorito, y qué.",
     "The server's version, its active users of the month, whether it takes sign-ups, and the posts and logins of this week.": "La versión del servidor, sus usuarios activos del mes, si acepta registros, y las publicaciones e inicios de sesión de esta semana.",
     "Your Mastodon server with its active users and this week's posts, your account, and your notifications.": "Tu servidor de Mastodon con sus usuarios activos y las publicaciones de esta semana, tu cuenta y tus notificaciones.",
-    "Your followers, who you follow, your posts and the notifications you have not read.": "Tus seguidores, a quién sigues, tus publicaciones y las notificaciones sin leer."
+    "Your followers, who you follow, your posts and the notifications you have not read.": "Tus seguidores, a quién sigues, tus publicaciones y las notificaciones sin leer.",
+    "How many spools are in use, how much filament is left in all, and how many are running out.": "Cuántas bobinas están en uso, cuánto filamento queda en total y cuántas se están acabando.",
+    "Only the spools in this place. Empty means all of them.": "Solo las bobinas en este lugar. Vacío significa todas.",
+    "Running out below (g)": "Se acaba por debajo de (g)",
+    "Spools": "Bobinas",
+    "The filament spools in use with what is left on each, the ones about to run out first.": "Las bobinas de filamento en uso con lo que queda en cada una, primero las que están por acabarse.",
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Las bobinas en uso con lo que queda en cada una, la más vacía primero, con material y lugar."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3112,6 +3118,8 @@
     "Following": "Siguiendo",
     "Logins this week": "Inicios de sesión esta semana",
     "Posts this week": "Publicaciones esta semana",
-    "Sign-ups": "Registros"
+    "Sign-ups": "Registros",
+    "Running out": "Se acaban",
+    "Spools in use": "Bobinas en uso"
   }
 }

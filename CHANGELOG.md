@@ -16,6 +16,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Mastodon**: your server with its active users and this week's posts, your
   account with followers and unread notifications, and the notifications
   themselves. ⚠️ Beta.
+- **Spoolman**: the filament spools in use with what is left on each, the
+  ones about to run out first. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
