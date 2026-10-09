@@ -2023,7 +2023,13 @@
     "Running out below (g)": "Geht zur Neige unter (g)",
     "Spools": "Spulen",
     "The filament spools in use with what is left on each, the ones about to run out first.": "Die Filamentspulen in Gebrauch mit dem, was auf jeder übrig ist, die fast leeren zuerst.",
-    "The spools in use with what is left on each, the emptiest first, with material and place.": "Die Spulen in Gebrauch mit dem, was auf jeder übrig ist, die leerste zuerst, mit Material und Ort."
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Die Spulen in Gebrauch mit dem, was auf jeder übrig ist, die leerste zuerst, mit Material und Ort.",
+    "Moonraker itself, usually on port 7125, not Mainsail or Fluidd.": "Moonraker selbst, meist auf Port 7125, nicht Mainsail oder Fluidd.",
+    "Only when Moonraker asks for one; a client on a trusted network needs none. Mainsail shows it under Settings > Authorization.": "Nur wenn Moonraker einen verlangt; ein Client in einem vertrauenswürdigen Netz braucht keinen. Mainsail zeigt ihn unter Einstellungen > Autorisierung.",
+    "Print history": "Druckverlauf",
+    "The Klipper printer behind Moonraker: the job with its progress, layer and time left, the temperatures, and the jobs before.": "Der Klipper-Drucker hinter Moonraker: der Auftrag mit Fortschritt, Schicht und Restzeit, die Temperaturen und die Aufträge davor.",
+    "The latest jobs with how they ended, how long they took and the filament they used.": "Die letzten Aufträge, wie sie endeten, wie lange sie dauerten und wie viel Filament sie brauchten.",
+    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Was der Drucker gerade tut: der Auftrag mit Fortschritt, Schicht und Restzeit, und die Temperaturen von Düse und Bett."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3120,6 +3126,8 @@
     "Posts this week": "Beiträge diese Woche",
     "Sign-ups": "Registrierungen",
     "Running out": "Geht zur Neige",
-    "Spools in use": "Spulen in Gebrauch"
+    "Spools in use": "Spulen in Gebrauch",
+    "Layer": "Schicht",
+    "Printed": "Gedruckt"
   }
 }

@@ -265,6 +265,14 @@ Updated at every milestone.
   bar and is never called running out. Read from its own OpenAPI document
   and checked against Spoolman v0.27.0 running locally, verified by the
   digest GitHub publishes for its release.
+- **Moonraker, for Klipper printers.** The job's progress from
+  display_status, which follows the slicer's M73 rather than the file
+  position that runs ahead on the first layers, the layer when the slicer
+  says it, a time left estimated only past the first few percent, the nozzle
+  and bed temperatures, and Klippy's own trouble ranked above whatever the
+  job says. A printer object that does not exist is simply absent from the
+  answer. Read from Moonraker's documentation; no printer was at hand to
+  check it against.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

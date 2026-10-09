@@ -2023,7 +2023,13 @@
     "Running out below (g)": "In esaurimento sotto (g)",
     "Spools": "Bobine",
     "The filament spools in use with what is left on each, the ones about to run out first.": "Le bobine di filamento in uso con quanto resta su ciascuna, prima quelle che stanno per finire.",
-    "The spools in use with what is left on each, the emptiest first, with material and place.": "Le bobine in uso con quanto resta su ciascuna, la più vuota per prima, con materiale e posto."
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Le bobine in uso con quanto resta su ciascuna, la più vuota per prima, con materiale e posto.",
+    "Moonraker itself, usually on port 7125, not Mainsail or Fluidd.": "Moonraker stesso, di solito sulla porta 7125, non Mainsail o Fluidd.",
+    "Only when Moonraker asks for one; a client on a trusted network needs none. Mainsail shows it under Settings > Authorization.": "Solo se Moonraker la chiede; un client su una rete fidata non ne ha bisogno. Mainsail la mostra in Impostazioni > Autorizzazione.",
+    "Print history": "Storico delle stampe",
+    "The Klipper printer behind Moonraker: the job with its progress, layer and time left, the temperatures, and the jobs before.": "La stampante Klipper dietro Moonraker: il lavoro con avanzamento, strato e tempo rimasto, le temperature e i lavori precedenti.",
+    "The latest jobs with how they ended, how long they took and the filament they used.": "Gli ultimi lavori con com'è finito ciascuno, quanto è durato e quanto filamento ha usato.",
+    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Cosa sta facendo la stampante: il lavoro con avanzamento, strato e tempo rimasto, e le temperature di ugello e piatto."
   },
   "labels": {
     "Jobs": "Job",
@@ -3120,6 +3126,8 @@
     "Posts this week": "Post questa settimana",
     "Sign-ups": "Iscrizioni",
     "Running out": "In esaurimento",
-    "Spools in use": "Bobine in uso"
+    "Spools in use": "Bobine in uso",
+    "Layer": "Strato",
+    "Printed": "Stampato"
   }
 }

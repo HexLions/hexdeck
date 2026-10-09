@@ -2023,7 +2023,13 @@
     "Running out below (g)": "Se acaba por debajo de (g)",
     "Spools": "Bobinas",
     "The filament spools in use with what is left on each, the ones about to run out first.": "Las bobinas de filamento en uso con lo que queda en cada una, primero las que están por acabarse.",
-    "The spools in use with what is left on each, the emptiest first, with material and place.": "Las bobinas en uso con lo que queda en cada una, la más vacía primero, con material y lugar."
+    "The spools in use with what is left on each, the emptiest first, with material and place.": "Las bobinas en uso con lo que queda en cada una, la más vacía primero, con material y lugar.",
+    "Moonraker itself, usually on port 7125, not Mainsail or Fluidd.": "Moonraker en sí, normalmente en el puerto 7125, no Mainsail ni Fluidd.",
+    "Only when Moonraker asks for one; a client on a trusted network needs none. Mainsail shows it under Settings > Authorization.": "Solo cuando Moonraker la pide; un cliente en una red de confianza no la necesita. Mainsail la muestra en Ajustes > Autorización.",
+    "Print history": "Historial de impresión",
+    "The Klipper printer behind Moonraker: the job with its progress, layer and time left, the temperatures, and the jobs before.": "La impresora Klipper detrás de Moonraker: el trabajo con su progreso, capa y tiempo restante, las temperaturas y los trabajos anteriores.",
+    "The latest jobs with how they ended, how long they took and the filament they used.": "Los últimos trabajos con cómo terminaron, cuánto duraron y el filamento que usaron.",
+    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Lo que está haciendo la impresora: el trabajo con su progreso, capa y tiempo restante, y las temperaturas de la boquilla y la cama."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3120,6 +3126,8 @@
     "Posts this week": "Publicaciones esta semana",
     "Sign-ups": "Registros",
     "Running out": "Se acaban",
-    "Spools in use": "Bobinas en uso"
+    "Spools in use": "Bobinas en uso",
+    "Layer": "Capa",
+    "Printed": "Impreso"
   }
 }
