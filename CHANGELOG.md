@@ -11,6 +11,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 - **Caddy**: the sites it serves with what answers each, and the upstreams it
   proxies to with their active requests and remembered failures. ⚠️ Beta.
+- **Memos**: the latest memos with their tags, pinned ones first, and the
+  memos with tasks still to tick. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

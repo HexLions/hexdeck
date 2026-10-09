@@ -2002,7 +2002,14 @@
     "The admin API, on port 2019. It listens on localhost unless the Caddyfile says admin 0.0.0.0:2019; keep it on an internal network.": "L'API di amministrazione, sulla porta 2019. Ascolta su localhost a meno che il Caddyfile dica admin 0.0.0.0:2019; tienila su una rete interna.",
     "The proxied backends with their active requests and the failures passive health checks remember.": "I backend dietro il proxy con le richieste attive e i fallimenti ricordati dai controlli passivi.",
     "The sites Caddy serves, what answers each, and the upstreams it proxies to with their failures.": "I siti che Caddy serve, cosa risponde per ciascuno, e gli upstream dietro il proxy con i loro fallimenti.",
-    "Upstreams": "Upstream"
+    "Upstreams": "Upstream",
+    "A personal access token from Settings > My account > Access tokens.": "Un token di accesso personale da Impostazioni > Il mio account > Token di accesso.",
+    "Memos": "Memo",
+    "Only the memos with this tag. Empty means all of them.": "Solo i memo con questo tag. Vuoto significa tutti.",
+    "Open tasks": "Compiti aperti",
+    "The latest memos, pinned ones first, with their tags.": "Gli ultimi memo, prima quelli fissati, con i loro tag.",
+    "The memos with a task list that still has something unticked.": "I memo con una lista di compiti in cui resta qualcosa da spuntare.",
+    "Your latest memos with their tags, and the ones with tasks still to tick.": "I tuoi ultimi memo con i loro tag, e quelli con compiti ancora da spuntare."
   },
   "labels": {
     "Jobs": "Job",

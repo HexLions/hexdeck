@@ -246,6 +246,12 @@ Updated at every milestone.
   upstream is up, so the cards say what was reported and colour remembered
   failures without calling anything down. Checked against Caddy v2.11.7
   running locally.
+- **Memos, from its own OpenAPI spec.** The latest memos with pinned ones
+  first and a tag filter written as a CEL term, and the memos whose task list
+  still has something unticked, asked for with the filter's own field name
+  (has_incomplete_tasks), not the answer's. The instance profile answers any
+  caller, so the connection test asks for a memo. Checked against Memos
+  v0.31.0 running locally.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
