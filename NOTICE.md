@@ -327,6 +327,11 @@ Updated at every milestone.
   Checked against MySpeed 1.0.9 running locally, with real tests over
   LibreSpeed, a failed one over Cloudflare, and its password off, on and at
   the read level.
+- **ESPHome through the endpoints kept for Home Assistant.** The devices and
+  whether each is online come from `/devices` and `/ping`, which ESPHome
+  Device Builder keeps from the old built-in dashboard. Checked against
+  Device Builder 1.23.0 with ESPHome 2026.9.1 running locally, with two
+  configured devices, with and without a password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

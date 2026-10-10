@@ -2083,7 +2083,12 @@
     "MySpeed's speed tests: the last download, upload and ping against what you expect, how many failed today, and the tests before.": "Die Speedtests von MySpeed: Download, Upload und Ping des letzten Tests gegenüber dem Erwarteten, wie viele heute fehlschlugen, und die Tests davor.",
     "Tests": "Tests",
     "The last download, upload and ping, against the speeds MySpeed expects, and the tests that failed today.": "Der letzte Download, Upload und Ping gegenüber den von MySpeed erwarteten Werten, und die heute fehlgeschlagenen Tests.",
-    "The latest speed tests with their results, and the reason of those that failed.": "Die letzten Speedtests mit ihren Ergebnissen und dem Grund der fehlgeschlagenen."
+    "The latest speed tests with their results, and the reason of those that failed.": "Die letzten Speedtests mit ihren Ergebnissen und dem Grund der fehlgeschlagenen.",
+    "Every configured device with its board and state, the offline ones first.": "Jedes eingerichtete Gerät mit Board und Zustand, die offline zuerst.",
+    "How many devices are online and offline, and how many need a firmware update.": "Wie viele Geräte online und offline sind und wie viele ein Firmware-Update brauchen.",
+    "Only the offline ones": "Nur die offline",
+    "Only when the dashboard has a user name and password.": "Nur wenn das Dashboard Benutzername und Passwort hat.",
+    "The devices of ESPHome's dashboard: which are online and which run firmware older than the dashboard's ESPHome.": "Die Geräte des ESPHome-Dashboards: welche online sind und welche eine ältere Firmware als das ESPHome des Dashboards haben."
   },
   "labels": {
     "Jobs": "Jobs",

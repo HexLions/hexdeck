@@ -2083,7 +2083,12 @@
     "MySpeed's speed tests: the last download, upload and ping against what you expect, how many failed today, and the tests before.": "Las pruebas de velocidad de MySpeed: la descarga, subida y ping de la última frente a lo esperado, cuántas fallaron hoy, y las anteriores.",
     "Tests": "Pruebas",
     "The last download, upload and ping, against the speeds MySpeed expects, and the tests that failed today.": "La última descarga, subida y ping frente a las velocidades que MySpeed espera, y las pruebas que fallaron hoy.",
-    "The latest speed tests with their results, and the reason of those that failed.": "Las últimas pruebas de velocidad con sus resultados, y el motivo de las que fallaron."
+    "The latest speed tests with their results, and the reason of those that failed.": "Las últimas pruebas de velocidad con sus resultados, y el motivo de las que fallaron.",
+    "Every configured device with its board and state, the offline ones first.": "Cada dispositivo configurado con su placa y su estado, primero los desconectados.",
+    "How many devices are online and offline, and how many need a firmware update.": "Cuántos dispositivos están conectados y desconectados, y cuántos necesitan actualizar el firmware.",
+    "Only the offline ones": "Solo los desconectados",
+    "Only when the dashboard has a user name and password.": "Solo si el panel tiene usuario y contraseña.",
+    "The devices of ESPHome's dashboard: which are online and which run firmware older than the dashboard's ESPHome.": "Los dispositivos del panel de ESPHome: cuáles están conectados y cuáles tienen un firmware más antiguo que el ESPHome del panel."
   },
   "labels": {
     "Private resources": "Recursos privados",

@@ -39,6 +39,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   due, the past-due reminders first. ⚠️ Beta.
 - **MySpeed**: the last speed test against the speeds you expect, how many
   failed today, and the tests before. ⚠️ Beta.
+- **ESPHome**: the devices of the dashboard, which are online, and which run
+  firmware older than the dashboard's ESPHome. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
