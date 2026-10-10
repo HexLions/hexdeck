@@ -1,0 +1,440 @@
+{
+    "results": [
+        {
+            "noteId": "amKE8JYij2oi",
+            "isProtected": false,
+            "title": "Meeting 2026-10-09",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "zVOrU7TP869lS5z050Fu",
+            "dateCreated": "2026-10-10 13:18:09.752+0000",
+            "dateModified": "2026-10-10 13:18:09.752+0000",
+            "utcDateCreated": "2026-10-10 13:18:09.752Z",
+            "utcDateModified": "2026-10-10 13:18:09.752Z",
+            "parentNoteIds": [
+                "root"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "root_amKE8JYij2oi"
+            ],
+            "childBranchIds": [],
+            "attributes": []
+        },
+        {
+            "noteId": "j70KaUTiMkGe",
+            "isProtected": false,
+            "title": "Reading notes",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "E9By8WdSax7mSwnsRdO5",
+            "dateCreated": "2026-10-10 13:18:09.734+0000",
+            "dateModified": "2026-10-10 13:18:09.734+0000",
+            "utcDateCreated": "2026-10-10 13:18:09.734Z",
+            "utcDateModified": "2026-10-10 13:18:09.734Z",
+            "parentNoteIds": [
+                "root"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "root_j70KaUTiMkGe"
+            ],
+            "childBranchIds": [],
+            "attributes": []
+        },
+        {
+            "noteId": "sKZC98JlcFBm",
+            "isProtected": false,
+            "title": "Homelab plan",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "4WSOjgX6tmRDRTRnOvUs",
+            "dateCreated": "2026-10-10 13:18:09.715+0000",
+            "dateModified": "2026-10-10 13:18:09.716+0000",
+            "utcDateCreated": "2026-10-10 13:18:09.715Z",
+            "utcDateModified": "2026-10-10 13:18:09.716Z",
+            "parentNoteIds": [
+                "root"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "root_sKZC98JlcFBm"
+            ],
+            "childBranchIds": [],
+            "attributes": []
+        },
+        {
+            "noteId": "OokOgH8vZjOX",
+            "isProtected": false,
+            "title": "Shopping list",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "j1b7rHqEIEDlfrdyObsB",
+            "dateCreated": "2026-10-10 13:18:09.698+0000",
+            "dateModified": "2026-10-10 13:18:09.698+0000",
+            "utcDateCreated": "2026-10-10 13:18:09.698Z",
+            "utcDateModified": "2026-10-10 13:18:09.698Z",
+            "parentNoteIds": [
+                "root"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "root_OokOgH8vZjOX"
+            ],
+            "childBranchIds": [],
+            "attributes": []
+        },
+        {
+            "noteId": "x8iJlGka2VVt",
+            "isProtected": false,
+            "title": "Send invites for christmas party",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "z4PhNX7vuL3xVChQ1m2A",
+            "dateCreated": "2026-10-10 13:17:38.978+0000",
+            "dateModified": "2026-10-10 13:17:39.072+0000",
+            "utcDateCreated": "2026-10-10 13:17:38.978Z",
+            "utcDateModified": "2026-10-10 13:17:39.072Z",
+            "parentNoteIds": [
+                "2gpOaJNp9nnH",
+                "nHuhcAfTTall"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "2gpOaJNp9nnH_x8iJlGka2VVt",
+                "nHuhcAfTTall_x8iJlGka2VVt"
+            ],
+            "childBranchIds": [],
+            "attributes": [
+                {
+                    "attributeId": "UmJRNEUSVrOq",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "label",
+                    "name": "task",
+                    "value": "",
+                    "position": 10,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "GIqHmk8yiltv",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "relation",
+                    "name": "template",
+                    "value": "xBSWVnruszl1",
+                    "position": 20,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "46k9tXif0qDg",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "label",
+                    "name": "location",
+                    "value": "work",
+                    "position": 30,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "saMVLTzdL3K5",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 40,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "L2zkHocNQp4Q",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 50,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "W3uxc10U73ru",
+                    "noteId": "x8iJlGka2VVt",
+                    "type": "label",
+                    "name": "todoDate",
+                    "value": "2021-12-18",
+                    "position": 60,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.073Z"
+                },
+                {
+                    "attributeId": "pHGVMLzGijTz",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:location",
+                    "value": "promoted,text,single",
+                    "position": 20,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "dDIQs4KRIybQ",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 30,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "Ve4N3fyUPdy0",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:tag",
+                    "value": "promoted,text,multi",
+                    "position": 40,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "vCNeJEC0buXp",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:todoDate",
+                    "value": "promoted,date,single",
+                    "position": 50,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "uXn34O0nxopJ",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:doneDate",
+                    "value": "promoted,date,single",
+                    "position": 60,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "5pbwKK0NQ2BE",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "iconClass",
+                    "value": "bx bx-task",
+                    "position": 70,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "MpOgZwJrRGxw",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "task",
+                    "value": "",
+                    "position": 80,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "j0biTLlY12fg",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "relation",
+                    "name": "runOnAttributeChange",
+                    "value": "xr0A521PLAGp",
+                    "position": 10,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                }
+            ]
+        },
+        {
+            "noteId": "7TVzMAvIrpkC",
+            "isProtected": false,
+            "title": "Buy milk",
+            "type": "text",
+            "mime": "text/html",
+            "blobId": "z4PhNX7vuL3xVChQ1m2A",
+            "dateCreated": "2026-10-10 13:17:38.978+0000",
+            "dateModified": "2026-10-10 13:17:39.066+0000",
+            "utcDateCreated": "2026-10-10 13:17:38.978Z",
+            "utcDateModified": "2026-10-10 13:17:39.066Z",
+            "parentNoteIds": [
+                "F3n8tniuptfh",
+                "AfkOpVLUhacC",
+                "tzLqmDOMUPbK",
+                "nHuhcAfTTall"
+            ],
+            "childNoteIds": [],
+            "parentBranchIds": [
+                "F3n8tniuptfh_7TVzMAvIrpkC",
+                "AfkOpVLUhacC_7TVzMAvIrpkC",
+                "tzLqmDOMUPbK_7TVzMAvIrpkC",
+                "nHuhcAfTTall_7TVzMAvIrpkC"
+            ],
+            "childBranchIds": [],
+            "attributes": [
+                {
+                    "attributeId": "I9IkqGakgWDY",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "task",
+                    "value": "",
+                    "position": 1,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.066Z"
+                },
+                {
+                    "attributeId": "aXOaTW7tAQRe",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "relation",
+                    "name": "template",
+                    "value": "xBSWVnruszl1",
+                    "position": 2,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.066Z"
+                },
+                {
+                    "attributeId": "s2XuSeKtuCYv",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "location",
+                    "value": "tesco",
+                    "position": 3,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.066Z"
+                },
+                {
+                    "attributeId": "N6ik6g1YmbEb",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 4,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.066Z"
+                },
+                {
+                    "attributeId": "h7ez66ABUwkC",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 4,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.066Z"
+                },
+                {
+                    "attributeId": "R7Sp6uOyGQqY",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "tag",
+                    "value": "groceries",
+                    "position": 5,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.070Z"
+                },
+                {
+                    "attributeId": "yFE8bLhXPLmI",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "tag",
+                    "value": "shopping",
+                    "position": 7,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.071Z"
+                },
+                {
+                    "attributeId": "iaGstU6b1wAI",
+                    "noteId": "7TVzMAvIrpkC",
+                    "type": "label",
+                    "name": "todoDate",
+                    "value": "2021-12-24",
+                    "position": 6,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.072Z"
+                },
+                {
+                    "attributeId": "pHGVMLzGijTz",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:location",
+                    "value": "promoted,text,single",
+                    "position": 20,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "dDIQs4KRIybQ",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "cssClass",
+                    "value": "todo",
+                    "position": 30,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "Ve4N3fyUPdy0",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:tag",
+                    "value": "promoted,text,multi",
+                    "position": 40,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "vCNeJEC0buXp",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:todoDate",
+                    "value": "promoted,date,single",
+                    "position": 50,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "uXn34O0nxopJ",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "label:doneDate",
+                    "value": "promoted,date,single",
+                    "position": 60,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "5pbwKK0NQ2BE",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "iconClass",
+                    "value": "bx bx-task",
+                    "position": 70,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "MpOgZwJrRGxw",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "label",
+                    "name": "task",
+                    "value": "",
+                    "position": 80,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                },
+                {
+                    "attributeId": "j0biTLlY12fg",
+                    "noteId": "xBSWVnruszl1",
+                    "type": "relation",
+                    "name": "runOnAttributeChange",
+                    "value": "xr0A521PLAGp",
+                    "position": 10,
+                    "isInheritable": false,
+                    "utcDateModified": "2026-10-10 13:17:39.064Z"
+                }
+            ]
+        }
+    ]
+}

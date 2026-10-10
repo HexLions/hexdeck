@@ -2065,7 +2065,13 @@
     "Show the failed links": "Mostra i link falliti",
     "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "Il gestore di download pyLoad: la velocità, i download in corso con il loro avanzamento e i link falliti.",
     "The download speed, how many downloads run and wait, and the free space.": "La velocità di download, quanti download sono in corso e in attesa, e lo spazio libero.",
-    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "I download in corso con avanzamento e tempo rimasto, poi i link falliti con il motivo dato da pyLoad."
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "I download in corso con avanzamento e tempo rimasto, poi i link falliti con il motivo dato da pyLoad.",
+    "A Trilium search, like #todo or note.dateCreated >= TODAY-7. Empty lists the notes changed last.": "Una ricerca di Trilium, come #todo o note.dateCreated >= TODAY-7. Vuoto elenca le note modificate per ultime.",
+    "A token made under Options > ETAPI in Trilium.": "Un token creato in Options > ETAPI di Trilium.",
+    "ETAPI token": "Token ETAPI",
+    "How many notes, revisions and attachments there are, and how big the database is.": "Quante note, revisioni e allegati ci sono, e quanto è grande il database.",
+    "The notes changed last, or the ones a search of your own finds, linking to each.": "Le note modificate per ultime, o quelle trovate da una tua ricerca, con un link a ciascuna.",
+    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: quante note, revisioni e allegati contiene, e le note modificate per ultime o trovate con una ricerca."
   },
   "labels": {
     "Jobs": "Job",
@@ -3173,6 +3179,8 @@
     "Child bridges": "Child bridge",
     "Homebridge": "Homebridge",
     "homebridge": "homebridge",
-    "main bridge": "bridge principale"
+    "main bridge": "bridge principale",
+    "Attachments": "Allegati",
+    "Revisions": "Revisioni"
   }
 }

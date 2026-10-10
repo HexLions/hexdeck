@@ -2065,7 +2065,13 @@
     "Show the failed links": "Mostrar los enlaces fallidos",
     "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "El gestor de descargas pyLoad: su velocidad, las descargas en curso con su progreso y los enlaces que fallaron.",
     "The download speed, how many downloads run and wait, and the free space.": "La velocidad de descarga, cuántas descargas están en curso y en espera, y el espacio libre.",
-    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Las descargas en curso con su progreso y tiempo restante, y luego los enlaces fallidos con el motivo de pyLoad."
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Las descargas en curso con su progreso y tiempo restante, y luego los enlaces fallidos con el motivo de pyLoad.",
+    "A Trilium search, like #todo or note.dateCreated >= TODAY-7. Empty lists the notes changed last.": "Una búsqueda de Trilium, como #todo o note.dateCreated >= TODAY-7. Vacío lista las notas cambiadas por última vez.",
+    "A token made under Options > ETAPI in Trilium.": "Un token creado en Options > ETAPI de Trilium.",
+    "ETAPI token": "Token de ETAPI",
+    "How many notes, revisions and attachments there are, and how big the database is.": "Cuántas notas, revisiones y adjuntos hay, y cuánto ocupa la base de datos.",
+    "The notes changed last, or the ones a search of your own finds, linking to each.": "Las notas cambiadas por última vez, o las que encuentra una búsqueda propia, con enlace a cada una.",
+    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: cuántas notas, revisiones y adjuntos contiene, y las notas cambiadas por última vez o halladas con una búsqueda."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3173,6 +3179,8 @@
     "Child bridges": "Puentes hijos",
     "Homebridge": "Homebridge",
     "homebridge": "homebridge",
-    "main bridge": "puente principal"
+    "main bridge": "puente principal",
+    "Attachments": "Adjuntos",
+    "Revisions": "Revisiones"
   }
 }

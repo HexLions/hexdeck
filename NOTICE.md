@@ -312,6 +312,11 @@ Updated at every milestone.
   the adapter sends whichever is configured. Checked against pyload-ng
   0.5.0b3.dev101 running locally with a key, a download running and failed
   links, and against 0.5.0b3.dev95 with basic auth.
+- **Trilium Notes through ETAPI.** The counts come from the metrics
+  endpoint, which only reports counts, and the notes from a search ordered
+  by the last change, which a query of one's own can replace. Hidden system
+  notes are left out of the list. Checked against Trilium Notes 0.106.0
+  running locally, on a new document with notes of its own added.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

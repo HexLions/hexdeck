@@ -2065,7 +2065,13 @@
     "Show the failed links": "Die fehlgeschlagenen Links zeigen",
     "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "Der Download-Manager pyLoad: seine Geschwindigkeit, die laufenden Downloads mit ihrem Fortschritt und die fehlgeschlagenen Links.",
     "The download speed, how many downloads run and wait, and the free space.": "Die Download-Geschwindigkeit, wie viele Downloads laufen und warten, und der freie Platz.",
-    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Die laufenden Downloads mit Fortschritt und Restzeit, danach die fehlgeschlagenen Links mit pyLoads Grund."
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Die laufenden Downloads mit Fortschritt und Restzeit, danach die fehlgeschlagenen Links mit pyLoads Grund.",
+    "A Trilium search, like #todo or note.dateCreated >= TODAY-7. Empty lists the notes changed last.": "Eine Trilium-Suche, etwa #todo oder note.dateCreated >= TODAY-7. Leer listet die zuletzt geänderten Notizen.",
+    "A token made under Options > ETAPI in Trilium.": "Ein Token, erstellt unter Options > ETAPI in Trilium.",
+    "ETAPI token": "ETAPI-Token",
+    "How many notes, revisions and attachments there are, and how big the database is.": "Wie viele Notizen, Revisionen und Anhänge es gibt und wie groß die Datenbank ist.",
+    "The notes changed last, or the ones a search of your own finds, linking to each.": "Die zuletzt geänderten Notizen oder die, die eine eigene Suche findet, mit Link zu jeder.",
+    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: wie viele Notizen, Revisionen und Anhänge es enthält, und die zuletzt geänderten oder per Suche gefundenen Notizen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3173,6 +3179,8 @@
     "Child bridges": "Child-Bridges",
     "Homebridge": "Homebridge",
     "homebridge": "homebridge",
-    "main bridge": "Haupt-Bridge"
+    "main bridge": "Haupt-Bridge",
+    "Attachments": "Anhänge",
+    "Revisions": "Revisionen"
   }
 }

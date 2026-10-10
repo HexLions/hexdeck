@@ -1,0 +1,53 @@
+{
+    "version": {
+        "app": "0.106.0",
+        "db": 240,
+        "node": "v24.21.0",
+        "sync": 39,
+        "buildDate": "2026-09-25T18:06:17Z",
+        "buildRevision": "c0fdceba3b59af8a4473c6944b4f176121bb9788"
+    },
+    "database": {
+        "totalNotes": 581,
+        "deletedNotes": 0,
+        "activeNotes": 581,
+        "protectedNotes": 0,
+        "totalAttachments": 19,
+        "deletedAttachments": 0,
+        "activeAttachments": 19,
+        "totalRevisions": 0,
+        "totalBranches": 596,
+        "totalAttributes": 1411,
+        "totalBlobs": 144,
+        "totalEtapiTokens": 1,
+        "totalRecentNotes": 0
+    },
+    "noteTypes": {
+        "doc": 303,
+        "text": 116,
+        "launcher": 33,
+        "book": 31,
+        "code": 30,
+        "contentWidget": 20,
+        "mermaid": 13,
+        "image": 12,
+        "render": 8,
+        "webView": 7,
+        "file": 5,
+        "noteMap": 1,
+        "mindMap": 1,
+        "canvas": 1
+    },
+    "attachmentTypes": {
+        "image/svg+xml": 16,
+        "image/jpg": 2,
+        "application/json": 1
+    },
+    "statistics": {
+        "oldestNote": "2026-10-10 13:17:38.543Z",
+        "newestNote": "2026-10-10 13:18:09.752Z",
+        "lastModified": "2026-10-10 13:18:09.752Z",
+        "databaseSizeBytes": 3264512
+    },
+    "timestamp": "2026-10-10T13:18:25.857Z"
+}
