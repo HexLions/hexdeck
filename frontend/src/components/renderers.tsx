@@ -236,6 +236,14 @@ function SaveLink({ widgetId, file }: { widgetId: number; file: Saveable }) {
 }
 
 /**
+ * A bar is green only from this share up.
+ *
+ * ⚠️ It was 0.99, which a slice of a day crosses with fourteen minutes down:
+ * once a bar stood for a whole day, a real outage stayed green. From nexdeck.
+ */
+const UP = 0.999
+
+/**
  * Availability over time: one bar per slice, green up, red down, grey
  * unknown. The app tile has drawn this since the beginning; a list row may
  * bring the same `bars` now, which is what the status page is made of.
@@ -243,13 +251,13 @@ function SaveLink({ widgetId, file }: { widgetId: number; file: Saveable }) {
 export function AvailabilityBars({ bars, title, className = '' }: { bars: (number | null)[]; title?: string; className?: string }) {
   if (!bars.length) return null
   return (
-    <div className={`flex gap-[2px] h-[6px] ${className}`} title={title} aria-hidden="true">
+    <div className={`flex gap-[2px] h-[6px] ${className}`} title={title} aria-hidden="true" data-testid="availability-bars">
       {bars.map((bar, index) => (
         <span
           key={index}
           className="flex-1 rounded-sm"
           style={{
-            background: bar === null ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)' : bar >= 0.99 ? 'var(--nd-ok)' : bar > 0.5 ? 'var(--nd-warn)' : 'var(--nd-bad)',
+            background: bar === null ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)' : bar >= UP ? 'var(--nd-ok)' : bar > 0.5 ? 'var(--nd-warn)' : 'var(--nd-bad)',
             opacity: bar === null ? 1 : 0.85,
           }}
         />
@@ -463,7 +471,7 @@ function Strip({ bars, label }: { bars: (number | null)[]; label: string }) {
             background:
               bar === null
                 ? 'color-mix(in srgb, var(--nd-text) 8%, transparent)'
-                : bar >= 0.99
+                : bar >= UP
                   ? 'var(--nd-ok)'
                   : bar > 0.5
                     ? 'var(--nd-warn)'

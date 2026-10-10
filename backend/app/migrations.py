@@ -143,6 +143,12 @@ def _maintenance_columns(connection: Connection) -> None:
     _add_column(connection, "project_items", "announced_on", "DATE")
 
 
+def _check_since_column(connection: Connection) -> None:
+    """A check from before knows nothing older than today: its long bars start here."""
+    _add_column(connection, "health_checks", "created_at", "DATETIME")
+    connection.execute(text("UPDATE health_checks SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"))
+
+
 MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     # (version, description, function). Version 1 is create_all.
     (2, "Nexview widgets get the bundled Nexview logo", _nexview_logo),
@@ -158,6 +164,7 @@ MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     (12, "An upload knows its own fingerprint", _asset_digest_column),
     (13, "Projects, milestones and items", _project_tables),
     (14, "Items can be due, and come back", _maintenance_columns),
+    (15, "A reachability check knows since when it measures", _check_since_column),
 ]
 
 

@@ -2183,7 +2183,11 @@
     "What the account downloaded on each of the last days, with the total over all of them.": "Quanto ha scaricato l'account in ciascuno degli ultimi giorni, con il totale di tutti.",
     "Whether nginx runs and since when, how many hosts, streams and certificates there are, and which nginx answers.": "Se nginx è in esecuzione e da quanto, quanti host, stream e certificati ci sono, e quale nginx risponde.",
     "Whether nginx runs, the traffic it carries, and the certificates that run out.": "Se nginx è in esecuzione, il traffico che trasporta e i certificati che scadono.",
-    "actual-http-api URL": "URL di actual-http-api"
+    "actual-http-api URL": "URL di actual-http-api",
+    "Last 30 days": "Ultimi 30 giorni",
+    "Last 30 days, one bar per day": "Ultimi 30 giorni, una barra al giorno",
+    "Last 7 days": "Ultimi 7 giorni",
+    "Last 7 days, one bar per 6 hours": "Ultimi 7 giorni, una barra ogni 6 ore"
   },
   "labels": {
     "Jobs": "Job",
