@@ -2043,7 +2043,12 @@
     "Only to see which indexers fail and why: that lives behind Jackett's login, which the API key does not open. Empty works when Jackett has no admin password.": "Serve solo per vedere quali indexer falliscono e perché: sta dietro il login di Jackett, che la chiave API non apre. Vuoto va bene se Jackett non ha una password di amministrazione.",
     "The API key from the top right of Jackett's dashboard.": "La chiave API in alto a destra nella dashboard di Jackett.",
     "The configured indexers, the failing ones first with their reason.": "Gli indexer configurati, prima quelli che falliscono con il loro motivo.",
-    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Gli indexer che Jackett fornisce a Sonarr, Radarr e agli altri, e quali falliscono e perché."
+    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Gli indexer che Jackett fornisce a Sonarr, Radarr e agli altri, e quali falliscono e perché.",
+    "An API key from slskd's configuration, under web > authentication > api_keys.": "Una chiave API dalla configurazione di slskd, in web > authentication > api_keys.",
+    "The Soulseek client slskd: whether it is on the network, what it shares, and its downloads and uploads.": "Il client Soulseek slskd: se è in rete, cosa condivide, e i suoi download e upload.",
+    "The downloads running and waiting, with their progress, and the ones that failed.": "I download in corso e in attesa, con il loro avanzamento, e quelli falliti.",
+    "Uploads instead": "Invece gli upload",
+    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Se slskd è collegato a Soulseek, cosa condivide e quanti trasferimenti sono in corso."
   },
   "labels": {
     "Jobs": "Job",
@@ -3144,6 +3149,9 @@
     "Layer": "Strato",
     "Printed": "Stampato",
     "Looks down": "Sembra giù",
-    "Public": "Pubblici"
+    "Public": "Pubblici",
+    "Shared files": "File condivisi",
+    "Soulseek": "Soulseek",
+    "Uploading": "In upload"
   }
 }

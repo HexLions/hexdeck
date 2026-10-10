@@ -93,6 +93,7 @@ that one of thirty-one renderers draws.
 | Radarr, Sonarr, Lidarr, Readarr | queue, status, calendar | search missing | API key |
 | Prowlarr | indexers, status | | API key |
 | Jackett | overview, indexers | | the API key from the dashboard, for the Torznab list of indexers; which indexers fail and why sits behind Jackett's login, which the key does not open, so it needs the admin password, or nothing when Jackett has none. A wrong key is answered with HTTP 200 and Torznab error 100 |
+| slskd | status, downloads (or uploads) | | an API key listed under web > authentication > api_keys, sent as `X-API-Key` (a Bearer header is refused). Without Soulseek credentials slskd answers but is offline, and the status says so |
 | autobrr | recent releases, grabbed | | API key from Settings > API keys |
 | SABnzbd, NZBGet, qBittorrent, Transmission, Deluge | queue, speed | pause, resume | key or password |
 | MeTube | fetch a video, downloads, download count | fetch an address you type in, save the file to your own machine, remove, try again | none; MeTube has no login of its own, so whoever reaches it may queue and delete |

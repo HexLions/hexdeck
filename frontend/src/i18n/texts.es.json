@@ -2043,7 +2043,12 @@
     "Only to see which indexers fail and why: that lives behind Jackett's login, which the API key does not open. Empty works when Jackett has no admin password.": "Solo para ver qué indexadores fallan y por qué: eso está tras el inicio de sesión de Jackett, que la clave de API no abre. Vacío sirve si Jackett no tiene contraseña de administración.",
     "The API key from the top right of Jackett's dashboard.": "La clave de API de la parte superior derecha del panel de Jackett.",
     "The configured indexers, the failing ones first with their reason.": "Los indexadores configurados, primero los que fallan con su motivo.",
-    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Los indexadores que Jackett ofrece a Sonarr, Radarr y los demás, y cuáles fallan y por qué."
+    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Los indexadores que Jackett ofrece a Sonarr, Radarr y los demás, y cuáles fallan y por qué.",
+    "An API key from slskd's configuration, under web > authentication > api_keys.": "Una clave de API de la configuración de slskd, en web > authentication > api_keys.",
+    "The Soulseek client slskd: whether it is on the network, what it shares, and its downloads and uploads.": "El cliente de Soulseek slskd: si está en la red, qué comparte, y sus descargas y subidas.",
+    "The downloads running and waiting, with their progress, and the ones that failed.": "Las descargas en curso y en espera, con su progreso, y las que fallaron.",
+    "Uploads instead": "Las subidas en su lugar",
+    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Si slskd ha iniciado sesión en Soulseek, qué comparte y cuántas transferencias están en curso."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3144,6 +3149,9 @@
     "Layer": "Capa",
     "Printed": "Impreso",
     "Looks down": "Parece caído",
-    "Public": "Públicos"
+    "Public": "Públicos",
+    "Shared files": "Archivos compartidos",
+    "Soulseek": "Soulseek",
+    "Uploading": "Subiendo"
   }
 }

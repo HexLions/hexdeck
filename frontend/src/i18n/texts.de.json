@@ -2043,7 +2043,12 @@
     "Only to see which indexers fail and why: that lives behind Jackett's login, which the API key does not open. Empty works when Jackett has no admin password.": "Nur um zu sehen, welche Indexer fehlschlagen und warum: Das liegt hinter Jacketts Anmeldung, die der API-Schlüssel nicht öffnet. Leer geht, wenn Jackett kein Admin-Passwort hat.",
     "The API key from the top right of Jackett's dashboard.": "Der API-Schlüssel oben rechts auf Jacketts Dashboard.",
     "The configured indexers, the failing ones first with their reason.": "Die eingerichteten Indexer, die fehlerhaften zuerst mit ihrem Grund.",
-    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Die Indexer, die Jackett Sonarr, Radarr und den anderen liefert, und welche davon fehlschlagen und warum."
+    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Die Indexer, die Jackett Sonarr, Radarr und den anderen liefert, und welche davon fehlschlagen und warum.",
+    "An API key from slskd's configuration, under web > authentication > api_keys.": "Ein API-Schlüssel aus der Konfiguration von slskd, unter web > authentication > api_keys.",
+    "The Soulseek client slskd: whether it is on the network, what it shares, and its downloads and uploads.": "Der Soulseek-Client slskd: ob er im Netz ist, was er teilt, und seine Downloads und Uploads.",
+    "The downloads running and waiting, with their progress, and the ones that failed.": "Die laufenden und wartenden Downloads mit ihrem Fortschritt, und die fehlgeschlagenen.",
+    "Uploads instead": "Stattdessen Uploads",
+    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Ob slskd bei Soulseek angemeldet ist, was es teilt und wie viele Übertragungen laufen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3144,6 +3149,9 @@
     "Layer": "Schicht",
     "Printed": "Gedruckt",
     "Looks down": "Scheint ausgefallen",
-    "Public": "Öffentlich"
+    "Public": "Öffentlich",
+    "Shared files": "Geteilte Dateien",
+    "Soulseek": "Soulseek",
+    "Uploading": "Hochladen"
   }
 }

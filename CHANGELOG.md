@@ -25,6 +25,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   down first, and the incidents still open. ⚠️ Beta.
 - **Jackett**: the indexers it serves the *arr apps, and which of them are
   failing and why. ⚠️ Beta.
+- **slskd**: whether the Soulseek client is on the network, what it shares,
+  and its downloads and uploads with their progress. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

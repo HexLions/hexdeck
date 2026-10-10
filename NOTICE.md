@@ -288,6 +288,12 @@ Updated at every milestone.
   connection's own. A wrong key is answered with 200 and Torznab error 100,
   so the body is read first. Checked against Jackett v0.24.2813 running
   locally, with an admin password set and unset.
+- **slskd's transfers, from its source.** Whether it is logged in to Soulseek,
+  its shares and its version come from `/api/v0/application`, checked against
+  slskd 0.26.0 running locally without a Soulseek account. The transfer lists
+  have no shape in Swagger: it was read from slskd's controllers at 0.26.0,
+  grouped by user and directory, with each state a set of flags written as one
+  string ("Completed, Errored"), split before it is read.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
