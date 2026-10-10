@@ -1,0 +1,110 @@
+{
+  "srv0": {
+    "automatic_https": {
+      "disable": true,
+      "skip": [
+        "static.localhost",
+        "dead.localhost",
+        "old.localhost",
+        "app.localhost"
+      ]
+    },
+    "listen": [
+      ":8091"
+    ],
+    "routes": [
+      {
+        "handle": [
+          {
+            "handler": "subroute",
+            "routes": [
+              {
+                "handle": [
+                  {
+                    "body": "hello",
+                    "handler": "static_response"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "match": [
+          {
+            "host": [
+              "static.localhost"
+            ]
+          }
+        ],
+        "terminal": true
+      },
+      {
+        "handle": [
+          {
+            "handler": "subroute",
+            "routes": [
+              {
+                "handle": [
+                  {
+                    "handler": "reverse_proxy",
+                    "health_checks": {
+                      "passive": {
+                        "fail_duration": 30000000000
+                      }
+                    },
+                    "upstreams": [
+                      {
+                        "dial": "127.0.0.1:8099"
+                      },
+                      {
+                        "dial": "127.0.0.1:8098"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "match": [
+          {
+            "host": [
+              "dead.localhost",
+              "old.localhost"
+            ]
+          }
+        ],
+        "terminal": true
+      },
+      {
+        "handle": [
+          {
+            "handler": "subroute",
+            "routes": [
+              {
+                "handle": [
+                  {
+                    "handler": "reverse_proxy",
+                    "upstreams": [
+                      {
+                        "dial": "127.0.0.1:8092"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "match": [
+          {
+            "host": [
+              "app.localhost"
+            ]
+          }
+        ],
+        "terminal": true
+      }
+    ]
+  }
+}

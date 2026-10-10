@@ -1,0 +1,48 @@
+{
+  "instance": {
+    "domain": "mastodon.social",
+    "title": "Mastodon",
+    "version": "4.8.0-nightly.2026-10-06",
+    "source_url": "https://github.com/mastodon/mastodon",
+    "description": "The original server of Mastodon, operated by Mastodon GmbH for the common good.\r\n\r\n",
+    "usage": {
+      "users": {
+        "active_month": 268223
+      }
+    },
+    "registrations": {
+      "enabled": true,
+      "approval_required": false,
+      "reason_required": false
+    },
+    "api_versions": {
+      "mastodon": 12
+    }
+  },
+  "activity": [
+    {
+      "week": "1791551346",
+      "statuses": "86305",
+      "logins": "38911",
+      "registrations": "844"
+    },
+    {
+      "week": "1790946546",
+      "statuses": "1098856",
+      "logins": "157878",
+      "registrations": "10370"
+    },
+    {
+      "week": "1790341746",
+      "statuses": "1056906",
+      "logins": "163881",
+      "registrations": "9933"
+    },
+    {
+      "week": "1789736946",
+      "statuses": "1049257",
+      "logins": "162061",
+      "registrations": "10067"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+    "version": {
+        "full": "0.26.0.0 (0.26.0.0+e42a525d)",
+        "current": "0.26.0.0",
+        "latest": "0.26.0.0",
+        "isUpdateAvailable": false,
+        "isCanary": false,
+        "isDevelopment": false
+    },
+    "pendingReconnect": false,
+    "pendingRestart": false,
+    "server": {
+        "state": "None",
+        "isConnected": false,
+        "isConnecting": false,
+        "isLoggedIn": false,
+        "isLoggingIn": false,
+        "isTransitioning": false
+    },
+    "connectionWatchdog": {
+        "isEnabled": false,
+        "isAttemptingConnection": false,
+        "isAwaitingVpn": false
+    },
+    "vpn": {
+        "isReady": false,
+        "isConnected": false
+    },
+    "relay": {
+        "mode": "Controller",
+        "controller": {
+            "state": "Disconnected"
+        },
+        "agents": []
+    },
+    "health": {
+        "search": {
+            "incoming": {
+                "latency": 0,
+                "queueDepth": 0,
+                "dropRate": 0
+            }
+        }
+    },
+    "user": {
+        "privileges": {
+            "isPrivileged": false,
+            "privilegesRemaining": 0
+        },
+        "statistics": {
+            "averageSpeed": 0,
+            "directoryCount": 0,
+            "fileCount": 0,
+            "uploadCount": 0
+        }
+    },
+    "distributedNetwork": {
+        "branchLevel": 0,
+        "canAcceptChildren": false,
+        "childLimit": 0,
+        "children": [],
+        "hasParent": false,
+        "isBranchRoot": false
+    },
+    "shares": {
+        "scanPending": false,
+        "scanning": false,
+        "ready": true,
+        "faulted": false,
+        "cancelled": false,
+        "scanProgress": 1,
+        "hosts": [
+            "local"
+        ],
+        "directories": 0,
+        "files": 0
+    },
+    "rooms": [],
+    "users": []
+}

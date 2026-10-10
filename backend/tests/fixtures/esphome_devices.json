@@ -1,0 +1,65 @@
+{
+ "devices": {
+  "configured": [
+   {
+    "name": "garage-door",
+    "friendly_name": "Garage door",
+    "configuration": "garage-door.yaml",
+    "comment": null,
+    "area": "",
+    "board_id": "d1_mini",
+    "target_platform": "esp8266",
+    "address": "127.0.0.1",
+    "current_version": "2026.9.1",
+    "loaded_integrations": [
+     "api",
+     "esp8266",
+     "esphome",
+     "logger",
+     "md5",
+     "mdns",
+     "network",
+     "ota",
+     "preferences",
+     "safe_mode",
+     "sha256",
+     "socket",
+     "wifi"
+    ],
+    "update_available": false,
+    "state": "unknown",
+    "deployed_version": ""
+   },
+   {
+    "name": "living-room-sensor",
+    "friendly_name": "Living room sensor",
+    "configuration": "living-room-sensor.yaml",
+    "comment": null,
+    "area": "",
+    "board_id": "esp32dev",
+    "target_platform": "esp32",
+    "address": "living-room-sensor.local",
+    "current_version": "2026.9.1",
+    "loaded_integrations": [
+     "api",
+     "esp32",
+     "esphome",
+     "logger",
+     "mdns",
+     "network",
+     "preferences",
+     "socket",
+     "wifi"
+    ],
+    "update_available": false,
+    "state": "unknown",
+    "deployed_version": ""
+   }
+  ],
+  "importable": []
+ },
+ "ping": {
+  "garage-door.yaml": null,
+  "living-room-sensor.yaml": null
+ }
+}

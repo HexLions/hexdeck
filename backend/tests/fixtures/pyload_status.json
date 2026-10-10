@@ -1,0 +1,138 @@
+{
+    "status_server": {
+        "pause": false,
+        "active": 1,
+        "queue": 4,
+        "total": 4,
+        "speed": 2099262,
+        "download": true,
+        "reconnect": false,
+        "captcha": false,
+        "proxy": false
+    },
+    "status_downloads": [
+        {
+            "fid": 4,
+            "name": "100Mb.dat",
+            "speed": 2099262,
+            "eta": 22,
+            "format_eta": "00:00:22",
+            "bleft": 46686208,
+            "size": 104857600,
+            "format_size": "100.00 MiB",
+            "percent": 55,
+            "status": 12,
+            "statusmsg": "downloading",
+            "format_wait": "00:00:00",
+            "wait_until": 0.0,
+            "package_id": 3,
+            "package_name": "Test file",
+            "plugin": "DefaultPlugin",
+            "info": ""
+        }
+    ],
+    "queue_data": [
+        {
+            "pid": 1,
+            "name": "Linux ISOs",
+            "folder": "Linux_ISOs",
+            "site": "",
+            "password": "",
+            "dest": 1,
+            "order": 0,
+            "linksdone": 0,
+            "sizedone": 0,
+            "sizetotal": 0,
+            "linkstotal": null,
+            "links": [
+                {
+                    "fid": 1,
+                    "url": "http://127.0.0.1:8099/big-file.bin",
+                    "name": "big-file.bin",
+                    "plugin": "DefaultPlugin",
+                    "size": 0,
+                    "format_size": "0.00 Bit",
+                    "status": 8,
+                    "statusmsg": "failed",
+                    "package_id": 1,
+                    "error": "Refusing to download from Server-Side host ('127.0.0.1' resolves to 127.0.0.1)",
+                    "order": 0
+                },
+                {
+                    "fid": 2,
+                    "url": "http://127.0.0.1:8099/other-file.bin",
+                    "name": "other-file.bin",
+                    "plugin": "DefaultPlugin",
+                    "size": 0,
+                    "format_size": "0.00 Bit",
+                    "status": 8,
+                    "statusmsg": "failed",
+                    "package_id": 1,
+                    "error": "Refusing to download from Server-Side host ('127.0.0.1' resolves to 127.0.0.1)",
+                    "order": 1
+                }
+            ],
+            "fids": null
+        },
+        {
+            "pid": 2,
+            "name": "Broken",
+            "folder": "Broken",
+            "site": "",
+            "password": "",
+            "dest": 1,
+            "order": 1,
+            "linksdone": 0,
+            "sizedone": 0,
+            "sizetotal": 0,
+            "linkstotal": null,
+            "links": [
+                {
+                    "fid": 3,
+                    "url": "http://127.0.0.1:8099/missing-file.bin",
+                    "name": "missing-file.bin",
+                    "plugin": "DefaultPlugin",
+                    "size": 0,
+                    "format_size": "0.00 Bit",
+                    "status": 8,
+                    "statusmsg": "failed",
+                    "package_id": 2,
+                    "error": "Refusing to download from Server-Side host ('127.0.0.1' resolves to 127.0.0.1)",
+                    "order": 0
+                }
+            ],
+            "fids": null
+        },
+        {
+            "pid": 3,
+            "name": "Test file",
+            "folder": "Test_file",
+            "site": "",
+            "password": "",
+            "dest": 1,
+            "order": 2,
+            "linksdone": 0,
+            "sizedone": 0,
+            "sizetotal": 0,
+            "linkstotal": null,
+            "links": [
+                {
+                    "fid": 4,
+                    "url": "https://proof.ovh.net/files/100Mb.dat",
+                    "name": "100Mb.dat",
+                    "plugin": "DefaultPlugin",
+                    "size": 104857600,
+                    "format_size": "100.00 MiB",
+                    "status": 12,
+                    "statusmsg": "downloading",
+                    "package_id": 3,
+                    "error": "",
+                    "order": 0
+                }
+            ],
+            "fids": null
+        }
+    ],
+    "version": "0.5.0",
+    "free_space": 26297102336
+}

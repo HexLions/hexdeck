@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "registered": "2026-10-09T19:07:57Z",
+    "filament": {
+      "id": 1,
+      "registered": "2026-10-09T19:07:57Z",
+      "name": "Galaxy Black",
+      "vendor": {
+        "id": 1,
+        "registered": "2026-10-09T19:07:57Z",
+        "name": "Prusament",
+        "extra": {}
+      },
+      "material": "PLA",
+      "density": 1.24,
+      "diameter": 1.75,
+      "weight": 1000.0,
+      "color_hex": "1B1B1F",
+      "tags": []
+    },
+    "remaining_weight": 60.0,
+    "initial_weight": 1000.0,
+    "used_weight": 940.0,
+    "remaining_length": 20117.017165005866,
+    "used_length": 315166.60225175857,
+    "location": "Printer 1",
+    "archived": false,
+    "tags": []
+  },
+  {
+    "id": 3,
+    "registered": "2026-10-09T19:07:57Z",
+    "filament": {
+      "id": 3,
+      "registered": "2026-10-09T19:07:57Z",
+      "name": "Generic White",
+      "material": "PLA",
+      "density": 1.24,
+      "diameter": 1.75,
+      "weight": 750.0,
+      "color_hex": "FFFFFF",
+      "tags": []
+    },
+    "remaining_weight": 750.0,
+    "initial_weight": 750.0,
+    "used_weight": 0.0,
+    "remaining_length": 251462.71456257332,
+    "used_length": 0.0,
+    "location": "Shelf",
+    "archived": false,
+    "tags": []
+  },
+  {
+    "id": 2,
+    "registered": "2026-10-09T19:07:57Z",
+    "filament": {
+      "id": 2,
+      "registered": "2026-10-09T19:07:57Z",
+      "name": "Jet Black",
+      "vendor": {
+        "id": 1,
+        "registered": "2026-10-09T19:07:57Z",
+        "name": "Prusament",
+        "extra": {}
+      },
+      "material": "PETG",
+      "density": 1.27,
+      "diameter": 1.75,
+      "weight": 1000.0,
+      "color_hex": "000000",
+      "tags": []
+    },
+    "remaining_weight": 790.0,
+    "initial_weight": 1000.0,
+    "used_weight": 210.0,
+    "remaining_length": 258617.19179579717,
+    "used_length": 68746.34212293342,
+    "location": "Dry box",
+    "archived": false,
+    "tags": []
+  }
+]

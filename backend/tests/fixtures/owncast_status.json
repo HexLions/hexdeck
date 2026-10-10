@@ -1,0 +1,69 @@
+{
+ "status_live": {
+  "serverTime": "2026-10-10T14:01:45.211459988Z",
+  "lastConnectTime": "2026-10-10T14:00:26Z",
+  "lastDisconnectTime": null,
+  "versionNumber": "0.3.0",
+  "streamTitle": "Test pattern",
+  "viewerCount": 2,
+  "online": true
+ },
+ "admin_live": {
+  "broadcaster": {
+   "time": "2026-10-10T14:00:26.45673147Z",
+   "remoteAddr": "192.0.2.10:41392",
+   "streamDetails": {
+    "videoCodec": "H.264",
+    "audioCodec": "AAC",
+    "encoder": "Lavf62.12.103",
+    "width": 640,
+    "height": 360,
+    "videoBitrate": 781,
+    "audioBitrate": 67,
+    "framerate": 25
+   }
+  },
+  "currentBroadcast": {
+   "outputSettings": [
+    {
+     "name": "",
+     "videoPassthrough": false,
+     "audioPassthrough": true,
+     "videoBitrate": 1200,
+     "audioBitrate": 0,
+     "cpuUsageLevel": 2,
+     "framerate": 24
+    }
+   ],
+   "latencyLevel": {
+    "level": 2
+   }
+  },
+  "health": null,
+  "streamTitle": "Test pattern",
+  "versionNumber": "0.3.0",
+  "viewerCount": 2,
+  "overallPeakViewerCount": 3,
+  "sessionPeakViewerCount": 3,
+  "online": true
+ },
+ "status_offline": {
+  "serverTime": "2026-10-10T14:01:58.121622939Z",
+  "lastConnectTime": null,
+  "lastDisconnectTime": "2026-10-10T14:01:50Z",
+  "versionNumber": "0.3.0",
+  "streamTitle": "Test pattern",
+  "online": false
+ },
+ "admin_offline": {
+  "broadcaster": null,
+  "currentBroadcast": null,
+  "health": null,
+  "streamTitle": "Test pattern",
+  "versionNumber": "0.3.0",
+  "viewerCount": 0,
+  "overallPeakViewerCount": 3,
+  "sessionPeakViewerCount": 3,
+  "online": false
+ }
+}

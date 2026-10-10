@@ -1,0 +1,200 @@
+{
+    "info": {
+        "data": {
+            "system": {
+                "info": {
+                    "currentVersion": "2.5.315",
+                    "latestVersion": "2.5.315",
+                    "pagesTotal": 4,
+                    "usersTotal": 2,
+                    "tagsTotal": 1
+                }
+            }
+        }
+    },
+    "pages": {
+        "data": {
+            "pages": {
+                "list": [
+                    {
+                        "id": 4,
+                        "path": "recipes/bread",
+                        "locale": "en",
+                        "title": "Sourdough bread",
+                        "description": "",
+                        "updatedAt": "2026-10-10T14:34:35.447Z",
+                        "isPublished": true,
+                        "isPrivate": false,
+                        "tags": [
+                            "test"
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "path": "homelab/backups",
+                        "locale": "en",
+                        "title": "Backup plan",
+                        "description": "",
+                        "updatedAt": "2026-10-10T14:34:34.351Z",
+                        "isPublished": true,
+                        "isPrivate": false,
+                        "tags": [
+                            "test"
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "path": "homelab/network",
+                        "locale": "en",
+                        "title": "Network layout",
+                        "description": "",
+                        "updatedAt": "2026-10-10T14:34:33.249Z",
+                        "isPublished": true,
+                        "isPrivate": false,
+                        "tags": [
+                            "test"
+                        ]
+                    },
+                    {
+                        "id": 1,
+                        "path": "home",
+                        "locale": "en",
+                        "title": "Home",
+                        "description": "",
+                        "updatedAt": "2026-10-10T14:34:32.143Z",
+                        "isPublished": true,
+                        "isPrivate": false,
+                        "tags": [
+                            "test"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "forbidden": {
+        "errors": [
+            {
+                "message": "Forbidden",
+                "locations": [
+                    {
+                        "line": 1,
+                        "column": 19
+                    }
+                ],
+                "path": [
+                    "system",
+                    "info",
+                    "currentVersion"
+                ],
+                "extensions": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "exception": {
+                        "stacktrace": [
+                            "Error: Forbidden"
+                        ]
+                    }
+                }
+            },
+            {
+                "message": "Forbidden",
+                "locations": [
+                    {
+                        "line": 1,
+                        "column": 34
+                    }
+                ],
+                "path": [
+                    "system",
+                    "info",
+                    "latestVersion"
+                ],
+                "extensions": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "exception": {
+                        "stacktrace": [
+                            "Error: Forbidden"
+                        ]
+                    }
+                }
+            },
+            {
+                "message": "Forbidden",
+                "locations": [
+                    {
+                        "line": 1,
+                        "column": 48
+                    }
+                ],
+                "path": [
+                    "system",
+                    "info",
+                    "pagesTotal"
+                ],
+                "extensions": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "exception": {
+                        "stacktrace": [
+                            "Error: Forbidden"
+                        ]
+                    }
+                }
+            },
+            {
+                "message": "Forbidden",
+                "locations": [
+                    {
+                        "line": 1,
+                        "column": 59
+                    }
+                ],
+                "path": [
+                    "system",
+                    "info",
+                    "usersTotal"
+                ],
+                "extensions": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "exception": {
+                        "stacktrace": [
+                            "Error: Forbidden"
+                        ]
+                    }
+                }
+            },
+            {
+                "message": "Forbidden",
+                "locations": [
+                    {
+                        "line": 1,
+                        "column": 70
+                    }
+                ],
+                "path": [
+                    "system",
+                    "info",
+                    "tagsTotal"
+                ],
+                "extensions": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "exception": {
+                        "stacktrace": [
+                            "Error: Forbidden"
+                        ]
+                    }
+                }
+            }
+        ],
+        "data": {
+            "system": {
+                "info": {
+                    "currentVersion": null,
+                    "latestVersion": null,
+                    "pagesTotal": null,
+                    "usersTotal": null,
+                    "tagsTotal": null
+                }
+            }
+        }
+    }
+}

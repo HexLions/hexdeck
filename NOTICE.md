@@ -239,6 +239,124 @@ Updated at every milestone.
   200 and a list of errors; both are read as what they are. Read from
   Cloudflare's OpenAPI schema and its analytics documentation; the refusals
   were measured against api.cloudflare.com.
+- **Caddy, through its admin API and only with GET.** The sites are read from
+  the configuration, subroutes followed so a Caddyfile's sites are found, and
+  the upstreams from /reverse_proxy/upstreams. That answer reports active
+  requests and the failures passive health checks remember, not whether an
+  upstream is up, so the cards say what was reported and colour remembered
+  failures without calling anything down. Checked against Caddy v2.11.7
+  running locally.
+- **Memos, from its own OpenAPI spec.** The latest memos with pinned ones
+  first and a tag filter written as a CEL term, and the memos whose task list
+  still has something unticked, asked for with the filter's own field name
+  (has_incomplete_tasks), not the answer's. The instance profile answers any
+  caller, so the connection test asks for a memo. Checked against Memos
+  v0.31.0 running locally.
+- **Mastodon, the server card without a token.** The instance and its weekly
+  activity are public and asked for without the token; the account and the
+  notifications need a user token with the read scopes. The activity's first
+  row is the week in progress and its counts are strings, so the card calls
+  it this week. A server before 4.3 has no unread count, and the card leaves
+  that line out. Read from Mastodon's documentation and checked against
+  mastodon.social's public answers.
+- **Spoolman, the emptiest spool first.** The spools in use sorted by what
+  is left, with a bar against their starting weight and the total from the
+  x-total-count header. A spool whose weight Spoolman does not know has no
+  bar and is never called running out. Read from its own OpenAPI document
+  and checked against Spoolman v0.27.0 running locally, verified by the
+  digest GitHub publishes for its release.
+- **Moonraker, for Klipper printers.** The job's progress from
+  display_status, which follows the slicer's M73 rather than the file
+  position that runs ahead on the first layers, the layer when the slicer
+  says it, a time left estimated only past the first few percent, the nozzle
+  and bed temperatures, and Klippy's own trouble ranked above whatever the
+  job says. A printer object that does not exist is simply absent from the
+  answer. Read from Moonraker's documentation; no printer was at hand to
+  check it against.
+- **UptimeRobot, API v3 and the read-only key.** The monitors with the last
+  day's uptime as the mean of its hourly buckets, the ones down first, and
+  the incidents still open. A monitor's answer carries its HTTP password,
+  headers and API key; none of that is read. The status words come from the
+  filter's description, since the schema leaves them open. Read from
+  UptimeRobot's OpenAPI spec for API 3.0; the refusal of a made-up key was
+  measured against its API.
+- **Jackett, through two doors.** The indexers come from the Torznab endpoint
+  with the API key; which of them fail, and why, comes from the admin API,
+  which only a session opens. The session is the login form's: the admin
+  password posted to the dashboard, or, when Jackett has none, the cookie it
+  hands out at the end of four redirects. It lives on a client of the
+  connection's own. A wrong key is answered with 200 and Torznab error 100,
+  so the body is read first. Checked against Jackett v0.24.2813 running
+  locally, with an admin password set and unset.
+- **slskd's transfers, from its source.** Whether it is logged in to Soulseek,
+  its shares and its version come from `/api/v0/application`, checked against
+  slskd 0.26.0 running locally without a Soulseek account. The transfer lists
+  have no shape in Swagger: it was read from slskd's controllers at 0.26.0,
+  grouped by user and directory, with each state a set of flags written as one
+  string ("Completed, Errored"), split before it is read.
+- **Ombi, from the counts and the latest requests.** The counts and the
+  latest requests come from Ombi's own API with its key in an `ApiKey` header;
+  the longer request lists are left alone because they carry each requesting
+  user's account. The request count answers without a key, so the connection
+  test asks the issue count. Checked against Ombi 4.53.10 running locally,
+  with requests from the admin and a plain user and one denied.
+- **Homebridge through its UI's login.** The Homebridge UI has no API keys,
+  so the adapter logs in as a UI user and keeps the token for the
+  connection, logging in again once when it is refused; two-factor users are
+  told to use a separate user. A child bridge's answer carries its HomeKit
+  setup code, which is never read out. Checked against Homebridge 2.4.0
+  with Homebridge UI 5.29.0 running locally under hb-service, with a child
+  bridge running and stopped.
+- **pyLoad, by key or by password.** pyLoad's API took the user name and
+  password as basic auth until spring 2026, and since takes only API keys, so
+  the adapter sends whichever is configured. Checked against pyload-ng
+  0.5.0b3.dev101 running locally with a key, a download running and failed
+  links, and against 0.5.0b3.dev95 with basic auth.
+- **Trilium Notes through ETAPI.** The counts come from the metrics
+  endpoint, which only reports counts, and the notes from a search ordered
+  by the last change, which a query of one's own can replace. Hidden system
+  notes are left out of the list. Checked against Trilium Notes 0.106.0
+  running locally, on a new document with notes of its own added.
+- **LubeLogger's reminders as it ranks them.** The urgency of each reminder
+  is LubeLogger's own, and the due date is never parsed because it is written
+  in the server's culture: the days and the distance left are. Checked
+  against LubeLogger 1.7.3 running locally, with two vehicles and four
+  reminders, with its login off and on.
+- **MySpeed, against the speeds it expects.** The last test is compared with
+  the expected speeds set in MySpeed itself, the same ones its gauges use.
+  Checked against MySpeed 1.0.9 running locally, with real tests over
+  LibreSpeed, a failed one over Cloudflare, and its password off, on and at
+  the read level.
+- **ESPHome through the endpoints kept for Home Assistant.** The devices and
+  whether each is online come from `/devices` and `/ping`, which ESPHome
+  Device Builder keeps from the old built-in dashboard. Checked against
+  Device Builder 1.23.0 with ESPHome 2026.9.1 running locally, with two
+  configured devices, with and without a password.
+- **Owncast, public first.** Whether the stream is live comes from the public
+  status; the viewers and the stream details need the admin password, and the
+  broadcaster's address in that answer is never shown. Checked against
+  Owncast 0.3.0 running locally, live from a test pattern pushed over RTMP
+  and offline afterwards.
+- **Garage through its admin API.** The health, nodes, statistics and buckets
+  come from the admin API v2 as its OpenAPI spec describes it; the access keys
+  listed with each bucket are never shown. Checked against Garage 2.4.1
+  running locally as one node, downloaded from Garage's own site, which
+  publishes no checksums.
+- **Readeck, counted by its headers.** The counts are the `Total-Count`
+  header of filtered lists of one bookmark, and the lists follow the filters
+  of Readeck's OpenAPI spec. Checked against Readeck 0.23.4 running locally,
+  with four bookmarks, two of them failing to load.
+- **Node-RED's missing types, found by comparison.** Node-RED waits without
+  starting the flows while a node type is not installed, yet reports the
+  flows as started; the adapter compares the types the flows use with the
+  installed ones. The flows are only counted, never shown. Checked against
+  Node-RED 5.0.8 running locally, as an admin and as a read-only user.
+- **Wiki.js, where a wrong key is a guest.** Wiki.js reads a request with a
+  wrong key as a guest's instead of refusing it, so the connection test asks
+  the system info, which only an administrator gets and which answers
+  "Forbidden" otherwise. Checked against Wiki.js 2.5.315 running locally,
+  with SQLite and four pages; its tarball is built for musl, so the SQLite
+  module was replaced with the official glibc build of the same version.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -28,6 +28,7 @@ that one of thirty-one renderers draws.
 | Unraid | system, array, guests | | API key (GraphQL) |
 | Nextcloud | overview, active users, free space | | serverinfo token, or an administrator account |
 | TrueNAS | system, pools, alerts | | API key; use https, where a Read-Only Administrator is enough; over http only a TrueNAS before 25.04 is read, with a full administrator's key, because later versions deprecate the REST API that http is limited to |
+| Garage | cluster, nodes, buckets | | an admin token as Bearer, on the admin API port (3903), not the S3 port; `admin_token` from garage.toml or a token from `garage admin-token create`. Objects, bytes and free space need Garage 2.4; older 2.x shows the health alone |
 | Proxmox Backup Server | datastores, host, tasks | | API token; DatastoreAudit on /datastore and Sys.Audit on /system |
 | Kopia | snapshots, backups | | the server's user and password; the CSRF token of its start page is fetched and kept |
 | Duplicati | backup jobs, backups | | the password of the web interface; Duplicati 2.1 or newer |
@@ -45,8 +46,10 @@ that one of thirty-one renderers draws.
 | Public address | address | | none; one call to ipapi.co or ipwho.is, kept for an hour |
 | UniFi Network | network, console, devices, findings, wlans | | API key (Network 9.0+), or a local account without two-factor |
 | Speedtest Tracker | latest, history | | API token |
+| MySpeed | last test, tests | | MySpeed's password in a `password` header when one is set, or nothing when its password level lets everyone read. The card turns amber when the last test falls short of the speeds set as expected in MySpeed |
 | nexpulse | latest result (a running test live, a button to start one), history (speed or ping idle and under load), period summary, recent tests, latency under load (graded A+ to F) | | API key from nexpulse under Settings > API keys; a key that may only read fills every card, one with "Read and start tests" adds the button. nexpulse 0.1.1 or newer tells nexdeck which kind of key it is; on 0.1.0 the button is always shown |
 | Traefik | overview, routers | | none, or basic authentication |
+| Caddy | overview, sites, upstreams | | none, the admin API has no sign-in; a user name and password only behind a proxy with basic authentication. The admin API listens on localhost:2019 unless the Caddyfile says `admin 0.0.0.0:2019`, and it can rewrite the configuration, so keep it on an internal network; this adapter only sends GET. Upstreams report active requests and remembered failures, not availability |
 | Nginx Proxy Manager | proxy hosts, certificates, status | | an account; the token is fetched and kept |
 | OPNsense | system, gateways | | API key and secret |
 | pfSense | system, interfaces | | API key of the package pfSense-pkg-RESTAPI |
@@ -75,6 +78,7 @@ that one of thirty-one renderers draws.
 | nexmail | unread mail (total and per mailbox, a mailbox whose sign-in fails is marked), latest mail (sender and subject, unread ones highlighted, each row opens the message in nexmail) | | API key from nexmail 0.17.0 or newer under Settings > API keys, with the mailboxes shared on it; the latest mail card needs the scope "Count, sender and subject" and is not offered for a key that may only count. The operator of nexmail has to allow API keys first |
 | Seerr | requests, counts | approve, decline | API key |
 | Overseerr, Jellyseerr | requests, counts | approve, decline | API key; same API as Seerr, listed under their own names |
+| Ombi | overview, latest requests | | the API key under Settings > Configuration > General, in an `ApiKey` header. The request count answers without a key, so the connection test asks the issue count, which checks it |
 | Tautulli | now playing, streams, most watched | | API key |
 | RomM | platforms, recently added games, game library | | client API token with roms.read and platforms.read |
 | Immich | archive, storage, users | | API key of an administrator |
@@ -91,14 +95,21 @@ that one of thirty-one renderers draws.
 | Jellystat | libraries, most watched | | API key |
 | Radarr, Sonarr, Lidarr, Readarr | queue, status, calendar | search missing | API key |
 | Prowlarr | indexers, status | | API key |
+| Jackett | overview, indexers | | the API key from the dashboard, for the Torznab list of indexers; which indexers fail and why sits behind Jackett's login, which the key does not open, so it needs the admin password, or nothing when Jackett has none. A wrong key is answered with HTTP 200 and Torznab error 100 |
+| slskd | status, downloads (or uploads) | | an API key listed under web > authentication > api_keys, sent as `X-API-Key` (a Bearer header is refused). Without Soulseek credentials slskd answers but is offline, and the status says so |
 | autobrr | recent releases, grabbed | | API key from Settings > API keys |
 | SABnzbd, NZBGet, qBittorrent, Transmission, Deluge | queue, speed | pause, resume | key or password |
+| pyLoad | status, downloads | | an API key from Settings > Users, sent as `X-API-Key`, on pyLoad from 2026 on; older versions take the user name and password as basic auth instead, which newer ones refuse |
 | MeTube | fetch a video, downloads, download count | fetch an address you type in, save the file to your own machine, remove, try again | none; MeTube has no login of its own, so whoever reaches it may queue and delete |
 | Sportarr | upcoming, missing events, events | | API key from Settings > General > Security |
 | Tube Archivist | download queue, latest videos, video archive | start downloads | API token from Settings > Application, sent as Token |
 | Home Assistant | entity, entity list | turn on/off, scenes, scripts, covers, locks | long-lived token; live over WebSocket |
+| Homebridge | status, bridges, updates | | a user of the Homebridge UI without two-factor login (the UI has no API keys), or nothing when its login is off. The token is kept for the connection. Whether Homebridge runs is known only when the UI runs it under hb-service, as in the official images. The child bridges' HomeKit setup codes are never read out |
+| ESPHome | overview, devices | | none, or the dashboard's user name and password as basic auth (ESPHome Device Builder). Reads `/devices` and `/ping`, which the old built-in dashboard has too, but only without a password. Online is the dashboard's own guess from mDNS and ping |
+| Node-RED | status, flows | | none, or a user of the editor when adminAuth is set; the token is asked with the scope read, which a read-only user is allowed. Missing node types are found by comparing the flows with the installed nodes, because the flow state says started even while Node-RED waits for them |
 | Uptime Kuma | monitors, summary | | API key (metrics endpoint) |
 | Healthchecks | checks, checks up | | API key from the project settings; the read-only one is enough, and healthchecks.io works too |
+| UptimeRobot | overview, monitors, open incidents | | the read-only API key from Integrations > API, sent as Bearer to API v3; an account key would also be able to change monitors. The free plan allows ten requests a minute for the whole account. A monitor's HTTP password, headers and key are never read |
 | ChangeDetection.io | recent changes, watches | check all now | API key from Settings > API |
 | n8n | workflows, last runs, summary | publish, unpublish | API key from Settings > n8n API |
 | Beszel | hosts, host | | user and password |
@@ -135,6 +146,9 @@ that one of thirty-one renderers draws.
 | FreshRSS | feed reader, unread, unread by feed | | user name and the API password from Settings > Profile, not the sign-in password; API access allowed under Administration > Authentication |
 | IMAP | unread mail, latest mail, folders | | user name and password or app password of the mailbox, over TLS, STARTTLS or, on a trusted network, unencrypted; no OAuth2, so Microsoft 365 is mostly out of reach. Reads counts and the sender, subject and date of a mail, never its text, and never marks anything as read |
 | Linkding | bookmarks, recent bookmarks | | REST API token from Settings > Integrations; each account sees its own bookmarks only |
+| Memos | memos, open tasks | | a personal access token from Settings > My account > Access tokens, sent as Bearer. The instance profile answers without one, so the connection test asks for a memo. Read from the OpenAPI spec of v0.31.0 |
+| Trilium Notes | overview, notes | | an ETAPI token from Options > ETAPI, sent in `Authorization` as it is, without Bearer. The counts need Trilium 0.94 or newer; older ones show only the version. The note count includes Trilium's own help notes |
+| Wiki.js | overview, pages | | a full-access API key from Administration > API Access, with the API turned on there, as Bearer. A wrong key is read as a guest's rather than refused, so the connection test asks the system info, which only an administrator gets. Wiki.js 2; the 3.0 betas are not supported |
 | Mailpit | Mailpit overview (unread, all mail, accepted and rejected since the start, database size; amber while chaos is on), latest mail (sender and subject, unread highlighted, with Mailpit's own search) | | none, or the user and password of Mailpit's own login (MP_UI_AUTH or --ui-auth-file); with a webroot the URL includes it. Reading never marks a mail as read |
 | NeutArr | NeutArr overview, hunted apps | | the API key from NeutArr's User page, sent as a header; NeutArr is the continuation of Huntarr |
 | nexbeat | requests (waiting, running, failed, arrived this week), library (artists and albums in Lidarr or nexcrate), requests to approve (with covers) | approve, turn down | API token from nexbeat 1.2.0 or newer under Profile > API tokens; a read-only token fills every card, approving needs an administrator's token that may write. A user's token counts only that user's requests |
@@ -143,6 +157,9 @@ that one of thirty-one renderers draws.
 | nexsift | nexsift inbox, newest lines | | an API key from Settings > API keys, after switching on Allow API keys; it may only read numbers and titles, never the text of a message |
 | nextrmnl | status, sessions, history, connections | | read-only API key from nextrmnl 0.3.0 or newer, with API keys switched on |
 | OctoPrint | printer, print job | | application key from User Settings > Application Keys; its user needs the permission Status (groups Users or Read-only) |
+| Spoolman | overview, spools | | none, Spoolman has no sign-in; a user name and password only behind a proxy with basic authentication. A spool without a known weight shows no bar and never counts as running out |
+| LubeLogger | overview, reminders | | a LubeLogger user as basic auth, or nothing when its login is off. The urgency is LubeLogger's own, from the thresholds in its settings; distances are shown without a unit because the API does not give one |
+| Moonraker (Klipper) | printer, print history | | none on a trusted network; otherwise Moonraker's API key, sent as `X-Api-Key`. Progress follows the slicer's M73 through display_status; layers only when the slicer sends SET_PRINT_STATS_INFO |
 | openmediavault | system, file systems, disks | | admin, or a user in the group openmediavault-admin; other users may sign in but read nothing. Three wrong passwords in five minutes lock the account in openmediavault until faillock resets it, so a refused password is tried again only every 15 minutes |
 | Pangolin | status, sites, resources (public with their health, private with their destination) | | Integration API key of the organization with List Sites, List Resources and List Site Resources, plus the organization ID. Self-hosted, the Integration API needs `enable_integration_api` in config.yml and a route to port 3003; Pangolin Cloud at https://api.pangolin.net |
 | PatchMon | PatchMon overview, hosts, operating systems | | a key of usage type API with the scope host: get, from Settings > Integrations > Auto-Enrollment & API (a GetHomepage key is refused); the URL has to be one named in PatchMon's CORS_ORIGIN |
@@ -163,12 +180,15 @@ that one of thirty-one renderers draws.
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |
 | Miniflux | unread, failing feeds, feed reader | | API key from Settings > API Keys |
+| Mastodon | server, account, notifications | | none for the server card, whose answers are public; a user token with read:accounts and read:notifications for the others, from Preferences > Development > New application. This week's posts and logins are the week in progress; a server can switch that activity off |
 | Karakeep | recent bookmarks, reading list | | API key from Settings > API Keys |
 | Linkwarden | recent links, links | | access token from Settings > Access Tokens |
+| Readeck | overview, bookmarks | | an API token from Settings > API Tokens as Bearer; the role Bookmarks: Read Only is enough. Each count is the `Total-Count` header of a filtered list of one |
 | YouTube | videos, from your subscriptions | | none for the channel feeds; a YouTube Data API key for the subscriptions card, whose account must keep its subscription list public |
 | GitHub releases | releases | | none; sixty requests an hour per address |
 | Share prices | prices | | none |
 | Twitch | live | | client ID and secret of an application at dev.twitch.tv |
+| Owncast | stream | | none for whether the stream is live; the admin password, as basic auth with the user admin, for the viewers, the peak and what is being sent. Since 0.3 the viewers are no longer public |
 | Wake-on-LAN | wake | wake | none; a MAC address and a network that carries the broadcast |
 
 Adapters marked **beta** in the interface have not been confirmed against a

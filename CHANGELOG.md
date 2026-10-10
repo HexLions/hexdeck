@@ -5,6 +5,53 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Caddy**: the sites it serves with what answers each, and the upstreams it
+  proxies to with their active requests and remembered failures. ⚠️ Beta.
+- **Memos**: the latest memos with their tags, pinned ones first, and the
+  memos with tasks still to tick. ⚠️ Beta.
+- **Mastodon**: your server with its active users and this week's posts, your
+  account with followers and unread notifications, and the notifications
+  themselves. ⚠️ Beta.
+- **Spoolman**: the filament spools in use with what is left on each, the
+  ones about to run out first. ⚠️ Beta.
+- **Moonraker (Klipper)**: the job on the printer with its progress, layer and
+  time left, the nozzle and bed temperatures, and the jobs before with how
+  they ended. ⚠️ Beta.
+- **UptimeRobot**: your monitors with the last day's uptime, the ones that are
+  down first, and the incidents still open. ⚠️ Beta.
+- **Jackett**: the indexers it serves the *arr apps, and which of them are
+  failing and why. ⚠️ Beta.
+- **slskd**: whether the Soulseek client is on the network, what it shares,
+  and its downloads and uploads with their progress. ⚠️ Beta.
+- **Ombi**: the requests waiting for approval, the latest requests and
+  where each stands, and open issues. ⚠️ Beta.
+- **Homebridge**: whether it runs, the state of each child bridge, and the
+  plugins with an update. ⚠️ Beta.
+- **pyLoad**: the download speed, the downloads running with their
+  progress, and the links that failed with pyLoad's reason. ⚠️ Beta.
+- **Trilium Notes**: how many notes, revisions and attachments it holds,
+  and the notes changed last or found by a search of your own. ⚠️ Beta.
+- **LubeLogger**: the vehicles in the garage and the maintenance coming
+  due, the past-due reminders first. ⚠️ Beta.
+- **MySpeed**: the last speed test against the speeds you expect, how many
+  failed today, and the tests before. ⚠️ Beta.
+- **ESPHome**: the devices of the dashboard, which are online, and which run
+  firmware older than the dashboard's ESPHome. ⚠️ Beta.
+- **Owncast**: whether your stream is live and since when, and with the
+  admin password the viewers and what is being sent. ⚠️ Beta.
+- **Garage**: the S3 cluster's health, its nodes and their free space, and
+  each bucket's objects and size. ⚠️ Beta.
+- **Readeck**: how much of the reading list is left unread, the latest
+  bookmarks, and the ones that failed to save. ⚠️ Beta.
+- **Node-RED**: whether the flows run, the node types they are missing, and
+  each flow with its nodes. ⚠️ Beta.
+- **Wiki.js**: how many pages, users and tags it holds, whether an update is
+  out, and the pages changed last. ⚠️ Beta.
+
 ## 0.23.1 (2026-10-08)
 
 Three things seen on a real board the day 0.23.0 came out.

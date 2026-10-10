@@ -1,0 +1,593 @@
+{
+ "flows": {
+  "flows": [
+   {
+    "id": "t1",
+    "type": "tab",
+    "label": "Lights",
+    "disabled": false
+   },
+   {
+    "id": "t2",
+    "type": "tab",
+    "label": "Backups",
+    "disabled": false
+   },
+   {
+    "id": "t3",
+    "type": "tab",
+    "label": "Old experiments",
+    "disabled": true
+   },
+   {
+    "id": "n1",
+    "type": "inject",
+    "z": "t1",
+    "name": "every minute",
+    "repeat": "60",
+    "once": false,
+    "wires": [
+     [
+      "n2"
+     ]
+    ],
+    "props": [
+     {
+      "p": "payload"
+     }
+    ],
+    "payload": "",
+    "payloadType": "date"
+   },
+   {
+    "id": "n2",
+    "type": "debug",
+    "z": "t1",
+    "name": "",
+    "active": true,
+    "wires": []
+   },
+   {
+    "id": "n3",
+    "type": "inject",
+    "z": "t2",
+    "name": "nightly",
+    "wires": [
+     [
+      "n4"
+     ]
+    ],
+    "props": [
+     {
+      "p": "payload"
+     }
+    ]
+   },
+   {
+    "id": "n4",
+    "type": "function",
+    "z": "t2",
+    "name": "check",
+    "func": "return msg;",
+    "wires": [
+     [
+      "n5"
+     ]
+    ]
+   },
+   {
+    "id": "n5",
+    "type": "debug",
+    "z": "t2",
+    "name": "",
+    "active": false,
+    "d": true,
+    "wires": []
+   },
+   {
+    "id": "n6",
+    "type": "debug",
+    "z": "t3",
+    "name": "",
+    "wires": []
+   },
+   {
+    "id": "n7",
+    "type": "tasmota-switch",
+    "z": "t1",
+    "name": "porch",
+    "wires": []
+   }
+  ],
+  "rev": "31c071e84c061377d4b3a9c46613c00c4d41cebf5904d464489412bad2c412b0"
+ },
+ "nodes": [
+  {
+   "id": "node-red/junction",
+   "name": "junction",
+   "types": [
+    "junction"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/inject",
+   "name": "inject",
+   "types": [
+    "inject"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/debug",
+   "name": "debug",
+   "types": [
+    "debug"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/complete",
+   "name": "complete",
+   "types": [
+    "complete"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/catch",
+   "name": "catch",
+   "types": [
+    "catch"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/status",
+   "name": "status",
+   "types": [
+    "status"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/link",
+   "name": "link",
+   "types": [
+    "link in",
+    "link out",
+    "link call"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/comment",
+   "name": "comment",
+   "types": [
+    "comment"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/global-config",
+   "name": "global-config",
+   "types": [
+    "global-config"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/unknown",
+   "name": "unknown",
+   "types": [
+    "unknown"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/function",
+   "name": "function",
+   "types": [
+    "function"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/switch",
+   "name": "switch",
+   "types": [
+    "switch"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/change",
+   "name": "change",
+   "types": [
+    "change"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/range",
+   "name": "range",
+   "types": [
+    "range"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/template",
+   "name": "template",
+   "types": [
+    "template"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/delay",
+   "name": "delay",
+   "types": [
+    "delay"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/trigger",
+   "name": "trigger",
+   "types": [
+    "trigger"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/exec",
+   "name": "exec",
+   "types": [
+    "exec"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/rbe",
+   "name": "rbe",
+   "types": [
+    "rbe"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/tls",
+   "name": "tls",
+   "types": [
+    "tls-config"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/httpproxy",
+   "name": "httpproxy",
+   "types": [
+    "http proxy"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/mqtt",
+   "name": "mqtt",
+   "types": [
+    "mqtt in",
+    "mqtt out",
+    "mqtt-broker"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/httpin",
+   "name": "httpin",
+   "types": [
+    "http in",
+    "http response"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/httprequest",
+   "name": "httprequest",
+   "types": [
+    "http request"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/websocket",
+   "name": "websocket",
+   "types": [
+    "websocket in",
+    "websocket out",
+    "websocket-listener",
+    "websocket-client"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/tcpin",
+   "name": "tcpin",
+   "types": [
+    "tcp in",
+    "tcp out",
+    "tcp request"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/udp",
+   "name": "udp",
+   "types": [
+    "udp in",
+    "udp out"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/CSV",
+   "name": "CSV",
+   "types": [
+    "csv"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/HTML",
+   "name": "HTML",
+   "types": [
+    "html"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/JSON",
+   "name": "JSON",
+   "types": [
+    "json"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/XML",
+   "name": "XML",
+   "types": [
+    "xml"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/YAML",
+   "name": "YAML",
+   "types": [
+    "yaml"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/split",
+   "name": "split",
+   "types": [
+    "split",
+    "join"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/sort",
+   "name": "sort",
+   "types": [
+    "sort"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/batch",
+   "name": "batch",
+   "types": [
+    "batch"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/file",
+   "name": "file",
+   "types": [
+    "file",
+    "file in"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  },
+  {
+   "id": "node-red/watch",
+   "name": "watch",
+   "types": [
+    "watch"
+   ],
+   "enabled": true,
+   "local": false,
+   "user": false,
+   "module": "node-red",
+   "version": "5.0.8"
+  }
+ ],
+ "state": {
+  "state": "start"
+ },
+ "diagnostics": {
+  "report": "diagnostics",
+  "scope": "basic",
+  "nodejs": {
+   "version": "v22.23.3",
+   "arch": "x64",
+   "platform": "linux",
+   "memoryUsage": {
+    "rss": 111636480,
+    "heapTotal": 36417536,
+    "heapUsed": 34304128,
+    "external": 3993544,
+    "arrayBuffers": 137969
+   }
+  },
+  "runtime": {
+   "version": "5.0.8",
+   "isStarted": true,
+   "flows": {
+    "state": "start",
+    "started": true
+   },
+   "modules": {
+    "node-red": "5.0.8"
+   }
+  }
+ }
+}

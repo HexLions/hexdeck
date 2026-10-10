@@ -1,0 +1,74 @@
+{
+  "memos": [
+    {
+      "name": "memos/3Rbfkrjp2EDdXnTifSbeXu",
+      "state": "NORMAL",
+      "creator": "users/admin",
+      "createTime": "2026-10-09T13:19:18Z",
+      "updateTime": "2026-10-09T13:19:18Z",
+      "content": "Read https://usememos.com/docs",
+      "visibility": "PUBLIC",
+      "tags": [],
+      "pinned": false,
+      "attachments": [],
+      "relations": [],
+      "reactions": [],
+      "property": {
+        "hasLink": true,
+        "hasTaskList": false,
+        "hasCode": false,
+        "hasIncompleteTasks": false,
+        "title": ""
+      },
+      "snippet": "Read https://usememos.com/docs"
+    },
+    {
+      "name": "memos/bqZx3yP2HDiMYVG4gsoJi5",
+      "state": "NORMAL",
+      "creator": "users/admin",
+      "createTime": "2026-10-09T13:19:18Z",
+      "updateTime": "2026-10-09T13:19:18Z",
+      "content": "Ideas for the #homelab: a card for #memos",
+      "visibility": "PROTECTED",
+      "tags": [
+        "homelab",
+        "memos"
+      ],
+      "pinned": false,
+      "attachments": [],
+      "relations": [],
+      "reactions": [],
+      "property": {
+        "hasLink": false,
+        "hasTaskList": false,
+        "hasCode": false,
+        "hasIncompleteTasks": false,
+        "title": ""
+      },
+      "snippet": "Ideas for the #homelab: a card for #memos"
+    },
+    {
+      "name": "memos/5pYBezeyEvRSPcXTy4LGRZ",
+      "state": "NORMAL",
+      "creator": "users/admin",
+      "createTime": "2026-10-09T13:19:18Z",
+      "updateTime": "2026-10-09T13:19:18Z",
+      "content": "# Rack\nReplace the UPS battery\n- [ ] order battery\n- [x] check model",
+      "visibility": "PRIVATE",
+      "tags": [],
+      "pinned": false,
+      "attachments": [],
+      "relations": [],
+      "reactions": [],
+      "property": {
+        "hasLink": false,
+        "hasTaskList": true,
+        "hasCode": false,
+        "hasIncompleteTasks": true,
+        "title": "Rack"
+      },
+      "snippet": "Rack Replace the UPS batteryorder battery check model"
+    }
+  ],
+  "nextPageToken": ""
+}
