@@ -351,6 +351,12 @@ Updated at every milestone.
   flows as started; the adapter compares the types the flows use with the
   installed ones. The flows are only counted, never shown. Checked against
   Node-RED 5.0.8 running locally, as an admin and as a read-only user.
+- **Wiki.js, where a wrong key is a guest.** Wiki.js reads a request with a
+  wrong key as a guest's instead of refusing it, so the connection test asks
+  the system info, which only an administrator gets and which answers
+  "Forbidden" otherwise. Checked against Wiki.js 2.5.315 running locally,
+  with SQLite and four pages; its tarball is built for musl, so the SQLite
+  module was replaced with the official glibc build of the same version.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

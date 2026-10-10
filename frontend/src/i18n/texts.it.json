@@ -2112,7 +2112,12 @@
     "Each flow with its number of nodes, the disabled ones marked, and the missing node types first.": "Ogni flow con il suo numero di nodi, quelli disattivati segnati, e prima i tipi di nodo mancanti.",
     "Flows": "Flow",
     "Node-RED: whether the flows run, the node types they miss, and each flow with its nodes.": "Node-RED: se i flow sono in esecuzione, quali tipi di nodo mancano, e ogni flow con i suoi nodi.",
-    "Whether the flows run, how many flows and nodes there are, the node types missing, and the memory in use.": "Se i flow sono in esecuzione, quanti flow e nodi ci sono, i tipi di nodo mancanti e la memoria in uso."
+    "Whether the flows run, how many flows and nodes there are, the node types missing, and the memory in use.": "Se i flow sono in esecuzione, quanti flow e nodi ci sono, i tipi di nodo mancanti e la memoria in uso.",
+    "A full-access key from Administration > API Access, after turning the API on there.": "Una chiave con accesso completo da Administration > API Access, dopo aver attivato lì l'API.",
+    "How many pages, users and tags there are, and whether a newer Wiki.js is out.": "Quante pagine, utenti e tag ci sono, e se è uscito un Wiki.js più recente.",
+    "Pages": "Pagine",
+    "The pages changed last, with when, linking to each.": "Le pagine modificate per ultime, con quando, con un link a ciascuna.",
+    "Wiki.js: how many pages, users and tags it holds, whether an update is out, and the pages changed last.": "Wiki.js: quante pagine, utenti e tag contiene, se è uscito un aggiornamento, e le pagine modificate per ultime."
   },
   "labels": {
     "Jobs": "Job",

@@ -49,6 +49,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   bookmarks, and the ones that failed to save. ⚠️ Beta.
 - **Node-RED**: whether the flows run, the node types they are missing, and
   each flow with its nodes. ⚠️ Beta.
+- **Wiki.js**: how many pages, users and tags it holds, whether an update is
+  out, and the pages changed last. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
