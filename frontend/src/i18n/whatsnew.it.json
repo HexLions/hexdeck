@@ -202,6 +202,36 @@
         "Nelle impostazioni di gruppo e schede le card si chiamano card: «Card contenute», «Card affiancate».",
         "Le impostazioni della card dicono «Base» invece di «Basics»."
       ]
+    },
+    "0.24.0": {
+      "lead": "HexDeck 0.24.0: venti nuove integrazioni, quasi tutte viste rispondere da un'istanza vera prima di essere scritte.",
+      "sections": [
+        {
+          "title": "Media e download",
+          "body": "Jackett con gli indexer che falliscono e il perché, slskd sulla rete Soulseek, le richieste di Ombi in attesa di approvazione, i download e i link falliti di pyLoad, e se il tuo stream Owncast è in diretta.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Casa e laboratorio",
+          "body": "Homebridge e i suoi child bridge, i dispositivi ESPHome online e quelli con firmware vecchio, i flow di Node-RED bloccati da un tipo di nodo mancante, la stampante Klipper tramite Moonraker, il filamento di Spoolman e la manutenzione in scadenza di LubeLogger.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Server e rete",
+          "body": "I siti di Caddy e gli upstream che falliscono, il cluster S3 Garage, i monitor e gli incidenti di UptimeRobot, e l'ultimo test di MySpeed rispetto alla velocità che paghi.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Note e lettura",
+          "body": "Memos con i task aperti, Trilium Notes, Wiki.js, la lista di lettura di Readeck, e il tuo server, account e notifiche Mastodon.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Le venti nuove integrazioni hanno il bollino beta finché non le si vede su più di una board.",
+        "I segreti che tornano nelle risposte, come i codici di abbinamento HomeKit o le password dei monitor, non vengono mai mostrati."
+      ]
     }
   }
 }

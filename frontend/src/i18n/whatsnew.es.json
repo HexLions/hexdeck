@@ -58,6 +58,36 @@
       "small": [
         "Los ajustes de la tarjeta nombran los básicos en tu idioma."
       ]
+    },
+    "0.24.0": {
+      "lead": "HexDeck 0.24.0: veinte integraciones nuevas, casi todas vistas respondiendo desde una instancia real antes de escribirse.",
+      "sections": [
+        {
+          "title": "Medios y descargas",
+          "body": "Jackett con los indexadores que fallan y por qué, slskd en la red Soulseek, las solicitudes de Ombi que esperan aprobación, las descargas y enlaces fallidos de pyLoad, y si tu emisión de Owncast está en directo.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Casa y taller",
+          "body": "Homebridge y sus puentes hijos, los dispositivos ESPHome conectados y con firmware atrasado, los flujos de Node-RED detenidos por un tipo de nodo que falta, la impresora Klipper a través de Moonraker, el filamento de Spoolman y el mantenimiento pendiente de LubeLogger.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Servidores y red",
+          "body": "Los sitios de Caddy y los upstreams que fallan, el clúster S3 Garage, los monitores e incidentes de UptimeRobot, y la última prueba de MySpeed frente a la velocidad que pagas.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Notas y lectura",
+          "body": "Memos con tareas abiertas, Trilium Notes, Wiki.js, la lista de lectura de Readeck, y tu servidor, cuenta y notificaciones de Mastodon.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Las veinte integraciones nuevas llevan la insignia beta hasta que se vean en más de un tablero.",
+        "Los secretos que vuelven en las respuestas, como los códigos de configuración de HomeKit o las contraseñas de los monitores, nunca se muestran."
+      ]
     }
   }
 }

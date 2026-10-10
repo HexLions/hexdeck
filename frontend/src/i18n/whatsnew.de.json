@@ -828,6 +828,36 @@
       "small": [
         "Die Karteneinstellungen nennen die Grundlagen in deiner Sprache."
       ]
+    },
+    "0.24.0": {
+      "lead": "HexDeck 0.24.0: zwanzig neue Integrationen, fast alle an einer echten Instanz antworten gesehen, bevor sie geschrieben wurden.",
+      "sections": [
+        {
+          "title": "Medien und Downloads",
+          "body": "Jackett mit den Indexern, die fehlschlagen, und warum, slskd im Soulseek-Netz, Ombis Anfragen, die auf Freigabe warten, pyLoads Downloads und fehlgeschlagene Links, und ob dein Owncast-Stream live ist.",
+          "path": "System > Verbindungen"
+        },
+        {
+          "title": "Zuhause und Werkstatt",
+          "body": "Homebridge und seine Child-Bridges, ESPHome-Geräte online und mit veralteter Firmware, Node-RED-Flows, die ein fehlender Node-Typ aufhält, der Klipper-Drucker über Moonraker, Spoolmans Filament und LubeLoggers anstehende Wartung.",
+          "path": "System > Verbindungen"
+        },
+        {
+          "title": "Server und Netzwerk",
+          "body": "Caddys Sites und fehlschlagende Upstreams, der Garage-S3-Cluster, UptimeRobots Monitore und Vorfälle, und MySpeeds letzter Test gegenüber der Geschwindigkeit, die du bezahlst.",
+          "path": "System > Verbindungen"
+        },
+        {
+          "title": "Notizen und Lesen",
+          "body": "Memos mit offenen Aufgaben, Trilium Notes, Wiki.js, die Readeck-Leseliste, und dein Mastodon-Server, Konto und Benachrichtigungen.",
+          "path": "System > Verbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die zwanzig neuen Integrationen tragen das Beta-Abzeichen, bis man sie auf mehr als einem Board gesehen hat.",
+        "Geheimnisse, die in Antworten zurückkommen, etwa HomeKit-Setup-Codes oder Monitor-Passwörter, werden nie gezeigt."
+      ]
     }
   }
 }
