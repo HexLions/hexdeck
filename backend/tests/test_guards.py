@@ -763,6 +763,11 @@ def test_the_readme_counts_the_services_it_has() -> None:
     assert badge, "the integrations badge is gone from the README"
     assert int(badge.group(1)) == len(services), (
         f"the badge says {badge.group(1)} and there are {len(services)}")
+    # The grid under "What it does" said 138 for three releases while the
+    # badge, checked here, kept up.
+    written = [int(number) for number in re.findall(r"\*\*(\d+) integrations\*\*", readme)]
+    assert written, "the integrations count in the opening grid is gone from the README"
+    assert set(written) == {len(services)}, f"the README says {written} integrations and there are {len(services)}"
 
 
 def test_every_service_stands_in_the_adapter_document() -> None:

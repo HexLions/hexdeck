@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **138 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **186 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -112,7 +112,7 @@ curl -fsSL https://raw.githubusercontent.com/HexLions/hexdeck/main/docker-compos
 docker compose up -d
 ```
 
-The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.21.0` stays where it is. [What changed in each release](CHANGELOG.md).
+The compose file takes `ghcr.io/hexlions/hexdeck:latest`, which is the newest release; `:main` follows the main branch instead, and a version such as `:0.24.0` stays where it is. [What changed in each release](CHANGELOG.md).
 
 Open `http://your-host:5175`. The first start creates the administrator and offers a demo board with invented, moving data, so you can look around before connecting anything. When you are done looking, *Leave demo mode* on the banner takes the demo's connections, cards and board away in one go, and what you built on real connections stays. For a dashboard at home that should not ask for a password at all, make a guest account and, under System › Sign-in providers, sign browsers on your network in as it by themselves; the password is then only for changing things.
 
@@ -197,7 +197,7 @@ services:
 - `PUID`/`PGID` are the owner of the files in the data volume; use the user that owns the dataset.
 - `/host/proc` and `/host/sys` are what the **Host card** reads; they are read-only views of what the kernel already publishes. Leave them out and the card shows the container's own processors and memory, with a line on the card saying so.
 - The Docker socket's group is detected at start. When that fails (the log says so), set `DOCKER_GID` to the group id of `/var/run/docker.sock` on the host, or leave the socket out.
-- `:latest` is the newest release, `:0.19.0` that one release for good, and `:main` every build of the main branch. A release is built for amd64 and arm64; `:main` for amd64 only.
+- `:latest` is the newest release, `:0.24.0` that one release for good, and `:main` every build of the main branch. A release is built for amd64 and arm64; `:main` for amd64 only.
 
 For the **TrueNAS card itself**, use `https://` and an API key **linked to a user** with the Read-Only Administrator role, not a full administrator's. Over https HexDeck speaks the current JSON-RPC API, which is what TrueNAS 25.04 and later expect; the old REST API is not called at all where the current one exists, because TrueNAS 25.10 counts every call to it in a deprecation alert on the NAS and TrueNAS 26 removes it. Behind a reverse proxy, the proxy has to pass WebSockets on.
 
@@ -217,8 +217,9 @@ Adapters that have not been confirmed against a live instance yet carry a *beta*
 
 ## What this fork changes
 
-Forked from nexdeck 0.15.0; upstream's 0.16.1 TrueNAS work is taken over. Item by
-item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.md).
+Forked from nexdeck 0.15.0; upstream's 0.16.1 TrueNAS work and twenty-three of the
+adapters upstream added up to its 0.30.0 are taken over. Item by item in
+[NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.md).
 
 ### Integrations added
 
@@ -237,10 +238,12 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/garage.svg" width="26" height="26" alt=""><br>**Garage**<br><sub>S3 cluster health,<br>nodes, buckets</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/readeck.svg" width="26" height="26" alt=""><br>**Readeck**<br><sub>Unread, latest bookmarks,<br>failed saves</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg" width="26" height="26" alt=""><br>**Node-RED**<br><sub>Flows running,<br>missing node types</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wikijs.svg" width="26" height="26" alt=""><br>**Wiki.js**<br><sub>Pages, updates,<br>changed last</sub> | | |
 
-The ten services here were confirmed against live instances on 2026-10-06 and carry no
-*beta* badge; the public address card asks a public service and has no instance to
-confirm. GitLab, Alertmanager and Cloudflare came after them and keep their *beta* badge until
-somebody has seen them answer an instance of their own. Every card they offer is in [docs/adapters.md](docs/adapters.md).
+The first ten services here were confirmed against live instances on 2026-10-06 and
+carry no *beta* badge; the public address card asks a public service and has no
+instance to confirm. Everything from GitLab on came after them: GitLab, Alertmanager and
+Cloudflare in 0.23.0, the twenty from Caddy to Wiki.js in 0.24.0. They keep their *beta*
+badge until somebody has seen them answer an instance of their own. Every card they
+offer is in [docs/adapters.md](docs/adapters.md).
 
 ### Integrations reworked
 
@@ -322,7 +325,7 @@ The frontend on `http://localhost:5176` proxies `/api` to the backend. Tests: `p
 
 ### Adding an adapter
 
-One file in `backend/app/adapters/`: declare the connection fields and the widgets, implement `test`, `fetch`, optionally `action`, and `demo`. Every widget maps onto one of thirty-one renderers, so no frontend code is needed. See [docs/adapters.md](docs/adapters.md).
+One file in `backend/app/adapters/`: declare the connection fields and the widgets, implement `test`, `fetch`, optionally `action`, and `demo`. Every widget maps onto one of thirty-five renderers, so no frontend code is needed. See [docs/adapters.md](docs/adapters.md).
 
 ## License
 
