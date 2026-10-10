@@ -8,7 +8,7 @@ and caches identical requests for a few seconds.
 Every adapter lives in one file under `backend/app/adapters/`. It declares
 its connection fields, its widgets, and how to fetch, act and fake data.
 The frontend never knows a service: every widget returns a `WidgetData`
-that one of thirty-one renderers draws.
+that one of thirty-five renderers draws.
 
 ## Adapters in 0.12.0
 
