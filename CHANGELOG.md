@@ -19,6 +19,21 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   daily note and takes a line into it, Real-Debrid shows the data used and the
   hoster limits. Mailpit, ReadMeABook, Real-Debrid, nexlore and nexsift are out
   of beta on upstream's confirmation.
+- **Twenty adapters this fork never changed are upstream's current files.**
+  They had stayed at the version first copied: Plex and Jellyfin now show a
+  series once in Recently added, at its newest episode, with how many are new;
+  PeaNUT, Nexview, Docker and the others carry upstream's smaller fixes.
+  Frigate is out of beta on upstream's confirmation.
+
+### Fixed
+
+- **An empty variable in the compose file stopped the server.** With
+  `HEXDECK_DEMO` left out of `.env`, the compose file handed over an empty
+  value, which is not a boolean, and HexDeck refused to start. An empty
+  variable now counts as not set.
+- **Gatus offered "In and out, mirrored"** for its count of endpoints up and
+  down, which is no traffic. A test now walks every card that offers the
+  drawing and checks it names both rows; the FRITZ!Box rows got their names.
 
 ## 0.24.0 (2026-10-10)
 

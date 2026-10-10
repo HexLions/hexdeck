@@ -207,7 +207,12 @@ Updated at every milestone.
   nexlore (today's daily note), nexpulse, nexsift, ReadMeABook, Real-Debrid
   (the data used and the hoster limits), rTorrent and Speedtest Tracker were
   replaced by upstream's newer files, since this fork had not changed them.
-  Their German, Italian and Spanish texts are upstream's.
+  Their German, Italian and Spanish texts are upstream's. Twenty more
+  adapters this fork had copied and never changed (AdGuard Home, Blocky,
+  Docker, Frigate, Gatus, Jellyfin, Jellystat, Nexview, PeaNUT, Pi-hole,
+  Plex, Portainer, Tdarr, Technitium and others) had stayed at that first
+  copy and are upstream's current files now, found by comparing each file
+  with every version upstream ever had.
 
   ⚠️ Eight of them are out of beta because **upstream** confirmed them
   against a live instance; the guard says so next to the list.

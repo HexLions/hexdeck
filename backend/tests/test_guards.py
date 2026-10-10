@@ -549,7 +549,7 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         "arcane", "dockhand", "freshrss", "imap", "linkding", "nexbeat", "nexcrate", "nextrmnl",
         "octoprint", "openmediavault", "patchmon", "rtorrent",
         # Taken over from nexdeck 0.31 to 0.36, confirmed there the same way.
-        "m3ueditor", "mailpit", "nexlore", "nexsift", "nginxignition", "readmeabook", "realdebrid", "reclaimerr",
+        "frigate", "m3ueditor", "mailpit", "nexlore", "nexsift", "nginxignition", "readmeabook", "realdebrid", "reclaimerr",
         # The ten this fork wrote itself, confirmed on 2026-10-06 against the
         # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
         # Kubernetes in their rack, and Minecraft, Steam, Shelly, NetBird,
