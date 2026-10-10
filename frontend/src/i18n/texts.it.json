@@ -2059,7 +2059,13 @@
     "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge e i plugin con una versione più recente, da quella installata all'ultima.",
     "The main bridge and every child bridge with its plugin and state, the ones down first.": "Il bridge principale e ogni child bridge con il suo plugin e il suo stato, prima quelli fermi.",
     "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Se Homebridge è in esecuzione, quanti child bridge sono attivi e quanti aggiornamenti attendono.",
-    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Se Homebridge è in esecuzione, lo stato di ogni child bridge e quali plugin hanno un aggiornamento."
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Se Homebridge è in esecuzione, lo stato di ogni child bridge e quali plugin hanno un aggiornamento.",
+    "An API key from Settings > Users, on pyLoad from 2026 on. Older versions take the user name and password instead.": "Una chiave API da Settings > Users, su pyLoad dal 2026 in poi. Le versioni precedenti vogliono invece nome utente e password.",
+    "Only for pyLoad from before API keys.": "Solo per pyLoad di prima delle chiavi API.",
+    "Show the failed links": "Mostra i link falliti",
+    "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "Il gestore di download pyLoad: la velocità, i download in corso con il loro avanzamento e i link falliti.",
+    "The download speed, how many downloads run and wait, and the free space.": "La velocità di download, quanti download sono in corso e in attesa, e lo spazio libero.",
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "I download in corso con avanzamento e tempo rimasto, poi i link falliti con il motivo dato da pyLoad."
   },
   "labels": {
     "Jobs": "Job",

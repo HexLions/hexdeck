@@ -2059,7 +2059,13 @@
     "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge y los plugins con una versión más nueva, de la instalada a la última.",
     "The main bridge and every child bridge with its plugin and state, the ones down first.": "El puente principal y cada puente hijo con su plugin y su estado, primero los caídos.",
     "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Si Homebridge está en marcha, cuántos puentes hijos funcionan y cuántas actualizaciones esperan.",
-    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Si Homebridge está en marcha, el estado de cada puente hijo y qué plugins tienen una actualización."
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Si Homebridge está en marcha, el estado de cada puente hijo y qué plugins tienen una actualización.",
+    "An API key from Settings > Users, on pyLoad from 2026 on. Older versions take the user name and password instead.": "Una clave de API de Settings > Users, en pyLoad desde 2026. Las versiones anteriores usan en su lugar usuario y contraseña.",
+    "Only for pyLoad from before API keys.": "Solo para pyLoad anterior a las claves de API.",
+    "Show the failed links": "Mostrar los enlaces fallidos",
+    "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "El gestor de descargas pyLoad: su velocidad, las descargas en curso con su progreso y los enlaces que fallaron.",
+    "The download speed, how many downloads run and wait, and the free space.": "La velocidad de descarga, cuántas descargas están en curso y en espera, y el espacio libre.",
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Las descargas en curso con su progreso y tiempo restante, y luego los enlaces fallidos con el motivo de pyLoad."
   },
   "labels": {
     "Private resources": "Recursos privados",

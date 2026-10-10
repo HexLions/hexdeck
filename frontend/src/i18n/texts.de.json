@@ -2059,7 +2059,13 @@
     "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge und die Plugins mit einer neueren Version, von der installierten bis zur neuesten.",
     "The main bridge and every child bridge with its plugin and state, the ones down first.": "Die Haupt-Bridge und jede Child-Bridge mit ihrem Plugin und Zustand, die ausgefallenen zuerst.",
     "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Ob Homebridge läuft, wie viele Child-Bridges laufen und wie viele Updates warten.",
-    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Ob Homebridge läuft, der Zustand jeder Child-Bridge und welche Plugins ein Update haben."
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Ob Homebridge läuft, der Zustand jeder Child-Bridge und welche Plugins ein Update haben.",
+    "An API key from Settings > Users, on pyLoad from 2026 on. Older versions take the user name and password instead.": "Ein API-Schlüssel aus Settings > Users, bei pyLoad ab 2026. Ältere Versionen nehmen stattdessen Benutzername und Passwort.",
+    "Only for pyLoad from before API keys.": "Nur für pyLoad aus der Zeit vor den API-Schlüsseln.",
+    "Show the failed links": "Die fehlgeschlagenen Links zeigen",
+    "The download manager pyLoad: its speed, the downloads running with their progress, and the links that failed.": "Der Download-Manager pyLoad: seine Geschwindigkeit, die laufenden Downloads mit ihrem Fortschritt und die fehlgeschlagenen Links.",
+    "The download speed, how many downloads run and wait, and the free space.": "Die Download-Geschwindigkeit, wie viele Downloads laufen und warten, und der freie Platz.",
+    "The downloads running with their progress and time left, then the links that failed with pyLoad's reason.": "Die laufenden Downloads mit Fortschritt und Restzeit, danach die fehlgeschlagenen Links mit pyLoads Grund."
   },
   "labels": {
     "Jobs": "Jobs",

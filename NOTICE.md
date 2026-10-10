@@ -307,6 +307,11 @@ Updated at every milestone.
   setup code, which is never read out. Checked against Homebridge 2.4.0
   with Homebridge UI 5.29.0 running locally under hb-service, with a child
   bridge running and stopped.
+- **pyLoad, by key or by password.** pyLoad's API took the user name and
+  password as basic auth until spring 2026, and since takes only API keys, so
+  the adapter sends whichever is configured. Checked against pyload-ng
+  0.5.0b3.dev101 running locally with a key, a download running and failed
+  links, and against 0.5.0b3.dev95 with basic auth.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
