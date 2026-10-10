@@ -280,6 +280,14 @@ Updated at every milestone.
   filter's description, since the schema leaves them open. Read from
   UptimeRobot's OpenAPI spec for API 3.0; the refusal of a made-up key was
   measured against its API.
+- **Jackett, through two doors.** The indexers come from the Torznab endpoint
+  with the API key; which of them fail, and why, comes from the admin API,
+  which only a session opens. The session is the login form's: the admin
+  password posted to the dashboard, or, when Jackett has none, the cookie it
+  hands out at the end of four redirects. It lives on a client of the
+  connection's own. A wrong key is answered with 200 and Torznab error 100,
+  so the body is read first. Checked against Jackett v0.24.2813 running
+  locally, with an admin password set and unset.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

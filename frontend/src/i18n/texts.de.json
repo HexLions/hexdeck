@@ -2036,7 +2036,14 @@
     "Open incidents": "Offene Vorfälle",
     "The incidents still going on, with the monitor, the reason and since when.": "Die noch laufenden Vorfälle, mit Monitor, Grund und seit wann.",
     "The read-only API key from Integrations > API in the dashboard. An account key works too, but it could also change monitors.": "Der schreibgeschützte API-Schlüssel aus Integrationen > API im Dashboard. Ein Kontoschlüssel geht auch, könnte aber Monitore ändern.",
-    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "Deine UptimeRobot-Monitore mit der Verfügbarkeit des letzten Tages, die ausgefallenen zuerst, und die offenen Vorfälle."
+    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "Deine UptimeRobot-Monitore mit der Verfügbarkeit des letzten Tages, die ausgefallenen zuerst, und die offenen Vorfälle.",
+    "Admin password": "Admin-Passwort",
+    "How many indexers are configured, how many of them private, and how many are failing.": "Wie viele Indexer eingerichtet sind, wie viele davon privat und wie viele fehlschlagen.",
+    "Only the failing ones": "Nur die fehlerhaften",
+    "Only to see which indexers fail and why: that lives behind Jackett's login, which the API key does not open. Empty works when Jackett has no admin password.": "Nur um zu sehen, welche Indexer fehlschlagen und warum: Das liegt hinter Jacketts Anmeldung, die der API-Schlüssel nicht öffnet. Leer geht, wenn Jackett kein Admin-Passwort hat.",
+    "The API key from the top right of Jackett's dashboard.": "Der API-Schlüssel oben rechts auf Jacketts Dashboard.",
+    "The configured indexers, the failing ones first with their reason.": "Die eingerichteten Indexer, die fehlerhaften zuerst mit ihrem Grund.",
+    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Die Indexer, die Jackett Sonarr, Radarr und den anderen liefert, und welche davon fehlschlagen und warum."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3136,6 +3143,7 @@
     "Spools in use": "Spulen in Gebrauch",
     "Layer": "Schicht",
     "Printed": "Gedruckt",
-    "Looks down": "Scheint ausgefallen"
+    "Looks down": "Scheint ausgefallen",
+    "Public": "Öffentlich"
   }
 }

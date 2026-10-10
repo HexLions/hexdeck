@@ -23,6 +23,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   they ended. ⚠️ Beta.
 - **UptimeRobot**: your monitors with the last day's uptime, the ones that are
   down first, and the incidents still open. ⚠️ Beta.
+- **Jackett**: the indexers it serves the *arr apps, and which of them are
+  failing and why. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

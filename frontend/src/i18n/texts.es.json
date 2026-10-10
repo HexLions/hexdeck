@@ -2036,7 +2036,14 @@
     "Open incidents": "Incidentes abiertos",
     "The incidents still going on, with the monitor, the reason and since when.": "Los incidentes aún en curso, con el monitor, el motivo y desde cuándo.",
     "The read-only API key from Integrations > API in the dashboard. An account key works too, but it could also change monitors.": "La clave de API de solo lectura de Integraciones > API en el panel. Una clave de cuenta también sirve, pero podría cambiar monitores.",
-    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "Tus monitores de UptimeRobot con la disponibilidad del último día, primero los caídos, y los incidentes aún abiertos."
+    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "Tus monitores de UptimeRobot con la disponibilidad del último día, primero los caídos, y los incidentes aún abiertos.",
+    "Admin password": "Contraseña de administración",
+    "How many indexers are configured, how many of them private, and how many are failing.": "Cuántos indexadores están configurados, cuántos privados y cuántos están fallando.",
+    "Only the failing ones": "Solo los que fallan",
+    "Only to see which indexers fail and why: that lives behind Jackett's login, which the API key does not open. Empty works when Jackett has no admin password.": "Solo para ver qué indexadores fallan y por qué: eso está tras el inicio de sesión de Jackett, que la clave de API no abre. Vacío sirve si Jackett no tiene contraseña de administración.",
+    "The API key from the top right of Jackett's dashboard.": "La clave de API de la parte superior derecha del panel de Jackett.",
+    "The configured indexers, the failing ones first with their reason.": "Los indexadores configurados, primero los que fallan con su motivo.",
+    "The indexers Jackett serves to Sonarr, Radarr and the rest, and which of them are failing and why.": "Los indexadores que Jackett ofrece a Sonarr, Radarr y los demás, y cuáles fallan y por qué."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3136,6 +3143,7 @@
     "Spools in use": "Bobinas en uso",
     "Layer": "Capa",
     "Printed": "Impreso",
-    "Looks down": "Parece caído"
+    "Looks down": "Parece caído",
+    "Public": "Públicos"
   }
 }

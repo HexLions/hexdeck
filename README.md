@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and seventy-two services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and seventy-three services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-172-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-173-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -207,7 +207,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 **Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, Traefik, Caddy, Nginx Proxy Manager, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, Shlink, Speedtest Tracker, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
-**Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, Seerr, Overseerr, Jellyseerr, Nexview, Maintainerr, Tdarr, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, Minecraft, AMP, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
+**Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, Jackett, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, Seerr, Overseerr, Jellyseerr, Nexview, Maintainerr, Tdarr, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, Minecraft, AMP, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
 
 **Home and files.** Home Assistant, Frigate, Reolink, evcc, Shelly, Immich, Nextcloud, Syncthing, Paperless-ngx, Firefly III, Mealie, Grocy, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, Moonraker (Klipper), nexlore.
 
@@ -230,7 +230,7 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmenux.svg" width="26" height="26" alt=""><br>**ProxMenux**<br><sub>Proxmox health checks,<br>disks, sensors, guests</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/netbird.svg" width="26" height="26" alt=""><br>**NetBird**<br><sub>Peers, expired logins,<br>setup keys</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitlab.svg" width="26" height="26" alt=""><br>**GitLab**<br><sub>Pipelines, merge requests,<br>open issues</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/alertmanager.svg" width="26" height="26" alt=""><br>**Alertmanager**<br><sub>Firing alerts, worst first,<br>silences</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg" width="26" height="26" alt=""><br>**Cloudflare**<br><sub>Tunnels, zones,<br>a day of traffic</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/caddy.svg" width="26" height="26" alt=""><br>**Caddy**<br><sub>Sites, what answers each,<br>upstream failures</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg" width="26" height="26" alt=""><br>**Memos**<br><sub>Latest memos, tags,<br>tasks still open</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mastodon.svg" width="26" height="26" alt=""><br>**Mastodon**<br><sub>Your server, your account,<br>notifications</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/spoolman.svg" width="26" height="26" alt=""><br>**Spoolman**<br><sub>Filament left per spool,<br>what runs out next</sub> |
-| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/klipper.svg" width="26" height="26" alt=""><br>**Moonraker**<br><sub>Klipper: the job, layer,<br>time left, history</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptimerobot.svg" width="26" height="26" alt=""><br>**UptimeRobot**<br><sub>Monitors, last day's uptime,<br>open incidents</sub> | |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/klipper.svg" width="26" height="26" alt=""><br>**Moonraker**<br><sub>Klipper: the job, layer,<br>time left, history</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptimerobot.svg" width="26" height="26" alt=""><br>**UptimeRobot**<br><sub>Monitors, last day's uptime,<br>open incidents</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg" width="26" height="26" alt=""><br>**Jackett**<br><sub>Indexers, which fail<br>and why</sub> |
 
 The ten services here were confirmed against live instances on 2026-10-06 and carry no
 *beta* badge; the public address card asks a public service and has no instance to
