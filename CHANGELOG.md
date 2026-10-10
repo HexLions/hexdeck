@@ -5,6 +5,21 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Actual Budget, M3U Editor, nginx ignition and Reclaimerr**, taken over
+  from nexdeck 0.36.0 with their tests. ⚠️ Actual Budget is beta.
+
+### Changed
+
+- **Mailpit, nexlore, nexpulse, nexsift, ReadMeABook, Real-Debrid, rTorrent
+  and Speedtest Tracker** are upstream's newer versions: nexlore shows today's
+  daily note and takes a line into it, Real-Debrid shows the data used and the
+  hoster limits. Mailpit, ReadMeABook, Real-Debrid, nexlore and nexsift are out
+  of beta on upstream's confirmation.
+
 ## 0.24.0 (2026-10-10)
 
 Twenty new integrations, each checked against the service itself wherever

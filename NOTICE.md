@@ -201,6 +201,21 @@ Updated at every milestone.
   independently: NetBird, Kubernetes, Minecraft, UrBackup, the public
   address, Elasticsearch and OpenWrt. This fork keeps its own, which are
   the ones its tests cover.
+- **Four more adapters and eight updates taken over from nexdeck 0.36.0.**
+  Actual Budget (through actual-http-api), M3U Editor, nginx ignition and
+  Reclaimerr came over as upstream has them, with their tests; Mailpit,
+  nexlore (today's daily note), nexpulse, nexsift, ReadMeABook, Real-Debrid
+  (the data used and the hoster limits), rTorrent and Speedtest Tracker were
+  replaced by upstream's newer files, since this fork had not changed them.
+  Their German, Italian and Spanish texts are upstream's.
+
+  ⚠️ Eight of them are out of beta because **upstream** confirmed them
+  against a live instance; the guard says so next to the list.
+
+  ⚠️ GitLab, Alertmanager and Cloudflare arrived upstream in 0.34.0 the same
+  week this fork wrote its own, independently and with different cards. This
+  fork keeps its own, which were checked against GitLab.com, a running
+  Alertmanager and Cloudflare's API, and which its tests cover.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which

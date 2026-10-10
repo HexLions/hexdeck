@@ -51,6 +51,7 @@ that one of thirty-five renderers draws.
 | Traefik | overview, routers | | none, or basic authentication |
 | Caddy | overview, sites, upstreams | | none, the admin API has no sign-in; a user name and password only behind a proxy with basic authentication. The admin API listens on localhost:2019 unless the Caddyfile says `admin 0.0.0.0:2019`, and it can rewrite the configuration, so keep it on an internal network; this adapter only sends GET. Upstreams report active requests and remembered failures, not availability |
 | Nginx Proxy Manager | proxy hosts, certificates, status | | an account; the token is fetched and kept |
+| nginx ignition | status, traffic, certificates | reload, start, stop; renew a certificate | an API token, which carries the permissions of the user who made it: one that may only read fills every card, one that may write adds the buttons, which are offered only where they are the thing to press. Traffic needs the statistics switched on in nginx ignition, 2.47.0 or newer |
 | OPNsense | system, gateways | | API key and secret |
 | pfSense | system, interfaces | | API key of the package pfSense-pkg-RESTAPI |
 | MikroTik | system, interfaces | | user with the read policy; needs RouterOS 7 with the REST service on |
@@ -89,9 +90,11 @@ that one of thirty-five renderers draws.
 | Kavita | library, recently added | | API key; the token is fetched once and kept |
 | Calibre-Web | library, recently added | | account; it has no API, so the address of its own table view is used |
 | Tdarr | queue, nodes | | optional API key |
+| M3U Editor | M3U Editor overview (streams the proxy carries, viewers, bandwidth, playlists, channels, guides; amber on a failed or old sync), active streams (channel, viewers by user name, running time, bandwidth; amber on a failover source or errors), playlists (channels, groups, last sync), guides (channels, last sync), recordings (running, planned, recent) | sync, on a playlist or a guide | an API token from API Tokens; the View ability is enough. The recordings need a DVR set up for the account. Custom, merged and alias playlists are listed but synced through their sources. Viewer addresses are never shown |
 | Unmanic | workers, queue | | none |
 | FileFlows | status, running | | optional access token |
 | Maintainerr | collections, status | | none |
+| Reclaimerr | Reclaimerr overview (titles marked for deletion, space they free, next automatic deletion, protections; amber on an old sync or scan or a failed task), leaving soon (the titles that go by themselves first, nearest deadline first, then the ones marked by hand, with size, days left and an open delete request of a user), tasks (schedule, last and next run) | postpone, keep, reset the timer, protect, on a title (a title marked by hand can only be protected); run now, on a task that neither deletes nor writes to Radarr and Sonarr | an rcl_ token from Settings > Integrations. Reading needs system:read, candidates:read, media:read, protections:read, tasks:read and events:read; the buttons need candidates:manage and tasks:run, and a card says which scope it misses. Sizes are known for whole movies and series only. What users vote for deletion is not in Reclaimerr's external API |
 | Jellystat | libraries, most watched | | API key |
 | Radarr, Sonarr, Lidarr, Readarr | queue, status, calendar | search missing | API key |
 | Prowlarr | indexers, status | | API key |
@@ -131,6 +134,7 @@ that one of thirty-five renderers draws.
 | Dawarich | distance, distance by month | | API key of the account; distances follow Dawarich's hourly calculation |
 | wger | weight, weigh-ins | | API key from the profile, sent as Token |
 | Firefly III | money, subscriptions, budgets | | personal access token from Profile > OAuth |
+| Actual Budget | this month (left to budget, budgeted, spent, overspent categories), accounts (balances, on and off budget), categories (spent of the budget, overspent first) | | through [actual-http-api](https://github.com/jhonderson/actual-http-api), a second container next to Actual, because Actual has no API of its own: its URL, its API_KEY and the budget's sync ID (Settings > Show advanced settings), and for an end-to-end encrypted budget its password. Reads only |
 | evcc | energy, charging | | none; the state is readable without a password |
 | BookOrbit | reading now, recently added, library | | user and password; BookOrbit has no API keys and allows five sign-ins a minute, so the token is kept |
 | Ghostfolio | portfolio, holdings | | security token of the account from Settings > Access; it is exchanged for a JWT that lasts 180 days |
@@ -153,7 +157,7 @@ that one of thirty-five renderers draws.
 | NeutArr | NeutArr overview, hunted apps | | the API key from NeutArr's User page, sent as a header; NeutArr is the continuation of Huntarr |
 | nexbeat | requests (waiting, running, failed, arrived this week), library (artists and albums in Lidarr or nexcrate), requests to approve (with covers) | approve, turn down | API token from nexbeat 1.2.0 or newer under Profile > API tokens; a read-only token fills every card, approving needs an administrator's token that may write. A user's token counts only that user's requests |
 | nexcrate | library (there, wanted, on its way, stuck, as a ring), downloads (progress and time left), stuck downloads (needing you first, with the buttons nexcrate offers), coming up, just arrived (posters and covers), why is it missing (nexcrate's reason per wanted title), storage, findings | try again, search again, remove and search again, clear, on a stuck download | paired from the connection sheet: nexdeck shows a code, the owner confirms it in nexcrate and the key arrives by itself; a key made in nexcrate's settings works too. Every card reads with "read"; the buttons need "operate" |
-| nexlore | nexlore overview, tasks, changed last | tick a task off, capture a line into the inbox | an API token from My account > Connections > API tokens, after the operator has switched API tokens on; Read fills the cards, Write also ticks off and captures |
+| nexlore | nexlore overview, tasks, changed last, daily note | tick a task off, capture a line into the inbox, add a line to the daily note | an API token from My account > Connections > API tokens, after the operator has switched API tokens on; Read fills the cards, Write also ticks off and captures; the daily note needs Write, because it is made from the space's template when it is missing |
 | nexsift | nexsift inbox, newest lines | | an API key from Settings > API keys, after switching on Allow API keys; it may only read numbers and titles, never the text of a message |
 | nextrmnl | status, sessions, history, connections | | read-only API key from nextrmnl 0.3.0 or newer, with API keys switched on |
 | OctoPrint | printer, print job | | application key from User Settings > Application Keys; its user needs the permission Status (groups Users or Read-only) |
@@ -165,7 +169,7 @@ that one of thirty-five renderers draws.
 | PatchMon | PatchMon overview, hosts, operating systems | | a key of usage type API with the scope host: get, from Settings > Integrations > Auto-Enrollment & API (a GetHomepage key is refused); the URL has to be one named in PatchMon's CORS_ORIGIN |
 | Qui | Qui overview, instances | | an API key, made under Settings > API keys; one key reads every qBittorrent behind Qui |
 | ReadMeABook | overview, downloading, latest requests | | API token (rmab_) of an administrator from Profile > API Tokens; a user's token is turned away from the admin figures the cards read; ReadMeABook 1.2.0 or newer |
-| Real-Debrid | Real-Debrid account (premium days, end, points, active torrents against the limit), torrents (progress and state), latest downloads | | the private API token from real-debrid.com/apitoken; Real-Debrid refuses many VPN and data centre addresses, and allows 250 requests a minute for all apps on an account together |
+| Real-Debrid | Real-Debrid account (premium days, end, points, active torrents against the limit), torrents (progress and state), latest downloads, data used (a bar for each of the last 7, 14 or 31 days, the total and the hoster most of it came from), hoster limits (each hoster with a limit, used against what is left, and when it resets) | | the private API token from real-debrid.com/apitoken; Real-Debrid refuses many VPN and data centre addresses, and allows 250 requests a minute for all apps on an account together |
 | rTorrent | queue, speed, torrents, rTorrent overview | pause, resume | the XML-RPC address (such as :8000/RPC2 of crazymax/rtorrent-rutorrent) or the address of ruTorrent, with the web server's user and password when one is set |
 | SNMP (switches and network devices) | device, ports, port traffic, findings, PoE | | SNMPv3 user with SHA and AES, read only; or an SNMPv2c community, which travels unencrypted. Any vendor, standard MIBs only (IF-MIB, EtherLike, ENTITY, POWER-ETHERNET, LLDP); never writes |
 | Tracearr | Tracearr overview, violations | | the public API key from Settings > API, which starts with trr_pub_ |
