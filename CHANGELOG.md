@@ -41,6 +41,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   failed today, and the tests before. ⚠️ Beta.
 - **ESPHome**: the devices of the dashboard, which are online, and which run
   firmware older than the dashboard's ESPHome. ⚠️ Beta.
+- **Owncast**: whether your stream is live and since when, and with the
+  admin password the viewers and what is being sent. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

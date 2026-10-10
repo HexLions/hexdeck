@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and eighty-one services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and eighty-two services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-181-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-182-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -211,7 +211,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 **Home and files.** Home Assistant, Homebridge, ESPHome, Frigate, Reolink, evcc, Shelly, Immich, Nextcloud, Syncthing, Paperless-ngx, Firefly III, Mealie, Grocy, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore.
 
-**Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Steam, RSS, Miniflux, Mastodon, Karakeep, Linkwarden, Memos, Trilium Notes, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
+**Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Owncast, Steam, RSS, Miniflux, Mastodon, Karakeep, Linkwarden, Memos, Trilium Notes, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
 
 Adapters that have not been confirmed against a live instance yet carry a *beta* badge in the interface. If one misbehaves, please open an issue with the service's version.
 
@@ -233,7 +233,7 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/klipper.svg" width="26" height="26" alt=""><br>**Moonraker**<br><sub>Klipper: the job, layer,<br>time left, history</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptimerobot.svg" width="26" height="26" alt=""><br>**UptimeRobot**<br><sub>Monitors, last day's uptime,<br>open incidents</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg" width="26" height="26" alt=""><br>**Jackett**<br><sub>Indexers, which fail<br>and why</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/slskd.svg" width="26" height="26" alt=""><br>**slskd**<br><sub>Soulseek: online, shares,<br>downloads</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ombi.svg" width="26" height="26" alt=""><br>**Ombi**<br><sub>Pending requests, latest,<br>open issues</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/homebridge.svg" width="26" height="26" alt=""><br>**Homebridge**<br><sub>Running, child bridges,<br>plugin updates</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pyload.svg" width="26" height="26" alt=""><br>**pyLoad**<br><sub>Speed, downloads,<br>failed links</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/trilium.svg" width="26" height="26" alt=""><br>**Trilium Notes**<br><sub>Counts, notes changed<br>last, a search</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/lubelogger.png" width="26" height="26" alt=""><br>**LubeLogger**<br><sub>Vehicles, maintenance<br>coming due</sub> |
-| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/myspeed.svg" width="26" height="26" alt=""><br>**MySpeed**<br><sub>Last speed test,<br>failures today</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/esphome.svg" width="26" height="26" alt=""><br>**ESPHome**<br><sub>Devices online,<br>firmware updates</sub> | |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/myspeed.svg" width="26" height="26" alt=""><br>**MySpeed**<br><sub>Last speed test,<br>failures today</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/esphome.svg" width="26" height="26" alt=""><br>**ESPHome**<br><sub>Devices online,<br>firmware updates</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/owncast.svg" width="26" height="26" alt=""><br>**Owncast**<br><sub>Live or not,<br>viewers</sub> |
 
 The ten services here were confirmed against live instances on 2026-10-06 and carry no
 *beta* badge; the public address card asks a public service and has no instance to

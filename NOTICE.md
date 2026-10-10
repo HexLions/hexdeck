@@ -332,6 +332,11 @@ Updated at every milestone.
   Device Builder keeps from the old built-in dashboard. Checked against
   Device Builder 1.23.0 with ESPHome 2026.9.1 running locally, with two
   configured devices, with and without a password.
+- **Owncast, public first.** Whether the stream is live comes from the public
+  status; the viewers and the stream details need the admin password, and the
+  broadcaster's address in that answer is never shown. Checked against
+  Owncast 0.3.0 running locally, live from a test pattern pushed over RTMP
+  and offline afterwards.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

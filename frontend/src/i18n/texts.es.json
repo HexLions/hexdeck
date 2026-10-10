@@ -2088,7 +2088,11 @@
     "How many devices are online and offline, and how many need a firmware update.": "Cuántos dispositivos están conectados y desconectados, y cuántos necesitan actualizar el firmware.",
     "Only the offline ones": "Solo los desconectados",
     "Only when the dashboard has a user name and password.": "Solo si el panel tiene usuario y contraseña.",
-    "The devices of ESPHome's dashboard: which are online and which run firmware older than the dashboard's ESPHome.": "Los dispositivos del panel de ESPHome: cuáles están conectados y cuáles tienen un firmware más antiguo que el ESPHome del panel."
+    "The devices of ESPHome's dashboard: which are online and which run firmware older than the dashboard's ESPHome.": "Los dispositivos del panel de ESPHome: cuáles están conectados y cuáles tienen un firmware más antiguo que el ESPHome del panel.",
+    "Only for the viewers and the stream details. Without it the card shows whether the stream is live.": "Solo para los espectadores y los detalles de la emisión. Sin ella, la tarjeta muestra si la emisión está en directo.",
+    "Stream": "Emisión",
+    "Whether the stream is live and since when, its title, the viewers and their peak, and the resolution and bitrate sent.": "Si la emisión está en directo y desde cuándo, su título, los espectadores y su pico, y la resolución y la tasa de bits enviadas.",
+    "Your Owncast stream: whether it is live and since when, its title, and with the admin password the viewers and what is being sent.": "Tu emisión de Owncast: si está en directo y desde cuándo, su título y, con la contraseña de administración, los espectadores y lo que se envía."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3200,6 +3204,11 @@
     "Attachments": "Adjuntos",
     "Revisions": "Revisiones",
     "Past due": "Vencidos",
-    "Vehicles": "Vehículos"
+    "Vehicles": "Vehículos",
+    "Last live": "Último directo",
+    "Live for": "En directo desde hace",
+    "Peak": "Pico",
+    "Sending": "Enviando",
+    "Title": "Título"
   }
 }

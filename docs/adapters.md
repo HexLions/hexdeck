@@ -184,6 +184,7 @@ that one of thirty-one renderers draws.
 | GitHub releases | releases | | none; sixty requests an hour per address |
 | Share prices | prices | | none |
 | Twitch | live | | client ID and secret of an application at dev.twitch.tv |
+| Owncast | stream | | none for whether the stream is live; the admin password, as basic auth with the user admin, for the viewers, the peak and what is being sent. Since 0.3 the viewers are no longer public |
 | Wake-on-LAN | wake | wake | none; a MAC address and a network that carries the broadcast |
 
 Adapters marked **beta** in the interface have not been confirmed against a
