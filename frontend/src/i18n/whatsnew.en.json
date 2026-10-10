@@ -828,6 +828,36 @@
       "small": [
         "The card settings name the basics in your language."
       ]
+    },
+    "0.24.0": {
+      "lead": "HexDeck 0.24.0: twenty new integrations, nearly all of them seen answering a real instance before they were written.",
+      "sections": [
+        {
+          "title": "Media and downloads",
+          "body": "Jackett with the indexers that fail and why, slskd on the Soulseek network, Ombi's requests waiting for approval, pyLoad's downloads and failed links, and whether your Owncast stream is live.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "Home and workshop",
+          "body": "Homebridge and its child bridges, ESPHome devices online and behind on firmware, Node-RED flows held back by a missing node type, the Klipper printer through Moonraker, Spoolman's filament and LubeLogger's maintenance coming due.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "Servers and network",
+          "body": "Caddy's sites and failing upstreams, the Garage S3 cluster, UptimeRobot's monitors and incidents, and MySpeed's last test against the speed you pay for.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "Notes and reading",
+          "body": "Memos with open tasks, Trilium Notes, Wiki.js, the Readeck reading list, and your Mastodon server, account and notifications.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The twenty new integrations carry the beta badge until they have been seen on more boards than one.",
+        "Secrets that come back in answers, such as HomeKit setup codes or monitor passwords, are never shown."
+      ]
     }
   }
 }
