@@ -2092,7 +2092,16 @@
     "Only for the viewers and the stream details. Without it the card shows whether the stream is live.": "Nur für die Zuschauer und die Stream-Details. Ohne zeigt die Karte, ob der Stream live ist.",
     "Stream": "Stream",
     "Whether the stream is live and since when, its title, the viewers and their peak, and the resolution and bitrate sent.": "Ob der Stream live ist und seit wann, sein Titel, die Zuschauer und ihr Höchststand, und die gesendete Auflösung und Bitrate.",
-    "Your Owncast stream: whether it is live and since when, its title, and with the admin password the viewers and what is being sent.": "Dein Owncast-Stream: ob er live ist und seit wann, sein Titel und mit dem Admin-Passwort die Zuschauer und was gesendet wird."
+    "Your Owncast stream: whether it is live and since when, its title, and with the admin password the viewers and what is being sent.": "Dein Owncast-Stream: ob er live ist und seit wann, sein Titel und mit dem Admin-Passwort die Zuschauer und was gesendet wird.",
+    "Admin API URL": "URL der Admin-API",
+    "Admin token": "Admin-Token",
+    "Buckets": "Buckets",
+    "Every node with its zone, capacity and free space, the ones down first.": "Jeder Knoten mit Zone, Kapazität und freiem Platz, die ausgefallenen zuerst.",
+    "The Garage S3 cluster: its health, the nodes up and their free space, and each bucket's objects and size.": "Der Garage-S3-Cluster: sein Zustand, die laufenden Knoten und ihr freier Platz, und Objekte und Größe jedes Buckets.",
+    "The admin API, port 3903 by default, not the S3 port.": "Die Admin-API, standardmäßig Port 3903, nicht der S3-Port.",
+    "The buckets with their objects and size, the biggest first, against their quota when one is set.": "Die Buckets mit Objekten und Größe, die größten zuerst, gemessen an ihrer Quote, wenn eine gesetzt ist.",
+    "The cluster's health, the storage nodes up, the objects stored and the space left.": "Der Zustand des Clusters, die laufenden Speicherknoten, die gespeicherten Objekte und der verbleibende Platz.",
+    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token aus garage.toml oder ein mit garage admin-token create erstelltes Token."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3209,6 +3218,8 @@
     "Live for": "Live seit",
     "Peak": "Höchststand",
     "Sending": "Gesendet",
-    "Title": "Titel"
+    "Title": "Titel",
+    "Nodes up": "Knoten aktiv",
+    "Objects": "Objekte"
   }
 }

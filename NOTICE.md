@@ -337,6 +337,11 @@ Updated at every milestone.
   broadcaster's address in that answer is never shown. Checked against
   Owncast 0.3.0 running locally, live from a test pattern pushed over RTMP
   and offline afterwards.
+- **Garage through its admin API.** The health, nodes, statistics and buckets
+  come from the admin API v2 as its OpenAPI spec describes it; the access keys
+  listed with each bucket are never shown. Checked against Garage 2.4.1
+  running locally as one node, downloaded from Garage's own site, which
+  publishes no checksums.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

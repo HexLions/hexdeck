@@ -43,6 +43,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   firmware older than the dashboard's ESPHome. ⚠️ Beta.
 - **Owncast**: whether your stream is live and since when, and with the
   admin password the viewers and what is being sent. ⚠️ Beta.
+- **Garage**: the S3 cluster's health, its nodes and their free space, and
+  each bucket's objects and size. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

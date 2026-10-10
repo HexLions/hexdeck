@@ -28,6 +28,7 @@ that one of thirty-one renderers draws.
 | Unraid | system, array, guests | | API key (GraphQL) |
 | Nextcloud | overview, active users, free space | | serverinfo token, or an administrator account |
 | TrueNAS | system, pools, alerts | | API key; use https, where a Read-Only Administrator is enough; over http only a TrueNAS before 25.04 is read, with a full administrator's key, because later versions deprecate the REST API that http is limited to |
+| Garage | cluster, nodes, buckets | | an admin token as Bearer, on the admin API port (3903), not the S3 port; `admin_token` from garage.toml or a token from `garage admin-token create`. Objects, bytes and free space need Garage 2.4; older 2.x shows the health alone |
 | Proxmox Backup Server | datastores, host, tasks | | API token; DatastoreAudit on /datastore and Sys.Audit on /system |
 | Kopia | snapshots, backups | | the server's user and password; the CSRF token of its start page is fetched and kept |
 | Duplicati | backup jobs, backups | | the password of the web interface; Duplicati 2.1 or newer |

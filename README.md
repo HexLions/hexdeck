@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and eighty-two services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and eighty-three services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-182-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-183-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -203,7 +203,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 ## The services it speaks to
 
-**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
+**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
 **Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, Traefik, Caddy, Nginx Proxy Manager, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
@@ -234,6 +234,7 @@ item in [NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.m
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/slskd.svg" width="26" height="26" alt=""><br>**slskd**<br><sub>Soulseek: online, shares,<br>downloads</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ombi.svg" width="26" height="26" alt=""><br>**Ombi**<br><sub>Pending requests, latest,<br>open issues</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/homebridge.svg" width="26" height="26" alt=""><br>**Homebridge**<br><sub>Running, child bridges,<br>plugin updates</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pyload.svg" width="26" height="26" alt=""><br>**pyLoad**<br><sub>Speed, downloads,<br>failed links</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/trilium.svg" width="26" height="26" alt=""><br>**Trilium Notes**<br><sub>Counts, notes changed<br>last, a search</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/lubelogger.png" width="26" height="26" alt=""><br>**LubeLogger**<br><sub>Vehicles, maintenance<br>coming due</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/myspeed.svg" width="26" height="26" alt=""><br>**MySpeed**<br><sub>Last speed test,<br>failures today</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/esphome.svg" width="26" height="26" alt=""><br>**ESPHome**<br><sub>Devices online,<br>firmware updates</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/owncast.svg" width="26" height="26" alt=""><br>**Owncast**<br><sub>Live or not,<br>viewers</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/garage.svg" width="26" height="26" alt=""><br>**Garage**<br><sub>S3 cluster health,<br>nodes, buckets</sub> | | |
 
 The ten services here were confirmed against live instances on 2026-10-06 and carry no
 *beta* badge; the public address card asks a public service and has no instance to

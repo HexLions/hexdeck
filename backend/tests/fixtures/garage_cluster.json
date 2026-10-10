@@ -1,0 +1,115 @@
+{
+    "health": {
+        "status": "healthy",
+        "knownNodes": 1,
+        "connectedNodes": 1,
+        "storageNodes": 1,
+        "storageNodesUp": 1,
+        "partitions": 256,
+        "partitionsQuorum": 256,
+        "partitionsAllOk": 256
+    },
+    "status": {
+        "layoutVersion": 1,
+        "nodes": [
+            {
+                "id": "300c96beda12a6e42686e3db9414a4b00ba3b510da295d7cc64a494fdc3763ea",
+                "garageVersion": "v2.4.1",
+                "addr": "127.0.0.1:3901",
+                "hostname": "garage-1",
+                "isUp": true,
+                "lastSeenSecsAgo": null,
+                "role": {
+                    "zone": "dc1",
+                    "tags": [],
+                    "capacity": 1000000000
+                },
+                "draining": false,
+                "dataPartition": {
+                    "available": 24717955072,
+                    "total": 33501757440
+                },
+                "metadataPartition": {
+                    "available": 24717955072,
+                    "total": 33501757440
+                }
+            }
+        ]
+    },
+    "statistics": {
+        "freeform": "Storage nodes:\n  ID                Hostname       Zone  Capacity   Part.  DataAvail                  MetaAvail\n  300c96beda12a6e4  garage-1  dc1   953.7 MiB  256    23.0 GiB/31.2 GiB (73.8%)  23.0 GiB/31.2 GiB (73.8%)\n\nNumber of buckets:        2\nTotal number of objects:  3\nTotal size of objects:    8.6 MiB\n\nEstimated available storage space cluster-wide (might be lower in practice):\n  data: 23.0 GiB\n  metadata: 23.0 GiB\n",
+        "dataAvail": 24717955072,
+        "metadataAvail": 24717955072,
+        "incompleteAvailInfo": false,
+        "bucketCount": 2,
+        "totalObjectCount": 3,
+        "totalObjectBytes": 9000000
+    },
+    "buckets": [
+        {
+            "id": "26ef8dadf9fe9ee7d5f4a9fea30f9853ba2339c5b926955b7614cec775b6dd88",
+            "created": "2026-10-10T14:06:30.532Z",
+            "globalAliases": [
+                "photos"
+            ],
+            "localAliases": []
+        },
+        {
+            "id": "cde782e33a6498d29a7bb3d61dfcf2540ab1bbb825d1323642572d4a0cffa185",
+            "created": "2026-10-10T14:06:30.576Z",
+            "globalAliases": [
+                "backups"
+            ],
+            "localAliases": []
+        }
+    ],
+    "bucket_photos": {
+        "id": "26ef8dadf9fe9ee7d5f4a9fea30f9853ba2339c5b926955b7614cec775b6dd88",
+        "created": "2026-10-10T14:06:30.532Z",
+        "globalAliases": [
+            "photos"
+        ],
+        "websiteAccess": false,
+        "keys": [
+            {
+                "accessKeyId": "GK54cc9d24297fc61d66dd3c86",
+                "name": "hexdeck-key",
+                "permissions": {
+                    "read": true,
+                    "write": true,
+                    "owner": false
+                },
+                "bucketLocalAliases": []
+            }
+        ],
+        "objects": 3,
+        "bytes": 9000000,
+        "unfinishedUploads": 0,
+        "unfinishedMultipartUploads": 0,
+        "unfinishedMultipartUploadParts": 0,
+        "unfinishedMultipartUploadBytes": 0,
+        "quotas": {
+            "maxSize": null,
+            "maxObjects": null
+        }
+    },
+    "bucket_backups": {
+        "id": "cde782e33a6498d29a7bb3d61dfcf2540ab1bbb825d1323642572d4a0cffa185",
+        "created": "2026-10-10T14:06:30.576Z",
+        "globalAliases": [
+            "backups"
+        ],
+        "websiteAccess": false,
+        "keys": [],
+        "objects": 0,
+        "bytes": 0,
+        "unfinishedUploads": 0,
+        "unfinishedMultipartUploads": 0,
+        "unfinishedMultipartUploadParts": 0,
+        "unfinishedMultipartUploadBytes": 0,
+        "quotas": {
+            "maxSize": null,
+            "maxObjects": null
+        }
+    }
+}

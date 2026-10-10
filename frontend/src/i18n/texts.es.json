@@ -2092,7 +2092,16 @@
     "Only for the viewers and the stream details. Without it the card shows whether the stream is live.": "Solo para los espectadores y los detalles de la emisión. Sin ella, la tarjeta muestra si la emisión está en directo.",
     "Stream": "Emisión",
     "Whether the stream is live and since when, its title, the viewers and their peak, and the resolution and bitrate sent.": "Si la emisión está en directo y desde cuándo, su título, los espectadores y su pico, y la resolución y la tasa de bits enviadas.",
-    "Your Owncast stream: whether it is live and since when, its title, and with the admin password the viewers and what is being sent.": "Tu emisión de Owncast: si está en directo y desde cuándo, su título y, con la contraseña de administración, los espectadores y lo que se envía."
+    "Your Owncast stream: whether it is live and since when, its title, and with the admin password the viewers and what is being sent.": "Tu emisión de Owncast: si está en directo y desde cuándo, su título y, con la contraseña de administración, los espectadores y lo que se envía.",
+    "Admin API URL": "URL de la API de administración",
+    "Admin token": "Token de administración",
+    "Buckets": "Buckets",
+    "Every node with its zone, capacity and free space, the ones down first.": "Cada nodo con su zona, capacidad y espacio libre, primero los caídos.",
+    "The Garage S3 cluster: its health, the nodes up and their free space, and each bucket's objects and size.": "El clúster S3 de Garage: su salud, los nodos activos y su espacio libre, y los objetos y el tamaño de cada bucket.",
+    "The admin API, port 3903 by default, not the S3 port.": "La API de administración, puerto 3903 por defecto, no el puerto S3.",
+    "The buckets with their objects and size, the biggest first, against their quota when one is set.": "Los buckets con sus objetos y tamaño, primero los más grandes, frente a su cuota cuando la tienen.",
+    "The cluster's health, the storage nodes up, the objects stored and the space left.": "La salud del clúster, los nodos de almacenamiento activos, los objetos guardados y el espacio que queda.",
+    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token de garage.toml, o un token creado con garage admin-token create."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3209,6 +3218,8 @@
     "Live for": "En directo desde hace",
     "Peak": "Pico",
     "Sending": "Enviando",
-    "Title": "Título"
+    "Title": "Título",
+    "Nodes up": "Nodos activos",
+    "Objects": "Objetos"
   }
 }
