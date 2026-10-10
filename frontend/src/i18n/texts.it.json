@@ -2101,7 +2101,13 @@
     "The admin API, port 3903 by default, not the S3 port.": "L'API di amministrazione, porta 3903 di default, non la porta S3.",
     "The buckets with their objects and size, the biggest first, against their quota when one is set.": "I bucket con oggetti e dimensione, prima i più grandi, rispetto alla quota quando è impostata.",
     "The cluster's health, the storage nodes up, the objects stored and the space left.": "Lo stato del cluster, i nodi di storage attivi, gli oggetti salvati e lo spazio rimasto.",
-    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token da garage.toml, o un token creato con garage admin-token create."
+    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token da garage.toml, o un token creato con garage admin-token create.",
+    "A token from Settings > API Tokens in Readeck; the role Bookmarks: Read Only is enough.": "Un token da Settings > API Tokens di Readeck; basta il ruolo Bookmarks: Read Only.",
+    "How many bookmarks wait unread, how many there are, archived, marked, and failed to save.": "Quanti segnalibri aspettano di essere letti, quanti sono in tutto, archiviati, contrassegnati e non salvati.",
+    "Marked": "Contrassegnati",
+    "Still to read": "Ancora da leggere",
+    "The latest bookmarks still to read, or the marked ones, with their site and progress, linking to each.": "Gli ultimi segnalibri ancora da leggere, o quelli contrassegnati, con sito e avanzamento, con un link a ciascuno.",
+    "Your Readeck reading list: how much is left unread, the latest bookmarks, and the ones that failed to save.": "La tua lista di lettura di Readeck: quanto resta da leggere, gli ultimi segnalibri e quelli non salvati."
   },
   "labels": {
     "Jobs": "Job",
@@ -3220,6 +3226,7 @@
     "Sending": "Invio",
     "Title": "Titolo",
     "Nodes up": "Nodi attivi",
-    "Objects": "Oggetti"
+    "Objects": "Oggetti",
+    "Failed to save": "Non salvati"
   }
 }

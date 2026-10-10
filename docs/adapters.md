@@ -181,6 +181,7 @@ that one of thirty-one renderers draws.
 | Mastodon | server, account, notifications | | none for the server card, whose answers are public; a user token with read:accounts and read:notifications for the others, from Preferences > Development > New application. This week's posts and logins are the week in progress; a server can switch that activity off |
 | Karakeep | recent bookmarks, reading list | | API key from Settings > API Keys |
 | Linkwarden | recent links, links | | access token from Settings > Access Tokens |
+| Readeck | overview, bookmarks | | an API token from Settings > API Tokens as Bearer; the role Bookmarks: Read Only is enough. Each count is the `Total-Count` header of a filtered list of one |
 | YouTube | videos, from your subscriptions | | none for the channel feeds; a YouTube Data API key for the subscriptions card, whose account must keep its subscription list public |
 | GitHub releases | releases | | none; sixty requests an hour per address |
 | Share prices | prices | | none |

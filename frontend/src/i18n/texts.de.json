@@ -2101,7 +2101,13 @@
     "The admin API, port 3903 by default, not the S3 port.": "Die Admin-API, standardmäßig Port 3903, nicht der S3-Port.",
     "The buckets with their objects and size, the biggest first, against their quota when one is set.": "Die Buckets mit Objekten und Größe, die größten zuerst, gemessen an ihrer Quote, wenn eine gesetzt ist.",
     "The cluster's health, the storage nodes up, the objects stored and the space left.": "Der Zustand des Clusters, die laufenden Speicherknoten, die gespeicherten Objekte und der verbleibende Platz.",
-    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token aus garage.toml oder ein mit garage admin-token create erstelltes Token."
+    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token aus garage.toml oder ein mit garage admin-token create erstelltes Token.",
+    "A token from Settings > API Tokens in Readeck; the role Bookmarks: Read Only is enough.": "Ein Token aus Settings > API Tokens in Readeck; die Rolle Bookmarks: Read Only genügt.",
+    "How many bookmarks wait unread, how many there are, archived, marked, and failed to save.": "Wie viele Lesezeichen ungelesen warten, wie viele es gibt, archiviert, markiert und nicht gespeichert.",
+    "Marked": "Markiert",
+    "Still to read": "Noch zu lesen",
+    "The latest bookmarks still to read, or the marked ones, with their site and progress, linking to each.": "Die neuesten noch zu lesenden oder die markierten Lesezeichen, mit Website und Fortschritt, mit Link zu jedem.",
+    "Your Readeck reading list: how much is left unread, the latest bookmarks, and the ones that failed to save.": "Deine Readeck-Leseliste: wie viel ungelesen ist, die neuesten Lesezeichen und die nicht gespeicherten."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3220,6 +3226,7 @@
     "Sending": "Gesendet",
     "Title": "Titel",
     "Nodes up": "Knoten aktiv",
-    "Objects": "Objekte"
+    "Objects": "Objekte",
+    "Failed to save": "Nicht gespeichert"
   }
 }

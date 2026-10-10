@@ -342,6 +342,10 @@ Updated at every milestone.
   listed with each bucket are never shown. Checked against Garage 2.4.1
   running locally as one node, downloaded from Garage's own site, which
   publishes no checksums.
+- **Readeck, counted by its headers.** The counts are the `Total-Count`
+  header of filtered lists of one bookmark, and the lists follow the filters
+  of Readeck's OpenAPI spec. Checked against Readeck 0.23.4 running locally,
+  with four bookmarks, two of them failing to load.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

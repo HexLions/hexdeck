@@ -1,0 +1,161 @@
+[
+    {
+        "id": "FAy6NfiBDbUcUettfSSdvY",
+        "href": "http://127.0.0.1:8092/api/bookmarks/FAy6NfiBDbUcUettfSSdvY",
+        "created": "2026-10-10T14:10:16.872190641Z",
+        "updated": "2026-10-10T14:10:17.206983725Z",
+        "state": 0,
+        "loaded": true,
+        "url": "https://en.wikipedia.org/wiki/Homelab",
+        "title": "",
+        "site_name": "en.wikipedia.org",
+        "site": "en.wikipedia.org",
+        "authors": [],
+        "lang": "",
+        "text_direction": "",
+        "document_type": "",
+        "type": "article",
+        "has_article": false,
+        "description": "",
+        "note": "",
+        "is_deleted": false,
+        "is_marked": false,
+        "is_archived": false,
+        "labels": [],
+        "read_progress": 0,
+        "resources": {
+            "log": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/FAy6NfiBDbUcUettfSSdvY/x/log"
+            },
+            "props": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/FAy6NfiBDbUcUettfSSdvY/x/props.json"
+            }
+        }
+    },
+    {
+        "id": "D3Bz7JEd91vSKBG4KdaWeH",
+        "href": "http://127.0.0.1:8092/api/bookmarks/D3Bz7JEd91vSKBG4KdaWeH",
+        "created": "2026-10-10T14:10:16.878190506Z",
+        "updated": "2026-10-10T14:10:44.216940529Z",
+        "state": 0,
+        "loaded": true,
+        "url": "https://blog.codinghorror.com/the-best-code-is-no-code-at-all/",
+        "title": "The Best Code is No Code At All",
+        "site_name": "Coding Horror",
+        "site": "blog.codinghorror.com",
+        "published": "2007-05-30T12:00:00Z",
+        "authors": [
+            "Jeff Atwood"
+        ],
+        "lang": "en",
+        "text_direction": "",
+        "document_type": "article",
+        "type": "article",
+        "has_article": true,
+        "description": "Rich Skrenta writes that code is our enemy. Code is bad. It rots. It requires periodic maintenance. It has bugs that need to be found. New features mean old code has to be adapted. The more code you have, the more places there are for bugs to hide. The longer checkouts or compiles take. The longer it takes a new...",
+        "note": "",
+        "is_deleted": false,
+        "is_marked": false,
+        "is_archived": false,
+        "labels": [],
+        "read_progress": 100,
+        "resources": {
+            "article": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/D3Bz7JEd91vSKBG4KdaWeH/article"
+            },
+            "icon": {
+                "src": "http://127.0.0.1:8092/bm/D3/D3Bz7JEd91vSKBG4KdaWeH/img/icon.png",
+                "width": 48,
+                "height": 48
+            },
+            "image": {
+                "src": "http://127.0.0.1:8092/bm/D3/D3Bz7JEd91vSKBG4KdaWeH/img/image.jpeg",
+                "width": 440,
+                "height": 480
+            },
+            "log": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/D3Bz7JEd91vSKBG4KdaWeH/x/log"
+            },
+            "props": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/D3Bz7JEd91vSKBG4KdaWeH/x/props.json"
+            },
+            "thumbnail": {
+                "src": "http://127.0.0.1:8092/bm/D3/D3Bz7JEd91vSKBG4KdaWeH/img/thumbnail.jpeg",
+                "width": 380,
+                "height": 414
+            }
+        },
+        "word_count": 728,
+        "reading_time": 3
+    },
+    {
+        "id": "VALPADjii5gWUBvrxDh57a",
+        "href": "http://127.0.0.1:8092/api/bookmarks/VALPADjii5gWUBvrxDh57a",
+        "created": "2026-10-10T14:10:16.883997857Z",
+        "updated": "2026-10-10T14:10:44.22247044Z",
+        "state": 0,
+        "loaded": true,
+        "url": "https://example.com/",
+        "title": "Example Domain",
+        "site_name": "example.com",
+        "site": "example.com",
+        "authors": [],
+        "lang": "en",
+        "text_direction": "",
+        "document_type": "article",
+        "type": "article",
+        "has_article": true,
+        "description": "",
+        "note": "",
+        "is_deleted": false,
+        "is_marked": true,
+        "is_archived": true,
+        "labels": [],
+        "read_progress": 0,
+        "resources": {
+            "article": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/VALPADjii5gWUBvrxDh57a/article"
+            },
+            "log": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/VALPADjii5gWUBvrxDh57a/x/log"
+            },
+            "props": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/VALPADjii5gWUBvrxDh57a/x/props.json"
+            }
+        },
+        "word_count": 25
+    },
+    {
+        "id": "BYAc66Pq8jij2NAntRPEBJ",
+        "href": "http://127.0.0.1:8092/api/bookmarks/BYAc66Pq8jij2NAntRPEBJ",
+        "created": "2026-10-10T14:10:16.89201959Z",
+        "updated": "2026-10-10T14:10:17.74467549Z",
+        "state": 0,
+        "loaded": true,
+        "url": "https://httpbin.org/status/404",
+        "title": "",
+        "site_name": "httpbin.org",
+        "site": "httpbin.org",
+        "authors": [],
+        "lang": "",
+        "text_direction": "",
+        "document_type": "",
+        "type": "article",
+        "has_article": false,
+        "description": "",
+        "note": "",
+        "is_deleted": false,
+        "is_marked": false,
+        "is_archived": false,
+        "labels": [],
+        "read_progress": 0,
+        "resources": {
+            "log": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/BYAc66Pq8jij2NAntRPEBJ/x/log"
+            },
+            "props": {
+                "src": "http://127.0.0.1:8092/api/bookmarks/BYAc66Pq8jij2NAntRPEBJ/x/props.json"
+            }
+        }
+    }
+]

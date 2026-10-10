@@ -2101,7 +2101,13 @@
     "The admin API, port 3903 by default, not the S3 port.": "La API de administración, puerto 3903 por defecto, no el puerto S3.",
     "The buckets with their objects and size, the biggest first, against their quota when one is set.": "Los buckets con sus objetos y tamaño, primero los más grandes, frente a su cuota cuando la tienen.",
     "The cluster's health, the storage nodes up, the objects stored and the space left.": "La salud del clúster, los nodos de almacenamiento activos, los objetos guardados y el espacio que queda.",
-    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token de garage.toml, o un token creado con garage admin-token create."
+    "admin_token from garage.toml, or a token made with garage admin-token create.": "admin_token de garage.toml, o un token creado con garage admin-token create.",
+    "A token from Settings > API Tokens in Readeck; the role Bookmarks: Read Only is enough.": "Un token de Settings > API Tokens en Readeck; basta con el rol Bookmarks: Read Only.",
+    "How many bookmarks wait unread, how many there are, archived, marked, and failed to save.": "Cuántos marcadores esperan sin leer, cuántos hay, archivados, marcados y sin poder guardarse.",
+    "Marked": "Marcados",
+    "Still to read": "Por leer",
+    "The latest bookmarks still to read, or the marked ones, with their site and progress, linking to each.": "Los últimos marcadores por leer, o los marcados, con su sitio y progreso, con enlace a cada uno.",
+    "Your Readeck reading list: how much is left unread, the latest bookmarks, and the ones that failed to save.": "Tu lista de lectura de Readeck: cuánto queda sin leer, los últimos marcadores y los que no se pudieron guardar."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3220,6 +3226,7 @@
     "Sending": "Enviando",
     "Title": "Título",
     "Nodes up": "Nodos activos",
-    "Objects": "Objetos"
+    "Objects": "Objetos",
+    "Failed to save": "Sin guardar"
   }
 }
