@@ -300,6 +300,13 @@ Updated at every milestone.
   user's account. The request count answers without a key, so the connection
   test asks the issue count. Checked against Ombi 4.53.10 running locally,
   with requests from the admin and a plain user and one denied.
+- **Homebridge through its UI's login.** The Homebridge UI has no API keys,
+  so the adapter logs in as a UI user and keeps the token for the
+  connection, logging in again once when it is refused; two-factor users are
+  told to use a separate user. A child bridge's answer carries its HomeKit
+  setup code, which is never read out. Checked against Homebridge 2.4.0
+  with Homebridge UI 5.29.0 running locally under hb-service, with a child
+  bridge running and stopped.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

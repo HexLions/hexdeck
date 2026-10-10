@@ -101,6 +101,7 @@ that one of thirty-one renderers draws.
 | Sportarr | upcoming, missing events, events | | API key from Settings > General > Security |
 | Tube Archivist | download queue, latest videos, video archive | start downloads | API token from Settings > Application, sent as Token |
 | Home Assistant | entity, entity list | turn on/off, scenes, scripts, covers, locks | long-lived token; live over WebSocket |
+| Homebridge | status, bridges, updates | | a user of the Homebridge UI without two-factor login (the UI has no API keys), or nothing when its login is off. The token is kept for the connection. Whether Homebridge runs is known only when the UI runs it under hb-service, as in the official images. The child bridges' HomeKit setup codes are never read out |
 | Uptime Kuma | monitors, summary | | API key (metrics endpoint) |
 | Healthchecks | checks, checks up | | API key from the project settings; the read-only one is enough, and healthchecks.io works too |
 | UptimeRobot | overview, monitors, open incidents | | the read-only API key from Integrations > API, sent as Bearer to API v3; an account key would also be able to change monitors. The free plan allows ten requests a minute for the whole account. A monitor's HTTP password, headers and key are never read |

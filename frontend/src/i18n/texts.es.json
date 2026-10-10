@@ -2053,7 +2053,13 @@
     "Ombi's requests for films, series and music: what waits for approval, the latest requests, and open issues.": "Las solicitudes de películas, series y música en Ombi: lo que espera aprobación, las últimas solicitudes y las incidencias abiertas.",
     "Only the pending ones": "Solo las pendientes",
     "The API key under Settings > Configuration > General in Ombi.": "La clave de API en Settings > Configuration > General de Ombi.",
-    "The latest requests of every kind, who asked and where each stands.": "Las últimas solicitudes de todo tipo, quién las hizo y en qué punto está cada una."
+    "The latest requests of every kind, who asked and where each stands.": "Las últimas solicitudes de todo tipo, quién las hizo y en qué punto está cada una.",
+    "A user of the Homebridge UI without two-factor login. Empty when the UI's login is turned off.": "Un usuario de la interfaz de Homebridge sin inicio de sesión en dos pasos. Vacío si el inicio de sesión de la interfaz está desactivado.",
+    "Bridges": "Puentes",
+    "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge y los plugins con una versión más nueva, de la instalada a la última.",
+    "The main bridge and every child bridge with its plugin and state, the ones down first.": "El puente principal y cada puente hijo con su plugin y su estado, primero los caídos.",
+    "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Si Homebridge está en marcha, cuántos puentes hijos funcionan y cuántas actualizaciones esperan.",
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Si Homebridge está en marcha, el estado de cada puente hijo y qué plugins tienen una actualización."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3157,6 +3163,10 @@
     "Public": "Públicos",
     "Shared files": "Archivos compartidos",
     "Soulseek": "Soulseek",
-    "Uploading": "Subiendo"
+    "Uploading": "Subiendo",
+    "Child bridges": "Puentes hijos",
+    "Homebridge": "Homebridge",
+    "homebridge": "homebridge",
+    "main bridge": "puente principal"
   }
 }

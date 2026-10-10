@@ -2053,7 +2053,13 @@
     "Ombi's requests for films, series and music: what waits for approval, the latest requests, and open issues.": "Le richieste di film, serie e musica in Ombi: cosa attende l'approvazione, le ultime richieste e le segnalazioni aperte.",
     "Only the pending ones": "Solo quelle in attesa",
     "The API key under Settings > Configuration > General in Ombi.": "La chiave API in Settings > Configuration > General di Ombi.",
-    "The latest requests of every kind, who asked and where each stands.": "Le ultime richieste di ogni tipo, chi le ha fatte e a che punto è ciascuna."
+    "The latest requests of every kind, who asked and where each stands.": "Le ultime richieste di ogni tipo, chi le ha fatte e a che punto è ciascuna.",
+    "A user of the Homebridge UI without two-factor login. Empty when the UI's login is turned off.": "Un utente dell'interfaccia di Homebridge senza accesso a due fattori. Vuoto se il login dell'interfaccia è disattivato.",
+    "Bridges": "Bridge",
+    "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge e i plugin con una versione più recente, da quella installata all'ultima.",
+    "The main bridge and every child bridge with its plugin and state, the ones down first.": "Il bridge principale e ogni child bridge con il suo plugin e il suo stato, prima quelli fermi.",
+    "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Se Homebridge è in esecuzione, quanti child bridge sono attivi e quanti aggiornamenti attendono.",
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Se Homebridge è in esecuzione, lo stato di ogni child bridge e quali plugin hanno un aggiornamento."
   },
   "labels": {
     "Jobs": "Job",
@@ -3157,6 +3163,10 @@
     "Public": "Pubblici",
     "Shared files": "File condivisi",
     "Soulseek": "Soulseek",
-    "Uploading": "In upload"
+    "Uploading": "In upload",
+    "Child bridges": "Child bridge",
+    "Homebridge": "Homebridge",
+    "homebridge": "homebridge",
+    "main bridge": "bridge principale"
   }
 }

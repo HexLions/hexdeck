@@ -29,6 +29,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   and its downloads and uploads with their progress. ⚠️ Beta.
 - **Ombi**: the requests waiting for approval, the latest requests and
   where each stands, and open issues. ⚠️ Beta.
+- **Homebridge**: whether it runs, the state of each child bridge, and the
+  plugins with an update. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

@@ -2053,7 +2053,13 @@
     "Ombi's requests for films, series and music: what waits for approval, the latest requests, and open issues.": "Ombis Anfragen für Filme, Serien und Musik: was auf Freigabe wartet, die neuesten Anfragen und offene Probleme.",
     "Only the pending ones": "Nur die wartenden",
     "The API key under Settings > Configuration > General in Ombi.": "Der API-Schlüssel unter Settings > Configuration > General in Ombi.",
-    "The latest requests of every kind, who asked and where each stands.": "Die neuesten Anfragen jeder Art, wer sie gestellt hat und wo jede steht."
+    "The latest requests of every kind, who asked and where each stands.": "Die neuesten Anfragen jeder Art, wer sie gestellt hat und wo jede steht.",
+    "A user of the Homebridge UI without two-factor login. Empty when the UI's login is turned off.": "Ein Benutzer der Homebridge-Oberfläche ohne Zwei-Faktor-Anmeldung. Leer, wenn die Anmeldung der Oberfläche ausgeschaltet ist.",
+    "Bridges": "Bridges",
+    "Homebridge and the plugins with a newer version, from the installed one to the latest.": "Homebridge und die Plugins mit einer neueren Version, von der installierten bis zur neuesten.",
+    "The main bridge and every child bridge with its plugin and state, the ones down first.": "Die Haupt-Bridge und jede Child-Bridge mit ihrem Plugin und Zustand, die ausgefallenen zuerst.",
+    "Whether Homebridge runs, how many child bridges are up, and how many updates wait.": "Ob Homebridge läuft, wie viele Child-Bridges laufen und wie viele Updates warten.",
+    "Whether Homebridge runs, the state of each child bridge, and which plugins have an update.": "Ob Homebridge läuft, der Zustand jeder Child-Bridge und welche Plugins ein Update haben."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3157,6 +3163,10 @@
     "Public": "Öffentlich",
     "Shared files": "Geteilte Dateien",
     "Soulseek": "Soulseek",
-    "Uploading": "Hochladen"
+    "Uploading": "Hochladen",
+    "Child bridges": "Child-Bridges",
+    "Homebridge": "Homebridge",
+    "homebridge": "homebridge",
+    "main bridge": "Haupt-Bridge"
   }
 }
