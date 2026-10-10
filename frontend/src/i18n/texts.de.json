@@ -2107,7 +2107,12 @@
     "Marked": "Markiert",
     "Still to read": "Noch zu lesen",
     "The latest bookmarks still to read, or the marked ones, with their site and progress, linking to each.": "Die neuesten noch zu lesenden oder die markierten Lesezeichen, mit Website und Fortschritt, mit Link zu jedem.",
-    "Your Readeck reading list: how much is left unread, the latest bookmarks, and the ones that failed to save.": "Deine Readeck-Leseliste: wie viel ungelesen ist, die neuesten Lesezeichen und die nicht gespeicherten."
+    "Your Readeck reading list: how much is left unread, the latest bookmarks, and the ones that failed to save.": "Deine Readeck-Leseliste: wie viel ungelesen ist, die neuesten Lesezeichen und die nicht gespeicherten.",
+    "A user of the editor, read permission is enough. Empty when adminAuth is not set.": "Ein Benutzer des Editors, Leserechte genügen. Leer, wenn adminAuth nicht gesetzt ist.",
+    "Each flow with its number of nodes, the disabled ones marked, and the missing node types first.": "Jeder Flow mit seiner Anzahl Nodes, die deaktivierten markiert und die fehlenden Node-Typen zuerst.",
+    "Flows": "Flows",
+    "Node-RED: whether the flows run, the node types they miss, and each flow with its nodes.": "Node-RED: ob die Flows laufen, welche Node-Typen ihnen fehlen, und jeder Flow mit seinen Nodes.",
+    "Whether the flows run, how many flows and nodes there are, the node types missing, and the memory in use.": "Ob die Flows laufen, wie viele Flows und Nodes es gibt, die fehlenden Node-Typen und der belegte Speicher."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3227,6 +3232,7 @@
     "Title": "Titel",
     "Nodes up": "Knoten aktiv",
     "Objects": "Objekte",
-    "Failed to save": "Nicht gespeichert"
+    "Failed to save": "Nicht gespeichert",
+    "Enabled flows": "Aktive Flows"
   }
 }

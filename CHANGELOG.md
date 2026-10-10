@@ -47,6 +47,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   each bucket's objects and size. ⚠️ Beta.
 - **Readeck**: how much of the reading list is left unread, the latest
   bookmarks, and the ones that failed to save. ⚠️ Beta.
+- **Node-RED**: whether the flows run, the node types they are missing, and
+  each flow with its nodes. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
