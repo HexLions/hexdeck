@@ -322,6 +322,11 @@ Updated at every milestone.
   in the server's culture: the days and the distance left are. Checked
   against LubeLogger 1.7.3 running locally, with two vehicles and four
   reminders, with its login off and on.
+- **MySpeed, against the speeds it expects.** The last test is compared with
+  the expected speeds set in MySpeed itself, the same ones its gauges use.
+  Checked against MySpeed 1.0.9 running locally, with real tests over
+  LibreSpeed, a failed one over Cloudflare, and its password off, on and at
+  the read level.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

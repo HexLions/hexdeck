@@ -45,6 +45,7 @@ that one of thirty-one renderers draws.
 | Public address | address | | none; one call to ipapi.co or ipwho.is, kept for an hour |
 | UniFi Network | network, console, devices, findings, wlans | | API key (Network 9.0+), or a local account without two-factor |
 | Speedtest Tracker | latest, history | | API token |
+| MySpeed | last test, tests | | MySpeed's password in a `password` header when one is set, or nothing when its password level lets everyone read. The card turns amber when the last test falls short of the speeds set as expected in MySpeed |
 | nexpulse | latest result (a running test live, a button to start one), history (speed or ping idle and under load), period summary, recent tests, latency under load (graded A+ to F) | | API key from nexpulse under Settings > API keys; a key that may only read fills every card, one with "Read and start tests" adds the button. nexpulse 0.1.1 or newer tells nexdeck which kind of key it is; on 0.1.0 the button is always shown |
 | Traefik | overview, routers | | none, or basic authentication |
 | Caddy | overview, sites, upstreams | | none, the admin API has no sign-in; a user name and password only behind a proxy with basic authentication. The admin API listens on localhost:2019 unless the Caddyfile says `admin 0.0.0.0:2019`, and it can rewrite the configuration, so keep it on an internal network; this adapter only sends GET. Upstreams report active requests and remembered failures, not availability |

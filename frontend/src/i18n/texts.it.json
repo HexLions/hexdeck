@@ -2077,7 +2077,13 @@
     "Only the urgent ones": "Solo quelli urgenti",
     "Reminders": "Promemoria",
     "The maintenance reminders of every vehicle, the most urgent first, with when each is due.": "I promemoria di manutenzione di ogni veicolo, prima i più urgenti, con la loro scadenza.",
-    "The vehicles in LubeLogger and the maintenance coming due, the past-due reminders first.": "I veicoli in LubeLogger e la manutenzione in scadenza, prima i promemoria scaduti."
+    "The vehicles in LubeLogger and the maintenance coming due, the past-due reminders first.": "I veicoli in LubeLogger e la manutenzione in scadenza, prima i promemoria scaduti.",
+    "Last test": "Ultimo test",
+    "MySpeed's password, if one is set. Not needed when its password level lets everyone read.": "La password di MySpeed, se è impostata. Non serve se il livello della password consente a tutti la lettura.",
+    "MySpeed's speed tests: the last download, upload and ping against what you expect, how many failed today, and the tests before.": "Gli speed test di MySpeed: download, upload e ping dell'ultimo test rispetto a quanto ti aspetti, quanti sono falliti oggi, e i test precedenti.",
+    "Tests": "Test",
+    "The last download, upload and ping, against the speeds MySpeed expects, and the tests that failed today.": "L'ultimo download, upload e ping rispetto alle velocità che MySpeed si aspetta, e i test falliti oggi.",
+    "The latest speed tests with their results, and the reason of those that failed.": "Gli ultimi speed test con i loro risultati, e il motivo di quelli falliti."
   },
   "labels": {
     "Jobs": "Job",

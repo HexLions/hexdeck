@@ -1,0 +1,101 @@
+{
+    "tests": [
+        {
+            "id": 3,
+            "serverId": 50,
+            "ping": 16,
+            "download": 652.83,
+            "upload": 205.91,
+            "type": "custom",
+            "time": 12,
+            "created": "2026-10-10T13:36:54.760Z"
+        },
+        {
+            "id": 2,
+            "serverId": 50,
+            "ping": 17,
+            "download": 666.44,
+            "upload": 224.89,
+            "type": "custom",
+            "time": 14,
+            "created": "2026-10-10T13:36:32.875Z"
+        },
+        {
+            "id": 1,
+            "serverId": 0,
+            "ping": -1,
+            "download": -1,
+            "upload": -1,
+            "error": "Validation error",
+            "type": "custom",
+            "time": null,
+            "created": "2026-10-10T13:35:54.995Z"
+        }
+    ],
+    "statistics": {
+        "tests": {
+            "total": 3,
+            "failed": 1,
+            "custom": 3
+        },
+        "ping": {
+            "min": 16,
+            "max": 17,
+            "avg": 17
+        },
+        "download": {
+            "min": 652.83,
+            "max": 666.44,
+            "avg": 659.63
+        },
+        "upload": {
+            "min": 205.91,
+            "max": 224.89,
+            "avg": 215.4
+        },
+        "time": {
+            "min": 12,
+            "max": 14,
+            "avg": 13
+        },
+        "data": {
+            "ping": [
+                16,
+                17
+            ],
+            "download": [
+                652.83,
+                666.44
+            ],
+            "upload": [
+                205.91,
+                224.89
+            ],
+            "time": [
+                12,
+                14
+            ]
+        },
+        "labels": [
+            "2026-10-10T13:36:54.760Z",
+            "2026-10-10T13:36:32.875Z"
+        ]
+    },
+    "config": {
+        "ping": "25",
+        "download": "100",
+        "upload": "50",
+        "cron": "0 * * * *",
+        "provider": "libre",
+        "ooklaId": "none",
+        "libreId": "50",
+        "passwordLevel": "none",
+        "interface": "eth0",
+        "viewMode": false,
+        "previewMode": false
+    },
+    "status": {
+        "paused": false,
+        "running": false
+    }
+}

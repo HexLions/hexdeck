@@ -37,6 +37,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   and the notes changed last or found by a search of your own. ⚠️ Beta.
 - **LubeLogger**: the vehicles in the garage and the maintenance coming
   due, the past-due reminders first. ⚠️ Beta.
+- **MySpeed**: the last speed test against the speeds you expect, how many
+  failed today, and the tests before. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
