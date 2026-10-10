@@ -35,6 +35,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   progress, and the links that failed with pyLoad's reason. ⚠️ Beta.
 - **Trilium Notes**: how many notes, revisions and attachments it holds,
   and the notes changed last or found by a search of your own. ⚠️ Beta.
+- **LubeLogger**: the vehicles in the garage and the maintenance coming
+  due, the past-due reminders first. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

@@ -317,6 +317,11 @@ Updated at every milestone.
   by the last change, which a query of one's own can replace. Hidden system
   notes are left out of the list. Checked against Trilium Notes 0.106.0
   running locally, on a new document with notes of its own added.
+- **LubeLogger's reminders as it ranks them.** The urgency of each reminder
+  is LubeLogger's own, and the due date is never parsed because it is written
+  in the server's culture: the days and the distance left are. Checked
+  against LubeLogger 1.7.3 running locally, with two vehicles and four
+  reminders, with its login off and on.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

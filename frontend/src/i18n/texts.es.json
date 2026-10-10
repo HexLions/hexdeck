@@ -2071,7 +2071,13 @@
     "ETAPI token": "Token de ETAPI",
     "How many notes, revisions and attachments there are, and how big the database is.": "Cuántas notas, revisiones y adjuntos hay, y cuánto ocupa la base de datos.",
     "The notes changed last, or the ones a search of your own finds, linking to each.": "Las notas cambiadas por última vez, o las que encuentra una búsqueda propia, con enlace a cada una.",
-    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: cuántas notas, revisiones y adjuntos contiene, y las notas cambiadas por última vez o halladas con una búsqueda."
+    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: cuántas notas, revisiones y adjuntos contiene, y las notas cambiadas por última vez o halladas con una búsqueda.",
+    "A LubeLogger user. Empty when its login is turned off.": "Un usuario de LubeLogger. Vacío si el inicio de sesión está desactivado.",
+    "How many reminders are past due and urgent across the garage, and how many vehicles there are.": "Cuántos recordatorios están vencidos y urgentes en todo el garaje, y cuántos vehículos hay.",
+    "Only the urgent ones": "Solo los urgentes",
+    "Reminders": "Recordatorios",
+    "The maintenance reminders of every vehicle, the most urgent first, with when each is due.": "Los recordatorios de mantenimiento de cada vehículo, primero los más urgentes, con su vencimiento.",
+    "The vehicles in LubeLogger and the maintenance coming due, the past-due reminders first.": "Los vehículos en LubeLogger y el mantenimiento que vence, primero los recordatorios vencidos."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3181,6 +3187,8 @@
     "homebridge": "homebridge",
     "main bridge": "puente principal",
     "Attachments": "Adjuntos",
-    "Revisions": "Revisiones"
+    "Revisions": "Revisiones",
+    "Past due": "Vencidos",
+    "Vehicles": "Vehículos"
   }
 }

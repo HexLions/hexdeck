@@ -2071,7 +2071,13 @@
     "ETAPI token": "Token ETAPI",
     "How many notes, revisions and attachments there are, and how big the database is.": "Quante note, revisioni e allegati ci sono, e quanto è grande il database.",
     "The notes changed last, or the ones a search of your own finds, linking to each.": "Le note modificate per ultime, o quelle trovate da una tua ricerca, con un link a ciascuna.",
-    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: quante note, revisioni e allegati contiene, e le note modificate per ultime o trovate con una ricerca."
+    "Trilium Notes: how many notes, revisions and attachments it holds, and the notes changed last or found by a search.": "Trilium Notes: quante note, revisioni e allegati contiene, e le note modificate per ultime o trovate con una ricerca.",
+    "A LubeLogger user. Empty when its login is turned off.": "Un utente di LubeLogger. Vuoto se il login è disattivato.",
+    "How many reminders are past due and urgent across the garage, and how many vehicles there are.": "Quanti promemoria sono scaduti e urgenti in tutto il garage, e quanti veicoli ci sono.",
+    "Only the urgent ones": "Solo quelli urgenti",
+    "Reminders": "Promemoria",
+    "The maintenance reminders of every vehicle, the most urgent first, with when each is due.": "I promemoria di manutenzione di ogni veicolo, prima i più urgenti, con la loro scadenza.",
+    "The vehicles in LubeLogger and the maintenance coming due, the past-due reminders first.": "I veicoli in LubeLogger e la manutenzione in scadenza, prima i promemoria scaduti."
   },
   "labels": {
     "Jobs": "Job",
@@ -3181,6 +3187,8 @@
     "homebridge": "homebridge",
     "main bridge": "bridge principale",
     "Attachments": "Allegati",
-    "Revisions": "Revisioni"
+    "Revisions": "Revisioni",
+    "Past due": "Scaduti",
+    "Vehicles": "Veicoli"
   }
 }
