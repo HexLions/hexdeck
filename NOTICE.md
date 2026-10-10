@@ -294,6 +294,12 @@ Updated at every milestone.
   have no shape in Swagger: it was read from slskd's controllers at 0.26.0,
   grouped by user and directory, with each state a set of flags written as one
   string ("Completed, Errored"), split before it is read.
+- **Ombi, from the counts and the latest requests.** The counts and the
+  latest requests come from Ombi's own API with its key in an `ApiKey` header;
+  the longer request lists are left alone because they carry each requesting
+  user's account. The request count answers without a key, so the connection
+  test asks the issue count. Checked against Ombi 4.53.10 running locally,
+  with requests from the admin and a plain user and one denied.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -2048,7 +2048,12 @@
     "The Soulseek client slskd: whether it is on the network, what it shares, and its downloads and uploads.": "El cliente de Soulseek slskd: si está en la red, qué comparte, y sus descargas y subidas.",
     "The downloads running and waiting, with their progress, and the ones that failed.": "Las descargas en curso y en espera, con su progreso, y las que fallaron.",
     "Uploads instead": "Las subidas en su lugar",
-    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Si slskd ha iniciado sesión en Soulseek, qué comparte y cuántas transferencias están en curso."
+    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Si slskd ha iniciado sesión en Soulseek, qué comparte y cuántas transferencias están en curso.",
+    "How many requests wait for approval, are approved, available or denied, and how many issues are open.": "Cuántas solicitudes esperan aprobación, están aprobadas, disponibles o rechazadas, y cuántas incidencias están abiertas.",
+    "Ombi's requests for films, series and music: what waits for approval, the latest requests, and open issues.": "Las solicitudes de películas, series y música en Ombi: lo que espera aprobación, las últimas solicitudes y las incidencias abiertas.",
+    "Only the pending ones": "Solo las pendientes",
+    "The API key under Settings > Configuration > General in Ombi.": "La clave de API en Settings > Configuration > General de Ombi.",
+    "The latest requests of every kind, who asked and where each stands.": "Las últimas solicitudes de todo tipo, quién las hizo y en qué punto está cada una."
   },
   "labels": {
     "Private resources": "Recursos privados",

@@ -27,6 +27,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   failing and why. ⚠️ Beta.
 - **slskd**: whether the Soulseek client is on the network, what it shares,
   and its downloads and uploads with their progress. ⚠️ Beta.
+- **Ombi**: the requests waiting for approval, the latest requests and
+  where each stands, and open issues. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 

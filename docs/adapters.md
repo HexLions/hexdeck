@@ -76,6 +76,7 @@ that one of thirty-one renderers draws.
 | nexmail | unread mail (total and per mailbox, a mailbox whose sign-in fails is marked), latest mail (sender and subject, unread ones highlighted, each row opens the message in nexmail) | | API key from nexmail 0.17.0 or newer under Settings > API keys, with the mailboxes shared on it; the latest mail card needs the scope "Count, sender and subject" and is not offered for a key that may only count. The operator of nexmail has to allow API keys first |
 | Seerr | requests, counts | approve, decline | API key |
 | Overseerr, Jellyseerr | requests, counts | approve, decline | API key; same API as Seerr, listed under their own names |
+| Ombi | overview, latest requests | | the API key under Settings > Configuration > General, in an `ApiKey` header. The request count answers without a key, so the connection test asks the issue count, which checks it |
 | Tautulli | now playing, streams, most watched | | API key |
 | RomM | platforms, recently added games, game library | | client API token with roms.read and platforms.read |
 | Immich | archive, storage, users | | API key of an administrator |

@@ -2048,7 +2048,12 @@
     "The Soulseek client slskd: whether it is on the network, what it shares, and its downloads and uploads.": "Der Soulseek-Client slskd: ob er im Netz ist, was er teilt, und seine Downloads und Uploads.",
     "The downloads running and waiting, with their progress, and the ones that failed.": "Die laufenden und wartenden Downloads mit ihrem Fortschritt, und die fehlgeschlagenen.",
     "Uploads instead": "Stattdessen Uploads",
-    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Ob slskd bei Soulseek angemeldet ist, was es teilt und wie viele Übertragungen laufen."
+    "Whether slskd is logged in to Soulseek, what it shares, and how many transfers are running.": "Ob slskd bei Soulseek angemeldet ist, was es teilt und wie viele Übertragungen laufen.",
+    "How many requests wait for approval, are approved, available or denied, and how many issues are open.": "Wie viele Anfragen auf Freigabe warten, freigegeben, verfügbar oder abgelehnt sind, und wie viele Probleme offen sind.",
+    "Ombi's requests for films, series and music: what waits for approval, the latest requests, and open issues.": "Ombis Anfragen für Filme, Serien und Musik: was auf Freigabe wartet, die neuesten Anfragen und offene Probleme.",
+    "Only the pending ones": "Nur die wartenden",
+    "The API key under Settings > Configuration > General in Ombi.": "Der API-Schlüssel unter Settings > Configuration > General in Ombi.",
+    "The latest requests of every kind, who asked and where each stands.": "Die neuesten Anfragen jeder Art, wer sie gestellt hat und wo jede steht."
   },
   "labels": {
     "Jobs": "Jobs",
