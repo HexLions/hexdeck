@@ -2029,7 +2029,14 @@
     "Print history": "Druckverlauf",
     "The Klipper printer behind Moonraker: the job with its progress, layer and time left, the temperatures, and the jobs before.": "Der Klipper-Drucker hinter Moonraker: der Auftrag mit Fortschritt, Schicht und Restzeit, die Temperaturen und die Aufträge davor.",
     "The latest jobs with how they ended, how long they took and the filament they used.": "Die letzten Aufträge, wie sie endeten, wie lange sie dauerten und wie viel Filament sie brauchten.",
-    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Was der Drucker gerade tut: der Auftrag mit Fortschritt, Schicht und Restzeit, und die Temperaturen von Düse und Bett."
+    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Was der Drucker gerade tut: der Auftrag mit Fortschritt, Schicht und Restzeit, und die Temperaturen von Düse und Bett.",
+    "Every monitor with its status and the last day's uptime, the ones that are down first.": "Jeder Monitor mit seinem Status und der Verfügbarkeit des letzten Tages, die ausgefallenen zuerst.",
+    "How many monitors are up, down and paused.": "Wie viele Monitore erreichbar, ausgefallen und pausiert sind.",
+    "Only what is not up": "Nur was nicht erreichbar ist",
+    "Open incidents": "Offene Vorfälle",
+    "The incidents still going on, with the monitor, the reason and since when.": "Die noch laufenden Vorfälle, mit Monitor, Grund und seit wann.",
+    "The read-only API key from Integrations > API in the dashboard. An account key works too, but it could also change monitors.": "Der schreibgeschützte API-Schlüssel aus Integrationen > API im Dashboard. Ein Kontoschlüssel geht auch, könnte aber Monitore ändern.",
+    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "Deine UptimeRobot-Monitore mit der Verfügbarkeit des letzten Tages, die ausgefallenen zuerst, und die offenen Vorfälle."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3128,6 +3135,7 @@
     "Running out": "Geht zur Neige",
     "Spools in use": "Spulen in Gebrauch",
     "Layer": "Schicht",
-    "Printed": "Gedruckt"
+    "Printed": "Gedruckt",
+    "Looks down": "Scheint ausgefallen"
   }
 }

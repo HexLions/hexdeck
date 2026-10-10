@@ -100,6 +100,7 @@ that one of thirty-one renderers draws.
 | Home Assistant | entity, entity list | turn on/off, scenes, scripts, covers, locks | long-lived token; live over WebSocket |
 | Uptime Kuma | monitors, summary | | API key (metrics endpoint) |
 | Healthchecks | checks, checks up | | API key from the project settings; the read-only one is enough, and healthchecks.io works too |
+| UptimeRobot | overview, monitors, open incidents | | the read-only API key from Integrations > API, sent as Bearer to API v3; an account key would also be able to change monitors. The free plan allows ten requests a minute for the whole account. A monitor's HTTP password, headers and key are never read |
 | ChangeDetection.io | recent changes, watches | check all now | API key from Settings > API |
 | n8n | workflows, last runs, summary | publish, unpublish | API key from Settings > n8n API |
 | Beszel | hosts, host | | user and password |

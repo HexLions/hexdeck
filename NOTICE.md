@@ -273,6 +273,13 @@ Updated at every milestone.
   job says. A printer object that does not exist is simply absent from the
   answer. Read from Moonraker's documentation; no printer was at hand to
   check it against.
+- **UptimeRobot, API v3 and the read-only key.** The monitors with the last
+  day's uptime as the mean of its hourly buckets, the ones down first, and
+  the incidents still open. A monitor's answer carries its HTTP password,
+  headers and API key; none of that is read. The status words come from the
+  filter's description, since the schema leaves them open. Read from
+  UptimeRobot's OpenAPI spec for API 3.0; the refusal of a made-up key was
+  measured against its API.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

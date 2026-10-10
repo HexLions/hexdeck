@@ -2029,7 +2029,14 @@
     "Print history": "Storico delle stampe",
     "The Klipper printer behind Moonraker: the job with its progress, layer and time left, the temperatures, and the jobs before.": "La stampante Klipper dietro Moonraker: il lavoro con avanzamento, strato e tempo rimasto, le temperature e i lavori precedenti.",
     "The latest jobs with how they ended, how long they took and the filament they used.": "Gli ultimi lavori con com'è finito ciascuno, quanto è durato e quanto filamento ha usato.",
-    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Cosa sta facendo la stampante: il lavoro con avanzamento, strato e tempo rimasto, e le temperature di ugello e piatto."
+    "What the printer is doing: the job with its progress, layer and time left, and the nozzle and bed temperatures.": "Cosa sta facendo la stampante: il lavoro con avanzamento, strato e tempo rimasto, e le temperature di ugello e piatto.",
+    "Every monitor with its status and the last day's uptime, the ones that are down first.": "Ogni monitor con il suo stato e l'uptime dell'ultimo giorno, prima quelli giù.",
+    "How many monitors are up, down and paused.": "Quanti monitor sono su, giù e in pausa.",
+    "Only what is not up": "Solo quelli non su",
+    "Open incidents": "Incidenti aperti",
+    "The incidents still going on, with the monitor, the reason and since when.": "Gli incidenti ancora in corso, con il monitor, il motivo e da quando.",
+    "The read-only API key from Integrations > API in the dashboard. An account key works too, but it could also change monitors.": "La chiave API di sola lettura da Integrazioni > API nella dashboard. Va bene anche una chiave dell'account, ma potrebbe modificare i monitor.",
+    "Your UptimeRobot monitors with the last day's uptime, the ones that are down first, and the incidents still open.": "I tuoi monitor UptimeRobot con l'uptime dell'ultimo giorno, prima quelli giù, e gli incidenti ancora aperti."
   },
   "labels": {
     "Jobs": "Job",
@@ -3128,6 +3135,7 @@
     "Running out": "In esaurimento",
     "Spools in use": "Bobine in uso",
     "Layer": "Strato",
-    "Printed": "Stampato"
+    "Printed": "Stampato",
+    "Looks down": "Sembra giù"
   }
 }

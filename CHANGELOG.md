@@ -21,6 +21,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Moonraker (Klipper)**: the job on the printer with its progress, layer and
   time left, the nozzle and bed temperatures, and the jobs before with how
   they ended. ⚠️ Beta.
+- **UptimeRobot**: your monitors with the last day's uptime, the ones that are
+  down first, and the incidents still open. ⚠️ Beta.
 
 ## 0.23.1 (2026-10-08)
 
