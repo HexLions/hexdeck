@@ -221,6 +221,17 @@ Updated at every milestone.
   week this fork wrote its own, independently and with different cards. This
   fork keeps its own, which were checked against GitLab.com, a running
   Alertmanager and Cloudflare's API, and which its tests cover.
+- **Sign-in from nexdeck 0.35 and 0.36: authentik in one step, linking,
+  hardening.** The authentik button and blueprint, linking one's own account to
+  a provider, changing a provider in place, links dropped on a new issuer, new
+  providers without automatic accounts, and the attempt cookie with its own key
+  and a single-use state, with upstream's tests. Fitted here: the objects made
+  in authentik are named HexDeck, and nexdeck's "session at home" is this
+  fork's automatic sign-in on trusted networks, which may not link an account.
+  The availability over 7 and 30 days, the card buttons in the head, the tile
+  floor of a group, the network map on a phone, the in-and-out chips, the bars
+  that stay while a board loads and the weather chips by the card's width are
+  upstream's fixes too, merged by hand where this fork had changed the code.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which
