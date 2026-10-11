@@ -34,6 +34,17 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Gatus offered "In and out, mirrored"** for its count of endpoints up and
   down, which is no traffic. A test now walks every card that offers the
   drawing and checks it names both rows; the FRITZ!Box rows got their names.
+- **A card's buttons lay on its status dot and its beta mark** when hovered.
+  In a card with a head they now stand in it, beside the dot; cards without a
+  head keep the floating corner.
+- **A group of app tiles held tiles four times as tall**, since the floor that
+  keeps cards on a phone apart. A group of tiles, buttons and headings keeps a
+  floor of one line again.
+- **A network map shrank to an unreadable size on a phone.** The card measures
+  itself and gives the machines under a node three, two or one column,
+  whichever draws the map largest.
+- **The chips under "In and out" cut off the upload** on a narrow card. The
+  label gives way; the arrow and the number stay.
 
 ## 0.24.0 (2026-10-10)
 

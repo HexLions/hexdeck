@@ -14,6 +14,23 @@ import { WidgetCard } from './WidgetCard'
 
 /** The least a card in a group is given in height: a title and a number under it. */
 export const GROUP_ROW_FLOOR = 132
+/** An app tile, a button or a heading in a group: one line, as they stood before the floor. */
+export const TILE_FLOOR = 32
+/** Cards that are one line and nothing under it. */
+const TILES = new Set(['app', 'button', 'heading'])
+
+/**
+ * The least height a row of this group may shrink to: a tile's line when it
+ * holds only tiles, else a card with a title and a number.
+ *
+ * ⚠️ The floor that stopped cards on a phone from being drawn over each other
+ * made a group of app tiles, a line each before, hold tiles four times as tall
+ * that scrolled, and nothing in the settings made them small again. Found and
+ * fixed the same way in nexdeck (#33).
+ */
+export function rowFloor(cards: { renderer: string }[]): number {
+  return cards.length > 0 && cards.every((card) => TILES.has(card.renderer)) ? TILE_FLOOR : GROUP_ROW_FLOOR
+}
 
 /** What a holder says while it holds nothing yet: where its cards come from. */
 function Waiting({ editing }: { editing?: boolean }) {
@@ -116,7 +133,7 @@ export function GroupCard({ widget }: RenderProps) {
             className="flex-1 min-h-0 grid gap-2.5 px-3 pb-3 overflow-y-auto"
             style={{
               gridTemplateColumns: columns === 'auto' ? 'repeat(auto-fit, minmax(180px, 1fr))' : `repeat(${Number(columns) || 3}, minmax(0, 1fr))`,
-              gridAutoRows: `minmax(${GROUP_ROW_FLOOR}px, 1fr)`,
+              gridAutoRows: `minmax(${rowFloor(cards)}px, 1fr)`,
             }}
           >
             {cards.map((card) => (

@@ -231,6 +231,8 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
               {reasons[0]}
             </span>
           )}
+          {/* In the head, beside the dot and the beta mark rather than over them. */}
+          {showControls && <div className="card-controls in-head">{controls}</div>}
           <span className="dot" data-status={status} role="img" aria-label={statusTitle} title={statusTitle} />
           {widget.beta && (
             <span className="chip !py-0 text-[10px] cursor-help hidden @min-[240px]:inline-flex" title={t('widget.betaHelp')}>
@@ -239,8 +241,8 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
           )}
         </header>
       )}
-      {/* The controls float over the corner: always while editing, on hover otherwise. */}
-      {showControls && <div className="card-controls glass">{controls}</div>}
+      {/* A card without a head: the controls float over the corner, always while editing, on hover otherwise. */}
+      {showControls && bare && <div className="card-controls glass">{controls}</div>}
       <div className="flex-1 min-h-0 flex flex-col">
         {renderWidget({ widget, data, series, canAct, canEdit, onAction, link, editing })}
       </div>

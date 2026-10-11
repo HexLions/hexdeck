@@ -596,9 +596,13 @@ export function InOutCard({ data, series }: RenderProps) {
         {[inside, outside].map((metric, index) => {
           const one = metric ? row(metric) : undefined
           return (
-            <span key={metric || index} className="chip min-w-0 truncate" style={{ color: index ? '#a5b4fc' : 'var(--nd-accent)' }}>
-              {index ? '↑' : '↓'} {one ? tLabel(one.label) : metric}
-              <b className="num">{formatValue(one?.value ?? '', one?.unit)}</b>
+            // ⚠️ On a narrow card the label gives way and the arrow and the number
+            // stay: truncating the whole chip cut the upload off in the middle of
+            // its value. From nexdeck.
+            <span key={metric || index} className="chip min-w-0 overflow-hidden" style={{ color: index ? '#a5b4fc' : 'var(--nd-accent)' }}>
+              <span className="shrink-0">{index ? '↑' : '↓'}</span>
+              <span className="truncate">{one ? tLabel(one.label) : metric}</span>
+              <b className="num shrink-0">{formatValue(one?.value ?? '', one?.unit)}</b>
             </span>
           )
         })}
