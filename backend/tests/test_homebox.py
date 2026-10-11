@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import date
 
 import httpx
@@ -55,11 +56,16 @@ def _export_today() -> str:
     from datetime import UTC, datetime, timedelta
 
     today = datetime.now(UTC).date()
-    return (EXPORT
-            .replace("2026-09-01", (today - timedelta(days=10)).isoformat())   # just ended
-            .replace("2026-10-01", (today + timedelta(days=20)).isoformat())   # ending soon
-            .replace("2027-03-30", (today + timedelta(days=200)).isoformat())  # far off
-            .replace("2026-07-01", (today - timedelta(days=80)).isoformat()))  # long gone
+    moved = {
+        "2026-09-01": today - timedelta(days=10),   # just ended
+        "2026-10-01": today + timedelta(days=20),   # ending soon
+        "2027-03-30": today + timedelta(days=200),  # far off
+        "2026-07-01": today - timedelta(days=80),   # long gone
+    }
+    # ⚠️ In one pass. One replace after the other moved a date onto the next
+    # one's original: on 11.10.2026 "just ended" became 2026-10-01, which the
+    # following replace then moved into "ending soon".
+    return re.sub("|".join(moved), lambda match: moved[match.group(0)].isoformat(), EXPORT)
 
 
 @respx.mock
