@@ -66,6 +66,12 @@ The *Proxmox rack* template: the node and its guests, TrueNAS pools and alerts, 
 
 ![The infrastructure board: Proxmox node load, guest counts, TrueNAS system and pools, UPS, alerts, backup datastores and tasks, and disk health](docs/screenshot-infrastructure.png)
 
+### Home
+
+The house that runs itself, on one board: Homebridge and its child bridges, the ESPHome devices with one behind on firmware, Node-RED, the energy of the day and its flow, the cameras' detections. This is the *Smart home* template with the demo's invented data.
+
+![The smart home board: Homebridge, ESPHome and Node-RED running, the day's energy, the ESPHome devices with one waiting for a firmware update, the Homebridge bridges, the energy flow of the house, Frigate's detections and the Node-RED flows](docs/screenshot-smarthome.png)
+
 ### Projects and maintenance
 
 The roadmap draws milestones as hexagons and dated items as dots on one line, the late ones red, the imminent ones yellow. A recurring item says how often it comes back. Next to it a notepad, a page of notes and the releases of the tools you run.
@@ -96,7 +102,7 @@ The same *Network* board in Nord, and in Gruvbox's light side. Themes are chosen
 
 Settings › Boards › *Start from a template*. Each placeholder is mapped to one of your connections of that kind; the first one is picked for you.
 
-![The template picker: five tiles, the media stack chosen, and a row per connection with the installation's own to choose from](docs/screenshot-templates.png)
+![The template picker: seven tiles, from the homelab overview and the media stack to the smart home and 3D printing](docs/screenshot-templates.png)
 
 ### On the wall
 
