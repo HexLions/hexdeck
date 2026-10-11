@@ -60,6 +60,9 @@ RECOVERY_INTERVAL = 60.0
 REFRESH_NOW_GAP = 5.0
 
 
+#: How long a card that turned red stays quiet before it may say so again.
+RED_QUIET_SECONDS = 3600
+
 class Collector:
     def __init__(self) -> None:
         self._tasks: dict[int, asyncio.Task[None]] = {}
@@ -365,7 +368,7 @@ class Collector:
             logger.debug("Widget %s changed while it was being read; the older answer is dropped.", widget_id)
             return interval
 
-        self._tell_about(widget_id, title, adapter, widget_kind, previous, data, options)
+        self._tell_about(widget_id, title, adapter, widget_kind, previous, data, options, demo=demo)
         live.set(widget_id, data)
         kept = history.implied_metrics(data)
         if kept:
@@ -483,7 +486,7 @@ class Collector:
             return WidgetData(status="unknown", error=f"Unexpected error: {error.__class__.__name__}.", meta={"code": "crash"})
 
     def _tell_about(self, widget_id: int, title: str, adapter: Any, widget_kind: str,
-                    before: WidgetData | None, after: WidgetData, options: dict[str, Any]) -> None:
+                    before: WidgetData | None, after: WidgetData, options: dict[str, Any], *, demo: bool = False) -> None:
         """Ask the adapter what happened, and pass it on once.
 
         ⚠️ Once. A card refreshing every thirty seconds would otherwise send
@@ -494,6 +497,8 @@ class Collector:
             self._tell_about_failure(widget_id, title, after)
             return
         self._broken.discard(widget_id)
+        if not demo:
+            self._tell_about_red(widget_id, title, before, after)
         try:
             found = adapter.detect(widget_kind, before, after, options)
         except Exception:  # noqa: BLE001 - a bad detector must not stop the card
@@ -509,6 +514,29 @@ class Collector:
             logger.info("%s on %r: %s", detected.event, title, detected.title)
             emit(detected.event, detected.title, detected.body,
                  level="warn" if detected.level in ("warn", "bad") else "info")
+
+    def _tell_about_red(self, widget_id: int, title: str, before: WidgetData | None, after: WidgetData) -> None:
+        """A card that went from green or amber to red, for every integration alike.
+
+        ⚠️ Only on the change, never on the first answer after a start: a board
+        with three red cards would otherwise say so on every restart. Once an
+        hour at most for each card, so one that flickers between amber and red
+        is said once. An ESPHome device offline, a Node-RED flow held back, a
+        maintenance item past due, Homebridge down: each card already knows,
+        and this is how it reaches somebody who is not looking.
+        """
+        if after.status != "bad" or before is None or before.error or before.status not in ("ok", "warn"):
+            return
+        now = time.time()
+        key = f"{widget_id}:card_red"
+        if now - self._told.get(key, 0.0) < RED_QUIET_SECONDS:
+            return
+        self._told[key] = now
+        self._forget_old_keys(now)
+        notice = str((after.meta or {}).get("notice") or "")
+        primary = after.primary or {}
+        said = notice or (f"{primary.get('label')}: {primary.get('value')}" if primary.get("label") else "")
+        emit("card_red", f"{title} turned red", said, level="warn")
 
     def _tell_about_failure(self, widget_id: int, title: str, data: WidgetData) -> None:
         """A card that stopped working, said once and not on every retry."""

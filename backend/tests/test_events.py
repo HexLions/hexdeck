@@ -150,3 +150,49 @@ def test_a_detector_is_given_the_options_of_its_card() -> None:
 
 def _unused(_: Any) -> None:
     return None
+
+
+# ---------------------------------------------------------------------------
+# Any card turning red
+# ---------------------------------------------------------------------------
+
+
+def _said(monkeypatch: Any) -> list[tuple[str, str, str]]:
+    from app.services import collector as collector_module
+
+    said: list[tuple[str, str, str]] = []
+    monkeypatch.setattr(collector_module, "emit", lambda event, title, body="", **_: said.append((event, title, body)))
+    return said
+
+
+def _tell(service: Any, before: WidgetData | None, after: WidgetData, *, demo: bool = False) -> None:
+    service._tell_about(7, "ESPHome devices", get_adapter("esphome"), "summary", before, after, {}, demo=demo)
+
+
+def test_a_card_that_turns_red_says_so_once_an_hour(monkeypatch: Any) -> None:
+    from app.services import collector as collector_module
+
+    said = _said(monkeypatch)
+    service = collector_module.Collector()
+    red = WidgetData(status="bad", primary={"label": "Online", "value": "3 / 4"})
+    _tell(service, WidgetData(status="ok"), red)
+    assert said == [("card_red", "ESPHome devices turned red", "Online: 3 / 4")]
+    _tell(service, red, red)
+    _tell(service, WidgetData(status="warn"), red)
+    assert len(said) == 1, "red again within the hour is not said again"
+    assert "card_red" in EVENTS
+
+
+def test_red_from_the_start_a_failure_or_the_demo_is_not_a_change(monkeypatch: Any) -> None:
+    from app.services import collector as collector_module
+
+    said = _said(monkeypatch)
+    service = collector_module.Collector()
+    red = WidgetData(status="bad", meta={"notice": "Missing node types: tasmota-switch"})
+    _tell(service, None, red)
+    _tell(service, WidgetData(status="unknown"), red)
+    _tell(service, WidgetData(status="unknown", error="unreachable"), red)
+    _tell(service, WidgetData(status="ok"), red, demo=True)
+    assert said == []
+    _tell(service, WidgetData(status="warn"), red)
+    assert said == [("card_red", "ESPHome devices turned red", "Missing node types: tasmota-switch")]

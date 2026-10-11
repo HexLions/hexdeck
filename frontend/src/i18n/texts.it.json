@@ -2193,7 +2193,8 @@
     "The house that runs itself: Homebridge and its bridges, the ESPHome devices that dropped off, Node-RED flows held back, the cameras and the energy of the day.": "La casa che va da sola: Homebridge e i suoi bridge, i dispositivi ESPHome caduti, i flow di Node-RED bloccati, le telecamere e l'energia della giornata.",
     "The printer and its filament: what Klipper prints now, how much of each spool is left, and the jobs before.": "La stampante e il suo filamento: cosa stampa ora Klipper, quanto resta di ogni bobina e le stampe precedenti.",
     "home": "casa",
-    "workshop": "laboratorio"
+    "workshop": "laboratorio",
+    "A card turned red": "Una card è diventata rossa"
   },
   "labels": {
     "Jobs": "Job",

@@ -36,6 +36,7 @@ EVENTS: dict[str, str] = {
     "request_new": "A new media request",
     "download_done": "A download finished",
     "widget_broken": "A card stopped working",
+    "card_red": "A card turned red",
     "auth_rejected": "A service rejected its credentials",
     "cert_expiring": "A certificate is running out",
     "disk_filling": "A disk is filling up",
