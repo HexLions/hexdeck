@@ -110,3 +110,25 @@ async def test_a_wrong_key_is_refused() -> None:
     respx.get(f"{BASE}/api/v0/application").mock(return_value=httpx.Response(401))
     with pytest.raises(AuthFailed):
         await get_adapter("slskd").test(CONFIG, _ctx())
+
+
+@respx.mock
+async def test_offline_offers_connect_and_finished_transfers_offer_clearing() -> None:
+    _slskd()
+    status = await get_adapter("slskd").fetch("status", CONFIG, {}, _ctx())
+    assert [action.id for action in status.actions] == ["connect"]
+    downloads = await get_adapter("slskd").fetch("downloads", CONFIG, {}, _ctx())
+    assert [action.id for action in downloads.actions] == ["clear"]
+    uploads = await get_adapter("slskd").fetch("downloads", CONFIG, {"uploads": True}, _ctx())
+    assert uploads.actions == [], "nothing finished, nothing to clear"
+
+
+@respx.mock
+async def test_connect_and_clear_as_measured() -> None:
+    """slskd 0.26.0: PUT /server answers 205 while it is already trying, DELETE .../all/completed 204."""
+    connect = respx.put(f"{BASE}/api/v0/server").mock(return_value=httpx.Response(205))
+    clear = respx.delete(f"{BASE}/api/v0/transfers/uploads/all/completed").mock(return_value=httpx.Response(204))
+    assert await get_adapter("slskd").action("status", "connect", {}, CONFIG, {}, _ctx()) == "slskd is connecting to Soulseek."
+    await get_adapter("slskd").action("downloads", "clear", {}, CONFIG, {"uploads": True}, _ctx())
+    assert connect.called and clear.called
+    assert connect.calls[0].request.headers["x-api-key"] == "made-up-key"

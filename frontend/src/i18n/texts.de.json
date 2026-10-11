@@ -2187,7 +2187,14 @@
     "Last 30 days": "Letzte 30 Tage",
     "Last 30 days, one bar per day": "Letzte 30 Tage, ein Balken je Tag",
     "Last 7 days": "Letzte 7 Tage",
-    "Last 7 days, one bar per 6 hours": "Letzte 7 Tage, ein Balken je 6 Stunden"
+    "Last 7 days, one bar per 6 hours": "Letzte 7 Tage, ein Balken je 6 Stunden",
+    "3D printing": "3D-Druck",
+    "Smart home": "Smart Home",
+    "The house that runs itself: Homebridge and its bridges, the ESPHome devices that dropped off, Node-RED flows held back, the cameras and the energy of the day.": "Das Haus, das sich selbst steuert: Homebridge und seine Bridges, die ESPHome-Geräte, die weggefallen sind, aufgehaltene Node-RED-Flows, die Kameras und die Energie des Tages.",
+    "The printer and its filament: what Klipper prints now, how much of each spool is left, and the jobs before.": "Der Drucker und sein Filament: was Klipper gerade druckt, wie viel von jeder Spule übrig ist und die Druckaufträge davor.",
+    "home": "Zuhause",
+    "workshop": "Werkstatt",
+    "A card turned red": "Eine Karte ist rot geworden"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3336,6 +3343,8 @@
     "Reload": "Neu laden",
     "Renew": "Erneuern",
     "Reset timer": "Frist neu starten",
-    "Sync": "Synchronisieren"
+    "Sync": "Synchronisieren",
+    "Clear finished": "Fertige entfernen",
+    "Connect": "Verbinden"
   }
 }

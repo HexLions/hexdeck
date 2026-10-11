@@ -1,0 +1,105 @@
+nexdeck: 1
+template:
+  id: smarthome
+  name: Smart home
+  description: 'The house that runs itself: Homebridge and its bridges, the ESPHome devices that dropped off, Node-RED flows held
+    back, the cameras and the energy of the day.'
+  tags:
+  - home
+board:
+  name: Smart home
+  icon: lamp
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: Homebridge
+  kind: homebridge
+- name: ESPHome
+  kind: esphome
+- name: Node-RED
+  kind: nodered
+- name: Frigate
+  kind: frigate
+- name: evcc
+  kind: evcc
+pages:
+- name: Overview
+  slug: overview
+  widgets:
+  - kind: homebridge.status
+    title: Homebridge
+    integration: Homebridge
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 6
+        h: 3
+  - kind: esphome.summary
+    title: ESPHome
+    integration: ESPHome
+    layout:
+      lg:
+        x: 6
+        y: 0
+        w: 6
+        h: 3
+  - kind: nodered.status
+    title: Node-RED
+    integration: Node-RED
+    layout:
+      lg:
+        x: 12
+        y: 0
+        w: 6
+        h: 3
+  - kind: evcc.energy
+    integration: evcc
+    layout:
+      lg:
+        x: 18
+        y: 0
+        w: 6
+        h: 3
+  - kind: esphome.devices
+    integration: ESPHome
+    layout:
+      lg:
+        x: 0
+        y: 3
+        w: 8
+        h: 6
+  - kind: homebridge.bridges
+    integration: Homebridge
+    layout:
+      lg:
+        x: 8
+        y: 3
+        w: 8
+        h: 6
+  - kind: evcc.flow
+    integration: evcc
+    layout:
+      lg:
+        x: 16
+        y: 3
+        w: 8
+        h: 6
+  - kind: frigate.events
+    integration: Frigate
+    layout:
+      lg:
+        x: 0
+        y: 9
+        w: 12
+        h: 6
+  - kind: nodered.flows
+    integration: Node-RED
+    layout:
+      lg:
+        x: 12
+        y: 9
+        w: 12
+        h: 6

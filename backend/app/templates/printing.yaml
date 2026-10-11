@@ -1,0 +1,55 @@
+nexdeck: 1
+template:
+  id: printing
+  name: 3D printing
+  description: 'The printer and its filament: what Klipper prints now, how much of each spool is left, and the jobs before.'
+  tags:
+  - workshop
+board:
+  name: 3D printing
+  icon: printer
+  settings:
+    columns: 24
+    max_width: full
+    fit_screen: false
+integrations:
+- name: Moonraker
+  kind: moonraker
+- name: Spoolman
+  kind: spoolman
+pages:
+- name: Printer
+  slug: printer
+  widgets:
+  - kind: moonraker.printer
+    integration: Moonraker
+    layout:
+      lg:
+        x: 0
+        y: 0
+        w: 12
+        h: 4
+  - kind: spoolman.summary
+    integration: Spoolman
+    layout:
+      lg:
+        x: 12
+        y: 0
+        w: 12
+        h: 4
+  - kind: moonraker.history
+    integration: Moonraker
+    layout:
+      lg:
+        x: 0
+        y: 4
+        w: 12
+        h: 6
+  - kind: spoolman.spools
+    integration: Spoolman
+    layout:
+      lg:
+        x: 12
+        y: 4
+        w: 12
+        h: 6

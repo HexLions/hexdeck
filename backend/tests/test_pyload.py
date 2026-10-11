@@ -96,3 +96,23 @@ async def test_a_refusal(config: dict, said: str) -> None:
     respx.get(f"{BASE}/api/status_server").mock(return_value=httpx.Response(401, json={"error": "Invalid API credentials"}))
     with pytest.raises(AuthFailed, match=said):
         await get_adapter("pyload").test(config, _ctx())
+
+
+@respx.mock
+async def test_the_status_offers_pause_and_then_resume() -> None:
+    _pyload()
+    running = await get_adapter("pyload").fetch("status", CONFIG, {}, _ctx())
+    assert [action.id for action in running.actions] == ["pause"]
+    _pyload({**ANSWERS["status_server"], "pause": True})
+    paused = await get_adapter("pyload").fetch("status", CONFIG, {}, _ctx())
+    assert [action.id for action in paused.actions] == ["resume"]
+
+
+@pytest.mark.parametrize(("action", "method"), [("pause", "pause_server"), ("resume", "unpause_server")])
+@respx.mock
+async def test_pause_and_resume_are_posts(action: str, method: str) -> None:
+    """Measured against dev101 with a key and dev95 with basic auth: both answer POST and null."""
+    route = respx.post(f"{BASE}/api/{method}").mock(return_value=httpx.Response(200, content=b"null", headers={"content-type": "application/json"}))
+    said = await get_adapter("pyload").action("status", action, {}, CONFIG, {}, _ctx())
+    assert route.called and said in ("Downloads paused.", "Downloads resumed.")
+    assert route.calls[0].request.headers["x-api-key"] == "pl_made-up-key"

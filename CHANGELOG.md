@@ -11,7 +11,18 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 - **Actual Budget, M3U Editor, nginx ignition and Reclaimerr**, taken over
   from nexdeck 0.36.0 with their tests. ⚠️ Actual Budget is beta.
-
+- **Two board templates: Smart home and 3D printing.** Smart home puts
+  Homebridge, ESPHome, Node-RED, Frigate and evcc on one board; 3D printing
+  the Klipper printer through Moonraker next to Spoolman's filament.
+- **"A card turned red" as a notification**, for every integration at once:
+  an ESPHome device offline, a Node-RED flow held back, a maintenance item past
+  due, Homebridge down. Only on the change, once an hour at most for each card,
+  never in demo mode and never for the red a board already shows after a
+  restart. Subscribe to it under the notification channels.
+- **Buttons on the pyLoad and slskd cards.** pyLoad pauses and resumes its
+  downloads, in versions with API keys and before them; slskd connects to
+  Soulseek when it is offline and clears the finished transfers off its list,
+  without touching a file.
 - **authentik in one step.** Under System › Sign-in providers, the address of
   authentik and a one-time API token are enough: HexDeck creates the signing
   key, the provider and the application there and adds itself as a sign-in
