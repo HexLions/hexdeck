@@ -29,6 +29,7 @@ pages:
   slug: overview
   widgets:
   - kind: homebridge.status
+    title: Homebridge
     integration: Homebridge
     layout:
       lg:
@@ -37,6 +38,7 @@ pages:
         w: 6
         h: 3
   - kind: esphome.summary
+    title: ESPHome
     integration: ESPHome
     layout:
       lg:
@@ -45,6 +47,7 @@ pages:
         w: 6
         h: 3
   - kind: nodered.status
+    title: Node-RED
     integration: Node-RED
     layout:
       lg:
