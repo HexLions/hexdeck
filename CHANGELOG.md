@@ -45,6 +45,11 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   whichever draws the map largest.
 - **The chips under "In and out" cut off the upload** on a narrow card. The
   label gives way; the arrow and the number stay.
+- **The top bar left the page while another board loaded**, and in the app
+  installed on iPadOS 26 the blur came back over it and stayed. Both bars
+  now stand in every state of the page, loading and failed included.
+- **The weather chips lay over the temperature** on a narrow card of a wide
+  screen, such as an iPad held upright. They follow the width of the card now.
 
 ## 0.24.0 (2026-10-10)
 
