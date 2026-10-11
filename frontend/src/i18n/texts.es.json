@@ -2187,7 +2187,13 @@
     "Last 30 days": "Últimos 30 días",
     "Last 30 days, one bar per day": "Últimos 30 días, una barra por día",
     "Last 7 days": "Últimos 7 días",
-    "Last 7 days, one bar per 6 hours": "Últimos 7 días, una barra cada 6 horas"
+    "Last 7 days, one bar per 6 hours": "Últimos 7 días, una barra cada 6 horas",
+    "3D printing": "Impresión 3D",
+    "Smart home": "Casa inteligente",
+    "The house that runs itself: Homebridge and its bridges, the ESPHome devices that dropped off, Node-RED flows held back, the cameras and the energy of the day.": "La casa que funciona sola: Homebridge y sus puentes, los dispositivos ESPHome que se cayeron, los flujos de Node-RED detenidos, las cámaras y la energía del día.",
+    "The printer and its filament: what Klipper prints now, how much of each spool is left, and the jobs before.": "La impresora y su filamento: lo que imprime Klipper ahora, cuánto queda de cada bobina y los trabajos anteriores.",
+    "home": "casa",
+    "workshop": "taller"
   },
   "labels": {
     "Private resources": "Recursos privados",

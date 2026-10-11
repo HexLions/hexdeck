@@ -264,7 +264,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | --- | --- |
 | Layout | 12, 24 or 36 columns per board, chosen width, rows that fit the screen |
 | Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved to another page or board |
-| Starting points | Five board templates, four bundled themes, themes as JSON |
+| Starting points | Seven board templates, four bundled themes, themes as JSON |
 | Holders | A tabs card and a group: cards leave the grid and live inside one, which folds away and moves as one |
 | Numbers | History behind every headline number, declared metric or not |
 
