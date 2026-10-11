@@ -232,6 +232,38 @@
         "Le venti nuove integrazioni hanno il bollino beta finché non le si vede su più di una board.",
         "I segreti che tornano nelle risposte, come i codici di abbinamento HomeKit o le password dei monitor, non vengono mai mostrati."
       ]
+    },
+    "0.25.0": {
+      "lead": "HexDeck 0.25.0: quello che nexdeck ha aggiunto fino alla 0.36, un modello per la casa smart e uno per la stampa 3D, e una notifica quando una card diventa rossa.",
+      "sections": [
+        {
+          "title": "Una card è diventata rossa",
+          "body": "Iscriviti nei canali di notifica: un dispositivo ESPHome offline, un flow di Node-RED bloccato, una manutenzione scaduta, Homebridge giù. Al massimo una volta l'ora per card.",
+          "path": "Sistema > Notifiche"
+        },
+        {
+          "title": "Due modelli",
+          "body": "Casa smart mette Homebridge, ESPHome, Node-RED, Frigate ed evcc su una board; Stampa 3D la stampante Klipper accanto al filamento di Spoolman.",
+          "path": "Impostazioni > Board > Parti da un modello"
+        },
+        {
+          "title": "authentik in un passaggio",
+          "body": "Bastano l'indirizzo di authentik e un token usa e getta: HexDeck si configura lì come applicazione e provider di accesso. Nel Profilo ogni account può collegarsi a un provider.",
+          "path": "Sistema > Provider di accesso"
+        },
+        {
+          "title": "Disponibilità su una settimana e un mese",
+          "body": "Le app tile e la pagina di stato possono mostrare gli ultimi 7 o 30 giorni, letti dalle interruzioni. Una barra è verde solo dal 99,9 per cento.",
+          "path": "Impostazioni di una card"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Actual Budget, M3U Editor, nginx ignition e Reclaimerr, da nexdeck.",
+        "pyLoad si mette in pausa e riprende dalla sua card; slskd si connette e toglie i trasferimenti finiti.",
+        "I pulsanti di una card non coprono più il pallino di stato, e le app tile in un gruppo tornano alte una riga.",
+        "Una variabile vuota nel file compose non blocca più l'avvio del server."
+      ]
     }
   }
 }

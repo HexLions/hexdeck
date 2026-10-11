@@ -858,6 +858,38 @@
         "Die zwanzig neuen Integrationen tragen das Beta-Abzeichen, bis man sie auf mehr als einem Board gesehen hat.",
         "Geheimnisse, die in Antworten zurückkommen, etwa HomeKit-Setup-Codes oder Monitor-Passwörter, werden nie gezeigt."
       ]
+    },
+    "0.25.0": {
+      "lead": "HexDeck 0.25.0: was nexdeck bis 0.36 hinzugefügt hat, eine Vorlage für das Smart Home und eine für den 3D-Druck, und eine Benachrichtigung, wenn eine Karte rot wird.",
+      "sections": [
+        {
+          "title": "Eine Karte ist rot geworden",
+          "body": "Unter den Benachrichtigungskanälen abonnieren: ein ESPHome-Gerät offline, ein aufgehaltener Node-RED-Flow, eine überfällige Wartung, Homebridge ausgefallen. Höchstens einmal pro Stunde und Karte.",
+          "path": "System > Benachrichtigungen"
+        },
+        {
+          "title": "Zwei Vorlagen",
+          "body": "Smart Home bringt Homebridge, ESPHome, Node-RED, Frigate und evcc auf ein Board; 3D-Druck den Klipper-Drucker neben Spoolmans Filament.",
+          "path": "Einstellungen > Boards > Mit einer Vorlage beginnen"
+        },
+        {
+          "title": "authentik in einem Schritt",
+          "body": "Die Adresse von authentik und ein Einmal-Token genügen: HexDeck richtet sich dort als Anwendung und Anmeldeanbieter ein. Im Profil kann jedes Konto sich mit einem Anbieter verknüpfen.",
+          "path": "System > Anmeldeanbieter"
+        },
+        {
+          "title": "Verfügbarkeit über eine Woche und einen Monat",
+          "body": "App-Kacheln und die Statusseite können die letzten 7 oder 30 Tage zeigen, aus den Ausfällen gelesen. Ein Balken ist erst ab 99,9 Prozent grün.",
+          "path": "Einstellungen einer Karte"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Actual Budget, M3U Editor, nginx ignition und Reclaimerr, von nexdeck.",
+        "pyLoad pausiert und setzt von seiner Karte aus fort; slskd verbindet sich und entfernt fertige Übertragungen.",
+        "Die Schaltflächen einer Karte liegen nicht mehr auf dem Statuspunkt, und App-Kacheln in einer Gruppe sind wieder eine Zeile hoch.",
+        "Eine leere Variable in der Compose-Datei hält den Server nicht mehr vom Start ab."
+      ]
     }
   }
 }

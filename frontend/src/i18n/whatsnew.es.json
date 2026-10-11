@@ -88,6 +88,38 @@
         "Las veinte integraciones nuevas llevan la insignia beta hasta que se vean en más de un tablero.",
         "Los secretos que vuelven en las respuestas, como los códigos de configuración de HomeKit o las contraseñas de los monitores, nunca se muestran."
       ]
+    },
+    "0.25.0": {
+      "lead": "HexDeck 0.25.0: lo que nexdeck añadió hasta la 0.36, una plantilla de casa inteligente y una de impresión 3D, y un aviso cuando una tarjeta se pone roja.",
+      "sections": [
+        {
+          "title": "Una tarjeta se puso roja",
+          "body": "Suscríbete en los canales de notificación: un dispositivo ESPHome desconectado, un flujo de Node-RED detenido, un mantenimiento vencido, Homebridge caído. Como mucho una vez por hora y tarjeta.",
+          "path": "Sistema > Notificaciones"
+        },
+        {
+          "title": "Dos plantillas",
+          "body": "Casa inteligente reúne Homebridge, ESPHome, Node-RED, Frigate y evcc en un tablero; Impresión 3D, la impresora Klipper junto al filamento de Spoolman.",
+          "path": "Ajustes > Tableros > Empezar desde una plantilla"
+        },
+        {
+          "title": "authentik en un paso",
+          "body": "Bastan la dirección de authentik y un token de un solo uso: HexDeck se configura allí como aplicación y proveedor de inicio de sesión. En el Perfil cada cuenta puede vincularse a un proveedor.",
+          "path": "Sistema > Proveedores de inicio de sesión"
+        },
+        {
+          "title": "Disponibilidad en una semana y un mes",
+          "body": "Los mosaicos de apps y la página de estado pueden mostrar los últimos 7 o 30 días, leídos de las caídas. Una barra es verde solo desde el 99,9 por ciento.",
+          "path": "Ajustes de una tarjeta"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Actual Budget, M3U Editor, nginx ignition y Reclaimerr, de nexdeck.",
+        "pyLoad pausa y reanuda desde su tarjeta; slskd se conecta y quita las transferencias terminadas.",
+        "Los botones de una tarjeta ya no tapan el punto de estado, y los mosaicos de apps en un grupo vuelven a tener una línea de alto.",
+        "Una variable vacía en el archivo compose ya no impide que arranque el servidor."
+      ]
     }
   }
 }

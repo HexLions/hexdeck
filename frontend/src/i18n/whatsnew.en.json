@@ -858,6 +858,38 @@
         "The twenty new integrations carry the beta badge until they have been seen on more boards than one.",
         "Secrets that come back in answers, such as HomeKit setup codes or monitor passwords, are never shown."
       ]
+    },
+    "0.25.0": {
+      "lead": "HexDeck 0.25.0: what nexdeck added up to 0.36, a smart home and a 3D printing template, and a notification when any card turns red.",
+      "sections": [
+        {
+          "title": "A card turned red",
+          "body": "Subscribe to it under the notification channels: an ESPHome device offline, a Node-RED flow held back, a maintenance item past due, Homebridge down. Once an hour at most for each card.",
+          "path": "System > Notifications"
+        },
+        {
+          "title": "Two templates",
+          "body": "Smart home puts Homebridge, ESPHome, Node-RED, Frigate and evcc on one board; 3D printing the Klipper printer next to Spoolman's filament.",
+          "path": "Settings > Boards > Start from a template"
+        },
+        {
+          "title": "authentik in one step",
+          "body": "The address of authentik and a one-time token are enough: HexDeck sets itself up there as an application and a sign-in provider. Under Profile every account can link itself to a provider.",
+          "path": "System > Sign-in providers"
+        },
+        {
+          "title": "Availability over a week and a month",
+          "body": "App tiles and the status page can show the last 7 or 30 days, read from the outages. A bar is green only from 99.9 per cent.",
+          "path": "A card's settings"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Actual Budget, M3U Editor, nginx ignition and Reclaimerr, from nexdeck.",
+        "pyLoad pauses and resumes from its card; slskd connects and clears its finished transfers.",
+        "A card's buttons no longer lie on its status dot, and app tiles in a group are one line high again.",
+        "An empty variable in the compose file no longer stops the server."
+      ]
     }
   }
 }
