@@ -5,6 +5,74 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Actual Budget, M3U Editor, nginx ignition and Reclaimerr**, taken over
+  from nexdeck 0.36.0 with their tests. ⚠️ Actual Budget is beta.
+
+- **authentik in one step.** Under System › Sign-in providers, the address of
+  authentik and a one-time API token are enough: HexDeck creates the signing
+  key, the provider and the application there and adds itself as a sign-in
+  provider. The token is neither stored nor logged; a blueprint download does
+  the same without one. From nexdeck.
+- **Linking one's own account to a sign-in provider**, under Profile, through
+  the provider itself. Before, signing in through a provider either made a
+  second, empty account or was turned away.
+- **Availability over the last 7 and 30 days** on app tiles and the status
+  page, read from the outages, which are kept a year. A bar is green only from
+  99.9 per cent. From nexdeck.
+- **A sign-in provider can be changed in place**, instead of deleted and added
+  again, which lost every linked account.
+
+### Changed
+
+- **New sign-in providers create no accounts on first sign-in** unless told to.
+  Providers already stored keep their setting.
+- **Changing a provider's issuer drops the accounts linked to the old one**,
+  after asking with their number: a subject means something only at its
+  issuer.
+- **Mailpit, nexlore, nexpulse, nexsift, ReadMeABook, Real-Debrid, rTorrent
+  and Speedtest Tracker** are upstream's newer versions: nexlore shows today's
+  daily note and takes a line into it, Real-Debrid shows the data used and the
+  hoster limits. Mailpit, ReadMeABook, Real-Debrid, nexlore and nexsift are out
+  of beta on upstream's confirmation.
+- **Twenty adapters this fork never changed are upstream's current files.**
+  They had stayed at the version first copied: Plex and Jellyfin now show a
+  series once in Recently added, at its newest episode, with how many are new;
+  PeaNUT, Nexview, Docker and the others carry upstream's smaller fixes.
+  Frigate is out of beta on upstream's confirmation.
+
+### Fixed
+
+- **The sign-in attempt could be replayed.** Its cookie is signed with a key of
+  its own now, and a state is used up when it is checked, even when the code
+  is then refused.
+- **An empty variable in the compose file stopped the server.** With
+  `HEXDECK_DEMO` left out of `.env`, the compose file handed over an empty
+  value, which is not a boolean, and HexDeck refused to start. An empty
+  variable now counts as not set.
+- **Gatus offered "In and out, mirrored"** for its count of endpoints up and
+  down, which is no traffic. A test now walks every card that offers the
+  drawing and checks it names both rows; the FRITZ!Box rows got their names.
+- **A card's buttons lay on its status dot and its beta mark** when hovered.
+  In a card with a head they now stand in it, beside the dot; cards without a
+  head keep the floating corner.
+- **A group of app tiles held tiles four times as tall**, since the floor that
+  keeps cards on a phone apart. A group of tiles, buttons and headings keeps a
+  floor of one line again.
+- **A network map shrank to an unreadable size on a phone.** The card measures
+  itself and gives the machines under a node three, two or one column,
+  whichever draws the map largest.
+- **The chips under "In and out" cut off the upload** on a narrow card. The
+  label gives way; the arrow and the number stay.
+- **The top bar left the page while another board loaded**, and in the app
+  installed on iPadOS 26 the blur came back over it and stayed. Both bars
+  now stand in every state of the page, loading and failed included.
+- **The weather chips lay over the temperature** on a narrow card of a wide
+  screen, such as an iPad held upright. They follow the width of the card now.
+
 ## 0.24.0 (2026-10-10)
 
 Twenty new integrations, each checked against the service itself wherever

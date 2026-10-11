@@ -17,6 +17,7 @@ from app.adapters.base import (
     as_chart,
     as_inout,
     as_ring,
+    inout_pair,
     offer_views,
     ring_of,
     shape_for_display,
@@ -310,3 +311,20 @@ def test_the_four_values_are_named_once_and_used_three_times() -> None:
     rows = [data.primary, *data.secondary]
     assert [row["part"] for row in rows] == keys
     assert sorted(data.metrics) == sorted(keys)
+
+
+def test_every_card_offering_in_and_out_names_the_rows_its_chips_read() -> None:
+    """⚠️ The chips under the drawing find their number by the row's metric.
+    A FRITZ!Box, a speed test and a torrent client wrote "Download" and
+    "Upload" without one, and the chips read "down –" and "up –" under a
+    drawing that knew both numbers. Found by nexdeck."""
+    unnamed = []
+    for adapter in all_adapters():
+        for widget in adapter.widgets:
+            pair = inout_pair(widget.metrics) if widget.inout and not widget.client_only else None
+            if pair is None:
+                continue
+            data = adapter.demo(widget.kind, {}, 3)
+            named = {row.get("metric") for row in [data.primary, *(data.secondary or [])] if row}
+            unnamed += [f"{adapter.kind}.{widget.kind}:{metric}" for metric in pair if metric not in named]
+    assert not unnamed, unnamed

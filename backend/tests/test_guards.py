@@ -117,6 +117,8 @@ GUESTS_MAY_CHANGE: dict[str, str] = {
     "POST /api/v1/auth/two-factor/confirm": "own second factor",
     "POST /api/v1/auth/two-factor/recovery-codes": "own second factor",
     "DELETE /api/v1/auth/two-factor": "own second factor",
+    "POST /api/v1/auth/oidc/{slug}/link": "own link to a sign-in provider",
+    "DELETE /api/v1/auth/oidc/{slug}/link": "own link to a sign-in provider",
     "POST /api/v1/notices/read": "marking one's own notices as read",
     "DELETE /api/v1/notices/{notice_id}": "one of one's own notices",
     "DELETE /api/v1/notices": "all of one's own read notices",
@@ -548,9 +550,11 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         # the badge in the interface will not say whose instance it was.
         "arcane", "dockhand", "freshrss", "imap", "linkding", "nexbeat", "nexcrate", "nextrmnl",
         "octoprint", "openmediavault", "patchmon", "rtorrent",
+        # Taken over from nexdeck 0.31 to 0.36, confirmed there the same way.
+        "frigate", "m3ueditor", "mailpit", "nexlore", "nexsift", "nginxignition", "readmeabook", "realdebrid", "reclaimerr",
         # The ten this fork wrote itself, confirmed on 2026-10-06 against the
         # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
-        # Kubernetes in his rack, and Minecraft, Steam, Shelly, NetBird,
+        # Kubernetes in their rack, and Minecraft, Steam, Shelly, NetBird,
         # OpenWrt and Elasticsearch besides. This confirmation is ours.
         "amp", "proxmenux", "shelly", "steam", "netbird", "kubernetes", "minecraft", "openwrt",
         "urbackup", "elasticsearch"}
@@ -743,6 +747,21 @@ def test_the_version_is_the_same_in_every_place_it_is_written() -> None:
 #: Adapters that are not a service anybody connects to: the built-in cards,
 #: the generic JSON reader and the calendar that merges other people's.
 NOT_A_SERVICE = {"core", "jsonapi", "calendar", "projects", "notepad"}
+
+
+def test_an_empty_variable_counts_as_not_set(monkeypatch: pytest.MonkeyPatch) -> None:
+    """⚠️ The compose file hands over ``HEXDECK_DEMO=""`` when .env leaves it
+    out, and the server refused to start: ``""`` is not a boolean. Every
+    setting, set but empty, has to fall back to its default.
+    """
+    from app.config import PREFIX, Settings
+
+    names = [name for name in Settings.model_fields if not name.startswith("_")]
+    assert len(names) >= 15, f"only {len(names)} settings were found, so this guard proves nothing"
+    for name in names:
+        monkeypatch.setenv(f"{PREFIX}{name.upper()}", "")
+    settings = Settings()
+    assert settings.demo is False
 
 
 def test_the_readme_counts_the_services_it_has() -> None:

@@ -20,6 +20,20 @@ describe('renderers', () => {
     expect(drawn).toBe(DEMO_VIEWS.length)
   })
 
+  it('draws a day with fourteen minutes down amber, not green', () => {
+    const view = { ...DEMO_VIEWS[0], id: 13, renderer: 'list' } as WidgetView
+    const data = {
+      status: 'ok',
+      meta: { bars: '30d' },
+      items: [{ title: 'Nextcloud', status: 'ok', value: 99, unit: '%', bars: [1, 0.99, 0.9995] }],
+    } as unknown as WidgetData
+    render(<>{renderWidget({ widget: view, data })}</>)
+    const [whole, fourteenMinutes, aMinute] = Array.from(screen.getByTestId('availability-bars').children) as HTMLElement[]
+    expect(whole.style.background).toBe('var(--nd-ok)')
+    expect(fourteenMinutes.style.background).toBe('var(--nd-warn)')
+    expect(aMinute.style.background).toBe('var(--nd-ok)')
+  })
+
   it('shows the value and the unit of a value card', () => {
     const view = DEMO_VIEWS.find((v) => v.renderer === 'value')!
     render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} series={DEMO_SERIES[view.id]} />)

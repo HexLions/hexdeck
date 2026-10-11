@@ -193,7 +193,12 @@ class OidcProvider(Base):
     scopes: Mapped[str] = mapped_column(String(200), default="openid profile email")
     enabled: Mapped[bool] = mapped_column(Boolean, default=True)
     #: Create an account on first sign-in, with this role.
-    auto_create: Mapped[bool] = mapped_column(Boolean, default=True)
+    #:
+    #: ⚠️ Off by default; until 0.36.0 on, so a provider added by hand gave
+    #: anybody with a login there an account here, unless the operator thought
+    #: to switch it off. Rows stored before keep their value: no migration
+    #: touches the column, the default is applied only to new rows.
+    auto_create: Mapped[bool] = mapped_column(Boolean, default=False)
     default_role: Mapped[str] = mapped_column(String(16), default=Role.user.value)
     #: This provider asks for a second factor itself, so HexDeck does not.
     #:
@@ -409,6 +414,10 @@ class HealthCheck(Base):
     last_checked_at: Mapped[datetime | None] = mapped_column(Utc(), nullable=True)
     last_error: Mapped[str] = mapped_column(String(300), default="")
     down_since: Mapped[datetime | None] = mapped_column(Utc(), nullable=True)
+    #: Since when this check measures. Before it, a bar of the last 7 or 30
+    #: days is unknown rather than up: a check made yesterday has not seen
+    #: the month. Checks from before 0.25.0 count from the update.
+    created_at: Mapped[datetime | None] = mapped_column(Utc(), nullable=True, default=utcnow)
 
     widget: Mapped[Widget | None] = relationship(back_populates="health_check")
     outages: Mapped[list[Outage]] = relationship(back_populates="check", cascade="all, delete-orphan")

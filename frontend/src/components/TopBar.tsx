@@ -49,7 +49,7 @@ export function TopBar(props: Props) {
     return () => window.removeEventListener('mousedown', onClick)
   }, [menu])
   return (
-    <header className="glass-strong sticky top-0 z-40 h-12 flex items-center gap-2 px-3 border-x-0 border-t-0 rounded-none">
+    <header className="app-bar glass-strong sticky top-0 z-40 h-12 flex items-center gap-2 px-3 border-x-0 border-t-0 rounded-none">
       <Link to="/" className="flex items-center gap-2 mr-1" aria-label="HexDeck">
         <LogoMark size={26} />
         <span className="wordmark hidden lg:inline">

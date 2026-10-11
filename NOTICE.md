@@ -201,6 +201,37 @@ Updated at every milestone.
   independently: NetBird, Kubernetes, Minecraft, UrBackup, the public
   address, Elasticsearch and OpenWrt. This fork keeps its own, which are
   the ones its tests cover.
+- **Four more adapters and eight updates taken over from nexdeck 0.36.0.**
+  Actual Budget (through actual-http-api), M3U Editor, nginx ignition and
+  Reclaimerr came over as upstream has them, with their tests; Mailpit,
+  nexlore (today's daily note), nexpulse, nexsift, ReadMeABook, Real-Debrid
+  (the data used and the hoster limits), rTorrent and Speedtest Tracker were
+  replaced by upstream's newer files, since this fork had not changed them.
+  Their German, Italian and Spanish texts are upstream's. Twenty more
+  adapters this fork had copied and never changed (AdGuard Home, Blocky,
+  Docker, Frigate, Gatus, Jellyfin, Jellystat, Nexview, PeaNUT, Pi-hole,
+  Plex, Portainer, Tdarr, Technitium and others) had stayed at that first
+  copy and are upstream's current files now, found by comparing each file
+  with every version upstream ever had.
+
+  ⚠️ Eight of them are out of beta because **upstream** confirmed them
+  against a live instance; the guard says so next to the list.
+
+  ⚠️ GitLab, Alertmanager and Cloudflare arrived upstream in 0.34.0 the same
+  week this fork wrote its own, independently and with different cards. This
+  fork keeps its own, which were checked against GitLab.com, a running
+  Alertmanager and Cloudflare's API, and which its tests cover.
+- **Sign-in from nexdeck 0.35 and 0.36: authentik in one step, linking,
+  hardening.** The authentik button and blueprint, linking one's own account to
+  a provider, changing a provider in place, links dropped on a new issuer, new
+  providers without automatic accounts, and the attempt cookie with its own key
+  and a single-use state, with upstream's tests. Fitted here: the objects made
+  in authentik are named HexDeck, and nexdeck's "session at home" is this
+  fork's automatic sign-in on trusted networks, which may not link an account.
+  The availability over 7 and 30 days, the card buttons in the head, the tile
+  floor of a group, the network map on a phone, the in-and-out chips, the bars
+  that stay while a board loads and the weather chips by the card's width are
+  upstream's fixes too, merged by hand where this fork had changed the code.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which

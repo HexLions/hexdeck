@@ -323,7 +323,7 @@ class CoreAdapter(Adapter):
                       options=(("board", "This board"), ("all", "Every board")),
                       help="Only cards whose reachability check is switched on are listed."),
                 Field("bars", "Availability bars", type="select", default="24h",
-                      options=(("24h", "Last 24 hours"), ("6h", "Last 6 hours"), ("1h", "Last hour"), ("live", "Last 48 checks"), ("", "None")),
+                      options=(("30d", "Last 30 days"), ("7d", "Last 7 days"), ("24h", "Last 24 hours"), ("6h", "Last 6 hours"), ("1h", "Last hour"), ("live", "Last 48 checks"), ("", "None")),
                       help="The row under each service."),
                 Field("only_down", "Only what is down", type="bool", default=False),
                 # ⚠️ The same rows drawn as one wide strip of bars per service:
@@ -367,6 +367,8 @@ class CoreAdapter(Adapter):
                     default="24h",
                     help="What the row of bars at the bottom of the tile shows.",
                     options=(
+                        ("30d", "Last 30 days, one bar per day"),
+                        ("7d", "Last 7 days, one bar per 6 hours"),
                         ("24h", "Last 24 hours, one bar per 30 minutes"),
                         ("6h", "Last 6 hours, one bar per 7.5 minutes"),
                         ("1h", "Last hour, one bar per minute"),

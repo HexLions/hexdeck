@@ -47,7 +47,12 @@ LEGACY_NAMES_ADOPTED: list[str] = adopt_legacy_environment()
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix=PREFIX, extra="ignore")
+    #: ⚠️ ``env_ignore_empty``: a variable that is set but empty counts as not
+    #: set. The compose file writes ``HEXDECK_DEMO=${HEXDECK_DEMO:-}``, which
+    #: hands over ``""`` when .env leaves it out, and ``""`` is not a boolean:
+    #: the server refused to start with a validation error. NAS templates
+    #: (Unraid, TrueNAS) pass empty fields the same way. Found by nexdeck.
+    model_config = SettingsConfigDict(env_prefix=PREFIX, extra="ignore", env_ignore_empty=True)
 
     #: Where the database, key file, uploads and caches live.
     data_dir: Path = Path("data")

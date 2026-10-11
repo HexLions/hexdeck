@@ -20,7 +20,7 @@ from .base import (
     human_bytes,
     path_segment,
 )
-from .media_base import Library, MediaAdapter, Stream
+from .media_base import Library, MediaAdapter, Stream, new_episodes
 from .music import (
     ALBUM_PAGE,
     ARTIST_PAGE,
@@ -225,6 +225,11 @@ class JellyfinAdapter(MediaAdapter, MusicLibrary):
     def _art(item_id: Any) -> str:
         return f"proxy:/Items/{item_id}/Images/Primary?maxHeight=400" if item_id else ""
 
+    @staticmethod
+    def _backdrop(item_id: Any) -> str:
+        """The wide picture of a film or a series, small enough for behind a card."""
+        return f"proxy:/Items/{item_id}/Images/Backdrop?maxWidth=960&quality=80" if item_id else ""
+
     # -- streams and library (the shared media shape) ----------------------------
 
     async def sessions(self, config: dict[str, Any], ctx: Context) -> list[Stream]:
@@ -254,6 +259,7 @@ class JellyfinAdapter(MediaAdapter, MusicLibrary):
                 remaining_seconds=(duration - position) if duration else None,
                 paused=bool((session.get("PlayState") or {}).get("IsPaused")), transcoding=transcoding,
                 art=self._art(item.get("SeriesId") or item.get("Id")),
+                backdrop=self._backdrop(item.get("SeriesId") or item.get("Id")),
             ))
         return streams
 
@@ -278,14 +284,21 @@ class JellyfinAdapter(MediaAdapter, MusicLibrary):
                 "Limit": limit * 5 if item_type == "Episode" else limit,
                 "Fields": "DateCreated,ProductionYear,SeriesId,ParentIndexNumber,IndexNumber,AlbumArtist",
             })
-            seen: set[str] = set()
+            seen: dict[str, tuple[dict[str, Any], int]] = {}
             for entry in (payload or {}).get("Items") or []:
                 series = str(entry.get("SeriesId") or "")
                 if item_type == "Episode" and series:
                     if series in seen:
+                        poster, episodes = seen[series]
+                        seen[series] = (poster, episodes + 1)
                         continue
-                    seen.add(series)
+                    seen[series] = (self._poster(entry), 1)
+                    items.append(seen[series][0])
+                    continue
                 items.append(self._poster(entry))
+            for poster, episodes in seen.values():
+                if episodes > 1:
+                    poster["subtitle"] = new_episodes(episodes)
         items.sort(key=lambda item: item.get("added_at") or 0, reverse=True)
         return WidgetData(items=items[:limit], meta={"empty": "Nothing new"})
 
