@@ -27,6 +27,7 @@ from typing import Any
 
 from . import demo as fake
 from .base import (
+    Action,
     Adapter,
     AdapterError,
     AuthFailed,
@@ -95,6 +96,30 @@ class SlskdAdapter(Adapter):
         except ValueError as failure:
             raise AdapterError("slskd did not answer with JSON.", code="not_json") from failure
 
+    async def _send(self, config: dict[str, Any], ctx: Context, verb: str, path: str) -> int:
+        """A change, by the same key: the status code is all slskd answers."""
+        response = await ctx.request(verb, f"{base_url(config)}/api/v0{path}", verify=not config.get("insecure"),
+                                     headers={"X-API-Key": str(config.get("api_key") or "").strip()}, auth_errors=False)
+        if response.status_code in (401, 403):
+            raise AuthFailed("slskd refused the change.",
+                             hint="A key with the role readwrite or administrator; a relay agent changes nothing itself.")
+        if response.status_code >= 400:
+            raise AdapterError(f"slskd answered with HTTP {response.status_code}.", code="http_error")
+        return response.status_code
+
+    async def action(self, widget_kind: str, action_id: str, params: dict[str, Any], config: dict[str, Any],
+                     options: dict[str, Any], ctx: Context) -> str:
+        if action_id == "connect":
+            # 200 starts the connection watchdog, 205 restarts one already trying.
+            await self._send(config, ctx, "PUT", "/server")
+            return "slskd is connecting to Soulseek."
+        if action_id == "clear":
+            # Removes the finished ones from the list, failed or succeeded; no file is touched.
+            which = "uploads" if options.get("uploads") else "downloads"
+            await self._send(config, ctx, "DELETE", f"/transfers/{which}/all/completed")
+            return "The finished transfers are off the list."
+        raise AdapterError("Unknown action.", code="no_such_action")
+
     async def test(self, config: dict[str, Any], ctx: Context) -> str:
         app = await self._get(config, ctx, "/application", 0) or {}
         server = app.get("server") or {}
@@ -129,6 +154,7 @@ class SlskdAdapter(Adapter):
             secondary.append({"label": "Update", "value": str(version.get("latest") or "")})
         logged_in = bool(server.get("isLoggedIn"))
         return WidgetData(
+            actions=[] if logged_in or server.get("isConnecting") else [Action(id="connect", label="Connect", icon="power")],
             status="ok" if logged_in else "warn" if server.get("isConnecting") or server.get("isLoggingIn") else "bad",
             primary={"label": "Soulseek", "value": "logged in" if logged_in else "connecting" if server.get("isConnecting") else "offline"},
             secondary=secondary,
@@ -171,7 +197,9 @@ class SlskdAdapter(Adapter):
                 row["progress"] = round(float(one["percentComplete"]), 1)
             rows.append(row)
         what = "upload" if uploads else "download"
+        finished = any("Completed" in states(one) for one in transfers)
         return WidgetData(
+            actions=[Action(id="clear", label="Clear finished", icon="check")] if finished else [],
             status="warn" if any(row["status"] == "bad" for row in rows) else "ok",
             items=rows[:limit],
             meta={"empty": f"No {what} yet"},

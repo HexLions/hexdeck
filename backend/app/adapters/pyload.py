@@ -29,6 +29,7 @@ from typing import Any
 
 from . import demo as fake
 from .base import (
+    Action,
     Adapter,
     AdapterError,
     AuthFailed,
@@ -78,7 +79,7 @@ class PyLoadAdapter(Adapter):
                             Field("limit", "Entries", type="number", default=10))),
     )
 
-    async def _get(self, config: dict[str, Any], ctx: Context, method: str, cache: float) -> Any:
+    async def _get(self, config: dict[str, Any], ctx: Context, method: str, cache: float, *, verb: str = "GET") -> Any:
         key = str(config.get("api_key") or "").strip()
         headers = {"Accept": "application/json"}
         auth = None
@@ -86,7 +87,7 @@ class PyLoadAdapter(Adapter):
             headers["X-API-Key"] = key
         elif config.get("username"):
             auth = (str(config.get("username")), str(config.get("password") or ""))
-        response = await ctx.request("GET", f"{base_url(config)}/api/{method}", verify=not config.get("insecure"),
+        response = await ctx.request(verb, f"{base_url(config)}/api/{method}", verify=not config.get("insecure"),
                                      headers=headers, auth=auth, cache_seconds=cache, auth_errors=False)
         if response.status_code in (401, 403):
             if key:
@@ -119,6 +120,16 @@ class PyLoadAdapter(Adapter):
         free = await self._get(config, ctx, "free_space", 300)
         return self._status(status, free if isinstance(free, (int, float)) else None)
 
+    async def action(self, widget_kind: str, action_id: str, params: dict[str, Any], config: dict[str, Any],
+                     options: dict[str, Any], ctx: Context) -> str:
+        if action_id == "pause":
+            await self._get(config, ctx, "pause_server", 0, verb="POST")
+            return "Downloads paused."
+        if action_id == "resume":
+            await self._get(config, ctx, "unpause_server", 0, verb="POST")
+            return "Downloads resumed."
+        raise AdapterError("Unknown action.", code="no_such_action")
+
     # -- the cards -----------------------------------------------------------
 
     @staticmethod
@@ -133,6 +144,10 @@ class PyLoadAdapter(Adapter):
             secondary.append({"label": "Free", "value": human_bytes(free)})
         notice = "A captcha is waiting." if status.get("captcha") else ""
         return WidgetData(
+            # ⚠️ POST /api/pause_server and /api/unpause_server, in pyLoad from
+            # before API keys (0.5.0b3.dev95) and after (dev101) alike. They
+            # need the user's STATUS permission.
+            actions=[Action(id="resume", label="Resume", icon="play")] if paused else [Action(id="pause", label="Pause", icon="pause")],
             status="warn" if paused or notice else "ok",
             primary={"label": "Paused" if paused else "Speed", "value": "paused" if paused else f"{human_bytes(speed)}/s", "metric": "speed"},
             secondary=secondary,

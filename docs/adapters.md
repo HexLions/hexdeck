@@ -99,10 +99,10 @@ that one of thirty-five renderers draws.
 | Radarr, Sonarr, Lidarr, Readarr | queue, status, calendar | search missing | API key |
 | Prowlarr | indexers, status | | API key |
 | Jackett | overview, indexers | | the API key from the dashboard, for the Torznab list of indexers; which indexers fail and why sits behind Jackett's login, which the key does not open, so it needs the admin password, or nothing when Jackett has none. A wrong key is answered with HTTP 200 and Torznab error 100 |
-| slskd | status, downloads (or uploads) | | an API key listed under web > authentication > api_keys, sent as `X-API-Key` (a Bearer header is refused). Without Soulseek credentials slskd answers but is offline, and the status says so |
+| slskd | status, downloads (or uploads) | connect, clear the finished from the list | an API key listed under web > authentication > api_keys, sent as `X-API-Key` (a Bearer header is refused). Without Soulseek credentials slskd answers but is offline, and the status says so |
 | autobrr | recent releases, grabbed | | API key from Settings > API keys |
 | SABnzbd, NZBGet, qBittorrent, Transmission, Deluge | queue, speed | pause, resume | key or password |
-| pyLoad | status, downloads | | an API key from Settings > Users, sent as `X-API-Key`, on pyLoad from 2026 on; older versions take the user name and password as basic auth instead, which newer ones refuse |
+| pyLoad | status, downloads | pause, resume | an API key from Settings > Users, sent as `X-API-Key`, on pyLoad from 2026 on; older versions take the user name and password as basic auth instead, which newer ones refuse |
 | MeTube | fetch a video, downloads, download count | fetch an address you type in, save the file to your own machine, remove, try again | none; MeTube has no login of its own, so whoever reaches it may queue and delete |
 | Sportarr | upcoming, missing events, events | | API key from Settings > General > Security |
 | Tube Archivist | download queue, latest videos, video archive | start downloads | API token from Settings > Application, sent as Token |

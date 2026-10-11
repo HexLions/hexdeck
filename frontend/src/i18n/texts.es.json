@@ -3343,6 +3343,8 @@
     "Reload": "Recargar",
     "Renew": "Renovar",
     "Reset timer": "Reiniciar plazo",
-    "Sync": "Sincronizar"
+    "Sync": "Sincronizar",
+    "Clear finished": "Quitar los terminados",
+    "Connect": "Conectar"
   }
 }
