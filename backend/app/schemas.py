@@ -395,7 +395,8 @@ class OidcProviderBody(BaseModel):
     client_secret: str = Field(default="", max_length=600)
     scopes: str = Field(default="openid profile email", max_length=200)
     enabled: bool = True
-    auto_create: bool = True
+    #: Off unless said otherwise: a new provider hands out no accounts on its own.
+    auto_create: bool = False
     default_role: Literal["admin", "user", "guest"] = "user"
     #: The provider asks for a second factor itself, so HexDeck does not.
     trusts_second_factor: bool = False
@@ -407,6 +408,13 @@ class AutoLoginBody(BaseModel):
     enabled: bool = False
     user_id: int | None = None
     networks: list[str] = Field(default_factory=list, max_length=50)
+
+
+class AuthentikSetupBody(BaseModel):
+    """Where authentik is, and a token that may create applications there. The token is not stored."""
+
+    url: str = Field(min_length=1, max_length=300)
+    token: str = Field(min_length=1, max_length=2000)
 
 
 class SettingsBody(BaseModel):

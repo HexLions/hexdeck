@@ -161,6 +161,31 @@ def current_user(user: Annotated[User | None, Depends(optional_user)]) -> User:
 
 
 CurrentUser = Annotated[User, Depends(current_user)]
+
+
+def refuse_at_home(request: Request) -> None:
+    """Nothing that would let the account in from elsewhere, from a browser signed in by itself.
+
+    The automatic sign-in on trusted networks counts only there. Linking the
+    account to a sign-in provider from such a browser would be a way in from
+    anywhere, around the very rule that makes the automatic sign-in
+    acceptable. Taken from nexdeck, which calls it a session at home.
+    """
+    if getattr(request.state, "auth_kind", "") == "auto":
+        raise error(
+            "auto_session",
+            "Signed in by itself on a trusted network, this browser may not create a way in from elsewhere. Sign in with a password for that.",
+            status.HTTP_403_FORBIDDEN,
+        )
+
+
+def not_signed_in_by_itself(request: Request, user: CurrentUser) -> User:
+    refuse_at_home(request)
+    return user
+
+
+#: The signed-in account, but not from a browser the trusted networks signed in by itself.
+PasswordUser = Annotated[User, Depends(not_signed_in_by_itself)]
 OptionalUser = Annotated[User | None, Depends(optional_user)]
 
 
