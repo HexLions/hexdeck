@@ -264,6 +264,18 @@
         "I pulsanti di una card non coprono più il pallino di stato, e le app tile in un gruppo tornano alte una riga.",
         "Una variabile vuota nel file compose non blocca più l'avvio del server."
       ]
+    },
+    "0.25.1": {
+      "lead": "HexDeck 0.25.1: una correzione di sicurezza. Aggiorna se HexDeck è raggiungibile da fuori dalla tua rete.",
+      "sections": [
+        {
+          "title": "Un indirizzo di casa bastava dichiararlo in un header",
+          "body": "Chiunque potesse raggiungere HexDeck poteva dichiarare un indirizzo di casa in un header e, con l'accesso automatico dalle reti fidate attivo, entrare da solo. Ora HexDeck crede a quell'header solo dai proxy che indichi. Dietro un reverse proxy, indicalo in HEXDECK_TRUSTED_PROXIES.",
+          "path": "Sistema > Provider di accesso"
+        }
+      ],
+      "smallTitle": "Corretto",
+      "small": []
     }
   }
 }

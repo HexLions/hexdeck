@@ -5,7 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.25.1 (2026-10-12)
+
+A security fix: update if HexDeck can be reached from outside your network.
 
 ### Security
 
