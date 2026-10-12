@@ -15,6 +15,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   four apps of the nex family. ⚠️ All beta.
 - **JSON API value cards carry up to four badges** read from the same answer.
   From nexdeck.
+- **The problems card says what is wrong and leads to the card.** "Jellyfin
+  findings: 0 errors, 1 warning" becomes the first red and yellow rows of that
+  card, and each row opens the card's own link. From nexdeck.
 
 ### Fixed
 

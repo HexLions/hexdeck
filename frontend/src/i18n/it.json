@@ -1065,7 +1065,8 @@
     "saveFile": "Salva {{name}}",
     "uptime": "Disponibilità nel periodo",
     "flow": "Dove va l'energia",
-    "topology": "Come sono collegati i punti"
+    "topology": "Come sono collegati i punti",
+    "problemsMore": "+{{count}} altri"
   },
   "player": {
     "title": "Musica",

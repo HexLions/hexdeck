@@ -1065,7 +1065,8 @@
     "saveFile": "{{name}} speichern",
     "uptime": "Verfügbarkeit im Zeitraum",
     "flow": "Wohin der Strom fließt",
-    "topology": "Wie die Orte zusammenhängen"
+    "topology": "Wie die Orte zusammenhängen",
+    "problemsMore": "+{{count}} weitere"
   },
   "player": {
     "title": "Musik",

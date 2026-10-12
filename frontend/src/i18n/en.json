@@ -1065,7 +1065,8 @@
     "saveFile": "Save {{name}}",
     "uptime": "Uptime in the window",
     "flow": "Where the power goes",
-    "topology": "How the places hang together"
+    "topology": "How the places hang together",
+    "problemsMore": "+{{count}} more"
   },
   "player": {
     "title": "Music",
