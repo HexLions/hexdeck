@@ -240,6 +240,12 @@ Updated at every milestone.
   checked for script and served in a sandbox; every other SVG is still
   refused. Upstream's switch of its own sign-in to a shared module (nexoidc)
   was not taken; the features of 0.36 already are.
+- **The iPad blur, the board as YAML, and the rest of nexdeck 0.37 to 0.40.**
+  Solid bars in the installed app on iPadOS 26 (from nexdeck 0.29.2, missed by
+  earlier takeovers) with the bar kept through loading, deleting a board and
+  dialogs; editing a board as YAML in place; deleting every notice; the
+  problems card naming findings; mail with Date and Message-ID. Merged by hand
+  into this fork's code, with upstream's tests and end-to-end specs.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which

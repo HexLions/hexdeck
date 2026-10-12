@@ -7,7 +7,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ApiError, del, get, patch, post, put, upload } from '../api/client'
 import { columnsOf, type Columns } from '../lib/layout'
 import type { BoardSummary, BoardWithLive, KioskToken } from '../api/types'
+import { useHomeBoardPath } from '../lib/homeBoard'
 import { BUNDLED } from './BackgroundLayer'
+import { BoardYamlDialog } from './BoardYamlDialog'
 import { Confirm, Field, Select, Sheet, Switch } from './ui'
 
 interface Props {
@@ -27,6 +29,7 @@ type Tab = 'boards' | 'look' | 'pages' | 'sharing' | 'kiosk' | 'file'
 export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onChanged, onPreview }: Props) {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const homeAfterDelete = useHomeBoardPath(board.id)
   const [tab, setTab] = useState<Tab>('boards')
   const [name, setName] = useState(board.name)
   const [background, setBackground] = useState(board.background)
@@ -37,6 +40,7 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
   const [deletingPage, setDeletingPage] = useState<{ id: number; name: string; widgets: number } | null>(null)
   const [newBoard, setNewBoard] = useState('')
   const [importText, setImportText] = useState('')
+  const [editingYaml, setEditingYaml] = useState(false)
   const [kioskForm, setKioskForm] = useState({ name: 'Wall display', allow_actions: false, cycle_seconds: 0, dim_from: '', dim_to: '' })
   const [freshToken, setFreshToken] = useState<KioskToken | null>(null)
   const users = useQuery({ queryKey: ['users'], queryFn: () => get<{ id: number; username: string; display_name: string; role: string }[]>('/users'), enabled: open && tab === 'sharing' })
@@ -355,9 +359,17 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
       {tab === 'file' && (
         <div>
           <p className="text-xs text-muted mb-2">{t('board.fileHelp')}</p>
-          <a className="btn mb-4 inline-flex" href={`/api/v1/boards/${board.slug}/export`} download>
-            {t('board.export')}
-          </a>
+          <div className="flex flex-wrap gap-2 mb-4">
+            <a className="btn inline-flex" href={`/api/v1/boards/${board.slug}/export`} download>
+              {t('board.export')}
+            </a>
+            {canEdit && !board.provisioned && (
+              <button className="btn" onClick={() => setEditingYaml(true)}>
+                {t('board.editYaml')}
+              </button>
+            )}
+          </div>
+          <BoardYamlDialog open={editingYaml} slug={board.slug} onClose={() => setEditingYaml(false)} onSaved={onChanged} />
           <Field label={t('board.import')} help={t('board.importHelp')}>
             <textarea className="input" rows={6} value={importText} onChange={(e) => setImportText(e.target.value)} placeholder="HexDeck: 1&#10;board:&#10;  name: …" />
           </Field>
@@ -409,7 +421,7 @@ export function BoardSettingsSheet({ open, board, boards, canEdit, onClose, onCh
           void del(`/boards/${board.slug}`).then(() => {
             onChanged()
             onClose()
-            navigate('/')
+            navigate(homeAfterDelete, { replace: true })
           })
         }}
       />

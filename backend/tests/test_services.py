@@ -255,7 +255,8 @@ def test_bundled_logos_are_served_and_listed_without_network(client: TestClient,
     assert b"<svg" in logo.content and b"<!--" not in logo.content
     names = client.get("/api/v1/icons/names").json()
     assert {"name": "nexview", "source": "bundled"} in names
-    assert [entry["name"] for entry in client.get("/api/v1/icons/search?q=nex").json()] == ["nexdeck", "nexmail", "nexview", "nexpulse"]
+    assert [entry["name"] for entry in client.get("/api/v1/icons/search?q=nex").json()] == [
+        "nexdeck", "nexmail", "nexview", "nexbrand", "nexdiary", "nexpaper", "nexpulse", "nexcanvas"]
 
 
 async def test_ping_without_subprocess_support_is_a_readable_failure(monkeypatch: pytest.MonkeyPatch) -> None:

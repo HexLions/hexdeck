@@ -32,11 +32,13 @@ interface Props {
   user: HeaderUser | null
   boards?: BoardEntry[]
   onSwitchBoard?: (slug: string) => void
+  /** Where the logo leads: the home board itself, not ``/`` (see ``useHomeBoardPath``). */
+  home?: string
 }
 
 /** The slim top bar: board and pages left, search in the middle, tools right. */
 export function TopBar(props: Props) {
-  const { boardName, pages, activePage, onPage, editing, onEdit, canEdit, unread, onNotices, onSearch, onBoards, user, boards = [], onSwitchBoard } = props
+  const { boardName, pages, activePage, onPage, editing, onEdit, canEdit, unread, onNotices, onSearch, onBoards, user, boards = [], onSwitchBoard, home = '/' } = props
   const { t } = useTranslation()
   const [menu, setMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -50,7 +52,7 @@ export function TopBar(props: Props) {
   }, [menu])
   return (
     <header className="app-bar glass-strong sticky top-0 z-40 h-12 flex items-center gap-2 px-3 border-x-0 border-t-0 rounded-none">
-      <Link to="/" className="flex items-center gap-2 mr-1" aria-label="HexDeck">
+      <Link to={home} className="flex items-center gap-2 mr-1" aria-label="HexDeck">
         <LogoMark size={26} />
         <span className="wordmark hidden lg:inline">
           Hex<span className="text-accent">Deck</span>
@@ -94,7 +96,7 @@ export function TopBar(props: Props) {
           </div>
         )}
       </div>
-      <nav className="hidden md:flex items-center gap-0.5 ml-1" aria-label={t('board.pages')}>
+      <nav className="hidden md:flex items-center gap-0.5 ml-1 min-w-0 overflow-x-auto scrollbar-none [&>*]:shrink-0 whitespace-nowrap" aria-label={t('board.pages')}>
         {pages.map((page) => (
           <button
             key={page.id}
@@ -106,7 +108,9 @@ export function TopBar(props: Props) {
           </button>
         ))}
       </nav>
-      <div className="flex-1 flex justify-center px-2">
+      {/* ⚠️ min-w: a flex item keeps the width of its content unless told otherwise, and the
+          placeholder alone pushed the account menu off an upright iPad (found by nexdeck). */}
+      <div className="flex-1 min-w-10 flex justify-center px-2">
         <button
           className="hidden sm:flex items-center gap-2 h-8 w-full min-w-0 max-w-[420px] px-3 rounded-lg border border-line bg-bg/40 text-muted text-[13px] hover:border-line-strong transition-colors"
           onClick={onSearch}
@@ -115,7 +119,7 @@ export function TopBar(props: Props) {
           <Search size={14} className="flex-none" />
           {/* One line, cut short: on a tablet with five pages the box is narrow and the text ran to three lines. */}
           <span className="flex-1 min-w-0 text-left truncate">{t('palette.placeholder')}</span>
-          <kbd className="flex-none num text-[10px] px-1.5 py-0.5 rounded border border-line text-faint">Ctrl K</kbd>
+          <kbd className="hidden lg:inline flex-none num text-[10px] px-1.5 py-0.5 rounded border border-line text-faint">Ctrl K</kbd>
         </button>
       </div>
       <div className="flex items-center gap-1.5">

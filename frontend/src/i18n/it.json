@@ -653,6 +653,8 @@
     "kioskCreate": "Crea link kiosk",
     "fileHelp": "Una board è un file YAML: esportala, tienila in Git, importala altrove. I segreti non vengono mai scritti.",
     "export": "Esporta come YAML",
+    "editYaml": "Modifica come YAML",
+    "editYamlHelp": "La board come testo. Una pagina o card che mantiene il suo id resta la stessa, con il suo controllo e la sua cronologia; una senza id è nuova, e quella che togli viene eliminata. Le connessioni vengono abbinate per nome.",
     "import": "Importa una board",
     "importHelp": "Incolla lo YAML di una board esportata.",
     "importRun": "Importa",
@@ -803,7 +805,10 @@
     "empty": "Niente da segnalare.",
     "markRead": "Segna come letto",
     "all": "Tutti gli avvisi",
-    "markAllRead": "Segna tutti come letti"
+    "markAllRead": "Segna tutti come letti",
+    "deleteAll": "Elimina tutto",
+    "deleteAllTitle": "Eliminare tutti gli avvisi?",
+    "deleteAllBody": "Verranno eliminati tutti i {{count}} avvisi, anche quelli non letti. Non si può annullare."
   },
   "palette": {
     "title": "Cerca",

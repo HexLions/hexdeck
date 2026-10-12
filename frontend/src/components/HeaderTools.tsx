@@ -160,7 +160,7 @@ function UserMenu({ user, signedIn }: { user: HeaderUser; signedIn: boolean }) {
         aria-label={name}
       >
         <Avatar url={user.avatar_url} name={name} size={26} />
-        <span className="hidden max-w-32 truncate text-[13px] text-muted sm:inline">{name}</span>
+        <span className="hidden max-w-32 truncate text-[13px] text-muted lg:inline">{name}</span>
         <ChevronDown size={13} className="text-faint" />
       </button>
       {open && (
