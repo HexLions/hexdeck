@@ -120,6 +120,18 @@
         "Los botones de una tarjeta ya no tapan el punto de estado, y los mosaicos de apps en un grupo vuelven a tener una línea de alto.",
         "Una variable vacía en el archivo compose ya no impide que arranque el servidor."
       ]
+    },
+    "0.25.1": {
+      "lead": "HexDeck 0.25.1: una corrección de seguridad. Actualiza si HexDeck es accesible desde fuera de tu red.",
+      "sections": [
+        {
+          "title": "Una dirección de casa estaba a un encabezado de distancia",
+          "body": "Cualquiera que pudiera llegar a HexDeck podía declarar una dirección de casa en un encabezado y, con el inicio de sesión automático en redes de confianza activado, entrar solo. Ahora HexDeck cree ese encabezado solo de los proxies que indiques. Detrás de un proxy inverso, indícalo en HEXDECK_TRUSTED_PROXIES.",
+          "path": "Sistema > Proveedores de inicio de sesión"
+        }
+      ],
+      "smallTitle": "Corregido",
+      "small": []
     }
   }
 }

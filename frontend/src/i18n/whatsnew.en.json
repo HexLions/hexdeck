@@ -890,6 +890,18 @@
         "A card's buttons no longer lie on its status dot, and app tiles in a group are one line high again.",
         "An empty variable in the compose file no longer stops the server."
       ]
+    },
+    "0.25.1": {
+      "lead": "HexDeck 0.25.1: a security fix. Update if HexDeck can be reached from outside your network.",
+      "sections": [
+        {
+          "title": "An address on the home network was a header away",
+          "body": "Anybody who could reach HexDeck could claim a home address in a header and, with the automatic sign-in on trusted networks switched on, be signed in by itself. HexDeck now believes that header only from the proxies you name. Behind a reverse proxy, name it in HEXDECK_TRUSTED_PROXIES.",
+          "path": "System > Sign-in providers"
+        }
+      ],
+      "smallTitle": "Fixed",
+      "small": []
     }
   }
 }

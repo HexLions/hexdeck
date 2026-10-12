@@ -890,6 +890,18 @@
         "Die Schaltflächen einer Karte liegen nicht mehr auf dem Statuspunkt, und App-Kacheln in einer Gruppe sind wieder eine Zeile hoch.",
         "Eine leere Variable in der Compose-Datei hält den Server nicht mehr vom Start ab."
       ]
+    },
+    "0.25.1": {
+      "lead": "HexDeck 0.25.1: eine Sicherheitskorrektur. Aktualisiere, wenn HexDeck von außerhalb deines Netzes erreichbar ist.",
+      "sections": [
+        {
+          "title": "Eine Adresse im Heimnetz war einen Header entfernt",
+          "body": "Wer HexDeck erreichen konnte, konnte in einem Header eine Adresse im Heimnetz behaupten und bei eingeschalteter automatischer Anmeldung in vertrauten Netzen von selbst angemeldet werden. HexDeck glaubt diesem Header jetzt nur noch von den Proxys, die du nennst. Hinter einem Reverse Proxy trage ihn in HEXDECK_TRUSTED_PROXIES ein.",
+          "path": "System > Anmeldeanbieter"
+        }
+      ],
+      "smallTitle": "Behoben",
+      "small": []
     }
   }
 }
