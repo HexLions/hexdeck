@@ -798,3 +798,28 @@ def test_every_service_stands_in_the_adapter_document() -> None:
     missing = [one.label for one in all_adapters()
                if one.kind not in NOT_A_SERVICE and one.label not in written]
     assert missing == [], "services the adapter document does not name: " + ", ".join(missing)
+
+
+def test_the_image_does_not_let_uvicorn_believe_forwarded_headers() -> None:
+    """⚠️ Until 0.25.0 the image started uvicorn with ``--forwarded-allow-ips "*"``.
+    uvicorn then took ``request.client`` from X-Forwarded-For, from any sender,
+    and an address on the home network was a header away: the automatic
+    sign-in on trusted networks let in whoever claimed one. HexDeck reads the
+    header itself, only from HEXDECK_TRUSTED_PROXIES."""
+    dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+    command = next(line for line in dockerfile.splitlines() if line.startswith("CMD "))
+    assert "--no-proxy-headers" in command, command
+    assert "forwarded-allow-ips" not in command, command
+
+
+def test_every_address_that_is_counted_or_logged_goes_through_the_trusted_proxies() -> None:
+    """``request.client.host`` alone is the proxy's address behind a proxy and,
+    with the wrong flags, a header anybody writes. One function decides."""
+    app_dir = Path(deps.__file__).parent
+    offenders = [
+        str(path.relative_to(app_dir))
+        for path in app_dir.rglob("*.py")
+        if "__pycache__" not in path.parts and path.name != "auto_login.py"
+        and "request.client.host" in path.read_text(encoding="utf-8")
+    ]
+    assert offenders == [], f"use auto_login.address_text(request) instead: {offenders}"

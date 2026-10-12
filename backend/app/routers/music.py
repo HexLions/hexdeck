@@ -38,6 +38,7 @@ from ..adapters.music import (
 from ..deps import DbSession, OptionalUser, board_for_viewer_id, error, kiosk_from_request
 from ..models import Integration, Page, Widget
 from ..schemas import PlaylistCreate, PlaylistEntries, PlaylistRename, PlaylistTracks
+from ..services import auto_login
 from ..services.collector import collector
 from .widgets import _image_client
 
@@ -242,7 +243,7 @@ def _playlist_name(text: str) -> str:
 
 
 def _actor(user: OptionalUser, request: Request) -> str:
-    return user.username if user is not None else f"kiosk ({request.client.host if request.client else '?'})"
+    return user.username if user is not None else f"kiosk ({auto_login.address_text(request)})"
 
 
 async def _change(widget: Widget, adapter: MusicLibrary, work: Any) -> Any:

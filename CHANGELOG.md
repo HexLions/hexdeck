@@ -5,6 +5,20 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Security
+
+- **An address on the home network was a header away.** The image started
+  uvicorn with `--forwarded-allow-ips "*"`, so it took the client's address
+  from `X-Forwarded-For` whoever sent it. With the automatic sign-in on trusted
+  networks switched on, anybody who could reach HexDeck could claim a home
+  address and be signed in as its account, and the count of failed sign-ins per
+  address could be dodged the same way. uvicorn now believes no forwarded
+  header; HexDeck reads `X-Forwarded-For` itself, only from the proxies in
+  `HEXDECK_TRUSTED_PROXIES`. Behind a reverse proxy, name it there, or the
+  automatic sign-in sees only the proxy's address.
+
 ## 0.25.0 (2026-10-11)
 
 What nexdeck did from 0.31 to 0.36, taken over and fitted, and the follow-ups

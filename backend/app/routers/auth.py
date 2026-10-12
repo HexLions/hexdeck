@@ -84,7 +84,7 @@ def open_session(db: DbSession, user: User, request: Request, response: Response
 @router.post("/login", response_model=UserPublic, summary="Sign in with user name and password")
 def login(body: LoginBody, request: Request, response: Response, db: DbSession) -> UserPublic:
     """Opens a browser session. Wrong attempts are throttled per address."""
-    address = request.client.host if request.client else "?"
+    address = auto_login.address_text(request)
     try:
         # Counted per address and per account: the address can be spoofed
         # behind a proxy, the account name cannot.
@@ -140,7 +140,7 @@ def second_step(body: SecondStepBody, request: Request, response: Response, db: 
     Throttled like the first step, and per account, because the ticket already
     says which account it is: without that, six digits are guessable.
     """
-    address = request.client.host if request.client else "?"
+    address = auto_login.address_text(request)
     # The password path puts the ticket in the body; the OIDC path cannot,
     # because it arrives as a redirect, so it leaves it in a cookie.
     claims = read_step_token(body.ticket or request.cookies.get(STEP_COOKIE, ""))
@@ -448,7 +448,7 @@ def forgot(body: ResetRequest, request: Request, db: DbSession) -> dict:
     whether the mail went out: identical. Anything else turns this into a list
     of who has an account here.
     """
-    address = request.client.host if request.client else "?"
+    address = auto_login.address_text(request)
     try:
         # Counted like a sign-in: this sends mail, and somebody who can send
         # a hundred of them can fill an inbox.

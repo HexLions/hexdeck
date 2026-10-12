@@ -159,7 +159,7 @@ Rarely needed, but real:
 | `HEXDECK_OUTAGE_THRESHOLD_SECONDS` | `120` | How long a service must be down before an outage is announced. |
 | `HEXDECK_ICON_CACHE_DAYS` | `30` | How long a fetched logo is kept. |
 | `HEXDECK_UPDATE_CHECK` | `0` | Ask GitHub whether a newer HexDeck exists. Off by default: it is an outbound call. |
-| `HEXDECK_TRUSTED_PROXIES` | empty | Reverse proxies whose `X-Forwarded-For` is believed, as addresses or networks, comma separated. Only the automatic sign-in on trusted networks reads it; without it the header is ignored, since anybody could send one. |
+| `HEXDECK_TRUSTED_PROXIES` | empty | Reverse proxies whose `X-Forwarded-For` is believed, as addresses or networks, comma separated. The automatic sign-in on trusted networks, the count of failed sign-ins and the action log read the client's address through it; without it the header is ignored, since anybody could send one. |
 | `HEXDECK_CORS_ORIGINS` | empty | Origins allowed to call the API from a browser. `*` is refused at start-up, because with credentials it would let any site act as the signed-in user. |
 | `HEXDECK_BACKUP_EVERY_HOURS` | `24` | How often a snapshot is written by itself. `0` switches it off. |
 

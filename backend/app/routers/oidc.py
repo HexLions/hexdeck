@@ -14,7 +14,7 @@ from ..deps import AdminUser, DbSession, PasswordUser, error, refuse_at_home
 from ..models import OidcLink, OidcProvider, Role, User
 from ..schemas import AuthentikSetupBody, OidcProviderBody
 from ..security import UNUSABLE_PASSWORD, create_step_token, has_usable_password
-from ..services import authentik_setup, login_guard, oidc, two_factor
+from ..services import authentik_setup, auto_login, login_guard, oidc, two_factor
 from ..services.public_url import public_url
 from .auth import STEP_COOKIE, STEP_MINUTES, cookie_secure, open_session
 
@@ -62,7 +62,7 @@ async def oidc_callback(slug: str, request: Request, db: DbSession, code: str | 
     """Every outcome is a redirect to the app with a code in the address; never JSON."""
     provider = _provider(db, slug)
     attempt = oidc.unpack_state(request.cookies.get(oidc.COOKIE_NAME))
-    address = request.client.host if request.client else "?"
+    address = auto_login.address_text(request)
     linking = attempt is not None and attempt.get("purpose") == "link"
 
     def refuse(code_: str, reason: str) -> RedirectResponse:

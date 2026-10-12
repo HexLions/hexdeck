@@ -108,6 +108,23 @@ def client_address(request: Request) -> ipaddress.IPv4Address | ipaddress.IPv6Ad
     return address
 
 
+def address_text(request: Request) -> str:
+    """The client's address as text, for throttling and the log: "?" when there is none.
+
+    ⚠️ Every place that counts or records an address uses this, never
+    ``request.client.host`` on its own. Until 0.25.0 the image started uvicorn
+    with ``--forwarded-allow-ips "*"``, which made ``request.client.host``
+    whatever an X-Forwarded-For header said, from any sender: anybody could
+    claim an address on the home network and be signed in by itself.
+    """
+    address = client_address(request)
+    if address is not None:
+        return str(address)
+    # Not an IP address (a Unix socket, a test client): the connection's own
+    # word, never a header's.
+    return request.client.host if request.client and request.client.host else "?"
+
+
 def account_for(db: Session, request: Request) -> User | None:
     """The account a browser at this address may be signed in as, or None."""
     config = stored(db)
