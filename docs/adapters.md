@@ -54,6 +54,7 @@ that one of thirty-five renderers draws.
 | nginx ignition | status, traffic, certificates | reload, start, stop; renew a certificate | an API token, which carries the permissions of the user who made it: one that may only read fills every card, one that may write adds the buttons, which are offered only where they are the thing to press. Traffic needs the statistics switched on in nginx ignition, 2.47.0 or newer |
 | OPNsense | system, gateways | | API key and secret |
 | pfSense | system, interfaces | | API key of the package pfSense-pkg-RESTAPI |
+| FortiGate | system (processor, memory, sessions, FortiOS version), interfaces (link, address, speed, traffic; the named ones turn the card red without a link), IPsec tunnels (by their phase 2 selectors), HA cluster (primary, configuration in sync) | | the token of a REST API administrator with a read-only profile and nexdeck under Trusted hosts, sent as a bearer token; an optional VDOM. Beta: not yet run against a FortiGate |
 | MikroTik | system, interfaces | | user with the read policy; needs RouterOS 7 with the REST service on |
 | FRITZ!Box | connection, line | | none; TR-064 on port 49000, the part of it that answers without credentials |
 | Tailscale | devices, status | | API access token from the admin console |
@@ -124,9 +125,10 @@ that one of thirty-five renderers draws.
 | Prometheus | query value, query list | | optional basic auth |
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
-| JSON API | value, list | | optional bearer token |
+| JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |
+| Papra | documents (count, size, trash), latest documents (with tags), organizations | | an API key from API keys in the user menu with Read organizations and Read documents; the organization by name or ID, or the first the key can see. Beta: run against a fresh Papra, not yet one in use |
 | Mealie | meal plan, shopping list, kitchen | | API token from Profile > Manage your API tokens |
 | Grocy | stock to watch, pantry | | API key from Manage API keys |
 | Vikunja | due tasks, tasks | | API token with read_all for tasks and projects; the time zone for "today" is a field, because a token cannot read the user's own |
@@ -159,6 +161,10 @@ that one of thirty-five renderers draws.
 | nexcrate | library (there, wanted, on its way, stuck, as a ring), downloads (progress and time left), stuck downloads (needing you first, with the buttons nexcrate offers), coming up, just arrived (posters and covers), why is it missing (nexcrate's reason per wanted title), storage, findings | try again, search again, remove and search again, clear, on a stuck download | paired from the connection sheet: nexdeck shows a code, the owner confirms it in nexcrate and the key arrives by itself; a key made in nexcrate's settings works too. Every card reads with "read"; the buttons need "operate" |
 | nexlore | nexlore overview, tasks, changed last, daily note | tick a task off, capture a line into the inbox, add a line to the daily note | an API token from My account > Connections > API tokens, after the operator has switched API tokens on; Read fills the cards, Write also ticks off and captures; the daily note needs Write, because it is made from the space's template when it is missing |
 | nexsift | nexsift inbox, newest lines | | an API key from Settings > API keys, after switching on Allow API keys; it may only read numbers and titles, never the text of a message |
+| nexcanvas | boards (the ones changed last with a picture each, how many changed today and this week), board (one board as a picture that renews itself) | | an API token from My account > Connections, after the operator has switched on API tokens under Settings > Server > API; it only reads, and a board the token may not read answers like one that does not exist |
+| nexbrand | overview (clients, those with a published version, projects), latest versions (drafts first, then the newest published ones) | | an API token from My account > Connections, after the operator has switched on API tokens; the level Read is enough; colours, fonts, logos and notes never reach a card |
+| nexpaper | inbox (the oldest waiting documents, yellow by count or age), deadlines (the next 14 days), filing (documents, this week, being read) | | an API key with the scope Read from My account, after the operator has allowed API keys under Settings > API; needs the nexpaper that has `GET /api/v1/dashboard` |
+| nexdiary | diary (streak, written today, entries and notes of the month), time capsule (days until the next one opens) | | an API token from My account > Connections, after the operator has switched on API tokens under Settings > API; numbers only, never a word of the diary; needs the nexdiary that has `GET /api/v1/dashboard` |
 | nextrmnl | status, sessions, history, connections | | read-only API key from nextrmnl 0.3.0 or newer, with API keys switched on |
 | OctoPrint | printer, print job | | application key from User Settings > Application Keys; its user needs the permission Status (groups Users or Read-only) |
 | Spoolman | overview, spools | | none, Spoolman has no sign-in; a user name and password only behind a proxy with basic authentication. A spool without a known weight shows no bar and never counts as running out |

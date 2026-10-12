@@ -653,6 +653,8 @@
     "kioskCreate": "Kiosk-Link erzeugen",
     "fileHelp": "Ein Board ist eine YAML-Datei: exportieren, in Git legen, anderswo importieren. Geheimnisse werden nie herausgeschrieben.",
     "export": "Als YAML exportieren",
+    "editYaml": "Als YAML bearbeiten",
+    "editYamlHelp": "Das Board als Text. Eine Seite oder Karte, die ihre id behält, bleibt dieselbe, samt Prüfung und Verlauf; eine ohne id ist neu, und eine, die du entfernst, wird gelöscht. Verbindungen werden über ihren Namen zugeordnet.",
     "import": "Board importieren",
     "importHelp": "Füge das YAML eines exportierten Boards ein.",
     "importRun": "Importieren",
@@ -803,7 +805,10 @@
     "empty": "Nichts zu melden.",
     "markRead": "Als gelesen markieren",
     "all": "Alle Hinweise",
-    "markAllRead": "Alle als gelesen markieren"
+    "markAllRead": "Alle als gelesen markieren",
+    "deleteAll": "Alle löschen",
+    "deleteAllTitle": "Alle Hinweise löschen?",
+    "deleteAllBody": "Alle {{count}} Hinweise werden gelöscht, auch die ungelesenen. Das lässt sich nicht rückgängig machen."
   },
   "palette": {
     "title": "Suche",
@@ -1065,7 +1070,8 @@
     "saveFile": "{{name}} speichern",
     "uptime": "Verfügbarkeit im Zeitraum",
     "flow": "Wohin der Strom fließt",
-    "topology": "Wie die Orte zusammenhängen"
+    "topology": "Wie die Orte zusammenhängen",
+    "problemsMore": "+{{count}} weitere"
   },
   "player": {
     "title": "Musik",

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import time
 from typing import Any
 from urllib.parse import quote
@@ -46,6 +47,7 @@ from ..services.layout import columns_of
 from ..services.notify import emit
 from ..services.sse import Recheck, board_topic, hub
 from ..services.state import live
+from .assets import unsafe_svg
 
 router = APIRouter(prefix="/api/v1", tags=["widgets"])
 
@@ -312,6 +314,8 @@ async def run_action(widget_id: int, action_id: str, body: ActionBody, request: 
 IMAGE_TTL = 3600
 IMAGE_LIMIT = 300
 IMAGE_MAX_BYTES = 5 * 1024 * 1024
+#: The words of an SVG's title, with no "<" among them (see ``widget_image``).
+TITLE_WORDS = re.compile(rb"<title>[^<]*</title>", re.I)
 #: What the whole cache may weigh.
 #:
 #: ⚠️ It was bounded by the number of entries and nothing else, and one entry
@@ -376,7 +380,7 @@ async def widget_image(widget_id: int, path: str, request: Request, user: Option
         raise error("bad_path", "An image path is relative to the service, starting with a slash.")
     hit = _images.get((widget_id, path))
     if hit and hit[0] > time.monotonic():
-        return Response(content=hit[1], media_type=hit[2], headers={"Cache-Control": "private, max-age=3600"})
+        return Response(content=hit[1], media_type=hit[2], headers=_image_headers(hit[2], "private, max-age=3600"))
     adapter, config, ctx = await _service_of(widget)
     try:
         source = await adapter.image_source(config, path, ctx)
@@ -390,16 +394,41 @@ async def widget_image(widget_id: int, path: str, request: Request, user: Option
     content_type = response.headers.get("content-type", "") or source.media_type
     # ⚠️ "image/" is not enough. image/svg+xml passes that test and is not a
     # picture but a document that runs script, handed out from HexDeck's own
-    # address. No service sends a poster as SVG.
+    # address. No service sends a poster as SVG. One that draws its pictures as
+    # SVG says so through the adapter (``MediaSource.svg``); that answer is
+    # then checked for script like an uploaded one, and served in a sandbox.
     if content_type.split(";")[0].strip().lower() == "image/svg+xml":
-        raise error("no_image", "The service answered with SVG, which is not served as an image.", status.HTTP_404_NOT_FOUND)
+        if not source.svg:
+            raise error("no_image", "The service answered with SVG, which is not served as an image.", status.HTTP_404_NOT_FOUND)
+        # The words of a <title> are left out of the check: "JavaScript: Basics"
+        # or "Online = yes" as the name of a board looked like an address or a
+        # handler, and the picture was refused (found by nexdeck against
+        # nexcanvas). Only a title without a single "<" in it: XML allows no
+        # "<" in an attribute, so such a span cannot hide a tag or a handler.
+        checked = TITLE_WORDS.sub(b"<title></title>", response.content)
+        refused = unsafe_svg(checked) if response.status_code < 400 else "it is an error page"
+        if refused:
+            raise error("no_image", f"The service's SVG was refused: {refused}.", status.HTTP_404_NOT_FOUND)
     if response.status_code >= 400 or not content_type.startswith("image/") or len(response.content) > IMAGE_MAX_BYTES:
         raise error("no_image", "The service did not answer with an image.", status.HTTP_404_NOT_FOUND)
     if source.cache_seconds <= 0:
-        return Response(content=response.content, media_type=content_type, headers={"Cache-Control": "no-store"})
+        return Response(content=response.content, media_type=content_type, headers=_image_headers(content_type, "no-store"))
     _images[(widget_id, path)] = (time.monotonic() + min(IMAGE_TTL, source.cache_seconds), response.content, content_type)
     _make_room()
-    return Response(content=response.content, media_type=content_type, headers={"Cache-Control": "private, max-age=3600"})
+    return Response(content=response.content, media_type=content_type, headers=_image_headers(content_type, "private, max-age=3600"))
+
+
+def _image_headers(content_type: str, cache: str) -> dict[str, str]:
+    """The headers of a served image; an SVG gets a sandbox of its own on top of the API's floor.
+
+    ⚠️ Stated here and not left to the middleware that sets the same policy
+    for everything under ``/api/``: this is the one route that hands out SVG
+    of somebody else's making, and it should stay safe if that floor moves.
+    """
+    headers = {"Cache-Control": cache}
+    if content_type.split(";")[0].strip().lower() == "image/svg+xml":
+        headers["Content-Security-Policy"] = "sandbox; default-src 'none'; style-src 'unsafe-inline'"
+    return headers
 
 
 # -- live video of a widget's service -------------------------------------------

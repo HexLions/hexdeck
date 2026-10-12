@@ -5,6 +5,36 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **FortiGate, Papra, nexcanvas, nexbrand, nexpaper and nexdiary**, taken over
+  from nexdeck 0.40.0 with their tests: a FortiGate's load, sessions,
+  interfaces, IPsec tunnels and HA cluster, read only; Papra's documents; and
+  four apps of the nex family. ⚠️ All beta.
+- **JSON API value cards carry up to four badges** read from the same answer.
+  From nexdeck.
+- **The problems card says what is wrong and leads to the card.** "Jellyfin
+  findings: 0 errors, 1 warning" becomes the first red and yellow rows of that
+  card, and each row opens the card's own link. From nexdeck.
+- **A board can be edited as YAML**, under its settings › File: whatever keeps
+  its id keeps its row, its reachability check and the history of its bars.
+  From nexdeck.
+- **"Delete all" in the notices**, next to "Mark all as read", asks first and
+  empties the list. From nexdeck.
+
+### Fixed
+
+- **In the app installed on an iPad, the top of the page stayed blurred.**
+  iPadOS 26 blurs the top of an installed app unless a solid bar sits there;
+  the bars are solid in the installed app now, stay on the page while a board
+  loads, after a board is deleted and under dialogs, and the bar fits an iPad
+  held upright. From nexdeck, which found it.
+- **Some mail providers dropped HexDeck's mails silently.** They carried no
+  `Date` and no `Message-ID`, which smtplib does not add; iCloud, Outlook and
+  Gmail discard a mail without a date. Both are set now. From nexdeck.
+
 ## 0.25.1 (2026-10-12)
 
 A security fix: update if HexDeck can be reached from outside your network.
