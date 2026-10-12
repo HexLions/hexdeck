@@ -7,6 +7,15 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ## Unreleased
 
+### New
+
+- **FortiGate, Papra, nexcanvas, nexbrand, nexpaper and nexdiary**, taken over
+  from nexdeck 0.40.0 with their tests: a FortiGate's load, sessions,
+  interfaces, IPsec tunnels and HA cluster, read only; Papra's documents; and
+  four apps of the nex family. ⚠️ All beta.
+- **JSON API value cards carry up to four badges** read from the same answer.
+  From nexdeck.
+
 ### Fixed
 
 - **Some mail providers dropped HexDeck's mails silently.** They carried no

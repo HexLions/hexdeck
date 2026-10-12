@@ -232,6 +232,14 @@ Updated at every milestone.
   floor of a group, the network map on a phone, the in-and-out chips, the bars
   that stay while a board loads and the weather chips by the card's width are
   upstream's fixes too, merged by hand where this fork had changed the code.
+- **Six adapters from nexdeck 0.37 to 0.40.** FortiGate, Papra, nexcanvas,
+  nexbrand, nexpaper and nexdiary came over as upstream has them, with their
+  tests and translation patterns, and the JSON API card is upstream's newer
+  file with its badges. nexcanvas draws its pictures as SVG, so the image
+  route took upstream's opt-in: an adapter that declares SVG gets the answer
+  checked for script and served in a sandbox; every other SVG is still
+  refused. Upstream's switch of its own sign-in to a shared module (nexoidc)
+  was not taken; the features of 0.36 already are.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which
