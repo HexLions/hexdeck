@@ -902,6 +902,33 @@
       ],
       "smallTitle": "Fixed",
       "small": []
+    },
+    "0.26.0": {
+      "lead": "HexDeck 0.26.0: six integrations from nexdeck, the installed app on an iPad without its blur, and a board you can edit as YAML.",
+      "sections": [
+        {
+          "title": "The iPad app keeps its bar",
+          "body": "iPadOS 26 blurred the top of the installed app whenever no solid bar sat there. The bars are solid now, and they stay through loading, deleting a board and every dialog.",
+          "path": "A board's settings"
+        },
+        {
+          "title": "A board as YAML",
+          "body": "Under the board's settings, File, Edit as YAML. Whatever keeps its id keeps its checks and the history of its bars.",
+          "path": "A board's settings > File"
+        },
+        {
+          "title": "Six integrations",
+          "body": "FortiGate, Papra, nexcanvas, nexbrand, nexpaper and nexdiary, from nexdeck. All beta.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The problems card says what is wrong and leads to the card.",
+        "Every notice can be deleted at once.",
+        "JSON API value cards carry up to four badges.",
+        "Mails carry a date, so iCloud, Outlook and Gmail no longer drop them."
+      ]
     }
   }
 }

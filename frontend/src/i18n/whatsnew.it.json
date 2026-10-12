@@ -276,6 +276,33 @@
       ],
       "smallTitle": "Corretto",
       "small": []
+    },
+    "0.26.0": {
+      "lead": "HexDeck 0.26.0: sei integrazioni da nexdeck, l'app installata su iPad senza la sfocatura, e una board modificabile come YAML.",
+      "sections": [
+        {
+          "title": "L'app su iPad tiene la sua barra",
+          "body": "iPadOS 26 sfocava la parte alta dell'app installata quando non c'era una barra a tinta unita. Ora le barre lo sono, e restano durante il caricamento, la cancellazione di una board e ogni dialogo.",
+          "path": "Impostazioni di una board"
+        },
+        {
+          "title": "Una board come YAML",
+          "body": "Nelle impostazioni della board, File, Modifica come YAML. Quello che mantiene il suo id conserva i controlli e lo storico delle barre.",
+          "path": "Impostazioni di una board > File"
+        },
+        {
+          "title": "Sei integrazioni",
+          "body": "FortiGate, Papra, nexcanvas, nexbrand, nexpaper e nexdiary, da nexdeck. Tutte in beta.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "La card dei problemi dice cosa non va e porta alla card.",
+        "Le notifiche si possono cancellare tutte insieme.",
+        "Le card valore JSON API possono avere fino a quattro badge.",
+        "Le email hanno una data, così iCloud, Outlook e Gmail non le scartano più."
+      ]
     }
   }
 }

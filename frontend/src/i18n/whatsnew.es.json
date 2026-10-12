@@ -132,6 +132,33 @@
       ],
       "smallTitle": "Corregido",
       "small": []
+    },
+    "0.26.0": {
+      "lead": "HexDeck 0.26.0: seis integraciones de nexdeck, la app instalada en el iPad sin su desenfoque, y un tablero que se puede editar como YAML.",
+      "sections": [
+        {
+          "title": "La app del iPad conserva su barra",
+          "body": "iPadOS 26 desenfocaba la parte superior de la app instalada cuando no había una barra de color sólido. Ahora las barras lo son y se quedan al cargar, al borrar un tablero y bajo cada diálogo.",
+          "path": "Ajustes de un tablero"
+        },
+        {
+          "title": "Un tablero como YAML",
+          "body": "En los ajustes del tablero, Archivo, Editar como YAML. Lo que conserva su id conserva sus comprobaciones y el historial de sus barras.",
+          "path": "Ajustes de un tablero > Archivo"
+        },
+        {
+          "title": "Seis integraciones",
+          "body": "FortiGate, Papra, nexcanvas, nexbrand, nexpaper y nexdiary, de nexdeck. Todas en beta.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "La tarjeta de problemas dice qué falla y lleva a la tarjeta.",
+        "Todos los avisos se pueden borrar a la vez.",
+        "Las tarjetas de valor JSON API llevan hasta cuatro insignias.",
+        "Los correos llevan fecha, así iCloud, Outlook y Gmail ya no los descartan."
+      ]
     }
   }
 }
