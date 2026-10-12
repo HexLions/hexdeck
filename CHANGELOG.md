@@ -5,7 +5,11 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.26.0 (2026-10-12)
+
+What nexdeck did from 0.37 to 0.40, taken over and fitted: six integrations,
+the installed app on an iPad without its blur, a board edited as YAML, and
+mail that providers no longer drop.
 
 ### New
 

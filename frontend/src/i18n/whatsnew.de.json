@@ -902,6 +902,33 @@
       ],
       "smallTitle": "Behoben",
       "small": []
+    },
+    "0.26.0": {
+      "lead": "HexDeck 0.26.0: sechs Integrationen von nexdeck, die installierte App auf dem iPad ohne ihre Unschärfe, und ein Board, das sich als YAML bearbeiten lässt.",
+      "sections": [
+        {
+          "title": "Die iPad-App behält ihre Leiste",
+          "body": "iPadOS 26 hat den oberen Rand der installierten App unscharf gemacht, wenn dort keine einfarbige Leiste lag. Die Leisten sind jetzt einfarbig und bleiben beim Laden, beim Löschen eines Boards und unter jedem Dialog.",
+          "path": "Einstellungen eines Boards"
+        },
+        {
+          "title": "Ein Board als YAML",
+          "body": "In den Einstellungen des Boards, Datei, Als YAML bearbeiten. Was seine ID behält, behält seine Prüfungen und den Verlauf seiner Balken.",
+          "path": "Einstellungen eines Boards > Datei"
+        },
+        {
+          "title": "Sechs Integrationen",
+          "body": "FortiGate, Papra, nexcanvas, nexbrand, nexpaper und nexdiary, von nexdeck. Alle Beta.",
+          "path": "System > Verbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die Problemkarte sagt, was nicht stimmt, und führt zur Karte.",
+        "Alle Hinweise lassen sich auf einmal löschen.",
+        "JSON-API-Wertkarten tragen bis zu vier Plaketten.",
+        "Mails tragen ein Datum, iCloud, Outlook und Gmail verwerfen sie nicht mehr."
+      ]
     }
   }
 }
