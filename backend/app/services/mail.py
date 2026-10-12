@@ -14,7 +14,7 @@ import logging
 import re
 import smtplib
 from email.message import EmailMessage
-from email.utils import formataddr
+from email.utils import formataddr, formatdate, make_msgid
 from typing import Any
 
 from sqlalchemy.orm import Session as DbSessionType
@@ -111,6 +111,10 @@ def send(config: dict[str, Any], to_address: str, subject: str, body: str) -> No
     mail["Subject"] = subject
     mail["From"] = formataddr((config["from_name"] or "HexDeck", config["from_address"]))
     mail["To"] = to_address
+    # Required by RFC 5322, and smtplib adds neither: without Date, iCloud,
+    # Outlook and Gmail drop the mail silently. Found by nexdeck.
+    mail["Date"] = formatdate(localtime=True)
+    mail["Message-ID"] = make_msgid(domain=config["from_address"].split("@")[-1])
     mail.set_content(body)
 
     port = int(config["port"] or 587)

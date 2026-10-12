@@ -5,6 +5,14 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Fixed
+
+- **Some mail providers dropped HexDeck's mails silently.** They carried no
+  `Date` and no `Message-ID`, which smtplib does not add; iCloud, Outlook and
+  Gmail discard a mail without a date. Both are set now. From nexdeck.
+
 ## 0.25.1 (2026-10-12)
 
 A security fix: update if HexDeck can be reached from outside your network.
