@@ -58,4 +58,8 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
 ENTRYPOINT ["/entrypoint.sh"]
 # The graceful timeout matters: open live streams would otherwise keep a
 # stopping container waiting for clients that never disconnect.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*", "--timeout-graceful-shutdown", "5"]
+# ⚠️ uvicorn does not read X-Forwarded-For or X-Forwarded-Proto: with
+# --forwarded-allow-ips "*" it believed them from any sender, so anybody could
+# claim an address on the home network and be signed in by itself. HexDeck reads
+# X-Forwarded-For itself, only from the proxies in HEXDECK_TRUSTED_PROXIES.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--workers", "1", "--no-proxy-headers", "--timeout-graceful-shutdown", "5"]
