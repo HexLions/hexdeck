@@ -2296,7 +2296,12 @@
     "The Items you name with their state, and a switch for the Switch Items.": "Los Items que indiques con su estado, y un interruptor para los Items Switch.",
     "The names of Items or Groups, separated by commas. A Group stands for its members.": "Los nombres de Items o Grupos, separados por comas. Un Grupo representa a sus miembros.",
     "Things": "Things",
-    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: qué Things están desconectados, los Items que elijas con su estado, y un interruptor para los Items Switch."
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: qué Things están desconectados, los Items que elijas con su estado, y un interruptor para los Items Switch.",
+    "A Fronius inverter over its local Solar API: the solar power, the house, the grid and the battery, and each inverter's state.": "Un inversor Fronius a través de su Solar API local: la potencia solar, la casa, la red y la batería, y el estado de cada inversor.",
+    "Each inverter with its state, its power and an error code when it has one.": "Cada inversor con su estado, su potencia y un código de error cuando lo tiene.",
+    "Solar, house, battery and grid as one picture, with the power moving between them.": "Solar, casa, batería y red en una sola imagen, con la potencia que circula entre ellos.",
+    "The inverter or its Datamanager on your own network. The Solar API needs no password; on a Gen24 it has to be switched on under Communication.": "El inversor o su Datamanager en tu propia red. La Solar API no necesita contraseña; en un Gen24 hay que activarla en Comunicación.",
+    "The solar power now, the house, the grid, the battery and the energy of the day.": "La potencia solar ahora, la casa, la red, la batería y la energía del día."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3476,6 +3481,7 @@
     "Hue bridge": "Puente Hue",
     "Kitchen light": "Luz de la cocina",
     "Living room": "Salón",
-    "Z-Wave stick": "Llave Z-Wave"
+    "Z-Wave stick": "Llave Z-Wave",
+    "From grid": "De la red"
   }
 }

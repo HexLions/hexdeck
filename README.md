@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and one services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and two services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-201-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-202-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **201 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **202 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -216,7 +216,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 **Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, Jackett, slskd, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, pyLoad, aria2, Seerr, Overseerr, Jellyseerr, Ombi, Nexview, Maintainerr, Reclaimerr, Tdarr, M3U Editor, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, Minecraft, AMP, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
 
-**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Shelly, Tasmota, Immich, Nextcloud, Syncthing, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
+**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Fronius, Shelly, Tasmota, Immich, Nextcloud, Syncthing, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
 
 **Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Owncast, Steam, RSS, Miniflux, Mastodon, Karakeep, Linkwarden, Readeck, Memos, Trilium Notes, Wiki.js, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
 
@@ -245,6 +245,7 @@ adapters upstream added up to its 0.30.0 are taken over. Item by item in
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/garage.svg" width="26" height="26" alt=""><br>**Garage**<br><sub>S3 cluster health,<br>nodes, buckets</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/readeck.svg" width="26" height="26" alt=""><br>**Readeck**<br><sub>Unread, latest bookmarks,<br>failed saves</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg" width="26" height="26" alt=""><br>**Node-RED**<br><sub>Flows running,<br>missing node types</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wikijs.svg" width="26" height="26" alt=""><br>**Wiki.js**<br><sub>Pages, updates,<br>changed last</sub> | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/sun.svg" width="26" height="26" alt=""><br>**OpenDTU**<br><sub>Solar power now,<br>yield, each inverter</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tasmota.svg" width="26" height="26" alt=""><br>**Tasmota**<br><sub>Relays with a switch,<br>power, sensors</sub> |
 | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/download.svg" width="26" height="26" alt=""><br>**aria2**<br><sub>Downloads, failures,<br>pause and resume</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jenkins.svg" width="26" height="26" alt=""><br>**Jenkins**<br><sub>Failing jobs, queue,<br>offline agents</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/openhab.svg" width="26" height="26" alt=""><br>**openHAB**<br><sub>Things offline,<br>Items with a switch</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/fronius.svg" width="26" height="26" alt=""><br>**Fronius**<br><sub>Solar, house, grid,<br>battery, inverters</sub> | | |
 
 The first ten services here were confirmed against live instances on 2026-10-06 and
 carry no *beta* badge; the public address card asks a public service and has no

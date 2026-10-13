@@ -1,0 +1,150 @@
+{
+ "gen24_flow": {
+  "Body": {
+   "Data": {
+    "Inverters": {
+     "1": {
+      "Battery_Mode": "normal",
+      "DT": 1,
+      "E_Day": null,
+      "E_Total": 9830412.5,
+      "E_Year": null,
+      "P": 3912.4,
+      "SOC": 63.2
+     }
+    },
+    "Site": {
+     "BackupMode": false,
+     "BatteryStandby": false,
+     "E_Day": null,
+     "E_Total": 9830412.5,
+     "E_Year": null,
+     "Meter_Location": "grid",
+     "Mode": "bidirectional",
+     "P_Akku": -1204.6,
+     "P_Grid": -512.3,
+     "P_Load": -2195.5,
+     "P_PV": 3912.4,
+     "rel_Autonomy": 100.0,
+     "rel_SelfConsumption": 76.6
+    },
+    "Version": "12"
+   }
+  },
+  "Head": {
+   "RequestArguments": {},
+   "Status": {
+    "Code": 0,
+    "Reason": "",
+    "UserMessage": ""
+   },
+   "Timestamp": "2026-10-13T12:04:11+00:00"
+  }
+ },
+ "symo_flow": {
+  "Body": {
+   "Data": {
+    "Inverters": {
+     "1": {
+      "DT": 121,
+      "E_Day": 8412.6,
+      "E_Total": 51204000,
+      "E_Year": 6180221,
+      "P": 1450
+     }
+    },
+    "Site": {
+     "E_Day": 8412.6,
+     "E_Total": 51204000,
+     "E_Year": 6180221,
+     "Meter_Location": "grid",
+     "Mode": "meter",
+     "P_Akku": null,
+     "P_Grid": 980.2,
+     "P_Load": -2430.2,
+     "P_PV": 1450,
+     "rel_Autonomy": 59.7,
+     "rel_SelfConsumption": 100
+    },
+    "Version": "12"
+   }
+  },
+  "Head": {
+   "RequestArguments": {},
+   "Status": {
+    "Code": 0,
+    "Reason": "",
+    "UserMessage": ""
+   },
+   "Timestamp": "2026-10-13T14:02:47+02:00"
+  }
+ },
+ "night_flow": {
+  "Body": {
+   "Data": {
+    "Inverters": {
+     "1": {
+      "DT": 121,
+      "P": null
+     }
+    },
+    "Site": {
+     "E_Day": 0,
+     "E_Total": 51212000,
+     "E_Year": 6188221,
+     "Meter_Location": "grid",
+     "Mode": "meter",
+     "P_Akku": null,
+     "P_Grid": 410.0,
+     "P_Load": -410.0,
+     "P_PV": null,
+     "rel_Autonomy": 0,
+     "rel_SelfConsumption": null
+    },
+    "Version": "12"
+   }
+  },
+  "Head": {
+   "RequestArguments": {},
+   "Status": {
+    "Code": 0,
+    "Reason": "",
+    "UserMessage": ""
+   },
+   "Timestamp": "2026-10-13T23:30:02+02:00"
+  }
+ },
+ "symo_info": {
+  "Body": {
+   "Data": {
+    "1": {
+     "CustomName": "&#83;&#121;&#109;&#111;&#32;&#56;&#46;&#50;",
+     "DT": 121,
+     "ErrorCode": 0,
+     "PVPower": 8200,
+     "Show": 1,
+     "StatusCode": 7,
+     "UniqueID": "1234567"
+    },
+    "2": {
+     "CustomName": "Garage",
+     "DT": 86,
+     "ErrorCode": 567,
+     "PVPower": 5000,
+     "Show": 1,
+     "StatusCode": 10,
+     "UniqueID": "7654321"
+    }
+   }
+  },
+  "Head": {
+   "RequestArguments": {},
+   "Status": {
+    "Code": 0,
+    "Reason": "",
+    "UserMessage": ""
+   },
+   "Timestamp": "2026-10-13T14:02:50+02:00"
+  }
+ }
+}

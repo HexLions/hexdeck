@@ -2296,7 +2296,12 @@
     "The Items you name with their state, and a switch for the Switch Items.": "Gli Item che indichi con il loro stato, e un interruttore per gli Item Switch.",
     "The names of Items or Groups, separated by commas. A Group stands for its members.": "I nomi di Item o Gruppi, separati da virgole. Un Gruppo sta per i suoi membri.",
     "Things": "Thing",
-    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: quali Thing sono offline, gli Item che scegli con il loro stato, e un interruttore per gli Item Switch."
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: quali Thing sono offline, gli Item che scegli con il loro stato, e un interruttore per gli Item Switch.",
+    "A Fronius inverter over its local Solar API: the solar power, the house, the grid and the battery, and each inverter's state.": "Un inverter Fronius tramite la sua Solar API locale: la potenza solare, la casa, la rete e la batteria, e lo stato di ogni inverter.",
+    "Each inverter with its state, its power and an error code when it has one.": "Ogni inverter con il suo stato, la sua potenza e un codice di errore quando ne ha uno.",
+    "Solar, house, battery and grid as one picture, with the power moving between them.": "Solare, casa, batteria e rete in un'unica immagine, con la potenza che passa tra loro.",
+    "The inverter or its Datamanager on your own network. The Solar API needs no password; on a Gen24 it has to be switched on under Communication.": "L'inverter o il suo Datamanager nella tua rete. La Solar API non chiede password; su un Gen24 va attivata in Comunicazione.",
+    "The solar power now, the house, the grid, the battery and the energy of the day.": "La potenza solare di adesso, la casa, la rete, la batteria e l'energia della giornata."
   },
   "labels": {
     "Jobs": "Job",
@@ -3476,6 +3481,7 @@
     "Hue bridge": "Bridge Hue",
     "Kitchen light": "Luce della cucina",
     "Living room": "Soggiorno",
-    "Z-Wave stick": "Chiavetta Z-Wave"
+    "Z-Wave stick": "Chiavetta Z-Wave",
+    "From grid": "Dalla rete"
   }
 }

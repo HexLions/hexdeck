@@ -428,6 +428,11 @@ Updated at every milestone.
   administrator's API token. Checked against openHAB 5.2.3 running locally,
   with Items of eight types, Things of the Network binding, a command to a
   switch, and a wrong token.
+- **Fronius over the local Solar API.** The site and each inverter come
+  from `GetPowerFlowRealtimeData.fcgi` and `GetInverterInfo.cgi`, in the
+  shapes a Symo, a Primo and a Gen24 with a battery answer as pyfronius and
+  Home Assistant record them; the fixture here is written anew in that
+  shape. Not yet run against an inverter.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

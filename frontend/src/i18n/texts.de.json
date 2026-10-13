@@ -2296,7 +2296,12 @@
     "The Items you name with their state, and a switch for the Switch Items.": "Die Items, die du nennst, mit ihrem Zustand, und ein Schalter für die Switch-Items.",
     "The names of Items or Groups, separated by commas. A Group stands for its members.": "Die Namen von Items oder Gruppen, durch Kommas getrennt. Eine Gruppe steht für ihre Mitglieder.",
     "Things": "Things",
-    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: welche Things offline sind, die gewählten Items mit ihrem Zustand, und ein Schalter für die Switch-Items."
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: welche Things offline sind, die gewählten Items mit ihrem Zustand, und ein Schalter für die Switch-Items.",
+    "A Fronius inverter over its local Solar API: the solar power, the house, the grid and the battery, and each inverter's state.": "Ein Fronius-Wechselrichter über seine lokale Solar API: die Solarleistung, das Haus, das Netz und die Batterie, und der Zustand jedes Wechselrichters.",
+    "Each inverter with its state, its power and an error code when it has one.": "Jeder Wechselrichter mit Zustand, Leistung und einem Fehlercode, wenn er einen hat.",
+    "Solar, house, battery and grid as one picture, with the power moving between them.": "Solar, Haus, Batterie und Netz als ein Bild, mit der Leistung, die zwischen ihnen fließt.",
+    "The inverter or its Datamanager on your own network. The Solar API needs no password; on a Gen24 it has to be switched on under Communication.": "Der Wechselrichter oder sein Datamanager in deinem eigenen Netz. Die Solar API braucht kein Passwort; bei einem Gen24 muss sie unter Kommunikation eingeschaltet werden.",
+    "The solar power now, the house, the grid, the battery and the energy of the day.": "Die Solarleistung jetzt, das Haus, das Netz, die Batterie und die Energie des Tages."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3476,6 +3481,7 @@
     "Hue bridge": "Hue Bridge",
     "Kitchen light": "Küchenlicht",
     "Living room": "Wohnzimmer",
-    "Z-Wave stick": "Z-Wave-Stick"
+    "Z-Wave stick": "Z-Wave-Stick",
+    "From grid": "Aus dem Netz"
   }
 }

@@ -27,6 +27,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   that are offline, and a button to build a job. ⚠️ Beta.
 - **openHAB**: which Things are offline and why, the Items you pick with
   their state, and a switch for the Switch Items. ⚠️ Beta.
+- **Fronius**: the solar power, the house, the grid and the battery as
+  numbers or as a flow, and each inverter's state. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 
