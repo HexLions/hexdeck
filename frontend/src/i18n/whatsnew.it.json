@@ -303,6 +303,27 @@
         "Le card valore JSON API possono avere fino a quattro badge.",
         "Le email hanno una data, così iCloud, Outlook e Gmail non le scartano più."
       ]
+    },
+    "0.27.0": {
+      "lead": "HexDeck 0.27.0: app configurate una volta e messe su qualsiasi board, e ogni numero disegnato come lancetta, LED, sette segmenti o grafico.",
+      "sections": [
+        {
+          "title": "App configurate una volta",
+          "body": "Un'app con nome, icona e tutti gli indirizzi da cui si raggiunge: tramite proxy, via Tailscale, diretto. Una tile la segue, così un indirizzo cambiato una volta cambia su ogni board. Automatico apre l'indirizzo di casa nelle tue reti fidate e l'altro ovunque altrove.",
+          "path": "Sistema > App"
+        },
+        {
+          "title": "Un numero, disegnato a modo tuo",
+          "body": "Ogni card numerica può essere una lancetta, LED orizzontali o verticali, sette segmenti o un grafico dell'ultima ora, delle ultime sei ore o del giorno. Pieno a, Vuoto a, Giallo da e Rosso da colorano il disegno, mai lo stato della card.",
+          "path": "Impostazioni di una card"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "La libreria dei widget elenca le app del catalogo sopra i widget.",
+        "La barra in alto resta ferma tra le pagine e sta su un iPad in verticale: la ricerca si stringe e le pagine scorrono con le frecce.",
+        "Eliminare un'app lascia le sue tile al loro posto, con quello che mostravano."
+      ]
     }
   }
 }

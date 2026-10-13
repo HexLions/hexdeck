@@ -929,6 +929,27 @@
         "JSON API value cards carry up to four badges.",
         "Mails carry a date, so iCloud, Outlook and Gmail no longer drop them."
       ]
+    },
+    "0.27.0": {
+      "lead": "HexDeck 0.27.0: apps set up once and placed on any board, and every number drawn as a dial, LED bars, seven segments or a chart.",
+      "sections": [
+        {
+          "title": "Apps set up once",
+          "body": "An app with its name, icon and every address it is reached by: through the proxy, over Tailscale, directly. A tile follows it, so an address changed once is changed on every board. Automatically opens the home address in your trusted networks and the other one everywhere else.",
+          "path": "System > Apps"
+        },
+        {
+          "title": "A number, drawn your way",
+          "body": "Every number card can be a dial, LED bars across or upright, seven segments or a chart of the last hour, six hours or day. Full at, Empty at, Yellow from and Red from colour the drawing, never the card's status.",
+          "path": "A card's settings"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The widget library lists the apps of the catalog above the widgets.",
+        "The top bar stays put between pages, and fits an iPad held upright: the search shrinks and the pages scroll with arrows.",
+        "Deleting an app leaves its tiles standing on their own, with what they showed."
+      ]
     }
   }
 }
