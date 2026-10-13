@@ -29,6 +29,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   their state, and a switch for the Switch Items. ⚠️ Beta.
 - **Fronius**: the solar power, the house, the grid and the battery as
   numbers or as a flow, and each inverter's state. ⚠️ Beta.
+- **Pterodactyl**: the game servers, which run, what they use, and buttons
+  to start and stop them. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

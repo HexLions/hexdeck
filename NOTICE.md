@@ -433,6 +433,11 @@ Updated at every milestone.
   shapes a Symo, a Primo and a Gen24 with a battery answer as pyfronius and
   Home Assistant record them; the fixture here is written anew in that
   shape. Not yet run against an inverter.
+- **Pterodactyl through the client API.** The servers and each one's live
+  state come from `/api/client` and `/api/client/servers/<id>/resources`,
+  in the shape the client transformers write in release v1.15.1. A node
+  that does not answer marks its server instead of failing the card. Not
+  yet run against a panel.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

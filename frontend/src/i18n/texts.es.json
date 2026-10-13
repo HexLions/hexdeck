@@ -2301,7 +2301,13 @@
     "Each inverter with its state, its power and an error code when it has one.": "Cada inversor con su estado, su potencia y un código de error cuando lo tiene.",
     "Solar, house, battery and grid as one picture, with the power moving between them.": "Solar, casa, batería y red en una sola imagen, con la potencia que circula entre ellos.",
     "The inverter or its Datamanager on your own network. The Solar API needs no password; on a Gen24 it has to be switched on under Communication.": "El inversor o su Datamanager en tu propia red. La Solar API no necesita contraseña; en un Gen24 hay que activarla en Comunicación.",
-    "The solar power now, the house, the grid, the battery and the energy of the day.": "La potencia solar ahora, la casa, la red, la batería y la energía del día."
+    "The solar power now, the house, the grid, the battery and the energy of the day.": "La potencia solar ahora, la casa, la red, la batería y la energía del día.",
+    "Client API key": "Clave de API de cliente",
+    "Each server with its state, processor, memory and uptime, and buttons to start and stop it.": "Cada servidor con su estado, procesador, memoria y tiempo encendido, y botones para iniciarlo y detenerlo.",
+    "How many servers run, how many are offline, and the ones the panel flags.": "Cuántos servidores funcionan, cuántos están apagados, y los que el panel marca.",
+    "Made under Account, API Credentials (ptlc_...). Not an application key: the card sees the servers this user can reach.": "Se crea en Cuenta, Credenciales de API (ptlc_...). No una clave de aplicación: la tarjeta ve los servidores a los que llega este usuario.",
+    "Needs a key whose user may control the server. Asks before it stops one.": "Necesita una clave cuyo usuario pueda controlar el servidor. Pregunta antes de detener uno.",
+    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "Los servidores de juegos de un panel Pterodactyl: cuáles funcionan, qué consumen, y botones para iniciarlos y detenerlos."
   },
   "labels": {
     "Private resources": "Recursos privados",
