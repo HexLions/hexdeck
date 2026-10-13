@@ -187,6 +187,7 @@ that one of thirty-five renderers draws.
 | UrBackup | clients, backups, running now | start an incremental file backup | user name and password of a local server user; the password is folded into the hash the web interface itself sends. A server with no users yet needs neither |
 | Elasticsearch | cluster, indices | | an encoded API key with the cluster privileges monitor and view_index_metadata, or basic credentials, or nothing on a cluster without security. OpenSearch answers the same calls |
 | Shelly | device, outputs | switch an output on or off | none on a device without authentication; a Gen 1 device takes its admin password. Gen 2 and later use digest, which is not supported yet. Local address only, never the cloud |
+| Tasmota | device, sensors | switch a relay on or off | none, or the web admin password, sent as HTTP Basic for `admin` (never in the address). One `Status 0` command reads everything; a plug with two measuring channels shows their sum. Local address only |
 | Steam | player, recently played, library | | Web API key from steamcommunity.com/dev, plus the 64-bit id or custom profile name. The profile's game details have to be public, or Steam answers an empty list |
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |

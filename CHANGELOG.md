@@ -19,6 +19,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   under it. From nexdeck.
 - **OpenDTU**: the power of Hoymiles micro inverters now, the yield today
   and in total, and each inverter. ⚠️ Beta.
+- **Tasmota**: a device's relays with a button to switch them, what it
+  draws, and every sensor it reads. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

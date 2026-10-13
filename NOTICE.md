@@ -407,6 +407,11 @@ Updated at every milestone.
   per inverter with it, in the shape `WebApi_ws_live.cpp` writes in release
   v26.9.28. An inverter that does not answer is shown as asleep, since micro
   inverters switch off with the light. Not yet run against a device.
+- **Tasmota with one command.** `Status 0` hands out the name, firmware,
+  relays, power and every sensor in one answer, read in the shape
+  `CmndStatus` and `MqttShowState` write in release v15.6.0. The password
+  goes as HTTP Basic, which Tasmota tries before the address parameters, so
+  it never lands in a log of addresses. Not yet run against a device.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -2271,7 +2271,14 @@
     "Inverters": "Inverter",
     "Only when read-only access is switched off under Security: the password of OpenDTU's web interface.": "Solo se l'accesso in sola lettura è disattivato in Sicurezza: la password dell'interfaccia web di OpenDTU.",
     "Solar": "Solare",
-    "The power the panels make now, the yield today and in total, and how many inverters are producing.": "La potenza che i pannelli producono adesso, la resa di oggi e totale, e quanti inverter stanno producendo."
+    "The power the panels make now, the yield today and in total, and how many inverters are producing.": "La potenza che i pannelli producono adesso, la resa di oggi e totale, e quanti inverter stanno producendo.",
+    "1 for a device with one relay; Tasmota counts its relays from 1.": "1 per un dispositivo con un solo relè; Tasmota conta i relè da 1.",
+    "A Tasmota device: its relays with a button to switch them, what it draws, and every sensor it reads.": "Un dispositivo Tasmota: i suoi relè con un pulsante per commutarli, quanto consuma e ogni sensore che legge.",
+    "Every reading of the device's sensors, and each relay with its own button.": "Ogni lettura dei sensori del dispositivo, e ogni relè con il suo pulsante.",
+    "Only when a web admin password is set on the device; its user name is always admin.": "Solo se sul dispositivo è impostata una password di amministrazione web; il nome utente è sempre admin.",
+    "Relay": "Relè",
+    "The device on your own network.": "Il dispositivo nella tua rete.",
+    "The relay, the power and today's energy on a plug that measures, the Wi-Fi signal and how long it has run.": "Il relè, la potenza e l'energia di oggi su una presa che misura, il segnale Wi-Fi e da quanto è acceso."
   },
   "labels": {
     "Jobs": "Job",
