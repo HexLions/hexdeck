@@ -2282,7 +2282,14 @@
     "Secret": "Segreto",
     "The --rpc-secret aria2 was started with, if any.": "Il --rpc-secret con cui è stato avviato aria2, se c'è.",
     "The RPC address, /jsonrpc is added when it is missing. aria2 has to run with --enable-rpc, and --rpc-listen-all to be reached from another machine.": "L'indirizzo RPC, /jsonrpc viene aggiunto se manca. aria2 deve girare con --enable-rpc, e con --rpc-listen-all per essere raggiungibile da un'altra macchina.",
-    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "I download di aria2 via JSON-RPC: velocità, avanzamento, cosa è fallito, e pausa o ripresa."
+    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "I download di aria2 via JSON-RPC: velocità, avanzamento, cosa è fallito, e pausa o ripresa.",
+    "Every job with its last build, the failing ones first, and a button to build it.": "Ogni job con la sua ultima build, prima quelli che falliscono, e un pulsante per avviarlo.",
+    "How many jobs fail, what is building and waiting, the executors in use and the agents that are offline.": "Quanti job falliscono, cosa è in build e in attesa, gli executor in uso e gli agent offline.",
+    "Jenkins: which jobs fail, what is building and waiting, the agents that are offline, and a button to build a job.": "Jenkins: quali job falliscono, cosa è in build e in attesa, gli agent offline, e un pulsante per avviare un job.",
+    "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Si crea nella pagina Sicurezza dell'utente, Aggiungi nuovo token. Senza il pulsante di build basta un utente che può solo leggere.",
+    "Needs a user who may build. Asks before it starts a build.": "Serve un utente che può avviare build. Chiede conferma prima di avviarne una.",
+    "Offer the build button": "Mostra il pulsante di build",
+    "The Jenkins user the API token belongs to.": "L'utente Jenkins a cui appartiene il token API."
   },
   "labels": {
     "Jobs": "Job",
@@ -3452,6 +3459,9 @@
     "Streak": "Serie",
     "With a version": "Con una versione",
     "Written today": "Scritto oggi",
-    "Producing": "In produzione"
+    "Producing": "In produzione",
+    "Building": "In build",
+    "Executors": "Executor",
+    "Build now": "Avvia build"
   }
 }

@@ -1,0 +1,147 @@
+{
+ "jobs": {
+  "_class": "hudson.model.Hudson",
+  "jobs": [
+   {
+    "_class": "hudson.model.FreeStyleProject",
+    "fullName": "backup-nightly",
+    "name": "backup-nightly",
+    "url": "http://jenkins.local:8080/job/backup-nightly/",
+    "buildable": true,
+    "color": "blue",
+    "healthReport": [
+     {
+      "description": "Build stability: No recent builds failed.",
+      "score": 100
+     }
+    ],
+    "lastBuild": {
+     "_class": "hudson.model.FreeStyleBuild",
+     "building": false,
+     "duration": 31,
+     "number": 1,
+     "result": "SUCCESS",
+     "timestamp": 1791930936652,
+     "url": "http://jenkins.local:8080/job/backup-nightly/1/"
+    }
+   },
+   {
+    "_class": "hudson.model.FreeStyleProject",
+    "fullName": "deploy-website",
+    "name": "deploy-website",
+    "url": "http://jenkins.local:8080/job/deploy-website/",
+    "buildable": true,
+    "color": "red",
+    "healthReport": [
+     {
+      "description": "Build stability: All recent builds failed.",
+      "score": 0
+     }
+    ],
+    "lastBuild": {
+     "_class": "hudson.model.FreeStyleBuild",
+     "building": false,
+     "duration": 12,
+     "number": 1,
+     "result": "FAILURE",
+     "timestamp": 1791930936708,
+     "url": "http://jenkins.local:8080/job/deploy-website/1/"
+    }
+   },
+   {
+    "_class": "hudson.model.FreeStyleProject",
+    "fullName": "integration-tests",
+    "name": "integration-tests",
+    "url": "http://jenkins.local:8080/job/integration-tests/",
+    "buildable": true,
+    "color": "notbuilt_anime",
+    "healthReport": [],
+    "lastBuild": {
+     "_class": "hudson.model.FreeStyleBuild",
+     "building": true,
+     "duration": 0,
+     "number": 1,
+     "result": null,
+     "timestamp": 1791930956653,
+     "url": "http://jenkins.local:8080/job/integration-tests/1/"
+    }
+   },
+   {
+    "_class": "hudson.model.FreeStyleProject",
+    "fullName": "lint",
+    "name": "lint",
+    "url": "http://jenkins.local:8080/job/lint/",
+    "buildable": true,
+    "color": "blue",
+    "healthReport": [
+     {
+      "description": "Build stability: No recent builds failed.",
+      "score": 100
+     }
+    ],
+    "lastBuild": {
+     "_class": "hudson.model.FreeStyleBuild",
+     "building": false,
+     "duration": 9,
+     "number": 1,
+     "result": "SUCCESS",
+     "timestamp": 1791930936727,
+     "url": "http://jenkins.local:8080/job/lint/1/"
+    }
+   },
+   {
+    "_class": "hudson.model.FreeStyleProject",
+    "fullName": "old-release",
+    "name": "old-release",
+    "url": "http://jenkins.local:8080/job/old-release/",
+    "buildable": false,
+    "color": "disabled",
+    "healthReport": [],
+    "lastBuild": null
+   }
+  ]
+ },
+ "queue": {
+  "_class": "hudson.model.Queue",
+  "items": [
+   {
+    "_class": "hudson.model.Queue$BlockedItem",
+    "blocked": true,
+    "id": 5,
+    "inQueueSince": 1791930961650,
+    "stuck": false,
+    "task": {
+     "_class": "hudson.model.FreeStyleProject",
+     "name": "integration-tests",
+     "url": "http://jenkins.local:8080/job/integration-tests/"
+    },
+    "why": "Build #1 is already in progress (ETA: N/A)"
+   }
+  ]
+ },
+ "computers": {
+  "_class": "hudson.model.ComputerSet",
+  "busyExecutors": 1,
+  "computer": [
+   {
+    "_class": "hudson.model.Hudson$MasterComputer",
+    "displayName": "Built-In Node",
+    "idle": false,
+    "numExecutors": 2,
+    "offline": false,
+    "offlineCauseReason": "",
+    "temporarilyOffline": false
+   },
+   {
+    "_class": "hudson.slaves.SlaveComputer",
+    "displayName": "build-arm64",
+    "idle": true,
+    "numExecutors": 1,
+    "offline": true,
+    "offlineCauseReason": "",
+    "temporarilyOffline": false
+   }
+  ],
+  "totalExecutors": 2
+ }
+}

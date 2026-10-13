@@ -417,6 +417,11 @@ Updated at every milestone.
   HTTP 400, not 401. Checked against aria2 1.37.0 running locally, with a
   secret, downloads running, paused, waiting, finished and failed, pause and
   resume, and a wrong secret.
+- **Jenkins with an API token and no crumb.** Jobs, queue and agents come
+  from `/api/json` with the fields named in `tree`; the build button posts
+  with the API token, which Jenkins exempts from its CSRF crumb. Checked
+  against Jenkins 2.580.1 running locally, with passing, failing, running,
+  queued and disabled jobs, an offline agent, and a wrong token.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

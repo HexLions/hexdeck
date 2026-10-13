@@ -2282,7 +2282,14 @@
     "Secret": "Secret",
     "The --rpc-secret aria2 was started with, if any.": "Das --rpc-secret, mit dem aria2 gestartet wurde, falls eines.",
     "The RPC address, /jsonrpc is added when it is missing. aria2 has to run with --enable-rpc, and --rpc-listen-all to be reached from another machine.": "Die RPC-Adresse, /jsonrpc wird ergänzt, wenn es fehlt. aria2 muss mit --enable-rpc laufen, und mit --rpc-listen-all, um von einem anderen Rechner erreichbar zu sein.",
-    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "Die Downloads von aria2 über JSON-RPC: Geschwindigkeit, Fortschritt, was fehlgeschlagen ist, und Pause oder Fortsetzen."
+    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "Die Downloads von aria2 über JSON-RPC: Geschwindigkeit, Fortschritt, was fehlgeschlagen ist, und Pause oder Fortsetzen.",
+    "Every job with its last build, the failing ones first, and a button to build it.": "Jeder Job mit seinem letzten Build, die fehlschlagenden zuerst, und eine Taste zum Bauen.",
+    "How many jobs fail, what is building and waiting, the executors in use and the agents that are offline.": "Wie viele Jobs fehlschlagen, was gebaut wird und wartet, die belegten Executoren und die Agents, die offline sind.",
+    "Jenkins: which jobs fail, what is building and waiting, the agents that are offline, and a button to build a job.": "Jenkins: welche Jobs fehlschlagen, was gebaut wird und wartet, welche Agents offline sind, und eine Taste zum Bauen eines Jobs.",
+    "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Erstellt auf der Sicherheitsseite des Benutzers, Neues Token hinzufügen. Ohne die Build-Taste genügt ein Benutzer, der nur lesen darf.",
+    "Needs a user who may build. Asks before it starts a build.": "Braucht einen Benutzer, der bauen darf. Fragt nach, bevor ein Build startet.",
+    "Offer the build button": "Build-Taste anbieten",
+    "The Jenkins user the API token belongs to.": "Der Jenkins-Benutzer, zu dem das API-Token gehört."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3452,6 +3459,9 @@
     "Streak": "Serie",
     "With a version": "Mit Fassung",
     "Written today": "Heute geschrieben",
-    "Producing": "Produzieren"
+    "Producing": "Produzieren",
+    "Building": "Im Bau",
+    "Executors": "Executoren",
+    "Build now": "Jetzt bauen"
   }
 }

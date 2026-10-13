@@ -2282,7 +2282,14 @@
     "Secret": "Secreto",
     "The --rpc-secret aria2 was started with, if any.": "El --rpc-secret con el que se inició aria2, si lo hay.",
     "The RPC address, /jsonrpc is added when it is missing. aria2 has to run with --enable-rpc, and --rpc-listen-all to be reached from another machine.": "La dirección RPC, se añade /jsonrpc si falta. aria2 tiene que ejecutarse con --enable-rpc, y con --rpc-listen-all para llegar desde otra máquina.",
-    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "Las descargas de aria2 por JSON-RPC: velocidad, progreso, lo que falló, y pausar o reanudar."
+    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "Las descargas de aria2 por JSON-RPC: velocidad, progreso, lo que falló, y pausar o reanudar.",
+    "Every job with its last build, the failing ones first, and a button to build it.": "Cada job con su última compilación, primero los que fallan, y un botón para lanzarlo.",
+    "How many jobs fail, what is building and waiting, the executors in use and the agents that are offline.": "Cuántos jobs fallan, qué se está compilando y qué espera, los ejecutores en uso y los agentes desconectados.",
+    "Jenkins: which jobs fail, what is building and waiting, the agents that are offline, and a button to build a job.": "Jenkins: qué jobs fallan, qué se compila y qué espera, los agentes desconectados, y un botón para lanzar un job.",
+    "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Se crea en la página Seguridad del usuario, Añadir nuevo token. Sin el botón de compilar basta un usuario que solo pueda leer.",
+    "Needs a user who may build. Asks before it starts a build.": "Necesita un usuario que pueda compilar. Pregunta antes de lanzar una compilación.",
+    "Offer the build button": "Mostrar el botón de compilar",
+    "The Jenkins user the API token belongs to.": "El usuario de Jenkins al que pertenece el token de API."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3452,6 +3459,9 @@
     "Streak": "Racha",
     "With a version": "Con versión",
     "Written today": "Escrito hoy",
-    "Producing": "Produciendo"
+    "Producing": "Produciendo",
+    "Building": "Compilando",
+    "Executors": "Ejecutores",
+    "Build now": "Compilar ahora"
   }
 }

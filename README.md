@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for a hundred and ninety-nine services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for two hundred services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-199-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-200-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **199 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **200 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -210,7 +210,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 ## The services it speaks to
 
-**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
+**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
 **Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, FortiGate, Traefik, Caddy, Nginx Proxy Manager, nginx ignition, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
@@ -244,7 +244,7 @@ adapters upstream added up to its 0.30.0 are taken over. Item by item in
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/myspeed.svg" width="26" height="26" alt=""><br>**MySpeed**<br><sub>Last speed test,<br>failures today</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/esphome.svg" width="26" height="26" alt=""><br>**ESPHome**<br><sub>Devices online,<br>firmware updates</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/owncast.svg" width="26" height="26" alt=""><br>**Owncast**<br><sub>Live or not,<br>viewers</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/garage.svg" width="26" height="26" alt=""><br>**Garage**<br><sub>S3 cluster health,<br>nodes, buckets</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/readeck.svg" width="26" height="26" alt=""><br>**Readeck**<br><sub>Unread, latest bookmarks,<br>failed saves</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg" width="26" height="26" alt=""><br>**Node-RED**<br><sub>Flows running,<br>missing node types</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wikijs.svg" width="26" height="26" alt=""><br>**Wiki.js**<br><sub>Pages, updates,<br>changed last</sub> | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/sun.svg" width="26" height="26" alt=""><br>**OpenDTU**<br><sub>Solar power now,<br>yield, each inverter</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tasmota.svg" width="26" height="26" alt=""><br>**Tasmota**<br><sub>Relays with a switch,<br>power, sensors</sub> |
-| <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/download.svg" width="26" height="26" alt=""><br>**aria2**<br><sub>Downloads, failures,<br>pause and resume</sub> | | |
+| <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/download.svg" width="26" height="26" alt=""><br>**aria2**<br><sub>Downloads, failures,<br>pause and resume</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jenkins.svg" width="26" height="26" alt=""><br>**Jenkins**<br><sub>Failing jobs, queue,<br>offline agents</sub> | |
 
 The first ten services here were confirmed against live instances on 2026-10-06 and
 carry no *beta* badge; the public address card asks a public service and has no

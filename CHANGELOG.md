@@ -23,6 +23,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   draws, and every sensor it reads. ⚠️ Beta.
 - **aria2**: the downloads with their progress, the ones that failed and
   why, and a button to pause or resume. ⚠️ Beta.
+- **Jenkins**: which jobs fail, what is building and waiting, the agents
+  that are offline, and a button to build a job. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 
