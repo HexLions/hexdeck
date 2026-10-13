@@ -595,6 +595,8 @@
     "settings": "Impostazioni della board",
     "manage": "Gestisci le board",
     "pages": "Pagine",
+    "pagesEarlier": "Pagine precedenti",
+    "pagesLater": "Altre pagine",
     "edit": "Modifica board",
     "confirmAction": "Eseguire questa azione adesso?",
     "pageName": "Nome della pagina",

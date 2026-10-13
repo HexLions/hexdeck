@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { ApiError, get, post } from '../api/client'
+import { Bar } from '../components/AppBar'
 import { BackgroundLayer } from '../components/BackgroundLayer'
 import { Logo } from '../components/Logo'
 import { Field, PasswordInput } from '../components/ui'
@@ -118,6 +119,12 @@ export function LoginPage() {
   const shell = (children: React.ReactNode) => (
     <div className="min-h-full flex items-center justify-center p-6">
       <BackgroundLayer />
+      {/* In the bar every page shares, bare in a browser tab: in the app
+          installed on iPadOS 26 a page with no solid bar brings the blur back,
+          and signing in carried it onto the board (found by nexdeck, #40). */}
+      <Bar bare spacer={false}>
+        <span className="flex-1" />
+      </Bar>
       <div className="glass rounded-2xl p-6 w-full max-w-sm shadow-2xl">
         <div className="flex justify-center mb-6">
           <Logo size={34} />

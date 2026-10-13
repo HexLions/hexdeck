@@ -5,6 +5,17 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Fixed
+
+- **The iPad blur came back between pages.** Every page brought a bar of its
+  own, and going from a board to the settings or from sign-in to a board took
+  one down and put another up. There is one bar now, built once above the
+  pages; it stands while a page loads and when one gives way to the next. On
+  an iPad held upright, a crowded bar keeps the search clear of the bell, the
+  board name on one line, and says when the row of pages scrolls. From nexdeck.
+
 ## 0.26.0 (2026-10-12)
 
 What nexdeck did from 0.37 to 0.40, taken over and fitted: six integrations,
