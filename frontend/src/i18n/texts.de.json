@@ -2313,7 +2313,11 @@
     "Mail queue": "Mail-Warteschlange",
     "The mail waiting in Postfix's queue, with the sender, the recipient and why it waits.": "Die Mail in der Warteschlange von Postfix, mit Absender, Empfänger und warum sie wartet.",
     "The mailboxes by how full they are, with the messages and the last sign-in.": "Die Postfächer nach Füllstand, mit den Nachrichten und der letzten Anmeldung.",
-    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "Unter System, Konfiguration, Zugang, API. Der Nur-Lese-Schlüssel genügt; die Adresse von HexDeck muss in seiner Liste der erlaubten Adressen stehen."
+    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "Unter System, Konfiguration, Zugang, API. Der Nur-Lese-Schlüssel genügt; die Adresse von HexDeck muss in seiner Liste der erlaubten Adressen stehen.",
+    "A BookStack wiki: how many shelves, books, chapters and pages it holds, and the pages changed last.": "Ein BookStack-Wiki: wie viele Regale, Bücher, Kapitel und Seiten es hat, und die zuletzt geänderten Seiten.",
+    "How many shelves, books, chapters and pages the wiki holds.": "Wie viele Regale, Bücher, Kapitel und Seiten das Wiki hat.",
+    "Made on the user's profile under API Tokens. The user's role needs the permission Access system API.": "Erstellt im Profil des Benutzers unter API-Tokens. Die Rolle des Benutzers braucht die Berechtigung System-API verwenden.",
+    "The pages changed last with their book, each opening the page.": "Die zuletzt geänderten Seiten mit ihrem Buch, jede öffnet die Seite."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3494,6 +3498,8 @@
     "Kitchen light": "Küchenlicht",
     "Living room": "Wohnzimmer",
     "Z-Wave stick": "Z-Wave-Stick",
-    "From grid": "Aus dem Netz"
+    "From grid": "Aus dem Netz",
+    "Chapters": "Kapitel",
+    "Shelves": "Regale"
   }
 }

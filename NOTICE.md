@@ -444,6 +444,10 @@ Updated at every milestone.
   in release 2026-09a. A key from an address it does not allow and a wrong
   key are told apart, since the second one feeds mailcow's fail2ban. Not
   yet run against an installation.
+- **BookStack through its token.** The counts and the pages changed last
+  come from `/api/shelves`, `/api/books`, `/api/chapters` and `/api/pages`,
+  in the listing shape and with the token format of release v26.09.1. Not
+  yet run against an installation.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

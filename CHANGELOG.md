@@ -33,6 +33,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   to start and stop them. ⚠️ Beta.
 - **mailcow**: whether every container runs, the mail waiting in the queue
   and why, the storage, and the fullest mailboxes. ⚠️ Beta.
+- **BookStack**: how many shelves, books, chapters and pages the wiki
+  holds, and the pages changed last. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

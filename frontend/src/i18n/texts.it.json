@@ -2313,7 +2313,11 @@
     "Mail queue": "Coda di posta",
     "The mail waiting in Postfix's queue, with the sender, the recipient and why it waits.": "La posta in attesa nella coda di Postfix, con mittente, destinatario e perché aspetta.",
     "The mailboxes by how full they are, with the messages and the last sign-in.": "Le caselle in ordine di riempimento, con i messaggi e l'ultimo accesso.",
-    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "In Sistema, Configurazione, Accesso, API. Basta la chiave in sola lettura; l'indirizzo di HexDeck deve essere nella sua lista di indirizzi ammessi."
+    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "In Sistema, Configurazione, Accesso, API. Basta la chiave in sola lettura; l'indirizzo di HexDeck deve essere nella sua lista di indirizzi ammessi.",
+    "A BookStack wiki: how many shelves, books, chapters and pages it holds, and the pages changed last.": "Un wiki BookStack: quanti scaffali, libri, capitoli e pagine contiene, e le pagine modificate per ultime.",
+    "How many shelves, books, chapters and pages the wiki holds.": "Quanti scaffali, libri, capitoli e pagine contiene il wiki.",
+    "Made on the user's profile under API Tokens. The user's role needs the permission Access system API.": "Si crea nel profilo dell'utente in Token API. Il ruolo dell'utente deve avere il permesso di accesso all'API di sistema.",
+    "The pages changed last with their book, each opening the page.": "Le pagine modificate per ultime con il loro libro, ognuna apre la pagina."
   },
   "labels": {
     "Jobs": "Job",
@@ -3494,6 +3498,8 @@
     "Kitchen light": "Luce della cucina",
     "Living room": "Soggiorno",
     "Z-Wave stick": "Chiavetta Z-Wave",
-    "From grid": "Dalla rete"
+    "From grid": "Dalla rete",
+    "Chapters": "Capitoli",
+    "Shelves": "Scaffali"
   }
 }
