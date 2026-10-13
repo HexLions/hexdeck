@@ -5,7 +5,11 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.27.0 (2026-10-13)
+
+What nexdeck did in 0.41, taken over and fitted: an app catalog, a dial,
+LED bars, seven segments or a chart for every number, and one bar for
+every page.
 
 ### New
 

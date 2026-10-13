@@ -929,6 +929,27 @@
         "JSON-API-Wertkarten tragen bis zu vier Plaketten.",
         "Mails tragen ein Datum, iCloud, Outlook und Gmail verwerfen sie nicht mehr."
       ]
+    },
+    "0.27.0": {
+      "lead": "HexDeck 0.27.0: Apps einmal eingerichtet und auf jedem Board platziert, und jede Zahl als Zeiger, LED-Balken, Siebensegmentanzeige oder Diagramm.",
+      "sections": [
+        {
+          "title": "Apps einmal einrichten",
+          "body": "Eine App mit Namen, Symbol und jeder Adresse, unter der sie erreichbar ist: über den Proxy, über Tailscale, direkt. Eine Kachel folgt ihr, also ist eine einmal geänderte Adresse auf jedem Board geändert. Automatisch öffnet in deinen vertrauenswürdigen Netzen die Adresse für daheim und überall sonst die andere.",
+          "path": "System > Apps"
+        },
+        {
+          "title": "Eine Zahl, wie du sie willst",
+          "body": "Jede Zahlenkarte kann ein Zeiger sein, LED-Balken quer oder hochkant, sieben Segmente oder ein Diagramm der letzten Stunde, sechs Stunden oder des Tages. Voll bei, Leer bei, Gelb ab und Rot ab färben die Zeichnung, nie den Status der Karte.",
+          "path": "Einstellungen einer Karte"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die Widget-Bibliothek zeigt die Apps des Katalogs über den Widgets.",
+        "Die obere Leiste bleibt zwischen den Seiten stehen und passt auf ein hochkant gehaltenes iPad: die Suche wird schmaler, die Seiten blättern mit Pfeilen.",
+        "Wird eine App gelöscht, bleiben ihre Kacheln stehen, mit dem, was sie zeigten."
+      ]
     }
   }
 }

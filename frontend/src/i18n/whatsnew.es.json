@@ -159,6 +159,27 @@
         "Las tarjetas de valor JSON API llevan hasta cuatro insignias.",
         "Los correos llevan fecha, así iCloud, Outlook y Gmail ya no los descartan."
       ]
+    },
+    "0.27.0": {
+      "lead": "HexDeck 0.27.0: apps configuradas una vez y colocadas en cualquier tablero, y cada número dibujado como aguja, barras LED, siete segmentos o gráfico.",
+      "sections": [
+        {
+          "title": "Apps configuradas una vez",
+          "body": "Una app con su nombre, su icono y cada dirección por la que se llega: por el proxy, por Tailscale, directa. Un mosaico la sigue, así que una dirección cambiada una vez cambia en cada tablero. Automático abre la dirección de casa en tus redes de confianza y la otra en cualquier otro lugar.",
+          "path": "Sistema > Apps"
+        },
+        {
+          "title": "Un número, dibujado a tu manera",
+          "body": "Cada tarjeta numérica puede ser una aguja, barras LED horizontales o verticales, siete segmentos o un gráfico de la última hora, seis horas o el día. Lleno en, Vacío en, Amarillo desde y Rojo desde colorean el dibujo, nunca el estado de la tarjeta.",
+          "path": "Ajustes de una tarjeta"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "La biblioteca de widgets muestra las apps del catálogo encima de los widgets.",
+        "La barra superior se queda quieta entre páginas y cabe en un iPad en vertical: la búsqueda se estrecha y las páginas se desplazan con flechas.",
+        "Borrar una app deja sus mosaicos en pie, con lo que mostraban."
+      ]
     }
   }
 }
