@@ -167,7 +167,7 @@ def _drawn_as(widget: Widget, declared: str) -> str:
     declared renderer.
     """
     view = str((widget.options or {}).get("view") or "")
-    return view if view in ("gauge", "value") else declared
+    return view if view in ("gauge", "value", "meter", "segments") else declared
 
 
 def widget_view(db: Session, widget: Widget, bars: list[float | None] | None = None) -> dict[str, Any]:

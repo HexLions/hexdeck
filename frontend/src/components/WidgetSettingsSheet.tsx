@@ -244,7 +244,9 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
           if (!option.only_when) return true
           const [name, wanted] = option.only_when
           const current = options[name] ?? spec.options.find((other) => other.name === name)?.default
-          return String(current ?? '') === wanted
+          // Several values are joined by "|": the ceiling of a dial is the ceiling
+          // of the LEDs too ("gauge|meter"). From nexdeck.
+          return wanted.split('|').includes(String(current ?? ''))
         })
         .map((option) => (
           <FieldInput

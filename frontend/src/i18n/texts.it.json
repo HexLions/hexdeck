@@ -2249,7 +2249,17 @@
     "Yellow when at least this many documents wait. 0 switches this off.": "Giallo quando aspettano almeno tanti documenti. 0 lo disattiva.",
     "Yellow when the oldest document has waited longer than this. 0 switches this off.": "Giallo quando il documento più vecchio aspetta da più di questo. 0 lo disattiva.",
     "nexbrand overview": "Panoramica nexbrand",
-    "nexpaper inbox": "Posta di nexpaper"
+    "nexpaper inbox": "Posta di nexpaper",
+    "Across": "In orizzontale",
+    "Upright": "In verticale",
+    "LED bars": "Barra a LED",
+    "LEDs run": "Direzione dei LED",
+    "Seven segments": "Sette segmenti",
+    "Yellow from": "Giallo da",
+    "Red from": "Rosso da",
+    "In the unit of the number. Empty leaves the colour to the card.": "Nell'unità del numero. Vuoto lascia il colore alla scheda.",
+    "Below Yellow from means low numbers are the bad ones, as with free space.": "Sotto Giallo da significa che i numeri bassi sono quelli cattivi, come per lo spazio libero.",
+    "What counts as full, in the unit of the number. Not needed for a percentage. Leave empty and the card stays a number.": "Ciò che conta come pieno, nell'unità del numero. Non serve per una percentuale. Lasciato vuoto, la scheda resta un numero."
   },
   "labels": {
     "Jobs": "Job",

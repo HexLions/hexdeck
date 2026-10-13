@@ -7,6 +7,12 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ## Unreleased
 
+### New
+
+- **Every number card can be a dial, LED bars, seven segments or a chart.**
+  Until now a dial was offered on a few cards only. Yellow and red lines colour
+  the drawing and leave the card's status alone. From nexdeck.
+
 ### Fixed
 
 - **The iPad blur came back between pages.** Every page brought a bar of its

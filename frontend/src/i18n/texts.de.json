@@ -2249,7 +2249,17 @@
     "Yellow when at least this many documents wait. 0 switches this off.": "Gelb, wenn mindestens so viele Dokumente warten. 0 schaltet das ab.",
     "Yellow when the oldest document has waited longer than this. 0 switches this off.": "Gelb, wenn das älteste Dokument länger wartet als das. 0 schaltet das ab.",
     "nexbrand overview": "nexbrand-Übersicht",
-    "nexpaper inbox": "nexpaper-Eingang"
+    "nexpaper inbox": "nexpaper-Eingang",
+    "Across": "Waagrecht",
+    "Upright": "Senkrecht",
+    "LED bars": "LED-Leiste",
+    "LEDs run": "LEDs laufen",
+    "Seven segments": "Siebensegment",
+    "Yellow from": "Gelb ab",
+    "Red from": "Rot ab",
+    "In the unit of the number. Empty leaves the colour to the card.": "In der Einheit der Zahl. Leer überlässt die Farbe der Karte.",
+    "Below Yellow from means low numbers are the bad ones, as with free space.": "Unter Gelb ab heißt: niedrige Zahlen sind die schlechten, wie bei freiem Platz.",
+    "What counts as full, in the unit of the number. Not needed for a percentage. Leave empty and the card stays a number.": "Was als voll gilt, in der Einheit der Zahl. Bei Prozent nicht nötig. Leer lassen und die Karte bleibt eine Zahl."
   },
   "labels": {
     "Jobs": "Jobs",
