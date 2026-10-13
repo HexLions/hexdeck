@@ -816,7 +816,8 @@
       "network": "Network",
       "monitoring": "Monitoring and home",
       "other": "Other"
-    }
+    },
+    "apps": "Apps from the catalog"
   },
   "notices": {
     "title": "Notices",
@@ -1089,7 +1090,9 @@
     "uptime": "Uptime in the window",
     "flow": "Where the power goes",
     "topology": "How the places hang together",
-    "problemsMore": "+{{count}} more"
+    "problemsMore": "+{{count}} more",
+    "lastHours_one": "last hour",
+    "lastHours_other": "last {{count}} hours"
   },
   "player": {
     "title": "Music",
@@ -1203,7 +1206,8 @@
     "noServers": "This account has no Plex server of its own."
   },
   "gauge": {
-    "of": "of"
+    "of": "of",
+    "range": "{{min}} to {{max}}"
   },
   "backups": {
     "title": "Backups",

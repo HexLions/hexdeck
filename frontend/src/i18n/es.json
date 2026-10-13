@@ -816,7 +816,8 @@
       "network": "Red",
       "monitoring": "Monitorización y hogar",
       "other": "Otros"
-    }
+    },
+    "apps": "Apps del catálogo"
   },
   "notices": {
     "title": "Avisos",
@@ -951,7 +952,9 @@
     "flow": "Adónde va la energía",
     "topology": "Cómo se conectan los lugares",
     "uptime": "Disponibilidad en la ventana",
-    "problemsMore": "+{{count}} más"
+    "problemsMore": "+{{count}} más",
+    "lastHours_one": "última hora",
+    "lastHours_other": "últimas {{count}} horas"
   },
   "player": {
     "title": "Música",
@@ -1065,7 +1068,8 @@
     "noServers": "Esta cuenta no tiene un servidor Plex propio."
   },
   "gauge": {
-    "of": "de"
+    "of": "de",
+    "range": "de {{min}} a {{max}}"
   },
   "backups": {
     "title": "Copias de seguridad",

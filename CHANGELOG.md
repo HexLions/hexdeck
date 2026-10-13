@@ -11,14 +11,17 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 - **Every number card can be a dial, LED bars, seven segments or a chart.**
   Until now a dial was offered on a few cards only. Yellow and red lines colour
-  the drawing and leave the card's status alone. From nexdeck.
+  the drawing and leave the card's status alone. "Empty at" sets where the
+  dial and the LEDs start, and a chart says how far back it reaches: the last
+  hour, six hours or a day. From nexdeck.
 - **Apps set up once, placed on any board.** System › Apps keeps a catalog:
   an app with its name, icon, a line of description and every address it is
   reached by (through the proxy, over Tailscale, directly). An app tile follows
   one, so an address changed once is changed on every board, and it can open
   the home address in the trusted networks of System › Sign-in providers and
   the other one everywhere else. Deleting an app leaves its tiles standing on
-  their own. From nexdeck.
+  their own. The widget library lists the apps above the widgets. From
+  nexdeck.
 
 ### Fixed
 
