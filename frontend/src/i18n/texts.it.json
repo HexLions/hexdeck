@@ -2265,7 +2265,13 @@
     "Chart shows": "Il grafico mostra",
     "The last hour": "L'ultima ora",
     "The last 6 hours": "Le ultime 6 ore",
-    "The last 24 hours": "Le ultime 24 ore"
+    "The last 24 hours": "Le ultime 24 ore",
+    "Each inverter with its power, its yield today, its temperature and its limit.": "Ogni inverter con la sua potenza, la resa di oggi, la temperatura e il limite.",
+    "Hoymiles micro inverters through OpenDTU: the power now, the yield today and in total, and each inverter.": "Microinverter Hoymiles tramite OpenDTU: la potenza di adesso, la resa di oggi e totale, e ogni inverter.",
+    "Inverters": "Inverter",
+    "Only when read-only access is switched off under Security: the password of OpenDTU's web interface.": "Solo se l'accesso in sola lettura è disattivato in Sicurezza: la password dell'interfaccia web di OpenDTU.",
+    "Solar": "Solare",
+    "The power the panels make now, the yield today and in total, and how many inverters are producing.": "La potenza che i pannelli producono adesso, la resa di oggi e totale, e quanti inverter stanno producendo."
   },
   "labels": {
     "Jobs": "Job",
@@ -3434,6 +3440,7 @@
     "Spaces": "Spazi",
     "Streak": "Serie",
     "With a version": "Con una versione",
-    "Written today": "Scritto oggi"
+    "Written today": "Scritto oggi",
+    "Producing": "In produzione"
   }
 }

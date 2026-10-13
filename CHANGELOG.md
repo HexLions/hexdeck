@@ -17,6 +17,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   Pi-hole, AdGuard Home, Immich and Nextcloud storage and PeaNUT are dials
   by default; their View list now offers the number too, with the rows
   under it. From nexdeck.
+- **OpenDTU**: the power of Hoymiles micro inverters now, the yield today
+  and in total, and each inverter. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

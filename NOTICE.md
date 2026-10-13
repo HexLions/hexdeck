@@ -402,6 +402,11 @@ Updated at every milestone.
   "Forbidden" otherwise. Checked against Wiki.js 2.5.315 running locally,
   with SQLite and four pages; its tarball is built for musl, so the SQLite
   module was replaced with the official glibc build of the same version.
+- **OpenDTU, read from its source.** The totals, each inverter and OpenDTU's
+  own hints come from `/api/livedata/status`, once without a serial and once
+  per inverter with it, in the shape `WebApi_ws_live.cpp` writes in release
+  v26.9.28. An inverter that does not answer is shown as asleep, since micro
+  inverters switch off with the light. Not yet run against a device.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
