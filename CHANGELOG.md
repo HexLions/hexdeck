@@ -13,6 +13,10 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   Set the new key in `HEXDECK_SECRET_KEY` and the old one in
   `HEXDECK_SECRET_KEY_PREVIOUS`: the next start moves every stored secret to
   the new key and says how many in the log. Then remove the variable.
+- **A dial card can be drawn as its plain number.** NextDNS, Technitium,
+  Pi-hole, AdGuard Home, Immich and Nextcloud storage and PeaNUT are dials
+  by default; their View list now offers the number too, with the rows
+  under it. From nexdeck.
 
 ## 0.27.0 (2026-10-13)
 
