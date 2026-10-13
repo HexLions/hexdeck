@@ -129,6 +129,7 @@ Mount `/var/run/docker.sock` (already in the compose file) to see this host's co
 | Variable | Default | Purpose |
 |---|---|---|
 | `HEXDECK_SECRET_KEY` | generated into `/data/secret.key` | Encrypts stored API keys and signs sessions. Set it once and keep it. |
+| `HEXDECK_SECRET_KEY_PREVIOUS` | empty | The key before a change. On the next start every stored API key moves to the new key; remove it afterwards. See [Changing the secret key](docs/operating.md#changing-the-secret-key). |
 | `HEXDECK_PUBLIC_URL` | empty | How browsers reach HexDeck. Needed for OpenID Connect and Web Push. |
 | `HEXDECK_DEMO` | `0` | Start every widget with invented data. |
 | `HEXDECK_LOG_LEVEL` | `INFO` | `DEBUG` logs every adapter request. |

@@ -61,6 +61,10 @@ class Settings(BaseSettings):
     #: Secret used for session signing and secret encryption. When empty a
     #: random key is generated once and stored in ``data/secret.key``.
     secret_key: str = ""
+    #: The secret this installation used before ``secret_key`` was changed.
+    #: Read only: on the next start every stored secret is decrypted with it
+    #: and written again under the new one. Remove it once that start is done.
+    secret_key_previous: str = ""
     #: Public URL as seen by browsers, e.g. ``https://deck.example.com``.
     #: Needed for OIDC return addresses and Web Push.
     public_url: str = ""

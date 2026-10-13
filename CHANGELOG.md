@@ -5,6 +5,15 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **A secret key can be changed without entering every API key again.**
+  Set the new key in `HEXDECK_SECRET_KEY` and the old one in
+  `HEXDECK_SECRET_KEY_PREVIOUS`: the next start moves every stored secret to
+  the new key and says how many in the log. Then remove the variable.
+
 ## 0.27.0 (2026-10-13)
 
 What nexdeck did in 0.41, taken over and fitted: an app catalog, a dial,
