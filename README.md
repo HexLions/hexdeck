@@ -251,7 +251,8 @@ adapters upstream added up to its 0.30.0 are taken over. Item by item in
 The first ten services here were confirmed against live instances on 2026-10-06 and
 carry no *beta* badge; the public address card asks a public service and has no
 instance to confirm. Everything from GitLab on came after them: GitLab, Alertmanager and
-Cloudflare in 0.23.0, the twenty from Caddy to Wiki.js in 0.24.0. They keep their *beta*
+Cloudflare in 0.23.0, the twenty from Caddy to Wiki.js in 0.24.0, the ten from OpenDTU
+to rclone in 0.28.0. They keep their *beta*
 badge until somebody has seen them answer an instance of their own. Every card they
 offer is in [docs/adapters.md](docs/adapters.md).
 
