@@ -225,6 +225,17 @@ tile's link and its reachability check take the integration's address on
 every read, so a changed address is changed once. A link of the tile's own
 still wins.
 
+Or it follows an app of the catalog (System > Apps): `options.app_id` names
+the app and `options.address` the label of the address it opens, or `auto`.
+Name, icon, description, address and check then come from the app, for an
+app without an adapter as well. `auto` opens the address named for home when
+the browser is in a trusted network (System > Sign-in providers > No
+sign-in at home, which may name networks without switching that sign-in on)
+and the one for the road everywhere else, including where HexDeck cannot
+tell. The check runs on the home address, since HexDeck runs at home. An export names the app and carries
+it along; an import over HTTP creates no app and turns a tile whose app is
+missing into a tile of its own.
+
 A card can be enlarged but never made smaller than its `default_size`;
 `min_size` is what the server uses when it has to squeeze a new widget into
 a tight spot.

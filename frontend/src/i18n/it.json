@@ -142,7 +142,7 @@
       "adminWarning": "Un amministratore: chiunque su queste reti può cambiare tutto, cancellare board e leggere l'indirizzo di ogni connessione. Scegli un guest o un utente, a meno che sulla rete ci sia davvero solo tu.",
       "noAccount": "Nessun account scelto",
       "networks": "Reti fidate",
-      "networksHelp": "Una per riga, come indirizzo o rete: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Tutta Internet viene rifiutata.",
+      "networksHelp": "Una per riga, come indirizzo o rete: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Tutta Internet viene rifiutata. I riquadri app che scelgono l'indirizzo da soli seguono le stesse reti, anche con l'interruttore spento.",
       "proxyNote": "Dietro un reverse proxy l'indirizzo visto è quello del proxy, a meno che HEXDECK_TRUSTED_PROXIES non lo indichi; allora conta l'indirizzo inoltrato."
     },
     "title": "Le mie impostazioni",
@@ -164,7 +164,8 @@
       "backups": "Backup",
       "media": "Media",
       "projects": "Progetti",
-      "player": "Lettore musicale"
+      "player": "Lettore musicale",
+      "apps": "App"
     },
     "mail": {
       "title": "Server di posta",
@@ -780,6 +781,21 @@
     "pictureBadAddress": "Questo non è un indirizzo da cui si possa caricare un'immagine.",
     "pictureLibrary": "Dai media",
     "pictureLibraryEmpty": "Ancora niente caricato. Carica prima un file.",
+    "app": {
+      "label": "App dal catalogo",
+      "help": "Nome, icona, indirizzo e controllo di raggiungibilità vengono dall'app. Cambiala una volta in Sistema, App e tutti i riquadri la seguono.",
+      "none": "Nessuna, impostato qui",
+      "address": "Apre",
+      "auto": "Automaticamente, a casa o fuori",
+      "autoHelp": "Apre automaticamente l'indirizzo di casa nelle reti domestiche e l'altro ovunque.",
+      "first": "Il primo indirizzo ({{label}})",
+      "saveAs": "Salva come app",
+      "saveAsHelp": "Mette questo riquadro nel catalogo, così ogni bacheca può usarlo. Da allora il riquadro la segue.",
+      "untitled": "App",
+      "firstLabel": "Principale",
+      "titleHelp": "Vuoto: il nome dell'app.",
+      "linkFollows": "Vuoto: l'indirizzo dell'app. Un indirizzo qui ha la precedenza."
+    },
     "move": "Sposta su un'altra pagina",
     "moveTo": "Sposta in…"
   },
@@ -1261,5 +1277,34 @@
     "down_one": "{{count}} giù",
     "down_other": "{{count}} giù",
     "none": "Su questa pagina non ci sono ancora altre card."
+  },
+  "apps": {
+    "title": "App",
+    "lead": "Configura un'app una volta e mettila come riquadro su qualsiasi bacheca. Cambia un indirizzo qui e tutti i riquadri lo seguono.",
+    "none": "Ancora nessuna app. Aggiungine una qui, oppure salva un riquadro app come app dalle sue impostazioni.",
+    "add": "Aggiungi app",
+    "edit": "Modifica app",
+    "editNamed": "Modifica {{name}}",
+    "delete": "Elimina app",
+    "deleteNamed": "Eliminare {{name}}?",
+    "deleteBody_one": "{{count}} riquadro la segue. Resta, come riquadro a sé con il nome, l'icona e l'indirizzo che mostra ora.",
+    "deleteBody_other": "{{count}} riquadri la seguono. Restano, come riquadri a sé con il nome, l'icona e l'indirizzo che mostrano ora.",
+    "tiles_one": "{{count}} riquadro",
+    "tiles_other": "{{count}} riquadri",
+    "name": "Nome",
+    "icon": "Icona",
+    "description": "Descrizione",
+    "addresses": "Indirizzi",
+    "addressesHelp": "Uno per ogni modo in cui l'app è raggiungibile, per esempio tramite il proxy, con Tailscale o direttamente con indirizzo e porta.",
+    "label": "Etichetta dell'indirizzo {{number}}",
+    "labelPlaceholder": "Proxy",
+    "url": "Indirizzo {{number}}",
+    "addAddress": "Aggiungi indirizzo",
+    "removeAddress": "Rimuovi l'indirizzo {{number}}",
+    "home": "A casa",
+    "away": "Fuori casa",
+    "notSet": "Non impostato",
+    "automaticHelp": "Se è impostato uno dei due, un riquadro può scegliere l'indirizzo da solo: quello di casa nelle reti fidate di Sistema, Provider di accesso, Niente login in casa, e l'altro ovunque.",
+    "deleteThis": "Elimina {{name}}"
   }
 }

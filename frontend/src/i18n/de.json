@@ -142,7 +142,7 @@
       "adminWarning": "Ein Administrator: jeder in diesen Netzen kann alles ändern, Boards löschen und die Adresse jeder Verbindung lesen. Wähle einen Gast oder Benutzer, außer das Netz bist wirklich nur du.",
       "noAccount": "Kein Konto gewählt",
       "networks": "Vertrauenswürdige Netze",
-      "networksHelp": "Eines pro Zeile, als Adresse oder Netz: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Das ganze Internet wird abgelehnt.",
+      "networksHelp": "Eines pro Zeile, als Adresse oder Netz: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. Das ganze Internet wird abgelehnt. App-Kacheln, die ihre Adresse automatisch wählen, richten sich nach denselben Netzen, auch wenn der Schalter aus ist.",
       "proxyNote": "Hinter einem Reverse-Proxy ist die gesehene Adresse die des Proxys, außer HEXDECK_TRUSTED_PROXIES nennt ihn; dann zählt die weitergereichte Adresse."
     },
     "title": "Meine Einstellungen",
@@ -164,7 +164,8 @@
       "backups": "Sicherungen",
       "media": "Medien",
       "projects": "Projekte",
-      "player": "Musik-Player"
+      "player": "Musik-Player",
+      "apps": "Apps"
     },
     "mail": {
       "title": "Mailserver",
@@ -780,6 +781,21 @@
     "pictureBadAddress": "Aus dieser Adresse lässt sich kein Bild laden.",
     "pictureLibrary": "Aus den Medien",
     "pictureLibraryEmpty": "Noch nichts hochgeladen. Lade zuerst eine Datei hoch.",
+    "app": {
+      "label": "App aus dem Katalog",
+      "help": "Name, Icon, Adresse und Erreichbarkeitsprüfung kommen von der App. Einmal unter System, Apps ändern, und alle Kacheln ziehen mit.",
+      "none": "Keine, hier eingerichtet",
+      "address": "Öffnet",
+      "auto": "Automatisch, daheim oder unterwegs",
+      "autoHelp": "Öffnet in den Heimnetzen automatisch die Adresse für daheim, überall sonst die andere.",
+      "first": "Die erste Adresse ({{label}})",
+      "saveAs": "Als App speichern",
+      "saveAsHelp": "Legt diese Kachel in den Katalog, damit jedes Board sie nutzen kann. Die Kachel folgt ihr ab dann.",
+      "untitled": "App",
+      "firstLabel": "Haupt",
+      "titleHelp": "Leer: der Name der App.",
+      "linkFollows": "Leer: die Adresse der App. Eine Adresse hier geht vor."
+    },
     "move": "Auf eine andere Seite verschieben",
     "moveTo": "Verschieben nach…"
   },
@@ -1261,5 +1277,34 @@
     "down_one": "{{count}} ausgefallen",
     "down_other": "{{count}} ausgefallen",
     "none": "Auf dieser Seite gibt es noch keine anderen Karten."
+  },
+  "apps": {
+    "title": "Apps",
+    "lead": "Eine App einmal einrichten und als Kachel auf jedes Board legen. Eine Adresse hier ändern, und alle Kacheln ziehen mit.",
+    "none": "Noch keine Apps. Hier eine anlegen, oder eine App-Kachel in ihren Einstellungen als App speichern.",
+    "add": "App hinzufügen",
+    "edit": "App bearbeiten",
+    "editNamed": "{{name}} bearbeiten",
+    "delete": "App löschen",
+    "deleteNamed": "{{name}} löschen?",
+    "deleteBody_one": "{{count}} Kachel folgt ihr. Sie bleibt, als eigene Kachel mit dem Namen, dem Icon und der Adresse, die sie jetzt zeigt.",
+    "deleteBody_other": "{{count}} Kacheln folgen ihr. Sie bleiben, als eigene Kacheln mit dem Namen, dem Icon und der Adresse, die sie jetzt zeigen.",
+    "tiles_one": "{{count}} Kachel",
+    "tiles_other": "{{count}} Kacheln",
+    "name": "Name",
+    "icon": "Icon",
+    "description": "Beschreibung",
+    "addresses": "Adressen",
+    "addressesHelp": "Eine je Weg, auf dem die App erreichbar ist, etwa über den Proxy, über Tailscale oder direkt mit Adresse und Port.",
+    "label": "Bezeichnung von Adresse {{number}}",
+    "labelPlaceholder": "Proxy",
+    "url": "Adresse {{number}}",
+    "addAddress": "Adresse hinzufügen",
+    "removeAddress": "Adresse {{number}} entfernen",
+    "home": "Daheim",
+    "away": "Unterwegs",
+    "notSet": "Nicht gesetzt",
+    "automaticHelp": "Ist eines von beiden gesetzt, kann eine Kachel ihre Adresse automatisch wählen: in den vertrauenswürdigen Netzen unter System, Anmeldeanbieter, Zu Hause ohne Anmeldung die für daheim, überall sonst die andere.",
+    "deleteThis": "{{name}} löschen"
   }
 }
