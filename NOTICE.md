@@ -448,6 +448,12 @@ Updated at every milestone.
   come from `/api/shelves`, `/api/books`, `/api/chapters` and `/api/pages`,
   in the listing shape and with the token format of release v26.09.1. Not
   yet run against an installation.
+- **rclone's remote control, without its job list.** The speed, the files
+  being copied and the errors come from `core/stats`. Since 1.75 every
+  remote control call becomes a job, the card's own included, so the job
+  list is not read. Checked against rclone v1.75.2 running locally as `rcd`,
+  with a throttled copy, a missing file, a read-only target and a wrong
+  password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -2317,7 +2317,14 @@
     "A BookStack wiki: how many shelves, books, chapters and pages it holds, and the pages changed last.": "Ein BookStack-Wiki: wie viele Regale, Bücher, Kapitel und Seiten es hat, und die zuletzt geänderten Seiten.",
     "How many shelves, books, chapters and pages the wiki holds.": "Wie viele Regale, Bücher, Kapitel und Seiten das Wiki hat.",
     "Made on the user's profile under API Tokens. The user's role needs the permission Access system API.": "Erstellt im Profil des Benutzers unter API-Tokens. Die Rolle des Benutzers braucht die Berechtigung System-API verwenden.",
-    "The pages changed last with their book, each opening the page.": "Die zuletzt geänderten Seiten mit ihrem Buch, jede öffnet die Seite."
+    "The pages changed last with their book, each opening the page.": "Die zuletzt geänderten Seiten mit ihrem Buch, jede öffnet die Seite.",
+    "Each file being copied now, with its progress, speed and time left.": "Jede Datei, die gerade kopiert wird, mit Fortschritt, Geschwindigkeit und verbleibender Zeit.",
+    "The --rc-pass rclone was started with.": "Das --rc-pass, mit dem rclone gestartet wurde.",
+    "The --rc-user rclone was started with.": "Der --rc-user, mit dem rclone gestartet wurde.",
+    "The address of rclone rcd, or of rclone started with --rc. It listens on localhost:5572 unless --rc-addr says otherwise.": "Die Adresse von rclone rcd oder von rclone mit --rc. Es lauscht auf localhost:5572, wenn --rc-addr nichts anderes sagt.",
+    "The speed now, the files being copied, how far along the whole run is, and the errors.": "Die Geschwindigkeit jetzt, die Dateien, die kopiert werden, wie weit der ganze Lauf ist, und die Fehler.",
+    "Transfers": "Übertragungen",
+    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "Die Fernsteuerung von rclone: was es gerade kopiert, wie schnell, wie weit, und der letzte Fehler."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3500,6 +3507,7 @@
     "Z-Wave stick": "Z-Wave-Stick",
     "From grid": "Aus dem Netz",
     "Chapters": "Kapitel",
-    "Shelves": "Regale"
+    "Shelves": "Regale",
+    "Copying": "Kopiert"
   }
 }

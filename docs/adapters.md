@@ -35,6 +35,7 @@ that one of thirty-five renderers draws.
 | Duplicati | backup jobs, backups | | the password of the web interface; Duplicati 2.1 or newer |
 | Syncthing | folders, status | | API key |
 | Backrest | backup plans, backups | back up a plan now | user and password of Backrest's own sign-in, or nothing when it is switched off |
+| rclone | status, transfers | | the `--rc-user` and `--rc-pass` of `rclone rcd` (or rclone started with `--rc`) as HTTP Basic, or nothing with `--rc-no-auth`. Every call is a POST with a `{}` body. The counters run from the daemon's start, so an error stays counted until `core/stats-reset`; the card turns amber for errors, red only for a fatal one |
 | Komodo | stacks, deployments, overview | restart a stack | API key and secret of a user, best a service user, with Read on stacks, deployments and servers and Execute on a stack to restart it; Komodo 2 |
 | Netdata | raised alerts, load per node, alerts | | none; the agent's API is open, and a parent answers for every node that streams to it |
 | Ollama | loaded models, installed models, models | unload a model | none; Ollama has no sign-in, so its port stays inside the network |

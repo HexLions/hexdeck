@@ -35,6 +35,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   and why, the storage, and the fullest mailboxes. ⚠️ Beta.
 - **BookStack**: how many shelves, books, chapters and pages the wiki
   holds, and the pages changed last. ⚠️ Beta.
+- **rclone**: what the remote control daemon is copying now, how fast, how
+  far along, and the last error. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 
