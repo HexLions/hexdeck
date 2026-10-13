@@ -134,7 +134,8 @@ class DownloadAdapter(Adapter):
                 "subtitle": " · ".join(subtitle_parts),
                 "progress": round(item.progress, 1),
                 "value": f"{item.progress:.0f}%",
-                "status": "warn" if item.state in ("paused", "stalled", "queued") else ("bad" if item.state in ("error", "failed") else "ok"),
+                # "failed: Resource not found" is a failure with its reason.
+                "status": "warn" if item.state in ("paused", "stalled", "queued") else ("bad" if item.state.split(":")[0] in ("error", "failed") else "ok"),
             })
         return WidgetData(
             status=status,

@@ -412,6 +412,11 @@ Updated at every milestone.
   `CmndStatus` and `MqttShowState` write in release v15.6.0. The password
   goes as HTTP Basic, which Tasmota tries before the address parameters, so
   it never lands in a log of addresses. Not yet run against a device.
+- **aria2, where the secret is a parameter.** aria2's JSON-RPC takes its
+  secret as the first parameter of every call and refuses a wrong one with
+  HTTP 400, not 401. Checked against aria2 1.37.0 running locally, with a
+  secret, downloads running, paused, waiting, finished and failed, pause and
+  resume, and a wrong secret.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

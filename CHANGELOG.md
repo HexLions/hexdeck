@@ -21,6 +21,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   and in total, and each inverter. ⚠️ Beta.
 - **Tasmota**: a device's relays with a button to switch them, what it
   draws, and every sensor it reads. ⚠️ Beta.
+- **aria2**: the downloads with their progress, the ones that failed and
+  why, and a button to pause or resume. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

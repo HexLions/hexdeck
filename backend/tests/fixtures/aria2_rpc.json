@@ -1,0 +1,225 @@
+{
+ "global": {
+  "downloadSpeed": "307348",
+  "numActive": "3",
+  "numStopped": "2",
+  "numStoppedTotal": "2",
+  "numWaiting": "2",
+  "uploadSpeed": "0"
+ },
+ "active": [
+  {
+   "completedLength": "3407872",
+   "connections": "1",
+   "dir": "/downloads",
+   "downloadSpeed": "124304",
+   "files": [
+    {
+     "completedLength": "3145728",
+     "index": "1",
+     "length": "209715200",
+     "path": "/downloads/big-archive.iso",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "used",
+       "uri": "http://127.0.0.1:8761/big-archive.iso"
+      },
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/big-archive.iso"
+      }
+     ]
+    }
+   ],
+   "gid": "ae2d6692fef31e30",
+   "status": "active",
+   "totalLength": "209715200",
+   "uploadSpeed": "0"
+  },
+  {
+   "completedLength": "2605056",
+   "connections": "1",
+   "dir": "/downloads",
+   "downloadSpeed": "115176",
+   "files": [
+    {
+     "completedLength": "2097152",
+     "index": "1",
+     "length": "157286400",
+     "path": "/downloads/second-image.img",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "used",
+       "uri": "http://127.0.0.1:8761/second-image.img"
+      },
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/second-image.img"
+      }
+     ]
+    }
+   ],
+   "gid": "5edb59cb29a39c4c",
+   "status": "active",
+   "totalLength": "157286400",
+   "uploadSpeed": "0"
+  },
+  {
+   "completedLength": "622592",
+   "connections": "1",
+   "dir": "/downloads",
+   "downloadSpeed": "90331",
+   "files": [
+    {
+     "completedLength": "0",
+     "index": "1",
+     "length": "209715200",
+     "path": "/downloads/waiting-copy.iso",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "used",
+       "uri": "http://127.0.0.1:8761/big-archive.iso"
+      },
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/big-archive.iso"
+      }
+     ]
+    }
+   ],
+   "gid": "92c4222636545284",
+   "status": "active",
+   "totalLength": "209715200",
+   "uploadSpeed": "0"
+  }
+ ],
+ "waiting": [
+  {
+   "completedLength": "0",
+   "connections": "0",
+   "dir": "/downloads",
+   "downloadSpeed": "0",
+   "files": [
+    {
+     "completedLength": "0",
+     "index": "1",
+     "length": "0",
+     "path": "/downloads/paused-copy.img",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/second-image.img"
+      }
+     ]
+    }
+   ],
+   "gid": "2b4a704719242053",
+   "status": "paused",
+   "totalLength": "0",
+   "uploadSpeed": "0"
+  },
+  {
+   "completedLength": "0",
+   "connections": "0",
+   "dir": "/downloads",
+   "downloadSpeed": "0",
+   "files": [
+    {
+     "completedLength": "0",
+     "index": "1",
+     "length": "0",
+     "path": "/downloads/queued-later.zip",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/small-file.zip"
+      }
+     ]
+    }
+   ],
+   "gid": "ad90df4ac49ccb1e",
+   "status": "waiting",
+   "totalLength": "0",
+   "uploadSpeed": "0"
+  }
+ ],
+ "stopped": [
+  {
+   "completedLength": "2097152",
+   "connections": "0",
+   "dir": "/downloads",
+   "downloadSpeed": "0",
+   "errorCode": "0",
+   "errorMessage": "",
+   "files": [
+    {
+     "completedLength": "2097152",
+     "index": "1",
+     "length": "2097152",
+     "path": "/downloads/small-file.zip",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "used",
+       "uri": "http://127.0.0.1:8761/small-file.zip"
+      },
+      {
+       "status": "waiting",
+       "uri": "http://127.0.0.1:8761/small-file.zip"
+      }
+     ]
+    }
+   ],
+   "gid": "f490a13e7952085d",
+   "status": "complete",
+   "totalLength": "2097152",
+   "uploadSpeed": "0"
+  },
+  {
+   "completedLength": "0",
+   "connections": "0",
+   "dir": "/downloads",
+   "downloadSpeed": "0",
+   "errorCode": "3",
+   "errorMessage": "Resource not found",
+   "files": [
+    {
+     "completedLength": "0",
+     "index": "1",
+     "length": "0",
+     "path": "",
+     "selected": "true",
+     "uris": [
+      {
+       "status": "used",
+       "uri": "http://127.0.0.1:8761/does-not-exist.tar"
+      }
+     ]
+    }
+   ],
+   "gid": "4d444ff402e1f002",
+   "status": "error",
+   "totalLength": "0",
+   "uploadSpeed": "0"
+  }
+ ],
+ "version": {
+  "enabledFeatures": [
+   "Async DNS",
+   "BitTorrent",
+   "Firefox3 Cookie",
+   "GZip",
+   "HTTPS",
+   "Message Digest",
+   "Metalink",
+   "XML-RPC",
+   "SFTP"
+  ],
+  "version": "1.37.0"
+ }
+}

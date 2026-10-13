@@ -104,6 +104,7 @@ that one of thirty-five renderers draws.
 | autobrr | recent releases, grabbed | | API key from Settings > API keys |
 | SABnzbd, NZBGet, qBittorrent, Transmission, Deluge | queue, speed | pause, resume | key or password |
 | pyLoad | status, downloads | pause, resume | an API key from Settings > Users, sent as `X-API-Key`, on pyLoad from 2026 on; older versions take the user name and password as basic auth instead, which newer ones refuse |
+| aria2 | queue, speed | pause, resume | the `--rpc-secret`, if aria2 was started with one; it travels as the first parameter of every call, not as a header. The address is the RPC one, `/jsonrpc` is added. Failed downloads are listed with aria2's reason and not counted in the queue |
 | MeTube | fetch a video, downloads, download count | fetch an address you type in, save the file to your own machine, remove, try again | none; MeTube has no login of its own, so whoever reaches it may queue and delete |
 | Sportarr | upcoming, missing events, events | | API key from Settings > General > Security |
 | Tube Archivist | download queue, latest videos, video archive | start downloads | API token from Settings > Application, sent as Token |

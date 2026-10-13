@@ -2278,7 +2278,11 @@
     "Only when a web admin password is set on the device; its user name is always admin.": "Solo se sul dispositivo è impostata una password di amministrazione web; il nome utente è sempre admin.",
     "Relay": "Relè",
     "The device on your own network.": "Il dispositivo nella tua rete.",
-    "The relay, the power and today's energy on a plug that measures, the Wi-Fi signal and how long it has run.": "Il relè, la potenza e l'energia di oggi su una presa che misura, il segnale Wi-Fi e da quanto è acceso."
+    "The relay, the power and today's energy on a plug that measures, the Wi-Fi signal and how long it has run.": "Il relè, la potenza e l'energia di oggi su una presa che misura, il segnale Wi-Fi e da quanto è acceso.",
+    "Secret": "Segreto",
+    "The --rpc-secret aria2 was started with, if any.": "Il --rpc-secret con cui è stato avviato aria2, se c'è.",
+    "The RPC address, /jsonrpc is added when it is missing. aria2 has to run with --enable-rpc, and --rpc-listen-all to be reached from another machine.": "L'indirizzo RPC, /jsonrpc viene aggiunto se manca. aria2 deve girare con --enable-rpc, e con --rpc-listen-all per essere raggiungibile da un'altra macchina.",
+    "The downloads of aria2 over JSON-RPC: speed, progress, what failed, and pause or resume.": "I download di aria2 via JSON-RPC: velocità, avanzamento, cosa è fallito, e pausa o ripresa."
   },
   "labels": {
     "Jobs": "Job",
