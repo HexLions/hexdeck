@@ -2289,7 +2289,14 @@
     "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Se crea en la página Seguridad del usuario, Añadir nuevo token. Sin el botón de compilar basta un usuario que solo pueda leer.",
     "Needs a user who may build. Asks before it starts a build.": "Necesita un usuario que pueda compilar. Pregunta antes de lanzar una compilación.",
     "Offer the build button": "Mostrar el botón de compilar",
-    "The Jenkins user the API token belongs to.": "El usuario de Jenkins al que pertenece el token de API."
+    "The Jenkins user the API token belongs to.": "El usuario de Jenkins al que pertenece el token de API.",
+    "How many Things are online and which are offline, with openHAB's reason.": "Cuántos Things están en línea y cuáles desconectados, con el motivo que da openHAB.",
+    "Made by an administrator under Profile, Create API token. Needed for the Things; the Items are readable without one unless anonymous access is off.": "Lo crea un administrador en Perfil, Crear token de API. Hace falta para los Things; los Items se leen sin él, salvo que el acceso anónimo esté desactivado.",
+    "Only the ones with a problem": "Solo los que tienen un problema",
+    "The Items you name with their state, and a switch for the Switch Items.": "Los Items que indiques con su estado, y un interruptor para los Items Switch.",
+    "The names of Items or Groups, separated by commas. A Group stands for its members.": "Los nombres de Items o Grupos, separados por comas. Un Grupo representa a sus miembros.",
+    "Things": "Things",
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: qué Things están desconectados, los Items que elijas con su estado, y un interruptor para los Items Switch."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3462,6 +3469,13 @@
     "Producing": "Produciendo",
     "Building": "Compilando",
     "Executors": "Ejecutores",
-    "Build now": "Compilar ahora"
+    "Build now": "Compilar ahora",
+    "Front door": "Puerta principal",
+    "Garage door": "Puerta del garaje",
+    "Grid power": "Potencia de red",
+    "Hue bridge": "Puente Hue",
+    "Kitchen light": "Luz de la cocina",
+    "Living room": "Salón",
+    "Z-Wave stick": "Llave Z-Wave"
   }
 }

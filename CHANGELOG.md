@@ -25,6 +25,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   why, and a button to pause or resume. ⚠️ Beta.
 - **Jenkins**: which jobs fail, what is building and waiting, the agents
   that are offline, and a button to build a job. ⚠️ Beta.
+- **openHAB**: which Things are offline and why, the Items you pick with
+  their state, and a switch for the Switch Items. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

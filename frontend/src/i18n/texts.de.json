@@ -2289,7 +2289,14 @@
     "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Erstellt auf der Sicherheitsseite des Benutzers, Neues Token hinzufügen. Ohne die Build-Taste genügt ein Benutzer, der nur lesen darf.",
     "Needs a user who may build. Asks before it starts a build.": "Braucht einen Benutzer, der bauen darf. Fragt nach, bevor ein Build startet.",
     "Offer the build button": "Build-Taste anbieten",
-    "The Jenkins user the API token belongs to.": "Der Jenkins-Benutzer, zu dem das API-Token gehört."
+    "The Jenkins user the API token belongs to.": "Der Jenkins-Benutzer, zu dem das API-Token gehört.",
+    "How many Things are online and which are offline, with openHAB's reason.": "Wie viele Things online sind und welche offline, mit dem Grund von openHAB.",
+    "Made by an administrator under Profile, Create API token. Needed for the Things; the Items are readable without one unless anonymous access is off.": "Wird von einem Administrator unter Profil, API-Token erstellen angelegt. Nötig für die Things; die Items sind ohne lesbar, solange anonymer Zugriff erlaubt ist.",
+    "Only the ones with a problem": "Nur die mit einem Problem",
+    "The Items you name with their state, and a switch for the Switch Items.": "Die Items, die du nennst, mit ihrem Zustand, und ein Schalter für die Switch-Items.",
+    "The names of Items or Groups, separated by commas. A Group stands for its members.": "Die Namen von Items oder Gruppen, durch Kommas getrennt. Eine Gruppe steht für ihre Mitglieder.",
+    "Things": "Things",
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: welche Things offline sind, die gewählten Items mit ihrem Zustand, und ein Schalter für die Switch-Items."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3462,6 +3469,13 @@
     "Producing": "Produzieren",
     "Building": "Im Bau",
     "Executors": "Executoren",
-    "Build now": "Jetzt bauen"
+    "Build now": "Jetzt bauen",
+    "Front door": "Haustür",
+    "Garage door": "Garagentor",
+    "Grid power": "Netzleistung",
+    "Hue bridge": "Hue Bridge",
+    "Kitchen light": "Küchenlicht",
+    "Living room": "Wohnzimmer",
+    "Z-Wave stick": "Z-Wave-Stick"
   }
 }

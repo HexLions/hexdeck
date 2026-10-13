@@ -1,0 +1,252 @@
+{
+ "root": {
+  "version": "8",
+  "locale": "en",
+  "measurementSystem": "SI",
+  "timezone": "Etc/UTC",
+  "runtimeInfo": {
+   "version": "5.2.3",
+   "buildString": "Release Build"
+  },
+  "links": [
+   {
+    "type": "items",
+    "url": "http://openhab.local:8080/rest/items"
+   },
+   {
+    "type": "thing-types",
+    "url": "http://openhab.local:8080/rest/thing-types"
+   },
+   {
+    "type": "audio",
+    "url": "http://openhab.local:8080/rest/audio"
+   },
+   {
+    "type": "inbox",
+    "url": "http://openhab.local:8080/rest/inbox"
+   },
+   {
+    "type": "logging",
+    "url": "http://openhab.local:8080/rest/logging"
+   },
+   {
+    "type": "profile-types",
+    "url": "http://openhab.local:8080/rest/profile-types"
+   },
+   {
+    "type": "rules",
+    "url": "http://openhab.local:8080/rest/rules"
+   },
+   {
+    "type": "transformations",
+    "url": "http://openhab.local:8080/rest/transformations"
+   },
+   {
+    "type": "services",
+    "url": "http://openhab.local:8080/rest/services"
+   },
+   {
+    "type": "events",
+    "url": "http://openhab.local:8080/rest/events"
+   },
+   {
+    "type": "uuid",
+    "url": "http://openhab.local:8080/rest/uuid"
+   },
+   {
+    "type": "addons",
+    "url": "http://openhab.local:8080/rest/addons"
+   },
+   {
+    "type": "persistence",
+    "url": "http://openhab.local:8080/rest/persistence"
+   },
+   {
+    "type": "ui",
+    "url": "http://openhab.local:8080/rest/ui"
+   },
+   {
+    "type": "spec",
+    "url": "http://openhab.local:8080/rest/spec"
+   },
+   {
+    "type": "things",
+    "url": "http://openhab.local:8080/rest/things"
+   },
+   {
+    "type": "templates",
+    "url": "http://openhab.local:8080/rest/templates"
+   },
+   {
+    "type": "file-format",
+    "url": "http://openhab.local:8080/rest/file-format"
+   },
+   {
+    "type": "iconsets",
+    "url": "http://openhab.local:8080/rest/iconsets"
+   },
+   {
+    "type": "config-descriptions",
+    "url": "http://openhab.local:8080/rest/config-descriptions"
+   },
+   {
+    "type": "systeminfo",
+    "url": "http://openhab.local:8080/rest/systeminfo"
+   },
+   {
+    "type": "links",
+    "url": "http://openhab.local:8080/rest/links"
+   },
+   {
+    "type": "module-types",
+    "url": "http://openhab.local:8080/rest/module-types"
+   },
+   {
+    "type": "sitemaps",
+    "url": "http://openhab.local:8080/rest/sitemaps"
+   },
+   {
+    "type": "discovery",
+    "url": "http://openhab.local:8080/rest/discovery"
+   },
+   {
+    "type": "auth",
+    "url": "http://openhab.local:8080/rest/auth"
+   },
+   {
+    "type": "channel-types",
+    "url": "http://openhab.local:8080/rest/channel-types"
+   },
+   {
+    "type": "voice",
+    "url": "http://openhab.local:8080/rest/voice"
+   },
+   {
+    "type": "tags",
+    "url": "http://openhab.local:8080/rest/tags"
+   },
+   {
+    "type": "actions",
+    "url": "http://openhab.local:8080/rest/actions"
+   }
+  ]
+ },
+ "items": [
+  {
+   "state": "21.4 °C",
+   "type": "Number:Temperature",
+   "name": "Living_Temperature",
+   "label": "Living room",
+   "groupNames": []
+  },
+  {
+   "state": "48",
+   "type": "Number:Dimensionless",
+   "name": "Living_Humidity",
+   "label": "Living humidity",
+   "groupNames": []
+  },
+  {
+   "state": "412 W",
+   "type": "Number:Power",
+   "name": "Grid_Power",
+   "label": "Grid power",
+   "groupNames": []
+  },
+  {
+   "state": "NULL",
+   "type": "Switch",
+   "name": "Never_Set",
+   "label": "Never set",
+   "groupNames": []
+  },
+  {
+   "state": "OPEN",
+   "type": "Contact",
+   "name": "Front_Door",
+   "label": "Front door",
+   "groupNames": []
+  },
+  {
+   "state": "NULL",
+   "type": "Group",
+   "name": "gLights",
+   "label": "Lights",
+   "groupNames": []
+  },
+  {
+   "state": "ON",
+   "type": "Switch",
+   "name": "Porch_Light",
+   "label": "Porch light",
+   "groupNames": [
+    "gLights"
+   ]
+  },
+  {
+   "state": "35",
+   "type": "Rollershutter",
+   "name": "Bedroom_Blind",
+   "label": "Bedroom blind",
+   "groupNames": []
+  },
+  {
+   "state": "Spinning",
+   "type": "String",
+   "name": "Washer_State",
+   "label": "Washing machine",
+   "groupNames": []
+  },
+  {
+   "state": "ON",
+   "type": "Switch",
+   "name": "Kitchen_Light",
+   "label": "Kitchen light",
+   "groupNames": [
+    "gLights"
+   ]
+  }
+ ],
+ "things": [
+  {
+   "statusInfo": {
+    "status": "UNINITIALIZED",
+    "statusDetail": "DISABLED"
+   },
+   "editable": true,
+   "label": "Printer",
+   "UID": "network:pingdevice:printer",
+   "thingTypeUID": "network:pingdevice"
+  },
+  {
+   "statusInfo": {
+    "status": "ONLINE",
+    "statusDetail": "NONE"
+   },
+   "editable": true,
+   "label": "Router",
+   "UID": "network:pingdevice:router",
+   "thingTypeUID": "network:pingdevice"
+  },
+  {
+   "statusInfo": {
+    "status": "ONLINE",
+    "statusDetail": "NONE"
+   },
+   "editable": true,
+   "label": "Garden camera",
+   "UID": "network:pingdevice:camera",
+   "thingTypeUID": "network:pingdevice"
+  },
+  {
+   "statusInfo": {
+    "status": "ONLINE",
+    "statusDetail": "NONE"
+   },
+   "editable": true,
+   "label": "NAS",
+   "UID": "network:pingdevice:nas",
+   "thingTypeUID": "network:pingdevice"
+  }
+ ]
+}

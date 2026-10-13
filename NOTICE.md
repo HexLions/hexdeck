@@ -422,6 +422,12 @@ Updated at every milestone.
   with the API token, which Jenkins exempts from its CSRF crumb. Checked
   against Jenkins 2.580.1 running locally, with passing, failing, running,
   queued and disabled jobs, an offline agent, and a wrong token.
+- **openHAB, Items without a token and Things with one.** The Items come
+  from `/rest/items`, which openHAB lets an anonymous user read by default;
+  the Things from `/rest/things?summary=true`, which needs an
+  administrator's API token. Checked against openHAB 5.2.3 running locally,
+  with Items of eight types, Things of the Network binding, a command to a
+  switch, and a wrong token.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

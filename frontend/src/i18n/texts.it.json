@@ -2289,7 +2289,14 @@
     "Made under the user's Security page, Add new token. A user who may only read is enough without the build button.": "Si crea nella pagina Sicurezza dell'utente, Aggiungi nuovo token. Senza il pulsante di build basta un utente che può solo leggere.",
     "Needs a user who may build. Asks before it starts a build.": "Serve un utente che può avviare build. Chiede conferma prima di avviarne una.",
     "Offer the build button": "Mostra il pulsante di build",
-    "The Jenkins user the API token belongs to.": "L'utente Jenkins a cui appartiene il token API."
+    "The Jenkins user the API token belongs to.": "L'utente Jenkins a cui appartiene il token API.",
+    "How many Things are online and which are offline, with openHAB's reason.": "Quanti Thing sono online e quali offline, con il motivo indicato da openHAB.",
+    "Made by an administrator under Profile, Create API token. Needed for the Things; the Items are readable without one unless anonymous access is off.": "Lo crea un amministratore in Profilo, Crea token API. Serve per i Thing; gli Item si leggono anche senza, a meno che l'accesso anonimo sia disattivato.",
+    "Only the ones with a problem": "Solo quelli con un problema",
+    "The Items you name with their state, and a switch for the Switch Items.": "Gli Item che indichi con il loro stato, e un interruttore per gli Item Switch.",
+    "The names of Items or Groups, separated by commas. A Group stands for its members.": "I nomi di Item o Gruppi, separati da virgole. Un Gruppo sta per i suoi membri.",
+    "Things": "Thing",
+    "openHAB: which Things are offline, the Items you pick with their state, and a switch for the Switch Items.": "openHAB: quali Thing sono offline, gli Item che scegli con il loro stato, e un interruttore per gli Item Switch."
   },
   "labels": {
     "Jobs": "Job",
@@ -3462,6 +3469,13 @@
     "Producing": "In produzione",
     "Building": "In build",
     "Executors": "Executor",
-    "Build now": "Avvia build"
+    "Build now": "Avvia build",
+    "Front door": "Porta d'ingresso",
+    "Garage door": "Porta del garage",
+    "Grid power": "Potenza di rete",
+    "Hue bridge": "Bridge Hue",
+    "Kitchen light": "Luce della cucina",
+    "Living room": "Soggiorno",
+    "Z-Wave stick": "Chiavetta Z-Wave"
   }
 }
