@@ -31,6 +31,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   numbers or as a flow, and each inverter's state. ⚠️ Beta.
 - **Pterodactyl**: the game servers, which run, what they use, and buttons
   to start and stop them. ⚠️ Beta.
+- **mailcow**: whether every container runs, the mail waiting in the queue
+  and why, the storage, and the fullest mailboxes. ⚠️ Beta.
 
 ## 0.27.0 (2026-10-13)
 

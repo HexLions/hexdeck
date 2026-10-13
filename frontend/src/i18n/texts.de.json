@@ -2307,7 +2307,13 @@
     "How many servers run, how many are offline, and the ones the panel flags.": "Wie viele Server laufen, wie viele offline sind, und die, die das Panel markiert.",
     "Made under Account, API Credentials (ptlc_...). Not an application key: the card sees the servers this user can reach.": "Erstellt unter Konto, API-Zugangsdaten (ptlc_...). Kein Application-Schlüssel: Die Karte sieht die Server, die dieser Benutzer erreicht.",
     "Needs a key whose user may control the server. Asks before it stops one.": "Braucht einen Schlüssel, dessen Benutzer den Server steuern darf. Fragt nach, bevor einer gestoppt wird.",
-    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "Die Spieleserver eines Pterodactyl-Panels: welche laufen, was sie verbrauchen, und Tasten zum Starten und Stoppen."
+    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "Die Spieleserver eines Pterodactyl-Panels: welche laufen, was sie verbrauchen, und Tasten zum Starten und Stoppen.",
+    "A mailcow server: whether every container runs, the mail waiting in the queue and why, the storage, and the fullest mailboxes.": "Ein mailcow-Server: ob jeder Container läuft, die wartende Mail in der Warteschlange und warum, der Speicher und die vollsten Postfächer.",
+    "How many containers run, the mail in the queue, the storage in use and the version.": "Wie viele Container laufen, die Mail in der Warteschlange, der belegte Speicher und die Version.",
+    "Mail queue": "Mail-Warteschlange",
+    "The mail waiting in Postfix's queue, with the sender, the recipient and why it waits.": "Die Mail in der Warteschlange von Postfix, mit Absender, Empfänger und warum sie wartet.",
+    "The mailboxes by how full they are, with the messages and the last sign-in.": "Die Postfächer nach Füllstand, mit den Nachrichten und der letzten Anmeldung.",
+    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "Unter System, Konfiguration, Zugang, API. Der Nur-Lese-Schlüssel genügt; die Adresse von HexDeck muss in seiner Liste der erlaubten Adressen stehen."
   },
   "labels": {
     "Jobs": "Jobs",

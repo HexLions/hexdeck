@@ -68,6 +68,7 @@ that one of thirty-five renderers draws.
 | NextDNS | blocking, top blocked | | API key and the profile ID |
 | authentik | status, failed sign-ins | | API token of a service account with read access |
 | CrowdSec | blocked addresses, blocked | | bouncer key from `cscli bouncers add`; it may read decisions and nothing else |
+| mailcow | status, mail queue, mailboxes | | an API key in an `X-API-Key` header; the read-only one is enough, and HexDeck's address has to be in its allowed list unless Skip IP check is ticked. A wrong key counts as a failed login in mailcow's own fail2ban, so a card left with one can get HexDeck's address banned; the card says whether the key or the address was refused |
 | Shlink | short URLs, visits | | API key from `shlink api-key:generate` |
 | Blocky | blocking, top blocked | pause 5 min, enable | none; Blocky's API has no sign-in, so its HTTP port stays inside the network, and statistics.enable has to be on (Blocky 0.35 or newer) |
 | Gatus | endpoints, endpoint health | | user and password of security.basic, or nothing when Gatus has no security section |

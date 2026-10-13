@@ -2307,7 +2307,13 @@
     "How many servers run, how many are offline, and the ones the panel flags.": "Cuántos servidores funcionan, cuántos están apagados, y los que el panel marca.",
     "Made under Account, API Credentials (ptlc_...). Not an application key: the card sees the servers this user can reach.": "Se crea en Cuenta, Credenciales de API (ptlc_...). No una clave de aplicación: la tarjeta ve los servidores a los que llega este usuario.",
     "Needs a key whose user may control the server. Asks before it stops one.": "Necesita una clave cuyo usuario pueda controlar el servidor. Pregunta antes de detener uno.",
-    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "Los servidores de juegos de un panel Pterodactyl: cuáles funcionan, qué consumen, y botones para iniciarlos y detenerlos."
+    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "Los servidores de juegos de un panel Pterodactyl: cuáles funcionan, qué consumen, y botones para iniciarlos y detenerlos.",
+    "A mailcow server: whether every container runs, the mail waiting in the queue and why, the storage, and the fullest mailboxes.": "Un servidor mailcow: si cada contenedor funciona, el correo en cola y por qué, el almacenamiento y los buzones más llenos.",
+    "How many containers run, the mail in the queue, the storage in use and the version.": "Cuántos contenedores funcionan, el correo en cola, el almacenamiento usado y la versión.",
+    "Mail queue": "Cola de correo",
+    "The mail waiting in Postfix's queue, with the sender, the recipient and why it waits.": "El correo que espera en la cola de Postfix, con remitente, destinatario y por qué espera.",
+    "The mailboxes by how full they are, with the messages and the last sign-in.": "Los buzones según lo llenos que están, con los mensajes y el último inicio de sesión.",
+    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "En Sistema, Configuración, Acceso, API. Basta la clave de solo lectura; la dirección de HexDeck tiene que estar en su lista de permitidas."
   },
   "labels": {
     "Private resources": "Recursos privados",

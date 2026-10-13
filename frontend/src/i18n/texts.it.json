@@ -2307,7 +2307,13 @@
     "How many servers run, how many are offline, and the ones the panel flags.": "Quanti server sono in esecuzione, quanti sono offline, e quelli che il pannello segnala.",
     "Made under Account, API Credentials (ptlc_...). Not an application key: the card sees the servers this user can reach.": "Si crea in Account, Credenziali API (ptlc_...). Non una chiave application: la card vede i server che questo utente può raggiungere.",
     "Needs a key whose user may control the server. Asks before it stops one.": "Serve una chiave il cui utente può controllare il server. Chiede conferma prima di fermarne uno.",
-    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "I server di gioco di un pannello Pterodactyl: quali sono in esecuzione, quanto usano, e i pulsanti per avviarli e fermarli."
+    "The game servers of a Pterodactyl panel: which run, what they use, and buttons to start and stop them.": "I server di gioco di un pannello Pterodactyl: quali sono in esecuzione, quanto usano, e i pulsanti per avviarli e fermarli.",
+    "A mailcow server: whether every container runs, the mail waiting in the queue and why, the storage, and the fullest mailboxes.": "Un server mailcow: se ogni container è in esecuzione, la posta in coda e perché, lo spazio e le caselle più piene.",
+    "How many containers run, the mail in the queue, the storage in use and the version.": "Quanti container sono in esecuzione, la posta in coda, lo spazio usato e la versione.",
+    "Mail queue": "Coda di posta",
+    "The mail waiting in Postfix's queue, with the sender, the recipient and why it waits.": "La posta in attesa nella coda di Postfix, con mittente, destinatario e perché aspetta.",
+    "The mailboxes by how full they are, with the messages and the last sign-in.": "Le caselle in ordine di riempimento, con i messaggi e l'ultimo accesso.",
+    "Under System, Configuration, Access, API. The read-only key is enough; HexDeck's address has to be in its allowed list.": "In Sistema, Configurazione, Accesso, API. Basta la chiave in sola lettura; l'indirizzo di HexDeck deve essere nella sua lista di indirizzi ammessi."
   },
   "labels": {
     "Jobs": "Job",

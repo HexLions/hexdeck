@@ -438,6 +438,12 @@ Updated at every milestone.
   in the shape the client transformers write in release v1.15.1. A node
   that does not answer marks its server instead of failing the card. Not
   yet run against a panel.
+- **mailcow, and the two ways it refuses.** Containers, storage, the
+  Postfix queue and the mailboxes come from `/api/v1/get/...` with an
+  `X-API-Key`, in the shape `json_api.php` builds and `openapi.yaml` shows
+  in release 2026-09a. A key from an address it does not allow and a wrong
+  key are told apart, since the second one feeds mailcow's fail2ban. Not
+  yet run against an installation.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
