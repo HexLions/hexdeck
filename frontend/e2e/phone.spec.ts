@@ -140,6 +140,133 @@ test('on a phone, edit mode moves nothing and saves nothing', async ({ page }) =
   expect(saves, 'a phone sent its stack to the server').toEqual([])
 })
 
+/**
+ * ⚠️ Issue #27, 04.10.2026: on an iPad held upright (1032 wide) the bar ran
+ * past the right edge, the account menu was cut off and the whole page could
+ * be dragged sideways. The search field kept the width of its placeholder,
+ * because a flex item does not shrink below its content unless told to.
+ */
+test('the bar of a board with four pages fits a tablet held upright', async ({ page }) => {
+  await signIn(page)
+  const write = { headers: { 'X-Nexdeck-Request': '1' } }
+  const made = await page.request.post('/api/v1/boards', { ...write, data: { name: 'Upright', slug: 'upright' } })
+  expect(made.status()).toBe(201)
+  try {
+    for (const name of ['Overview', 'LAN', 'Remote', 'IP']) {
+      const added = await page.request.post('/api/v1/boards/upright/pages', { ...write, data: { name } })
+      expect(added.status()).toBe(201)
+    }
+    for (const size of [{ width: 1032, height: 1376 }, { width: 820, height: 1180 }, { width: 768, height: 1024 }]) {
+      await page.setViewportSize(size)
+      await page.goto('/b/upright')
+      const account = page.getByRole('button', { name: ACCOUNT.username, exact: true })
+      await expect(account).toBeVisible()
+      const box = await account.boundingBox()
+      expect(box && box.x + box.width, `the account menu leaves the screen at ${size.width}`).toBeLessThanOrEqual(size.width)
+      const sideways = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
+      expect(sideways, `the page can be dragged sideways at ${size.width}`).toBeLessThanOrEqual(0)
+      await expect(page.getByRole('button', { name: 'IP', exact: true })).toBeVisible()
+      if (size.width >= 820) {
+        // Not only there, but in sight: the pages scroll once they no longer fit, and an iPad fits all of them.
+        const last = await page.getByRole('button', { name: 'IP', exact: true }).boundingBox()
+        const pages = await page.getByRole('navigation', { name: 'Pages' }).boundingBox()
+        expect(last && pages && last.x + last.width, `the last page is scrolled away at ${size.width}`).toBeLessThanOrEqual((pages?.x ?? 0) + (pages?.width ?? 0) + 1)
+      }
+    }
+
+    // The installed app: iPadOS 26 blurs the top of the page unless the bar there is one solid colour.
+    // Chromium cannot pretend to be installed (setEmulatedMedia ignores display-mode), so the rule
+    // for it is switched on where it stands, in its own layer, and the bar is measured.
+    const bar = () => page.locator('header').first().evaluate((element) => {
+      const style = getComputedStyle(element)
+      return { background: style.backgroundColor, filter: style.backdropFilter }
+    })
+    // HexDeck's bars are opaque panels in a browser tab too, so there is no glass to lose there;
+    // what matters is the installed app below.
+    const found = await page.evaluate(() => {
+      const walk = (rules: CSSRuleList): boolean => {
+        for (const rule of [...rules]) {
+          if (rule instanceof CSSMediaRule && rule.conditionText.includes('display-mode: standalone')) {
+            const parent = rule.parentRule as CSSGroupingRule | null
+            const inner = [...rule.cssRules].map((one) => one.cssText).join('\n')
+            if (parent) parent.insertRule(`@media all { ${inner} }`, parent.cssRules.length)
+            else rule.parentStyleSheet?.insertRule(`@media all { ${inner} }`, rule.parentStyleSheet.cssRules.length)
+            return true
+          }
+          if ('cssRules' in rule && walk((rule as CSSGroupingRule).cssRules)) return true
+        }
+        return false
+      }
+      return [...document.styleSheets].some((sheet) => walk(sheet.cssRules))
+    })
+    expect(found, 'no rule for the installed app').toBe(true)
+    expect((await bar()).filter, 'the bar of the installed app is still glass').toBe('none')
+    expect((await bar()).background, 'the bar of the installed app lets the page show through').toMatch(/^rgb\(/)
+  } finally {
+    await page.request.delete('/api/v1/boards/upright', write)
+  }
+})
+
+test('with many pages the search stays clear of the bell and the row says it scrolls', async ({ page }) => {
+  // ⚠️ Issue #40, 13.10.2026, on an upright iPad with seven pages: the search field, squeezed to 40 points,
+  // still showed "Ctrl K", which ran under the bell; the board name broke onto two lines; and the page added
+  // last seemed missing, because nothing said that the row scrolls.
+  await signIn(page)
+  const write = { headers: { 'X-Nexdeck-Request': '1' } }
+  const made = await page.request.post('/api/v1/boards', { ...write, data: { name: 'Testing ground', slug: 'crowded' } })
+  expect(made.status()).toBe(201)
+  try {
+    for (const name of ['Overview', 'Home', 'Tailscale', 'IP', 'Websites', 'Github', 'Seedbox']) {
+      expect((await page.request.post('/api/v1/boards/crowded/pages', { ...write, data: { name } })).status()).toBe(201)
+    }
+    await page.setViewportSize({ width: 1032, height: 1376 })
+    await page.goto('/b/crowded')
+    const bar = page.locator('header.app-bar')
+    const search = bar.getByRole('button', { name: 'Search' })
+    const bell = bar.getByRole('button', { name: 'Notices', exact: true })
+    await expect(bell).toBeVisible()
+    const field = await search.boundingBox()
+    const ring = await bell.boundingBox()
+    expect(field && ring && field.x + field.width, 'the search field reaches into the bell').toBeLessThanOrEqual(ring?.x ?? 0)
+    // Nothing inside the field may stick out of it, the key "Ctrl K" least of all.
+    const spill = await search.evaluate((button) => {
+      const own = button.getBoundingClientRect()
+      return [...button.querySelectorAll('*')].filter((inner) => {
+        const box = inner.getBoundingClientRect()
+        return box.width > 0 && getComputedStyle(inner).display !== 'none' && (box.right > own.right + 0.5 || box.left < own.left - 0.5)
+      }).length
+    })
+    expect(spill, 'something in the search field sticks out of it').toBe(0)
+    const name = bar.getByRole('button', { name: 'Testing ground' })
+    // The button keeps its height either way; the lines of the text inside it are what broke.
+    const lines = await name.evaluate((button) => {
+      const range = document.createRange()
+      range.selectNodeContents(button.querySelector('span') ?? button)
+      return new Set([...range.getClientRects()].filter((rect) => rect.width > 0).map((rect) => Math.round(rect.top))).size
+    })
+    expect(lines, 'the board name broke onto two lines').toBe(1)
+
+    const row = bar.getByRole('navigation', { name: 'Pages' })
+    await expect(row, 'the row does not say there is more to the right').toHaveAttribute('data-more', 'right')
+    // The arrow turns the row on until the last page is there, and then says there is more the other way.
+    const later = bar.getByRole('button', { name: 'More pages' })
+    for (let turn = 0; turn < 6 && (await later.isVisible()); turn += 1) {
+      await later.click()
+      await page.waitForTimeout(400)
+    }
+    await expect(later).toBeHidden()
+    await expect(row, 'the row does not say there is more to the left').toHaveAttribute('data-more', 'left')
+    await expect(bar.getByRole('button', { name: 'Earlier pages' })).toBeVisible()
+    // The page shown is brought into sight, also when it is the last one.
+    await page.goto('/b/crowded/seedbox')
+    const shown = await row.getByRole('button', { name: 'Seedbox', exact: true }).boundingBox()
+    const room = await row.boundingBox()
+    expect(shown && room && shown.x + shown.width, 'the page shown is scrolled away').toBeLessThanOrEqual((room?.x ?? 0) + (room?.width ?? 0) + 1)
+  } finally {
+    await page.request.delete('/api/v1/boards/crowded', write)
+  }
+})
+
 test('the bar stays on the page while another board loads', async ({ page }) => {
   // ⚠️ Found in nexdeck, issue #27, 06.10.2026: in the app installed on iPadOS 26 the blur came back over the bar
   // after a switch to another board, and stayed until the app was started again. Switching
@@ -229,6 +356,85 @@ test('the bar stays on the page when a board is deleted', async ({ page }) => {
   } finally {
     await page.request.delete('/api/v1/boards/doomed', write)
   }
+})
+
+/**
+ * Counts every moment without exactly one bar from now on, keeps the bar that holds the buttons to compare,
+ * and notes each address on the way. One bar, not "a bar": a second one, built by a page beside the shared
+ * one, is the bar of #40 again, and a probe that only asked for "a bar" stayed green on it.
+ */
+async function watchTheBar(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    const state = window as unknown as { barGone: number; bar: Element | null; paths: string[] }
+    state.barGone = 0
+    state.paths = [location.pathname]
+    state.bar = document.querySelector('header.app-bar')
+    new MutationObserver(() => {
+      if (document.querySelectorAll('header.app-bar').length !== 1) state.barGone += 1
+      if (state.paths.at(-1) !== location.pathname) state.paths.push(location.pathname)
+    }).observe(document.documentElement, { childList: true, subtree: true })
+  })
+}
+
+function theBarSoFar(page: Page): Promise<{ gone: number; same: boolean; paths: string[] }> {
+  return page.evaluate(() => {
+    const state = window as unknown as { barGone: number; bar: Element | null; paths: string[] }
+    return { gone: state.barGone, same: state.bar !== null && state.bar === document.querySelector('header.app-bar'), paths: state.paths }
+  })
+}
+
+test('the bar stays the same from a board to the settings and the system and back', async ({ page }) => {
+  // ⚠️ Issue #40, 12.10.2026: in the app installed on iPadOS 26 the blur came back over the bar as soon as
+  // My settings or System opened. They had a bar of their own, a second one: going there took the board's
+  // bar down and put up another, and the blur stayed. Every page now fills the one bar that never leaves.
+  await signIn(page)
+  await page.setViewportSize({ width: 1032, height: 1376 })
+  await watchTheBar(page)
+  for (const [entry, address, title] of [
+    ['My settings', /\/settings/, 'Profile'],
+    ['System', /\/system/, 'Integrations'],
+  ] as const) {
+    await page.getByRole('button', { name: ACCOUNT.username, exact: true }).click()
+    await page.getByRole('menuitem', { name: entry }).click()
+    await expect(page).toHaveURL(address)
+    await expect(page.getByRole('link', { name: title }).first()).toBeVisible()
+    await page.getByRole('link', { name: 'Back', exact: true }).click()
+    await expect(page).toHaveURL(/\/b\/home$/)
+    await expect(page.locator('section[aria-label="Containers"]')).toBeVisible()
+  }
+  const after = await theBarSoFar(page)
+  expect(after.paths, 'the way back went through another page').not.toContain('/')
+  expect(after.gone, 'the bar left the page on the way').toBe(0)
+  expect(after.same, 'the bar was taken down and built anew').toBe(true)
+})
+
+test('the bar stays the same from signing in to the board', async ({ page }) => {
+  // ⚠️ Issue #40, 12.10.2026: in the app installed on iPadOS 26 the blur was there after signing in. The
+  // sign-in page had no bar, so the blur came, and stayed on the board. The language now sits in the bar
+  // every page shares: bare in a browser tab, as sign-in always looked, and solid in the installed app.
+  await page.setViewportSize({ width: 1032, height: 1376 })
+  await page.goto('/')
+  await expect(page.getByLabel('User name')).toBeVisible()
+  const bar = page.locator('header.app-bar')
+  // HexDeck's sign-in has no language picker; the bar is there all the same, empty and bare.
+  await expect(bar).toHaveCount(1)
+  expect(await bar.evaluate((element) => getComputedStyle(element).backgroundColor), 'sign-in has a bar of glass in a browser tab').toBe('rgba(0, 0, 0, 0)')
+  await watchTheBar(page)
+  await page.getByLabel('User name').fill(ACCOUNT.username)
+  await page.getByLabel('Password', { exact: true }).fill(ACCOUNT.password)
+  await page.getByRole('button', { name: 'Sign in' }).click()
+  await expect(page).toHaveURL(/\/b\//)
+  await expect(bar.getByRole('button', { name: 'Edit board' })).toBeVisible()
+  const after = await theBarSoFar(page)
+  expect(after.gone, 'the bar left the page on the way to the board').toBe(0)
+  expect(after.same, 'the bar was taken down and built anew').toBe(true)
+
+  // The installed app: solid on sign-in too.
+  await page.request.post('/api/v1/auth/logout', { headers: { 'X-Nexdeck-Request': '1' } })
+  await page.goto('/login')
+  await expect(page.getByLabel('User name')).toBeVisible()
+  await asInstalled(page)
+  expect(await bar.evaluate((element) => getComputedStyle(element).backgroundColor), 'sign-in in the installed app has no solid bar').toMatch(/^rgb\(/)
 })
 
 /**

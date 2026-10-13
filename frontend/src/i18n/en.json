@@ -142,7 +142,7 @@
       "adminWarning": "An administrator: everybody on these networks can change everything, delete boards and read every connection's address. Choose a guest or a user unless the network really is only you.",
       "noAccount": "No account chosen",
       "networks": "Trusted networks",
-      "networksHelp": "One per line, as an address or a network: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. The whole Internet is refused.",
+      "networksHelp": "One per line, as an address or a network: 192.168.1.0/24, 10.0.0.0/8, fd00::/8. The whole Internet is refused. App tiles that open their address automatically go by the same networks, also with the switch off.",
       "proxyNote": "Behind a reverse proxy the address seen is the proxy's, unless HEXDECK_TRUSTED_PROXIES names it; then the forwarded address counts."
     },
     "title": "My settings",
@@ -164,7 +164,8 @@
       "backups": "Backups",
       "media": "Media",
       "projects": "Projects",
-      "player": "Music player"
+      "player": "Music player",
+      "apps": "Apps"
     },
     "mail": {
       "title": "Mail server",
@@ -595,6 +596,8 @@
     "settings": "Board settings",
     "manage": "Manage boards",
     "pages": "Pages",
+    "pagesEarlier": "Earlier pages",
+    "pagesLater": "More pages",
     "edit": "Edit board",
     "confirmAction": "Run this action now?",
     "pageName": "Page name",
@@ -778,6 +781,21 @@
     "pictureBadAddress": "That is not an address a picture can be loaded from.",
     "pictureLibrary": "From the media",
     "pictureLibraryEmpty": "Nothing uploaded yet. Upload a file first.",
+    "app": {
+      "label": "App from the catalog",
+      "help": "Name, icon, address and reachability check come from the app. Change it once under System, Apps and every tile follows.",
+      "none": "None, set up here",
+      "address": "Opens",
+      "auto": "Automatically, at home or on the road",
+      "autoHelp": "Automatically opens the home address in the home networks and the other one everywhere else.",
+      "first": "The first address ({{label}})",
+      "saveAs": "Save as app",
+      "saveAsHelp": "Puts this tile into the catalog, so any board can use it. The tile follows it from then on.",
+      "untitled": "App",
+      "firstLabel": "Main",
+      "titleHelp": "Empty: the name of the app.",
+      "linkFollows": "Empty: the address of the app. An address here wins over it."
+    },
     "move": "Move to another page",
     "moveTo": "Move to…"
   },
@@ -798,7 +816,8 @@
       "network": "Network",
       "monitoring": "Monitoring and home",
       "other": "Other"
-    }
+    },
+    "apps": "Apps from the catalog"
   },
   "notices": {
     "title": "Notices",
@@ -1071,7 +1090,9 @@
     "uptime": "Uptime in the window",
     "flow": "Where the power goes",
     "topology": "How the places hang together",
-    "problemsMore": "+{{count}} more"
+    "problemsMore": "+{{count}} more",
+    "lastHours_one": "last hour",
+    "lastHours_other": "last {{count}} hours"
   },
   "player": {
     "title": "Music",
@@ -1185,7 +1206,8 @@
     "noServers": "This account has no Plex server of its own."
   },
   "gauge": {
-    "of": "of"
+    "of": "of",
+    "range": "{{min}} to {{max}}"
   },
   "backups": {
     "title": "Backups",
@@ -1259,5 +1281,34 @@
     "down_one": "{{count}} down",
     "down_other": "{{count}} down",
     "none": "There are no other cards on this page yet."
+  },
+  "apps": {
+    "title": "Apps",
+    "lead": "Set an app up once and place it as a tile on any board. Change an address here and every tile follows.",
+    "none": "No apps yet. Add one here, or save an app tile as an app from its settings.",
+    "add": "Add app",
+    "edit": "Edit app",
+    "editNamed": "Edit {{name}}",
+    "delete": "Delete app",
+    "deleteNamed": "Delete {{name}}?",
+    "deleteBody_one": "{{count}} tile follows it. It stays, as a tile of its own with the name, icon and address it shows now.",
+    "deleteBody_other": "{{count}} tiles follow it. They stay, as tiles of their own with the name, icon and address they show now.",
+    "tiles_one": "{{count}} tile",
+    "tiles_other": "{{count}} tiles",
+    "name": "Name",
+    "icon": "Icon",
+    "description": "Description",
+    "addresses": "Addresses",
+    "addressesHelp": "One for each way the app is reached, for example through the proxy, over Tailscale or directly by address and port.",
+    "label": "Label of address {{number}}",
+    "labelPlaceholder": "Proxy",
+    "url": "Address {{number}}",
+    "addAddress": "Add address",
+    "removeAddress": "Remove address {{number}}",
+    "home": "At home",
+    "away": "On the road",
+    "notSet": "Not set",
+    "automaticHelp": "With one of the two set, a tile can open its address automatically: the one for home in the trusted networks named under System, Sign-in providers, No sign-in at home, and the other one everywhere else.",
+    "deleteThis": "Delete {{name}}"
   }
 }

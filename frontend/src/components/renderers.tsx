@@ -30,7 +30,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ComponentTyp
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 
-import { fileUrl, mediaUrl, patch, post } from '../api/client'
+import { fileUrl, get, mediaUrl, patch, post } from '../api/client'
 import { addItem, addMilestone, createProject, deleteItem, listProjects, orderItems, patchItem, patchMilestone, type ProjectView } from '../api/projects'
 import { tLabel } from '../i18n/texts'
 import { formatValue, timeAgo } from '../lib/format'
@@ -98,6 +98,8 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   feed: FeedCard,
   log: LogCard,
   chart: ChartCard,
+  meter: MeterCard,
+  segments: SegmentsCard,
   bars: BarsCard,
   timeline: TimelineCard,
   roadmap: RoadmapCard,
@@ -330,10 +332,21 @@ function dialArc(from: number, to: number, radius: number): string {
   return `M ${x1} ${y1} A ${radius} ${radius} 0 ${large} 1 ${x2} ${y2}`
 }
 
+/**
+ * The colour of a drawing of one number: the lines the operator drew for it
+ * (``meta.level``), or else what the service said.
+ *
+ * ⚠️ Only the colour. The card's status stays the service's word: the
+ * problems card and the red glow read that, not a line drawn for the look.
+ */
+function levelColour(data: WidgetData | null | undefined): string {
+  const level = typeof data?.meta?.level === 'string' ? data.meta.level : data?.status
+  return level === 'bad' ? 'var(--nd-bad)' : level === 'warn' ? 'var(--nd-warn)' : 'var(--nd-accent)'
+}
+
 export function GaugeCard({ data }: RenderProps) {
-  const { t } = useTranslation()
   const primary = data?.primary
-  const dial = (data?.meta?.gauge ?? null) as { share?: number; max?: number } | null
+  const dial = (data?.meta?.gauge ?? null) as { share?: number; max?: number; min?: number } | null
   // ⚠️ Two kinds of card end up here. One was turned into a dial by the
   // collector and carries its share in `meta`; the other measures a
   // percentage to begin with, and then the number *is* the share.
@@ -341,11 +354,12 @@ export function GaugeCard({ data }: RenderProps) {
     0,
     Math.min(100, typeof dial?.share === 'number' ? dial.share : primary?.unit === '%' && typeof primary?.value === 'number' ? primary.value : 0),
   )
-  const colour = data?.status === 'bad' ? 'var(--nd-bad)' : data?.status === 'warn' ? 'var(--nd-warn)' : 'var(--nd-accent)'
+  const colour = levelColour(data)
   const [tipX, tipY] = dialPoint(share, 30)
   // Only where it adds something. A card that already measures a share
   // would read "18% of 100%", which is a sentence about nothing.
   const ceiling = typeof dial?.max === 'number' ? dial.max : null
+  const floor = typeof dial?.min === 'number' ? dial.min : null
 
   return (
     <div className="flex-1 flex items-center gap-3 px-4 pb-3 min-h-0">
@@ -382,14 +396,219 @@ export function GaugeCard({ data }: RenderProps) {
       <div className="min-w-0 flex-1">
         <div className="text-[11px] text-muted uppercase tracking-wide truncate">{tLabel(primary?.label)}</div>
         <div className="num text-[19px] font-semibold leading-tight mt-0.5 truncate">{formatValue(primary?.value, primary?.unit)}</div>
-        {ceiling !== null && (
-          <div className="text-[10px] text-muted num">
-            {t('gauge.of')} {formatValue(ceiling, primary?.unit)}
-          </div>
-        )}
+        <DialRange floor={floor} ceiling={ceiling} unit={primary?.unit} />
         <div className="mt-1.5">
           <Chips items={data?.secondary} />
         </div>
+      </div>
+    </div>
+  )
+}
+
+/** What the dial or the LEDs run between: "of 48 MB/s", or "15 °C to 29 °C" once a floor is named. */
+function DialRange({ floor, ceiling, unit }: { floor: number | null; ceiling: number | null; unit?: string }) {
+  const { t } = useTranslation()
+  if (ceiling === null) return null
+  return (
+    <div className="text-[10px] text-muted num">
+      {floor !== null ? t('gauge.range', { min: formatValue(floor, unit), max: formatValue(ceiling, unit) }) : `${t('gauge.of')} ${formatValue(ceiling, unit)}`}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// LED bars: how full something is, as a row of lights (issue #39)
+// ---------------------------------------------------------------------------
+
+/** How many lights a row has: enough to read a share at a glance, few enough to tell apart. */
+const LEDS = { across: 24, upright: 14 }
+
+interface MeterMeta {
+  direction?: 'across' | 'upright'
+  zones?: { warn?: number; bad?: number }
+  low_is_bad?: boolean
+}
+
+/**
+ * The colour of one light, by where it stands in the row.
+ *
+ * With lines for yellow and red the row is coloured like a level meter: the
+ * stretch past yellow is yellow, past red is red. Red below yellow turns it
+ * round, as for free space, where the first lights are the bad ones. Without
+ * lines every lit light has the card's colour.
+ */
+export function ledColour(position: number, meter: MeterMeta, fallback: string): string {
+  const zones = meter.zones ?? {}
+  if (zones.warn === undefined && zones.bad === undefined) return fallback
+  if (meter.low_is_bad) {
+    if (zones.bad !== undefined && position <= zones.bad) return 'var(--nd-bad)'
+    if (zones.warn !== undefined && position <= zones.warn) return 'var(--nd-warn)'
+    return 'var(--nd-ok)'
+  }
+  if (zones.bad !== undefined && position > zones.bad) return 'var(--nd-bad)'
+  if (zones.warn !== undefined && position > zones.warn) return 'var(--nd-warn)'
+  return 'var(--nd-ok)'
+}
+
+export function MeterCard({ data }: RenderProps) {
+  const primary = data?.primary
+  const dial = (data?.meta?.gauge ?? null) as { share?: number; max?: number; min?: number } | null
+  const meter = (data?.meta?.meter ?? {}) as MeterMeta
+  const upright = meter.direction === 'upright'
+  const count = upright ? LEDS.upright : LEDS.across
+  const share = Math.max(0, Math.min(100, typeof dial?.share === 'number' ? dial.share : 0))
+  // A light is lit once the share reaches its middle, so 50% of 24 lights twelve.
+  const lit = Math.round((share / 100) * count)
+  const fallback = levelColour(data)
+  const ceiling = typeof dial?.max === 'number' ? dial.max : null
+  const floor = typeof dial?.min === 'number' ? dial.min : null
+  const lights = Array.from({ length: count }, (_, index) => {
+    // The share at the far edge of this light: where it sits in the row.
+    const position = ((index + 1) / count) * 100
+    const on = index < lit
+    return (
+      <span
+        key={index}
+        data-led={on ? 'on' : 'off'}
+        className="rounded-[2px] transition-[background-color,opacity] duration-300"
+        style={{
+          flex: '1 1 0',
+          background: on ? ledColour(position, meter, fallback) : 'color-mix(in srgb, var(--nd-text) 10%, transparent)',
+        }}
+      />
+    )
+  })
+  const reading = (
+    <div className="min-w-0">
+      <div className="text-[11px] text-muted uppercase tracking-wide truncate">{tLabel(primary?.label)}</div>
+      <div className="num text-[19px] font-semibold leading-tight mt-0.5 truncate">{formatValue(primary?.value ?? '', primary?.unit)}</div>
+      <DialRange floor={floor} ceiling={ceiling} unit={primary?.unit} />
+    </div>
+  )
+  if (upright) {
+    return (
+      <div className="flex-1 flex items-stretch gap-3 px-4 pb-3 min-h-0" data-testid="meter">
+        {/* Bottom up, as a level rises. */}
+        <div className="flex flex-col-reverse gap-[3px] w-5 flex-none py-0.5" role="meter" aria-valuenow={Math.round(share)} aria-valuemin={0} aria-valuemax={100} aria-label={tLabel(primary?.label)}>
+          {lights}
+        </div>
+        <div className="min-w-0 flex-1 flex flex-col justify-center">
+          {reading}
+          <div className="mt-1.5">
+            <Chips items={data?.secondary} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className="flex-1 flex flex-col justify-center gap-2 px-4 pb-3 min-h-0" data-testid="meter">
+      {reading}
+      <div className="flex gap-[3px] h-3.5" role="meter" aria-valuenow={Math.round(share)} aria-valuemin={0} aria-valuemax={100} aria-label={tLabel(primary?.label)}>
+        {lights}
+      </div>
+      <Chips items={data?.secondary} />
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Seven segments: the number as an LED display would show it (issue #39)
+// ---------------------------------------------------------------------------
+
+/** Which of the seven segments each character lights, a to g clockwise from the top, g in the middle. */
+const SEGMENTS: Record<string, string> = {
+  '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc',
+  '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abfgcd', '-': 'g',
+}
+
+/** One digit cell: width, height and the thickness of a segment, in viewBox units. */
+const CELL = { w: 12, h: 22, t: 2.6, gap: 3.2 }
+
+/** The rectangle of each segment inside its cell. */
+function segmentBox(name: string): [number, number, number, number] {
+  const { w, h, t } = CELL
+  const across = w - t * 1.4
+  const down = h / 2 - t * 1.2
+  switch (name) {
+    case 'a': return [t * 0.7, 0, across, t]
+    case 'g': return [t * 0.7, h / 2 - t / 2, across, t]
+    case 'd': return [t * 0.7, h - t, across, t]
+    case 'f': return [0, t * 0.7, t, down]
+    case 'b': return [w - t, t * 0.7, t, down]
+    case 'e': return [0, h / 2 + t * 0.5, t, down]
+    default: return [w - t, h / 2 + t * 0.5, t, down] // c
+  }
+}
+
+/**
+ * The characters a number becomes on the display, and after which of them a
+ * point is lit. Plain digits, no grouping: a display has no thousands
+ * separator, and "1,234" in German is a decimal.
+ */
+export function segmentText(value: number): { chars: string[]; points: Set<number> } {
+  const text = value.toLocaleString('en-US', { useGrouping: false, maximumFractionDigits: 3 })
+  const chars: string[] = []
+  const points = new Set<number>()
+  for (const char of text) {
+    if (char === '.') points.add(chars.length - 1)
+    else chars.push(char)
+  }
+  return { chars, points }
+}
+
+export function SegmentsCard(props: RenderProps) {
+  const { data } = props
+  const primary = data?.primary
+  const value = typeof primary?.value === 'number' ? primary.value : null
+  // A word or nothing has no digits; the card draws it as a number card would.
+  if (value === null) return <ValueCard {...props} />
+  const { chars, points } = segmentText(value)
+  const colour = levelColour(data)
+  const width = chars.length * (CELL.w + CELL.gap) - CELL.gap + 2
+  return (
+    <div className="flex-1 flex flex-col justify-center px-4 pb-3 min-h-0" data-testid="segments">
+      <div className="flex items-end gap-2 min-h-0">
+        <svg
+          viewBox={`-1 -1 ${width + 2} ${CELL.h + 2}`}
+          className="min-w-0 max-h-[64px] w-auto h-full flex-shrink"
+          style={{ aspectRatio: `${width + 2} / ${CELL.h + 2}` }}
+          role="img"
+          aria-label={`${formatValue(value, primary?.unit)}`}
+        >
+          {/* A slant, as the displays have. */}
+          <g transform="skewX(-6) translate(2 0)">
+            {chars.map((char, index) => {
+              const on = new Set(SEGMENTS[char] ?? '')
+              const x = index * (CELL.w + CELL.gap)
+              return (
+                <g key={index} transform={`translate(${x} 0)`}>
+                  {'abcdefg'.split('').map((name) => {
+                    const [sx, sy, sw, sh] = segmentBox(name)
+                    return (
+                      <rect
+                        key={name}
+                        data-segment={on.has(name) ? 'on' : 'off'}
+                        x={sx}
+                        y={sy}
+                        width={sw}
+                        height={sh}
+                        rx={CELL.t / 2}
+                        fill={on.has(name) ? colour : 'color-mix(in srgb, var(--nd-text) 7%, transparent)'}
+                      />
+                    )
+                  })}
+                  {points.has(index) && <circle cx={CELL.w + CELL.gap / 2} cy={CELL.h - CELL.t / 2} r={CELL.t / 1.6} fill={colour} />}
+                </g>
+              )
+            })}
+          </g>
+        </svg>
+        {primary?.unit && <span className="text-sm text-muted font-medium pb-0.5 flex-none">{tLabel(primary.unit)}</span>}
+      </div>
+      {primary?.label && <div className="text-[11px] text-muted mt-1.5 uppercase tracking-wide truncate">{tLabel(primary.label)}</div>}
+      <div className="mt-1.5">
+        <Chips items={data?.secondary} />
       </div>
     </div>
   )
@@ -1211,10 +1430,44 @@ export function LogCard({ data }: RenderProps) {
  * All the lines share one scale here, which is the whole point of drawing
  * them together.
  */
-export function ChartCard({ data, series }: RenderProps) {
+/**
+ * The history a chart asked for, fetched for its own stretch and again every minute.
+ *
+ * ⚠️ Not the board's series. The browser keeps the last 120 points of every
+ * metric for the sparklines, and a day arrives thinned to 240: what was drawn
+ * as "a day" was its second half. A chart that names its hours asks for them.
+ */
+function useChartHistory(widgetId: number, hours: number | null): Record<string, number[]> | null {
+  const [points, setPoints] = useState<Record<string, number[]> | null>(null)
+  useEffect(() => {
+    setPoints(null)
+    if (hours === null || !(widgetId > 0)) return
+    let gone = false
+    const read = () => {
+      get<Record<string, [number, number][]>>(`/widgets/${widgetId}/history?hours=${hours}`)
+        .then((answer) => {
+          if (gone || !answer || typeof answer !== 'object') return
+          setPoints(Object.fromEntries(Object.entries(answer).map(([metric, rows]) => [metric, (Array.isArray(rows) ? rows : []).map(([, value]) => value)])))
+        })
+        // The board's own series stay on screen; a chart that cannot fetch is not an empty one.
+        .catch(() => undefined)
+    }
+    read()
+    const timer = window.setInterval(read, 60_000)
+    return () => {
+      gone = true
+      window.clearInterval(timer)
+    }
+  }, [widgetId, hours])
+  return points
+}
+
+export function ChartCard({ data, series, widget }: RenderProps) {
   const { t } = useTranslation()
+  const hours = typeof data?.meta?.chart_hours === 'number' ? data.meta.chart_hours : null
+  const fetched = useChartHistory(widget?.id ?? 0, hours)
   const lines = Object.keys(data?.metrics ?? {})
-    .map((metric) => ({ metric, points: series?.[metric] ?? [] }))
+    .map((metric) => ({ metric, points: fetched?.[metric] ?? series?.[metric] ?? [] }))
     .filter((line) => line.points.length > 1)
   const all = lines.flatMap((line) => line.points)
   const low = all.length ? Math.min(...all) : 0
@@ -1235,6 +1488,7 @@ export function ChartCard({ data, series }: RenderProps) {
         <span className="text-[11px] text-muted truncate">{tLabel(data?.primary?.label)}</span>
         {all.length > 1 && (
           <span className="ml-auto num text-[10px] text-faint whitespace-nowrap">
+            {hours !== null && `${t('card.lastHours', { count: hours })} · `}
             {t('card.min')} {formatValue(low)} · {t('card.max')} {formatValue(high)}
           </span>
         )}
@@ -1535,7 +1789,8 @@ export function AppTile({ widget, data, link }: RenderProps) {
   const health = widget.health
   const window = String(widget.options?.bars ?? '24h')
   const status: Status = health ? (health.last_ok === null ? 'unknown' : health.last_ok ? 'ok' : 'bad') : 'unknown'
-  const description = String(data?.meta?.description ?? '')
+  // The tile's own line, else the one of the app it follows (issue #37).
+  const description = String(data?.meta?.description || widget.app?.description || '')
   const href = safeUrl(link || widget.link || widget.service_link) || undefined
   const bars = health?.bars ?? []
   const Tag = href ? 'a' : 'div'

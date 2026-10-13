@@ -225,6 +225,17 @@ tile's link and its reachability check take the integration's address on
 every read, so a changed address is changed once. A link of the tile's own
 still wins.
 
+Or it follows an app of the catalog (System > Apps): `options.app_id` names
+the app and `options.address` the label of the address it opens, or `auto`.
+Name, icon, description, address and check then come from the app, for an
+app without an adapter as well. `auto` opens the address named for home when
+the browser is in a trusted network (System > Sign-in providers > No
+sign-in at home, which may name networks without switching that sign-in on)
+and the one for the road everywhere else, including where HexDeck cannot
+tell. The check runs on the home address, since HexDeck runs at home. An export names the app and carries
+it along; an import over HTTP creates no app and turns a tile whose app is
+missing into a tile of its own.
+
 A card can be enlarged but never made smaller than its `default_size`;
 `min_size` is what the server uses when it has to squeeze a new widget into
 a tight spot.
@@ -234,9 +245,17 @@ a tight spot.
 `value`, `gauge`, `stats`, `list`, `nowplaying`, `calendar`, `text`,
 `bookmarks`, `iframe`, `clock`, `weather`, `feed`, `log`, `chart`, `app`, `posters`,
 `counters`, `camera`, `bars`, `ring`, `timeline`, `button`, `image`, `wol`,
-`search`, `ask`, `player`, `roadmap`, `project`, `items`: thirty-one, the keys of `RENDERER_MIN` in
+`search`, `ask`, `player`, `roadmap`, `project`, `items`, `meter`, `segments`: thirty-three, the keys of `RENDERER_MIN` in
 `backend/app/adapters/base.py`. A fetch may pick another renderer for its data through
 `meta["renderer"]`; the media library card uses that for its icon row.
+
+Every card drawn by `value`, `stats` or `gauge` that records at least one
+metric gets the drawings of a number by itself: a dial, LED bars, seven
+segments and a chart, with "Full at" and "Empty at" for the dial and the
+LEDs, the lines "Yellow from" and "Red from" (red below yellow means low
+numbers are the bad ones), and the hours a chart reaches back: one, six or
+twenty-four, as far as HexDeck keeps minute rows. Those lines colour the drawing only (`meta["level"]`); the card's
+`status` stays what the service said.
 
 Images such as posters are never linked with a token in the browser: an adapter
 hands out `proxy:/path`, and `GET /api/v1/widgets/{id}/image?path=` fetches it
@@ -288,9 +307,15 @@ Rules:
 
 - Secrets are fields with `secret=True`; they are encrypted at rest and never returned by the API.
 - Raise `AdapterError` (or `AuthFailed`, `Unreachable`) with an English message and a hint; the card shows both.
-- `metrics` are numbers recorded for sparklines; name them stably. Two or
-  more of them also give the card a **View** option that draws them all as one
-  chart, so name them for a legend, not for a column.
+- `metrics` are numbers recorded for sparklines; name them stably. They also
+  give the card a **View** option that draws them as one chart (a number card
+  from one metric on, any other card from two), so name them for a legend, not
+  for a column.
+- **A dial needs to know what full is.** A number in `%` is full at 100 by
+  itself. A card that knows its own ceiling, such as a line's speed, passes it
+  as `as_gauge(card, options, maximum=...)`: the dial and the LED bars both use
+  it. A fetch that has to pick one number out of several for these views asks
+  `single_number_view(options)`.
 - **A drawing is offered, not written into the adapter.** A `list` card gets
   bars by itself. For a ring, set `ring=True` on the `WidgetType` **and** have
   the fetch write `meta["ring"] = ring_of(("Blocked", 400), ("Allowed", 600))`:

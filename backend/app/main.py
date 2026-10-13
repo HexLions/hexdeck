@@ -24,6 +24,7 @@ from .db import db_session, get_engine
 from .migrations import migrate
 from .routers import (
     appearance,
+    apps,
     assets,
     auth,
     avatars,
@@ -59,6 +60,7 @@ from .services import channels as channel_service
 from .services import icons as icon_service
 from .services import oidc as oidc_service
 from .services import projects as project_service
+from .services.apps import RememberRequest
 from .services.channels import webpush as webpush_service
 from .services.collector import collector
 from .services.hass_ws import hass_listener
@@ -217,7 +219,7 @@ if _cors:
 # past the point where compressing costs more than it saves for a small answer.
 app.add_middleware(GZipMiddleware, minimum_size=700)
 
-for module in (system, setup, auth, users, avatars, backups, boards, widgets, music, integrations, stream, nexcrate, notices, channels, push, tokens, icons, assets, discovery, logs, journal_router, mail, oidc, plex, projects, search, appearance, templates, imports):
+for module in (system, setup, auth, users, avatars, backups, boards, widgets, music, integrations, apps, stream, nexcrate, notices, channels, push, tokens, icons, assets, discovery, logs, journal_router, mail, oidc, plex, projects, search, appearance, templates, imports):
     app.include_router(module.router)
 
 
@@ -315,6 +317,11 @@ async def security_headers(request: Request, call_next):  # noqa: ANN001
             "frame-ancestors 'self'",
         )
     return response
+
+
+# Outermost, and last added for that reason: an app tile asks where its
+# browser is (services/apps.py).
+app.add_middleware(RememberRequest)
 
 
 @app.exception_handler(404)

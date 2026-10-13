@@ -5,6 +5,33 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Every number card can be a dial, LED bars, seven segments or a chart.**
+  Until now a dial was offered on a few cards only. Yellow and red lines colour
+  the drawing and leave the card's status alone. "Empty at" sets where the
+  dial and the LEDs start, and a chart says how far back it reaches: the last
+  hour, six hours or a day. From nexdeck.
+- **Apps set up once, placed on any board.** System › Apps keeps a catalog:
+  an app with its name, icon, a line of description and every address it is
+  reached by (through the proxy, over Tailscale, directly). An app tile follows
+  one, so an address changed once is changed on every board, and it can open
+  the home address in the trusted networks of System › Sign-in providers and
+  the other one everywhere else. Deleting an app leaves its tiles standing on
+  their own. The widget library lists the apps above the widgets. From
+  nexdeck.
+
+### Fixed
+
+- **The iPad blur came back between pages.** Every page brought a bar of its
+  own, and going from a board to the settings or from sign-in to a board took
+  one down and put another up. There is one bar now, built once above the
+  pages; it stands while a page loads and when one gives way to the next. On
+  an iPad held upright, a crowded bar keeps the search clear of the bell, the
+  board name on one line, and says when the row of pages scrolls. From nexdeck.
+
 ## 0.26.0 (2026-10-12)
 
 What nexdeck did from 0.37 to 0.40, taken over and fitted: six integrations,

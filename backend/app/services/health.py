@@ -113,8 +113,25 @@ async def check_ping(target: str, timeout: float) -> tuple[bool, int, str]:
     return code == 0, int((time.perf_counter() - started) * 1000), "reply" if code == 0 else "no reply"
 
 
-def service_target(kind: str, widget: Widget | None) -> str:
-    """The address of a widget's integration, shaped for the check: the URL, host:port, or the host."""
+def _shaped(kind: str, url: str) -> str:
+    """A URL as the check needs it: the URL itself, host:port, or the host."""
+    if kind == "http" or not url:
+        return url
+    parsed = urlsplit(url if "://" in url else f"http://{url}")
+    host = parsed.hostname or ""
+    if kind == "tcp":
+        return f"{host}:{parsed.port or (443 if parsed.scheme == 'https' else 80)}"
+    return host
+
+
+def service_target(kind: str, widget: Widget | None, db=None) -> str:  # noqa: ANN001
+    """The address of a widget's app or integration, shaped for the check: the URL, host:port, or the host."""
+    if widget is not None and db is not None:
+        from . import apps as apps_service
+
+        app = apps_service.followed(db, widget)
+        if app is not None:
+            return _shaped(kind, apps_service.check_address(app, str((widget.options or {}).get("address") or "")))
     if widget is None or widget.integration is None:
         return ""
     from ..adapters import get_adapter
@@ -129,13 +146,7 @@ def service_target(kind: str, widget: Widget | None) -> str:
         # code cannot work out is one tile without a check, nothing more.
         logger.warning("The address of widget %s could not be worked out for its check.", widget.id, exc_info=True)
         return ""
-    if kind == "http" or not url:
-        return url
-    parsed = urlsplit(url if "://" in url else f"http://{url}")
-    host = parsed.hostname or ""
-    if kind == "tcp":
-        return f"{host}:{parsed.port or (443 if parsed.scheme == 'https' else 80)}"
-    return host
+    return _shaped(kind, url)
 
 
 async def run_check(check: HealthCheck) -> tuple[bool, int, str]:
@@ -185,7 +196,7 @@ class HealthService:
             ))
             due = [c for c in checks if force or self._next_due.get(c.id, 0) <= now]
             # A check without a target follows its widget's integration, read afresh every time.
-            snapshot = [(c.id, c.kind, c.target or service_target(c.kind, c.widget), c.timeout_seconds, c.expect_status, c.insecure, c.interval_seconds) for c in due]
+            snapshot = [(c.id, c.kind, c.target or service_target(c.kind, c.widget, db), c.timeout_seconds, c.expect_status, c.insecure, c.interval_seconds) for c in due]
         # ⚠️ A check whose address cannot be worked out yet is not a service
         # that is down. It used to run against the empty string, which fails
         # the way an unreachable host fails, so an outage was opened and every
@@ -333,8 +344,13 @@ def widget_target(widget: Widget) -> str:
 
 
 def ensure_check_for_widget(db, widget: Widget) -> HealthCheck | None:  # noqa: ANN001
-    """App tiles get a check on their link automatically."""
-    wants = widget.kind == "core.app" and bool(widget.link) and widget.options.get("check", True)
+    """App tiles get a check on their link automatically.
+
+    A tile that follows an app and has no link of its own gets a check without
+    a target, which follows the app on every round (``service_target``).
+    """
+    follows_app = widget.kind == "core.app" and bool((widget.options or {}).get("app_id"))
+    wants = widget.kind == "core.app" and (bool(widget.link) or follows_app) and widget.options.get("check", True)
     existing = widget.health_check
     if wants and existing is None:
         existing = HealthCheck(widget_id=widget.id, target=widget.link, kind="http",

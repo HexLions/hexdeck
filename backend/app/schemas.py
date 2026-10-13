@@ -543,3 +543,28 @@ class ItemPatch(BaseModel):
 
 class ItemOrder(BaseModel):
     ids: list[int] = Field(min_length=1, max_length=1000)
+
+
+class AppAddress(BaseModel):
+    label: str = Field(min_length=1, max_length=40)
+    url: str = Field(min_length=1, max_length=600)
+
+
+class AppCreate(BaseModel):
+    """An app for the catalog (issue #37)."""
+
+    name: str = Field(min_length=1, max_length=120)
+    icon: str = Field(default="", max_length=200)
+    description: str = Field(default="", max_length=300)
+    addresses: list[AppAddress] = Field(min_length=1, max_length=8)
+    home: str = Field(default="", max_length=40)
+    away: str = Field(default="", max_length=40)
+
+
+class AppPatch(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    icon: str | None = Field(default=None, max_length=200)
+    description: str | None = Field(default=None, max_length=300)
+    addresses: list[AppAddress] | None = Field(default=None, min_length=1, max_length=8)
+    home: str | None = Field(default=None, max_length=40)
+    away: str | None = Field(default=None, max_length=40)
