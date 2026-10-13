@@ -219,7 +219,7 @@ class OpenHABAdapter(Adapter):
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         if widget_kind == "items":
             items = [
-                {"name": "Living_Temperature", "label": "Living room", "type": "Number:Temperature", "state": f"{fake.walk('oh-t', tick, 20.5, 22.4):.1f} °C"},
+                {"name": "Living_Temperature", "label": "Temperature", "type": "Number:Temperature", "state": f"{fake.walk('oh-t', tick, 20.5, 22.4):.1f} °C"},
                 {"name": "Kitchen_Light", "label": "Kitchen light", "type": "Switch", "state": "ON" if fake.flicker("oh-k", tick, 0.4) else "OFF"},
                 {"name": "Front_Door", "label": "Front door", "type": "Contact", "state": "CLOSED"},
                 {"name": "Grid_Power", "label": "Grid power", "type": "Number:Power", "state": f"{fake.walk('oh-p', tick, 180, 900):.0f} W"},
