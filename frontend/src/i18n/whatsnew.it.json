@@ -324,6 +324,26 @@
         "La barra in alto resta ferma tra le pagine e sta su un iPad in verticale: la ricerca si stringe e le pagine scorrono con le frecce.",
         "Eliminare un'app lascia le sue tile al loro posto, con quello che mostravano."
       ]
+    },
+    "0.28.0": {
+      "lead": "HexDeck 0.28.0: dieci integrazioni, dai pannelli solari ai server di gioco, e una chiave segreta che si può cambiare senza reinserire tutte le chiavi API.",
+      "sections": [
+        {
+          "title": "Dieci integrazioni",
+          "body": "OpenDTU, Fronius, Tasmota e openHAB per la casa; aria2 e rclone per download e copie; Jenkins, Pterodactyl, mailcow e BookStack. Tasmota e openHAB commutano, aria2 mette in pausa, Jenkins avvia build e Pterodactyl avvia e ferma, ognuno solo se la card lo chiede.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Una nuova chiave segreta, le stesse chiavi API",
+          "body": "Metti la chiave nuova in HEXDECK_SECRET_KEY e la vecchia in HEXDECK_SECRET_KEY_PREVIOUS: all'avvio successivo ogni segreto salvato passa alla chiave nuova e il log dice quanti. Poi togli la variabile.",
+          "path": "docker-compose.yml"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Una card a lancetta, come Pi-hole o NextDNS, si può mostrare come numero semplice. Da nexdeck.",
+        "Un elenco di download colora di rosso una riga quando il suo errore ha un motivo."
+      ]
     }
   }
 }

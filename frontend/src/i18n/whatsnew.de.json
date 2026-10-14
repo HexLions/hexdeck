@@ -950,6 +950,26 @@
         "Die obere Leiste bleibt zwischen den Seiten stehen und passt auf ein hochkant gehaltenes iPad: die Suche wird schmaler, die Seiten blättern mit Pfeilen.",
         "Wird eine App gelöscht, bleiben ihre Kacheln stehen, mit dem, was sie zeigten."
       ]
+    },
+    "0.28.0": {
+      "lead": "HexDeck 0.28.0: zehn Integrationen, von Solarmodulen bis zu Spieleservern, und ein geheimer Schlüssel, der sich wechseln lässt, ohne jeden API-Schlüssel neu einzugeben.",
+      "sections": [
+        {
+          "title": "Zehn Integrationen",
+          "body": "OpenDTU, Fronius, Tasmota und openHAB für zu Hause; aria2 und rclone für Downloads und Kopien; Jenkins, Pterodactyl, mailcow und BookStack. Tasmota und openHAB schalten, aria2 pausiert, Jenkins baut und Pterodactyl startet und stoppt, jeweils nur, wenn die Karte es anbietet.",
+          "path": "System > Anbindungen"
+        },
+        {
+          "title": "Ein neuer geheimer Schlüssel, dieselben API-Schlüssel",
+          "body": "Den neuen Schlüssel in HEXDECK_SECRET_KEY und den alten in HEXDECK_SECRET_KEY_PREVIOUS setzen: Beim nächsten Start wandert jedes gespeicherte Geheimnis zum neuen Schlüssel, und das Protokoll sagt, wie viele. Danach die Variable entfernen.",
+          "path": "docker-compose.yml"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Eine Zeigerkarte wie Pi-hole oder NextDNS lässt sich als einfache Zahl zeigen. Von nexdeck.",
+        "Eine Download-Liste färbt eine Zeile rot, wenn ihr Fehler einen Grund nennt."
+      ]
     }
   }
 }

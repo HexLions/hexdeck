@@ -950,6 +950,26 @@
         "The top bar stays put between pages, and fits an iPad held upright: the search shrinks and the pages scroll with arrows.",
         "Deleting an app leaves its tiles standing on their own, with what they showed."
       ]
+    },
+    "0.28.0": {
+      "lead": "HexDeck 0.28.0: ten integrations, from solar panels to game servers, and a secret key that can be changed without entering every API key again.",
+      "sections": [
+        {
+          "title": "Ten integrations",
+          "body": "OpenDTU, Fronius, Tasmota and openHAB at home; aria2 and rclone for downloads and copies; Jenkins, Pterodactyl, mailcow and BookStack. Tasmota and openHAB switch, aria2 pauses, Jenkins builds and Pterodactyl starts and stops, each only when the card asks for it.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "A new secret key, the same API keys",
+          "body": "Set the new key in HEXDECK_SECRET_KEY and the old one in HEXDECK_SECRET_KEY_PREVIOUS: the next start moves every stored secret to the new key and says how many in the log. Then remove the variable.",
+          "path": "docker-compose.yml"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A dial card, such as Pi-hole or NextDNS, can be drawn as its plain number. From nexdeck.",
+        "A download list turns a row red when its failure carries a reason."
+      ]
     }
   }
 }
