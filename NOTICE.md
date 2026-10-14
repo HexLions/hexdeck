@@ -402,6 +402,58 @@ Updated at every milestone.
   "Forbidden" otherwise. Checked against Wiki.js 2.5.315 running locally,
   with SQLite and four pages; its tarball is built for musl, so the SQLite
   module was replaced with the official glibc build of the same version.
+- **OpenDTU, read from its source.** The totals, each inverter and OpenDTU's
+  own hints come from `/api/livedata/status`, once without a serial and once
+  per inverter with it, in the shape `WebApi_ws_live.cpp` writes in release
+  v26.9.28. An inverter that does not answer is shown as asleep, since micro
+  inverters switch off with the light. Not yet run against a device.
+- **Tasmota with one command.** `Status 0` hands out the name, firmware,
+  relays, power and every sensor in one answer, read in the shape
+  `CmndStatus` and `MqttShowState` write in release v15.6.0. The password
+  goes as HTTP Basic, which Tasmota tries before the address parameters, so
+  it never lands in a log of addresses. Not yet run against a device.
+- **aria2, where the secret is a parameter.** aria2's JSON-RPC takes its
+  secret as the first parameter of every call and refuses a wrong one with
+  HTTP 400, not 401. Checked against aria2 1.37.0 running locally, with a
+  secret, downloads running, paused, waiting, finished and failed, pause and
+  resume, and a wrong secret.
+- **Jenkins with an API token and no crumb.** Jobs, queue and agents come
+  from `/api/json` with the fields named in `tree`; the build button posts
+  with the API token, which Jenkins exempts from its CSRF crumb. Checked
+  against Jenkins 2.580.1 running locally, with passing, failing, running,
+  queued and disabled jobs, an offline agent, and a wrong token.
+- **openHAB, Items without a token and Things with one.** The Items come
+  from `/rest/items`, which openHAB lets an anonymous user read by default;
+  the Things from `/rest/things?summary=true`, which needs an
+  administrator's API token. Checked against openHAB 5.2.3 running locally,
+  with Items of eight types, Things of the Network binding, a command to a
+  switch, and a wrong token.
+- **Fronius over the local Solar API.** The site and each inverter come
+  from `GetPowerFlowRealtimeData.fcgi` and `GetInverterInfo.cgi`, in the
+  shapes a Symo, a Primo and a Gen24 with a battery answer as pyfronius and
+  Home Assistant record them; the fixture here is written anew in that
+  shape. Not yet run against an inverter.
+- **Pterodactyl through the client API.** The servers and each one's live
+  state come from `/api/client` and `/api/client/servers/<id>/resources`,
+  in the shape the client transformers write in release v1.15.1. A node
+  that does not answer marks its server instead of failing the card. Not
+  yet run against a panel.
+- **mailcow, and the two ways it refuses.** Containers, storage, the
+  Postfix queue and the mailboxes come from `/api/v1/get/...` with an
+  `X-API-Key`, in the shape `json_api.php` builds and `openapi.yaml` shows
+  in release 2026-09a. A key from an address it does not allow and a wrong
+  key are told apart, since the second one feeds mailcow's fail2ban. Not
+  yet run against an installation.
+- **BookStack through its token.** The counts and the pages changed last
+  come from `/api/shelves`, `/api/books`, `/api/chapters` and `/api/pages`,
+  in the listing shape and with the token format of release v26.09.1. Not
+  yet run against an installation.
+- **rclone's remote control, without its job list.** The speed, the files
+  being copied and the errors come from `core/stats`. Since 1.75 every
+  remote control call becomes a job, the card's own included, so the job
+  list is not read. Checked against rclone v1.75.2 running locally as `rcd`,
+  with a throttled copy, a missing file, a read-only target and a wrong
+  password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -1,0 +1,408 @@
+{
+ "live": {
+  "inverters": [
+   {
+    "serial": "116181234567",
+    "name": "Balcony east",
+    "order": 0,
+    "data_age": 4,
+    "data_age_ms": 4120,
+    "poll_enabled": true,
+    "reachable": true,
+    "producing": true,
+    "limit_relative": 100.0,
+    "limit_absolute": 800.0,
+    "radio_stats": {
+     "tx_request": 1520,
+     "tx_re_request": 12,
+     "rx_success": 1490,
+     "rx_fail_nothing": 20,
+     "rx_fail_partial": 8,
+     "rx_fail_corrupt": 2,
+     "rssi": -62
+    }
+   },
+   {
+    "serial": "1161ABCDEF01",
+    "name": "Garage roof",
+    "order": 1,
+    "data_age": 4,
+    "data_age_ms": 4120,
+    "poll_enabled": true,
+    "reachable": true,
+    "producing": false,
+    "limit_relative": 50.0,
+    "limit_absolute": 400.0,
+    "radio_stats": {
+     "tx_request": 1520,
+     "tx_re_request": 12,
+     "rx_success": 1490,
+     "rx_fail_nothing": 20,
+     "rx_fail_partial": 8,
+     "rx_fail_corrupt": 2,
+     "rssi": -62
+    }
+   },
+   {
+    "serial": "114172221111",
+    "name": "Shed",
+    "order": 2,
+    "data_age": 4,
+    "data_age_ms": 4120,
+    "poll_enabled": true,
+    "reachable": false,
+    "producing": false,
+    "limit_relative": 100.0,
+    "limit_absolute": -1,
+    "radio_stats": {
+     "tx_request": 1520,
+     "tx_re_request": 12,
+     "rx_success": 1490,
+     "rx_fail_nothing": 20,
+     "rx_fail_partial": 8,
+     "rx_fail_corrupt": 2,
+     "rssi": -62
+    }
+   }
+  ],
+  "total": {
+   "Power": {
+    "v": 512.3,
+    "u": "W",
+    "d": 1
+   },
+   "YieldDay": {
+    "v": 2873,
+    "u": "Wh",
+    "d": 0
+   },
+   "YieldTotal": {
+    "v": 1834.62,
+    "u": "kWh",
+    "d": 3
+   }
+  },
+  "hints": {
+   "time_sync": false,
+   "radio_problem": false,
+   "default_password": false,
+   "pin_mapping_issue": false
+  }
+ },
+ "detail": {
+  "116181234567": {
+   "inverters": [
+    {
+     "serial": "116181234567",
+     "name": "Balcony east",
+     "order": 0,
+     "data_age": 4,
+     "data_age_ms": 4120,
+     "poll_enabled": true,
+     "reachable": true,
+     "producing": true,
+     "limit_relative": 100.0,
+     "limit_absolute": 800.0,
+     "radio_stats": {
+      "tx_request": 1520,
+      "tx_re_request": 12,
+      "rx_success": 1490,
+      "rx_fail_nothing": 20,
+      "rx_fail_partial": 8,
+      "rx_fail_corrupt": 2,
+      "rssi": -62
+     },
+     "AC": {
+      "0": {
+       "Power": {
+        "v": 512.3,
+        "u": "W",
+        "d": 1
+       },
+       "Voltage": {
+        "v": 231.4,
+        "u": "V",
+        "d": 1
+       },
+       "Current": {
+        "v": 2.21,
+        "u": "A",
+        "d": 2
+       },
+       "Frequency": {
+        "v": 50.01,
+        "u": "Hz",
+        "d": 2
+       },
+       "PowerFactor": {
+        "v": 1.0,
+        "u": "",
+        "d": 3
+       },
+       "ReactivePower": {
+        "v": 0.4,
+        "u": "var",
+        "d": 1
+       }
+      }
+     },
+     "DC": {
+      "0": {
+       "name": {
+        "u": "Panel 1"
+       },
+       "Power": {
+        "v": 532.8,
+        "u": "W",
+        "d": 1
+       },
+       "Voltage": {
+        "v": 34.2,
+        "u": "V",
+        "d": 1
+       },
+       "Current": {
+        "v": 7.8,
+        "u": "A",
+        "d": 2
+       },
+       "YieldDay": {
+        "v": 2873,
+        "u": "Wh",
+        "d": 0
+       },
+       "YieldTotal": {
+        "v": 620.1,
+        "u": "kWh",
+        "d": 3
+       }
+      }
+     },
+     "INV": {
+      "0": {
+       "Power DC": {
+        "v": 532.8,
+        "u": "W",
+        "d": 1
+       },
+       "YieldDay": {
+        "v": 2873,
+        "u": "Wh",
+        "d": 0
+       },
+       "YieldTotal": {
+        "v": 1210.4,
+        "u": "kWh",
+        "d": 3
+       },
+       "Temperature": {
+        "v": 41.6,
+        "u": "°C",
+        "d": 1
+       },
+       "Efficiency": {
+        "v": 96.1,
+        "u": "%",
+        "d": 3
+       }
+      }
+     },
+     "events": 3
+    }
+   ],
+   "total": {
+    "Power": {
+     "v": 512.3,
+     "u": "W",
+     "d": 1
+    },
+    "YieldDay": {
+     "v": 2873,
+     "u": "Wh",
+     "d": 0
+    },
+    "YieldTotal": {
+     "v": 1834.62,
+     "u": "kWh",
+     "d": 3
+    }
+   },
+   "hints": {
+    "time_sync": false,
+    "radio_problem": false,
+    "default_password": false,
+    "pin_mapping_issue": false
+   }
+  },
+  "1161ABCDEF01": {
+   "inverters": [
+    {
+     "serial": "1161ABCDEF01",
+     "name": "Garage roof",
+     "order": 1,
+     "data_age": 4,
+     "data_age_ms": 4120,
+     "poll_enabled": true,
+     "reachable": true,
+     "producing": false,
+     "limit_relative": 50.0,
+     "limit_absolute": 400.0,
+     "radio_stats": {
+      "tx_request": 1520,
+      "tx_re_request": 12,
+      "rx_success": 1490,
+      "rx_fail_nothing": 20,
+      "rx_fail_partial": 8,
+      "rx_fail_corrupt": 2,
+      "rssi": -62
+     },
+     "AC": {
+      "0": {
+       "Power": {
+        "v": 0.0,
+        "u": "W",
+        "d": 1
+       },
+       "Voltage": {
+        "v": 231.4,
+        "u": "V",
+        "d": 1
+       },
+       "Current": {
+        "v": 0.0,
+        "u": "A",
+        "d": 2
+       },
+       "Frequency": {
+        "v": 50.01,
+        "u": "Hz",
+        "d": 2
+       },
+       "PowerFactor": {
+        "v": 1.0,
+        "u": "",
+        "d": 3
+       },
+       "ReactivePower": {
+        "v": 0.4,
+        "u": "var",
+        "d": 1
+       }
+      }
+     },
+     "DC": {
+      "0": {
+       "name": {
+        "u": "Panel 1"
+       },
+       "Power": {
+        "v": 0.0,
+        "u": "W",
+        "d": 1
+       },
+       "Voltage": {
+        "v": 34.2,
+        "u": "V",
+        "d": 1
+       },
+       "Current": {
+        "v": 7.8,
+        "u": "A",
+        "d": 2
+       },
+       "YieldDay": {
+        "v": 0,
+        "u": "Wh",
+        "d": 0
+       },
+       "YieldTotal": {
+        "v": 620.1,
+        "u": "kWh",
+        "d": 3
+       }
+      }
+     },
+     "INV": {
+      "0": {
+       "Power DC": {
+        "v": 0.0,
+        "u": "W",
+        "d": 1
+       },
+       "YieldDay": {
+        "v": 0,
+        "u": "Wh",
+        "d": 0
+       },
+       "YieldTotal": {
+        "v": 1210.4,
+        "u": "kWh",
+        "d": 3
+       },
+       "Temperature": {
+        "v": 22.0,
+        "u": "°C",
+        "d": 1
+       },
+       "Efficiency": {
+        "v": 96.1,
+        "u": "%",
+        "d": 3
+       }
+      }
+     },
+     "events": 3
+    }
+   ],
+   "total": {
+    "Power": {
+     "v": 512.3,
+     "u": "W",
+     "d": 1
+    },
+    "YieldDay": {
+     "v": 2873,
+     "u": "Wh",
+     "d": 0
+    },
+    "YieldTotal": {
+     "v": 1834.62,
+     "u": "kWh",
+     "d": 3
+    }
+   },
+   "hints": {
+    "time_sync": false,
+    "radio_problem": false,
+    "default_password": false,
+    "pin_mapping_issue": false
+   }
+  },
+  "114172221111": {
+   "inverters": [],
+   "total": {
+    "Power": {
+     "v": 512.3,
+     "u": "W",
+     "d": 1
+    },
+    "YieldDay": {
+     "v": 2873,
+     "u": "Wh",
+     "d": 0
+    },
+    "YieldTotal": {
+     "v": 1834.62,
+     "u": "kWh",
+     "d": 3
+    }
+   },
+   "hints": {
+    "time_sync": false,
+    "radio_problem": false,
+    "default_password": false,
+    "pin_mapping_issue": false
+   }
+  }
+ }
+}

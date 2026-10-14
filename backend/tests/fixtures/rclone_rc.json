@@ -1,0 +1,119 @@
+{
+ "version": {
+  "arch": "amd64",
+  "decomposed": [
+   1,
+   75,
+   2
+  ],
+  "goTags": "none",
+  "goVersion": "go1.26.9",
+  "isBeta": false,
+  "isGit": false,
+  "linking": "static",
+  "os": "linux",
+  "osArch": "amd64",
+  "osKernel": "6.12.48-amd64 (x86_64)",
+  "osVersion": "debian 13.6 (64 bit)",
+  "version": "v1.75.2"
+ },
+ "stats": {
+  "bytes": 31186944,
+  "checks": 0,
+  "deletedDirs": 0,
+  "deletes": 0,
+  "elapsedTime": 1.3222e-05,
+  "errors": 0,
+  "eta": 60,
+  "fatalError": false,
+  "listed": 3,
+  "renames": 0,
+  "retryError": false,
+  "serverSideCopies": 0,
+  "serverSideCopyBytes": 0,
+  "serverSideMoveBytes": 0,
+  "serverSideMoves": 0,
+  "speed": 2974752.256651939,
+  "totalBytes": 211812352,
+  "totalChecks": 0,
+  "totalTransfers": 4,
+  "transferTime": 12.887429852,
+  "transferring": [
+   {
+    "bytes": 16281600,
+    "dstFs": "nas:backup",
+    "eta": 52,
+    "group": "backup-to-nas",
+    "name": "documents.zip",
+    "percentage": 19,
+    "size": 83886080,
+    "speed": 1266602.6414030024,
+    "speedAvg": 1278723.1547089645,
+    "srcFs": "/data/photos"
+   },
+   {
+    "bytes": 12808192,
+    "dstFs": "nas:backup",
+    "eta": 114,
+    "group": "backup-to-nas",
+    "name": "photos-2026.tar",
+    "percentage": 10,
+    "size": 125829120,
+    "speed": 999190.7864854136,
+    "speedAvg": 990678.6524526997,
+    "srcFs": "/data/photos"
+   }
+  ],
+  "transfers": 2
+ },
+ "stats_errors": {
+  "bytes": 86663168,
+  "checks": 0,
+  "deletedDirs": 0,
+  "deletes": 0,
+  "elapsedTime": 26.446194576,
+  "errors": 3,
+  "eta": 45,
+  "fatalError": false,
+  "lastError": "open offsite:archive/notes.txt.eae89ecb.partial: permission denied",
+  "listed": 6,
+  "renames": 0,
+  "retryError": true,
+  "serverSideCopies": 0,
+  "serverSideCopyBytes": 0,
+  "serverSideMoveBytes": 0,
+  "serverSideMoves": 0,
+  "speed": 2759634.412160494,
+  "totalBytes": 211812352,
+  "totalChecks": 0,
+  "totalTransfers": 4,
+  "transferTime": 39.333612189,
+  "transferring": [
+   {
+    "bytes": 44003328,
+    "dstFs": "nas:backup",
+    "eta": 36,
+    "group": "backup-to-nas",
+    "name": "documents.zip",
+    "percentage": 52,
+    "size": 83886080,
+    "speed": 1119656.870836235,
+    "speedAvg": 1087696.6997966608,
+    "srcFs": "/data/photos"
+   },
+   {
+    "bytes": 40562688,
+    "dstFs": "nas:backup",
+    "eta": 82,
+    "group": "backup-to-nas",
+    "name": "photos-2026.tar",
+    "percentage": 32,
+    "size": 125829120,
+    "speed": 1033056.1426643668,
+    "speedAvg": 1038734.5435442595,
+    "srcFs": "/data/photos"
+   }
+  ],
+  "transfers": 2
+ }
+}

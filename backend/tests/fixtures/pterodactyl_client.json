@@ -1,0 +1,294 @@
+{
+ "servers": {
+  "object": "list",
+  "data": [
+   {
+    "object": "server",
+    "attributes": {
+     "server_owner": true,
+     "identifier": "1a7ce997",
+     "__deprecated_uuid_short": "1a7ce997",
+     "server_identifier": "1a7ce997",
+     "internal_id": 1,
+     "uuid": "1a7ce997-1f4e-4c11-9a35-6b2d0e7c8a10",
+     "name": "Minecraft survival",
+     "node": "node-01",
+     "is_node_under_maintenance": false,
+     "sftp_details": {
+      "ip": "node-01.example.com",
+      "port": 2022
+     },
+     "description": "",
+     "limits": {
+      "memory": 6144,
+      "swap": 0,
+      "disk": 20480,
+      "io": 500,
+      "cpu": 300,
+      "threads": null,
+      "oom_disabled": true
+     },
+     "invocation": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+     "docker_image": "ghcr.io/pterodactyl/yolks:java_21",
+     "egg_features": [
+      "eula",
+      "java_version"
+     ],
+     "feature_limits": {
+      "databases": 0,
+      "allocations": 1,
+      "backups": 3
+     },
+     "status": null,
+     "is_suspended": false,
+     "is_installing": false,
+     "is_transferring": false,
+     "skip_scripts": false
+    }
+   },
+   {
+    "object": "server",
+    "attributes": {
+     "server_owner": true,
+     "identifier": "5b0e2f11",
+     "__deprecated_uuid_short": "5b0e2f11",
+     "server_identifier": "5b0e2f11",
+     "internal_id": 1,
+     "uuid": "5b0e2f11-1f4e-4c11-9a35-6b2d0e7c8a10",
+     "name": "Valheim",
+     "node": "node-01",
+     "is_node_under_maintenance": false,
+     "sftp_details": {
+      "ip": "node-01.example.com",
+      "port": 2022
+     },
+     "description": "",
+     "limits": {
+      "memory": 4096,
+      "swap": 0,
+      "disk": 20480,
+      "io": 500,
+      "cpu": 0,
+      "threads": null,
+      "oom_disabled": true
+     },
+     "invocation": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+     "docker_image": "ghcr.io/pterodactyl/yolks:java_21",
+     "egg_features": [
+      "eula",
+      "java_version"
+     ],
+     "feature_limits": {
+      "databases": 0,
+      "allocations": 1,
+      "backups": 3
+     },
+     "status": null,
+     "is_suspended": false,
+     "is_installing": false,
+     "is_transferring": false,
+     "skip_scripts": false
+    }
+   },
+   {
+    "object": "server",
+    "attributes": {
+     "server_owner": true,
+     "identifier": "9c4d8a02",
+     "__deprecated_uuid_short": "9c4d8a02",
+     "server_identifier": "9c4d8a02",
+     "internal_id": 1,
+     "uuid": "9c4d8a02-1f4e-4c11-9a35-6b2d0e7c8a10",
+     "name": "Terraria",
+     "node": "node-01",
+     "is_node_under_maintenance": false,
+     "sftp_details": {
+      "ip": "node-01.example.com",
+      "port": 2022
+     },
+     "description": "",
+     "limits": {
+      "memory": 1024,
+      "swap": 0,
+      "disk": 20480,
+      "io": 500,
+      "cpu": 100,
+      "threads": null,
+      "oom_disabled": true
+     },
+     "invocation": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+     "docker_image": "ghcr.io/pterodactyl/yolks:java_21",
+     "egg_features": [
+      "eula",
+      "java_version"
+     ],
+     "feature_limits": {
+      "databases": 0,
+      "allocations": 1,
+      "backups": 3
+     },
+     "status": null,
+     "is_suspended": false,
+     "is_installing": false,
+     "is_transferring": false,
+     "skip_scripts": false
+    }
+   },
+   {
+    "object": "server",
+    "attributes": {
+     "server_owner": true,
+     "identifier": "d2e81b44",
+     "__deprecated_uuid_short": "d2e81b44",
+     "server_identifier": "d2e81b44",
+     "internal_id": 1,
+     "uuid": "d2e81b44-1f4e-4c11-9a35-6b2d0e7c8a10",
+     "name": "Rust",
+     "node": "node-01",
+     "is_node_under_maintenance": false,
+     "sftp_details": {
+      "ip": "node-01.example.com",
+      "port": 2022
+     },
+     "description": "",
+     "limits": {
+      "memory": 8192,
+      "swap": 0,
+      "disk": 20480,
+      "io": 500,
+      "cpu": 400,
+      "threads": null,
+      "oom_disabled": true
+     },
+     "invocation": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+     "docker_image": "ghcr.io/pterodactyl/yolks:java_21",
+     "egg_features": [
+      "eula",
+      "java_version"
+     ],
+     "feature_limits": {
+      "databases": 0,
+      "allocations": 1,
+      "backups": 3
+     },
+     "status": "install_failed",
+     "is_suspended": false,
+     "is_installing": false,
+     "is_transferring": false,
+     "skip_scripts": false
+    }
+   },
+   {
+    "object": "server",
+    "attributes": {
+     "server_owner": true,
+     "identifier": "e07a3c55",
+     "__deprecated_uuid_short": "e07a3c55",
+     "server_identifier": "e07a3c55",
+     "internal_id": 1,
+     "uuid": "e07a3c55-1f4e-4c11-9a35-6b2d0e7c8a10",
+     "name": "Factorio",
+     "node": "node-01",
+     "is_node_under_maintenance": false,
+     "sftp_details": {
+      "ip": "node-01.example.com",
+      "port": 2022
+     },
+     "description": "",
+     "limits": {
+      "memory": 2048,
+      "swap": 0,
+      "disk": 20480,
+      "io": 500,
+      "cpu": 200,
+      "threads": null,
+      "oom_disabled": true
+     },
+     "invocation": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+     "docker_image": "ghcr.io/pterodactyl/yolks:java_21",
+     "egg_features": [
+      "eula",
+      "java_version"
+     ],
+     "feature_limits": {
+      "databases": 0,
+      "allocations": 1,
+      "backups": 3
+     },
+     "status": null,
+     "is_suspended": false,
+     "is_installing": false,
+     "is_transferring": false,
+     "skip_scripts": false
+    }
+   }
+  ],
+  "meta": {
+   "pagination": {
+    "total": 5,
+    "count": 5,
+    "per_page": 25,
+    "current_page": 1,
+    "total_pages": 1,
+    "links": {}
+   }
+  }
+ },
+ "resources": {
+  "1a7ce997": {
+   "object": "stats",
+   "attributes": {
+    "current_state": "running",
+    "is_suspended": false,
+    "resources": {
+     "memory_bytes": 3946741760,
+     "cpu_absolute": 87.4,
+     "disk_bytes": 5368709120,
+     "network_rx_bytes": 182334201,
+     "network_tx_bytes": 904221013,
+     "uptime": 147600000
+    }
+   }
+  },
+  "5b0e2f11": {
+   "object": "stats",
+   "attributes": {
+    "current_state": "starting",
+    "is_suspended": false,
+    "resources": {
+     "memory_bytes": 512000000,
+     "cpu_absolute": 12.0,
+     "disk_bytes": 5368709120,
+     "network_rx_bytes": 182334201,
+     "network_tx_bytes": 904221013,
+     "uptime": 4000
+    }
+   }
+  },
+  "9c4d8a02": {
+   "object": "stats",
+   "attributes": {
+    "current_state": "offline",
+    "is_suspended": false,
+    "resources": {
+     "memory_bytes": 0,
+     "cpu_absolute": 0,
+     "disk_bytes": 5368709120,
+     "network_rx_bytes": 182334201,
+     "network_tx_bytes": 904221013,
+     "uptime": 0
+    }
+   }
+  }
+ },
+ "unreachable": "e07a3c55",
+ "unauthenticated": {
+  "errors": [
+   {
+    "code": "AuthenticationException",
+    "status": "401",
+    "detail": "Unauthenticated."
+   }
+  ]
+ }
+}

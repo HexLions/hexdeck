@@ -60,6 +60,26 @@ writes a safety copy of the current state, and only then replaces the file. If
 the safety copy cannot be written, the restore is refused; there is a
 checkbox for the case where the safety copy is what is broken.
 
+## Changing the secret key
+
+A key that was shown somewhere it should not have been (a screenshot, a
+pasted compose file) is changed like this, without entering any API key
+again:
+
+1. Generate a new key, for example with `openssl rand -base64 48`.
+2. Set `HEXDECK_SECRET_KEY` to the new key and `HEXDECK_SECRET_KEY_PREVIOUS`
+   to the old one. An installation that never set a key has its old one in
+   `/data/secret.key`.
+3. Start HexDeck. The log says how many stored secrets were moved to the new
+   key: connections, the mail password, second factors, sign-in providers,
+   Web Push.
+4. Remove `HEXDECK_SECRET_KEY_PREVIOUS` and start again.
+
+Everybody signs in again afterwards, since the sessions were signed with the
+old key, and that is the point of changing it. A secret neither key opens is
+left as it is and named in the log as a count; enter that one again. Backups
+made before the change still need the old key.
+
 ## Updating
 
 ```

@@ -23,6 +23,7 @@ that one of thirty-five renderers draws.
 | Gitea, Forgejo | open issues or pull requests, Actions jobs, repositories | | access token with read access to repositories, issues and the user |
 | GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |
 | Semaphore UI | last runs, automation | | API token of a user; the cards see the projects that user sees |
+| Jenkins | overview, jobs | build a job (off by default, asks first) | a user name with an API token from the user's Security page, sent as HTTP Basic; with a token no CSRF crumb is needed. Jobs inside a folder are read one level deep. The button builds only a job the last answer listed, by its full name |
 | Meilisearch | indexes, search | | a key of its own with stats.get, indexes.get, tasks.get and version |
 | Synology DSM | system, volumes, disks, containers, vms | start, stop, restart; power on, shut down, reboot | user and password; containers and VM details through DSM's own interface calls |
 | Unraid | system, array, guests | | API key (GraphQL) |
@@ -34,6 +35,7 @@ that one of thirty-five renderers draws.
 | Duplicati | backup jobs, backups | | the password of the web interface; Duplicati 2.1 or newer |
 | Syncthing | folders, status | | API key |
 | Backrest | backup plans, backups | back up a plan now | user and password of Backrest's own sign-in, or nothing when it is switched off |
+| rclone | status, transfers | | the `--rc-user` and `--rc-pass` of `rclone rcd` (or rclone started with `--rc`) as HTTP Basic, or nothing with `--rc-no-auth`. Every call is a POST with a `{}` body. The counters run from the daemon's start, so an error stays counted until `core/stats-reset`; the card turns amber for errors, red only for a fatal one |
 | Komodo | stacks, deployments, overview | restart a stack | API key and secret of a user, best a service user, with Read on stacks, deployments and servers and Execute on a stack to restart it; Komodo 2 |
 | Netdata | raised alerts, load per node, alerts | | none; the agent's API is open, and a parent answers for every node that streams to it |
 | Ollama | loaded models, installed models, models | unload a model | none; Ollama has no sign-in, so its port stays inside the network |
@@ -67,6 +69,7 @@ that one of thirty-five renderers draws.
 | NextDNS | blocking, top blocked | | API key and the profile ID |
 | authentik | status, failed sign-ins | | API token of a service account with read access |
 | CrowdSec | blocked addresses, blocked | | bouncer key from `cscli bouncers add`; it may read decisions and nothing else |
+| mailcow | status, mail queue, mailboxes | | an API key in an `X-API-Key` header; the read-only one is enough, and HexDeck's address has to be in its allowed list unless Skip IP check is ticked. A wrong key counts as a failed login in mailcow's own fail2ban, so a card left with one can get HexDeck's address banned; the card says whether the key or the address was refused |
 | Shlink | short URLs, visits | | API key from `shlink api-key:generate` |
 | Blocky | blocking, top blocked | pause 5 min, enable | none; Blocky's API has no sign-in, so its HTTP port stays inside the network, and statistics.enable has to be on (Blocky 0.35 or newer) |
 | Gatus | endpoints, endpoint health | | user and password of security.basic, or nothing when Gatus has no security section |
@@ -104,11 +107,13 @@ that one of thirty-five renderers draws.
 | autobrr | recent releases, grabbed | | API key from Settings > API keys |
 | SABnzbd, NZBGet, qBittorrent, Transmission, Deluge | queue, speed | pause, resume | key or password |
 | pyLoad | status, downloads | pause, resume | an API key from Settings > Users, sent as `X-API-Key`, on pyLoad from 2026 on; older versions take the user name and password as basic auth instead, which newer ones refuse |
+| aria2 | queue, speed | pause, resume | the `--rpc-secret`, if aria2 was started with one; it travels as the first parameter of every call, not as a header. The address is the RPC one, `/jsonrpc` is added. Failed downloads are listed with aria2's reason and not counted in the queue |
 | MeTube | fetch a video, downloads, download count | fetch an address you type in, save the file to your own machine, remove, try again | none; MeTube has no login of its own, so whoever reaches it may queue and delete |
 | Sportarr | upcoming, missing events, events | | API key from Settings > General > Security |
 | Tube Archivist | download queue, latest videos, video archive | start downloads | API token from Settings > Application, sent as Token |
 | Home Assistant | entity, entity list | turn on/off, scenes, scripts, covers, locks | long-lived token; live over WebSocket |
 | Homebridge | status, bridges, updates | | a user of the Homebridge UI without two-factor login (the UI has no API keys), or nothing when its login is off. The token is kept for the connection. Whether Homebridge runs is known only when the UI runs it under hb-service, as in the official images. The child bridges' HomeKit setup codes are never read out |
+| openHAB | things, items | switch a Switch Item on or off | an API token from an administrator (Profile, Create API token) as a Bearer token, needed for the Things; the Items are readable without one while anonymous access stays on, as it is by default. The items card names Items or Groups, a Group standing for its members. The switch sends `ON` or `OFF` only to a Switch Item the card lists |
 | ESPHome | overview, devices | | none, or the dashboard's user name and password as basic auth (ESPHome Device Builder). Reads `/devices` and `/ping`, which the old built-in dashboard has too, but only without a password. Online is the dashboard's own guess from mDNS and ping |
 | Node-RED | status, flows | | none, or a user of the editor when adminAuth is set; the token is asked with the scope read, which a read-only user is allowed. Missing node types are found by comparing the flows with the installed nodes, because the flow state says started even while Node-RED waits for them |
 | Uptime Kuma | monitors, summary | | API key (metrics endpoint) |
@@ -138,6 +143,8 @@ that one of thirty-five renderers draws.
 | Firefly III | money, subscriptions, budgets | | personal access token from Profile > OAuth |
 | Actual Budget | this month (left to budget, budgeted, spent, overspent categories), accounts (balances, on and off budget), categories (spent of the budget, overspent first) | | through [actual-http-api](https://github.com/jhonderson/actual-http-api), a second container next to Actual, because Actual has no API of its own: its URL, its API_KEY and the budget's sync ID (Settings > Show advanced settings), and for an end-to-end encrypted budget its password. Reads only |
 | evcc | energy, charging | | none; the state is readable without a password |
+| OpenDTU | solar, inverters | | none while read-only access is on (OpenDTU's default); otherwise HTTP authentication as `admin` with the password of the web interface. An inverter that does not answer at night is shown as asleep, not as a fault; OpenDTU's own hints (radio not connected, no time, default password) colour the card |
+| Fronius | solar, energy flow, inverters | | none; the local Solar API v1 of the inverter or its Datamanager, which a Gen24 needs switched on under Communication. The grid is positive while the house takes from it, the battery while it gives. A Gen24 has no energy of the day, so the card shows the total instead |
 | BookOrbit | reading now, recently added, library | | user and password; BookOrbit has no API keys and allows five sign-ins a minute, so the token is kept |
 | Ghostfolio | portfolio, holdings | | security token of the account from Settings > Access; it is exchanged for a JWT that lasts 180 days |
 | Homebox | inventory, value by place, warranties | | API key from Profile > API Keys, on Homebox 0.26 and later; Homebox shows it only once. On 0.25 and older, which has no API keys, a user name and password. The item export is at /entities/export from 0.26 and /items/export before it, and whichever answers is remembered |
@@ -146,6 +153,7 @@ that one of thirty-five renderers draws.
 | Wallos | next payments, subscription costs | | API key from the profile; it goes in the body of a POST, never in the address |
 | Weather (Open-Meteo), RSS feeds, Calendar, Basics | current, headlines, upcoming, clock, notes, bookmarks, iframe, app tile, host, updates, status, notices, to-do | | none; the host card reads /proc, and the machine's own when /proc and /sys are mounted under /host |
 | AMP (CubeCoders) | servers, server, panel | start, stop or restart a server | a panel account's user name and password; AMP has no API tokens, and an account with two-factor cannot be used unattended. One server's numbers come through a login proxied by the controller |
+| Pterodactyl | overview, servers | start, stop, restart a server (off by default, asks before stopping) | a client API key from Account, API Credentials (`ptlc_...`), as a Bearer token; the card sees the servers that user can reach. Each server's live state comes from its node through the panel; a node that does not answer marks that server, not the card. Buttons act only on a server the panel lists |
 | Arcane | overview, environments, projects, containers, image updates | start, stop and restart a container; start, stop, redeploy and update a project; update a container to its newer image | API key from Settings > API keys; environments:list, containers:list and projects:list for the cards, images:list, volumes:list and networks:list for the overview's counts, and containers:start, containers:stop, containers:restart, projects:deploy, projects:down, projects:update and image-updates:check for the buttons; Arcane 2.14 |
 | Dockhand | overview, environments, stacks, containers, image updates | | API token from Profile > API tokens, or nothing when Dockhand's sign-in is switched off; a token may do everything its user may, and in the free edition every user may do everything, though the cards only read; Dockhand 1.0 |
 | FileBrowser Quantum | storage | | an API token with the permission api, made in FileBrowser's settings; shares are counted when the token may read them |
@@ -155,6 +163,7 @@ that one of thirty-five renderers draws.
 | Memos | memos, open tasks | | a personal access token from Settings > My account > Access tokens, sent as Bearer. The instance profile answers without one, so the connection test asks for a memo. Read from the OpenAPI spec of v0.31.0 |
 | Trilium Notes | overview, notes | | an ETAPI token from Options > ETAPI, sent in `Authorization` as it is, without Bearer. The counts need Trilium 0.94 or newer; older ones show only the version. The note count includes Trilium's own help notes |
 | Wiki.js | overview, pages | | a full-access API key from Administration > API Access, with the API turned on there, as Bearer. A wrong key is read as a guest's rather than refused, so the connection test asks the system info, which only an administrator gets. Wiki.js 2; the 3.0 betas are not supported |
+| BookStack | overview, changed last | | an API token from the user's profile (API Tokens), as `Authorization: Token <id>:<secret>`; the user's role needs the permission Access system API. The counts and pages are what that user may see |
 | Mailpit | Mailpit overview (unread, all mail, accepted and rejected since the start, database size; amber while chaos is on), latest mail (sender and subject, unread highlighted, with Mailpit's own search) | | none, or the user and password of Mailpit's own login (MP_UI_AUTH or --ui-auth-file); with a webroot the URL includes it. Reading never marks a mail as read |
 | NeutArr | NeutArr overview, hunted apps | | the API key from NeutArr's User page, sent as a header; NeutArr is the continuation of Huntarr |
 | nexbeat | requests (waiting, running, failed, arrived this week), library (artists and albums in Lidarr or nexcrate), requests to approve (with covers) | approve, turn down | API token from nexbeat 1.2.0 or newer under Profile > API tokens; a read-only token fills every card, approving needs an administrator's token that may write. A user's token counts only that user's requests |
@@ -186,6 +195,7 @@ that one of thirty-five renderers draws.
 | UrBackup | clients, backups, running now | start an incremental file backup | user name and password of a local server user; the password is folded into the hash the web interface itself sends. A server with no users yet needs neither |
 | Elasticsearch | cluster, indices | | an encoded API key with the cluster privileges monitor and view_index_metadata, or basic credentials, or nothing on a cluster without security. OpenSearch answers the same calls |
 | Shelly | device, outputs | switch an output on or off | none on a device without authentication; a Gen 1 device takes its admin password. Gen 2 and later use digest, which is not supported yet. Local address only, never the cloud |
+| Tasmota | device, sensors | switch a relay on or off | none, or the web admin password, sent as HTTP Basic for `admin` (never in the address). One `Status 0` command reads everything; a plug with two measuring channels shows their sum. Local address only |
 | Steam | player, recently played, library | | Web API key from steamcommunity.com/dev, plus the 64-bit id or custom profile name. The profile's game details have to be public, or Steam answers an empty list |
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |
@@ -251,7 +261,8 @@ a tight spot.
 
 Every card drawn by `value`, `stats` or `gauge` that records at least one
 metric gets the drawings of a number by itself: a dial, LED bars, seven
-segments and a chart, with "Full at" and "Empty at" for the dial and the
+segments and a chart (a card drawn by `gauge` gets "The number" instead of
+a dial, as the view `number`; `value` stays its dial), with "Full at" and "Empty at" for the dial and the
 LEDs, the lines "Yellow from" and "Red from" (red below yellow means low
 numbers are the bad ones), and the hours a chart reaches back: one, six or
 twenty-four, as far as HexDeck keeps minute rows. Those lines colour the drawing only (`meta["level"]`); the card's

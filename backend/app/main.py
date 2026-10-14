@@ -140,6 +140,26 @@ if os.environ.get("HEXDECK_RESCUE", "") not in ("", "0", "false"):
 
 
 @asynccontextmanager
+def _rewrap_previous_secret() -> None:
+    """Move every stored secret to a changed HEXDECK_SECRET_KEY (crypto.rewrap_previous)."""
+    from .crypto import rewrap_previous
+
+    counts = rewrap_previous(get_engine())
+    if counts is None:
+        return
+    logger.warning(
+        "HEXDECK_SECRET_KEY_PREVIOUS is set: %d stored secret(s) moved to the new key now. "
+        "Remove the variable; it is not needed again.",
+        counts["rewritten"],
+    )
+    if counts["unreadable"]:
+        logger.error(
+            "%d stored secret(s) open with neither HEXDECK_SECRET_KEY nor HEXDECK_SECRET_KEY_PREVIOUS "
+            "and were left as they are; enter those again.",
+            counts["unreadable"],
+        )
+
+
 async def lifespan(app: FastAPI):
     # ⚠️ Not ``basicConfig``. That wrote to standard output and nowhere else,
     # so the question "what happened at four in the morning" had no answer on
@@ -153,6 +173,7 @@ async def lifespan(app: FastAPI):
     anyio.to_thread.current_default_thread_limiter().total_tokens = get_settings().request_threads
     get_engine()
     migrate()
+    _rewrap_previous_secret()
     with db_session() as db:
         system.load_demo_flag(db)
         journal.apply_stored(db)

@@ -1,0 +1,114 @@
+{
+ "pages": {
+  "data": [
+   {
+    "id": 41,
+    "book_id": 3,
+    "chapter_id": 0,
+    "name": "Proxmox upgrade notes",
+    "slug": "proxmox-upgrade-notes",
+    "priority": 41,
+    "draft": false,
+    "template": false,
+    "created_at": "2026-09-01T08:00:00.000000Z",
+    "updated_at": "2026-10-13T09:12:44.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1
+   },
+   {
+    "id": 40,
+    "book_id": 3,
+    "chapter_id": 0,
+    "name": "VLAN plan",
+    "slug": "vlan-plan",
+    "priority": 40,
+    "draft": true,
+    "template": false,
+    "created_at": "2026-09-01T08:00:00.000000Z",
+    "updated_at": "2026-10-12T18:01:02.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1
+   },
+   {
+    "id": 12,
+    "book_id": 7,
+    "chapter_id": 0,
+    "name": "Sourdough",
+    "slug": "sourdough",
+    "priority": 12,
+    "draft": false,
+    "template": false,
+    "created_at": "2026-09-01T08:00:00.000000Z",
+    "updated_at": "2026-10-10T07:30:00.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1
+   },
+   {
+    "id": 9,
+    "book_id": 99,
+    "chapter_id": 0,
+    "name": "Old notes",
+    "slug": "old-notes",
+    "priority": 9,
+    "draft": false,
+    "template": false,
+    "created_at": "2026-09-01T08:00:00.000000Z",
+    "updated_at": "2026-09-30T07:30:00.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1
+   }
+  ],
+  "total": 214
+ },
+ "books": {
+  "data": [
+   {
+    "id": 3,
+    "name": "Homelab",
+    "slug": "homelab",
+    "description": "",
+    "created_at": "2025-01-02T10:00:00.000000Z",
+    "updated_at": "2026-10-13T09:12:44.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1,
+    "image_id": null
+   },
+   {
+    "id": 7,
+    "name": "Recipes",
+    "slug": "recipes",
+    "description": "",
+    "created_at": "2025-03-04T10:00:00.000000Z",
+    "updated_at": "2026-10-10T07:30:00.000000Z",
+    "created_by": 1,
+    "updated_by": 1,
+    "owned_by": 1,
+    "image_id": null
+   }
+  ],
+  "total": 12
+ },
+ "totals": {
+  "shelves": 4,
+  "books": 12,
+  "chapters": 37,
+  "pages": 214
+ },
+ "no_permission": {
+  "error": {
+   "message": "The owner of the used API token does not have permission to make API calls",
+   "code": 403
+  }
+ },
+ "bad_format": {
+  "error": {
+   "message": "An authorization token was found on the request but the format appeared incorrect",
+   "code": 401
+  }
+ }
+}

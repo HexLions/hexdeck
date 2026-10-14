@@ -5,6 +5,39 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **A secret key can be changed without entering every API key again.**
+  Set the new key in `HEXDECK_SECRET_KEY` and the old one in
+  `HEXDECK_SECRET_KEY_PREVIOUS`: the next start moves every stored secret to
+  the new key and says how many in the log. Then remove the variable.
+- **A dial card can be drawn as its plain number.** NextDNS, Technitium,
+  Pi-hole, AdGuard Home, Immich and Nextcloud storage and PeaNUT are dials
+  by default; their View list now offers the number too, with the rows
+  under it. From nexdeck.
+- **OpenDTU**: the power of Hoymiles micro inverters now, the yield today
+  and in total, and each inverter. ⚠️ Beta.
+- **Tasmota**: a device's relays with a button to switch them, what it
+  draws, and every sensor it reads. ⚠️ Beta.
+- **aria2**: the downloads with their progress, the ones that failed and
+  why, and a button to pause or resume. ⚠️ Beta.
+- **Jenkins**: which jobs fail, what is building and waiting, the agents
+  that are offline, and a button to build a job. ⚠️ Beta.
+- **openHAB**: which Things are offline and why, the Items you pick with
+  their state, and a switch for the Switch Items. ⚠️ Beta.
+- **Fronius**: the solar power, the house, the grid and the battery as
+  numbers or as a flow, and each inverter's state. ⚠️ Beta.
+- **Pterodactyl**: the game servers, which run, what they use, and buttons
+  to start and stop them. ⚠️ Beta.
+- **mailcow**: whether every container runs, the mail waiting in the queue
+  and why, the storage, and the fullest mailboxes. ⚠️ Beta.
+- **BookStack**: how many shelves, books, chapters and pages the wiki
+  holds, and the pages changed last. ⚠️ Beta.
+- **rclone**: what the remote control daemon is copying now, how fast, how
+  far along, and the last error. ⚠️ Beta.
+
 ## 0.27.0 (2026-10-13)
 
 What nexdeck did in 0.41, taken over and fitted: an app catalog, a dial,

@@ -1,0 +1,177 @@
+{
+ "plug": {
+  "Status": {
+   "Module": 0,
+   "DeviceName": "Washing machine",
+   "FriendlyName": [
+    "Washing machine"
+   ],
+   "Topic": "tasmota_5A1B2C",
+   "ButtonTopic": "0",
+   "Power": "1",
+   "PowerLock": "0",
+   "PowerOnState": 3,
+   "LedState": 1,
+   "LedMask": "FFFF",
+   "SaveData": 1,
+   "SaveState": 1,
+   "SwitchTopic": "0",
+   "SwitchMode": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "ButtonRetain": 0,
+   "SwitchRetain": 0,
+   "SensorRetain": 0,
+   "PowerRetain": 0,
+   "InfoRetain": 0,
+   "StateRetain": 0,
+   "StatusRetain": 0
+  },
+  "StatusPRM": {
+   "Baudrate": 4800,
+   "SerialConfig": "8E1",
+   "GroupTopic": "tasmotas",
+   "OtaUrl": "http://ota.tasmota.com/tasmota/release/tasmota.bin.gz",
+   "RestartReason": "Software/System restart",
+   "Uptime": "3T04:12:55",
+   "StartupUTC": "2026-10-10T07:31:02",
+   "Sleep": 50,
+   "CfgHolder": 4617,
+   "BootCount": 41,
+   "BCResetTime": "2025-02-11T18:02:40",
+   "SaveCount": 318,
+   "SaveAddress": "F5000"
+  },
+  "StatusFWR": {
+   "Version": "15.0.1(release-tasmota)",
+   "BuildDateTime": "2026-09-02T10:21:12",
+   "Boot": 31,
+   "Core": "2_7_8",
+   "SDK": "2.2.2-dev(38a443e)",
+   "CpuFrequency": 80,
+   "Hardware": "ESP8266EX",
+   "CR": "429/699"
+  },
+  "StatusNET": {
+   "Hostname": "tasmota-5A1B2C-6956",
+   "IPAddress": "192.168.1.60",
+   "Gateway": "192.168.1.1",
+   "Subnetmask": "255.255.255.0",
+   "DNSServer1": "192.168.1.1",
+   "DNSServer2": "0.0.0.0",
+   "Mac": "C4:5B:BE:5A:1B:2C",
+   "Webserver": 2,
+   "HTTP_API": 1,
+   "WifiConfig": 4,
+   "WifiPower": 17.0
+  },
+  "StatusTIM": {
+   "UTC": "2026-10-13T11:43:57Z",
+   "Local": "2026-10-13T13:43:57",
+   "StartDST": "2026-03-29T02:00:00",
+   "EndDST": "2026-10-25T03:00:00",
+   "Timezone": "+01:00",
+   "Sunrise": "07:38",
+   "Sunset": "18:31"
+  },
+  "StatusPTH": {
+   "PowerDelta": [
+    0,
+    0,
+    0
+   ],
+   "PowerLow": 0,
+   "PowerHigh": 0,
+   "VoltageLow": 0,
+   "VoltageHigh": 0,
+   "CurrentLow": 0,
+   "CurrentHigh": 0
+  },
+  "StatusSNS": {
+   "Time": "2026-10-13T13:43:57",
+   "ENERGY": {
+    "TotalStartTime": "2025-02-11T18:02:40",
+    "Total": 512.418,
+    "Yesterday": 1.802,
+    "Today": 0.734,
+    "Power": 1843,
+    "ApparentPower": 1861,
+    "ReactivePower": 259,
+    "Factor": 0.99,
+    "Voltage": 229,
+    "Current": 8.127
+   }
+  },
+  "StatusSTS": {
+   "Time": "2026-10-13T13:43:57",
+   "Uptime": "3T04:12:55",
+   "UptimeSec": 274375,
+   "Heap": 24,
+   "SleepMode": "Dynamic",
+   "Sleep": 50,
+   "LoadAvg": 19,
+   "MqttCount": 1,
+   "POWER": "ON",
+   "Wifi": {
+    "AP": 1,
+    "SSId": "home",
+    "BSSId": "74:42:7F:11:22:33",
+    "Channel": 6,
+    "Mode": "11n",
+    "RSSI": 70,
+    "Signal": -65,
+    "LinkCount": 1,
+    "Downtime": "0T00:00:03"
+   },
+   "Hostname": "tasmota-5A1B2C-6956",
+   "IPAddress": "192.168.1.60"
+  }
+ },
+ "relays": {
+  "Status": {
+   "DeviceName": "Garden relays",
+   "FriendlyName": [
+    "Pump",
+    "Lights",
+    "Fountain",
+    "Spare"
+   ]
+  },
+  "StatusFWR": {
+   "Version": "14.6.0(release-tasmota32)"
+  },
+  "StatusSNS": {
+   "Time": "2026-10-13T13:44:10",
+   "DS18B20": {
+    "Id": "01144A1F2B3C",
+    "Temperature": 17.9
+   },
+   "BME280": {
+    "Temperature": 19.2,
+    "Humidity": 61.4,
+    "DewPoint": 11.6,
+    "Pressure": 1012.4
+   },
+   "PressureUnit": "hPa",
+   "TempUnit": "C"
+  },
+  "StatusSTS": {
+   "UptimeSec": 1203,
+   "POWER1": "ON",
+   "POWER2": "OFF",
+   "POWER3": "OFF",
+   "POWER4": "ON",
+   "Wifi": {
+    "RSSI": 44,
+    "Signal": -78
+   }
+  }
+ }
+}

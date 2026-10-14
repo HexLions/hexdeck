@@ -1,0 +1,223 @@
+{
+ "containers": {
+  "acme-mailcow": {
+   "type": "info",
+   "container": "acme-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/acme:2026-09a"
+  },
+  "clamd-mailcow": {
+   "type": "info",
+   "container": "clamd-mailcow",
+   "state": "exited",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/clamd:2026-09a"
+  },
+  "dockerapi-mailcow": {
+   "type": "info",
+   "container": "dockerapi-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/dockerapi:2026-09a"
+  },
+  "dovecot-mailcow": {
+   "type": "info",
+   "container": "dovecot-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/dovecot:2026-09a"
+  },
+  "ipv6nat-mailcow": {
+   "type": "info",
+   "container": "ipv6nat-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/ipv6nat:2026-09a"
+  },
+  "memcached-mailcow": {
+   "type": "info",
+   "container": "memcached-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/memcached:2026-09a"
+  },
+  "mysql-mailcow": {
+   "type": "info",
+   "container": "mysql-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/mysql:2026-09a"
+  },
+  "netfilter-mailcow": {
+   "type": "info",
+   "container": "netfilter-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/netfilter:2026-09a"
+  },
+  "nginx-mailcow": {
+   "type": "info",
+   "container": "nginx-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/nginx:2026-09a"
+  },
+  "olefy-mailcow": {
+   "type": "info",
+   "container": "olefy-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/olefy:2026-09a"
+  },
+  "php-fpm-mailcow": {
+   "type": "info",
+   "container": "php-fpm-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/php-fpm:2026-09a"
+  },
+  "postfix-mailcow": {
+   "type": "info",
+   "container": "postfix-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/postfix:2026-09a"
+  },
+  "redis-mailcow": {
+   "type": "info",
+   "container": "redis-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/redis:2026-09a"
+  },
+  "rspamd-mailcow": {
+   "type": "info",
+   "container": "rspamd-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/rspamd:2026-09a"
+  },
+  "sogo-mailcow": {
+   "type": "info",
+   "container": "sogo-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/sogo:2026-09a"
+  },
+  "solr-mailcow": {
+   "type": "info",
+   "container": "solr-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/solr:2026-09a"
+  },
+  "unbound-mailcow": {
+   "type": "info",
+   "container": "unbound-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/unbound:2026-09a"
+  },
+  "watchdog-mailcow": {
+   "type": "info",
+   "container": "watchdog-mailcow",
+   "state": "running",
+   "started_at": "2026-10-02T04:11:08.270660275Z",
+   "image": "ghcr.io/mailcow/watchdog:2026-09a"
+  }
+ },
+ "queue": [
+  {
+   "queue_name": "deferred",
+   "queue_id": "4Q1Zt52kXqz9tFB",
+   "arrival_time": 1791900000,
+   "message_size": 18442,
+   "forced_expire": false,
+   "sender": "newsletter@example.com",
+   "recipients": [
+    "anna@example.org (connect to mx.example.org[203.0.113.7]:25: Connection timed out)"
+   ]
+  },
+  {
+   "queue_name": "active",
+   "queue_id": "4Q1Zv01mNbz9tFC",
+   "arrival_time": 1791931000,
+   "message_size": 2048,
+   "forced_expire": false,
+   "sender": "ben@example.com",
+   "recipients": [
+    "carla@example.net",
+    "dario@example.net"
+   ]
+  }
+ ],
+ "vmail": {
+  "type": "info",
+  "disk": "/dev/mapper/vg-root",
+  "used": "118G",
+  "total": "196G",
+  "used_percent": "61%"
+ },
+ "version": {
+  "version": "2026-09a"
+ },
+ "mailboxes": [
+  {
+   "username": "anna@example.com",
+   "active": 1,
+   "active_int": 1,
+   "domain": "example.com",
+   "name": "Anna",
+   "local_part": "anna",
+   "quota": 5368709120,
+   "messages": 18234,
+   "quota_used": 4939212390,
+   "percent_in_use": 92,
+   "created": "2024-03-01 10:00:00",
+   "modified": null,
+   "authsource": "mailcow",
+   "last_imap_login": 1791928000
+  },
+  {
+   "username": "info@example.com",
+   "active": 1,
+   "active_int": 1,
+   "domain": "example.com",
+   "name": "Info",
+   "local_part": "info",
+   "quota": 0,
+   "messages": 412,
+   "quota_used": 81264640,
+   "percent_in_use": "- ",
+   "created": "2024-03-01 10:00:00",
+   "modified": null,
+   "authsource": "mailcow",
+   "last_imap_login": 0
+  },
+  {
+   "username": "ben@example.com",
+   "active": 0,
+   "active_int": 0,
+   "domain": "example.com",
+   "name": "Ben",
+   "local_part": "ben",
+   "quota": 2147483648,
+   "messages": 2210,
+   "quota_used": 858993459,
+   "percent_in_use": 40,
+   "created": "2024-05-12 09:00:00",
+   "modified": null,
+   "authsource": "mailcow",
+   "last_imap_login": 0
+  }
+ ],
+ "denied_ip": {
+  "type": "error",
+  "msg": "api access denied for ip 192.168.1.20"
+ },
+ "wrong_key": {
+  "type": "error",
+  "msg": "authentication failed"
+ }
+}
