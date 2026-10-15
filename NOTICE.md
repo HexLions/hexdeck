@@ -473,6 +473,11 @@ Updated at every milestone.
   credentials token, the service account holding only view roles. Checked
   against Keycloak 26.8.1 running locally, with sessions, wrong passwords,
   an unknown user, a wrong secret and a realm it may not read.
+- **Matrix Synapse through its admin API.** Users, rooms, reports and the
+  federation list come from `/_synapse/admin` with an admin's token.
+  Checked against Synapse 1.163.0 running locally, with users, rooms, a
+  reported message, a user's token and a wrong one; the federation list was
+  empty there and is read in the shape Synapse documents.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -2363,7 +2363,15 @@
     "Sessions by client": "Sesiones por cliente",
     "The last sign-ins that failed: who was typed, why, from where and through which client.": "Los últimos inicios de sesión fallidos: qué nombre se escribió, por qué, desde dónde y con qué cliente.",
     "The sessions active now, the users, and the sign-ins that failed in the last day.": "Las sesiones activas ahora, los usuarios y los inicios de sesión fallidos del último día.",
-    "Under the client's Credentials tab.": "En la pestaña Credentials del cliente."
+    "Under the client's Credentials tab.": "En la pestaña Credentials del cliente.",
+    "A Matrix Synapse server: its users and rooms, the messages reported and waiting, and the servers it cannot reach.": "Un servidor Matrix Synapse: sus usuarios y salas, los mensajes denunciados pendientes, y los servidores a los que no llega.",
+    "Federation": "Federación",
+    "Of a user who is a server admin; Element shows it under Settings, Help & About.": "De un usuario administrador del servidor; Element lo muestra en Ajustes, Ayuda y acerca de.",
+    "Rooms": "Salas",
+    "The address the admin API answers at, usually the server's client address.": "La dirección donde responde la API de administración, normalmente la dirección de cliente del servidor.",
+    "The rooms with the most members, with how many of them are on this server.": "Las salas con más miembros, y cuántos de ellos están en este servidor.",
+    "The servers Synapse cannot reach, since when, and when it tries again.": "Los servidores a los que Synapse no llega, desde cuándo, y cuándo lo volverá a intentar.",
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Los usuarios y salas, los mensajes denunciados, los servidores inalcanzables y la versión."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3552,6 +3560,7 @@
     "Active today": "Activos hoy",
     "Comments": "Comentarios",
     "Communities": "Comunidades",
-    "Yesterday": "Ayer"
+    "Yesterday": "Ayer",
+    "Reports": "Denuncias"
   }
 }

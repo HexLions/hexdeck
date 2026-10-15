@@ -28,6 +28,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   where visitors come from. ⚠️ Beta.
 - **Keycloak**: who is signed in through which client, how many users a
   realm has, and the sign-ins that failed and why. ⚠️ Beta.
+- **Matrix Synapse**: the users and rooms, the reported messages, and the
+  servers it cannot reach. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 

@@ -2363,7 +2363,15 @@
     "Sessions by client": "Sitzungen nach Client",
     "The last sign-ins that failed: who was typed, why, from where and through which client.": "Die letzten fehlgeschlagenen Anmeldungen: welcher Name eingegeben wurde, warum, von wo und über welchen Client.",
     "The sessions active now, the users, and the sign-ins that failed in the last day.": "Die jetzt aktiven Sitzungen, die Benutzer und die Anmeldungen, die am letzten Tag fehlschlugen.",
-    "Under the client's Credentials tab.": "Im Reiter Credentials des Clients."
+    "Under the client's Credentials tab.": "Im Reiter Credentials des Clients.",
+    "A Matrix Synapse server: its users and rooms, the messages reported and waiting, and the servers it cannot reach.": "Ein Matrix-Synapse-Server: seine Benutzer und Räume, die gemeldeten und wartenden Nachrichten, und die Server, die er nicht erreicht.",
+    "Federation": "Föderation",
+    "Of a user who is a server admin; Element shows it under Settings, Help & About.": "Eines Benutzers, der Server-Admin ist; Element zeigt es unter Einstellungen, Hilfe & Info.",
+    "Rooms": "Räume",
+    "The address the admin API answers at, usually the server's client address.": "Die Adresse, unter der die Admin-API antwortet, meist die Client-Adresse des Servers.",
+    "The rooms with the most members, with how many of them are on this server.": "Die Räume mit den meisten Mitgliedern, und wie viele davon auf diesem Server sind.",
+    "The servers Synapse cannot reach, since when, and when it tries again.": "Die Server, die Synapse nicht erreicht, seit wann, und wann es es wieder versucht.",
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Die Benutzer und Räume, die gemeldeten Nachrichten, die nicht erreichbaren Server und die Version."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3552,6 +3560,7 @@
     "Active today": "Heute aktiv",
     "Comments": "Kommentare",
     "Communities": "Communities",
-    "Yesterday": "Gestern"
+    "Yesterday": "Gestern",
+    "Reports": "Meldungen"
   }
 }

@@ -2363,7 +2363,15 @@
     "Sessions by client": "Sessioni per client",
     "The last sign-ins that failed: who was typed, why, from where and through which client.": "Gli ultimi accessi falliti: chi è stato digitato, perché, da dove e con quale client.",
     "The sessions active now, the users, and the sign-ins that failed in the last day.": "Le sessioni attive adesso, gli utenti e gli accessi falliti nell'ultimo giorno.",
-    "Under the client's Credentials tab.": "Nella scheda Credentials del client."
+    "Under the client's Credentials tab.": "Nella scheda Credentials del client.",
+    "A Matrix Synapse server: its users and rooms, the messages reported and waiting, and the servers it cannot reach.": "Un server Matrix Synapse: utenti e stanze, i messaggi segnalati in attesa, e i server che non riesce a raggiungere.",
+    "Federation": "Federazione",
+    "Of a user who is a server admin; Element shows it under Settings, Help & About.": "Di un utente amministratore del server; Element lo mostra in Impostazioni, Aiuto e informazioni.",
+    "Rooms": "Stanze",
+    "The address the admin API answers at, usually the server's client address.": "L'indirizzo a cui risponde l'API di amministrazione, di solito l'indirizzo client del server.",
+    "The rooms with the most members, with how many of them are on this server.": "Le stanze con più membri, e quanti di loro sono su questo server.",
+    "The servers Synapse cannot reach, since when, and when it tries again.": "I server che Synapse non raggiunge, da quando, e quando riproverà.",
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Utenti e stanze, i messaggi segnalati, i server irraggiungibili e la versione."
   },
   "labels": {
     "Jobs": "Job",
@@ -3552,6 +3560,7 @@
     "Active today": "Attivi oggi",
     "Comments": "Commenti",
     "Communities": "Community",
-    "Yesterday": "Ieri"
+    "Yesterday": "Ieri",
+    "Reports": "Segnalazioni"
   }
 }

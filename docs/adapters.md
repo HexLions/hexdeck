@@ -70,6 +70,7 @@ that one of thirty-five renderers draws.
 | NextDNS | blocking, top blocked | | API key and the profile ID |
 | authentik | status, failed sign-ins | | API token of a service account with read access |
 | Keycloak | realm, failed sign-ins, sessions by client | | a confidential client of the realm with Service accounts roles on, its service account given `view-users`, `view-realm`, `view-clients` and `view-events` of realm-management; HexDeck signs in with client credentials and keeps the token while it lasts. Failed sign-ins need the realm to record events; with events off the card says so instead of showing zero |
+| Matrix Synapse | server, rooms, federation | | the access token of a server admin, as a Bearer token, to `/_synapse/admin`; a reverse proxy often keeps that path from the outside, so use an address where it is open. The federation list is read by name, a thousand servers at most, as Synapse's documentation advises |
 | CrowdSec | blocked addresses, blocked | | bouncer key from `cscli bouncers add`; it may read decisions and nothing else |
 | mailcow | status, mail queue, mailboxes | | an API key in an `X-API-Key` header; the read-only one is enough, and HexDeck's address has to be in its allowed list unless Skip IP check is ticked. A wrong key counts as a failed login in mailcow's own fail2ban, so a card left with one can get HexDeck's address banned; the card says whether the key or the address was refused |
 | Shlink | short URLs, visits | | API key from `shlink api-key:generate` |
