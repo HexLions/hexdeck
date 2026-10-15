@@ -26,6 +26,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   now, and a button to run an event. ⚠️ Beta.
 - **GoatCounter**: visitors today and this week, the pages read most, and
   where visitors come from. ⚠️ Beta.
+- **Keycloak**: who is signed in through which client, how many users a
+  realm has, and the sign-ins that failed and why. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 

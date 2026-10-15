@@ -2352,7 +2352,18 @@
     "Under User, API. It needs the permission Read statistics.": "Unter Benutzer, API. Es braucht die Berechtigung Read statistics.",
     "Visitors": "Besucher",
     "Visitors today and in the last seven days.": "Besucher heute und in den letzten sieben Tagen.",
-    "Where visitors come from, with how many each.": "Woher die Besucher kommen, mit wie vielen jeweils."
+    "Where visitors come from, with how many each.": "Woher die Besucher kommen, mit wie vielen jeweils.",
+    "A Keycloak realm: who is signed in through which client, how many users it has, and the sign-ins that failed and why.": "Ein Keycloak-Realm: wer über welchen Client angemeldet ist, wie viele Benutzer er hat und welche Anmeldungen fehlschlugen und warum.",
+    "A confidential client of this realm with Service accounts roles on. Give its service account the roles view-users, view-realm, view-clients and view-events of realm-management.": "Ein vertraulicher Client dieses Realms mit eingeschalteten Service-Account-Rollen. Gib seinem Service-Account die Rollen view-users, view-realm, view-clients und view-events von realm-management.",
+    "Amber from": "Gelb ab",
+    "Each client with its active and offline sessions.": "Jeder Client mit seinen aktiven und Offline-Sitzungen.",
+    "Failed sign-ins in a day that turn the card amber.": "Fehlgeschlagene Anmeldungen pro Tag, ab denen die Karte gelb wird.",
+    "Keycloak's address, without /realms or /admin.": "Die Adresse von Keycloak, ohne /realms oder /admin.",
+    "Realm": "Realm",
+    "Sessions by client": "Sitzungen nach Client",
+    "The last sign-ins that failed: who was typed, why, from where and through which client.": "Die letzten fehlgeschlagenen Anmeldungen: welcher Name eingegeben wurde, warum, von wo und über welchen Client.",
+    "The sessions active now, the users, and the sign-ins that failed in the last day.": "Die jetzt aktiven Sitzungen, die Benutzer und die Anmeldungen, die am letzten Tag fehlschlugen.",
+    "Under the client's Credentials tab.": "Im Reiter Credentials des Clients."
   },
   "labels": {
     "Jobs": "Jobs",

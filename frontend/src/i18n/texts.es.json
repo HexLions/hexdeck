@@ -2352,7 +2352,18 @@
     "Under User, API. It needs the permission Read statistics.": "En Usuario, API. Necesita el permiso Read statistics.",
     "Visitors": "Visitantes",
     "Visitors today and in the last seven days.": "Visitantes de hoy y de los últimos siete días.",
-    "Where visitors come from, with how many each.": "De dónde llegan los visitantes, con cuántos cada uno."
+    "Where visitors come from, with how many each.": "De dónde llegan los visitantes, con cuántos cada uno.",
+    "A Keycloak realm: who is signed in through which client, how many users it has, and the sign-ins that failed and why.": "Un realm de Keycloak: quién ha iniciado sesión y con qué cliente, cuántos usuarios tiene, y los inicios de sesión fallidos y por qué.",
+    "A confidential client of this realm with Service accounts roles on. Give its service account the roles view-users, view-realm, view-clients and view-events of realm-management.": "Un cliente confidencial de este realm con los roles de cuenta de servicio activados. Da a su cuenta de servicio los roles view-users, view-realm, view-clients y view-events de realm-management.",
+    "Amber from": "Ámbar desde",
+    "Each client with its active and offline sessions.": "Cada cliente con sus sesiones activas y sin conexión.",
+    "Failed sign-ins in a day that turn the card amber.": "Inicios de sesión fallidos en un día que ponen la tarjeta en ámbar.",
+    "Keycloak's address, without /realms or /admin.": "La dirección de Keycloak, sin /realms ni /admin.",
+    "Realm": "Realm",
+    "Sessions by client": "Sesiones por cliente",
+    "The last sign-ins that failed: who was typed, why, from where and through which client.": "Los últimos inicios de sesión fallidos: qué nombre se escribió, por qué, desde dónde y con qué cliente.",
+    "The sessions active now, the users, and the sign-ins that failed in the last day.": "Las sesiones activas ahora, los usuarios y los inicios de sesión fallidos del último día.",
+    "Under the client's Credentials tab.": "En la pestaña Credentials del cliente."
   },
   "labels": {
     "Private resources": "Recursos privados",

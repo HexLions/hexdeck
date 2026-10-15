@@ -468,6 +468,11 @@ Updated at every milestone.
   referrers come from `/api/v0/stats/...`, kept ten minutes, since a token
   gets 500 API requests an hour. Checked against GoatCounter v2.7.0 running
   locally, with pageviews sent through its count API, and a wrong token.
+- **Keycloak through a read-only service account.** Users, sessions per
+  client and failed sign-ins come from the admin API with a client
+  credentials token, the service account holding only view roles. Checked
+  against Keycloak 26.8.1 running locally, with sessions, wrong passwords,
+  an unknown user, a wrong secret and a realm it may not read.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

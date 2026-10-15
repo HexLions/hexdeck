@@ -2352,7 +2352,18 @@
     "Under User, API. It needs the permission Read statistics.": "In Utente, API. Serve il permesso Read statistics.",
     "Visitors": "Visitatori",
     "Visitors today and in the last seven days.": "Visitatori di oggi e degli ultimi sette giorni.",
-    "Where visitors come from, with how many each.": "Da dove arrivano i visitatori, con quanti per ciascuna provenienza."
+    "Where visitors come from, with how many each.": "Da dove arrivano i visitatori, con quanti per ciascuna provenienza.",
+    "A Keycloak realm: who is signed in through which client, how many users it has, and the sign-ins that failed and why.": "Un realm Keycloak: chi ha effettuato l'accesso e con quale client, quanti utenti ha, e gli accessi falliti con il motivo.",
+    "A confidential client of this realm with Service accounts roles on. Give its service account the roles view-users, view-realm, view-clients and view-events of realm-management.": "Un client confidenziale di questo realm con i ruoli Service account attivi. Assegna al suo service account i ruoli view-users, view-realm, view-clients e view-events di realm-management.",
+    "Amber from": "Giallo da",
+    "Each client with its active and offline sessions.": "Ogni client con le sue sessioni attive e offline.",
+    "Failed sign-ins in a day that turn the card amber.": "Accessi falliti in un giorno oltre i quali la card diventa gialla.",
+    "Keycloak's address, without /realms or /admin.": "L'indirizzo di Keycloak, senza /realms o /admin.",
+    "Realm": "Realm",
+    "Sessions by client": "Sessioni per client",
+    "The last sign-ins that failed: who was typed, why, from where and through which client.": "Gli ultimi accessi falliti: chi è stato digitato, perché, da dove e con quale client.",
+    "The sessions active now, the users, and the sign-ins that failed in the last day.": "Le sessioni attive adesso, gli utenti e gli accessi falliti nell'ultimo giorno.",
+    "Under the client's Credentials tab.": "Nella scheda Credentials del client."
   },
   "labels": {
     "Jobs": "Job",
