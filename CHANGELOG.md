@@ -24,6 +24,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   comments and communities, and what is hot in its communities. ⚠️ Beta.
 - **Cronicle**: which scheduled jobs failed last time and why, what runs
   now, and a button to run an event. ⚠️ Beta.
+- **GoatCounter**: visitors today and this week, the pages read most, and
+  where visitors come from. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 

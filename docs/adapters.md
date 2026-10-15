@@ -131,6 +131,7 @@ that one of thirty-five renderers draws.
 | Prometheus | query value, query list | | optional basic auth |
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
+| GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
 | JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |

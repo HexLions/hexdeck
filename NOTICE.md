@@ -464,6 +464,10 @@ Updated at every milestone.
   `code` in the body, a wrong key included. Checked against Cronicle
   0.9.136 running locally, with events succeeding, failing, running and
   disabled, the run button, and a wrong key.
+- **GoatCounter within its hourly allowance.** Visitors, pages and
+  referrers come from `/api/v0/stats/...`, kept ten minutes, since a token
+  gets 500 API requests an hour. Checked against GoatCounter v2.7.0 running
+  locally, with pageviews sent through its count API, and a wrong token.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

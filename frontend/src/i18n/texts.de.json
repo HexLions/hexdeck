@@ -2342,7 +2342,17 @@
     "Needs a key with Run Events. Asks before it starts a job.": "Braucht einen Schlüssel mit Run Events. Fragt nach, bevor ein Job startet.",
     "Offer the run button": "Start-Taste anbieten",
     "The address of the master server; a worker does not answer the API.": "Die Adresse des Master-Servers; ein Worker beantwortet die API nicht.",
-    "Under Admin, API Keys. Reading needs no privilege; the run button needs Run Events.": "Unter Admin, API Keys. Lesen braucht kein Recht; die Start-Taste braucht Run Events."
+    "Under Admin, API Keys. Reading needs no privilege; the run button needs Run Events.": "Unter Admin, API Keys. Lesen braucht kein Recht; die Start-Taste braucht Run Events.",
+    "GoatCounter's web statistics: visitors today and this week, the pages they read most, and where they come from.": "Die Webstatistik von GoatCounter: Besucher heute und diese Woche, die meistgelesenen Seiten und woher sie kommen.",
+    "Referrers": "Verweise",
+    "The address of the site in GoatCounter, the one its dashboard opens at.": "Die Adresse der Seite in GoatCounter, unter der ihr Dashboard aufgeht.",
+    "The last 30 days": "Die letzten 30 Tage",
+    "The last 7 days": "Die letzten 7 Tage",
+    "The pages read most, with their visitors.": "Die meistgelesenen Seiten mit ihren Besuchern.",
+    "Under User, API. It needs the permission Read statistics.": "Unter Benutzer, API. Es braucht die Berechtigung Read statistics.",
+    "Visitors": "Besucher",
+    "Visitors today and in the last seven days.": "Besucher heute und in den letzten sieben Tagen.",
+    "Where visitors come from, with how many each.": "Woher die Besucher kommen, mit wie vielen jeweils."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3530,6 +3540,7 @@
     "Views": "Aufrufe",
     "Active today": "Heute aktiv",
     "Comments": "Kommentare",
-    "Communities": "Communities"
+    "Communities": "Communities",
+    "Yesterday": "Gestern"
   }
 }
