@@ -454,6 +454,41 @@ Updated at every milestone.
   list is not read. Checked against rclone v1.75.2 running locally as `rcd`,
   with a throttled copy, a missing file, a read-only target and a wrong
   password.
+- **PeerTube from what every instance shows.** The server stats, the
+  version and the newest local videos need no account. Checked against
+  Framatube, PeerTube 8.3.1, on 2026-10-15.
+- **Lemmy from what every instance shows.** The site's counts and the hot
+  local posts need no account, through the API v3 of Lemmy 0.19. Checked
+  against lemmy.ml, Lemmy 0.19.20, on 2026-10-15.
+- **Cronicle, where every answer is 200.** Success and failure are the
+  `code` in the body, a wrong key included. Checked against Cronicle
+  0.9.136 running locally, with events succeeding, failing, running and
+  disabled, the run button, and a wrong key.
+- **GoatCounter within its hourly allowance.** Visitors, pages and
+  referrers come from `/api/v0/stats/...`, kept ten minutes, since a token
+  gets 500 API requests an hour. Checked against GoatCounter v2.7.0 running
+  locally, with pageviews sent through its count API, and a wrong token.
+- **Keycloak through a read-only service account.** Users, sessions per
+  client and failed sign-ins come from the admin API with a client
+  credentials token, the service account holding only view roles. Checked
+  against Keycloak 26.8.1 running locally, with sessions, wrong passwords,
+  an unknown user, a wrong secret and a realm it may not read.
+- **Matrix Synapse through its admin API.** Users, rooms, reports and the
+  federation list come from `/_synapse/admin` with an admin's token.
+  Checked against Synapse 1.163.0 running locally, with users, rooms, a
+  reported message, a user's token and a wrong one; the federation list was
+  empty there and is read in the shape Synapse documents.
+- **InfluxDB 2 with a read-only token.** Health, tasks and buckets come
+  from the v2 API. Checked against InfluxDB v2.9.1 running locally, with a
+  task failing on a missing bucket, an inactive one, a wrong token and an
+  unknown organisation.
+- **Kodi from its own schema.** What plays, the buttons and the library
+  counts use the methods and types of Kodi's JSON-RPC schema, API version
+  14.1.0. Not yet run against a Kodi.
+- **KitchenOwl from its controllers.** The shopping list and the meal plan
+  are read in the shapes the controllers of release v0.7.10 build, every
+  moment in milliseconds as its JSON provider writes them. Its backend wants
+  Python 3.14 and a library that did not build here, so it was not run.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

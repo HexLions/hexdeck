@@ -1,0 +1,215 @@
+{
+ "schedule": {
+  "code": 0,
+  "rows": [
+   {
+    "title": "Old cleanup",
+    "enabled": 0,
+    "category": "general",
+    "plugin": "shellplug",
+    "target": "allgrp",
+    "timing": {
+     "hours": [
+      2
+     ],
+     "minutes": [
+      0
+     ]
+    },
+    "params": {
+     "script": "#!/bin/sh\ntrue\n",
+     "annotate": 0,
+     "json": 0
+    },
+    "id": "emv9p11o805",
+    "modified": 1792078097,
+    "created": 1792078097,
+    "max_children": 0,
+    "timeout": 0,
+    "timezone": "UTC",
+    "api_key": "bb54ccd704b6ee0e549ee408075e6722"
+   },
+   {
+    "title": "Media scan",
+    "enabled": 1,
+    "category": "general",
+    "plugin": "shellplug",
+    "target": "allgrp",
+    "timing": {
+     "minutes": [
+      30
+     ]
+    },
+    "params": {
+     "script": "#!/bin/sh\nsleep 900\n",
+     "annotate": 0,
+     "json": 0
+    },
+    "id": "emv9p11o104",
+    "modified": 1792078097,
+    "created": 1792078097,
+    "max_children": 0,
+    "timeout": 0,
+    "timezone": "UTC",
+    "api_key": "bb54ccd704b6ee0e549ee408075e6722"
+   },
+   {
+    "title": "Renew certificates",
+    "enabled": 1,
+    "category": "general",
+    "plugin": "shellplug",
+    "target": "allgrp",
+    "timing": {
+     "hours": [
+      4
+     ],
+     "minutes": [
+      0
+     ]
+    },
+    "params": {
+     "script": "#!/bin/sh\necho cannot reach ACME >&2\nexit 3\n",
+     "annotate": 0,
+     "json": 0
+    },
+    "id": "emv9p11nv03",
+    "modified": 1792078097,
+    "created": 1792078097,
+    "max_children": 0,
+    "timeout": 0,
+    "timezone": "UTC",
+    "api_key": "bb54ccd704b6ee0e549ee408075e6722"
+   },
+   {
+    "title": "Nightly backup",
+    "enabled": 1,
+    "category": "general",
+    "plugin": "shellplug",
+    "target": "allgrp",
+    "timing": {
+     "hours": [
+      3
+     ],
+     "minutes": [
+      15
+     ]
+    },
+    "params": {
+     "script": "#!/bin/sh\necho backup ok\n",
+     "annotate": 0,
+     "json": 0
+    },
+    "id": "emv9p11nn02",
+    "modified": 1792078097,
+    "created": 1792078097,
+    "max_children": 0,
+    "timeout": 0,
+    "timezone": "UTC",
+    "api_key": "bb54ccd704b6ee0e549ee408075e6722"
+   }
+  ],
+  "list": {
+   "page_size": 50,
+   "first_page": 0,
+   "last_page": 0,
+   "length": 4,
+   "type": "list"
+  }
+ },
+ "active": {
+  "code": 0,
+  "jobs": {
+   "jmv9p17b908": {
+    "category": "general",
+    "plugin": "shellplug",
+    "target": "allgrp",
+    "params": {
+     "script": "#!/bin/sh\nsleep 900\n",
+     "annotate": 0,
+     "json": 0
+    },
+    "timeout": 0,
+    "timezone": "UTC",
+    "source": "API Key (HexDeck)",
+    "id": "jmv9p17b908",
+    "time_start": 1792078104.645,
+    "hostname": "cronicle-01",
+    "event": "emv9p11o104",
+    "now": 1792078104,
+    "event_title": "Media scan",
+    "plugin_title": "Shell Script",
+    "category_title": "General",
+    "nice_target": "All Servers",
+    "command": "bin/shell-plugin.js",
+    "log_file": "/opt/cronicle/Cronicle-0.9.136/logs/jobs/jmv9p17b908.log",
+    "pid": 122177,
+    "log_file_size": 116,
+    "cpu": {
+     "min": 0.6,
+     "max": 0.6,
+     "total": 0.6,
+     "count": 1,
+     "current": 0.6
+    },
+    "mem": {
+     "min": 64188416,
+     "max": 64188416,
+     "total": 64188416,
+     "count": 1,
+     "current": 64188416
+    }
+   }
+  }
+ },
+ "history": {
+  "code": 0,
+  "rows": [
+   {
+    "id": "jmv9p17av07",
+    "code": 3,
+    "event": "emv9p11nv03",
+    "category": "general",
+    "plugin": "shellplug",
+    "hostname": "cronicle-01",
+    "time_start": 1792078104.631,
+    "elapsed": 0.11899995803833008,
+    "perf": "",
+    "cpu": {},
+    "mem": {},
+    "log_file_size": 259,
+    "action": "job_complete",
+    "epoch": 1792078104,
+    "event_title": "Renew certificates",
+    "category_title": "General",
+    "plugin_title": "Shell Script",
+    "description": "Script exited with code: 3: cannot reach ACME"
+   },
+   {
+    "id": "jmv9p17ae06",
+    "code": 0,
+    "event": "emv9p11nn02",
+    "category": "general",
+    "plugin": "shellplug",
+    "hostname": "cronicle-01",
+    "time_start": 1792078104.614,
+    "elapsed": 0.10399985313415527,
+    "perf": "",
+    "cpu": {},
+    "mem": {},
+    "log_file_size": 206,
+    "action": "job_complete",
+    "epoch": 1792078104,
+    "event_title": "Nightly backup",
+    "category_title": "General",
+    "plugin_title": "Shell Script"
+   }
+  ],
+  "list": {
+   "page_size": 50,
+   "first_page": 0,
+   "last_page": 0,
+   "length": 2,
+   "type": "list"
+  }
+ }
+}

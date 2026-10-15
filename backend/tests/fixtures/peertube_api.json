@@ -1,0 +1,148 @@
+{
+ "stats": {
+  "totalUsers": 9,
+  "totalDailyActiveUsers": 2,
+  "totalWeeklyActiveUsers": 3,
+  "totalMonthlyActiveUsers": 3,
+  "totalModerators": 1,
+  "totalAdmins": 3,
+  "totalLocalVideos": 933,
+  "totalLocalVideoViews": 1007443,
+  "totalLocalVideoDownloads": 82506,
+  "totalLocalVideoComments": 2,
+  "totalLocalVideoFilesSize": 477860054854,
+  "totalVideos": 24284,
+  "totalVideoComments": 6678,
+  "totalLocalVideoChannels": 28,
+  "totalLocalDailyActiveVideoChannels": 0,
+  "totalLocalWeeklyActiveVideoChannels": 0,
+  "totalLocalMonthlyActiveVideoChannels": 0,
+  "totalLocalPlaylists": 13,
+  "totalInstanceFollowers": 192,
+  "totalInstanceFollowing": 29,
+  "videosRedundancy": [
+   {
+    "totalUsed": 0,
+    "totalVideos": 0,
+    "totalVideoFiles": 0,
+    "strategy": "manual",
+    "totalSize": null
+   }
+  ],
+  "averageAbuseResponseTimeMs": null,
+  "totalAbuses": 7,
+  "totalAbusesProcessed": 2,
+  "averageRegistrationRequestResponseTimeMs": null,
+  "totalRegistrationRequests": 0,
+  "totalRegistrationRequestsProcessed": 0,
+  "totalActivityPubMessagesProcessed": 977646,
+  "totalActivityPubMessagesSuccesses": 977072,
+  "totalActivityPubCreateMessagesSuccesses": 2784,
+  "totalActivityPubUpdateMessagesSuccesses": 102582,
+  "totalActivityPubDeleteMessagesSuccesses": 1540,
+  "totalActivityPubFollowMessagesSuccesses": 1978,
+  "totalActivityPubAcceptMessagesSuccesses": 49,
+  "totalActivityPubRejectMessagesSuccesses": 0,
+  "totalActivityPubAnnounceMessagesSuccesses": 271,
+  "totalActivityPubUndoMessagesSuccesses": 1751,
+  "totalActivityPubLikeMessagesSuccesses": 9,
+  "totalActivityPubDislikeMessagesSuccesses": 0,
+  "totalActivityPubFlagMessagesSuccesses": 0,
+  "totalActivityPubViewMessagesSuccesses": 570222,
+  "totalActivityPubDownloadMessagesSuccesses": 295886,
+  "totalActivityPubApproveReplyMessagesSuccesses": 0,
+  "totalActivityPubRejectReplyMessagesSuccesses": 0,
+  "totalActivityPubCreateMessagesErrors": 0,
+  "totalActivityPubUpdateMessagesErrors": 392,
+  "totalActivityPubDeleteMessagesErrors": 0,
+  "totalActivityPubFollowMessagesErrors": 0,
+  "totalActivityPubAcceptMessagesErrors": 0,
+  "totalActivityPubRejectMessagesErrors": 0,
+  "totalActivityPubAnnounceMessagesErrors": 0,
+  "totalActivityPubUndoMessagesErrors": 0,
+  "totalActivityPubLikeMessagesErrors": 0,
+  "totalActivityPubDislikeMessagesErrors": 0,
+  "totalActivityPubFlagMessagesErrors": 0,
+  "totalActivityPubViewMessagesErrors": 182,
+  "totalActivityPubDownloadMessagesErrors": 0,
+  "totalActivityPubApproveReplyMessagesErrors": 0,
+  "totalActivityPubRejectReplyMessagesErrors": 0,
+  "totalActivityPubMessagesErrors": 574,
+  "activityPubMessagesProcessedPerSecond": 0.7252310599764913,
+  "totalActivityPubMessagesWaiting": 0
+ },
+ "about": {
+  "instance": {
+   "name": "Framatube",
+   "shortDescription": "PeerTube platform dedicated to Framasoft's videos."
+  }
+ },
+ "config": {
+  "serverVersion": "8.3.1"
+ },
+ "videos": {
+  "total": 933,
+  "data": [
+   {
+    "id": 70690,
+    "uuid": "6a19252f-e799-404f-913f-1014c3a52fb6",
+    "name": "Indépendance numérique : peut-on vraiment se passer des GAFAM ?",
+    "url": "https://framatube.org/videos/watch/6a19252f-e799-404f-913f-1014c3a52fb6",
+    "publishedAt": "2026-06-27T15:16:38.488Z",
+    "views": 223,
+    "duration": 3361,
+    "isLive": false,
+    "thumbnailPath": "/lazy-static/thumbnails/8880a223-65da-4991-a58f-5fd2ae6e82ef.jpg",
+    "channel": {
+     "displayName": "Les interviews",
+     "name": "interviews"
+    }
+   },
+   {
+    "id": 70162,
+    "uuid": "b23d8bd7-28f3-40f0-93b7-f505381ac0c4",
+    "name": "Framaspace : 3 ans de cloud libre (et gratuit) pour les associations - Pierre-Yves Gosset - JdLL2026",
+    "url": "https://framatube.org/videos/watch/b23d8bd7-28f3-40f0-93b7-f505381ac0c4",
+    "publishedAt": "2026-06-19T12:49:55.324Z",
+    "views": 239,
+    "duration": 3577,
+    "isLive": false,
+    "thumbnailPath": "/lazy-static/thumbnails/ff3b020a-2be4-4c93-a80f-0ee27cf7d28d.png",
+    "channel": {
+     "displayName": "FramaConf",
+     "name": "framaconf"
+    }
+   },
+   {
+    "id": 70161,
+    "uuid": "d0dc4349-56a9-4388-bc76-b6b1d52efb6c",
+    "name": "PeerTube : une plateforme vidéo qui vous respecte - Booteille - JdLL2026",
+    "url": "https://framatube.org/videos/watch/d0dc4349-56a9-4388-bc76-b6b1d52efb6c",
+    "publishedAt": "2026-06-19T12:39:03.402Z",
+    "views": 190,
+    "duration": 3165,
+    "isLive": false,
+    "thumbnailPath": "/lazy-static/thumbnails/4d1e6ce9-7a41-418c-b9c3-2ab474304716.png",
+    "channel": {
+     "displayName": "FramaConf",
+     "name": "framaconf"
+    }
+   },
+   {
+    "id": 70160,
+    "uuid": "294c7267-def5-4a67-a5a9-5077c3ca6c0b",
+    "name": "Internet : tout cramer pour repartir sur des bases saines. - Pierre-Yves Gosset - JdLL2026",
+    "url": "https://framatube.org/videos/watch/294c7267-def5-4a67-a5a9-5077c3ca6c0b",
+    "publishedAt": "2026-06-19T12:19:41.485Z",
+    "views": 933,
+    "duration": 3508,
+    "isLive": false,
+    "thumbnailPath": "/lazy-static/thumbnails/4ee65c01-5e23-4a5b-b46a-71011c1a48e6.jpg",
+    "channel": {
+     "displayName": "FramaConf",
+     "name": "framaconf"
+    }
+   }
+  ]
+ }
+}

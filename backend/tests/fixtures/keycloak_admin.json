@@ -1,0 +1,142 @@
+{
+ "count": 4,
+ "sessions": [
+  {
+   "offline": "0",
+   "clientId": "photos",
+   "active": "2",
+   "id": "294c0e26-9b3a-4f99-90fa-67ace4847189"
+  }
+ ],
+ "errors": [
+  {
+   "id": "01f8ecb8-4782-4bfc-bd47-dd77fa48273a",
+   "time": 1792098892587,
+   "type": "LOGIN_ERROR",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "ipAddress": "192.168.1.20",
+   "error": "user_not_found",
+   "details": {
+    "auth_method": "openid-connect",
+    "grant_type": "password",
+    "client_auth_method": "client-secret",
+    "username": "nobody"
+   }
+  },
+  {
+   "id": "92b16d17-e964-4f09-af4a-5cb1d5c09f9a",
+   "time": 1792098892550,
+   "type": "LOGIN_ERROR",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "userId": "7f805afe-f77f-4f78-a698-d09a5535530f",
+   "ipAddress": "192.168.1.20",
+   "error": "invalid_user_credentials",
+   "details": {
+    "auth_method": "openid-connect",
+    "grant_type": "password",
+    "client_auth_method": "client-secret",
+    "username": "carla"
+   }
+  },
+  {
+   "id": "1e68647a-4b3c-43a0-91d2-9d1c1e1e4a58",
+   "time": 1792098892503,
+   "type": "LOGIN_ERROR",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "userId": "7f805afe-f77f-4f78-a698-d09a5535530f",
+   "ipAddress": "192.168.1.20",
+   "error": "invalid_user_credentials",
+   "details": {
+    "auth_method": "openid-connect",
+    "grant_type": "password",
+    "client_auth_method": "client-secret",
+    "username": "carla"
+   }
+  },
+  {
+   "id": "2c60cd89-f5c0-4ba2-9539-2dcf85e15bf6",
+   "time": 1792098892468,
+   "type": "LOGIN_ERROR",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "userId": "5f985d27-84da-4008-82bc-f747915518a6",
+   "ipAddress": "192.168.1.20",
+   "error": "invalid_user_credentials",
+   "details": {
+    "auth_method": "openid-connect",
+    "grant_type": "password",
+    "client_auth_method": "client-secret",
+    "username": "anna"
+   }
+  }
+ ],
+ "logins": [
+  {
+   "id": "86516cbd-9d0d-4dbe-b77e-f5ab0f40bd9f",
+   "time": 1792098892430,
+   "type": "LOGIN",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "userId": "ffe90bbb-ce3f-4c1b-a432-7b0a42b0efde",
+   "sessionId": "TuTTbh2VWgnDXrZhQuUP6VH3",
+   "ipAddress": "192.168.1.20",
+   "details": {
+    "refresh_token_provider_id": "default",
+    "auth_method": "openid-connect",
+    "token_id": "onrtro:5a78440b-befd-29ec-82f6-d60047a9e50e",
+    "grant_type": "password",
+    "refresh_token_type": "Refresh",
+    "scope": "profile email",
+    "refresh_token_id": "ae1d32d9-c9bb-5f7b-f895-db3141a1c25f",
+    "client_auth_method": "client-secret",
+    "username": "ben"
+   }
+  },
+  {
+   "id": "465295e7-7d1c-4f9c-b918-098378b6690c",
+   "time": 1792098892376,
+   "type": "LOGIN",
+   "realmId": "9e68a31b-4e61-4268-860c-8bcde74f9b64",
+   "clientId": "photos",
+   "userId": "5f985d27-84da-4008-82bc-f747915518a6",
+   "sessionId": "kK9ckcLPiJy0NEidOJ5fiIfh",
+   "ipAddress": "192.168.1.20",
+   "details": {
+    "refresh_token_provider_id": "default",
+    "auth_method": "openid-connect",
+    "token_id": "onrtro:6b0d1c62-393e-21fd-cfd4-e2c18b4046f9",
+    "grant_type": "password",
+    "refresh_token_type": "Refresh",
+    "scope": "profile email",
+    "refresh_token_id": "a681bda2-d5c0-6d8d-4f39-ebc72bde862a",
+    "client_auth_method": "client-secret",
+    "username": "anna"
+   }
+  }
+ ],
+ "realm": {
+  "realm": "home",
+  "displayName": null,
+  "eventsEnabled": true,
+  "enabledEventTypes": [
+   "LOGIN",
+   "LOGIN_ERROR",
+   "LOGOUT"
+  ]
+ },
+ "token": {
+  "access_token": "made-up.access.token",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "scope": "profile email"
+ },
+ "wrong_secret": {
+  "error": "unauthorized_client",
+  "error_description": "Invalid client or Invalid client credentials"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "site": {
+  "version": "0.19.20",
+  "site_view": {
+   "site": {
+    "id": 1,
+    "name": "Lemmy",
+    "description": "A community of privacy and FOSS enthusiasts, run by Lemmy’s developers",
+    "actor_id": "https://lemmy.ml/"
+   },
+   "counts": {
+    "site_id": 1,
+    "users": 58851,
+    "posts": 219169,
+    "comments": 1115084,
+    "communities": 4784,
+    "users_active_day": 713,
+    "users_active_week": 1208,
+    "users_active_month": 1783,
+    "users_active_half_year": 3309
+   }
+  }
+ },
+ "posts": {
+  "posts": [
+   {
+    "post": {
+     "id": 54050722,
+     "name": "Canonical releases Ubuntu 26.10 Stonking Stingray",
+     "url": "https://ubuntu.com/blog/canonical-releases-ubuntu-26-10-stonking-stingray",
+     "published": "2026-10-15T14:24:21.401943Z",
+     "nsfw": false,
+     "ap_id": "https://programming.dev/post/58008880",
+     "local": false,
+     "featured_local": false
+    },
+    "community": {
+     "id": 14701,
+     "name": "linux",
+     "title": "Linux",
+     "actor_id": "https://lemmy.ml/c/linux"
+    },
+    "counts": {
+     "score": 14,
+     "comments": 1,
+     "upvotes": 14,
+     "downvotes": 0
+    }
+   },
+   {
+    "post": {
+     "id": 54052611,
+     "name": "How do I convince normies to protect their privacy?",
+     "published": "2026-10-15T15:00:18.566704Z",
+     "nsfw": false,
+     "ap_id": "https://lemmy.zip/post/73289934",
+     "local": false,
+     "featured_local": false
+    },
+    "community": {
+     "id": 14806,
+     "name": "privacy",
+     "title": "Privacy",
+     "actor_id": "https://lemmy.ml/c/privacy"
+    },
+    "counts": {
+     "score": 6,
+     "comments": 5,
+     "upvotes": 7,
+     "downvotes": 1
+    }
+   },
+   {
+    "post": {
+     "id": 54051285,
+     "name": "Worried about Russian meddling in UK politics? Wait till you see what Israel is up to",
+     "url": "https://jonathancook.substack.com/p/worried-about-russian-meddling-in",
+     "published": "2026-10-15T14:28:26.278265Z",
+     "nsfw": false,
+     "ap_id": "https://lemmy.world/post/53164114",
+     "local": false,
+     "featured_local": false
+    },
+    "community": {
+     "id": 1128385,
+     "name": "ManufacturingConsent",
+     "title": "Inventing Reality",
+     "actor_id": "https://lemmy.ml/c/ManufacturingConsent"
+    },
+    "counts": {
+     "score": 10,
+     "comments": 0,
+     "upvotes": 10,
+     "downvotes": 0
+    }
+   },
+   {
+    "post": {
+     "id": 54049727,
+     "name": "Big surprise: Some Ray-Ban Meta owners say their glasses are listening without being asked",
+     "url": "https://www.androidauthority.com/ray-ban-meta-glasses-listening-3722586/",
+     "published": "2026-10-15T13:58:53.101223Z",
+     "nsfw": false,
+     "ap_id": "https://lemmy.world/post/53163412",
+     "local": false,
+     "featured_local": false
+    },
+    "community": {
+     "id": 14788,
+     "name": "worldnews",
+     "title": "World News",
+     "actor_id": "https://lemmy.ml/c/worldnews"
+    },
+    "counts": {
+     "score": 15,
+     "comments": 2,
+     "upvotes": 15,
+     "downvotes": 0
+    }
+   }
+  ]
+ }
+}

@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and six services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and fifteen services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-206-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-215-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **206 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **215 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -58,7 +58,7 @@ Shift and a click select several cards · a card's menu moves it to another page
 
 What is playing, what the library holds, what was asked for, what is on its way in, and what airs next. This is the *Media stack* template with the demo's invented data.
 
-![The media board: now playing on Plex, streams, pending requests, download speed, recently added covers, the Sonarr calendar, requests, the Sonarr and Radarr queues, the qBittorrent queue and the most watched titles](docs/screenshot-media.png)
+![The media board: now playing on Plex, Kodi, streams, pending requests, download speed, recently added covers, the Sonarr calendar, requests, the Sonarr and Radarr queues, the qBittorrent queue and the most watched titles](docs/screenshot-media.png)
 
 ### Infrastructure
 
@@ -210,15 +210,15 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 ## The services it speaks to
 
-**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, Grafana, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
+**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Cronicle, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, InfluxDB, Grafana, GoatCounter, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Ollama, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
-**Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, FortiGate, Traefik, Caddy, Nginx Proxy Manager, nginx ignition, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, CrowdSec, mailcow, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
+**Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, FortiGate, Traefik, Caddy, Nginx Proxy Manager, nginx ignition, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, Keycloak, Matrix Synapse, CrowdSec, mailcow, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
-**Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, Jackett, slskd, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, pyLoad, aria2, Seerr, Overseerr, Jellyseerr, Ombi, Nexview, Maintainerr, Reclaimerr, Tdarr, M3U Editor, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, Minecraft, AMP, Pterodactyl, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
+**Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, Jackett, slskd, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, pyLoad, aria2, Seerr, Overseerr, Jellyseerr, Ombi, Nexview, Maintainerr, Reclaimerr, Tdarr, M3U Editor, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, PeerTube, Minecraft, AMP, Pterodactyl, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
 
-**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Fronius, Shelly, Tasmota, Immich, Nextcloud, Syncthing, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
+**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Fronius, Shelly, Tasmota, Immich, Nextcloud, Syncthing, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, KitchenOwl, Vikunja, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
 
-**Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Owncast, Steam, RSS, Miniflux, Mastodon, Karakeep, Linkwarden, Readeck, Memos, Trilium Notes, Wiki.js, BookStack, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
+**Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Owncast, Steam, RSS, Miniflux, Mastodon, Lemmy, Karakeep, Linkwarden, Readeck, Memos, Trilium Notes, Wiki.js, BookStack, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
 
 Adapters that have not been confirmed against a live instance yet carry a *beta* badge in the interface. If one misbehaves, please open an issue with the service's version.
 
@@ -246,13 +246,16 @@ adapters upstream added up to its 0.30.0 are taken over. Item by item in
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wikijs.svg" width="26" height="26" alt=""><br>**Wiki.js**<br><sub>Pages, updates,<br>changed last</sub> | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/sun.svg" width="26" height="26" alt=""><br>**OpenDTU**<br><sub>Solar power now,<br>yield, each inverter</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tasmota.svg" width="26" height="26" alt=""><br>**Tasmota**<br><sub>Relays with a switch,<br>power, sensors</sub> |
 | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/download.svg" width="26" height="26" alt=""><br>**aria2**<br><sub>Downloads, failures,<br>pause and resume</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jenkins.svg" width="26" height="26" alt=""><br>**Jenkins**<br><sub>Failing jobs, queue,<br>offline agents</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/openhab.svg" width="26" height="26" alt=""><br>**openHAB**<br><sub>Things offline,<br>Items with a switch</sub> |
 | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/fronius.svg" width="26" height="26" alt=""><br>**Fronius**<br><sub>Solar, house, grid,<br>battery, inverters</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pterodactyl.svg" width="26" height="26" alt=""><br>**Pterodactyl**<br><sub>Game servers,<br>start and stop</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mailcow.svg" width="26" height="26" alt=""><br>**mailcow**<br><sub>Containers, mail queue,<br>fullest mailboxes</sub> |
-| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bookstack.svg" width="26" height="26" alt=""><br>**BookStack**<br><sub>Shelves, books, pages,<br>changed last</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/rclone.svg" width="26" height="26" alt=""><br>**rclone**<br><sub>Copying now, speed,<br>last error</sub> | |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bookstack.svg" width="26" height="26" alt=""><br>**BookStack**<br><sub>Shelves, books, pages,<br>changed last</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/rclone.svg" width="26" height="26" alt=""><br>**rclone**<br><sub>Copying now, speed,<br>last error</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/peertube.svg" width="26" height="26" alt=""><br>**PeerTube**<br><sub>Videos, views, storage,<br>published last</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/lemmy.svg" width="26" height="26" alt=""><br>**Lemmy**<br><sub>Active users,<br>what is hot</sub> | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/clock.svg" width="26" height="26" alt=""><br>**Cronicle**<br><sub>Failed jobs, running,<br>run an event</sub> | <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/bar-chart-3.svg" width="26" height="26" alt=""><br>**GoatCounter**<br><sub>Visitors, pages,<br>referrers</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/keycloak.svg" width="26" height="26" alt=""><br>**Keycloak**<br><sub>Sessions, users,<br>failed sign-ins</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/matrix.svg" width="26" height="26" alt=""><br>**Matrix Synapse**<br><sub>Users, rooms, reports,<br>unreachable servers</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/influxdb.svg" width="26" height="26" alt=""><br>**InfluxDB**<br><sub>Health, failing tasks,<br>buckets</sub> |
+| <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kodi.svg" width="26" height="26" alt=""><br>**Kodi**<br><sub>Now playing, pause,<br>library</sub> | <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kitchenowl.svg" width="26" height="26" alt=""><br>**KitchenOwl**<br><sub>Shopping list,<br>meal plan</sub> | |
 
 The first ten services here were confirmed against live instances on 2026-10-06 and
 carry no *beta* badge; the public address card asks a public service and has no
 instance to confirm. Everything from GitLab on came after them: GitLab, Alertmanager and
 Cloudflare in 0.23.0, the twenty from Caddy to Wiki.js in 0.24.0, the ten from OpenDTU
-to rclone in 0.28.0. They keep their *beta*
+to rclone in 0.28.0, the nine from PeerTube to KitchenOwl in 0.29.0. They keep their *beta*
 badge until somebody has seen them answer an instance of their own. Every card they
 offer is in [docs/adapters.md](docs/adapters.md).
 

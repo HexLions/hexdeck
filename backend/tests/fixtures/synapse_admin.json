@@ -1,0 +1,117 @@
+{
+ "version": {
+  "server_version": "1.163.0"
+ },
+ "users": {
+  "users": [
+   {
+    "name": "@admin:matrix.example.com",
+    "user_type": null,
+    "is_guest": false,
+    "admin": true,
+    "deactivated": false,
+    "shadow_banned": false,
+    "displayname": "admin",
+    "avatar_url": null,
+    "creation_ts": 1792099045000,
+    "erased": false,
+    "last_seen_ts": null,
+    "locked": false
+   }
+  ],
+  "total": 3,
+  "next_token": "1"
+ },
+ "rooms": {
+  "offset": 0,
+  "rooms": [
+   {
+    "room_id": "!h2vMljSNmGwsIfClI4fVMNbmI_4uFKsoUH5DvYm0ZFM",
+    "name": "Homelab",
+    "canonical_alias": "#homelab:matrix.example.com",
+    "joined_members": 2,
+    "joined_local_members": 2,
+    "version": "12",
+    "creator": "@anna:matrix.example.com",
+    "encryption": null,
+    "federatable": true,
+    "public": false,
+    "join_rules": "public",
+    "guest_access": null,
+    "history_visibility": "shared",
+    "state_events": 8,
+    "room_type": null
+   },
+   {
+    "room_id": "!lU56wodcC9Q4XmDJqW7s_fDzfNp7X1or2lhibB_xr-c",
+    "name": "Family",
+    "canonical_alias": null,
+    "joined_members": 1,
+    "joined_local_members": 1,
+    "version": "12",
+    "creator": "@ben:matrix.example.com",
+    "encryption": null,
+    "federatable": true,
+    "public": false,
+    "join_rules": "invite",
+    "guest_access": "can_join",
+    "history_visibility": "shared",
+    "state_events": 7,
+    "room_type": null
+   }
+  ],
+  "total_rooms": 2
+ },
+ "reports": {
+  "event_reports": [
+   {
+    "id": 2,
+    "received_ts": 1792099047364,
+    "room_id": "!h2vMljSNmGwsIfClI4fVMNbmI_4uFKsoUH5DvYm0ZFM",
+    "event_id": "$5d6D9vSAVqz3_B-pLIbxzNSIlN_xolruqM1EwQvrBlo",
+    "user_id": "@anna:matrix.example.com",
+    "score": -100,
+    "reason": "spam",
+    "sender": "@ben:matrix.example.com",
+    "canonical_alias": "#homelab:matrix.example.com",
+    "name": "Homelab"
+   }
+  ],
+  "total": 1
+ },
+ "destinations": {
+  "destinations": [
+   {
+    "destination": "matrix.org",
+    "retry_last_ts": 0,
+    "retry_interval": 0,
+    "failure_ts": null,
+    "last_successful_stream_ordering": 4812
+   },
+   {
+    "destination": "chat.example.net",
+    "retry_last_ts": 1792095000000,
+    "retry_interval": 3600000,
+    "failure_ts": 1792050000000,
+    "last_successful_stream_ordering": 901
+   },
+   {
+    "destination": "old.example.org",
+    "retry_last_ts": 1792090000000,
+    "retry_interval": 86400000,
+    "failure_ts": 1791400000000,
+    "last_successful_stream_ordering": null
+   }
+  ],
+  "total": 3
+ },
+ "unknown_token": {
+  "errcode": "M_UNKNOWN_TOKEN",
+  "error": "Invalid access token passed.",
+  "soft_logout": false
+ },
+ "not_admin": {
+  "errcode": "M_FORBIDDEN",
+  "error": "You are not a server admin"
+ }
+}

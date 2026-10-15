@@ -1,0 +1,192 @@
+{
+ "health": {
+  "name": "influxdb",
+  "message": "ready for queries and writes",
+  "status": "pass",
+  "checks": [],
+  "version": "v2.9.1",
+  "commit": "d4fa1941fd"
+ },
+ "buckets": {
+  "links": {
+   "self": "/api/v2/buckets?descending=false&limit=20&offset=0&org=home"
+  },
+  "buckets": [
+   {
+    "id": "da64ed3893828d82",
+    "orgID": "04b373e5111c2910",
+    "type": "system",
+    "description": "System bucket for monitoring logs",
+    "name": "_monitoring",
+    "retentionRules": [
+     {
+      "type": "expire",
+      "everySeconds": 604800,
+      "shardGroupDurationSeconds": 86400
+     }
+    ],
+    "createdAt": "2026-10-15T21:19:34.392670143Z",
+    "updatedAt": "2026-10-15T21:19:34.39267019Z",
+    "links": {
+     "labels": "/api/v2/buckets/da64ed3893828d82/labels",
+     "members": "/api/v2/buckets/da64ed3893828d82/members",
+     "org": "/api/v2/orgs/04b373e5111c2910",
+     "owners": "/api/v2/buckets/da64ed3893828d82/owners",
+     "self": "/api/v2/buckets/da64ed3893828d82",
+     "write": "/api/v2/write?org=04b373e5111c2910&bucket=da64ed3893828d82"
+    },
+    "labels": []
+   },
+   {
+    "id": "e156e943ad4ff5fb",
+    "orgID": "04b373e5111c2910",
+    "type": "system",
+    "description": "System bucket for task logs",
+    "name": "_tasks",
+    "retentionRules": [
+     {
+      "type": "expire",
+      "everySeconds": 259200,
+      "shardGroupDurationSeconds": 86400
+     }
+    ],
+    "createdAt": "2026-10-15T21:19:34.392473902Z",
+    "updatedAt": "2026-10-15T21:19:34.392473951Z",
+    "links": {
+     "labels": "/api/v2/buckets/e156e943ad4ff5fb/labels",
+     "members": "/api/v2/buckets/e156e943ad4ff5fb/members",
+     "org": "/api/v2/orgs/04b373e5111c2910",
+     "owners": "/api/v2/buckets/e156e943ad4ff5fb/owners",
+     "self": "/api/v2/buckets/e156e943ad4ff5fb",
+     "write": "/api/v2/write?org=04b373e5111c2910&bucket=e156e943ad4ff5fb"
+    },
+    "labels": []
+   },
+   {
+    "id": "d49252965eaad8d1",
+    "orgID": "04b373e5111c2910",
+    "type": "user",
+    "name": "downsampled",
+    "retentionRules": [
+     {
+      "type": "expire",
+      "everySeconds": 0,
+      "shardGroupDurationSeconds": 604800
+     }
+    ],
+    "createdAt": "2026-10-15T21:19:48.776348207Z",
+    "updatedAt": "2026-10-15T21:19:48.776348256Z",
+    "links": {
+     "labels": "/api/v2/buckets/d49252965eaad8d1/labels",
+     "members": "/api/v2/buckets/d49252965eaad8d1/members",
+     "org": "/api/v2/orgs/04b373e5111c2910",
+     "owners": "/api/v2/buckets/d49252965eaad8d1/owners",
+     "self": "/api/v2/buckets/d49252965eaad8d1",
+     "write": "/api/v2/write?org=04b373e5111c2910&bucket=d49252965eaad8d1"
+    },
+    "labels": []
+   },
+   {
+    "id": "f1e466ad9eaf3a56",
+    "orgID": "04b373e5111c2910",
+    "type": "user",
+    "name": "homelab",
+    "retentionRules": [
+     {
+      "type": "expire",
+      "everySeconds": 2592000,
+      "shardGroupDurationSeconds": 86400
+     }
+    ],
+    "createdAt": "2026-10-15T21:19:34.392849754Z",
+    "updatedAt": "2026-10-15T21:19:34.392849794Z",
+    "links": {
+     "labels": "/api/v2/buckets/f1e466ad9eaf3a56/labels",
+     "members": "/api/v2/buckets/f1e466ad9eaf3a56/members",
+     "org": "/api/v2/orgs/04b373e5111c2910",
+     "owners": "/api/v2/buckets/f1e466ad9eaf3a56/owners",
+     "self": "/api/v2/buckets/f1e466ad9eaf3a56",
+     "write": "/api/v2/write?org=04b373e5111c2910&bucket=f1e466ad9eaf3a56"
+    },
+    "labels": []
+   }
+  ]
+ },
+ "tasks": {
+  "links": {
+   "self": "/api/v2/tasks?limit=100&org=home&orgID=04b373e5111c2910"
+  },
+  "tasks": [
+   {
+    "links": {
+     "labels": "/api/v2/tasks/117c5b390de7c000/labels",
+     "logs": "/api/v2/tasks/117c5b390de7c000/logs",
+     "members": "/api/v2/tasks/117c5b390de7c000/members",
+     "owners": "/api/v2/tasks/117c5b390de7c000/owners",
+     "runs": "/api/v2/tasks/117c5b390de7c000/runs",
+     "self": "/api/v2/tasks/117c5b390de7c000"
+    },
+    "labels": [],
+    "id": "117c5b390de7c000",
+    "orgID": "04b373e5111c2910",
+    "org": "home",
+    "ownerID": "117c5b2af10d4000",
+    "name": "downsample cpu",
+    "status": "active",
+    "flux": "option task = {name: \"downsample cpu\", every: 1m}\nfrom(bucket: \"homelab\") |> range(start: -task.every) |> aggregateWindow(every: 1m, fn: mean) |> to(bucket: \"downsampled\")",
+    "every": "1m",
+    "latestCompleted": "2026-10-15T21:20:00Z",
+    "lastRunStatus": "success",
+    "createdAt": "2026-10-15T21:19:48Z"
+   },
+   {
+    "links": {
+     "labels": "/api/v2/tasks/117c5b390f67c000/labels",
+     "logs": "/api/v2/tasks/117c5b390f67c000/logs",
+     "members": "/api/v2/tasks/117c5b390f67c000/members",
+     "owners": "/api/v2/tasks/117c5b390f67c000/owners",
+     "runs": "/api/v2/tasks/117c5b390f67c000/runs",
+     "self": "/api/v2/tasks/117c5b390f67c000"
+    },
+    "labels": [],
+    "id": "117c5b390f67c000",
+    "orgID": "04b373e5111c2910",
+    "org": "home",
+    "ownerID": "117c5b2af10d4000",
+    "name": "copy to archive",
+    "status": "active",
+    "flux": "option task = {name: \"copy to archive\", every: 1m}\nfrom(bucket: \"homelab\") |> range(start: -task.every) |> to(bucket: \"archive-that-does-not-exist\")",
+    "every": "1m",
+    "latestCompleted": "2026-10-15T21:20:00Z",
+    "lastRunStatus": "failed",
+    "lastRunError": "error exhausting result iterator: failed to initialize execute state: could not find bucket \"archive-that-does-not-exist\"",
+    "createdAt": "2026-10-15T21:19:48Z"
+   },
+   {
+    "links": {
+     "labels": "/api/v2/tasks/117c5b3910a7c000/labels",
+     "logs": "/api/v2/tasks/117c5b3910a7c000/logs",
+     "members": "/api/v2/tasks/117c5b3910a7c000/members",
+     "owners": "/api/v2/tasks/117c5b3910a7c000/owners",
+     "runs": "/api/v2/tasks/117c5b3910a7c000/runs",
+     "self": "/api/v2/tasks/117c5b3910a7c000"
+    },
+    "labels": [],
+    "id": "117c5b3910a7c000",
+    "orgID": "04b373e5111c2910",
+    "org": "home",
+    "ownerID": "117c5b2af10d4000",
+    "name": "old export",
+    "status": "inactive",
+    "flux": "option task = {name: \"old export\", every: 1h}\nfrom(bucket: \"homelab\") |> range(start: -1h)",
+    "every": "1h",
+    "latestCompleted": "2026-10-15T21:19:48Z",
+    "createdAt": "2026-10-15T21:19:48Z"
+   }
+  ]
+ },
+ "unauthorized": {
+  "code": "unauthorized",
+  "message": "unauthorized access"
+ }
+}

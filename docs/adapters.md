@@ -24,6 +24,7 @@ that one of thirty-five renderers draws.
 | GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |
 | Semaphore UI | last runs, automation | | API token of a user; the cards see the projects that user sees |
 | Jenkins | overview, jobs | build a job (off by default, asks first) | a user name with an API token from the user's Security page, sent as HTTP Basic; with a token no CSRF crumb is needed. Jobs inside a folder are read one level deep. The button builds only a job the last answer listed, by its full name |
+| Cronicle | overview, events | run an event (off by default, asks first) | an API key from Admin, API Keys in an `X-API-Key` header; reading needs no privilege, the button needs Run Events. Only the master server answers the API. An event's last result is its newest job in the history. Every answer is HTTP 200 and says success or failure in its `code` |
 | Meilisearch | indexes, search | | a key of its own with stats.get, indexes.get, tasks.get and version |
 | Synology DSM | system, volumes, disks, containers, vms | start, stop, restart; power on, shut down, reboot | user and password; containers and VM details through DSM's own interface calls |
 | Unraid | system, array, guests | | API key (GraphQL) |
@@ -68,6 +69,8 @@ that one of thirty-five renderers draws.
 | Technitium DNS | blocking, top blocked | | API token |
 | NextDNS | blocking, top blocked | | API key and the profile ID |
 | authentik | status, failed sign-ins | | API token of a service account with read access |
+| Keycloak | realm, failed sign-ins, sessions by client | | a confidential client of the realm with Service accounts roles on, its service account given `view-users`, `view-realm`, `view-clients` and `view-events` of realm-management; HexDeck signs in with client credentials and keeps the token while it lasts. Failed sign-ins need the realm to record events; with events off the card says so instead of showing zero |
+| Matrix Synapse | server, rooms, federation | | the access token of a server admin, as a Bearer token, to `/_synapse/admin`; a reverse proxy often keeps that path from the outside, so use an address where it is open. The federation list is read by name, a thousand servers at most, as Synapse's documentation advises |
 | CrowdSec | blocked addresses, blocked | | bouncer key from `cscli bouncers add`; it may read decisions and nothing else |
 | mailcow | status, mail queue, mailboxes | | an API key in an `X-API-Key` header; the read-only one is enough, and HexDeck's address has to be in its allowed list unless Skip IP check is ticked. A wrong key counts as a failed login in mailcow's own fail2ban, so a card left with one can get HexDeck's address banned; the card says whether the key or the address was refused |
 | Shlink | short URLs, visits | | API key from `shlink api-key:generate` |
@@ -128,14 +131,17 @@ that one of thirty-five renderers draws.
 | Gotify | messages, message count | | client token (an application token may only write) |
 | ntfy | messages | | topic, and a token for a protected one |
 | Prometheus | query value, query list | | optional basic auth |
+| InfluxDB | status, tasks, buckets | | an API token (Load Data, API Tokens) that may read the organisation's buckets and tasks, as `Authorization: Token`, and the organisation's name. InfluxDB 2's API only. A task's failure shows InfluxDB's own error; the system buckets are left out |
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
+| GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
 | JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |
 | Papra | documents (count, size, trash), latest documents (with tags), organizations | | an API key from API keys in the user menu with Read organizations and Read documents; the organization by name or ID, or the first the key can see. Beta: run against a fresh Papra, not yet one in use |
 | Mealie | meal plan, shopping list, kitchen | | API token from Profile > Manage your API tokens |
 | Grocy | stock to watch, pantry | | API key from Manage API keys |
+| KitchenOwl | shopping list, meal plan | | a long-lived token from Settings, Sessions, as a Bearer token. A household and a list are picked by name, empty takes the first. Every installation describes its API at `/api/openapi` |
 | Vikunja | due tasks, tasks | | API token with read_all for tasks and projects; the time zone for "today" is a field, because a token cannot read the user's own |
 | Kimai | time entries, booked time | stop a running timer | API token from Profile > API access |
 | Dawarich | distance, distance by month | | API key of the account; distances follow Dawarich's hourly calculation |
@@ -201,6 +207,7 @@ that one of thirty-five renderers draws.
 | Hacker News | stories | | none |
 | Miniflux | unread, failing feeds, feed reader | | API key from Settings > API Keys |
 | Mastodon | server, account, notifications | | none for the server card, whose answers are public; a user token with read:accounts and read:notifications for the others, from Preferences > Development > New application. This week's posts and logins are the week in progress; a server can switch that activity off |
+| Lemmy | instance, hot | | none; the site's counts and the hot posts of its own communities are public. Lemmy 0.19's API v3; a post opens on this instance, though it may come from another. NSFW posts are left out |
 | Karakeep | recent bookmarks, reading list | | API key from Settings > API Keys |
 | Linkwarden | recent links, links | | access token from Settings > Access Tokens |
 | Readeck | overview, bookmarks | | an API token from Settings > API Tokens as Bearer; the role Bookmarks: Read Only is enough. Each count is the `Total-Count` header of a filtered list of one |
@@ -209,6 +216,8 @@ that one of thirty-five renderers draws.
 | Share prices | prices | | none |
 | Twitch | live | | client ID and secret of an application at dev.twitch.tv |
 | Owncast | stream | | none for whether the stream is live; the admin password, as basic auth with the user admin, for the viewers, the peak and what is being sent. Since 0.3 the viewers are no longer public |
+| Kodi | now playing, library | pause, play, stop | the web server's user name and password as HTTP Basic, with Allow remote control via HTTP on (Settings, Services, Control). JSON-RPC on `/jsonrpc`; a slide show is not counted as playing |
+| PeerTube | instance, published last | | none; the server stats, the version and the newest local videos are public on every instance. The counts are the instance's own videos, not the federated ones. The card turns amber while abuse reports wait for a moderator |
 | Wake-on-LAN | wake | wake | none; a MAC address and a network that carries the broadcast |
 
 Adapters marked **beta** in the interface have not been confirmed against a
