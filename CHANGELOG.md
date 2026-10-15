@@ -18,6 +18,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   hours.
 - **A card is green again**: a new event, said once after a red that was
   said.
+- **PeerTube**: an instance's own videos, views, storage, users and
+  followers, the reports waiting, and the videos published last. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 

@@ -2325,7 +2325,13 @@
     "The address of rclone rcd, or of rclone started with --rc. It listens on localhost:5572 unless --rc-addr says otherwise.": "Die Adresse von rclone rcd oder von rclone mit --rc. Es lauscht auf localhost:5572, wenn --rc-addr nichts anderes sagt.",
     "The speed now, the files being copied, how far along the whole run is, and the errors.": "Die Geschwindigkeit jetzt, die Dateien, die kopiert werden, wie weit der ganze Lauf ist, und die Fehler.",
     "Transfers": "Übertragungen",
-    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "Die Fernsteuerung von rclone: was es gerade kopiert, wie schnell, wie weit, und der letzte Fehler."
+    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "Die Fernsteuerung von rclone: was es gerade kopiert, wie schnell, wie weit, und der letzte Fehler.",
+    "A PeerTube instance: its own videos, views, storage, users and followers, the reports waiting, and the videos published last.": "Eine PeerTube-Instanz: ihre eigenen Videos, Aufrufe, Speicher, Benutzer und Follower, die wartenden Meldungen und die zuletzt veröffentlichten Videos.",
+    "Instance": "Instanz",
+    "Published last": "Zuletzt veröffentlicht",
+    "The instance's address. Everything shown is public on every instance, so no account is needed.": "Die Adresse der Instanz. Alles Gezeigte ist auf jeder Instanz öffentlich, ein Konto ist nicht nötig.",
+    "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "Die eigenen Videos der Instanz, ihre Aufrufe und ihr Speicher, die Benutzer, die Follower und die wartenden Meldungen.",
+    "The videos published on this instance last, with their channel and views, each opening the video.": "Die zuletzt auf dieser Instanz veröffentlichten Videos, mit Kanal und Aufrufen, jedes öffnet das Video."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3508,6 +3514,8 @@
     "From grid": "Aus dem Netz",
     "Chapters": "Kapitel",
     "Shelves": "Regale",
-    "Copying": "Kopiert"
+    "Copying": "Kopiert",
+    "Reports open": "Offene Meldungen",
+    "Views": "Aufrufe"
   }
 }

@@ -454,6 +454,9 @@ Updated at every milestone.
   list is not read. Checked against rclone v1.75.2 running locally as `rcd`,
   with a throttled copy, a missing file, a read-only target and a wrong
   password.
+- **PeerTube from what every instance shows.** The server stats, the
+  version and the newest local videos need no account. Checked against
+  Framatube, PeerTube 8.3.1, on 2026-10-15.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

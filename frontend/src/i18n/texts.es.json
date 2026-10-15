@@ -2325,7 +2325,13 @@
     "The address of rclone rcd, or of rclone started with --rc. It listens on localhost:5572 unless --rc-addr says otherwise.": "La dirección de rclone rcd, o de rclone iniciado con --rc. Escucha en localhost:5572 salvo que --rc-addr diga otra cosa.",
     "The speed now, the files being copied, how far along the whole run is, and the errors.": "La velocidad ahora, los archivos que se copian, cuánto lleva toda la ejecución, y los errores.",
     "Transfers": "Transferencias",
-    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "El control remoto de rclone: qué está copiando ahora, a qué velocidad, cuánto lleva, y el último error."
+    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "El control remoto de rclone: qué está copiando ahora, a qué velocidad, cuánto lleva, y el último error.",
+    "A PeerTube instance: its own videos, views, storage, users and followers, the reports waiting, and the videos published last.": "Una instancia de PeerTube: sus propios vídeos, visualizaciones, almacenamiento, usuarios y seguidores, las denuncias pendientes y los vídeos publicados por último.",
+    "Instance": "Instancia",
+    "Published last": "Publicados por último",
+    "The instance's address. Everything shown is public on every instance, so no account is needed.": "La dirección de la instancia. Todo lo que se muestra es público en cada instancia, así que no hace falta cuenta.",
+    "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "Los vídeos propios de la instancia, sus visualizaciones y almacenamiento, los usuarios, los seguidores y las denuncias pendientes.",
+    "The videos published on this instance last, with their channel and views, each opening the video.": "Los vídeos publicados por último en esta instancia, con su canal y visualizaciones, cada uno abre el vídeo."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3508,6 +3514,8 @@
     "From grid": "De la red",
     "Chapters": "Capítulos",
     "Shelves": "Estanterías",
-    "Copying": "Copiando"
+    "Copying": "Copiando",
+    "Reports open": "Denuncias abiertas",
+    "Views": "Visualizaciones"
   }
 }

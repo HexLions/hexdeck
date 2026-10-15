@@ -2325,7 +2325,13 @@
     "The address of rclone rcd, or of rclone started with --rc. It listens on localhost:5572 unless --rc-addr says otherwise.": "L'indirizzo di rclone rcd, o di rclone avviato con --rc. Ascolta su localhost:5572 se --rc-addr non dice altro.",
     "The speed now, the files being copied, how far along the whole run is, and the errors.": "La velocità di adesso, i file in copia, a che punto è l'intera esecuzione, e gli errori.",
     "Transfers": "Trasferimenti",
-    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "Il controllo remoto di rclone: cosa sta copiando adesso, quanto veloce, a che punto, e l'ultimo errore."
+    "rclone's remote control: what it is copying now, how fast, how far along, and the last error.": "Il controllo remoto di rclone: cosa sta copiando adesso, quanto veloce, a che punto, e l'ultimo errore.",
+    "A PeerTube instance: its own videos, views, storage, users and followers, the reports waiting, and the videos published last.": "Un'istanza PeerTube: i suoi video, visualizzazioni, spazio, utenti e follower, le segnalazioni in attesa e i video pubblicati per ultimi.",
+    "Instance": "Istanza",
+    "Published last": "Pubblicati per ultimi",
+    "The instance's address. Everything shown is public on every instance, so no account is needed.": "L'indirizzo dell'istanza. Tutto ciò che si vede è pubblico su ogni istanza, quindi non serve un account.",
+    "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "I video propri dell'istanza, le loro visualizzazioni e lo spazio, gli utenti, i follower e le segnalazioni in attesa.",
+    "The videos published on this instance last, with their channel and views, each opening the video.": "I video pubblicati per ultimi su questa istanza, con canale e visualizzazioni, ognuno apre il video."
   },
   "labels": {
     "Jobs": "Job",
@@ -3508,6 +3514,8 @@
     "From grid": "Dalla rete",
     "Chapters": "Capitoli",
     "Shelves": "Scaffali",
-    "Copying": "In copia"
+    "Copying": "In copia",
+    "Reports open": "Segnalazioni aperte",
+    "Views": "Visualizzazioni"
   }
 }
