@@ -478,6 +478,10 @@ Updated at every milestone.
   Checked against Synapse 1.163.0 running locally, with users, rooms, a
   reported message, a user's token and a wrong one; the federation list was
   empty there and is read in the shape Synapse documents.
+- **InfluxDB 2 with a read-only token.** Health, tasks and buckets come
+  from the v2 API. Checked against InfluxDB v2.9.1 running locally, with a
+  task failing on a missing bucket, an inactive one, a wrong token and an
+  unknown organisation.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

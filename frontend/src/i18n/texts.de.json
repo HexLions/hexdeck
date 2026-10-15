@@ -2371,7 +2371,14 @@
     "The address the admin API answers at, usually the server's client address.": "Die Adresse, unter der die Admin-API antwortet, meist die Client-Adresse des Servers.",
     "The rooms with the most members, with how many of them are on this server.": "Die Räume mit den meisten Mitgliedern, und wie viele davon auf diesem Server sind.",
     "The servers Synapse cannot reach, since when, and when it tries again.": "Die Server, die Synapse nicht erreicht, seit wann, und wann es es wieder versucht.",
-    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Die Benutzer und Räume, die gemeldeten Nachrichten, die nicht erreichbaren Server und die Version."
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Die Benutzer und Räume, die gemeldeten Nachrichten, die nicht erreichbaren Server und die Version.",
+    "Each task with its last run, the failing ones first with InfluxDB's error.": "Jeder Task mit seinem letzten Lauf, die fehlschlagenden zuerst mit dem Fehler von InfluxDB.",
+    "InfluxDB 2: whether it is healthy, which tasks failed on their last run and why, and the buckets with their retention.": "InfluxDB 2: ob es gesund ist, welche Tasks beim letzten Lauf fehlschlugen und warum, und die Buckets mit ihrer Aufbewahrung.",
+    "Organisation": "Organisation",
+    "The organisation's buckets with how long each keeps its data.": "Die Buckets der Organisation und wie lange jeder seine Daten behält.",
+    "The organisation's name, as InfluxDB shows it.": "Der Name der Organisation, wie InfluxDB ihn zeigt.",
+    "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "Unter Load Data, API Tokens. Eines, das die Buckets und Tasks der Organisation lesen darf, genügt.",
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Ob InfluxDB gesund ist, wie viele Tasks beim letzten Lauf fehlschlugen, und die Buckets."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3561,6 +3568,7 @@
     "Comments": "Kommentare",
     "Communities": "Communities",
     "Yesterday": "Gestern",
-    "Reports": "Meldungen"
+    "Reports": "Meldungen",
+    "Failing tasks": "Fehlschlagende Tasks"
   }
 }

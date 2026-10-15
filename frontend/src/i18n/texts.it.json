@@ -2371,7 +2371,14 @@
     "The address the admin API answers at, usually the server's client address.": "L'indirizzo a cui risponde l'API di amministrazione, di solito l'indirizzo client del server.",
     "The rooms with the most members, with how many of them are on this server.": "Le stanze con più membri, e quanti di loro sono su questo server.",
     "The servers Synapse cannot reach, since when, and when it tries again.": "I server che Synapse non raggiunge, da quando, e quando riproverà.",
-    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Utenti e stanze, i messaggi segnalati, i server irraggiungibili e la versione."
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Utenti e stanze, i messaggi segnalati, i server irraggiungibili e la versione.",
+    "Each task with its last run, the failing ones first with InfluxDB's error.": "Ogni task con l'ultima esecuzione, prima quelli falliti con l'errore di InfluxDB.",
+    "InfluxDB 2: whether it is healthy, which tasks failed on their last run and why, and the buckets with their retention.": "InfluxDB 2: se è in salute, quali task sono falliti all'ultima esecuzione e perché, e i bucket con la loro conservazione.",
+    "Organisation": "Organizzazione",
+    "The organisation's buckets with how long each keeps its data.": "I bucket dell'organizzazione e per quanto tempo ognuno conserva i dati.",
+    "The organisation's name, as InfluxDB shows it.": "Il nome dell'organizzazione, come lo mostra InfluxDB.",
+    "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "In Load Data, API Tokens. Basta uno che possa leggere bucket e task dell'organizzazione.",
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Se InfluxDB è in salute, quanti task sono falliti all'ultima esecuzione, e i bucket."
   },
   "labels": {
     "Jobs": "Job",
@@ -3561,6 +3568,7 @@
     "Comments": "Commenti",
     "Communities": "Community",
     "Yesterday": "Ieri",
-    "Reports": "Segnalazioni"
+    "Reports": "Segnalazioni",
+    "Failing tasks": "Task falliti"
   }
 }

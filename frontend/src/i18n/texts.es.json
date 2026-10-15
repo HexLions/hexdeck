@@ -2371,7 +2371,14 @@
     "The address the admin API answers at, usually the server's client address.": "La dirección donde responde la API de administración, normalmente la dirección de cliente del servidor.",
     "The rooms with the most members, with how many of them are on this server.": "Las salas con más miembros, y cuántos de ellos están en este servidor.",
     "The servers Synapse cannot reach, since when, and when it tries again.": "Los servidores a los que Synapse no llega, desde cuándo, y cuándo lo volverá a intentar.",
-    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Los usuarios y salas, los mensajes denunciados, los servidores inalcanzables y la versión."
+    "The users and rooms, the reported messages, the servers it cannot reach, and the version.": "Los usuarios y salas, los mensajes denunciados, los servidores inalcanzables y la versión.",
+    "Each task with its last run, the failing ones first with InfluxDB's error.": "Cada tarea con su última ejecución, primero las que fallan con el error de InfluxDB.",
+    "InfluxDB 2: whether it is healthy, which tasks failed on their last run and why, and the buckets with their retention.": "InfluxDB 2: si está sano, qué tareas fallaron en su última ejecución y por qué, y los buckets con su retención.",
+    "Organisation": "Organización",
+    "The organisation's buckets with how long each keeps its data.": "Los buckets de la organización y cuánto tiempo guarda cada uno sus datos.",
+    "The organisation's name, as InfluxDB shows it.": "El nombre de la organización, tal como lo muestra InfluxDB.",
+    "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "En Load Data, API Tokens. Basta uno que pueda leer los buckets y tareas de la organización.",
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Si InfluxDB está sano, cuántas tareas fallaron en su última ejecución, y los buckets."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3561,6 +3568,7 @@
     "Comments": "Comentarios",
     "Communities": "Comunidades",
     "Yesterday": "Ayer",
-    "Reports": "Denuncias"
+    "Reports": "Denuncias",
+    "Failing tasks": "Tareas fallidas"
   }
 }

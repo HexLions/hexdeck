@@ -131,6 +131,7 @@ that one of thirty-five renderers draws.
 | Gotify | messages, message count | | client token (an application token may only write) |
 | ntfy | messages | | topic, and a token for a protected one |
 | Prometheus | query value, query list | | optional basic auth |
+| InfluxDB | status, tasks, buckets | | an API token (Load Data, API Tokens) that may read the organisation's buckets and tasks, as `Authorization: Token`, and the organisation's name. InfluxDB 2's API only. A task's failure shows InfluxDB's own error; the system buckets are left out |
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
