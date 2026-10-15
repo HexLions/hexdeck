@@ -2378,7 +2378,14 @@
     "The organisation's buckets with how long each keeps its data.": "I bucket dell'organizzazione e per quanto tempo ognuno conserva i dati.",
     "The organisation's name, as InfluxDB shows it.": "Il nome dell'organizzazione, come lo mostra InfluxDB.",
     "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "In Load Data, API Tokens. Basta uno che possa leggere bucket e task dell'organizzazione.",
-    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Se InfluxDB è in salute, quanti task sono falliti all'ultima esecuzione, e i bucket."
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Se InfluxDB è in salute, quanti task sono falliti all'ultima esecuzione, e i bucket.",
+    "How many films, shows, episodes and albums the library holds.": "Quanti film, serie, episodi e album contiene la libreria.",
+    "Kodi's web server. Turn on Settings, Services, Control, Allow remote control via HTTP.": "Il server web di Kodi. Attiva Impostazioni, Servizi, Controllo, Consenti il controllo remoto via HTTP.",
+    "Kodi: what is playing and how far along, a button to pause or stop it, and how big the library is.": "Kodi: cosa sta riproducendo e a che punto, un pulsante per mettere in pausa o fermare, e quanto è grande la libreria.",
+    "Off makes the card read-only.": "Spento rende la card di sola lettura.",
+    "Offer pause and stop": "Mostra pausa e stop",
+    "The web server's password from the same page.": "La password del server web nella stessa pagina.",
+    "What plays and how far along it is, with buttons to pause and stop it.": "Cosa sta riproducendo e a che punto è, con i pulsanti per metterlo in pausa e fermarlo."
   },
   "labels": {
     "Jobs": "Job",
@@ -3569,6 +3576,7 @@
     "Communities": "Community",
     "Yesterday": "Ieri",
     "Reports": "Segnalazioni",
-    "Failing tasks": "Task falliti"
+    "Failing tasks": "Task falliti",
+    "Play": "Riproduci"
   }
 }

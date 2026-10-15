@@ -2378,7 +2378,14 @@
     "The organisation's buckets with how long each keeps its data.": "Los buckets de la organización y cuánto tiempo guarda cada uno sus datos.",
     "The organisation's name, as InfluxDB shows it.": "El nombre de la organización, tal como lo muestra InfluxDB.",
     "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "En Load Data, API Tokens. Basta uno que pueda leer los buckets y tareas de la organización.",
-    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Si InfluxDB está sano, cuántas tareas fallaron en su última ejecución, y los buckets."
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Si InfluxDB está sano, cuántas tareas fallaron en su última ejecución, y los buckets.",
+    "How many films, shows, episodes and albums the library holds.": "Cuántas películas, series, episodios y álbumes tiene la biblioteca.",
+    "Kodi's web server. Turn on Settings, Services, Control, Allow remote control via HTTP.": "El servidor web de Kodi. Activa Ajustes, Servicios, Control, Permitir el control remoto por HTTP.",
+    "Kodi: what is playing and how far along, a button to pause or stop it, and how big the library is.": "Kodi: qué se reproduce y por dónde va, un botón para pausar o detener, y qué tamaño tiene la biblioteca.",
+    "Off makes the card read-only.": "Desactivado deja la tarjeta en solo lectura.",
+    "Offer pause and stop": "Mostrar pausa y detener",
+    "The web server's password from the same page.": "La contraseña del servidor web en la misma página.",
+    "What plays and how far along it is, with buttons to pause and stop it.": "Qué se reproduce y por dónde va, con botones para pausar y detener."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3569,6 +3576,7 @@
     "Communities": "Comunidades",
     "Yesterday": "Ayer",
     "Reports": "Denuncias",
-    "Failing tasks": "Tareas fallidas"
+    "Failing tasks": "Tareas fallidas",
+    "Play": "Reproducir"
   }
 }

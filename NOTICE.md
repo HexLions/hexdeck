@@ -482,6 +482,9 @@ Updated at every milestone.
   from the v2 API. Checked against InfluxDB v2.9.1 running locally, with a
   task failing on a missing bucket, an inactive one, a wrong token and an
   unknown organisation.
+- **Kodi from its own schema.** What plays, the buttons and the library
+  counts use the methods and types of Kodi's JSON-RPC schema, API version
+  14.1.0. Not yet run against a Kodi.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

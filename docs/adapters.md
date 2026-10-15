@@ -215,6 +215,7 @@ that one of thirty-five renderers draws.
 | Share prices | prices | | none |
 | Twitch | live | | client ID and secret of an application at dev.twitch.tv |
 | Owncast | stream | | none for whether the stream is live; the admin password, as basic auth with the user admin, for the viewers, the peak and what is being sent. Since 0.3 the viewers are no longer public |
+| Kodi | now playing, library | pause, play, stop | the web server's user name and password as HTTP Basic, with Allow remote control via HTTP on (Settings, Services, Control). JSON-RPC on `/jsonrpc`; a slide show is not counted as playing |
 | PeerTube | instance, published last | | none; the server stats, the version and the newest local videos are public on every instance. The counts are the instance's own videos, not the federated ones. The card turns amber while abuse reports wait for a moderator |
 | Wake-on-LAN | wake | wake | none; a MAC address and a network that carries the broadcast |
 

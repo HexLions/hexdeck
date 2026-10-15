@@ -2378,7 +2378,14 @@
     "The organisation's buckets with how long each keeps its data.": "Die Buckets der Organisation und wie lange jeder seine Daten behält.",
     "The organisation's name, as InfluxDB shows it.": "Der Name der Organisation, wie InfluxDB ihn zeigt.",
     "Under Load Data, API Tokens. One that may read the organisation's buckets and tasks is enough.": "Unter Load Data, API Tokens. Eines, das die Buckets und Tasks der Organisation lesen darf, genügt.",
-    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Ob InfluxDB gesund ist, wie viele Tasks beim letzten Lauf fehlschlugen, und die Buckets."
+    "Whether InfluxDB is healthy, how many tasks failed on their last run, and the buckets.": "Ob InfluxDB gesund ist, wie viele Tasks beim letzten Lauf fehlschlugen, und die Buckets.",
+    "How many films, shows, episodes and albums the library holds.": "Wie viele Filme, Serien, Episoden und Alben die Bibliothek hat.",
+    "Kodi's web server. Turn on Settings, Services, Control, Allow remote control via HTTP.": "Der Webserver von Kodi. Schalte Einstellungen, Dienste, Steuerung, Fernsteuerung über HTTP erlauben ein.",
+    "Kodi: what is playing and how far along, a button to pause or stop it, and how big the library is.": "Kodi: was läuft und wie weit, eine Taste zum Pausieren oder Stoppen, und wie groß die Bibliothek ist.",
+    "Off makes the card read-only.": "Aus macht die Karte schreibgeschützt.",
+    "Offer pause and stop": "Pause und Stopp anbieten",
+    "The web server's password from the same page.": "Das Passwort des Webservers auf derselben Seite.",
+    "What plays and how far along it is, with buttons to pause and stop it.": "Was läuft und wie weit es ist, mit Tasten zum Pausieren und Stoppen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3569,6 +3576,7 @@
     "Communities": "Communities",
     "Yesterday": "Gestern",
     "Reports": "Meldungen",
-    "Failing tasks": "Fehlschlagende Tasks"
+    "Failing tasks": "Fehlschlagende Tasks",
+    "Play": "Abspielen"
   }
 }

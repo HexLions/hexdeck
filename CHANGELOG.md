@@ -32,6 +32,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   servers it cannot reach. ⚠️ Beta.
 - **InfluxDB**: whether it is healthy, which tasks failed on their last
   run and why, and the buckets with their retention. ⚠️ Beta.
+- **Kodi**: what is playing and how far along, a button to pause or stop
+  it, and how big the library is. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 
