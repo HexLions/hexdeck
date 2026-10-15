@@ -368,6 +368,8 @@ class ChannelCreate(BaseModel):
     config: dict[str, Any] = Field(default_factory=dict)
     enabled: bool = True
     events: list[str] = Field(default_factory=list)
+    #: Quiet hours and the daily summary, see services/alert_schedule.py.
+    schedule: dict[str, Any] | None = None
 
 
 class ChannelPatch(BaseModel):
@@ -375,6 +377,7 @@ class ChannelPatch(BaseModel):
     config: dict[str, Any] | None = None
     enabled: bool | None = None
     events: list[str] | None = None
+    schedule: dict[str, Any] | None = None
 
 
 class PushSubscribeBody(BaseModel):

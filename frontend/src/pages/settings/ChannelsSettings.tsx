@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ApiError, del, get, patch, post } from '../../api/client'
-import type { Channel, ChannelKind } from '../../api/types'
+import type { Channel, ChannelKind, ChannelSchedule } from '../../api/types'
 import { FieldInput } from '../../components/FieldInput'
 import { ServiceIcon } from '../../components/ServiceIcon'
 import { Confirm, Field, Switch, Toast } from '../../components/ui'
@@ -292,6 +292,51 @@ function Guide({ kind }: { kind: string }) {
  * The guide stands open as long as it is needed, which is until this way has
  * been saved once. After that the same place holds what it reports.
  */
+/** A channel that speaks at any hour and sends no summary. */
+const NO_SCHEDULE: ChannelSchedule = { quiet_from: '', quiet_to: '', quiet_urgent: true, summary_at: '' }
+
+/** Quiet hours and the daily summary of one channel, in the server's time. */
+function ScheduleFields({
+  schedule,
+  quiet,
+  onQuiet,
+  onChange,
+}: {
+  schedule: ChannelSchedule
+  quiet: boolean
+  onQuiet: (quiet: boolean) => void
+  onChange: (schedule: ChannelSchedule) => void
+}) {
+  const { t } = useTranslation()
+  const set = (part: Partial<ChannelSchedule>) => onChange({ ...schedule, ...part })
+  const quietOn = (wanted: boolean) => {
+    onQuiet(wanted)
+    // A sensible night to start from, not two empty boxes.
+    if (wanted && !schedule.quiet_from) set({ quiet_from: '22:30', quiet_to: '07:00' })
+  }
+  return (
+    <div className="flex flex-col gap-3 border-t border-line pt-3">
+      <Switch checked={quiet} onChange={quietOn} label={t('channels.quiet')} description={t('channels.quietHelp')} />
+      {quiet && (
+        <>
+          <div className="grid grid-cols-2 gap-3">
+            <Field label={t('channels.quietFrom')} htmlFor="c-quiet-from">
+              <input id="c-quiet-from" className="input" type="time" value={schedule.quiet_from} onChange={(event) => set({ quiet_from: event.target.value })} />
+            </Field>
+            <Field label={t('channels.quietTo')} htmlFor="c-quiet-to">
+              <input id="c-quiet-to" className="input" type="time" value={schedule.quiet_to} onChange={(event) => set({ quiet_to: event.target.value })} />
+            </Field>
+          </div>
+          <Switch checked={schedule.quiet_urgent} onChange={(quiet_urgent) => set({ quiet_urgent })} label={t('channels.quietUrgent')} description={t('channels.quietUrgentHelp')} />
+        </>
+      )}
+      <Field label={t('channels.summaryAt')} htmlFor="c-summary" help={t('channels.summaryHelp')}>
+        <input id="c-summary" className="input" type="time" value={schedule.summary_at} onChange={(event) => set({ summary_at: event.target.value })} />
+      </Field>
+    </div>
+  )
+}
+
 function ChannelEditor({
   spec,
   channel,
@@ -314,6 +359,8 @@ function ChannelEditor({
   )
   const [selected, setSelected] = useState<string[]>(channel?.events ?? DEFAULT_EVENTS)
   const [enabled, setEnabled] = useState(channel?.enabled ?? true)
+  const [schedule, setSchedule] = useState<ChannelSchedule>(channel?.schedule ?? NO_SCHEDULE)
+  const [quiet, setQuiet] = useState(Boolean(channel?.schedule?.quiet_from))
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
   const [testing, setTesting] = useState(false)
@@ -325,7 +372,8 @@ function ChannelEditor({
     setError('')
     setSaving(true)
     try {
-      const body = { name, config, enabled, events: selected }
+      const wanted = quiet ? schedule : { ...schedule, quiet_from: '', quiet_to: '' }
+      const body = { name, config, enabled, events: selected, schedule: wanted }
       const saved = channel ? await patch<Channel>(`/channels/${channel.id}`, body) : await post<Channel>('/channels', { kind: spec.kind, ...body })
       onSaved(saved)
       return saved
@@ -364,6 +412,7 @@ function ChannelEditor({
             <FieldInput key={field.name} spec={field} value={config[field.name]} onChange={(value) => setConfig((current) => ({ ...current, [field.name]: value }))} />
           ))}
           <Switch checked={enabled} onChange={setEnabled} label={t('channels.enabled')} />
+          <ScheduleFields schedule={schedule} quiet={quiet} onQuiet={setQuiet} onChange={setSchedule} />
         </div>
 
         <div className="flex flex-col gap-3">

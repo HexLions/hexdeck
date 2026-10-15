@@ -88,6 +88,8 @@ class Collector:
         self._told: dict[str, float] = {}
         #: Cards already reported as broken; one line per breakage, not per try.
         self._broken: set[int] = set()
+        #: Cards whose turning red was said; their return to green is said too.
+        self._said_red: set[int] = set()
         #: The last "refresh now" of each card: when, for which settings, and the fetch it started.
         self._pressed: dict[int, tuple[float, int, asyncio.Future[float | None]]] = {}
         self._tick_start = time.time()
@@ -525,6 +527,12 @@ class Collector:
         maintenance item past due, Homebridge down: each card already knows,
         and this is how it reaches somebody who is not looking.
         """
+        if after.status == "ok" and widget_id in self._said_red:
+            # ⚠️ Only after a red that was said: a card that came up green, or
+            # turned red while nobody was told, has nothing to take back.
+            self._said_red.discard(widget_id)
+            emit("card_green", f"{title} is green again", level="info")
+            return
         if after.status != "bad" or before is None or before.error or before.status not in ("ok", "warn"):
             return
         now = time.time()
@@ -536,6 +544,7 @@ class Collector:
         notice = str((after.meta or {}).get("notice") or "")
         primary = after.primary or {}
         said = notice or (f"{primary.get('label')}: {primary.get('value')}" if primary.get("label") else "")
+        self._said_red.add(widget_id)
         emit("card_red", f"{title} turned red", said, level="warn")
 
     def _tell_about_failure(self, widget_id: int, title: str, data: WidgetData) -> None:

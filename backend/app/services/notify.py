@@ -37,6 +37,7 @@ EVENTS: dict[str, str] = {
     "download_done": "A download finished",
     "widget_broken": "A card stopped working",
     "card_red": "A card turned red",
+    "card_green": "A card is green again",
     "auth_rejected": "A service rejected its credentials",
     "cert_expiring": "A certificate is running out",
     "disk_filling": "A disk is filling up",
@@ -91,6 +92,9 @@ def notice_payload(notice: Notice) -> dict[str, Any]:
 
 
 async def dispatch(message: Message, user_ids: list[int]) -> None:
+    from datetime import datetime
+
+    from . import alert_schedule
     from .channels import send_to_channel
 
     with db_session() as db:
@@ -106,7 +110,11 @@ async def dispatch(message: Message, user_ids: list[int]) -> None:
                 .distinct()
             )
         )
-        jobs = [(c.id, c.kind, c.user_id) for c in channels]
+        # ⚠️ A channel in its quiet hours keeps the message for later: it is a
+        # notice already, and alert_schedule sends the notices of the quiet
+        # stretch as one message when it ends.
+        now = datetime.now().astimezone()
+        jobs = [(c.id, c.kind, c.user_id) for c in channels if not alert_schedule.holds(c.schedule, message.level, now)]
     for channel_id, _kind, _user in jobs:
         try:
             await send_to_channel(channel_id, message)

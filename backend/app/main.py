@@ -89,6 +89,18 @@ def _housekeeping_once() -> None:
         logger.exception("The scheduled snapshot could not be written.")
 
 
+async def _alert_schedule() -> None:
+    """Quiet hours ending and daily summaries, checked every minute."""
+    from .services import alert_schedule
+
+    while True:
+        await asyncio.sleep(60)
+        try:
+            await alert_schedule.tick()
+        except Exception:  # noqa: BLE001
+            logger.exception("Sending the scheduled notifications failed.")
+
+
 async def _housekeeping() -> None:
     """Condense history, prune logs and end a deep log level every few minutes."""
     while True:
@@ -182,6 +194,7 @@ async def lifespan(app: FastAPI):
     await health_service.start()
     await hass_listener.start()
     housekeeping = asyncio.create_task(_housekeeping(), name="housekeeping")
+    scheduled = asyncio.create_task(_alert_schedule(), name="alert-schedule")
     provisioning_task = asyncio.create_task(provisioning.watch(), name="provisioning")
     logger.info("HexDeck %s ready.", __version__)
     if LEGACY_NAMES_ADOPTED:
@@ -193,6 +206,7 @@ async def lifespan(app: FastAPI):
         yield
     finally:
         housekeeping.cancel()
+        scheduled.cancel()
         provisioning_task.cancel()
         await hass_listener.stop()
         await health_service.stop()

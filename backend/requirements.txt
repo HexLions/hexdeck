@@ -27,7 +27,7 @@ pyyaml==6.0.3
 # Home Assistant speaks WebSocket; httpx does not.
 websockets==15.0.1
 # One adapter, a hundred notification services.
-apprise==1.9.5
+apprise==1.13.1
 # RSS and Atom parsing for the feed widget.
 feedparser==6.0.12
 python-multipart==0.0.31

@@ -135,6 +135,15 @@ export interface Channel {
   events: string[]
   last_error: string
   created_at: string
+  /** Quiet hours and the daily summary; empty times mean off. */
+  schedule?: ChannelSchedule
+}
+
+export interface ChannelSchedule {
+  quiet_from: string
+  quiet_to: string
+  quiet_urgent: boolean
+  summary_at: string
 }
 
 export interface ApiToken {

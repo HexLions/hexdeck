@@ -196,3 +196,28 @@ def test_red_from_the_start_a_failure_or_the_demo_is_not_a_change(monkeypatch: A
     assert said == []
     _tell(service, WidgetData(status="warn"), red)
     assert said == [("card_red", "ESPHome devices turned red", "Missing node types: tasmota-switch")]
+
+
+def test_a_card_said_red_says_when_it_is_green_again(monkeypatch: Any) -> None:
+    from app.services import collector as collector_module
+
+    said = _said(monkeypatch)
+    service = collector_module.Collector()
+    red = WidgetData(status="bad")
+    _tell(service, WidgetData(status="ok"), red)
+    _tell(service, red, WidgetData(status="warn"))
+    assert [event for event, _, _ in said] == ["card_red"], "amber is not green"
+    _tell(service, WidgetData(status="warn"), WidgetData(status="ok"))
+    assert said[-1] == ("card_green", "ESPHome devices is green again", "")
+    _tell(service, WidgetData(status="ok"), WidgetData(status="ok"))
+    assert len(said) == 2, "green is said once"
+
+
+def test_green_without_a_red_that_was_said_is_nothing(monkeypatch: Any) -> None:
+    from app.services import collector as collector_module
+
+    said = _said(monkeypatch)
+    service = collector_module.Collector()
+    _tell(service, None, WidgetData(status="bad"))
+    _tell(service, WidgetData(status="bad"), WidgetData(status="ok"))
+    assert said == [], "red from the start was never said, so its end is not either"

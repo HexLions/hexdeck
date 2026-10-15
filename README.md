@@ -41,7 +41,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | 📈 **History for every number** | Kept and drawn behind the number, whether the adapter declared a metric or not |
 | 📱 **Three screens, one arrangement** | Desk, tablet, an installable phone app, and kiosk links that cycle pages and dim at night |
 | 👥 **Users, roles, sharing** | Administrators, users and guests; boards shared at view, edit or act level |
-| 🔔 **Notifications** | Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack, Apprise |
+| 🔔 **Notifications** | Telegram, e-mail, Web Push, ntfy, Gotify, Discord, Slack, Apprise; quiet hours and a daily summary per channel |
 | 📄 **Boards as files** | YAML export, provisioning from `data/boards/`, tiles from Docker labels |
 | 📥 **Coming from Homepage or Homarr** | Paste their files: groups become pages, their services become connections and cards |
 | 🔑 **Sign in your way** | Local accounts, OpenID Connect, API tokens, or no password at all on the networks you trust |
