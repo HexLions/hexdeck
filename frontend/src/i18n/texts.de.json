@@ -2385,7 +2385,15 @@
     "Off makes the card read-only.": "Aus macht die Karte schreibgeschützt.",
     "Offer pause and stop": "Pause und Stopp anbieten",
     "The web server's password from the same page.": "Das Passwort des Webservers auf derselben Seite.",
-    "What plays and how far along it is, with buttons to pause and stop it.": "Was läuft und wie weit es ist, mit Tasten zum Pausieren und Stoppen."
+    "What plays and how far along it is, with buttons to pause and stop it.": "Was läuft und wie weit es ist, mit Tasten zum Pausieren und Stoppen.",
+    "Household": "Haushalt",
+    "Its name; empty takes the first household of the token's user.": "Sein Name; leer nimmt den ersten Haushalt des Benutzers des Tokens.",
+    "Its name; empty takes the first list.": "Ihr Name; leer nimmt die erste Liste.",
+    "KitchenOwl: what is on the shopping list, and the meals planned for the coming days.": "KitchenOwl: was auf der Einkaufsliste steht, und die für die nächsten Tage geplanten Mahlzeiten.",
+    "Long-lived token": "Langlebiges Token",
+    "The meals planned for the next seven days, by day.": "Die für die nächsten sieben Tage geplanten Mahlzeiten, nach Tag.",
+    "Under Settings, Sessions: add a long-lived token for HexDeck.": "Unter Einstellungen, Sitzungen: ein langlebiges Token für HexDeck hinzufügen.",
+    "What is on a shopping list, with the amounts.": "Was auf einer Einkaufsliste steht, mit den Mengen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3577,6 +3585,8 @@
     "Yesterday": "Gestern",
     "Reports": "Meldungen",
     "Failing tasks": "Fehlschlagende Tasks",
-    "Play": "Abspielen"
+    "Play": "Abspielen",
+    "today": "heute",
+    "tomorrow": "morgen"
   }
 }

@@ -141,6 +141,7 @@ that one of thirty-five renderers draws.
 | Papra | documents (count, size, trash), latest documents (with tags), organizations | | an API key from API keys in the user menu with Read organizations and Read documents; the organization by name or ID, or the first the key can see. Beta: run against a fresh Papra, not yet one in use |
 | Mealie | meal plan, shopping list, kitchen | | API token from Profile > Manage your API tokens |
 | Grocy | stock to watch, pantry | | API key from Manage API keys |
+| KitchenOwl | shopping list, meal plan | | a long-lived token from Settings, Sessions, as a Bearer token. A household and a list are picked by name, empty takes the first. Every installation describes its API at `/api/openapi` |
 | Vikunja | due tasks, tasks | | API token with read_all for tasks and projects; the time zone for "today" is a field, because a token cannot read the user's own |
 | Kimai | time entries, booked time | stop a running timer | API token from Profile > API access |
 | Dawarich | distance, distance by month | | API key of the account; distances follow Dawarich's hourly calculation |

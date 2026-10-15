@@ -34,6 +34,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   run and why, and the buckets with their retention. ⚠️ Beta.
 - **Kodi**: what is playing and how far along, a button to pause or stop
   it, and how big the library is. ⚠️ Beta.
+- **KitchenOwl**: what is on the shopping list, and the meals planned for
+  the coming days. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 
