@@ -572,7 +572,15 @@
         "server": "Questo è un canale a sé, con il proprio server SMTP; quello sotto Sistema serve per i reset delle password.",
         "addresses": "Servono sia l'indirizzo mittente che quello destinatario. Molti provider rifiutano un mittente che non sia il loro."
       }
-    }
+    },
+    "quiet": "Ore di silenzio",
+    "quietHelp": "Quello che arriva in queste ore aspetta, e arriva come un unico messaggio quando finiscono. L'orario è quello del server.",
+    "quietFrom": "Dalle",
+    "quietTo": "Alle",
+    "quietUrgent": "Un servizio che va giù arriva comunque",
+    "quietUrgentHelp": "Spento trattiene anche i guasti.",
+    "summaryAt": "Riepilogo giornaliero alle",
+    "summaryHelp": "Una volta al giorno: cosa è giù, cosa è rosso e cosa è successo nelle ultime 24 ore. Vuoto non ne manda."
   },
   "board": {
     "demo": "Modalità demo: ogni card mostra dati inventati, anche per le connessioni che hai aggiunto tu.",

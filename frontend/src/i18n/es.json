@@ -572,7 +572,15 @@
         "server": "Este es un canal propio, con su propio servidor SMTP; el de Sistema es para restablecer contraseñas.",
         "addresses": "Hacen falta tanto la dirección del remitente como la del destinatario. Muchos proveedores rechazan una dirección de remitente que no sea suya."
       }
-    }
+    },
+    "quiet": "Horas de silencio",
+    "quietHelp": "Lo que llega en estas horas espera, y llega como un solo mensaje cuando terminan. La hora es la del servidor.",
+    "quietFrom": "Desde",
+    "quietTo": "Hasta",
+    "quietUrgent": "Un servicio que se cae llega igualmente",
+    "quietUrgentHelp": "Desactivado retiene también las caídas.",
+    "summaryAt": "Resumen diario a las",
+    "summaryHelp": "Una vez al día: qué está caído, qué está en rojo y qué pasó en las últimas 24 horas. Vacío no envía ninguno."
   },
   "board": {
     "demo": "Modo demo: todas las tarjetas muestran datos inventados, también en las conexiones que añadiste tú.",

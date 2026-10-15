@@ -572,7 +572,15 @@
         "server": "Das ist ein eigener Kanal mit eigenem SMTP-Server; der unter System ist für vergessene Passwörter da.",
         "addresses": "Absender- und Empfängeradresse werden beide gebraucht. Viele Anbieter lehnen einen fremden Absender ab."
       }
-    }
+    },
+    "quiet": "Ruhezeiten",
+    "quietHelp": "Was in diesen Stunden kommt, wartet und kommt als eine Nachricht, wenn sie enden. Die Uhrzeit ist die des Servers.",
+    "quietFrom": "Von",
+    "quietTo": "Bis",
+    "quietUrgent": "Ein Dienst, der ausfällt, kommt trotzdem durch",
+    "quietUrgentHelp": "Aus hält auch Ausfälle zurück.",
+    "summaryAt": "Tägliche Zusammenfassung um",
+    "summaryHelp": "Einmal am Tag: was ausgefallen ist, was rot ist und was in den letzten 24 Stunden geschah. Leer schickt keine."
   },
   "board": {
     "demo": "Vorführmodus: Jede Karte zeigt erfundene Daten, auch bei Anbindungen, die du selbst angelegt hast.",

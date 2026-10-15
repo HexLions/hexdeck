@@ -5,6 +5,20 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### New
+
+- **Quiet hours for every notification channel.** What arrives in those
+  hours waits and comes as one message when they end; a service that goes
+  down still comes through, unless that is switched off too. Nothing is
+  lost to a restart at night: the message is built from the notices.
+- **A daily summary**, at the time a channel names: what is down, what is
+  red on the boards its owner may see, and what happened in the last 24
+  hours.
+- **A card is green again**: a new event, said once after a red that was
+  said.
+
 ## 0.28.0 (2026-10-14)
 
 Ten integrations, a secret key that can be changed without entering every

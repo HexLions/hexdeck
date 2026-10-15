@@ -572,7 +572,15 @@
         "server": "This is a channel of its own, with its own SMTP server; the one under System is for password resets.",
         "addresses": "From address and to address are both needed. Many providers refuse a from address that is not their own."
       }
-    }
+    },
+    "quiet": "Quiet hours",
+    "quietHelp": "What arrives in these hours waits, and comes as one message when they end. The time is the server's.",
+    "quietFrom": "From",
+    "quietTo": "Until",
+    "quietUrgent": "A service that goes down still comes through",
+    "quietUrgentHelp": "Off holds back outages too.",
+    "summaryAt": "Daily summary at",
+    "summaryHelp": "Once a day: what is down, what is red, and what happened in the last 24 hours. Empty sends none."
   },
   "board": {
     "demo": "Demo mode: every card shows invented data, also for connections you added yourself.",

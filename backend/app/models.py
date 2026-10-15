@@ -481,6 +481,8 @@ class NotificationChannel(Base):
     enabled: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(Utc(), default=utcnow)
     last_error: Mapped[str] = mapped_column(String(300), default="")
+    #: Quiet hours and the daily summary, see services/alert_schedule.py.
+    schedule: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     subscriptions: Mapped[list[Subscription]] = relationship(
         back_populates="channel", cascade="all, delete-orphan"

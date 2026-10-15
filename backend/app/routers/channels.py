@@ -11,6 +11,7 @@ from sqlalchemy import select
 from ..deps import CurrentUser, DbSession, MemberUser, error
 from ..models import NotificationChannel, Subscription
 from ..schemas import ChannelCreate, ChannelPatch
+from ..services import alert_schedule
 from ..services.channels import (
     KINDS,
     kinds_payload,
@@ -72,7 +73,8 @@ def _refuse_unless_allowed(kind: str, user: CurrentUser) -> None:
 
 def _public(channel: NotificationChannel) -> dict:
     return {"id": channel.id, "kind": channel.kind, "name": channel.name, "config": public_channel_config(channel), "enabled": channel.enabled,
-            "events": sorted(s.event for s in channel.subscriptions), "last_error": channel.last_error, "created_at": channel.created_at}
+            "events": sorted(s.event for s in channel.subscriptions), "last_error": channel.last_error, "created_at": channel.created_at,
+            "schedule": alert_schedule.public(channel.schedule)}
 
 
 @router.get("/channel-kinds", summary="List channel kinds and their fields")
@@ -97,6 +99,19 @@ def _own(db: DbSession, channel_id: int, user: CurrentUser) -> NotificationChann
     if channel is None or channel.user_id != user.id:
         raise error("not_found", "There is no such channel.", status.HTTP_404_NOT_FOUND)
     return channel
+
+
+def _set_schedule(channel: NotificationChannel, incoming: dict) -> None:
+    from datetime import datetime
+
+    try:
+        schedule = alert_schedule.clean(incoming, channel.schedule)
+    except alert_schedule.ScheduleError as why:
+        raise error("bad_schedule", str(why)) from why
+    # ⚠️ From now on: quiet hours set this morning must not send last night's
+    # notices, which went out when they happened.
+    schedule["_flushed"] = datetime.now().astimezone().isoformat()
+    channel.schedule = schedule
 
 
 def _set_events(db: DbSession, channel: NotificationChannel, events: list[str]) -> None:
@@ -124,6 +139,8 @@ def create_channel(body: ChannelCreate, user: MemberUser, db: DbSession) -> dict
                 "No mail server is set up. Set one up under System, Mail server first.",
             )
     channel = NotificationChannel(user_id=user.id, kind=body.kind, name=body.name.strip(), config=store_channel_config(body.kind, body.config), enabled=body.enabled)
+    if body.schedule is not None:
+        _set_schedule(channel, body.schedule)
     db.add(channel)
     db.flush()
     _set_events(db, channel, body.events or ["outage", "recovery", "action_failed"])
@@ -146,6 +163,8 @@ def patch_channel(channel_id: int, body: ChannelPatch, user: MemberUser, db: DbS
         channel.enabled = body.enabled
     if body.events is not None:
         _set_events(db, channel, body.events)
+    if body.schedule is not None:
+        _set_schedule(channel, body.schedule)
     channel.last_error = ""
     db.commit()
     db.refresh(channel)
