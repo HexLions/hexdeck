@@ -20,6 +20,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   said.
 - **PeerTube**: an instance's own videos, views, storage, users and
   followers, the reports waiting, and the videos published last. ⚠️ Beta.
+- **Lemmy**: who was active today and this month, the users, posts,
+  comments and communities, and what is hot in its communities. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 

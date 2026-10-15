@@ -2331,7 +2331,11 @@
     "Published last": "Pubblicati per ultimi",
     "The instance's address. Everything shown is public on every instance, so no account is needed.": "L'indirizzo dell'istanza. Tutto ciò che si vede è pubblico su ogni istanza, quindi non serve un account.",
     "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "I video propri dell'istanza, le loro visualizzazioni e lo spazio, gli utenti, i follower e le segnalazioni in attesa.",
-    "The videos published on this instance last, with their channel and views, each opening the video.": "I video pubblicati per ultimi su questa istanza, con canale e visualizzazioni, ognuno apre il video."
+    "The videos published on this instance last, with their channel and views, each opening the video.": "I video pubblicati per ultimi su questa istanza, con canale e visualizzazioni, ognuno apre il video.",
+    "A Lemmy instance: who was active today and this month, its users, posts, comments and communities, and what is hot in its communities.": "Un'istanza Lemmy: chi è stato attivo oggi e questo mese, i suoi utenti, post, commenti e community, e cosa va forte nelle sue community.",
+    "The hot posts of the instance's own communities, with their community, score and comments.": "I post più caldi delle community dell'istanza, con community, punteggio e commenti.",
+    "The instance's address. Everything shown is public, so no account is needed.": "L'indirizzo dell'istanza. Tutto ciò che si vede è pubblico, quindi non serve un account.",
+    "Users active today and this month, and the users, posts, comments and communities in all.": "Gli utenti attivi oggi e questo mese, e in tutto utenti, post, commenti e community."
   },
   "labels": {
     "Jobs": "Job",
@@ -3516,6 +3520,9 @@
     "Shelves": "Scaffali",
     "Copying": "In copia",
     "Reports open": "Segnalazioni aperte",
-    "Views": "Visualizzazioni"
+    "Views": "Visualizzazioni",
+    "Active today": "Attivi oggi",
+    "Comments": "Commenti",
+    "Communities": "Community"
   }
 }

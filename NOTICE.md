@@ -457,6 +457,9 @@ Updated at every milestone.
 - **PeerTube from what every instance shows.** The server stats, the
   version and the newest local videos need no account. Checked against
   Framatube, PeerTube 8.3.1, on 2026-10-15.
+- **Lemmy from what every instance shows.** The site's counts and the hot
+  local posts need no account, through the API v3 of Lemmy 0.19. Checked
+  against lemmy.ml, Lemmy 0.19.20, on 2026-10-15.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

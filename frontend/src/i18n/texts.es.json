@@ -2331,7 +2331,11 @@
     "Published last": "Publicados por último",
     "The instance's address. Everything shown is public on every instance, so no account is needed.": "La dirección de la instancia. Todo lo que se muestra es público en cada instancia, así que no hace falta cuenta.",
     "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "Los vídeos propios de la instancia, sus visualizaciones y almacenamiento, los usuarios, los seguidores y las denuncias pendientes.",
-    "The videos published on this instance last, with their channel and views, each opening the video.": "Los vídeos publicados por último en esta instancia, con su canal y visualizaciones, cada uno abre el vídeo."
+    "The videos published on this instance last, with their channel and views, each opening the video.": "Los vídeos publicados por último en esta instancia, con su canal y visualizaciones, cada uno abre el vídeo.",
+    "A Lemmy instance: who was active today and this month, its users, posts, comments and communities, and what is hot in its communities.": "Una instancia de Lemmy: quién estuvo activo hoy y este mes, sus usuarios, publicaciones, comentarios y comunidades, y lo más destacado de sus comunidades.",
+    "The hot posts of the instance's own communities, with their community, score and comments.": "Las publicaciones destacadas de las comunidades propias de la instancia, con su comunidad, puntuación y comentarios.",
+    "The instance's address. Everything shown is public, so no account is needed.": "La dirección de la instancia. Todo lo que se muestra es público, así que no hace falta cuenta.",
+    "Users active today and this month, and the users, posts, comments and communities in all.": "Usuarios activos hoy y este mes, y en total usuarios, publicaciones, comentarios y comunidades."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3516,6 +3520,9 @@
     "Shelves": "Estanterías",
     "Copying": "Copiando",
     "Reports open": "Denuncias abiertas",
-    "Views": "Visualizaciones"
+    "Views": "Visualizaciones",
+    "Active today": "Activos hoy",
+    "Comments": "Comentarios",
+    "Communities": "Comunidades"
   }
 }

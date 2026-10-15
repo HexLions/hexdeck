@@ -201,6 +201,7 @@ that one of thirty-five renderers draws.
 | Hacker News | stories | | none |
 | Miniflux | unread, failing feeds, feed reader | | API key from Settings > API Keys |
 | Mastodon | server, account, notifications | | none for the server card, whose answers are public; a user token with read:accounts and read:notifications for the others, from Preferences > Development > New application. This week's posts and logins are the week in progress; a server can switch that activity off |
+| Lemmy | instance, hot | | none; the site's counts and the hot posts of its own communities are public. Lemmy 0.19's API v3; a post opens on this instance, though it may come from another. NSFW posts are left out |
 | Karakeep | recent bookmarks, reading list | | API key from Settings > API Keys |
 | Linkwarden | recent links, links | | access token from Settings > Access Tokens |
 | Readeck | overview, bookmarks | | an API token from Settings > API Tokens as Bearer; the role Bookmarks: Read Only is enough. Each count is the `Total-Count` header of a filtered list of one |

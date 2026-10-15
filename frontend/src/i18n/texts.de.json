@@ -2331,7 +2331,11 @@
     "Published last": "Zuletzt veröffentlicht",
     "The instance's address. Everything shown is public on every instance, so no account is needed.": "Die Adresse der Instanz. Alles Gezeigte ist auf jeder Instanz öffentlich, ein Konto ist nicht nötig.",
     "The instance's own videos, their views and storage, the users, the followers and the reports waiting.": "Die eigenen Videos der Instanz, ihre Aufrufe und ihr Speicher, die Benutzer, die Follower und die wartenden Meldungen.",
-    "The videos published on this instance last, with their channel and views, each opening the video.": "Die zuletzt auf dieser Instanz veröffentlichten Videos, mit Kanal und Aufrufen, jedes öffnet das Video."
+    "The videos published on this instance last, with their channel and views, each opening the video.": "Die zuletzt auf dieser Instanz veröffentlichten Videos, mit Kanal und Aufrufen, jedes öffnet das Video.",
+    "A Lemmy instance: who was active today and this month, its users, posts, comments and communities, and what is hot in its communities.": "Eine Lemmy-Instanz: wer heute und diesen Monat aktiv war, ihre Benutzer, Beiträge, Kommentare und Communities, und was in ihren Communities gerade angesagt ist.",
+    "The hot posts of the instance's own communities, with their community, score and comments.": "Die angesagten Beiträge der eigenen Communities der Instanz, mit Community, Punkten und Kommentaren.",
+    "The instance's address. Everything shown is public, so no account is needed.": "Die Adresse der Instanz. Alles Gezeigte ist öffentlich, ein Konto ist nicht nötig.",
+    "Users active today and this month, and the users, posts, comments and communities in all.": "Heute und diesen Monat aktive Benutzer, und Benutzer, Beiträge, Kommentare und Communities insgesamt."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3516,6 +3520,9 @@
     "Shelves": "Regale",
     "Copying": "Kopiert",
     "Reports open": "Offene Meldungen",
-    "Views": "Aufrufe"
+    "Views": "Aufrufe",
+    "Active today": "Heute aktiv",
+    "Comments": "Kommentare",
+    "Communities": "Communities"
   }
 }
