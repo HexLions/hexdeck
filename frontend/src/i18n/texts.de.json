@@ -2335,7 +2335,14 @@
     "A Lemmy instance: who was active today and this month, its users, posts, comments and communities, and what is hot in its communities.": "Eine Lemmy-Instanz: wer heute und diesen Monat aktiv war, ihre Benutzer, Beiträge, Kommentare und Communities, und was in ihren Communities gerade angesagt ist.",
     "The hot posts of the instance's own communities, with their community, score and comments.": "Die angesagten Beiträge der eigenen Communities der Instanz, mit Community, Punkten und Kommentaren.",
     "The instance's address. Everything shown is public, so no account is needed.": "Die Adresse der Instanz. Alles Gezeigte ist öffentlich, ein Konto ist nicht nötig.",
-    "Users active today and this month, and the users, posts, comments and communities in all.": "Heute und diesen Monat aktive Benutzer, und Benutzer, Beiträge, Kommentare und Communities insgesamt."
+    "Users active today and this month, and the users, posts, comments and communities in all.": "Heute und diesen Monat aktive Benutzer, und Benutzer, Beiträge, Kommentare und Communities insgesamt.",
+    "Cronicle's scheduled jobs: which failed last time and why, what runs now, and a button to run an event.": "Die geplanten Jobs von Cronicle: welche beim letzten Mal fehlschlugen und warum, was gerade läuft, und eine Taste zum Starten eines Events.",
+    "Each event with its last run and result, the failing ones first, and a button to run it.": "Jedes Event mit seinem letzten Lauf und Ergebnis, die fehlschlagenden zuerst, und eine Taste zum Starten.",
+    "How many events failed on their last run, what runs now, and the events switched on.": "Wie viele Events beim letzten Lauf fehlschlugen, was gerade läuft, und die eingeschalteten Events.",
+    "Needs a key with Run Events. Asks before it starts a job.": "Braucht einen Schlüssel mit Run Events. Fragt nach, bevor ein Job startet.",
+    "Offer the run button": "Start-Taste anbieten",
+    "The address of the master server; a worker does not answer the API.": "Die Adresse des Master-Servers; ein Worker beantwortet die API nicht.",
+    "Under Admin, API Keys. Reading needs no privilege; the run button needs Run Events.": "Unter Admin, API Keys. Lesen braucht kein Recht; die Start-Taste braucht Run Events."
   },
   "labels": {
     "Jobs": "Jobs",

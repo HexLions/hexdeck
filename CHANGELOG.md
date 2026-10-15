@@ -22,6 +22,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   followers, the reports waiting, and the videos published last. ⚠️ Beta.
 - **Lemmy**: who was active today and this month, the users, posts,
   comments and communities, and what is hot in its communities. ⚠️ Beta.
+- **Cronicle**: which scheduled jobs failed last time and why, what runs
+  now, and a button to run an event. ⚠️ Beta.
 
 ## 0.28.0 (2026-10-14)
 
