@@ -200,6 +200,26 @@
         "Una tarjeta de aguja, como Pi-hole o NextDNS, se puede mostrar como número simple. De nexdeck.",
         "Una lista de descargas pone en rojo una fila cuando su error trae un motivo."
       ]
+    },
+    "0.29.0": {
+      "lead": "HexDeck 0.29.0: notificaciones que saben cuándo callar, un resumen cada mañana, y nueve integraciones.",
+      "sections": [
+        {
+          "title": "Horas de silencio y resumen diario",
+          "body": "Cada canal puede callar de noche: lo que llega espera y llega como un solo mensaje cuando terminan las horas, mientras que un servicio caído llega igualmente. Un resumen diario a la hora que elijas dice qué está caído, qué está en rojo y qué pasó en las últimas 24 horas.",
+          "path": "Sistema > Notificaciones"
+        },
+        {
+          "title": "Nueve integraciones",
+          "body": "PeerTube, Lemmy, Cronicle, GoatCounter, Keycloak, Matrix Synapse, InfluxDB, Kodi y KitchenOwl. Kodi pausa y detiene, Cronicle lanza un evento si la tarjeta lo ofrece.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Una tarjeta anunciada en rojo avisa cuando vuelve a estar verde.",
+        "Apprise pasa a la 1.13.1, que ya no reenvía las cabeceras de autenticación a otro sitio tras una redirección."
+      ]
     }
   }
 }

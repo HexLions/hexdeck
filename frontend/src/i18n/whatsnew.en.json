@@ -970,6 +970,26 @@
         "A dial card, such as Pi-hole or NextDNS, can be drawn as its plain number. From nexdeck.",
         "A download list turns a row red when its failure carries a reason."
       ]
+    },
+    "0.29.0": {
+      "lead": "HexDeck 0.29.0: notifications that know when to keep quiet, a summary every morning, and nine integrations.",
+      "sections": [
+        {
+          "title": "Quiet hours and a daily summary",
+          "body": "Each channel can keep quiet at night: what arrives waits and comes as one message when the hours end, while a service going down still comes through. A daily summary at the time you choose says what is down, what is red and what happened in the last 24 hours.",
+          "path": "System > Notifications"
+        },
+        {
+          "title": "Nine integrations",
+          "body": "PeerTube, Lemmy, Cronicle, GoatCounter, Keycloak, Matrix Synapse, InfluxDB, Kodi and KitchenOwl. Kodi pauses and stops, Cronicle runs an event when the card asks for it.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A card that was announced red says when it is green again.",
+        "Apprise moves to 1.13.1, which no longer sends configured auth headers on to another site after a redirect."
+      ]
     }
   }
 }
