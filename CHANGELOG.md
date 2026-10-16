@@ -5,7 +5,10 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.29.0 (2026-10-15)
+
+Quiet hours and a daily summary for every notification channel, a card that
+says when it is green again, and nine integrations.
 
 ### New
 
@@ -36,6 +39,13 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   it, and how big the library is. ⚠️ Beta.
 - **KitchenOwl**: what is on the shopping list, and the meals planned for
   the coming days. ⚠️ Beta.
+
+### Security
+
+- **Apprise 1.13.1.** Apprise up to 1.10 sent the auth headers configured for
+  a notification service on to another site when that service redirected
+  there (GHSA-856c-92hv-3vxx). Only an administrator's Apprise channel used
+  it.
 
 ## 0.28.0 (2026-10-14)
 

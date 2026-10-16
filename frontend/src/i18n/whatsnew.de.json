@@ -970,6 +970,26 @@
         "Eine Zeigerkarte wie Pi-hole oder NextDNS lässt sich als einfache Zahl zeigen. Von nexdeck.",
         "Eine Download-Liste färbt eine Zeile rot, wenn ihr Fehler einen Grund nennt."
       ]
+    },
+    "0.29.0": {
+      "lead": "HexDeck 0.29.0: Benachrichtigungen, die wissen, wann sie still sein sollen, jeden Morgen eine Zusammenfassung, und neun Integrationen.",
+      "sections": [
+        {
+          "title": "Ruhezeiten und tägliche Zusammenfassung",
+          "body": "Jeder Kanal kann nachts still sein: Was kommt, wartet und kommt als eine Nachricht, wenn die Zeit endet, während ein ausgefallener Dienst trotzdem durchkommt. Eine tägliche Zusammenfassung zur gewählten Zeit sagt, was ausgefallen ist, was rot ist und was in den letzten 24 Stunden geschah.",
+          "path": "System > Benachrichtigungen"
+        },
+        {
+          "title": "Neun Integrationen",
+          "body": "PeerTube, Lemmy, Cronicle, GoatCounter, Keycloak, Matrix Synapse, InfluxDB, Kodi und KitchenOwl. Kodi pausiert und stoppt, Cronicle startet ein Event, wenn die Karte es anbietet.",
+          "path": "System > Anbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Eine als rot gemeldete Karte sagt, wenn sie wieder grün ist.",
+        "Apprise wechselt auf 1.13.1 und gibt eingestellte Auth-Header nach einer Weiterleitung nicht mehr an eine andere Seite weiter."
+      ]
     }
   }
 }

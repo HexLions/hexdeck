@@ -344,6 +344,26 @@
         "Una card a lancetta, come Pi-hole o NextDNS, si può mostrare come numero semplice. Da nexdeck.",
         "Un elenco di download colora di rosso una riga quando il suo errore ha un motivo."
       ]
+    },
+    "0.29.0": {
+      "lead": "HexDeck 0.29.0: notifiche che sanno quando tacere, un riepilogo ogni mattina, e nove integrazioni.",
+      "sections": [
+        {
+          "title": "Ore di silenzio e riepilogo giornaliero",
+          "body": "Ogni canale può tacere di notte: quello che arriva aspetta e arriva come un unico messaggio quando le ore finiscono, mentre un servizio che va giù passa comunque. Un riepilogo all'ora che scegli dice cosa è giù, cosa è rosso e cosa è successo nelle ultime 24 ore.",
+          "path": "Sistema > Notifiche"
+        },
+        {
+          "title": "Nove integrazioni",
+          "body": "PeerTube, Lemmy, Cronicle, GoatCounter, Keycloak, Matrix Synapse, InfluxDB, Kodi e KitchenOwl. Kodi mette in pausa e ferma, Cronicle avvia un evento se la card lo chiede.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Una card annunciata rossa dice quando torna verde.",
+        "Apprise passa alla 1.13.1, che non inoltra più gli header di autenticazione a un altro sito dopo un redirect."
+      ]
     }
   }
 }
