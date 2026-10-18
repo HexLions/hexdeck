@@ -1007,6 +1007,26 @@
       ],
       "smallTitle": "Kleinere Dinge",
       "small": []
+    },
+    "0.29.2": {
+      "lead": "HexDeck 0.29.2: Sicherheitskorrekturen für die Anmeldung zu Hause, Container-Logs und den geheimen Schlüssel.",
+      "sections": [
+        {
+          "title": "Die Anmeldung zu Hause bleibt zu Hause",
+          "body": "Ein Browser, der sich in einem vertrauenswürdigen Netz von selbst angemeldet hat, kann kein API-Token mehr erstellen, kein Passwort setzen und keinen Anmeldeanbieter verknüpfen, auch nach der ersten Anfrage nicht. Dafür mit Passwort anmelden.",
+          "path": "System > Anmeldeanbieter"
+        },
+        {
+          "title": "Container-Logs nur für, wer handeln darf",
+          "body": "Log-Zeilen erreichen Gäste, Nur-Ansehen-Freigaben und Kiosk-Displays nicht mehr über die Live-Updates des Boards. Ein Log zu lesen braucht das Recht, auf dem Board zu handeln, und die Docker-Anbindung selbst.",
+          "path": "Einstellungen > Boards"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "HexDeck startet nicht mehr mit einem Beispiel- oder leeren HEXDECK_SECRET_KEY und warnt bei einem unter 32 Zeichen.",
+        "Ein Anmeldename mit Doppelpunkt zählt nicht mehr gegen den zweiten Schritt eines anderen Kontos."
+      ]
     }
   }
 }

@@ -381,6 +381,26 @@
       ],
       "smallTitle": "Cose più piccole",
       "small": []
+    },
+    "0.29.2": {
+      "lead": "HexDeck 0.29.2: correzioni di sicurezza per l'accesso automatico a casa, i log dei container e la chiave segreta.",
+      "sections": [
+        {
+          "title": "L'accesso automatico resta a casa",
+          "body": "Un browser entrato da solo su una rete fidata non può più creare un token API, impostare una password o collegare un provider di accesso, anche dopo la prima richiesta. Per questo serve l'accesso con password.",
+          "path": "Sistema > Provider di accesso"
+        },
+        {
+          "title": "Log dei container solo per chi può agire",
+          "body": "Le righe di log non arrivano più a ospiti, condivisioni in sola lettura o display kiosk attraverso gli aggiornamenti dal vivo della board. Leggere un log richiede il permesso di agire sulla board e la connessione Docker stessa.",
+          "path": "Impostazioni > Board"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "HexDeck non parte più con una HEXDECK_SECRET_KEY d'esempio o vuota, e avvisa se è più corta di 32 caratteri.",
+        "Un nome di accesso con i due punti non conta più sul secondo fattore di un altro account."
+      ]
     }
   }
 }

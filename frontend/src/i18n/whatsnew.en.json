@@ -1007,6 +1007,26 @@
       ],
       "smallTitle": "Smaller things",
       "small": []
+    },
+    "0.29.2": {
+      "lead": "HexDeck 0.29.2: security fixes for the sign-in at home, container logs and the secret key.",
+      "sections": [
+        {
+          "title": "The sign-in at home stays at home",
+          "body": "A browser signed in by itself on a trusted network can no longer create an API token, set a password or link a sign-in provider, also after its first request. Sign in with a password for those.",
+          "path": "System > Sign-in providers"
+        },
+        {
+          "title": "Container logs only for those who may act",
+          "body": "Log lines no longer reach guests, view-only shares or kiosk displays through the board's live updates. Reading a log needs the right to act on the board and the Docker connection itself.",
+          "path": "Settings > Boards"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "HexDeck no longer starts with an example or blank HEXDECK_SECRET_KEY, and warns about one shorter than 32 characters.",
+        "A sign-in name with a colon no longer counts against another account's second step."
+      ]
     }
   }
 }
