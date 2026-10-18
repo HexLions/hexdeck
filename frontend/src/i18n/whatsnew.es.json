@@ -237,6 +237,26 @@
       ],
       "smallTitle": "Cosas más pequeñas",
       "small": []
+    },
+    "0.29.2": {
+      "lead": "HexDeck 0.29.2: correcciones de seguridad para el inicio de sesión en casa, los registros de contenedores y la clave secreta.",
+      "sections": [
+        {
+          "title": "El inicio de sesión en casa se queda en casa",
+          "body": "Un navegador que entró solo en una red de confianza ya no puede crear un token de API, establecer una contraseña ni vincular un proveedor de inicio de sesión, tampoco después de su primera petición. Para eso, inicia sesión con contraseña.",
+          "path": "Sistema > Proveedores de inicio de sesión"
+        },
+        {
+          "title": "Registros de contenedores solo para quien puede actuar",
+          "body": "Las líneas de registro ya no llegan a invitados, comparticiones de solo lectura ni pantallas kiosco a través de las actualizaciones en vivo del tablero. Leer un registro requiere el permiso de actuar en el tablero y la propia conexión Docker.",
+          "path": "Ajustes > Tableros"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "HexDeck ya no arranca con una HEXDECK_SECRET_KEY de ejemplo o vacía, y avisa si tiene menos de 32 caracteres.",
+        "Un nombre de inicio de sesión con dos puntos ya no cuenta contra el segundo paso de otra cuenta."
+      ]
     }
   }
 }

@@ -5,6 +5,30 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## 0.29.2 (2026-10-18)
+
+Security fixes from a review of sign-in, sessions and the live stream.
+
+### Security
+
+- **A browser signed in at home stays marked as such.** The automatic
+  sign-in on trusted networks marked only its first answer, so from the
+  second request on such a browser could create an API token, link a
+  sign-in provider or set a password: ways in from anywhere. The session
+  now carries the mark, and creating a token and changing the password
+  refuse it too.
+- **Container log lines only for those who may read the log.** The board's
+  live updates passed log lines to anybody who could look at the board: a
+  guest, a view share, a kiosk display. They now need the same as the log
+  routes: the right to act on the board and the Docker connection itself.
+- **An example or blank `HEXDECK_SECRET_KEY` stops the start.** The TrueNAS
+  example in the README set a fixed placeholder, and every session, kiosk
+  and sign-in cookie is signed with a key made from it. A key under 32
+  characters is warned about in the log; the README says how to make one.
+- **A sign-in name with a colon** no longer fills the second-step or
+  forgotten-password counter of another account.
+
+
 ## 0.29.1 (2026-10-18)
 
 From nexdeck 0.41.4: a dropped board stays put, and nexpaper's last day to cancel.
