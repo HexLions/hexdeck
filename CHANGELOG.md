@@ -5,6 +5,19 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Fixed
+
+- **A dropped board stays where it was dropped while the server is told.**
+  On a slow server the row jumped back to its old place for a second or two
+  and then over again. From nexdeck.
+
+### Changed
+
+- **nexpaper names a contract's last day to cancel** (nexpaper 1.4.0), beside
+  the day it ends. From nexdeck.
+
 ## 0.29.0 (2026-10-15)
 
 Quiet hours and a daily summary for every notification channel, a card that
