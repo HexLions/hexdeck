@@ -151,7 +151,31 @@ if os.environ.get("HEXDECK_RESCUE", "") not in ("", "0", "false"):
     _rescue_and_exit()
 
 
-@asynccontextmanager
+#: Values printed in an example that people copy as they are.
+_EXAMPLE_SECRETS = {"generate-one-and-keep-it", "change-me", "changeme", "secret"}
+
+
+def _refuse_example_secret() -> None:
+    """Stop when HEXDECK_SECRET_KEY is a placeholder or blank.
+
+    ⚠️ Every session, kiosk and sign-in cookie is signed with a key derived
+    from it, and one such cookie is handed to anybody who opens a sign-in
+    provider's start page. With the README's example value a stranger could
+    sign their own admin session. A short value is only warned about: it may
+    be what an existing installation runs on.
+    """
+    secret = get_settings().secret_key
+    if not secret:
+        return
+    if not secret.strip() or secret.strip().lower() in _EXAMPLE_SECRETS:
+        raise SystemExit(
+            "HEXDECK_SECRET_KEY is an example value or blank. Set a random one "
+            "(openssl rand -base64 48), or leave it unset to have one generated."
+        )
+    if len(secret) < 32:
+        logger.warning("HEXDECK_SECRET_KEY has fewer than 32 characters; a longer random one is safer (openssl rand -base64 48).")
+
+
 def _rewrap_previous_secret() -> None:
     """Move every stored secret to a changed HEXDECK_SECRET_KEY (crypto.rewrap_previous)."""
     from .crypto import rewrap_previous
@@ -172,11 +196,13 @@ def _rewrap_previous_secret() -> None:
         )
 
 
+@asynccontextmanager
 async def lifespan(app: FastAPI):
     # ⚠️ Not ``basicConfig``. That wrote to standard output and nowhere else,
     # so the question "what happened at four in the morning" had no answer on
     # a machine whose container log had rotated away.
     journal.setup()
+    _refuse_example_secret()
     set_main_loop(asyncio.get_running_loop())
     # Synchronous routes run here, and each one holds a database connection
     # while it does. Keeping the number below the pool means a request waits
