@@ -993,12 +993,20 @@
     },
     "0.29.1": {
       "lead": "HexDeck 0.29.1: a dropped board stays where you put it, and nexpaper names the last day to cancel.",
-      "sections": [],
+      "sections": [
+        {
+          "title": "A dropped board stays put",
+          "body": "A board dragged to a new place in the list stays there while the server saves it, instead of jumping back for a moment.",
+          "path": "Settings > Boards"
+        },
+        {
+          "title": "The last day to cancel",
+          "body": "nexpaper's deadlines show a contract's last day to cancel beside the day it ends (nexpaper 1.4.0).",
+          "path": "System > Connections"
+        }
+      ],
       "smallTitle": "Smaller things",
-      "small": [
-        "A board dragged to a new place in the list stays there while the server saves it, instead of jumping back for a moment.",
-        "nexpaper's deadlines show a contract's last day to cancel beside its end (nexpaper 1.4.0)."
-      ]
+      "small": []
     }
   }
 }

@@ -367,12 +367,20 @@
     },
     "0.29.1": {
       "lead": "HexDeck 0.29.1: una board trascinata resta dove la metti, e nexpaper indica l'ultimo giorno per disdire.",
-      "sections": [],
+      "sections": [
+        {
+          "title": "Una board trascinata resta al suo posto",
+          "body": "Una board trascinata in un nuovo posto della lista resta lì mentre il server salva, invece di tornare indietro per un attimo.",
+          "path": "Impostazioni > Board"
+        },
+        {
+          "title": "L'ultimo giorno per disdire",
+          "body": "Le scadenze di nexpaper mostrano l'ultimo giorno per disdire un contratto accanto alla sua fine (nexpaper 1.4.0).",
+          "path": "Sistema > Connessioni"
+        }
+      ],
       "smallTitle": "Cose più piccole",
-      "small": [
-        "Una board trascinata in un nuovo posto della lista resta lì mentre il server salva, invece di tornare indietro per un attimo.",
-        "Le scadenze di nexpaper mostrano l'ultimo giorno per disdire un contratto accanto alla sua fine (nexpaper 1.4.0)."
-      ]
+      "small": []
     }
   }
 }

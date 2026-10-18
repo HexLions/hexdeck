@@ -993,12 +993,20 @@
     },
     "0.29.1": {
       "lead": "HexDeck 0.29.1: ein verschobenes Board bleibt, wo du es ablegst, und nexpaper nennt den letzten Kündigungstag.",
-      "sections": [],
+      "sections": [
+        {
+          "title": "Ein verschobenes Board bleibt liegen",
+          "body": "Ein in der Liste verschobenes Board bleibt dort, während der Server speichert, statt kurz zurückzuspringen.",
+          "path": "Einstellungen > Boards"
+        },
+        {
+          "title": "Der letzte Kündigungstag",
+          "body": "Die Fristen von nexpaper zeigen den letzten Kündigungstag eines Vertrags neben seinem Ende (nexpaper 1.4.0).",
+          "path": "System > Anbindungen"
+        }
+      ],
       "smallTitle": "Kleinere Dinge",
-      "small": [
-        "Ein in der Liste verschobenes Board bleibt dort, während der Server speichert, statt kurz zurückzuspringen.",
-        "Die Fristen von nexpaper zeigen den letzten Kündigungstag eines Vertrags neben seinem Ende (nexpaper 1.4.0)."
-      ]
+      "small": []
     }
   }
 }
