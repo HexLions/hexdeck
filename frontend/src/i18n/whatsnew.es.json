@@ -220,6 +220,23 @@
         "Una tarjeta anunciada en rojo avisa cuando vuelve a estar verde.",
         "Apprise pasa a la 1.13.1, que ya no reenvía las cabeceras de autenticación a otro sitio tras una redirección."
       ]
+    },
+    "0.29.1": {
+      "lead": "HexDeck 0.29.1: un tablero arrastrado se queda donde lo dejas, y nexpaper indica el último día para cancelar.",
+      "sections": [
+        {
+          "title": "Un tablero arrastrado se queda en su sitio",
+          "body": "Un tablero arrastrado a otro lugar de la lista se queda ahí mientras el servidor guarda, en lugar de volver atrás un momento.",
+          "path": "Ajustes > Tableros"
+        },
+        {
+          "title": "El último día para cancelar",
+          "body": "Los plazos de nexpaper muestran el último día para cancelar un contrato junto a su fin (nexpaper 1.4.0).",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": []
     }
   }
 }
