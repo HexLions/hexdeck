@@ -8,7 +8,7 @@ from datetime import timedelta
 from fastapi import APIRouter, Request, status
 from sqlalchemy import select
 
-from ..deps import CurrentUser, DbSession, MemberUser, error
+from ..deps import CurrentUser, DbSession, MemberUser, error, refuse_at_home
 from ..models import ApiToken, utcnow
 from ..schemas import TokenCreate
 from ..security import new_opaque_token
@@ -46,6 +46,9 @@ def create_token(body: TokenCreate, body_request: Request, user: MemberUser, db:
             "An API token cannot create another one. Sign in and make it there.",
             status.HTTP_403_FORBIDDEN,
         )
+    # Nor from a browser the trusted networks signed in by itself: a token
+    # works from anywhere, and nobody proved anything there.
+    refuse_at_home(body_request)
     token, token_hash, prefix = new_opaque_token("nd")
     ends = utcnow() + timedelta(days=body.expires_days) if body.expires_days else None
     row = ApiToken(user_id=user.id, name=body.name.strip(), token_hash=token_hash, prefix=prefix, expires_at=ends)

@@ -100,3 +100,25 @@ def test_only_an_administrator_changes_it(client: TestClient) -> None:
     login(client, "kim", "another-long-password")
     assert client.get("/api/v1/settings/auto-login").status_code == 403
     assert client.put("/api/v1/settings/auto-login", json={"enabled": False, "user_id": None, "networks": []}, headers=CSRF).status_code == 403
+
+
+def test_a_browser_signed_in_by_itself_stays_that_way_after_the_first_answer(client: TestClient) -> None:
+    """⚠️ Only the first answer knew. From the second request on, the browser
+    could create an API token, set a password or link a sign-in provider: ways
+    in from anywhere, around the rule that keeps this sign-in at home."""
+    setup_admin(client)
+    kim = create_user(client, "kim")
+    _configure(client, kim["id"], ["192.168.1.0/24"])
+    inside = _from(client, "192.168.1.23")
+    assert inside.get("/api/v1/auth/me").status_code == 200
+    again = inside.get("/api/v1/auth/me")
+    assert again.status_code == 200 and again.json()["auth_kind"] == "auto"
+    token = inside.post("/api/v1/tokens", json={"name": "x"}, headers=CSRF)
+    assert token.status_code == 403 and token.json()["detail"]["code"] == "auto_session"
+    password = inside.post("/api/v1/auth/password", json={"current_password": "another-long-password", "new_password": "a-third-long-password"}, headers=CSRF)
+    assert password.status_code == 403 and password.json()["detail"]["code"] == "auto_session"
+    assert inside.get("/api/v1/auth/oidc/links").status_code == 403
+
+    login(inside, "kim", "another-long-password")
+    assert inside.get("/api/v1/auth/me").json()["auth_kind"] == "session"
+    assert inside.post("/api/v1/tokens", json={"name": "x"}, headers=CSRF).status_code == 201

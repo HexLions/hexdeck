@@ -94,7 +94,13 @@ def now_ms() -> int:
     return int(datetime.now(UTC).timestamp() * 1000)
 
 
-def create_session_token(user_id: int, session_id: int) -> str:
+def create_session_token(user_id: int, session_id: int, auto: bool = False) -> str:
+    """``auto`` marks a session the trusted networks opened without a password.
+
+    ⚠️ It has to travel with the session. Only the first answer knew, so from
+    the second request on such a browser could link a sign-in provider,
+    create an API token or set a password like one that had signed in.
+    """
     settings = get_settings()
     now = datetime.now(UTC)
     payload: dict[str, Any] = {
@@ -104,6 +110,8 @@ def create_session_token(user_id: int, session_id: int) -> str:
         "ms": int(now.timestamp() * 1000),
         "exp": int((now + timedelta(days=settings.session_days)).timestamp()),
     }
+    if auto:
+        payload["auto"] = True
     return jwt.encode(payload, _signing_key(), algorithm=ALGORITHM)
 
 
@@ -112,6 +120,7 @@ class SessionClaims:
     user_id: int
     session_id: int
     issued_ms: int
+    auto: bool = False
 
 
 def read_session_token(token: str) -> SessionClaims | None:
@@ -124,6 +133,7 @@ def read_session_token(token: str) -> SessionClaims | None:
             user_id=int(payload["sub"]),
             session_id=int(payload["sid"]),
             issued_ms=int(payload.get("ms", 0)),
+            auto=payload.get("auto") is True,
         )
     except (KeyError, TypeError, ValueError):
         return None
