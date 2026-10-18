@@ -85,10 +85,14 @@ def open_session(db: DbSession, user: User, request: Request, response: Response
 def login(body: LoginBody, request: Request, response: Response, db: DbSession) -> UserPublic:
     """Opens a browser session. Wrong attempts are throttled per address."""
     address = auto_login.address_text(request)
+    # ⚠️ No account name has a colon in it, and the second step and the
+    # forgotten password count under "2fa:<name>" and "forgot:<name>". A
+    # sign-in as "2fa:admin" filled the admin's second-step bucket.
+    account = body.username if ":" not in body.username else ""
     try:
         # Counted per address and per account: the address can be spoofed
         # behind a proxy, the account name cannot.
-        login_guard.check(address, body.username)
+        login_guard.check(address, account)
     except login_guard.TooManyAttempts:
         raise error(
             "too_many_attempts",
@@ -102,10 +106,10 @@ def login(body: LoginBody, request: Request, response: Response, db: DbSession) 
     # attempts, it does not hide that difference.
     right = verify_password(body.password, user.password_hash) if user is not None else burn_a_password_check(body.password)
     if user is None or user.disabled or not right:
-        login_guard.failed(address, body.username)
+        login_guard.failed(address, account)
         logger.info("Sign-in refused for %r from %s.", body.username, address)
         raise error("bad_credentials", "User name or password is wrong.", status.HTTP_401_UNAUTHORIZED)
-    login_guard.succeeded(address, body.username)
+    login_guard.succeeded(address, account)
     if two_factor.enabled(user):
         # ⚠️ No session yet. The ticket says the password was right and can be
         # exchanged for a session only together with a code; on its own it

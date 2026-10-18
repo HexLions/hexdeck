@@ -371,3 +371,16 @@ def test_being_made_a_guest_takes_the_boards_you_own_down_to_looking(client: Tes
     assert kim.post(f"/api/v1/widgets/{widget['id']}/actions/anything", json={"params": {}}, headers=CSRF).status_code == 403
     assert kim.post(f"/api/v1/widgets/{widget['id']}/refresh", headers=CSRF).status_code == 403
     assert kim.delete(f"/api/v1/boards/{board['slug']}", headers=CSRF).status_code == 403
+
+
+def test_a_name_with_a_colon_does_not_fill_another_bucket(client: TestClient) -> None:
+    """⚠️ The second step counts under "2fa:<name>". Signing in as "2fa:admin"
+    filled the admin's second-step bucket, from anywhere, without an account."""
+    from app.services import login_guard
+
+    login_guard.reset()
+    setup_admin(client)
+    for _ in range(login_guard.MAX_PER_ACCOUNT):
+        client.post("/api/v1/auth/login", json={"username": "2fa:admin", "password": "wrong"})
+    assert not any(key.startswith("u:2fa:") for key in login_guard._failures)
+    login_guard.reset()
