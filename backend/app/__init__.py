@@ -1,3 +1,3 @@
 """HexDeck: the live homelab dashboard of the nexapps family."""
 
-__version__ = "0.29.0"
+__version__ = "0.29.1"

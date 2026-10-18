@@ -990,6 +990,15 @@
         "Eine als rot gemeldete Karte sagt, wenn sie wieder grün ist.",
         "Apprise wechselt auf 1.13.1 und gibt eingestellte Auth-Header nach einer Weiterleitung nicht mehr an eine andere Seite weiter."
       ]
+    },
+    "0.29.1": {
+      "lead": "HexDeck 0.29.1: ein verschobenes Board bleibt, wo du es ablegst, und nexpaper nennt den letzten Kündigungstag.",
+      "sections": [],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Ein in der Liste verschobenes Board bleibt dort, während der Server speichert, statt kurz zurückzuspringen.",
+        "Die Fristen von nexpaper zeigen den letzten Kündigungstag eines Vertrags neben seinem Ende (nexpaper 1.4.0)."
+      ]
     }
   }
 }
