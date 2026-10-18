@@ -172,7 +172,7 @@ HexDeck speaks plain HTTP on port 8000 and trusts `X-Forwarded-Proto` for its co
 
 ### Two things to decide before the first start
 
-**`HEXDECK_SECRET_KEY` encrypts every stored API key.** Set it yourself on the first start and keep it somewhere safe. Left empty, HexDeck generates one into `/data/secret.key`; lose that file and every connection has to be entered again. Backups leave the key out on purpose, so a restore on another machine needs the same variable.
+**`HEXDECK_SECRET_KEY` encrypts every stored API key.** Set it yourself on the first start, to a random value of 32 characters or more (`openssl rand -base64 48`), and keep it somewhere safe. HexDeck refuses to start with an example value such as `change-me`. Left empty, HexDeck generates one into `/data/secret.key`; lose that file and every connection has to be entered again. Backups leave the key out on purpose, so a restore on another machine needs the same variable.
 
 **A writable Docker socket is root on the host.** Whoever can act on a board that has Docker cards can start, stop and read the logs of any container, which is a step from root on the machine. Mount the socket only if you want those buttons. To see states and logs without handing over the socket, run a read-only proxy such as `tecnativa/docker-socket-proxy` next to HexDeck and point the Docker connection at `tcp://socket-proxy:2375`; with `CONTAINERS=1` and nothing else enabled, the cards show but the buttons refuse.
 
@@ -194,12 +194,13 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
     environment:
-      - HEXDECK_SECRET_KEY=generate-one-and-keep-it
+      - HEXDECK_SECRET_KEY=change-me
       - HEXDECK_PUBLIC_URL=http://truenas.lan:5175
       - PUID=1000
       - PGID=1000
 ```
 
+- Replace `change-me` with the output of `openssl rand -base64 48` before the first start; HexDeck does not start with it.
 - Paths are absolute, under `/mnt/<pool>/…`; make the dataset first, or Docker creates the directory as root and `PUID`/`PGID` fix its ownership on the first start.
 - `PUID`/`PGID` are the owner of the files in the data volume; use the user that owns the dataset.
 - `/host/proc` and `/host/sys` are what the **Host card** reads; they are read-only views of what the kernel already publishes. Leave them out and the card shows the container's own processors and memory, with a line on the card saying so.

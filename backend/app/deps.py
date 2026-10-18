@@ -68,7 +68,7 @@ def _user_from_cookie(request: Request, db: DbSessionType) -> User | None:
     if claims.issued_ms < user.password_changed_ms:
         return None
     _touch_session(db, session)
-    request.state.auth_kind = "session"
+    request.state.auth_kind = "auto" if claims.auto else "session"
     return user
 
 

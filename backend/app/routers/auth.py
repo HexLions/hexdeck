@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException, Request, Response, UploadFile, sta
 from sqlalchemy import func, select
 
 from ..config import get_settings
-from ..deps import COOKIE_NAME, CurrentUser, DbSession, OptionalUser, error
+from ..deps import COOKIE_NAME, CurrentUser, DbSession, OptionalUser, PasswordUser, error
 from ..models import Notice, OidcProvider, Session, User, utcnow
 from ..schemas import (
     LoginBody,
@@ -72,11 +72,11 @@ def user_public(user: User, request: Request | None = None) -> UserPublic:
     )
 
 
-def open_session(db: DbSession, user: User, request: Request, response: Response) -> None:
+def open_session(db: DbSession, user: User, request: Request, response: Response, auto: bool = False) -> None:
     session = Session(user_id=user.id, user_agent=request.headers.get("user-agent", "")[:300])
     db.add(session)
     db.commit()
-    set_session_cookie(response, request, create_session_token(user.id, session.id))
+    set_session_cookie(response, request, create_session_token(user.id, session.id, auto=auto))
     if request.cookies.get(auto_login.MANUAL_COOKIE):
         response.delete_cookie(auto_login.MANUAL_COOKIE, path="/")
 
@@ -85,10 +85,14 @@ def open_session(db: DbSession, user: User, request: Request, response: Response
 def login(body: LoginBody, request: Request, response: Response, db: DbSession) -> UserPublic:
     """Opens a browser session. Wrong attempts are throttled per address."""
     address = auto_login.address_text(request)
+    # ⚠️ No account name has a colon in it, and the second step and the
+    # forgotten password count under "2fa:<name>" and "forgot:<name>". A
+    # sign-in as "2fa:admin" filled the admin's second-step bucket.
+    account = body.username if ":" not in body.username else ""
     try:
         # Counted per address and per account: the address can be spoofed
         # behind a proxy, the account name cannot.
-        login_guard.check(address, body.username)
+        login_guard.check(address, account)
     except login_guard.TooManyAttempts:
         raise error(
             "too_many_attempts",
@@ -102,10 +106,10 @@ def login(body: LoginBody, request: Request, response: Response, db: DbSession) 
     # attempts, it does not hide that difference.
     right = verify_password(body.password, user.password_hash) if user is not None else burn_a_password_check(body.password)
     if user is None or user.disabled or not right:
-        login_guard.failed(address, body.username)
+        login_guard.failed(address, account)
         logger.info("Sign-in refused for %r from %s.", body.username, address)
         raise error("bad_credentials", "User name or password is wrong.", status.HTTP_401_UNAUTHORIZED)
-    login_guard.succeeded(address, body.username)
+    login_guard.succeeded(address, account)
     if two_factor.enabled(user):
         # ⚠️ No session yet. The ticket says the password was right and can be
         # exchanged for a session only together with a code; on its own it
@@ -224,7 +228,7 @@ def me(user: OptionalUser, request: Request, response: Response, db: DbSession) 
         user = auto_login.account_for(db, request)
         if user is None:
             raise error("unauthenticated", "Sign in first.", status.HTTP_401_UNAUTHORIZED)
-        open_session(db, user, request, response)
+        open_session(db, user, request, response, auto=True)
         request.state.auth_kind = "auto"
         logger.info("Signed in as %s by itself, from a trusted network.", user.username)
     return user_public(user, request)
@@ -242,7 +246,7 @@ def auto_sign_in(request: Request, response: Response, db: DbSession) -> UserPub
     user = auto_login.account_for(db, request)
     if user is None:
         raise error("not_trusted", "This address is not on a trusted network.", status.HTTP_403_FORBIDDEN)
-    open_session(db, user, request, response)
+    open_session(db, user, request, response, auto=True)
     response.delete_cookie(auto_login.MANUAL_COOKIE, path="/")
     request.state.auth_kind = "auto"
     logger.info("Signed in as %s from a trusted network, on request.", user.username)
@@ -288,7 +292,7 @@ def delete_avatar(user: CurrentUser, request: Request, db: DbSession) -> UserPub
 
 
 @router.post("/password", status_code=status.HTTP_204_NO_CONTENT, summary="Change own password")
-def change_password(body: PasswordBody, user: CurrentUser, db: DbSession) -> None:
+def change_password(body: PasswordBody, user: PasswordUser, db: DbSession) -> None:
     """Every session of the account is signed out afterwards, this one included.
 
     ⚠️ Deliberate, and a test says so. What was missing is that the interface

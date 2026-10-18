@@ -93,3 +93,19 @@ def test_the_start_does_it_and_says_so(data_dir: Path, monkeypatch: pytest.Monke
     _use(monkeypatch, NEW, None)
     with db_session() as db:
         assert crypto.decrypt(db.get(Integration, integration_id).config["api_key"]) == "the-api-key"
+
+
+@pytest.mark.parametrize("value", ["generate-one-and-keep-it", "change-me", "  "])
+def test_an_example_or_blank_key_stops_the_start(monkeypatch: pytest.MonkeyPatch, value: str) -> None:
+    """⚠️ The README's example value used to be taken as it was, and every
+    session cookie is signed with a key made from it."""
+    from app import main
+
+    monkeypatch.setenv("HEXDECK_SECRET_KEY", value)
+    config.reset_settings_cache()
+    with pytest.raises(SystemExit):
+        main._refuse_example_secret()
+    monkeypatch.setenv("HEXDECK_SECRET_KEY", NEW)
+    config.reset_settings_cache()
+    main._refuse_example_secret()
+    config.reset_settings_cache()
