@@ -173,8 +173,44 @@ MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
 ]
 
 
+def _behind(engine, newest: int) -> int | None:
+    """The schema of an existing database that has steps ahead of it, else None."""
+    tables = set(inspect(engine).get_table_names())
+    if not set(Base.metadata.tables) & tables:
+        return None
+    current = 1
+    if "schema_version" in tables:
+        with engine.connect() as connection:
+            current = int(connection.execute(text("SELECT MAX(version) FROM schema_version")).scalar() or 1)
+    return current if current < newest else None
+
+
+def _snapshot_before_steps(engine, newest: int) -> None:
+    """A snapshot of the database as it was, before any step changes it.
+
+    ⚠️ The operating notes said to take a backup before an update, and an
+    update by Watchtower or a re-pull takes none: the first start of the new
+    image migrated the only copy there was. Taken before ``create_all`` too,
+    so the copy is the old schema exactly. A snapshot that cannot be written
+    is said in the log and the start goes on: refusing would leave the
+    operator without a way in.
+    """
+    current = _behind(engine, newest)
+    if current is None:
+        return
+    from .services import backup
+
+    try:
+        written = backup.create(kind=backup.AUTOMATIC, note=f"before schema {newest}")
+    except Exception:
+        logger.exception("Could not write a snapshot before migrating from schema %d; migrating anyway.", current)
+        return
+    logger.info("Snapshot of schema %d written before migrating: %s", current, written.name)
+
+
 def migrate() -> None:
     engine = get_engine()
+    _snapshot_before_steps(engine, max((number for number, _name, _step in MIGRATIONS), default=0))
     # Asked before ``create_all``, which would answer it the same for every database.
     fresh = not set(Base.metadata.tables) & set(inspect(engine).get_table_names())
     Base.metadata.create_all(engine)

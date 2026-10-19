@@ -88,7 +88,10 @@ docker compose up -d
 ```
 
 The database is migrated on the way up. Migrations only ever add; a version
-that ran once will not run again. **Take a backup first anyway.** The
+that ran once will not run again. When a start has migrations to run, it
+first writes an automatic snapshot of the database as it was, named
+`…-before-schema-N`; it counts among the five automatic ones that are kept.
+**Take a backup first anyway**, an archive kept off the machine: the
 migration is not the risk, the disk is.
 
 Going back to an older image with a newer database is not supported. HexDeck
