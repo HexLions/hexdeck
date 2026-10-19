@@ -70,13 +70,13 @@ def test_waiting_and_several_recipients() -> None:
     adapter = get_adapter("stalwart")
     now = datetime(2026, 10, 19, 16, 40, tzinfo=UTC)
     answers = {"q": {"total": 1}, "g": {"list": [{
-        "nextRetry": "2026-10-19T18:41:00Z", "size": 2048,
+        "nextRetry": "2026-10-19T18:41:00", "size": 2048,
         "recipients": {"a@example.com": {"status": {"@type": "Scheduled"}}, "b@example.com": {"status": {"@type": "Scheduled"}}},
     }]}}
     [row] = adapter._list(answers, {}, now).items
     assert row["title"] == "a@example.com and 1 more"
     assert row["subtitle"] == "Waiting for the first try · 2.0 KB"
-    assert row["value"] == "Retry in 2 h" and row["status"] == "unknown"
+    assert row["value"] == "Retry in 2h 1m" and row["status"] == "unknown"
 
 
 @respx.mock
@@ -113,3 +113,38 @@ def test_the_demo() -> None:
     for tick in range(6):
         assert adapter.demo("summary", {}, tick).primary["label"] == "Queued"
         assert adapter.demo("queue", {}, tick).items
+
+
+@respx.mock
+async def test_refusals_on_the_request_itself(ctx: Context) -> None:
+    respx.get(f"{ST}/jmap/session").mock(return_value=httpx.Response(200, json=FIXTURE["session"]))
+    respx.post(f"{ST}/jmap/").mock(side_effect=[
+        httpx.Response(401, json=FIXTURE["unauthorized"]),
+        httpx.Response(500, text="oops"),
+        httpx.Response(200, json={"methodResponses": [["error", {"type": "serverFail", "description": "store unavailable"}, "q"]]}),
+        httpx.Response(200, json={"methodResponses": "not a list of calls"}),
+    ])
+    adapter = get_adapter("stalwart")
+    with pytest.raises(AuthFailed):
+        await adapter.fetch("queue", CONFIG, {}, ctx)
+    for code in ("http_error", "jmap_error", "not_stalwart"):
+        with pytest.raises(AdapterError) as failure:
+            await adapter.fetch("queue", CONFIG, {}, ctx)
+        assert failure.value.code == code
+
+
+@respx.mock
+async def test_a_session_that_is_not_json(ctx: Context) -> None:
+    respx.get(f"{ST}/jmap/session").mock(return_value=httpx.Response(200, text="<html>"))
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("stalwart").fetch("queue", CONFIG, {}, ctx)
+    assert failure.value.code == "not_stalwart"
+
+
+@respx.mock
+async def test_two_cards_share_one_answer(ctx: Context) -> None:
+    route = _server()
+    adapter = get_adapter("stalwart")
+    await adapter.fetch("queue", CONFIG, {}, ctx)
+    await adapter.fetch("queue", CONFIG, {"limit": 3}, ctx)
+    assert route.call_count == 1, "JMAP is POST, which the engine does not cache"

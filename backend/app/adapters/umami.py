@@ -44,6 +44,7 @@ from .base import (
     WidgetData,
     WidgetType,
     base_url,
+    measured,
 )
 
 TOKEN_KEY = "umami:token"
@@ -52,16 +53,21 @@ MAX_SITES = 10
 DAY_MS = 86_400_000
 
 
-def _count(value: Any) -> int:
+def _count(value: Any) -> int | None:
+    """A number, also from text; None when the answer did not carry one."""
     try:
         return int(float(value))
     except (TypeError, ValueError):
-        return 0
+        return None
+
+
+def _shown(value: int | None) -> int | str:
+    return "?" if value is None else value
 
 
 def _bounce_rate(stats: dict[str, Any]) -> int | None:
-    visits = _count(stats.get("visits"))
-    return round(100 * _count(stats.get("bounces")) / visits) if visits else None
+    visits, bounces = _count(stats.get("visits")), _count(stats.get("bounces"))
+    return round(100 * bounces / visits) if visits and bounces is not None else None
 
 
 class UmamiAdapter(Adapter):
@@ -105,19 +111,22 @@ class UmamiAdapter(Adapter):
                                      json_body={"username": config.get("username"), "password": config.get("password")},
                                      verify=not config.get("insecure"), auth_errors=False)
         if response.status_code in (400, 401, 403):
-            raise AuthFailed("Umami refused the user name or password.")
+            raise AuthFailed("Umami refused the user name or password.", hint="Check them, or use an API key instead.")
         if response.status_code >= 400:
-            raise AdapterError(f"Umami answered the sign-in with HTTP {response.status_code}.", code="http_error")
+            raise AdapterError(f"Umami answered the sign-in with HTTP {response.status_code}.", code="http_error",
+                               hint="Check the URL; it is Umami's own address, without /api.")
         try:
             answer = response.json()
         except ValueError as error:
-            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami") from error
+            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami",
+                               hint="Check the URL; it is Umami's own address, without /api.") from error
         if answer.get("requiresTwoFactor"):
             raise AuthFailed("This account has two-factor sign-in, which a dashboard cannot answer.",
                              hint="Use an API key instead.")
         token = str(answer.get("token") or "")
         if not token:
-            raise AdapterError("Umami signed in without handing over a token.", code="not_umami")
+            raise AdapterError("Umami signed in without handing over a token.", code="not_umami",
+                               hint="Use an API key instead.")
         ctx.cache[TOKEN_KEY] = token
         return token
 
@@ -139,31 +148,35 @@ class UmamiAdapter(Adapter):
         try:
             return response.json()
         except ValueError as error:
-            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami") from error
+            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami",
+                               hint="Check the URL; it is Umami's own address, without /api.") from error
 
-    async def _sites(self, config: dict[str, Any], ctx: Context, cache: float = 300) -> list[dict[str, Any]]:
+    async def _sites(self, config: dict[str, Any], ctx: Context, cache: float = 300) -> tuple[list[dict[str, Any]], int]:
+        """The first hundred sites, and how many there are in all."""
         answer = await self._get(config, ctx, "/api/websites", {"pageSize": 100}, cache=cache)
         if not isinstance(answer, dict) or not isinstance(answer.get("data"), list):
-            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami")
-        return [one for one in answer["data"] if isinstance(one, dict) and one.get("id")]
+            raise AdapterError("This address answers, but not the way Umami does.", code="not_umami",
+                               hint="Check the URL; it is Umami's own address, without /api.")
+        sites = [one for one in answer["data"] if isinstance(one, dict) and one.get("id")]
+        return sites, _count(answer.get("count")) or len(sites)
 
-    async def _numbers(self, config: dict[str, Any], ctx: Context, site: dict[str, Any]) -> tuple[int, dict[str, Any]]:
+    async def _numbers(self, config: dict[str, Any], ctx: Context, site: dict[str, Any]) -> tuple[int | None, dict[str, Any]]:
         site_id = quote(str(site["id"]), safe="")
         # To the minute, so two cards in the same minute share one answer.
         end = int(time.time() // 60 * 60 * 1000)
         active = await self._get(config, ctx, f"/api/websites/{site_id}/active", cache=30)
         stats = await self._get(config, ctx, f"/api/websites/{site_id}/stats", {"startAt": end - DAY_MS, "endAt": end}, cache=60)
-        return _count((active or {}).get("visitors")), stats if isinstance(stats, dict) else {}
+        return _count(active.get("visitors") if isinstance(active, dict) else None), stats if isinstance(stats, dict) else {}
 
     async def test(self, config: dict[str, Any], ctx: Context) -> str:
-        sites = await self._sites(config, ctx, cache=0)
-        return f"Umami answers with {len(sites)} site{'' if len(sites) == 1 else 's'}."
+        _sites, total = await self._sites(config, ctx, cache=0)
+        return f"Umami answers with {total} site{'' if total == 1 else 's'}."
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
-        sites = await self._sites(config, ctx)
+        sites, total = await self._sites(config, ctx)
         if widget_kind == "sites":
             chosen = sorted(sites, key=lambda one: str(one.get("name") or "").lower())[: max(1, min(MAX_SITES, int(options.get("limit") or 5)))]
-            return self._list([(site, *await self._numbers(config, ctx, site)) for site in chosen], len(sites))
+            return self._list([(site, *await self._numbers(config, ctx, site)) for site in chosen], total)
         wanted = str(options.get("website") or "").strip().lower()
         site = next((one for one in sites if not wanted or wanted in (str(one.get("name") or "").lower(), str(one.get("domain") or "").lower())), None)
         if site is None:
@@ -175,29 +188,30 @@ class UmamiAdapter(Adapter):
     # -- the cards -----------------------------------------------------------
 
     @staticmethod
-    def _site(site: dict[str, Any], active: int, stats: dict[str, Any]) -> WidgetData:
+    def _site(site: dict[str, Any], active: int | None, stats: dict[str, Any]) -> WidgetData:
         visitors = _count(stats.get("visitors"))
         secondary: list[dict[str, Any]] = [
-            {"label": "Visitors", "value": visitors},
-            {"label": "Views", "value": _count(stats.get("pageviews"))},
+            {"label": "Visitors", "value": _shown(visitors)},
+            {"label": "Views", "value": _shown(_count(stats.get("pageviews")))},
         ]
         bounce = _bounce_rate(stats)
         if bounce is not None:
             secondary.append({"label": "Bounce rate", "value": bounce, "unit": "%"})
         return WidgetData(
             status="ok",
-            primary={"label": "Right now", "value": active},
+            primary={"label": "Right now", "value": _shown(active)},
             secondary=secondary,
-            metrics={"active": float(active), "visitors": float(visitors)},
+            metrics=measured({"active": None if active is None else float(active),
+                              "visitors": None if visitors is None else float(visitors)}),
         )
 
     @staticmethod
-    def _list(rows: list[tuple[dict[str, Any], int, dict[str, Any]]], total: int) -> WidgetData:
+    def _list(rows: list[tuple[dict[str, Any], int | None, dict[str, Any]]], total: int) -> WidgetData:
         items = [{
             "title": str(site.get("name") or site.get("domain") or "?"),
-            "subtitle": f"{_count(stats.get('visitors'))} visitors · {_count(stats.get('pageviews'))} views in 24 h",
-            "status": "ok" if active else "unknown",
-            "value": f"{active} now",
+            "subtitle": f"{_shown(_count(stats.get('visitors')))} visitors · {_shown(_count(stats.get('pageviews')))} views in 24 h",
+            "status": "ok",
+            "value": f"{_shown(active)} now",
         } for site, active, stats in rows]
         return WidgetData(status="ok", items=items, secondary=[{"label": "Sites", "value": total}],
                           meta={"empty": "Umami has no site yet."})

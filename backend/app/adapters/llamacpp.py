@@ -11,7 +11,7 @@ noticed only on ``/props``, never on the health check.
 
 ⚠️ While the model loads, ``/health`` answers 503 ``{"error": {"message":
 "Loading model", "type": "unavailable_error"}}``. That is a server on its way
-up, not a broken one.
+up, not a broken one, so the cards say so in grey instead of failing.
 
 ⚠️ ``/slots`` and ``/metrics`` can be switched off (``--no-slots``, and
 ``--metrics`` is off by default); they then answer 501 with
@@ -144,7 +144,13 @@ class LlamaCppAdapter(Adapter):
         return f"llama-server {build} answers with {_model_name(props)} on {props.get('total_slots')} slots.".replace("  ", " ")
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
-        props = await self._props(config, ctx)
+        try:
+            props = await self._props(config, ctx)
+        except AdapterError as failure:
+            if failure.code != "loading":
+                raise
+            return WidgetData(status="unknown", primary={"label": "Model", "value": "Loading"},
+                              meta={"empty": "The model is still loading."})
         slots = await self._slots(config, ctx, props)
         if widget_kind == "slots":
             return self._slot_list(slots)
@@ -191,10 +197,12 @@ class LlamaCppAdapter(Adapter):
         items = []
         for one in sorted(slots, key=lambda slot: int(_number(slot.get("id")) or 0)):
             working = bool(one.get("is_processing"))
+            context = _number(one.get("n_ctx"))
             items.append({
                 "title": f"Slot {int(_number(one.get('id')) or 0)}",
-                "subtitle": f"Context {int(_number(one.get('n_ctx')) or 0)}",
-                "status": "warn" if working else "ok",
+                "subtitle": f"{int(context)} tokens of context" if context else "",
+                # Busy is what a slot is for, not something to look at.
+                "status": "ok",
                 "value": "Working" if working else "Idle",
             })
         busy = sum(1 for one in slots if one.get("is_processing"))

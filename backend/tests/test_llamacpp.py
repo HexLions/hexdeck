@@ -69,8 +69,8 @@ async def test_switched_off_endpoints_are_not_asked(ctx: Context) -> None:
 async def test_the_slot_list(ctx: Context) -> None:
     _server()
     data = await get_adapter("llamacpp").fetch("slots", CONFIG, {}, ctx)
-    assert [(one["title"], one["value"], one["status"]) for one in data.items] == [("Slot 0", "Working", "warn"), ("Slot 1", "Idle", "ok")]
-    assert data.items[0]["subtitle"] == "Context 128"
+    assert [(one["title"], one["value"], one["status"]) for one in data.items] == [("Slot 0", "Working", "ok"), ("Slot 1", "Idle", "ok")]
+    assert data.items[0]["subtitle"] == "128 tokens of context"
 
 
 @respx.mock
@@ -90,10 +90,22 @@ async def test_a_wrong_key(ctx: Context) -> None:
 
 @respx.mock
 async def test_a_model_still_loading(ctx: Context) -> None:
+    """A server on its way up is grey, not a failure."""
     respx.get(f"{LL}/health").mock(return_value=httpx.Response(503, json=FIXTURE["loading"]))
-    with pytest.raises(AdapterError) as failure:
-        await get_adapter("llamacpp").fetch("server", CONFIG, {}, ctx)
-    assert failure.value.code == "loading"
+    for kind in ("server", "slots"):
+        data = await get_adapter("llamacpp").fetch(kind, CONFIG, {}, ctx)
+        assert data.status == "unknown" and data.primary == {"label": "Model", "value": "Loading"}
+
+
+@respx.mock
+async def test_a_server_error_and_a_switched_off_endpoint(ctx: Context) -> None:
+    respx.get(f"{LL}/health").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+    respx.get(f"{LL}/props").mock(return_value=httpx.Response(200, json=FIXTURE["props"]))
+    respx.get(f"{LL}/slots").mock(side_effect=[httpx.Response(501, json=FIXTURE["slots_off"]), httpx.Response(500)])
+    for code in ("not_supported", "http_error"):
+        with pytest.raises(AdapterError) as failure:
+            await get_adapter("llamacpp").fetch("slots", CONFIG, {}, Context(httpx.AsyncClient(), integration_id=1, widget_id=1, cache={}))
+        assert failure.value.code == code
 
 
 @respx.mock

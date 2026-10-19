@@ -34,6 +34,8 @@ failed one.
 
 from __future__ import annotations
 
+import json
+import time
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -47,6 +49,7 @@ from .base import (
     WidgetData,
     WidgetType,
     base_url,
+    duration_short,
     human_bytes,
 )
 
@@ -54,26 +57,23 @@ USING = ["urn:ietf:params:jmap:core", "urn:stalwart:jmap"]
 NOT_STALWART = "This address answers, but not the way Stalwart 0.16 or later does."
 #: Queued messages read for the list; the total is counted by the server.
 LIMIT = 50
+#: JMAP is all POST, which the engine does not cache; the cards keep the answer this long.
+ANSWER_SECONDS = 30
 
 
 def _when(value: Any) -> datetime | None:
     try:
-        return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        moment = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
     except ValueError:
         return None
+    return moment if moment.tzinfo else moment.replace(tzinfo=UTC)
 
 
 def _in(moment: datetime | None, now: datetime) -> str:
     if moment is None:
         return ""
-    seconds = int((moment - now).total_seconds())
-    if seconds <= 0:
-        return "now"
-    if seconds < 3600:
-        return f"in {max(1, seconds // 60)} min"
-    if seconds < 86400:
-        return f"in {seconds // 3600} h"
-    return f"in {seconds // 86400} d"
+    seconds = (moment - now).total_seconds()
+    return "now" if seconds <= 0 else f"in {duration_short(seconds)}"
 
 
 class StalwartAdapter(Adapter):
@@ -132,23 +132,27 @@ class StalwartAdapter(Adapter):
         account = await self._account(config, ctx, cache=cache)
         for call in calls:
             call[1] = {"accountId": account, **call[1]}
+        key = "stalwart:" + json.dumps(calls, sort_keys=True)
+        kept = ctx.cache.get(key)
+        if kept and kept[0] > time.monotonic():
+            return kept[1]
         response = await ctx.request("POST", f"{base_url(config)}/jmap/", headers=self._headers(config),
                                      json_body={"using": USING, "methodCalls": calls},
                                      verify=not config.get("insecure"), auth_errors=False)
         self._refused(response.status_code)
-        try:
-            answers = response.json()["methodResponses"]
-        except (ValueError, KeyError, TypeError) as error:
-            raise AdapterError(NOT_STALWART, code="not_stalwart") from error
         by_id: dict[str, Any] = {}
-        for name, body, call_id in answers:
-            if name == "error":
+        try:
+            for name, body, call_id in response.json()["methodResponses"]:
+                if name != "error":
+                    by_id[call_id] = body
+                    continue
                 if body.get("type") != "forbidden":
                     raise AdapterError(f"Stalwart refused a request: {body.get('description') or body.get('type')}.",
-                                       code="jmap_error")
+                                       code="jmap_error", hint="Stalwart's own log says more.")
                 by_id[call_id] = None
-            else:
-                by_id[call_id] = body
+        except (ValueError, KeyError, TypeError, AttributeError) as error:
+            raise AdapterError(NOT_STALWART, code="not_stalwart", hint="The URL probably points at something else.") from error
+        ctx.cache[key] = (time.monotonic() + ANSWER_SECONDS, by_id)
         return by_id
 
     async def _queue(self, config: dict[str, Any], ctx: Context, *, counts: bool) -> dict[str, Any]:

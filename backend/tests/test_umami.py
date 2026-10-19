@@ -122,3 +122,33 @@ def test_the_demo() -> None:
     for tick in range(0, 100, 9):
         assert adapter.demo("site", {}, tick).primary["label"] == "Right now"
         assert len(adapter.demo("sites", {}, tick).items) == 3
+
+
+@respx.mock
+async def test_a_number_the_answer_did_not_carry(ctx: Context) -> None:
+    """Shown as unknown and kept out of the history, not written down as 0."""
+    respx.get(f"{UM}/api/websites").mock(return_value=httpx.Response(200, json=SITES))
+    respx.get(url__regex=rf"{UM}/api/websites/[^/]+/active").mock(return_value=httpx.Response(200, json={}))
+    respx.get(url__regex=rf"{UM}/api/websites/[^/]+/stats.*").mock(return_value=httpx.Response(200, json={"pageviews": 4}))
+    data = await get_adapter("umami").fetch("site", KEY, {}, ctx)
+    assert data.primary["value"] == "?" and data.secondary[0] == {"label": "Visitors", "value": "?"}
+    assert data.metrics == {}
+
+
+@respx.mock
+async def test_more_sites_than_one_page(ctx: Context) -> None:
+    _server()
+    respx.get(f"{UM}/api/websites").mock(return_value=httpx.Response(200, json={**SITES, "count": 140}))
+    data = await get_adapter("umami").fetch("sites", KEY, {}, ctx)
+    assert data.secondary == [{"label": "Sites", "value": 140}]
+
+
+@respx.mock
+async def test_errors_and_something_else(ctx: Context) -> None:
+    respx.get(f"{UM}/api/websites").mock(side_effect=[httpx.Response(500), httpx.Response(200, text="<html>")])
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("umami").fetch("site", KEY, {}, ctx)
+    assert failure.value.code == "http_error"
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("umami").fetch("site", KEY, {}, Context(httpx.AsyncClient(), integration_id=1, widget_id=1, cache={}))
+    assert failure.value.code == "not_umami"
