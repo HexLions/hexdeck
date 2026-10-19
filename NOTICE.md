@@ -501,6 +501,11 @@ Updated at every milestone.
   running locally, set up through its bootstrap, with messages to addresses
   that cannot be reached, a key with every permission, one with the queue
   only, and a wrong key.
+- **Umami from its source.** The site list, the visitors of the last five
+  minutes and the statistics of the last day, in the shapes the routes and
+  queries of release v3.4.0 build, with an API key or a sign-in. Its build
+  needed more memory than the machine it was written on had, so it was not
+  run.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

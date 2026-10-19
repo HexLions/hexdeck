@@ -2404,7 +2404,12 @@
     "Mail server": "Mailserver",
     "Messages waiting in the queue, accounts and domains.": "Nachrichten in der Warteschlange, Konten und Domains.",
     "Stalwart mail server: the outgoing queue with why each message waits, and its accounts and domains.": "Stalwart-Mailserver: die ausgehende Warteschlange mit dem Grund, warum jede Nachricht wartet, und seine Konten und Domains.",
-    "The web address of Stalwart, where its admin interface is.": "Die Webadresse von Stalwart, unter der seine Verwaltungsoberfläche liegt."
+    "The web address of Stalwart, where its admin interface is.": "Die Webadresse von Stalwart, unter der seine Verwaltungsoberfläche liegt.",
+    "An Umami 3 API key (umami_...), from Settings > API keys. Or leave it empty and sign in below.": "Ein API-Schlüssel von Umami 3 (umami_...), unter Einstellungen > API-Schlüssel. Oder leer lassen und unten anmelden.",
+    "Every site with its visitors right now and over the last 24 hours.": "Jede Website mit ihren Besuchern jetzt und in den letzten 24 Stunden.",
+    "Its name or domain. Empty means the first site.": "Ihr Name oder ihre Domain. Leer bedeutet die erste Website.",
+    "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Umami-Webanalyse: Besucher auf jeder Website jetzt, und Besucher und Aufrufe in den letzten 24 Stunden.",
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Besucher jetzt, und Besucher, Aufrufe und Absprungrate in den letzten 24 Stunden."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3602,6 +3607,8 @@
     "Last day to cancel": "Letzter Kündigungstag",
     "Busy slots": "Belegte Slots",
     "Generation": "Generierung",
-    "Prompt": "Prompt"
+    "Prompt": "Prompt",
+    "Bounce rate": "Absprungrate",
+    "Right now": "Gerade jetzt"
   }
 }

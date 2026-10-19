@@ -137,6 +137,7 @@ that one of thirty-five renderers draws.
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
+| Umami | site, sites | | an Umami 3 API key (`umami_...`) as a bearer token, or a user name and password for `POST /api/auth/login`, whose token is signed in again once after a 401. Umami answers 401 also for a site the account may not see. Visitors right now are the sessions of the last five minutes; the rest covers the last 24 hours. Written from the source of v3.4.0, not yet run against an installation |
 | JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |

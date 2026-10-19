@@ -12,6 +12,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   how fast it generates. ⚠️ Beta.
 - **Stalwart**: the outgoing mail queue with why each message waits, and
   how many accounts and domains the server holds. ⚠️ Beta.
+- **Umami**: visitors on each site right now, and visitors, views and
+  bounce rate over the last 24 hours. ⚠️ Beta.
 
 ## 0.29.2 (2026-10-18)
 
