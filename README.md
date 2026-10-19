@@ -130,6 +130,8 @@ Mount `/var/run/docker.sock` (already in the compose file) to see this host's co
 |---|---|---|
 | `HEXDECK_SECRET_KEY` | generated into `/data/secret.key` | Encrypts stored API keys and signs sessions. Set it once and keep it. |
 | `HEXDECK_SECRET_KEY_PREVIOUS` | empty | The key before a change. On the next start every stored API key moves to the new key; remove it afterwards. See [Changing the secret key](docs/operating.md#changing-the-secret-key). |
+| `HEXDECK_SECRET_KEY_FILE` | empty | A file holding the key instead, such as a Docker secret (`/run/secrets/hexdeck_key`). Not together with `HEXDECK_SECRET_KEY`. |
+| `HEXDECK_SECRET_KEY_PREVIOUS_FILE` | empty | The same for the previous key. |
 | `HEXDECK_PUBLIC_URL` | empty | How browsers reach HexDeck. Needed for OpenID Connect and Web Push. |
 | `HEXDECK_DEMO` | `0` | Start every widget with invented data. |
 | `HEXDECK_LOG_LEVEL` | `INFO` | `DEBUG` logs every adapter request. |
@@ -172,7 +174,7 @@ HexDeck speaks plain HTTP on port 8000 and trusts `X-Forwarded-Proto` for its co
 
 ### Two things to decide before the first start
 
-**`HEXDECK_SECRET_KEY` encrypts every stored API key.** Set it yourself on the first start, to a random value of 32 characters or more (`openssl rand -base64 48`), and keep it somewhere safe. HexDeck refuses to start with an example value such as `change-me`. Left empty, HexDeck generates one into `/data/secret.key`; lose that file and every connection has to be entered again. Backups leave the key out on purpose, so a restore on another machine needs the same variable.
+**`HEXDECK_SECRET_KEY` encrypts every stored API key.** Set it yourself on the first start, to a random value of 32 characters or more (`openssl rand -base64 48`), and keep it somewhere safe. HexDeck refuses to start with an example value such as `change-me`. To keep it out of the compose file, put it in a Docker secret and point `HEXDECK_SECRET_KEY_FILE` at it. Left empty, HexDeck generates one into `/data/secret.key`; lose that file and every connection has to be entered again. Backups leave the key out on purpose, so a restore on another machine needs the same variable.
 
 **A writable Docker socket is root on the host.** Whoever can act on a board that has Docker cards can start, stop and read the logs of any container, which is a step from root on the machine. Mount the socket only if you want those buttons. To see states and logs without handing over the socket, run a read-only proxy such as `tecnativa/docker-socket-proxy` next to HexDeck and point the Docker connection at `tcp://socket-proxy:2375`; with `CONTAINERS=1` and nothing else enabled, the cards show but the buttons refuse.
 
