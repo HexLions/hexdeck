@@ -5,9 +5,27 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.30.0 (2026-10-19)
+
+A page that says how every card is read, a snapshot before each update of the
+database, the secret key from a file, and three integrations.
 
 ### Added
+
+- **System > Card status.** For administrators: every card that is being
+  read, when it was last read, how long it took, when it is read next, how
+  many failures in a row have slowed it down, and for an unexpected failure
+  the reason the card itself keeps to the server log.
+- **A snapshot before the database is migrated.** A start with migrations
+  to run first writes an automatic snapshot of the database as it was,
+  named `…-before-schema-N`. An update by Watchtower or a re-pull took no
+  backup before.
+- **`HEXDECK_SECRET_KEY_FILE`** and `HEXDECK_SECRET_KEY_PREVIOUS_FILE` read
+  the keys from files such as Docker secrets, so the key need not sit in
+  the compose file.
+- **The command palette finds the links on the board.** Bookmarks, link
+  buttons and the saved links of Karakeep, Linkwarden and Linkding cards
+  appear as a Link group in Ctrl+K. From nexdeck 0.42.0.
 - **llama.cpp server**: the model it serves, how many slots are busy, and
   how fast it generates. ⚠️ Beta.
 - **Stalwart**: the outgoing mail queue with why each message waits, and

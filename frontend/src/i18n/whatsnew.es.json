@@ -257,6 +257,27 @@
         "HexDeck ya no arranca con una HEXDECK_SECRET_KEY de ejemplo o vacía, y avisa si tiene menos de 32 caracteres.",
         "Un nombre de inicio de sesión con dos puntos ya no cuenta contra el segundo paso de otra cuenta."
       ]
+    },
+    "0.30.0": {
+      "lead": "HexDeck 0.30.0: una página que dice cómo se lee cada tarjeta, una copia antes de cada actualización de la base de datos, y tres integraciones.",
+      "sections": [
+        {
+          "title": "Estado de las tarjetas",
+          "body": "Cuándo se leyó cada tarjeta por última vez, cuánto tardó, cuándo se lee de nuevo y por qué falla una, con el motivo que antes estaba solo en el registro del servidor.",
+          "path": "Sistema > Estado de las tarjetas"
+        },
+        {
+          "title": "Tres integraciones",
+          "body": "llama.cpp server, Stalwart y Umami: el modelo y su velocidad, la cola de correo y por qué espera un mensaje, los visitantes ahora.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Antes de migrar la base de datos, un arranque escribe una copia de ella tal como era.",
+        "La clave secreta puede venir de un archivo, como un secreto de Docker, con HEXDECK_SECRET_KEY_FILE.",
+        "Ctrl+K encuentra los enlaces del tablero: marcadores, botones de enlace y enlaces guardados."
+      ]
     }
   }
 }
