@@ -1027,6 +1027,27 @@
         "HexDeck startet nicht mehr mit einem Beispiel- oder leeren HEXDECK_SECRET_KEY und warnt bei einem unter 32 Zeichen.",
         "Ein Anmeldename mit Doppelpunkt zählt nicht mehr gegen den zweiten Schritt eines anderen Kontos."
       ]
+    },
+    "0.30.0": {
+      "lead": "HexDeck 0.30.0: eine Seite, die zeigt, wie jede Karte gelesen wird, eine Sicherung vor jeder Aktualisierung der Datenbank, und drei Integrationen.",
+      "sections": [
+        {
+          "title": "Kartenstatus",
+          "body": "Wann jede Karte zuletzt gelesen wurde, wie lange es dauerte, wann sie als Nächstes gelesen wird und warum eine fehlschlägt, mit dem Grund, der vorher nur im Server-Log stand.",
+          "path": "System > Kartenstatus"
+        },
+        {
+          "title": "Drei Integrationen",
+          "body": "llama.cpp server, Stalwart und Umami: das Modell und seine Geschwindigkeit, die Mail-Warteschlange und warum eine Nachricht wartet, die Besucher jetzt.",
+          "path": "System > Anbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Vor der Migration der Datenbank schreibt ein Start eine Kopie, wie sie war.",
+        "Der geheime Schlüssel kann aus einer Datei kommen, etwa einem Docker-Secret, mit HEXDECK_SECRET_KEY_FILE.",
+        "Strg+K findet die Links auf dem Board: Lesezeichen, Link-Schaltflächen und gespeicherte Links."
+      ]
     }
   }
 }

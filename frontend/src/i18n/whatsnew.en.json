@@ -1027,6 +1027,27 @@
         "HexDeck no longer starts with an example or blank HEXDECK_SECRET_KEY, and warns about one shorter than 32 characters.",
         "A sign-in name with a colon no longer counts against another account's second step."
       ]
+    },
+    "0.30.0": {
+      "lead": "HexDeck 0.30.0: a page that says how every card is read, a snapshot before each update of the database, and three integrations.",
+      "sections": [
+        {
+          "title": "Card status",
+          "body": "When every card was last read, how long it took, when it is read next and why one fails, with the reason that used to be only in the server log.",
+          "path": "System > Card status"
+        },
+        {
+          "title": "Three integrations",
+          "body": "llama.cpp server, Stalwart and Umami: the model and its speed, the mail queue and why a message waits, the visitors right now.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Before migrating the database, a start writes a snapshot of it as it was.",
+        "The secret key can come from a file, such as a Docker secret, with HEXDECK_SECRET_KEY_FILE.",
+        "Ctrl+K finds the links on the board: bookmarks, link buttons and saved links."
+      ]
     }
   }
 }

@@ -401,6 +401,27 @@
         "HexDeck non parte più con una HEXDECK_SECRET_KEY d'esempio o vuota, e avvisa se è più corta di 32 caratteri.",
         "Un nome di accesso con i due punti non conta più sul secondo fattore di un altro account."
       ]
+    },
+    "0.30.0": {
+      "lead": "HexDeck 0.30.0: una pagina che dice come viene letta ogni card, un backup prima di ogni aggiornamento del database, e tre integrazioni.",
+      "sections": [
+        {
+          "title": "Stato delle card",
+          "body": "Quando ogni card è stata letta l'ultima volta, quanto ci ha messo, quando verrà letta di nuovo e perché una fallisce, con il motivo che prima stava solo nel log del server.",
+          "path": "Sistema > Stato delle card"
+        },
+        {
+          "title": "Tre integrazioni",
+          "body": "llama.cpp server, Stalwart e Umami: il modello e la sua velocità, la coda della posta e perché un messaggio aspetta, i visitatori adesso.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Prima di migrare il database, l'avvio ne scrive una copia com'era.",
+        "La chiave segreta può arrivare da un file, come un Docker secret, con HEXDECK_SECRET_KEY_FILE.",
+        "Ctrl+K trova i link della board: segnalibri, pulsanti link e link salvati."
+      ]
     }
   }
 }
