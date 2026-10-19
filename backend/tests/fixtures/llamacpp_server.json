@@ -1,0 +1,96 @@
+{
+ "props": {
+  "default_generation_settings": {
+   "n_ctx": 128
+  },
+  "total_slots": 2,
+  "model_alias": "stories15M",
+  "model_ftype": "Q4_0",
+  "model_path": "/models/stories15M-q4_0.gguf",
+  "modalities": {
+   "vision": false,
+   "video": false,
+   "audio": false
+  },
+  "media_marker": "<__media_wmLXdvOmSi1QPdAWatoqW3lLDFWdTZZE__>",
+  "endpoint_slots": true,
+  "endpoint_props": false,
+  "endpoint_metrics": true,
+  "ui": true,
+  "ui_settings": {},
+  "chat_template_caps": {
+   "supports_object_arguments": false,
+   "supports_parallel_tool_calls": false,
+   "supports_preserve_reasoning": false,
+   "supports_reasoning_effort": false,
+   "supports_string_content": true,
+   "supports_system_role": true,
+   "supports_tool_calls": false,
+   "supports_tools": false,
+   "supports_typed_content": false
+  },
+  "bos_token": "<s>",
+  "eos_token": "</s>",
+  "build_info": "b11734-f3fb2fcdb",
+  "is_sleeping": false,
+  "cors_proxy_enabled": false
+ },
+ "slots_idle": [
+  {
+   "id": 0,
+   "n_ctx": 128,
+   "speculative": false,
+   "is_processing": false
+  },
+  {
+   "id": 1,
+   "n_ctx": 128,
+   "speculative": false,
+   "is_processing": false
+  }
+ ],
+ "slots_busy": [
+  {
+   "id": 0,
+   "n_ctx": 128,
+   "speculative": false,
+   "is_processing": true,
+   "id_task": 170,
+   "n_prompt_tokens": 6,
+   "n_prompt_tokens_processed": 1,
+   "n_prompt_tokens_cache": 4,
+   "params": {
+    "n_predict": 120
+   }
+  },
+  {
+   "id": 1,
+   "n_ctx": 128,
+   "speculative": false,
+   "is_processing": false
+  }
+ ],
+ "metrics_busy": "# HELP llamacpp:prompt_tokens_total Number of prompt tokens processed, excluding cached tokens\n# TYPE llamacpp:prompt_tokens_total counter\nllamacpp:prompt_tokens_total 7\n# HELP llamacpp:prompt_tokens_cached_total Number of prompt tokens reused from the cache\n# TYPE llamacpp:prompt_tokens_cached_total counter\nllamacpp:prompt_tokens_cached_total 8\n# HELP llamacpp:prompt_seconds_total Total time spent processing prompts\n# TYPE llamacpp:prompt_seconds_total counter\nllamacpp:prompt_seconds_total 0.014661\n# HELP llamacpp:tokens_predicted_total Number of generation tokens processed\n# TYPE llamacpp:tokens_predicted_total counter\nllamacpp:tokens_predicted_total 163\n# HELP llamacpp:tokens_predicted_seconds_total Total time spent generating tokens\n# TYPE llamacpp:tokens_predicted_seconds_total counter\nllamacpp:tokens_predicted_seconds_total 0.109218\n# HELP llamacpp:n_decode_total Total number of llama_decode() calls, excluding speculative decoding and multimodal decoding\n# TYPE llamacpp:n_decode_total counter\nllamacpp:n_decode_total 164\n# HELP llamacpp:n_tokens_max Largest observed sequence length (prompt + generation)\n# TYPE llamacpp:n_tokens_max counter\nllamacpp:n_tokens_max 127\n# HELP llamacpp:spec_decode_num_draft_tokens_total Speculative: Total draft tokens generated\n# TYPE llamacpp:spec_decode_num_draft_tokens_total counter\nllamacpp:spec_decode_num_draft_tokens_total 0\n# HELP llamacpp:spec_decode_num_accepted_tokens_total Speculative: Total draft tokens accepted by the target model\n# TYPE llamacpp:spec_decode_num_accepted_tokens_total counter\nllamacpp:spec_decode_num_accepted_tokens_total 0\n# HELP llamacpp:spec_decode_num_drafts_total Speculative: Total speculative decoding verification steps\n# TYPE llamacpp:spec_decode_num_drafts_total counter\nllamacpp:spec_decode_num_drafts_total 0\n# HELP llamacpp:prompt_tokens_seconds Average prompt throughput in tokens/s\n# TYPE llamacpp:prompt_tokens_seconds gauge\nllamacpp:prompt_tokens_seconds 310.849\n# HELP llamacpp:predicted_tokens_seconds Average generation throughput in tokens/s\n# TYPE llamacpp:predicted_tokens_seconds gauge\nllamacpp:predicted_tokens_seconds 0\n# HELP llamacpp:requests_processing Number of requests processing\n# TYPE llamacpp:requests_processing gauge\nllamacpp:requests_processing 1\n# HELP llamacpp:requests_deferred Number of requests deferred\n# TYPE llamacpp:requests_deferred gauge\nllamacpp:requests_deferred 0\n# HELP llamacpp:n_busy_slots_per_decode Average number of busy slots per llama_decode() call\n# TYPE llamacpp:n_busy_slots_per_decode gauge\nllamacpp:n_busy_slots_per_decode 1\n",
+ "unauthorized": {
+  "error": {
+   "message": "Invalid API Key",
+   "type": "authentication_error",
+   "code": 401
+  }
+ },
+ "loading": {
+  "error": {
+   "message": "Loading model",
+   "type": "unavailable_error",
+   "code": 503
+  }
+ },
+ "slots_off": {
+  "error": {
+   "code": 501,
+   "message": "This server does not support slots endpoint. Start it with `--slots`",
+   "type": "not_supported_error"
+  }
+ },
+ "props_no_alias_model_alias": "/models/stories15M-q4_0.gguf"
+}

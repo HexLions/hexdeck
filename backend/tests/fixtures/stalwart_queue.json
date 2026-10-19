@@ -1,0 +1,221 @@
+{
+ "session": {
+  "capabilities": {
+   "urn:ietf:params:jmap:core": {},
+   "urn:ietf:params:jmap:mail": {},
+   "urn:ietf:params:jmap:calendars": {},
+   "urn:ietf:params:jmap:calendars:parse": {},
+   "urn:ietf:params:jmap:contacts": {},
+   "urn:ietf:params:jmap:contacts:parse": {},
+   "urn:ietf:params:jmap:filenode": {},
+   "urn:ietf:params:jmap:principals": {},
+   "urn:ietf:params:jmap:principals:availability": {},
+   "urn:ietf:params:jmap:submission": {},
+   "urn:ietf:params:jmap:vacationresponse": {},
+   "urn:ietf:params:jmap:sieve": {},
+   "urn:ietf:params:jmap:blob": {},
+   "urn:ietf:params:jmap:quota": {},
+   "urn:ietf:params:jmap:emailpush": {},
+   "urn:ietf:params:jmap:webpush-vapid": {},
+   "urn:ietf:params:jmap:websocket": {}
+  },
+  "accounts": {
+   "b": {
+    "name": "admin@example.org",
+    "isPersonal": true,
+    "isReadOnly": false
+   }
+  },
+  "primaryAccounts": {
+   "urn:ietf:params:jmap:websocket": "b",
+   "urn:ietf:params:jmap:principals": "b",
+   "urn:ietf:params:jmap:principals:availability": "b",
+   "urn:stalwart:jmap": "b"
+  },
+  "username": "admin@example.org",
+  "apiUrl": "https://mail.example.org/jmap/",
+  "state": "8482a13b"
+ },
+ "answers_full_key": {
+  "methodResponses": [
+   [
+    "x:QueuedMessage/query",
+    {
+     "accountId": "b",
+     "queryState": "n",
+     "canCalculateChanges": true,
+     "position": 0,
+     "ids": [
+      "jkjscieaaaaa"
+     ],
+     "total": 1
+    },
+    "q"
+   ],
+   [
+    "x:QueuedMessage/get",
+    {
+     "accountId": "b",
+     "list": [
+      {
+       "createdAt": "2026-10-19T16:40:00Z",
+       "nextRetry": "2026-10-19T16:42:01Z",
+       "returnPath": "admin@example.org",
+       "recipients": {
+        "someone@mail-nowhere.example.net": {
+         "retryCount": 1,
+         "retryDue": "2026-10-19T16:42:01Z",
+         "notifyCount": 0,
+         "notifyDue": "2026-10-20T16:40:00Z",
+         "expires": {
+          "expiresAt": "2026-10-22T16:40:00Z",
+          "@type": "Ttl"
+         },
+         "queueName": "remote",
+         "status": {
+          "errorType": "dnsError",
+          "errorMessage": "No IP addresses found for Borrowed(\"mail-nowhere.example.net\").",
+          "errorCommand": null,
+          "responseHostname": "mail-nowhere.example.net",
+          "responseCode": null,
+          "responseEnhanced": null,
+          "responseMessage": null,
+          "@type": "TemporaryFailure"
+         },
+         "flags": {},
+         "orcpt": null
+        }
+       },
+       "size": 93,
+       "id": "jkjscieaaaaa"
+      }
+     ],
+     "notFound": []
+    },
+    "g"
+   ],
+   [
+    "x:Account/query",
+    {
+     "accountId": "b",
+     "queryState": "n",
+     "canCalculateChanges": true,
+     "position": 0,
+     "ids": [
+      "b"
+     ],
+     "total": 1,
+     "limit": 0
+    },
+    "a"
+   ],
+   [
+    "x:Domain/query",
+    {
+     "accountId": "b",
+     "queryState": "n",
+     "canCalculateChanges": true,
+     "position": 0,
+     "ids": [
+      "b"
+     ],
+     "total": 1,
+     "limit": 0
+    },
+    "d"
+   ]
+  ],
+  "sessionState": "8482a13b"
+ },
+ "answers_queue_only_key": {
+  "methodResponses": [
+   [
+    "x:QueuedMessage/query",
+    {
+     "accountId": "b",
+     "queryState": "n",
+     "canCalculateChanges": true,
+     "position": 0,
+     "ids": [
+      "jkjscieaaaaa"
+     ],
+     "total": 1
+    },
+    "q"
+   ],
+   [
+    "x:QueuedMessage/get",
+    {
+     "accountId": "b",
+     "list": [
+      {
+       "createdAt": "2026-10-19T16:40:00Z",
+       "nextRetry": "2026-10-19T16:42:01Z",
+       "returnPath": "admin@example.org",
+       "recipients": {
+        "someone@mail-nowhere.example.net": {
+         "retryCount": 1,
+         "retryDue": "2026-10-19T16:42:01Z",
+         "notifyCount": 0,
+         "notifyDue": "2026-10-20T16:40:00Z",
+         "expires": {
+          "expiresAt": "2026-10-22T16:40:00Z",
+          "@type": "Ttl"
+         },
+         "queueName": "remote",
+         "status": {
+          "errorType": "dnsError",
+          "errorMessage": "No IP addresses found for Borrowed(\"mail-nowhere.example.net\").",
+          "errorCommand": null,
+          "responseHostname": "mail-nowhere.example.net",
+          "responseCode": null,
+          "responseEnhanced": null,
+          "responseMessage": null,
+          "@type": "TemporaryFailure"
+         },
+         "flags": {},
+         "orcpt": null
+        }
+       },
+       "size": 93,
+       "id": "jkjscieaaaaa"
+      }
+     ],
+     "notFound": []
+    },
+    "g"
+   ],
+   [
+    "error",
+    {
+     "type": "forbidden",
+     "description": "You are not authorized to perform this action"
+    },
+    "a"
+   ],
+   [
+    "error",
+    {
+     "type": "forbidden",
+     "description": "You are not authorized to perform this action"
+    },
+    "d"
+   ]
+  ],
+  "sessionState": "8482a13b"
+ },
+ "unauthorized": {
+  "type": "about:blank",
+  "status": 401,
+  "title": "Unauthorized",
+  "detail": "You have to authenticate first."
+ },
+ "metric_query_community": [
+  "error",
+  {
+   "type": "forbidden",
+   "description": "This feature is only available in the Enterprise edition. Obtain your trial license at https://license.stalw.art/trial."
+  },
+  "m"
+ ]
+}

@@ -40,6 +40,7 @@ that one of thirty-five renderers draws.
 | Komodo | stacks, deployments, overview | restart a stack | API key and secret of a user, best a service user, with Read on stacks, deployments and servers and Execute on a stack to restart it; Komodo 2 |
 | Netdata | raised alerts, load per node, alerts | | none; the agent's API is open, and a parent answers for every node that streams to it |
 | Ollama | loaded models, installed models, models | unload a model | none; Ollama has no sign-in, so its port stays inside the network |
+| llama.cpp server | server, slots | | the `--api-key` the server was started with, as a bearer token, or nothing. `/health` answers without it, so a wrong key shows on `/props`. A 503 while the model loads is said as such. `/slots` and `/metrics` are asked only when `/props` says they are on; the speed is the counters' average since the start, because the `*_tokens_seconds` gauges reset on every read |
 | Open WebUI | users, models, accounts | | API key of an administrator from Settings > Account > API keys; API keys have to be switched on in the admin settings, they are off by default |
 | Watchtower | last update run | run now | API token (WATCHTOWER_HTTP_API_TOKEN), with metrics and update switched on in WATCHTOWER_HTTP_API_ENDPOINTS; the maintained fork nickfedor/watchtower |
 | What's Up Docker | container updates, updates waiting | update a container WUD has a Docker trigger for, check now | API token from My Profile, WUD 9 or newer; read for the cards, write for the buttons |
@@ -73,6 +74,7 @@ that one of thirty-five renderers draws.
 | Matrix Synapse | server, rooms, federation | | the access token of a server admin, as a Bearer token, to `/_synapse/admin`; a reverse proxy often keeps that path from the outside, so use an address where it is open. The federation list is read by name, a thousand servers at most, as Synapse's documentation advises |
 | CrowdSec | blocked addresses, blocked | | bouncer key from `cscli bouncers add`; it may read decisions and nothing else |
 | mailcow | status, mail queue, mailboxes | | an API key in an `X-API-Key` header; the read-only one is enough, and HexDeck's address has to be in its allowed list unless Skip IP check is ticked. A wrong key counts as a failed login in mailcow's own fail2ban, so a card left with one can get HexDeck's address banned; the card says whether the key or the address was refused |
+| Stalwart | mail server, mail queue | | an API key (`API_...`) as a bearer token, with the permissions to query and get queued messages and, for the counts, to query accounts and domains; a count the key may not read is left out. 0.16 or later: everything goes through JMAP with `urn:stalwart:jmap`, the REST management API of earlier versions is gone. A message that failed for good leaves the queue at once, so the queue shows what will be tried again, with the reason of the last try |
 | Shlink | short URLs, visits | | API key from `shlink api-key:generate` |
 | Blocky | blocking, top blocked | pause 5 min, enable | none; Blocky's API has no sign-in, so its HTTP port stays inside the network, and statistics.enable has to be on (Blocky 0.35 or newer) |
 | Gatus | endpoints, endpoint health | | user and password of security.basic, or nothing when Gatus has no security section |
@@ -135,6 +137,7 @@ that one of thirty-five renderers draws.
 | Alertmanager | alerts, firing alerts, silences | | none, or basic auth when its web configuration or a proxy asks for it. API v2; only the version and the cluster are read from /api/v2/status, never the configuration it carries |
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
+| Umami | site, sites | | an Umami 3 API key (`umami_...`) as a bearer token, or a user name and password for `POST /api/auth/login`, whose token is signed in again once after a 401. Umami answers 401 also for a site the account may not see. Visitors right now are the sessions of the last five minutes; the rest covers the last 24 hours. Written from the source of v3.4.0, not yet run against an installation |
 | JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |

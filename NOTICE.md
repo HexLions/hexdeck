@@ -489,6 +489,23 @@ Updated at every milestone.
   are read in the shapes the controllers of release v0.7.10 build, every
   moment in milliseconds as its JSON provider writes them. Its backend wants
   Python 3.14 and a library that did not build here, so it was not run.
+- **llama.cpp's server from the endpoints it documents.** `/health`, `/props`,
+  `/slots` and the Prometheus text of `/metrics`, the last two only when
+  `/props` says they are switched on. Checked against llama-server b11734
+  running locally with a 19 MB test model, two slots, an API key, a wrong
+  key, a model still loading and both endpoints switched off.
+- **Stalwart through JMAP.** Version 0.16 dropped the REST management API;
+  the queue, the accounts and the domains are read as `x:QueuedMessage`,
+  `x:Account` and `x:Domain` objects of its `urn:stalwart:jmap` capability,
+  for the account the session names. Checked against Stalwart v0.16.27
+  running locally, set up through its bootstrap, with messages to addresses
+  that cannot be reached, a key with every permission, one with the queue
+  only, and a wrong key.
+- **Umami from its source.** The site list, the visitors of the last five
+  minutes and the statistics of the last day, in the shapes the routes and
+  queries of release v3.4.0 build, with an API key or a sign-in. Its build
+  needed more memory than the machine it was written on had, so it was not
+  run.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

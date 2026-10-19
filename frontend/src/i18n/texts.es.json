@@ -2393,7 +2393,23 @@
     "Long-lived token": "Token de larga duración",
     "The meals planned for the next seven days, by day.": "Las comidas planificadas para los próximos siete días, por día.",
     "Under Settings, Sessions: add a long-lived token for HexDeck.": "En Ajustes, Sesiones: añade un token de larga duración para HexDeck.",
-    "What is on a shopping list, with the amounts.": "Qué hay en una lista de la compra, con las cantidades."
+    "What is on a shopping list, with the amounts.": "Qué hay en una lista de la compra, con las cantidades.",
+    "Every slot, and whether it is working on a request.": "Cada slot, y si está trabajando en una petición.",
+    "Only when llama-server was started with --api-key.": "Solo si llama-server se inició con --api-key.",
+    "Slots": "Slots",
+    "The model llama-server serves, how many of its slots are busy, and how fast it generates.": "El modelo que sirve llama-server, cuántos de sus slots están ocupados y a qué velocidad genera.",
+    "The model, the busy slots and the generation speed. Speed needs --metrics on the server.": "El modelo, los slots ocupados y la velocidad de generación. La velocidad necesita --metrics en el servidor.",
+    "An API key with the permissions to query and get queued messages, and to query accounts and domains.": "Una clave de API con permisos para consultar y leer los mensajes en cola, y para consultar cuentas y dominios.",
+    "Every message waiting to go out, to whom, why, and when it is tried again.": "Cada mensaje que espera salir, a quién, por qué, y cuándo se vuelve a intentar.",
+    "Mail server": "Servidor de correo",
+    "Messages waiting in the queue, accounts and domains.": "Mensajes en la cola, cuentas y dominios.",
+    "Stalwart mail server: the outgoing queue with why each message waits, and its accounts and domains.": "Servidor de correo Stalwart: la cola de salida con el motivo por el que espera cada mensaje, y sus cuentas y dominios.",
+    "The web address of Stalwart, where its admin interface is.": "La dirección web de Stalwart, donde está su interfaz de administración.",
+    "An Umami 3 API key (umami_...), from Settings > API keys. Or leave it empty and sign in below.": "Una clave de API de Umami 3 (umami_...), en Ajustes > Claves de API. O déjala vacía e inicia sesión abajo.",
+    "Every site with its visitors right now and over the last 24 hours.": "Cada sitio con sus visitantes ahora y en las últimas 24 horas.",
+    "Its name or domain. Empty means the first site.": "Su nombre o dominio. Vacío significa el primer sitio.",
+    "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Analítica web Umami: visitantes en cada sitio ahora, y visitantes y vistas en las últimas 24 horas.",
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Visitantes ahora, y visitantes, vistas y tasa de rebote en las últimas 24 horas."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3588,6 +3604,12 @@
     "Play": "Reproducir",
     "today": "hoy",
     "tomorrow": "mañana",
-    "Last day to cancel": "Último día para cancelar"
+    "Last day to cancel": "Último día para cancelar",
+    "Busy slots": "Slots ocupados",
+    "Generation": "Generación",
+    "Prompt": "Prompt",
+    "Bounce rate": "Tasa de rebote",
+    "Right now": "Ahora mismo",
+    "Domains": "Dominios"
   }
 }

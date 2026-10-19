@@ -2393,7 +2393,23 @@
     "Long-lived token": "Langlebiges Token",
     "The meals planned for the next seven days, by day.": "Die für die nächsten sieben Tage geplanten Mahlzeiten, nach Tag.",
     "Under Settings, Sessions: add a long-lived token for HexDeck.": "Unter Einstellungen, Sitzungen: ein langlebiges Token für HexDeck hinzufügen.",
-    "What is on a shopping list, with the amounts.": "Was auf einer Einkaufsliste steht, mit den Mengen."
+    "What is on a shopping list, with the amounts.": "Was auf einer Einkaufsliste steht, mit den Mengen.",
+    "Every slot, and whether it is working on a request.": "Jeder Slot, und ob er gerade an einer Anfrage arbeitet.",
+    "Only when llama-server was started with --api-key.": "Nur wenn llama-server mit --api-key gestartet wurde.",
+    "Slots": "Slots",
+    "The model llama-server serves, how many of its slots are busy, and how fast it generates.": "Das Modell, das llama-server bereitstellt, wie viele seiner Slots belegt sind und wie schnell es generiert.",
+    "The model, the busy slots and the generation speed. Speed needs --metrics on the server.": "Das Modell, die belegten Slots und die Generierungsgeschwindigkeit. Die Geschwindigkeit braucht --metrics auf dem Server.",
+    "An API key with the permissions to query and get queued messages, and to query accounts and domains.": "Ein API-Schlüssel mit den Rechten, Nachrichten in der Warteschlange abzufragen und zu lesen, und Konten und Domains abzufragen.",
+    "Every message waiting to go out, to whom, why, and when it is tried again.": "Jede Nachricht, die auf den Versand wartet, an wen, warum, und wann es erneut versucht wird.",
+    "Mail server": "Mailserver",
+    "Messages waiting in the queue, accounts and domains.": "Nachrichten in der Warteschlange, Konten und Domains.",
+    "Stalwart mail server: the outgoing queue with why each message waits, and its accounts and domains.": "Stalwart-Mailserver: die ausgehende Warteschlange mit dem Grund, warum jede Nachricht wartet, und seine Konten und Domains.",
+    "The web address of Stalwart, where its admin interface is.": "Die Webadresse von Stalwart, unter der seine Verwaltungsoberfläche liegt.",
+    "An Umami 3 API key (umami_...), from Settings > API keys. Or leave it empty and sign in below.": "Ein API-Schlüssel von Umami 3 (umami_...), unter Einstellungen > API-Schlüssel. Oder leer lassen und unten anmelden.",
+    "Every site with its visitors right now and over the last 24 hours.": "Jede Website mit ihren Besuchern jetzt und in den letzten 24 Stunden.",
+    "Its name or domain. Empty means the first site.": "Ihr Name oder ihre Domain. Leer bedeutet die erste Website.",
+    "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Umami-Webanalyse: Besucher auf jeder Website jetzt, und Besucher und Aufrufe in den letzten 24 Stunden.",
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Besucher jetzt, und Besucher, Aufrufe und Absprungrate in den letzten 24 Stunden."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3588,6 +3604,12 @@
     "Play": "Abspielen",
     "today": "heute",
     "tomorrow": "morgen",
-    "Last day to cancel": "Letzter Kündigungstag"
+    "Last day to cancel": "Letzter Kündigungstag",
+    "Busy slots": "Belegte Slots",
+    "Generation": "Generierung",
+    "Prompt": "Prompt",
+    "Bounce rate": "Absprungrate",
+    "Right now": "Gerade jetzt",
+    "Domains": "Domains"
   }
 }
