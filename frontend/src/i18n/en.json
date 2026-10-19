@@ -161,6 +161,7 @@
       "search": "Search",
       "appearance": "Appearance",
       "journal": "Log",
+      "cards": "Card status",
       "backups": "Backups",
       "media": "Media",
       "projects": "Projects",
@@ -415,6 +416,19 @@
       "clearTitle": "Empty the log?",
       "clearBody": "Every line kept, including the older files, is removed. This cannot be undone.",
       "cleared": "The log is empty."
+    },
+    "cards": {
+      "title": "Card status",
+      "intro": "When every card was last read, how long it took and when it is read next. Cards that fail come first, with the reason the card itself keeps to the server log.",
+      "summary_one": "{{count}} card is being read, {{troubled}} with trouble.",
+      "summary_other": "{{count}} cards are being read, {{troubled}} with trouble.",
+      "onlyTrouble": "Only cards with trouble",
+      "none": "Nothing to show.",
+      "read": "read {{ago}} ago",
+      "took": "took {{time}}",
+      "next": "next in {{time}}",
+      "backoff_one": "{{count}} failure in a row, reading less often",
+      "backoff_other": "{{count}} failures in a row, reading less often"
     },
     "twoFactor": {
       "title": "Second factor",

@@ -161,6 +161,7 @@
       "search": "Ricerca",
       "appearance": "Aspetto",
       "journal": "Log",
+      "cards": "Stato delle card",
       "backups": "Backup",
       "media": "Media",
       "projects": "Progetti",
@@ -415,6 +416,19 @@
       "clearTitle": "Svuotare il log?",
       "clearBody": "Ogni riga conservata, compresi i file più vecchi, viene rimossa. Non si può annullare.",
       "cleared": "Il log è vuoto."
+    },
+    "cards": {
+      "title": "Stato delle card",
+      "intro": "Quando ogni card è stata letta l'ultima volta, quanto ci ha messo e quando verrà letta di nuovo. Prima le card che falliscono, con il motivo che la card stessa lascia al log del server.",
+      "summary_one": "{{count}} card in lettura, {{troubled}} con problemi.",
+      "summary_other": "{{count}} card in lettura, {{troubled}} con problemi.",
+      "onlyTrouble": "Solo le card con problemi",
+      "none": "Niente da mostrare.",
+      "read": "letta {{ago}} fa",
+      "took": "ci ha messo {{time}}",
+      "next": "prossima tra {{time}}",
+      "backoff_one": "{{count}} errore di fila, letta meno spesso",
+      "backoff_other": "{{count}} errori di fila, letta meno spesso"
     },
     "twoFactor": {
       "title": "Secondo fattore",

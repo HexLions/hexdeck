@@ -14,7 +14,7 @@ from .. import __version__
 from ..adapters.base import outbound_client
 from ..config import get_settings
 from ..deps import AdminUser, CurrentUser, DbSession, error
-from ..models import Board, Integration, Setting, User, Widget
+from ..models import Board, Integration, Page, Setting, User, Widget
 from ..schemas import AutoLoginBody, SettingsBody
 from ..services import auto_login, demo_exit, two_factor
 from ..services import collector as collector_module
@@ -22,6 +22,7 @@ from ..services.collector import collector, demo_flag, set_demo_flag
 from ..services.notify import emit
 from ..services.public_url import public_url
 from ..services.sse import hub
+from ..services.state import live
 
 router = APIRouter(tags=["system"])
 logger = logging.getLogger("hexdeck.system")
@@ -92,6 +93,51 @@ def write_auto_login(body: AutoLoginBody, user: AdminUser, db: DbSession) -> dic
     logger.info("Automatic sign-in %s by %s: account %s on %s.", "enabled" if stored["enabled"] else "disabled", user.username,
                 stored["user_id"], ", ".join(stored["networks"]) or "no network")
     return stored
+
+
+@router.get("/api/v1/system/cards", summary="How every card's last read went")
+def card_runs(user: AdminUser, db: DbSession) -> list[dict]:
+    """One row per card that is being read: when, how long, when next, and why not.
+
+    For the administrator only: ``reason`` is the exception behind an
+    unexpected failure, which the card itself keeps to "the server log says
+    why" because every viewer of the board sees the card.
+    """
+    runs = collector.runs()
+    if not runs:
+        return []
+    rows = db.execute(
+        select(Widget.id, Widget.title, Widget.kind, Board.slug, Board.name, Page.name, Integration.name)
+        .join(Page, Widget.page_id == Page.id)
+        .join(Board, Page.board_id == Board.id)
+        .outerjoin(Integration, Widget.integration_id == Integration.id)
+        .where(Widget.id.in_(list(runs)))
+    ).all()
+    answer = []
+    for widget_id, title, kind, board_slug, board_name, page_name, integration in rows:
+        run = runs[widget_id]
+        data = live.get(widget_id)
+        answer.append({
+            "id": widget_id,
+            "title": title or kind,
+            "kind": kind,
+            "board": board_name,
+            "board_slug": board_slug,
+            "page": page_name,
+            "integration": integration or "",
+            "status": data.status if data is not None else "unknown",
+            "error": (data.error or "") if data is not None else "",
+            "code": str((data.meta or {}).get("code", "")) if data is not None else "",
+            "started": run.started,
+            "seconds": run.seconds,
+            "interval": run.interval,
+            "next": run.started + run.seconds + run.interval if run.interval is not None else None,
+            "failures": run.failures,
+            "reason": run.reason,
+        })
+    # The ones that need a look first, then the slowest.
+    answer.sort(key=lambda row: (not row["error"], -row["seconds"]))
+    return answer
 
 
 @router.post("/api/v1/settings/demo/leave", summary="Leave demo mode and remove what the demo made")

@@ -148,6 +148,7 @@
       "search": "Buscar",
       "appearance": "Aspecto",
       "journal": "Registro",
+      "cards": "Estado de las tarjetas",
       "backups": "Copias de seguridad",
       "media": "Multimedia",
       "player": "Reproductor de música",
@@ -402,6 +403,19 @@
       "clearTitle": "¿Vaciar el registro?",
       "clearBody": "Se eliminan todas las líneas guardadas, incluidos los archivos antiguos. No se puede deshacer.",
       "cleared": "El registro está vacío."
+    },
+    "cards": {
+      "title": "Estado de las tarjetas",
+      "intro": "Cuándo se leyó cada tarjeta por última vez, cuánto tardó y cuándo se lee de nuevo. Primero las tarjetas que fallan, con el motivo que la propia tarjeta deja al registro del servidor.",
+      "summary_one": "{{count}} tarjeta en lectura, {{troubled}} con problemas.",
+      "summary_other": "{{count}} tarjetas en lectura, {{troubled}} con problemas.",
+      "onlyTrouble": "Solo tarjetas con problemas",
+      "none": "Nada que mostrar.",
+      "read": "leída hace {{ago}}",
+      "took": "tardó {{time}}",
+      "next": "siguiente en {{time}}",
+      "backoff_one": "{{count}} fallo seguido, se lee con menos frecuencia",
+      "backoff_other": "{{count}} fallos seguidos, se lee con menos frecuencia"
     },
     "twoFactor": {
       "title": "Segundo factor",

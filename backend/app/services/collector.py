@@ -15,6 +15,7 @@ import asyncio
 import logging
 import random
 import time
+from dataclasses import dataclass
 from typing import Any
 
 import httpx
@@ -60,6 +61,22 @@ RECOVERY_INTERVAL = 60.0
 REFRESH_NOW_GAP = 5.0
 
 
+@dataclass
+class Run:
+    """The last read of one card, for the administrator's overview."""
+
+    #: When the read began and how long it took, in seconds.
+    started: float
+    seconds: float
+    #: Seconds until the next read; None once the loop has ended.
+    interval: float | None
+    #: Failures in a row; above zero the interval is backed off.
+    failures: int = 0
+    #: The exception behind an unexpected failure, which the card itself does
+    #: not show: it reaches every viewer of the board.
+    reason: str = ""
+
+
 #: How long a card that turned red stays quiet before it may say so again.
 RED_QUIET_SECONDS = 3600
 
@@ -69,6 +86,10 @@ class Collector:
         self._caches: dict[int, dict[str, Any]] = {}
         self._client: httpx.AsyncClient | None = None
         self._failures: dict[int, int] = {}
+        #: The last read of every card, for ``runs``.
+        self._runs: dict[int, Run] = {}
+        #: Why the last read of a card failed unexpectedly, until it succeeds.
+        self._reasons: dict[int, str] = {}
         #: Counted up every time a widget's settings change, so an answer that
         #: was already being fetched when they changed can be recognised.
         #:
@@ -175,6 +196,8 @@ class Collector:
         run_on_loop(lambda: self._cancel(widget_id))
 
     def _cancel(self, widget_id: int) -> None:
+        self._runs.pop(widget_id, None)
+        self._reasons.pop(widget_id, None)
         task = self._tasks.pop(widget_id, None)
         if task is not None:
             task.cancel()
@@ -231,11 +254,14 @@ class Collector:
         # service at the same instant.
         await asyncio.sleep(random.uniform(0.05, 1.5))
         while self.running:
+            started = time.time()
             try:
                 interval = await self.refresh(widget_id)
             except asyncio.CancelledError:
                 raise
-            except Exception:
+            except Exception as failure:
+                self._reasons[widget_id] = _reason(failure)
+                self._note_run(widget_id, started, RECOVERY_INTERVAL)
                 # ⚠️ Anything that escapes here used to end the task for good.
                 # Nothing restarts it and nothing prints it, so the card stayed
                 # blank and the log stayed empty. Say it out loud, put it on
@@ -247,9 +273,26 @@ class Collector:
                 ))
                 await asyncio.sleep(RECOVERY_INTERVAL)
                 continue
+            self._note_run(widget_id, started, interval)
             if interval is None:
                 return
             await asyncio.sleep(interval)
+
+    def _note_run(self, widget_id: int, started: float, interval: float | None) -> None:
+        data = live.get(widget_id)
+        if data is not None and not data.error:
+            self._reasons.pop(widget_id, None)
+        self._runs[widget_id] = Run(
+            started=started,
+            seconds=round(time.time() - started, 3),
+            interval=interval,
+            failures=self._failures.get(widget_id, 0),
+            reason=self._reasons.get(widget_id, ""),
+        )
+
+    def runs(self) -> dict[int, Run]:
+        """The last read of every card that has a loop, by widget id."""
+        return {widget_id: run for widget_id, run in self._runs.items() if widget_id in self._tasks}
 
     async def refresh(self, widget_id: int) -> float | None:
         """Fetch once, publish, and return the seconds until the next fetch.
@@ -273,7 +316,8 @@ class Collector:
                 meta={"code": "secret_unreadable", "hint": "The key changed. Enter the credentials of this connection again."},
             ))
             return RECOVERY_INTERVAL
-        except Exception:  # noqa: BLE001
+        except Exception as failure:  # noqa: BLE001
+            self._reasons[widget_id] = _reason(failure)
             # ⚠️ Anything at all. The two branches above cover what an adapter
             # is expected to raise; anything else came out of here and ended
             # the card's task, so the card froze on its last data and came back
@@ -355,6 +399,7 @@ class Collector:
             self._mark_integration(integration_id, ok=False, error="timeout")
         except Exception as error:  # noqa: BLE001 - one broken adapter must not stop the others
             logger.exception("Widget %s (%s) failed.", widget_id, kind)
+            self._reasons[widget_id] = _reason(error)
             data = self._failure(widget_id, f"Unexpected error: {error.__class__.__name__}.", code="crash")
             self._mark_integration(integration_id, ok=False, error=error.__class__.__name__)
 
@@ -718,6 +763,11 @@ class Collector:
 
 
 _demo_flag = False
+
+
+def _reason(failure: BaseException) -> str:
+    text = str(failure).strip()
+    return (f"{failure.__class__.__name__}: {text}" if text else failure.__class__.__name__)[:300]
 
 
 def demo_flag() -> bool:
