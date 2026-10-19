@@ -494,6 +494,13 @@ Updated at every milestone.
   `/props` says they are switched on. Checked against llama-server b11734
   running locally with a 19 MB test model, two slots, an API key, a wrong
   key, a model still loading and both endpoints switched off.
+- **Stalwart through JMAP.** Version 0.16 dropped the REST management API;
+  the queue, the accounts and the domains are read as `x:QueuedMessage`,
+  `x:Account` and `x:Domain` objects of its `urn:stalwart:jmap` capability,
+  for the account the session names. Checked against Stalwart v0.16.27
+  running locally, set up through its bootstrap, with messages to addresses
+  that cannot be reached, a key with every permission, one with the queue
+  only, and a wrong key.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

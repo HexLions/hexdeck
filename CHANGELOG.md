@@ -10,6 +10,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ### Added
 - **llama.cpp server**: the model it serves, how many slots are busy, and
   how fast it generates. ⚠️ Beta.
+- **Stalwart**: the outgoing mail queue with why each message waits, and
+  how many accounts and domains the server holds. ⚠️ Beta.
 
 ## 0.29.2 (2026-10-18)
 

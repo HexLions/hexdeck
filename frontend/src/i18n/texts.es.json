@@ -2398,7 +2398,13 @@
     "Only when llama-server was started with --api-key.": "Solo si llama-server se inició con --api-key.",
     "Slots": "Slots",
     "The model llama-server serves, how many of its slots are busy, and how fast it generates.": "El modelo que sirve llama-server, cuántos de sus slots están ocupados y a qué velocidad genera.",
-    "The model, the busy slots and the generation speed. Speed needs --metrics on the server.": "El modelo, los slots ocupados y la velocidad de generación. La velocidad necesita --metrics en el servidor."
+    "The model, the busy slots and the generation speed. Speed needs --metrics on the server.": "El modelo, los slots ocupados y la velocidad de generación. La velocidad necesita --metrics en el servidor.",
+    "An API key with the permissions to query and get queued messages, and to query accounts and domains.": "Una clave de API con permisos para consultar y leer los mensajes en cola, y para consultar cuentas y dominios.",
+    "Every message waiting to go out, to whom, why, and when it is tried again.": "Cada mensaje que espera salir, a quién, por qué, y cuándo se vuelve a intentar.",
+    "Mail server": "Servidor de correo",
+    "Messages waiting in the queue, accounts and domains.": "Mensajes en la cola, cuentas y dominios.",
+    "Stalwart mail server: the outgoing queue with why each message waits, and its accounts and domains.": "Servidor de correo Stalwart: la cola de salida con el motivo por el que espera cada mensaje, y sus cuentas y dominios.",
+    "The web address of Stalwart, where its admin interface is.": "La dirección web de Stalwart, donde está su interfaz de administración."
   },
   "labels": {
     "Private resources": "Recursos privados",
