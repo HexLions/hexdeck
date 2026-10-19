@@ -5,6 +5,12 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+- **llama.cpp server**: the model it serves, how many slots are busy, and
+  how fast it generates. ⚠️ Beta.
+
 ## 0.29.2 (2026-10-18)
 
 Security fixes from a review of sign-in, sessions and the live stream.

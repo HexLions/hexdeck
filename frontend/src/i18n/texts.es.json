@@ -2393,7 +2393,12 @@
     "Long-lived token": "Token de larga duración",
     "The meals planned for the next seven days, by day.": "Las comidas planificadas para los próximos siete días, por día.",
     "Under Settings, Sessions: add a long-lived token for HexDeck.": "En Ajustes, Sesiones: añade un token de larga duración para HexDeck.",
-    "What is on a shopping list, with the amounts.": "Qué hay en una lista de la compra, con las cantidades."
+    "What is on a shopping list, with the amounts.": "Qué hay en una lista de la compra, con las cantidades.",
+    "Every slot, and whether it is working on a request.": "Cada slot, y si está trabajando en una petición.",
+    "Only when llama-server was started with --api-key.": "Solo si llama-server se inició con --api-key.",
+    "Slots": "Slots",
+    "The model llama-server serves, how many of its slots are busy, and how fast it generates.": "El modelo que sirve llama-server, cuántos de sus slots están ocupados y a qué velocidad genera.",
+    "The model, the busy slots and the generation speed. Speed needs --metrics on the server.": "El modelo, los slots ocupados y la velocidad de generación. La velocidad necesita --metrics en el servidor."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3588,6 +3593,9 @@
     "Play": "Reproducir",
     "today": "hoy",
     "tomorrow": "mañana",
-    "Last day to cancel": "Último día para cancelar"
+    "Last day to cancel": "Último día para cancelar",
+    "Busy slots": "Slots ocupados",
+    "Generation": "Generación",
+    "Prompt": "Prompt"
   }
 }

@@ -40,6 +40,7 @@ that one of thirty-five renderers draws.
 | Komodo | stacks, deployments, overview | restart a stack | API key and secret of a user, best a service user, with Read on stacks, deployments and servers and Execute on a stack to restart it; Komodo 2 |
 | Netdata | raised alerts, load per node, alerts | | none; the agent's API is open, and a parent answers for every node that streams to it |
 | Ollama | loaded models, installed models, models | unload a model | none; Ollama has no sign-in, so its port stays inside the network |
+| llama.cpp server | server, slots | | the `--api-key` the server was started with, as a bearer token, or nothing. `/health` answers without it, so a wrong key shows on `/props`. A 503 while the model loads is said as such. `/slots` and `/metrics` are asked only when `/props` says they are on; the speed is the counters' average since the start, because the `*_tokens_seconds` gauges reset on every read |
 | Open WebUI | users, models, accounts | | API key of an administrator from Settings > Account > API keys; API keys have to be switched on in the admin settings, they are off by default |
 | Watchtower | last update run | run now | API token (WATCHTOWER_HTTP_API_TOKEN), with metrics and update switched on in WATCHTOWER_HTTP_API_ENDPOINTS; the maintained fork nickfedor/watchtower |
 | What's Up Docker | container updates, updates waiting | update a container WUD has a Docker trigger for, check now | API token from My Profile, WUD 9 or newer; read for the cards, write for the buttons |
