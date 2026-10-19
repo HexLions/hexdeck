@@ -161,6 +161,7 @@
       "search": "Suche",
       "appearance": "Aussehen",
       "journal": "Protokoll",
+      "cards": "Kartenstatus",
       "backups": "Sicherungen",
       "media": "Medien",
       "projects": "Projekte",
@@ -415,6 +416,19 @@
       "clearTitle": "Protokoll leeren?",
       "clearBody": "Alle aufbewahrten Zeilen werden entfernt, auch die älteren Dateien. Das lässt sich nicht rückgängig machen.",
       "cleared": "Das Protokoll ist leer."
+    },
+    "cards": {
+      "title": "Kartenstatus",
+      "intro": "Wann jede Karte zuletzt gelesen wurde, wie lange es dauerte und wann sie als Nächstes gelesen wird. Karten mit Fehlern zuerst, mit dem Grund, den die Karte selbst dem Server-Log überlässt.",
+      "summary_one": "{{count}} Karte wird gelesen, {{troubled}} mit Problemen.",
+      "summary_other": "{{count}} Karten werden gelesen, {{troubled}} mit Problemen.",
+      "onlyTrouble": "Nur Karten mit Problemen",
+      "none": "Nichts anzuzeigen.",
+      "read": "vor {{ago}} gelesen",
+      "took": "dauerte {{time}}",
+      "next": "nächste in {{time}}",
+      "backoff_one": "{{count}} Fehler in Folge, seltener gelesen",
+      "backoff_other": "{{count}} Fehler in Folge, seltener gelesen"
     },
     "twoFactor": {
       "title": "Zweiter Faktor",

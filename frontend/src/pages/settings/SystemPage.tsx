@@ -1,4 +1,4 @@
-import { Archive, Globe, Info, KeyRound, LayoutGrid, Mail, Palette, Plug, ScrollText, Search, Users } from 'lucide-react'
+import { Activity, Archive, Globe, Info, KeyRound, LayoutGrid, Mail, Palette, Plug, ScrollText, Search, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import { AboutSettings } from './AboutSettings'
 import { AppearanceSettings } from './AppearanceSettings'
 import { AppsSettings } from './AppsSettings'
 import { BackupsSettings } from './BackupsSettings'
+import { CardRunsSettings } from './CardRunsSettings'
 import { AddressSettings } from './AddressSettings'
 import { IntegrationsSettings } from './IntegrationsSettings'
 import { MailSettings } from './MailSettings'
@@ -39,6 +40,7 @@ export function SystemPage() {
     { to: 'appearance', icon: Palette, label: t('settings.nav.appearance'), show: admin },
     { to: 'oidc', icon: KeyRound, label: t('settings.nav.oidc'), show: admin },
     { to: 'journal', icon: ScrollText, label: t('settings.nav.journal'), show: admin },
+    { to: 'cards', icon: Activity, label: t('settings.nav.cards'), show: admin },
     { to: 'backups', icon: Archive, label: t('settings.nav.backups'), show: admin },
     { to: 'about', icon: Info, label: t('settings.nav.about') },
   ]
@@ -62,6 +64,7 @@ export function SystemPage() {
             <Route path="appearance" element={forAdmin(<AppearanceSettings />)} />
             <Route path="oidc" element={forAdmin(<OidcSettings />)} />
             <Route path="journal" element={forAdmin(<JournalSettings />)} />
+            <Route path="cards" element={forAdmin(<CardRunsSettings />)} />
             <Route path="backups" element={forAdmin(<BackupsSettings />)} />
             <Route path="about" element={<AboutSettings />} />
             <Route path="*" element={<Navigate to="/system" replace />} />
