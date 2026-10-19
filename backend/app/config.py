@@ -17,6 +17,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PREFIX = "HEXDECK_"
@@ -65,6 +66,11 @@ class Settings(BaseSettings):
     #: Read only: on the next start every stored secret is decrypted with it
     #: and written again under the new one. Remove it once that start is done.
     secret_key_previous: str = ""
+    #: A file holding ``secret_key``, such as a Docker or Kubernetes secret
+    #: (``/run/secrets/...``), so the key need not sit in the compose file.
+    secret_key_file: Path | None = None
+    #: The same for ``secret_key_previous``.
+    secret_key_previous_file: Path | None = None
     #: Public URL as seen by browsers, e.g. ``https://deck.example.com``.
     #: Needed for OIDC return addresses and Web Push.
     public_url: str = ""
@@ -154,6 +160,30 @@ class Settings(BaseSettings):
     allow_loopback_targets: bool = False
     #: Filled on the first read of the generated key file; not a setting.
     _remembered_key: str = ""
+
+    @model_validator(mode="after")
+    def _read_secret_files(self) -> Settings:
+        """Fill the keys from their ``*_FILE`` variables.
+
+        ⚠️ Both forms at once is refused rather than one quietly winning: an
+        operator moving the key into a secret file who forgot the old variable
+        would otherwise run on a key they believe is gone.
+        """
+        for field, file_field in (("secret_key", "secret_key_file"), ("secret_key_previous", "secret_key_previous_file")):
+            path = getattr(self, file_field)
+            if path is None:
+                continue
+            name = PREFIX + field.upper()
+            if getattr(self, field):
+                raise ValueError(f"{name} and {name}_FILE are both set; keep one.")
+            try:
+                value = Path(path).read_text(encoding="utf-8").strip()
+            except OSError as failure:
+                raise ValueError(f"{name}_FILE cannot be read: {failure.strerror or failure}") from None
+            if not value:
+                raise ValueError(f"{name}_FILE is empty.")
+            setattr(self, field, value)
+        return self
 
     @property
     def database_path(self) -> Path:
