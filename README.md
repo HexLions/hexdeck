@@ -165,6 +165,10 @@ Rarely needed, but real:
 | `HEXDECK_TRUSTED_PROXIES` | empty | Reverse proxies whose `X-Forwarded-For` is believed, as addresses or networks, comma separated. The automatic sign-in on trusted networks, the count of failed sign-ins and the action log read the client's address through it; without it the header is ignored, since anybody could send one. |
 | `HEXDECK_CORS_ORIGINS` | empty | Origins allowed to call the API from a browser. `*` is refused at start-up, because with credentials it would let any site act as the signed-in user. |
 | `HEXDECK_BACKUP_EVERY_HOURS` | `24` | How often a snapshot is written by itself. `0` switches it off. |
+| `HEXDECK_BACKUP_COPY_DIR` | empty | A folder off the data volume, such as a mounted NAS share, where every scheduled snapshot and every backup made by hand also goes as an encrypted archive. See [Copies off the machine](docs/operating.md#copies-off-the-machine). |
+| `HEXDECK_BACKUP_COPY_PASSWORD` | empty | The password of those archives. Without it nothing is copied. |
+| `HEXDECK_BACKUP_COPY_PASSWORD_FILE` | empty | The same from a file, such as a Docker secret. |
+| `HEXDECK_BACKUP_COPY_KEEP` | `14` | How many copies stay in that folder; older ones HexDeck wrote are deleted. |
 
 A guard test keeps this table in step with the settings in the code.
 

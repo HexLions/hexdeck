@@ -28,10 +28,18 @@ interface Entry {
   reason: string
 }
 
+export interface Copies {
+  folder: string
+  keep: number
+  password_set: boolean
+  last: { at: string | null; name: string; error: string }
+}
+
 interface Listing {
   entries: Entry[]
   folder: string
   keep_automatic: number
+  copies?: Copies
 }
 
 const SHORTEST = 8
@@ -113,6 +121,7 @@ export function BackupsSettings() {
             {listing.data.folder}
           </p>
         )}
+        {listing.data?.copies && <CopiesLine copies={listing.data.copies} />}
       </SettingsCard>
 
       <SettingsCard title={t('backups.listTitle')} description={t('backups.listHelp', { count: listing.data?.keep_automatic ?? 5 })}>
@@ -227,5 +236,22 @@ export function BackupsSettings() {
         </Toast>
       )}
     </>
+  )
+}
+
+/** Where scheduled snapshots also go, off this disk, and how the last copy went. */
+export function CopiesLine({ copies }: { copies: Copies }) {
+  const { t } = useTranslation()
+  if (!copies.folder) {
+    return <p className="text-xs text-muted mt-2" data-testid="copies">{t('backups.copies.none')}</p>
+  }
+  const when = copies.last.at ? new Date(copies.last.at).toLocaleString() : ''
+  return (
+    <div className="text-xs mt-2 space-y-0.5" data-testid="copies">
+      <p className="text-muted">{t('backups.copies.to', { folder: copies.folder, count: copies.keep })}</p>
+      {!copies.password_set && <p className="text-bad">{t('backups.copies.noPassword')}</p>}
+      {copies.last.error && <p className="text-bad break-words">{t('backups.copies.failed', { when, reason: copies.last.error })}</p>}
+      {!copies.last.error && copies.last.name && <p className="text-ok">{t('backups.copies.last', { when, name: copies.last.name })}</p>}
+    </div>
   )
 }

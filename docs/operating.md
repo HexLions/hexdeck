@@ -42,6 +42,29 @@ Settings → Backups → Download → set a password
 ⚠️ **The password is not recoverable.** HexDeck does not keep it and cannot
 open the archive without it.
 
+### Copies off the machine
+
+A snapshot sits on the same disk as the database. To have a copy elsewhere
+without downloading one by hand, mount a folder of another machine into the
+container and name it:
+
+```yaml
+    volumes:
+      - /mnt/nas/hexdeck-backups:/backup
+    environment:
+      - HEXDECK_BACKUP_COPY_DIR=/backup
+      - HEXDECK_BACKUP_COPY_PASSWORD=a-long-password-kept-somewhere-else
+```
+
+Every scheduled snapshot and every backup made by hand then also goes there
+as the same encrypted archive the Download button makes, named after the
+snapshot (`hexdeck-automatic-…zip`). The last `HEXDECK_BACKUP_COPY_KEEP` (14)
+stay; older ones HexDeck wrote are deleted, anything else in the folder is
+left alone. Without a password nothing is copied, because the archive holds
+the key file. **Settings → Backups** says where the copies go and whether the
+last one worked; a share that is not mounted is said there and in the log,
+and the snapshot itself is written anyway.
+
 ## Restoring
 
 ```

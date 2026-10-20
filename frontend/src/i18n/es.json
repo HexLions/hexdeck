@@ -1146,6 +1146,14 @@
       "keyOnlyFromEnv": "Este archivo no contiene ninguna clave. Esta instalación toma su clave de NEXDECK_SECRET_KEY, así que las credenciales se podrán leer si la variable tiene el mismo valor que en la máquina de la que viene la copia.",
       "noKeyAtAll": "Este archivo no contiene ninguna clave, y aquí tampoco hay ninguna en el entorno. nexdeck creará una nueva, y después no se podrá leer ninguna credencial guardada. Habría que volver a introducir todas las conexiones.",
       "envKeyWins": "Este archivo trae una clave, pero aquí está definida NEXDECK_SECRET_KEY y es la que gana. Las credenciales siguen sin poder leerse, salvo que la variable tenga el mismo valor."
+    },
+    "copies": {
+      "none": "Copias fuera de este disco: ninguna. Pon HEXDECK_BACKUP_COPY_DIR en una carpeta compartida montada para que cada copia de seguridad llegue también allí.",
+      "to_one": "Cada copia de seguridad se copia también, cifrada, en {{folder}}; se queda la última {{count}} copia.",
+      "to_other": "Cada copia de seguridad se copia también, cifrada, en {{folder}}; se quedan las últimas {{count}} copias.",
+      "noPassword": "HEXDECK_BACKUP_COPY_PASSWORD no está definida, así que no se copia nada.",
+      "failed": "La última copia falló ({{when}}): {{reason}}",
+      "last": "Última copia {{when}}: {{name}}"
     }
   },
   "nav": {

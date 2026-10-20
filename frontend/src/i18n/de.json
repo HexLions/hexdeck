@@ -1284,6 +1284,14 @@
       "keyOnlyFromEnv": "In diesem Archiv liegt kein Schlüssel. Diese Installation nimmt ihren aus HEXDECK_SECRET_KEY. Die Zugänge sind danach lesbar, wenn dort derselbe Wert steht wie auf dem Rechner, von dem die Sicherung stammt.",
       "noKeyAtAll": "In diesem Archiv liegt kein Schlüssel, und hier steht auch keiner in der Umgebung. HexDeck erzeugt dann einen neuen, und danach ist kein gespeicherter Zugang mehr lesbar. Jede Anbindung müsste neu eingetragen werden.",
       "envKeyWins": "Dieses Archiv bringt einen Schlüssel mit, aber hier ist HEXDECK_SECRET_KEY gesetzt und gewinnt. Die Zugänge bleiben unlesbar, wenn dort nicht derselbe Wert steht."
+    },
+    "copies": {
+      "none": "Kopien außerhalb dieser Platte: keine. Setze HEXDECK_BACKUP_COPY_DIR auf eine eingebundene Freigabe, damit jede Sicherung auch dort landet.",
+      "to_one": "Jede Sicherung wird außerdem verschlüsselt nach {{folder}} kopiert; die letzte {{count}} Kopie bleibt.",
+      "to_other": "Jede Sicherung wird außerdem verschlüsselt nach {{folder}} kopiert; die letzten {{count}} Kopien bleiben.",
+      "noPassword": "HEXDECK_BACKUP_COPY_PASSWORD ist nicht gesetzt, also wird nichts kopiert.",
+      "failed": "Die letzte Kopie ist fehlgeschlagen ({{when}}): {{reason}}",
+      "last": "Letzte Kopie {{when}}: {{name}}"
     }
   },
   "nav": {

@@ -352,6 +352,7 @@ def write_one_if_due() -> Path | None:
         return None
     written = create(kind=AUTOMATIC, note="scheduled")
     logger.info("Wrote the scheduled snapshot %s.", written.name)
+    copy_off(written)
     return written
 
 
@@ -434,6 +435,78 @@ def _extras_to_pack(backup: Path) -> list[tuple[Path, str]]:
             if one.is_file():
                 found.append((one, f"{name}/{one.name}"))
     return found
+
+
+# ---------------------------------------------------------------------------
+# Copies off the machine
+# ---------------------------------------------------------------------------
+
+#: The name every copy HexDeck writes starts with; only these are swept.
+COPY_PREFIX = "hexdeck-"
+
+#: How the last copy went, for the Backups page: when, which file, and why not.
+last_copy: dict[str, object] = {"at": None, "name": "", "error": ""}
+
+
+def copy_folder() -> Path | None:
+    folder_ = get_settings().backup_copy_dir
+    return Path(folder_) if folder_ else None
+
+
+def copy_off(snapshot: Path) -> Path | None:
+    """Put one snapshot into ``HEXDECK_BACKUP_COPY_DIR`` as an encrypted archive.
+
+    ⚠️ A snapshot beside the database dies with the disk it is on, and the
+    only copy elsewhere was the one somebody remembered to download. This one
+    happens by itself, after every scheduled snapshot. Written to a temporary
+    name first and renamed, so a share that drops halfway leaves no half
+    archive that looks whole. A failure is logged and kept for the Backups
+    page; it never stops the snapshot itself.
+    """
+    target_folder = copy_folder()
+    if target_folder is None:
+        return None
+    settings = get_settings()
+    stamp = datetime.now(UTC).isoformat(timespec="seconds")
+    try:
+        if not settings.backup_copy_password:
+            raise BackupError("no_password", "HEXDECK_BACKUP_COPY_PASSWORD is not set, so nothing is copied.")
+        if not target_folder.is_dir():
+            raise BackupError("no_folder", f"{target_folder} is not a folder HexDeck can see. Is the share mounted?")
+        blob = archive(snapshot.name, settings.backup_copy_password)
+        target = target_folder / f"{snapshot.stem}.zip"
+        partial = target_folder / f".{target.name}.part"
+        partial.write_bytes(blob)
+        partial.replace(target)
+    except (BackupError, OSError) as failure:
+        reason = failure.message if isinstance(failure, BackupError) else f"{failure.__class__.__name__}: {failure.strerror or failure}"
+        last_copy.update({"at": stamp, "name": "", "error": reason})
+        logger.error("The backup copy to %s failed: %s", target_folder, reason)
+        return None
+    last_copy.update({"at": stamp, "name": target.name, "error": ""})
+    logger.info("Backup copied to %s (%.1f MB).", target, len(blob) / 1048576)
+    sweep_copies()
+    return target
+
+
+def sweep_copies(keep: int | None = None) -> int:
+    """Drop the oldest copies HexDeck wrote; anything else in the folder is left alone."""
+    target_folder = copy_folder()
+    if target_folder is None or not target_folder.is_dir():
+        return 0
+    keep = get_settings().backup_copy_keep if keep is None else keep
+    if keep <= 0:
+        return 0
+    ours = sorted((path for path in target_folder.glob(f"{COPY_PREFIX}*.zip") if path.is_file()),
+                  key=lambda path: path.stat().st_mtime, reverse=True)
+    dropped = 0
+    for path in ours[keep:]:
+        try:
+            path.unlink()
+            dropped += 1
+        except OSError as failure:
+            logger.warning("Could not sweep the copy %s: %s", path.name, failure)
+    return dropped
 
 
 # ---------------------------------------------------------------------------

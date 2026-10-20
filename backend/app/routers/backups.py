@@ -56,6 +56,19 @@ def list_backups(admin: AdminUser) -> dict:
         "entries": [_entry(entry) for entry in backup.listing()],
         "folder": str(backup.folder()),
         "keep_automatic": backup.KEEP_AUTOMATIC,
+        "copies": _copies(),
+    }
+
+
+def _copies() -> dict:
+    """Where scheduled snapshots are also copied to, and how the last one went."""
+    settings = get_settings()
+    target = backup.copy_folder()
+    return {
+        "folder": str(target) if target else "",
+        "keep": settings.backup_copy_keep,
+        "password_set": bool(settings.backup_copy_password),
+        "last": dict(backup.last_copy),
     }
 
 
@@ -68,6 +81,8 @@ async def make_backup(body: MakeBody, admin: AdminUser) -> dict:
     except backup.BackupError as failure:
         raise error(failure.code, failure.message) from failure
     logger.info("%s wrote a backup: %s.", admin.username, path.name)
+    # A backup made on purpose is the one most wanted off the machine.
+    await asyncio.to_thread(backup.copy_off, path)
     return _entry(next(entry for entry in backup.listing() if entry.name == path.name))
 
 
