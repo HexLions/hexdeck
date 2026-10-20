@@ -123,17 +123,22 @@ test('a card marked to stay off the phone is left out there, and only there', as
     headers: { 'X-Nexdeck-Request': '1' },
   })
   expect(saved.ok()).toBe(true)
-  await page.reload()
+  // ⚠️ The board is shared with the tests after this one; the card goes back as it was.
+  try {
+    await page.reload()
 
-  await page.setViewportSize({ width: 390, height: 844 })
-  await expect.poll(() => gridWidth(page)).toBeLessThan(400)
-  const phone = await cards(page)
-  expect(phone.cards.map((one) => one.name)).not.toContain(card.title)
-  expect(phone.cards.length).toBe(wide.cards.length - 1)
+    await page.setViewportSize({ width: 390, height: 844 })
+    await expect.poll(() => gridWidth(page)).toBeLessThan(400)
+    const phone = await cards(page)
+    expect(phone.cards.map((one) => one.name)).not.toContain(card.title)
+    expect(phone.cards.length).toBe(wide.cards.length - 1)
 
-  await page.setViewportSize({ width: 1280, height: 900 })
-  await expect.poll(() => gridWidth(page)).toBeGreaterThan(700)
-  expect((await cards(page)).cards.map((one) => one.name)).toContain(card.title)
+    await page.setViewportSize({ width: 1280, height: 900 })
+    await expect.poll(() => gridWidth(page)).toBeGreaterThan(700)
+    expect((await cards(page)).cards.map((one) => one.name)).toContain(card.title)
+  } finally {
+    await page.request.patch(`/api/v1/widgets/${card.id}`, { data: { options: card.options }, headers: { 'X-Nexdeck-Request': '1' } })
+  }
 })
 
 test('on a phone, edit mode moves nothing and saves nothing', async ({ page }) => {
