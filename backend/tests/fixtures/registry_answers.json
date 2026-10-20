@@ -1,0 +1,52 @@
+{
+ "catalog": {
+  "repositories": [
+   "homelab/backup-job",
+   "homelab/hexdeck",
+   "tools/curl"
+  ]
+ },
+ "catalog_page1": {
+  "repositories": [
+   "homelab/backup-job",
+   "homelab/hexdeck"
+  ]
+ },
+ "catalog_page1_link": "</v2/_catalog?n=2&last=homelab/hexdeck>; rel=\"next\"",
+ "tags": {
+  "name": "homelab/backup-job",
+  "tags": [
+   "1.2.0",
+   "1.3.0",
+   "latest"
+  ]
+ },
+ "zot_unauthorized": {
+  "code": "UNAUTHORIZED",
+  "message": "authentication required",
+  "detail": {
+   "description": "The access controller was unable to authenticate the client. Often this will be accompanied by a WWW-Authenticate HTTP response header indicating how to authenticate."
+  }
+ },
+ "zot_challenge": "Basic realm=\"Authorization Required\"",
+ "name_unknown": {
+  "errors": [
+   {
+    "code": "NAME_UNKNOWN",
+    "message": "repository name not known to registry",
+    "detail": {
+     "description": "This is returned if the name used during an operation is unknown to the registry.",
+     "name": "nope"
+    }
+   }
+  ]
+ },
+ "ghcr_challenge_tags": "Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:hexlions/hexdeck:pull\"",
+ "ghcr_challenge_catalog": "Bearer realm=\"https://ghcr.io/token\",service=\"ghcr.io\",scope=\"repository:user/image:pull\"",
+ "dockerhub_token_keys": [
+  "token",
+  "access_token",
+  "expires_in",
+  "issued_at"
+ ]
+}

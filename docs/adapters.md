@@ -19,6 +19,7 @@ that one of thirty-five renderers draws.
 | Portainer | containers, summary | container actions | access token |
 | Nomad | jobs, nodes, cluster | stop a job, scale a task group up or down | none on a cluster without ACLs, else an ACL token with node:read and namespace:read-job; the buttons need namespace:scale-job or namespace:submit-job |
 | Cup | image updates, updates waiting | check now | none; Cup has no sign-in, so its port stays inside the network |
+| Container registry | repositories, image | | none for public images; otherwise a user name and password (or a personal access token in the password). The registry says how on its first 401: Basic (zot, a registry behind htpasswd) gets them on every request, Bearer (ghcr.io, Docker Hub, Harbor) sends them to the token service it names and uses the token for that one scope. The repository list needs `/v2/_catalog`, which ghcr.io and Docker Hub do not offer; there the image card names its image. Paged lists are followed up to ten pages |
 | Coolify | applications, deployments, status | | API token; the API has to be switched on in Coolify |
 | Gitea, Forgejo | open issues or pull requests, Actions jobs, repositories | | access token with read access to repositories, issues and the user |
 | GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |

@@ -511,6 +511,12 @@ Updated at every milestone.
   against SFTPGo v2.7.6 running locally with an SFTP session, an upload,
   failed sign-ins, a key of an admin allowed less, and a wrong key, which
   turned out to get the caller's address banned.
+- **Container registries through the distribution API alone.** The
+  catalog, the tag lists with their `Link` pages, and both ways of signing
+  in: Basic as the challenge asks, or a token from the realm the Bearer
+  challenge names, for that one scope. Checked against zot v2.1.22 running
+  locally behind htpasswd with images pushed to it, and against ghcr.io and
+  Docker Hub anonymously.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

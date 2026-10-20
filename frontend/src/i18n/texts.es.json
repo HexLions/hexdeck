@@ -2416,7 +2416,14 @@
     "SFTPGo file server: who is connected now, how full each user's quota is, and banned addresses.": "Servidor de archivos SFTPGo: quién está conectado ahora, cuánto se ha llenado la cuota de cada usuario, y las direcciones bloqueadas.",
     "The address of SFTPGo's web admin, without /api/v2.": "La dirección de la administración web de SFTPGo, sin /api/v2.",
     "The users with a quota, fullest first.": "Los usuarios con cuota, los más llenos primero.",
-    "Who is connected, over which protocol, from where and since when.": "Quién está conectado, por qué protocolo, desde dónde y desde cuándo."
+    "Who is connected, over which protocol, from where and since when.": "Quién está conectado, por qué protocolo, desde dónde y desde cuándo.",
+    "Any OCI or Docker registry (zot, Distribution, Harbor, ghcr.io, Docker Hub): its repositories, and the tags of one image.": "Cualquier registro OCI o Docker (zot, Distribution, Harbor, ghcr.io, Docker Hub): sus repositorios, y las etiquetas de una imagen.",
+    "Empty for public images.": "Vacío para imágenes públicas.",
+    "Every repository with its number of tags. Needs a registry that lists its catalog.": "Cada repositorio con su número de etiquetas. Necesita un registro que liste su catálogo.",
+    "How many tags one image has, and its highest version.": "Cuántas etiquetas tiene una imagen, y su versión más alta.",
+    "Password or token": "Contraseña o token",
+    "The registry's address, without /v2. For Docker Hub: https://registry-1.docker.io.": "La dirección del registro, sin /v2. Para Docker Hub: https://registry-1.docker.io.",
+    "The repository path, without the registry's address.": "La ruta del repositorio, sin la dirección del registro."
   },
   "labels": {
     "Private resources": "Recursos privados",

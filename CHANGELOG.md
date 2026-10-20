@@ -10,6 +10,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ### Added
 - **SFTPGo**: who is connected now, how full each user's quota is, and the
   addresses its defender has banned. ⚠️ Beta.
+- **Container registry**: the repositories of any OCI or Docker registry,
+  and the tags and newest version of one image, on zot, Distribution,
+  Harbor, ghcr.io or Docker Hub. ⚠️ Beta.
 
 ## 0.30.0 (2026-10-19)
 
