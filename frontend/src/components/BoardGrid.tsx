@@ -107,7 +107,13 @@ export function BoardGrid(props: Props) {
   // this ran on every widget tick, once or twice a second on a board of
   // thirty, and handed react-grid-layout a new object identity each time.
   const wide = useMemo(() => layoutFor(layouts.lg, widgets, columns), [layouts.lg, widgets, columns])
-  const gridLayouts: Layouts = useMemo(() => ({ lg: wide, sm: stackedFor(wide, PHONE_COLUMNS, columns) }), [wide, columns])
+  // A card may stay off the phone; while editing it is shown, so it can be found again.
+  const onPhone = screen === 'sm' && !editing
+  const shown = useMemo(() => (onPhone ? widgets.filter((widget) => widget.options?.hide_on_phone !== true) : widgets), [onPhone, widgets])
+  const gridLayouts: Layouts = useMemo(() => {
+    const kept = new Set(shown.map((widget) => String(widget.id)))
+    return { lg: wide, sm: stackedFor(wide.filter((item) => kept.has(item.i)), PHONE_COLUMNS, columns) }
+  }, [wide, columns, shown])
   const cols = useMemo(() => ({ lg: columns, sm: PHONE_COLUMNS }), [columns])
   const host = useRef<HTMLDivElement>(null)
   const rowHeight = useFitRowHeight(host, Boolean(fitScreen) && screen === 'lg', rowsOf(wide), compact ? ROW_HEIGHT_COMPACT : ROW_HEIGHT)
@@ -272,7 +278,7 @@ export function BoardGrid(props: Props) {
           onLayoutChange('lg', changed.map(plain))
         }}
       >
-        {widgets.map((widget) => (
+        {shown.map((widget) => (
           <div
             key={String(widget.id)}
             // ⚠️ The keyboard way round the grid. react-grid-layout 1.5.2 listens

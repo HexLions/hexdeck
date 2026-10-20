@@ -823,7 +823,9 @@
     "move": "Move or copy to another page",
     "moveTo": "Move to…",
     "copyTo": "Copy to…",
-    "copyHere": "Duplicate here"
+    "copyHere": "Duplicate here",
+    "hideOnPhone": "Hide on a phone",
+    "hideOnPhoneHelp": "On a phone this card is left out, so the board stays short. In edit mode it is shown, to be found again."
   },
   "library": {
     "title": "Add a widget",

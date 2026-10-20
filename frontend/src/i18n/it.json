@@ -823,7 +823,9 @@
     "move": "Sposta o copia su un'altra pagina",
     "moveTo": "Sposta in…",
     "copyTo": "Copia su…",
-    "copyHere": "Duplica qui"
+    "copyHere": "Duplica qui",
+    "hideOnPhone": "Nascondi sul telefono",
+    "hideOnPhoneHelp": "Sul telefono questa card non compare, così la board resta corta. In modifica si vede, per poterla ritrovare."
   },
   "library": {
     "title": "Aggiungi una card",

@@ -111,6 +111,31 @@ test('a phone stacks the board in the order of the wide one, a tablet shows it a
   })
 })
 
+test('a card marked to stay off the phone is left out there, and only there', async ({ page }) => {
+  await signIn(page)
+  const wide = await cards(page)
+  const boards = await (await page.request.get('/api/v1/boards')).json()
+  const board = await (await page.request.get(`/api/v1/boards/${boards[0].slug}`)).json()
+  const card = board.pages[0].widgets.find((widget: { title: string }) => widget.title === wide.cards[0].name)
+  expect(card, 'the first card on the screen is not in the board').toBeTruthy()
+  const saved = await page.request.patch(`/api/v1/widgets/${card.id}`, {
+    data: { options: { ...card.options, hide_on_phone: true } },
+    headers: { 'X-Nexdeck-Request': '1' },
+  })
+  expect(saved.ok()).toBe(true)
+  await page.reload()
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect.poll(() => gridWidth(page)).toBeLessThan(400)
+  const phone = await cards(page)
+  expect(phone.cards.map((one) => one.name)).not.toContain(card.title)
+  expect(phone.cards.length).toBe(wide.cards.length - 1)
+
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await expect.poll(() => gridWidth(page)).toBeGreaterThan(700)
+  expect((await cards(page)).cards.map((one) => one.name)).toContain(card.title)
+})
+
 test('on a phone, edit mode moves nothing and saves nothing', async ({ page }) => {
   const saves: string[] = []
   page.on('request', (request) => {

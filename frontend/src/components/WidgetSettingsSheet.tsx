@@ -360,6 +360,7 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
       {!spec?.client_only && (
         <Switch checked={options.show_findings === true} onChange={(value) => setOptions((o) => ({ ...o, show_findings: value }))} label={t('widget.showFindings')} description={t('widget.showFindingsHelp')} />
       )}
+      <Switch checked={options.hide_on_phone === true} onChange={(value) => setOptions((o) => ({ ...o, hide_on_phone: value }))} label={t('widget.hideOnPhone')} description={t('widget.hideOnPhoneHelp')} />
       {isApp && (
         <div className="rounded-xl border border-line p-3 mb-3">
           <Switch checked={options.check !== false} onChange={(value) => setOptions((o) => ({ ...o, check: value }))} label={t('widget.health.enable')} description={t('widget.health.help')} />
