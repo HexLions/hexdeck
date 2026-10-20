@@ -1048,6 +1048,30 @@
         "Der geheime Schlüssel kann aus einer Datei kommen, etwa einem Docker-Secret, mit HEXDECK_SECRET_KEY_FILE.",
         "Strg+K findet die Links auf dem Board: Lesezeichen, Link-Schaltflächen und gespeicherte Links."
       ]
+    },
+    "0.31.0": {
+      "lead": "HexDeck 0.31.0: Sicherungen, die die Maschine verlassen, HexDeck für Prometheus, Karten kopieren, und vier Integrationen, darunter deine USV.",
+      "sections": [
+        {
+          "title": "Kopien außerhalb der Maschine",
+          "body": "Richte HEXDECK_BACKUP_COPY_DIR auf eine eingebundene NAS-Freigabe, und jede Sicherung landet auch dort, verschlüsselt. Diese Seite sagt, ob die letzte Kopie geklappt hat.",
+          "path": "System > Sicherungen"
+        },
+        {
+          "title": "Karten kopieren und ausblenden",
+          "body": "Im Bearbeitungsmodus dupliziert das Verschiebe-Menü eine Karte oder kopiert sie auf ein anderes Board, und die Einstellungen einer Karte können sie vom Handy fernhalten.",
+          "path": "Einstellungen > Boards"
+        },
+        {
+          "title": "Vier Integrationen",
+          "body": "Eine USV direkt von ihrem NUT-Server, etwa dem USV-Dienst von TrueNAS, dazu SFTPGo, Container-Registries und Traccar.",
+          "path": "System > Anbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "/api/metrics gibt den Zustand von HexDeck an Prometheus, sobald HEXDECK_METRICS_TOKEN gesetzt ist."
+      ]
     }
   }
 }

@@ -5,9 +5,25 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.31.0 (2026-10-20)
+
+Backups that leave the machine, HexDeck for Prometheus, copying and hiding cards,
+and four integrations, a UPS straight from NUT among them.
 
 ### Added
+
+- **Copies off the machine.** `HEXDECK_BACKUP_COPY_DIR` names a folder off
+  the data volume, such as a mounted NAS share; every scheduled snapshot and
+  every backup made by hand also goes there as the encrypted archive the
+  Download button makes. The last `HEXDECK_BACKUP_COPY_KEEP` (14) stay.
+  Settings > Backups says whether the last copy worked.
+- **`/api/metrics` for Prometheus.** Which cards fail, how long their reads
+  take, live connections, the newest snapshot and whether its copy worked.
+  Off until `HEXDECK_METRICS_TOKEN` is set, then only with that token.
+- **Copy cards.** The move menu of a card in edit mode also duplicates it on
+  its page or copies it onto a page of another board.
+- **Hide on a phone.** A switch in a card's settings leaves it out of the
+  phone's stack; the wide board and the tablet keep it.
 - **SFTPGo**: who is connected now, how full each user's quota is, and the
   addresses its defender has banned. ⚠️ Beta.
 - **Container registry**: the repositories of any OCI or Docker registry,

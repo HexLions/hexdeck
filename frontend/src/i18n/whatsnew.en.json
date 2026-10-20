@@ -1048,6 +1048,30 @@
         "The secret key can come from a file, such as a Docker secret, with HEXDECK_SECRET_KEY_FILE.",
         "Ctrl+K finds the links on the board: bookmarks, link buttons and saved links."
       ]
+    },
+    "0.31.0": {
+      "lead": "HexDeck 0.31.0: backups that leave the machine, HexDeck for Prometheus, copying cards, and four integrations, your UPS among them.",
+      "sections": [
+        {
+          "title": "Copies off the machine",
+          "body": "Point HEXDECK_BACKUP_COPY_DIR at a mounted NAS share and every snapshot also lands there, encrypted. This page says whether the last copy worked.",
+          "path": "System > Backups"
+        },
+        {
+          "title": "Copy and hide cards",
+          "body": "In edit mode the move menu also duplicates a card or copies it onto another board, and a card's settings can keep it off the phone.",
+          "path": "Settings > Boards"
+        },
+        {
+          "title": "Four integrations",
+          "body": "A UPS straight from its NUT server, such as TrueNAS's UPS service, plus SFTPGo, container registries and Traccar.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "/api/metrics hands HexDeck's own state to Prometheus once HEXDECK_METRICS_TOKEN is set."
+      ]
     }
   }
 }
