@@ -13,6 +13,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Container registry**: the repositories of any OCI or Docker registry,
   and the tags and newest version of one image, on zot, Distribution,
   Harbor, ghcr.io or Docker Hub. ⚠️ Beta.
+- **Traccar**: which GPS trackers are online, when each was last heard
+  from, how fast it moves and its battery. ⚠️ Beta.
 
 ## 0.30.0 (2026-10-19)
 

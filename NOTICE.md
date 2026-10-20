@@ -517,6 +517,11 @@ Updated at every milestone.
   challenge names, for that one scope. Checked against zot v2.1.22 running
   locally behind htpasswd with images pushed to it, and against ghcr.io and
   Docker Hub anonymously.
+- **Traccar's devices and their last positions.** Read with a token or a
+  password, the state taken as Traccar means it rather than as it reads.
+  Checked against Traccar 6.16.0 running locally with positions sent as the
+  OsmAnd app sends them, a device that never reported, the status timeout
+  passing, a garbled token and a wrong password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

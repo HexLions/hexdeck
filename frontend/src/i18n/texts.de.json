@@ -2423,7 +2423,13 @@
     "How many tags one image has, and its highest version.": "Wie viele Tags ein Image hat, und seine höchste Version.",
     "Password or token": "Passwort oder Token",
     "The registry's address, without /v2. For Docker Hub: https://registry-1.docker.io.": "Die Adresse der Registry, ohne /v2. Für Docker Hub: https://registry-1.docker.io.",
-    "The repository path, without the registry's address.": "Der Pfad des Repositorys, ohne die Adresse der Registry."
+    "The repository path, without the registry's address.": "Der Pfad des Repositorys, ohne die Adresse der Registry.",
+    "Every tracker with its state, when it was last heard from, its speed and battery.": "Jeder Tracker mit seinem Zustand, wann er zuletzt gemeldet hat, seiner Geschwindigkeit und seinem Akku.",
+    "How many trackers are online, and how many have gone quiet.": "Wie viele Tracker online sind, und wie viele still geworden sind.",
+    "Made in Traccar under Settings > Preferences > Token. Or leave it empty and sign in below.": "Erstellt in Traccar unter Einstellungen > Präferenzen > Token. Oder leer lassen und unten anmelden.",
+    "Only without a token.": "Nur ohne Token.",
+    "Traccar GPS tracking: which trackers are online, when each was last heard from, how fast it moves and its battery.": "Traccar-GPS-Ortung: welche Tracker online sind, wann jeder zuletzt gemeldet hat, wie schnell er fährt und sein Akku.",
+    "Trackers": "Tracker"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3625,6 +3631,7 @@
     "Bounce rate": "Absprungrate",
     "Right now": "Gerade jetzt",
     "Domains": "Domains",
-    "Banned": "Gesperrt"
+    "Banned": "Gesperrt",
+    "Not heard from": "Ohne Meldung"
   }
 }
