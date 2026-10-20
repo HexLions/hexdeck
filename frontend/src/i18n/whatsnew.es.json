@@ -278,6 +278,30 @@
         "La clave secreta puede venir de un archivo, como un secreto de Docker, con HEXDECK_SECRET_KEY_FILE.",
         "Ctrl+K encuentra los enlaces del tablero: marcadores, botones de enlace y enlaces guardados."
       ]
+    },
+    "0.31.0": {
+      "lead": "HexDeck 0.31.0: copias de seguridad que salen de la máquina, HexDeck para Prometheus, copiar tarjetas, y cuatro integraciones, entre ellas tu SAI.",
+      "sections": [
+        {
+          "title": "Copias fuera de la máquina",
+          "body": "Apunta HEXDECK_BACKUP_COPY_DIR a una carpeta compartida del NAS montada y cada copia de seguridad llega también allí, cifrada. Esta página dice si la última copia funcionó.",
+          "path": "Sistema > Copias de seguridad"
+        },
+        {
+          "title": "Copiar y ocultar tarjetas",
+          "body": "En modo edición el menú de mover también duplica una tarjeta o la copia a otro tablero, y los ajustes de una tarjeta pueden dejarla fuera del móvil.",
+          "path": "Ajustes > Tableros"
+        },
+        {
+          "title": "Cuatro integraciones",
+          "body": "Un SAI directamente desde su servidor NUT, como el servicio UPS de TrueNAS, más SFTPGo, registros de contenedores y Traccar.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "/api/metrics entrega el estado de HexDeck a Prometheus una vez definida HEXDECK_METRICS_TOKEN."
+      ]
     }
   }
 }

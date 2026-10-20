@@ -422,6 +422,30 @@
         "La chiave segreta può arrivare da un file, come un Docker secret, con HEXDECK_SECRET_KEY_FILE.",
         "Ctrl+K trova i link della board: segnalibri, pulsanti link e link salvati."
       ]
+    },
+    "0.31.0": {
+      "lead": "HexDeck 0.31.0: backup che escono dalla macchina, HexDeck per Prometheus, copia delle card, e quattro integrazioni, tra cui il tuo UPS.",
+      "sections": [
+        {
+          "title": "Copie fuori dalla macchina",
+          "body": "Imposta HEXDECK_BACKUP_COPY_DIR su una cartella condivisa del NAS montata e ogni backup finisce anche lì, cifrato. Questa pagina dice se l'ultima copia è riuscita.",
+          "path": "Sistema > Backup"
+        },
+        {
+          "title": "Copiare e nascondere card",
+          "body": "In modifica il menu per spostare una card la duplica anche o la copia su un'altra board, e le impostazioni di una card possono tenerla fuori dal telefono.",
+          "path": "Impostazioni > Board"
+        },
+        {
+          "title": "Quattro integrazioni",
+          "body": "Un UPS direttamente dal suo server NUT, come il servizio UPS di TrueNAS, più SFTPGo, i registry di container e Traccar.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "/api/metrics passa lo stato di HexDeck a Prometheus una volta impostata HEXDECK_METRICS_TOKEN."
+      ]
     }
   }
 }
