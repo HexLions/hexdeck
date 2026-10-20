@@ -2434,7 +2434,8 @@
     "Charge, runtime left, load and input voltage; red on battery.": "Carga, autonomía restante, carga conectada y tensión de entrada; rojo con batería.",
     "On TrueNAS the Identifier of the UPS service.": "En TrueNAS el Identifier del servicio UPS.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "La máquina a la que está conectado el SAI. En TrueNAS marca Remote Monitor en el servicio UPS.",
-    "UPS name": "Nombre del SAI"
+    "UPS name": "Nombre del SAI",
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modelo, tensión y tipo de batería, entrada y salida, la potencia que puede dar, los límites de batería baja, avisador acústico y controlador."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3647,6 +3648,15 @@
     "Umami has no site yet.": "Umami aún no tiene sitios.",
     "The server has no slots.": "El servidor no tiene slots.",
     "The model is still loading.": "El modelo aún se está cargando.",
-    "Input": "Entrada"
+    "Input": "Entrada",
+    "Battery type": "Tipo de batería",
+    "Low battery at": "Batería baja a",
+    "Low runtime at": "Autonomía baja a",
+    "Input frequency": "Frecuencia de entrada",
+    "Output": "Salida",
+    "Nominal power": "Potencia nominal",
+    "Beeper": "Avisador acústico",
+    "Self-test": "Autoprueba",
+    "Driver": "Controlador"
   }
 }

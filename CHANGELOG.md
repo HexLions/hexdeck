@@ -5,6 +5,20 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **More from a UPS through NUT.** The UPS card shows the power drawn in watts, and
+  a new UPS details card shows the model, battery voltage and type, input
+  frequency, output, nominal power, the low-battery limits, beeper,
+  self-test and driver.
+
+### Fixed
+
+- **A UPS that pads its maker's name** (a CyberPower on TrueNAS said `1 `)
+  is named by its model in the connection test.
+
 ## 0.31.0 (2026-10-20)
 
 Backups that leave the machine, HexDeck for Prometheus, copying and hiding cards,

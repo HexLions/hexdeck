@@ -2434,7 +2434,8 @@
     "Charge, runtime left, load and input voltage; red on battery.": "Carica, autonomia rimasta, carico e tensione in ingresso; rosso a batteria.",
     "On TrueNAS the Identifier of the UPS service.": "Su TrueNAS l'Identifier del servizio UPS.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "La macchina a cui è collegato l'UPS. Su TrueNAS spunta Remote Monitor nel servizio UPS.",
-    "UPS name": "Nome UPS"
+    "UPS name": "Nome UPS",
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver."
   },
   "labels": {
     "Jobs": "Job",
@@ -3647,6 +3648,15 @@
     "Umami has no site yet.": "Umami non ha ancora siti.",
     "The server has no slots.": "Il server non ha slot.",
     "The model is still loading.": "Il modello si sta ancora caricando.",
-    "Input": "Ingresso"
+    "Input": "Ingresso",
+    "Battery type": "Tipo di batteria",
+    "Low battery at": "Batteria bassa a",
+    "Low runtime at": "Autonomia bassa a",
+    "Input frequency": "Frequenza in ingresso",
+    "Output": "Uscita",
+    "Nominal power": "Potenza nominale",
+    "Beeper": "Cicalino",
+    "Self-test": "Autotest",
+    "Driver": "Driver"
   }
 }

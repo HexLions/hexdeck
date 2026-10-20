@@ -50,8 +50,9 @@ async def test_on_line() -> None:
     assert data.status == "ok"
     assert data.primary == {"label": "Charge", "value": 100, "unit": "%"}
     assert data.secondary == [{"label": "Status", "value": "On line"}, {"label": "Runtime", "value": "41m"},
-                              {"label": "Load", "value": 23, "unit": "%"}, {"label": "Input", "value": 231, "unit": "V"}]
-    assert data.metrics == {"charge": 100.0, "load": 23.0, "runtime_min": 41.0}
+                              {"label": "Load", "value": 23, "unit": "%"}, {"label": "Input", "value": 231, "unit": "V"},
+                              {"label": "Power", "value": 93, "unit": "W"}]
+    assert data.metrics == {"charge": 100.0, "load": 23.0, "runtime_min": 41.0, "power_w": 93.0}, "23 % of 405 W nominal"
     assert heard == ["VER", "LIST VAR ups"], "no USERNAME, PASSWORD or LOGIN: reading needs none"
 
 
@@ -100,3 +101,30 @@ def test_the_demo() -> None:
     adapter = get_adapter("nut")
     states = {adapter.demo("status", {}, tick).status for tick in range(24)}
     assert states == {"ok", "bad"}, "the demo shows a power cut now and then"
+
+
+async def test_a_cyberpower_that_pads_its_names() -> None:
+    """usbhid-ups on TrueNAS: device.mfr "1 ", ups.mfr "1 ", device.model "1000".
+
+    ``cyberpower_truenas`` is what upsd 2.8.0 on a TrueNAS answered for a
+    CyberPower 1000 VA on USB on 21.10.2026, read through this adapter.
+    """
+    server, port, _heard = await _upsd(FIXTURE["cyberpower_truenas"])
+    async with server:
+        said = await get_adapter("nut").test({"host": "127.0.0.1", "port": port, "ups": "ups"}, _ctx())
+    assert said == "upsd answers for UPS 1000: On line."
+
+
+async def test_the_details_of_that_cyberpower() -> None:
+    server, port, _heard = await _upsd(FIXTURE["cyberpower_truenas"])
+    async with server:
+        status = await get_adapter("nut").fetch("status", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {}, _ctx())
+        details = await get_adapter("nut").fetch("details", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {}, _ctx())
+    assert {"label": "Power", "value": 138, "unit": "W"} in status.secondary, "23 % of 600 W"
+    rows = {row["label"]: row["value"] for row in details.secondary}
+    assert rows["Model"] == "1000", "the maker is padding, so only the model"
+    assert rows["Battery"] == "13.6 V of 12 V" and rows["Battery type"] == "PbAcid"
+    assert rows["Low battery at"] == 10 and rows["Low runtime at"] == "5m"
+    assert rows["Input frequency"] == "49.8" and rows["Nominal power"] == 600
+    assert "Output" not in rows, "25.4 V out with 230 V in is not what comes out"
+    assert rows["Driver"] == "usbhid-ups 2.8.0" and rows["Beeper"] == "enabled"

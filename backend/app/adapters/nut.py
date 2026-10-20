@@ -104,6 +104,45 @@ async def read_vars(host: str, port: int, ups: str) -> tuple[dict[str, str], str
         writer.close()
 
 
+def _named(found: dict[str, str], *names: str) -> str:
+    """The first of these that holds a word, not padding.
+
+    ⚠️ A CyberPower on TrueNAS (usbhid-ups, "CyberPower HID 0.6") reported
+    ``device.mfr`` as ``"1 "`` and its serial as sixteen spaces; the test
+    said "upsd answers for 1 1000". A value without a letter is not a name.
+    """
+    for name in names:
+        value = found.get(name, "").strip()
+        if any(char.isalpha() for char in value):
+            return value
+    return ""
+
+
+def _power(found: dict[str, str]) -> float | None:
+    """Watts drawn: ``ups.realpower`` where the UPS measures it, else the load share of its nominal power."""
+    measured = _number(found, "ups.realpower")
+    if measured is not None:
+        return measured
+    load, nominal = _number(found, "ups.load"), _number(found, "ups.realpower.nominal")
+    return load * nominal / 100 if load is not None and nominal else None
+
+
+def _output(found: dict[str, str]) -> float | None:
+    """The output voltage, unless it cannot be what comes out.
+
+    ⚠️ The same CyberPower reported ``output.voltage`` 25.4 while on line with
+    230 V in; the driver reads a field this model fills with something else.
+    On line, an output under half the input is left out rather than shown.
+    """
+    output = _number(found, "output.voltage")
+    if output is None:
+        return None
+    reference = _number(found, "input.voltage") or _number(found, "input.voltage.nominal")
+    if "OL" in found.get("ups.status", "").split() and reference and output < reference / 2:
+        return None
+    return round(output)
+
+
 def _number(found: dict[str, str], name: str) -> float | None:
     try:
         return float(found[name])
@@ -127,7 +166,10 @@ class NutAdapter(Adapter):
     )
     widgets = (
         WidgetType(kind="status", label="UPS", description="Charge, runtime left, load and input voltage; red on battery.",
-                   renderer="value", default_size=(3, 2), refresh_seconds=30, metrics=("charge", "load", "runtime_min")),
+                   renderer="value", default_size=(3, 2), refresh_seconds=30, metrics=("charge", "load", "runtime_min", "power_w")),
+        WidgetType(kind="details", label="UPS details",
+                   description="Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.",
+                   renderer="stats", default_size=(4, 3), refresh_seconds=60),
     )
 
     def _target(self, config: dict[str, Any]) -> tuple[str, int, str]:
@@ -159,11 +201,15 @@ class NutAdapter(Adapter):
 
     async def test(self, config: dict[str, Any], ctx: Context) -> str:
         found, _version = await self._read(config, ctx, cache=0)
-        model = " ".join(part for part in (found.get("device.mfr") or found.get("ups.mfr"), found.get("device.model") or found.get("ups.model")) if part)
-        return f"upsd answers for {model or 'the UPS'}: {self._words(found.get('ups.status', ''))}."
+        maker = _named(found, "device.mfr", "ups.mfr")
+        model = (found.get("device.model") or found.get("ups.model") or "").strip()
+        named = f"{maker} {model}".strip() if maker else (f"UPS {model}" if model else "the UPS")
+        return f"upsd answers for {named}: {self._words(found.get('ups.status', ''))}."
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         found, _version = await self._read(config, ctx)
+        if widget_kind == "details":
+            return self._details(found)
         return self._status(found)
 
     @staticmethod
@@ -196,13 +242,52 @@ class NutAdapter(Adapter):
             secondary.append({"label": "Load", "value": round(load), "unit": "%"})
         if voltage is not None:
             secondary.append({"label": "Input", "value": round(voltage), "unit": "V"})
+        power = _power(found)
+        if power is not None:
+            secondary.append({"label": "Power", "value": round(power), "unit": "W"})
         meta: dict[str, Any] = {}
         if state == "bad":
             meta["status_reason"] = NutAdapter._words(found.get("ups.status", ""))
         metrics = {name: value for name, value in (("charge", charge), ("load", load),
-                                                   ("runtime_min", round(runtime / 60, 1) if runtime is not None else None)) if value is not None}
+                                                   ("runtime_min", round(runtime / 60, 1) if runtime is not None else None),
+                                                   ("power_w", round(power) if power is not None else None)) if value is not None}
         return WidgetData(status=state, primary={"label": "Charge", "value": round(charge) if charge is not None else "?", "unit": "%" if charge is not None else ""},
                           secondary=secondary, meta=meta, metrics=metrics)
+
+    @staticmethod
+    def _details(found: dict[str, str]) -> WidgetData:
+        """Everything worth knowing that the main card leaves out, as far as the UPS says it."""
+        rows: list[dict[str, Any]] = []
+
+        def add(label: str, value: Any, unit: str = "") -> None:
+            if value not in (None, ""):
+                rows.append({"label": label, "value": value, **({"unit": unit} if unit else {})})
+
+        maker = _named(found, "device.mfr", "ups.mfr")
+        model = (found.get("device.model") or found.get("ups.model") or "").strip()
+        add("Model", f"{maker} {model}".strip() if maker else model)
+        add("Status", NutAdapter._words(found.get("ups.status", "")) if found.get("ups.status") else "")
+        battery = _number(found, "battery.voltage")
+        nominal = _number(found, "battery.voltage.nominal")
+        if battery is not None:
+            add("Battery", f"{battery:g} V" + (f" of {nominal:g} V" if nominal else ""))
+        add("Battery type", found.get("battery.type", "").strip())
+        low_charge = _number(found, "battery.charge.low")
+        add("Low battery at", round(low_charge) if low_charge is not None else None, "%")
+        low_runtime = _number(found, "battery.runtime.low")
+        add("Low runtime at", duration_short(low_runtime) if low_runtime is not None else None)
+        frequency = _number(found, "input.frequency")
+        add("Input frequency", f"{frequency:g}" if frequency is not None else None, "Hz")
+        add("Output", _output(found), "V")
+        capacity = _number(found, "ups.realpower.nominal")
+        add("Nominal power", round(capacity) if capacity is not None else None, "W")
+        add("Beeper", found.get("ups.beeper.status", "").strip())
+        add("Self-test", found.get("ups.test.result", "").strip())
+        add("Driver", " ".join(part for part in (found.get("driver.name", ""), found.get("driver.version", "")) if part))
+        charge = _number(found, "battery.charge")
+        return WidgetData(status=NutAdapter._status(found).status,
+                          primary={"label": "Charge", "value": round(charge) if charge is not None else "?", "unit": "%" if charge is not None else ""},
+                          secondary=rows)
 
     def demo(self, widget_kind: str, options: dict[str, Any], tick: int) -> WidgetData:
         on_battery = tick % 12 >= 10
@@ -213,8 +298,13 @@ class NutAdapter(Adapter):
             "ups.load": str(round(fake.walk("nut-load", tick, 18, 31))),
             "input.voltage": "0.0" if on_battery else str(round(fake.walk("nut-volt", tick, 228, 234), 1)),
             "device.model": "Back-UPS ES 700G",
+            "device.mfr": "American Power Conversion",
+            "ups.realpower.nominal": "405",
+            "battery.voltage": "13.6", "battery.voltage.nominal": "12", "battery.type": "PbAc",
+            "battery.charge.low": "10", "battery.runtime.low": "120", "input.frequency": "50.0",
+            "ups.beeper.status": "enabled", "ups.test.result": "Done and passed", "driver.name": "usbhid-ups", "driver.version": "2.8.1",
         }
-        return self._status(found)
+        return self._details(found) if widget_kind == "details" else self._status(found)
 
 
 ADAPTER = NutAdapter()
