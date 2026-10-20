@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import logging
 import re
 import time
@@ -224,6 +225,50 @@ def move_widgets(body: WidgetMove, user: CurrentUser, db: DbSession) -> dict:
         hub.publish(board_topic(board_id), "board", {"id": board_id, "changed": True})
     logger.info("%d card(s) moved to page %r by %s.", moved, target.name, user.username)
     return {"moved": moved, "page_id": target.id}
+
+
+@router.post("/widgets/copy", status_code=status.HTTP_201_CREATED, summary="Copy cards onto a page")
+def copy_widgets(body: WidgetMove, user: CurrentUser, db: DbSession) -> dict:
+    """New cards with the settings of the old ones, at the bottom of the page.
+
+    The same page duplicates a card. Edit is needed on the board each card
+    comes from (its options are what an editor sees) and on the one it lands
+    on, and the connection and the options are checked again as for a new
+    card: a card on a connection reserved for administrators does not reach
+    a board through a copy. The history, the reachability check's settings
+    and the place are not copied; the copy gets the default check for its
+    link, like any new card.
+    """
+    target = db.get(Page, body.page_id)
+    if target is None:
+        raise error("not_found", "There is no such page.", status.HTTP_404_NOT_FOUND)
+    to_board, _ = require_board_id(db, target.board_id, user, "edit")
+    made: list[Widget] = []
+    for widget_id in dict.fromkeys(body.ids):
+        source, page = _widget(db, widget_id)
+        from_board, _ = require_board_id(db, page.board_id, user, "edit")
+        _validate_kind(db, source.kind, source.integration_id, user)
+        options = copy.deepcopy(source.options or {})
+        _validate_options(db, source.kind, options, user)
+        size = next(((item["w"], item["h"]) for item in (page.layouts or {}).get("lg", []) if item.get("i") == str(source.id)), None)
+        widget = Widget(page_id=target.id, kind=source.kind, title=source.title, icon=source.icon, link=source.link,
+                        integration_id=source.integration_id, options=options, refresh_seconds=source.refresh_seconds)
+        db.add(widget)
+        db.flush()
+        adapter, widget_kind = split_widget_kind(widget.kind)
+        widget_type = adapter.widget(widget_kind)
+        old_columns = columns_of(from_board.settings)
+        wide = (round(size[0] * 12 / old_columns), size[1]) if size else widget_type.default_size
+        place_widget(target, widget.id, (max(1, wide[0]), max(1, wide[1])), widget_type.min_size, columns_of(to_board.settings))
+        health_service.ensure_check_for_widget(db, widget)
+        made.append(widget)
+    db.commit()
+    for widget in made:
+        collector.schedule(widget.id)
+        hass_listener.forget_widgets(widget.integration_id)
+    hub.publish(board_topic(to_board.id), "board", {"id": to_board.id, "changed": True})
+    logger.info("%d card(s) copied to page %r by %s.", len(made), target.name, user.username)
+    return {"copied": len(made), "page_id": target.id, "ids": [widget.id for widget in made]}
 
 
 @router.delete("/widgets/{widget_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Remove a widget")

@@ -363,18 +363,22 @@ export function BoardPage() {
   const onRemove = useCallback((id: number) => setRemoving(id), [])
   // The other pages of this board first, then the pages of every board one may edit.
   const moveTargets = useMemo(() => {
-    const here = (data?.pages ?? []).filter((p) => p.id !== activePage?.id).map((p) => ({ id: p.id, label: p.name }))
+    // The page itself only as a place for a copy: the menu leaves it out of moving.
+    const here = (data?.pages ?? []).map((p) => ({ id: p.id, label: p.name, here: p.id === activePage?.id }))
     const elsewhere = (boards.data ?? [])
       .filter((b) => b.slug !== slug && (b.permission === 'owner' || b.permission === 'edit'))
       .flatMap((b) => b.pages.map((p) => ({ id: p.id, label: `${b.name} › ${p.name}` })))
     return [...here, ...elsewhere]
   }, [data?.pages, activePage?.id, boards.data, slug])
   const onMove = useCallback(
-    (ids: number[], pageId: number) => {
+    (ids: number[], pageId: number, copy?: boolean) => {
       const target = moveTargets.find((t) => t.id === pageId)
-      void post<{ moved: number }>('/widgets/move', { ids, page_id: pageId })
-        .then((answer) => {
-          setToast({ text: t('board.moved', { count: answer.moved, page: target?.label ?? '' }), level: 'ok' })
+      const done = copy
+        ? post<{ copied: number }>('/widgets/copy', { ids, page_id: pageId }).then((answer) => t('board.copied', { count: answer.copied, page: target?.label ?? '' }))
+        : post<{ moved: number }>('/widgets/move', { ids, page_id: pageId }).then((answer) => t('board.moved', { count: answer.moved, page: target?.label ?? '' }))
+      void done
+        .then((text) => {
+          setToast({ text, level: 'ok' })
           return board.refetch()
         })
         .catch((failure) => setToast({ text: failure instanceof ApiError ? failure.message : t('errors.network'), level: 'error' }))

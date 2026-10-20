@@ -714,7 +714,9 @@
     "pickOne": "Pick one",
     "stackedHint": "On a narrow screen the cards follow the order of the wide board. To move them, open the board on a wider screen.",
     "moved_one": "{{count}} card moved to {{page}}.",
-    "moved_other": "{{count}} cards moved to {{page}}."
+    "moved_other": "{{count}} cards moved to {{page}}.",
+    "copied_one": "{{count}} card copied to {{page}}.",
+    "copied_other": "{{count}} cards copied to {{page}}."
   },
   "widget": {
     "size": "Size",
@@ -818,8 +820,10 @@
       "titleHelp": "Empty: the name of the app.",
       "linkFollows": "Empty: the address of the app. An address here wins over it."
     },
-    "move": "Move to another page",
-    "moveTo": "Move to…"
+    "move": "Move or copy to another page",
+    "moveTo": "Move to…",
+    "copyTo": "Copy to…",
+    "copyHere": "Duplicate here"
   },
   "library": {
     "title": "Add a widget",

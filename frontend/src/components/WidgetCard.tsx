@@ -1,5 +1,5 @@
 import { AlertTriangle, ArrowRightLeft, ExternalLink, Proportions, RefreshCw, Settings2, Trash2 } from 'lucide-react'
-import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -24,18 +24,20 @@ interface Props {
   onRemove?: () => void
   /** Put the card to one of four sizes; offered while editing. */
   onResize?: (preset: SizePreset) => void
-  /** The pages a card may be moved to, and the move itself; offered while editing. */
+  /** The pages a card may be moved or copied to, and the move itself; offered while editing. */
   moveTargets?: MoveTarget[]
-  onMove?: (pageId: number) => void
+  onMove?: (pageId: number, copy?: boolean) => void
 }
 
 export interface MoveTarget {
   id: number
   label: string
+  /** The page the card is on: a copy may land here, a move may not. */
+  here?: boolean
 }
 
-/** The other pages, of this board and of the boards one may edit, behind one button. */
-function MoveMenu({ targets, onMove }: { targets: MoveTarget[]; onMove: (pageId: number) => void }) {
+/** The other pages, of this board and of the boards one may edit, behind one button; a copy may also stay on this page. */
+function MoveMenu({ targets, onMove }: { targets: MoveTarget[]; onMove: (pageId: number, copy?: boolean) => void }) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null)
@@ -45,20 +47,28 @@ function MoveMenu({ targets, onMove }: { targets: MoveTarget[]; onMove: (pageId:
         <ArrowRightLeft size={13} />
       </button>
       <CardMenu anchor={anchor} open={open} onClose={() => setOpen(false)} className="flex max-h-56 w-56 flex-col overflow-auto p-1">
-          <span className="px-2 py-1 text-[10px] uppercase tracking-wide text-faint">{t('widget.moveTo')}</span>
-          {targets.map((target) => (
-            <button
-              key={target.id}
-              role="menuitem"
-              className="rounded px-2 py-1 text-left text-xs text-muted hover:bg-surface-hover hover:text-ink"
-              onClick={() => {
-                setOpen(false)
-                onMove(target.id)
-              }}
-            >
-              {target.label}
-            </button>
-          ))}
+          {[false, true].map((copy) => {
+            const shown = copy ? targets : targets.filter((target) => !target.here)
+            if (!shown.length) return null
+            return (
+              <Fragment key={String(copy)}>
+                <span className="px-2 py-1 text-[10px] uppercase tracking-wide text-faint">{t(copy ? 'widget.copyTo' : 'widget.moveTo')}</span>
+                {shown.map((target) => (
+                  <button
+                    key={target.id}
+                    role="menuitem"
+                    className="rounded px-2 py-1 text-left text-xs text-muted hover:bg-surface-hover hover:text-ink"
+                    onClick={() => {
+                      setOpen(false)
+                      onMove(target.id, copy)
+                    }}
+                  >
+                    {target.here ? t('widget.copyHere') : target.label}
+                  </button>
+                ))}
+              </Fragment>
+            )
+          })}
       </CardMenu>
     </span>
   )

@@ -58,7 +58,7 @@ interface Props {
   onRemove?: (widgetId: number) => void
   /** Where a card may be moved to, and the move; the selected cards go together. */
   moveTargets?: MoveTarget[]
-  onMove?: (widgetIds: number[], pageId: number) => void
+  onMove?: (widgetIds: number[], pageId: number, copy?: boolean) => void
   compact?: boolean
   /** On, every card moves up to fill space. Off, cards stay where they are dropped and gaps are allowed. */
   autoCompact?: boolean
@@ -164,11 +164,11 @@ export function BoardGrid(props: Props) {
    */
   /** A move takes the selected cards along when the moved one is among them. */
   const move = useCallback(
-    (widgetId: number, pageId: number) => {
+    (widgetId: number, pageId: number, copy?: boolean) => {
       if (!onMove) return
       const ids = selected.size > 1 && selected.has(String(widgetId)) ? [...selected].map(Number) : [widgetId]
       setSelected(new Set())
-      onMove(ids, pageId)
+      onMove(ids, pageId, copy)
     },
     [onMove, selected],
   )
@@ -325,7 +325,7 @@ interface CardProps {
   onRemove?: (widgetId: number) => void
   onResize?: (widgetId: number, preset: SizePreset) => void
   moveTargets?: MoveTarget[]
-  onMove?: (widgetId: number, pageId: number) => void
+  onMove?: (widgetId: number, pageId: number, copy?: boolean) => void
 }
 
 /**
@@ -339,7 +339,7 @@ interface CardProps {
  * for as long as the card is, and the wrapper is what the grid renders.
  */
 const GridCard = memo(function GridCard({ widget, data, series, editing, canAct, canEdit, onAction, onRefresh, onSettings, onRemove, onResize, moveTargets, onMove }: CardProps) {
-  const moveTo = useCallback((pageId: number) => onMove?.(widget.id, pageId), [onMove, widget.id])
+  const moveTo = useCallback((pageId: number, copy?: boolean) => onMove?.(widget.id, pageId, copy), [onMove, widget.id])
   const act = useCallback((action: Action) => onAction?.(widget.id, action), [onAction, widget.id])
   const size = useCallback((preset: SizePreset) => onResize?.(widget.id, preset), [onResize, widget.id])
   const refresh = useCallback(() => onRefresh?.(widget.id), [onRefresh, widget.id])
