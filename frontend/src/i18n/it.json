@@ -714,7 +714,9 @@
     "pickOne": "Scegline uno",
     "stackedHint": "Su uno schermo stretto le card seguono l'ordine della board larga. Per spostarle, apri la board su uno schermo più largo.",
     "moved_one": "{{count}} card spostata in {{page}}.",
-    "moved_other": "{{count}} card spostate in {{page}}."
+    "moved_other": "{{count}} card spostate in {{page}}.",
+    "copied_one": "{{count}} card copiata su {{page}}.",
+    "copied_other": "{{count}} card copiate su {{page}}."
   },
   "widget": {
     "size": "Dimensione",
@@ -818,8 +820,10 @@
       "titleHelp": "Vuoto: il nome dell'app.",
       "linkFollows": "Vuoto: l'indirizzo dell'app. Un indirizzo qui ha la precedenza."
     },
-    "move": "Sposta su un'altra pagina",
-    "moveTo": "Sposta in…"
+    "move": "Sposta o copia su un'altra pagina",
+    "moveTo": "Sposta in…",
+    "copyTo": "Copia su…",
+    "copyHere": "Duplica qui"
   },
   "library": {
     "title": "Aggiungi una card",

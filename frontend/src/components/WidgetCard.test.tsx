@@ -53,12 +53,17 @@ describe('WidgetCard', () => {
   it('offers the other pages behind one button while editing, the selection going along', () => {
     const view = valueView()
     const moved = vi.fn()
-    render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} editing moveTargets={[{ id: 7, label: 'Media' }, { id: 9, label: 'Lab › Overview' }]} onMove={moved} />)
-    fireEvent.click(screen.getByRole('button', { name: 'Move to another page' }))
-    expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual(['Media', 'Lab › Overview'])
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Lab › Overview' }))
-    expect(moved).toHaveBeenCalledWith(9)
+    const targets = [{ id: 3, label: 'Home', here: true }, { id: 7, label: 'Media' }, { id: 9, label: 'Lab › Overview' }]
+    render(<WidgetCard widget={view} data={DEMO_DATA[view.id]} editing moveTargets={targets} onMove={moved} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Move or copy to another page' }))
+    // Moving leaves the card's own page out; copying offers it as a duplicate.
+    expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual(['Media', 'Lab › Overview', 'Duplicate here', 'Media', 'Lab › Overview'])
+    fireEvent.click(screen.getAllByRole('menuitem', { name: 'Lab › Overview' })[0])
+    expect(moved).toHaveBeenCalledWith(9, false)
     expect(screen.queryByRole('menu')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Move or copy to another page' }))
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Duplicate here' }))
+    expect(moved).toHaveBeenLastCalledWith(3, true)
   })
 
   it('does not open the link while editing', () => {

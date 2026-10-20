@@ -714,7 +714,9 @@
     "pickOne": "Bitte auswählen",
     "stackedHint": "Auf einem schmalen Bildschirm folgen die Karten der Reihenfolge des breiten Boards. Verschieben geht auf einem breiteren Bildschirm.",
     "moved_one": "{{count}} Karte nach {{page}} verschoben.",
-    "moved_other": "{{count}} Karten nach {{page}} verschoben."
+    "moved_other": "{{count}} Karten nach {{page}} verschoben.",
+    "copied_one": "{{count}} Karte nach {{page}} kopiert.",
+    "copied_other": "{{count}} Karten nach {{page}} kopiert."
   },
   "widget": {
     "size": "Größe",
@@ -818,8 +820,10 @@
       "titleHelp": "Leer: der Name der App.",
       "linkFollows": "Leer: die Adresse der App. Eine Adresse hier geht vor."
     },
-    "move": "Auf eine andere Seite verschieben",
-    "moveTo": "Verschieben nach…"
+    "move": "Auf eine andere Seite verschieben oder kopieren",
+    "moveTo": "Verschieben nach…",
+    "copyTo": "Kopieren nach…",
+    "copyHere": "Hier duplizieren"
   },
   "library": {
     "title": "Widget hinzufügen",

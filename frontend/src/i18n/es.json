@@ -714,7 +714,9 @@
     "undoHint": "Devolver la última disposición (Ctrl+Z)",
     "tidyConfirm": "¿Ordenar esta página?",
     "moved_one": "{{count}} tarjeta movida a {{page}}.",
-    "moved_other": "{{count}} tarjetas movidas a {{page}}."
+    "moved_other": "{{count}} tarjetas movidas a {{page}}.",
+    "copied_one": "{{count}} tarjeta copiada a {{page}}.",
+    "copied_other": "{{count}} tarjetas copiadas a {{page}}."
   },
   "widget": {
     "remove": {
@@ -818,8 +820,10 @@
       "XL": "Muy grande: el doble"
     },
     "size": "Tamaño",
-    "move": "Mover a otra página",
-    "moveTo": "Mover a…"
+    "move": "Mover o copiar a otra página",
+    "moveTo": "Mover a…",
+    "copyTo": "Copiar a…",
+    "copyHere": "Duplicar aquí"
   },
   "library": {
     "title": "Añadir un widget",
