@@ -128,6 +128,17 @@ class Settings(BaseSettings):
     #: snapshot that ever happened by itself was the one before a restore. A
     #: sweeper without a writer is a promise with nothing behind it.
     backup_every_hours: int = 24
+    #: A folder off this volume, such as a NAS share mounted into the
+    #: container, where every scheduled snapshot also goes as the same
+    #: encrypted archive the Backups page downloads. Empty means none.
+    backup_copy_dir: Path | None = None
+    #: The archive password for those copies. Without one nothing is copied:
+    #: the archive holds ``secret.key``, so it is never written unencrypted.
+    backup_copy_password: str = ""
+    #: The same from a file, such as a Docker secret.
+    backup_copy_password_file: Path | None = None
+    #: How many copies stay in that folder; older ones HexDeck wrote are deleted.
+    backup_copy_keep: int = 14
     #: How long the rows nobody reads again are kept. ``0`` switches a sweep
     #: off and lets that table grow, which is what all three did until now.
     #:
@@ -169,7 +180,8 @@ class Settings(BaseSettings):
         operator moving the key into a secret file who forgot the old variable
         would otherwise run on a key they believe is gone.
         """
-        for field, file_field in (("secret_key", "secret_key_file"), ("secret_key_previous", "secret_key_previous_file")):
+        for field, file_field in (("secret_key", "secret_key_file"), ("secret_key_previous", "secret_key_previous_file"),
+                                  ("backup_copy_password", "backup_copy_password_file")):
             path = getattr(self, file_field)
             if path is None:
                 continue

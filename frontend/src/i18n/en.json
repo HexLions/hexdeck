@@ -1284,6 +1284,14 @@
       "keyOnlyFromEnv": "There is no key in this archive. This installation takes its key from HEXDECK_SECRET_KEY, so the credentials will be readable if the variable holds the same value as on the machine the backup came from.",
       "noKeyAtAll": "There is no key in this archive and none in the environment here. HexDeck will make a new one, and no stored credential will be readable afterwards. Every connection would have to be entered again.",
       "envKeyWins": "This archive brings a key, but HEXDECK_SECRET_KEY is set here and wins. The credentials stay unreadable unless the variable holds the same value."
+    },
+    "copies": {
+      "none": "Copies off this disk: none. Set HEXDECK_BACKUP_COPY_DIR to a mounted share to have every snapshot also land there.",
+      "to_one": "Every snapshot is also copied, encrypted, to {{folder}}; the last {{count}} copy stays.",
+      "to_other": "Every snapshot is also copied, encrypted, to {{folder}}; the last {{count}} copies stay.",
+      "noPassword": "HEXDECK_BACKUP_COPY_PASSWORD is not set, so nothing is copied.",
+      "failed": "The last copy failed ({{when}}): {{reason}}",
+      "last": "Last copy {{when}}: {{name}}"
     }
   },
   "nav": {
