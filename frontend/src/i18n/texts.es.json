@@ -3632,6 +3632,15 @@
     "Right now": "Ahora mismo",
     "Domains": "Dominios",
     "Banned": "Bloqueadas",
-    "Not heard from": "Sin noticias"
+    "Not heard from": "Sin noticias",
+    "Nobody is connected.": "No hay nadie conectado.",
+    "No user has a quota.": "Ningún usuario tiene cuota.",
+    "The registry has no repository yet.": "El registro aún no tiene repositorios.",
+    "Traccar has no trackers yet.": "Traccar aún no tiene rastreadores.",
+    "No file service is running.": "No hay ningún servicio de archivos en marcha.",
+    "Nothing is waiting to go out.": "Nada espera para salir.",
+    "Umami has no site yet.": "Umami aún no tiene sitios.",
+    "The server has no slots.": "El servidor no tiene slots.",
+    "The model is still loading.": "El modelo aún se está cargando."
   }
 }

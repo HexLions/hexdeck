@@ -23,7 +23,8 @@ back still made the device online.
 ⚠️ Speeds are knots, as everywhere in Traccar's API; the battery is
 ``attributes.batteryLevel`` in percent when the device sends one.
 ``/api/positions`` without parameters answers the latest position of every
-device the account may see.
+device the account may see. A device marked ``disabled`` is left out of both
+cards.
 """
 
 from __future__ import annotations
@@ -152,8 +153,8 @@ class TraccarAdapter(Adapter):
             items.append({
                 "title": str(one.get("name") or one.get("uniqueId") or "?"),
                 "subtitle": " · ".join(parts),
+                # The dot says online or not; a word here would not translate.
                 "status": "ok" if _online(one) else "warn",
-                "value": "Online" if _online(one) else "Quiet",
             })
         return WidgetData(status="warn" if any(item["status"] == "warn" for item in items) else "ok", items=items,
                           meta={"empty": "Traccar has no trackers yet."})

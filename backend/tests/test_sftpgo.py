@@ -20,7 +20,7 @@ from app.adapters.base import AdapterError, AuthFailed, Context
 
 SG = "http://sftpgo.local:8080"
 API = f"{SG}/api/v2"
-CONFIG = {"url": SG, "api_key": "AXNuFuQidQL5GGEJ4KHBC9.secret"}
+CONFIG = {"url": SG, "api_key": "test-key-id.test-key-secret"}
 FIXTURE = json.loads((Path(__file__).parent / "fixtures" / "sftpgo_server.json").read_text())
 
 
@@ -114,3 +114,15 @@ def test_the_demo() -> None:
     for tick in range(10):
         for kind in ("status", "connections", "quotas"):
             assert adapter.demo(kind, {}, tick).status in ("ok", "warn")
+
+
+@respx.mock
+async def test_any_401_is_a_refusal_and_a_test_that_gets_no_list(ctx: Context) -> None:
+    respx.get(f"{API}/status").mock(return_value=httpx.Response(401, json={"message": "Unauthorized"}))
+    with pytest.raises(AuthFailed):
+        await get_adapter("sftpgo").fetch("status", CONFIG, {}, ctx)
+    respx.get(f"{API}/version").mock(return_value=httpx.Response(200, json=FIXTURE["version"]))
+    respx.get(f"{API}/connections").mock(return_value=httpx.Response(200, json={"not": "a list"}))
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("sftpgo").test(CONFIG, Context(httpx.AsyncClient(), integration_id=1, widget_id=1, cache={}))
+    assert failure.value.code == "not_sftpgo"

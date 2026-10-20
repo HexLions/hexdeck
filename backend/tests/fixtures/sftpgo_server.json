@@ -20,7 +20,7 @@
    "host_keys": [
     {
      "path": "/var/lib/sftpgo/id_rsa",
-     "fingerprint": "SHA256:NME77XCrjOFaTnesIKUivhOh6+ecEwxABx2VqzMRIZ4",
+     "fingerprint": "SHA256:placeholder-host-key-fingerprint-0",
      "algorithms": [
       "rsa-sha2-256",
       "rsa-sha2-512"
@@ -28,14 +28,14 @@
     },
     {
      "path": "/var/lib/sftpgo/id_ecdsa",
-     "fingerprint": "SHA256:imgFVnLGZmSAGvaqTCnr5/cNWVksiMpn8w+0PfDuqvg",
+     "fingerprint": "SHA256:placeholder-host-key-fingerprint-1",
      "algorithms": [
       "ecdsa-sha2-nistp256"
      ]
     },
     {
      "path": "/var/lib/sftpgo/id_ed25519",
-     "fingerprint": "SHA256:x1RwBfj5c/RN422NgnZU7lh2wFPzri6Yr3TSepLPP8I",
+     "fingerprint": "SHA256:placeholder-host-key-fingerprint-2",
      "algorithms": [
       "ssh-ed25519"
      ]
@@ -124,7 +124,7 @@
   {
    "username": "anna",
    "connection_id": "SFTP_ae0999290016972dac86e5da8318700e2ec7989675f50449c2e8a04bb99065e4_1",
-   "client_version": "SSH-2.0-OpenSSH_10.0p2 Debian-7+deb13u4",
+   "client_version": "SSH-2.0-OpenSSH_10.0",
    "remote_address": "192.168.1.20:35974",
    "connection_time": 1792492567347,
    "last_activity": 1792492567347,

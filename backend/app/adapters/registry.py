@@ -4,6 +4,9 @@ Speaks the OCI Distribution API (``/v2/``), which zot, Docker's own registry
 (``distribution``), Harbor, Gitea and Forgejo, GitHub's ghcr.io and Docker
 Hub all answer.
 
+Not yet run against Docker's ``distribution``, Harbor, Gitea or Forgejo; they
+are named because they serve the same specification.
+
 Checked against zot v2.1.22 (the minimal build, which is the plain
 distribution API) running locally on 20.10.2026 behind htpasswd, with three
 repositories pushed and six tags, a wrong password and a repository that is
@@ -26,6 +29,9 @@ repository card has to name its image.
 ⚠️ Both lists come in pages with a ``Link: </v2/...?last=...&n=...>;
 rel="next"`` header; Docker Hub gave fifty tags of alpine per page. Pages are
 followed up to a bound, and the count says when it stopped.
+
+⚠️ ``/v2/`` answers 200 with ``Docker-Distribution-Api-Version:
+registry/2.0`` on zot; the connection test names it when it is there.
 
 ⚠️ zot answers a wrong password with ``{"code": "UNAUTHORIZED", ...}`` at the
 top; distribution and the rest use ``{"errors": [{"code": ...}]}``. Only the
@@ -56,6 +62,10 @@ MAX_PAGES = 10
 PAGE = 100
 #: Repositories whose tags the list card counts; one request each.
 MAX_REPOSITORIES = 20
+#: Tag pages the list card reads per repository; the count says "+" past them.
+LIST_TAG_PAGES = 2
+#: A repository name as the distribution specification allows it.
+_NAME = re.compile(r"^[a-z0-9]+(?:(?:[._]|__|-+)[a-z0-9]+)*(?:/[a-z0-9]+(?:(?:[._]|__|-+)[a-z0-9]+)*)*$")
 _CHALLENGE = re.compile(r'(\w+)="([^"]*)"')
 _NEXT = re.compile(r"<([^>]+)>\s*;\s*rel=\"?next\"?")
 #: A version has at least one dot: alpine's tags include dates such as
@@ -114,6 +124,10 @@ class RegistryAdapter(Adapter):
         if not realm.startswith(("http://", "https://")):
             raise AdapterError("The registry asks for a token but names no address to get one.", code="bad_challenge",
                                hint="Check the URL; it is the registry itself, without /v2.")
+        if realm.startswith("http://") and base_url(config).startswith("https://"):
+            # The password would go to the token service unencrypted.
+            raise AdapterError("The registry names a token service without https.", code="bad_challenge",
+                               hint="Its token realm has to be https when the registry itself is.")
         key = f"registry:token:{fields.get('scope', '')}"
         kept = ctx.cache.get(key)
         if kept and kept[0] > time.monotonic():
@@ -167,11 +181,11 @@ class RegistryAdapter(Adapter):
                                hint="Check the URL; it is the registry itself, without /v2.")
         return response
 
-    async def _pages(self, config: dict[str, Any], ctx: Context, path: str, field: str) -> tuple[list[str], bool]:
+    async def _pages(self, config: dict[str, Any], ctx: Context, path: str, field: str, pages: int = MAX_PAGES) -> tuple[list[str], bool]:
         """Every name of a paged list, and whether the bound stopped it short."""
         names: list[str] = []
         url: str | None = f"{path}?n={PAGE}"
-        for _ in range(MAX_PAGES):
+        for _ in range(pages):
             response = await self._get(config, ctx, url)  # type: ignore[arg-type]
             try:
                 part = response.json().get(field) or []
@@ -195,21 +209,23 @@ class RegistryAdapter(Adapter):
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         if widget_kind == "image":
             repository = str(options.get("repository") or "").strip().strip("/")
-            if not repository:
-                raise AdapterError("No image is named.", code="no_repository", hint="Name it in the card's settings, such as library/alpine.")
+            if not _NAME.match(repository):
+                raise AdapterError("No image is named, or the name is not one a registry knows.", code="no_repository",
+                                   hint="Name it in the card's settings, such as library/alpine.")
             tags, cut = await self._pages(config, ctx, f"/v2/{repository}/tags/list", "tags")
             return self._image(repository, tags, cut)
         repositories, cut = await self._pages(config, ctx, "/v2/_catalog", "repositories")
         limit = max(1, min(MAX_REPOSITORIES, int(options.get("limit") or 10)))
         counted = []
         for name in sorted(repositories)[:limit]:
-            tags, more = await self._pages(config, ctx, f"/v2/{name}/tags/list", "tags")
+            tags, more = await self._pages(config, ctx, f"/v2/{name}/tags/list", "tags", pages=LIST_TAG_PAGES)
             counted.append((name, tags, more))
         return self._repositories(counted, len(repositories), cut)
 
     @staticmethod
     def _image(repository: str, tags: list[str], cut: bool) -> WidgetData:
-        newest = _newest(tags)
+        # A list cut short may hold its highest version on a page not read.
+        newest = "" if cut else _newest(tags)
         secondary: list[dict[str, Any]] = [{"label": "Image", "value": repository}]
         if newest:
             secondary.append({"label": "Newest", "value": newest})
@@ -220,7 +236,7 @@ class RegistryAdapter(Adapter):
     def _repositories(counted: list[tuple[str, list[str], bool]], total: int, cut: bool) -> WidgetData:
         items = [{
             "title": name,
-            "subtitle": " · ".join(part for part in (_newest(tags), ", ".join(tag for tag in tags if tag == "latest")) if part),
+            "subtitle": " · ".join(part for part in ("" if more else _newest(tags), ", ".join(tag for tag in tags if tag == "latest")) if part),
             "status": "ok" if tags else "unknown",
             "value": f"{len(tags)}{'+' if more else ''} tag{'' if len(tags) == 1 and not more else 's'}",
         } for name, tags, more in counted]

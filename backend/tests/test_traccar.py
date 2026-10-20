@@ -19,7 +19,7 @@ from app.adapters import get_adapter
 from app.adapters.base import AdapterError, AuthFailed, Context
 
 TR = "http://traccar.local:8082"
-TOKEN = {"url": TR, "token": "SDBGAiEA6knficzrR_4VcVIE"}
+TOKEN = {"url": TR, "token": "test-token-for-traccar"}
 FIXTURE = json.loads((Path(__file__).parent / "fixtures" / "traccar_devices.json").read_text())
 
 
@@ -49,7 +49,7 @@ async def test_the_summary_counts_unknown_and_offline_as_quiet(ctx: Context) -> 
 async def test_the_devices(ctx: Context) -> None:
     _server(FIXTURE["devices_online"])
     rows = (await get_adapter("traccar").fetch("devices", TOKEN, {}, ctx)).items
-    assert [(row["title"], row["value"]) for row in rows] == [("Dog collar", "Quiet"), ("Bike", "Online"), ("Car", "Online")]
+    assert [(row["title"], row["status"]) for row in rows] == [("Dog collar", "warn"), ("Bike", "ok"), ("Car", "ok")]
     assert rows[0]["subtitle"] == "never heard from"
     car = rows[2]["subtitle"]
     assert "50 km/h" in car and "battery 88%" in car, "27 knots, the battery the OsmAnd position carried"
@@ -94,3 +94,14 @@ def test_the_demo() -> None:
     for tick in range(8):
         assert adapter.demo("summary", {}, tick).primary["value"].endswith("/ 3")
         assert len(adapter.demo("devices", {}, tick).items) == 3
+
+
+@respx.mock
+async def test_a_disabled_device_and_a_refusing_proxy(ctx: Context) -> None:
+    devices = [*FIXTURE["devices_online"], {**FIXTURE["devices_online"][0], "id": 9, "name": "Old phone", "disabled": True}]
+    _server(devices)
+    data = await get_adapter("traccar").fetch("summary", TOKEN, {}, ctx)
+    assert data.primary["value"] == "2 / 3", "a disabled tracker is left out"
+    respx.get(f"{TR}/api/devices").mock(return_value=httpx.Response(403))
+    with pytest.raises(AuthFailed):
+        await get_adapter("traccar").fetch("summary", TOKEN, {}, Context(httpx.AsyncClient(), integration_id=1, widget_id=1, cache={}))

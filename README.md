@@ -35,7 +35,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | 🔌 **221 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
-| 🔄 **One updates list** | WUD, Cup, container registries (zot, Distribution, Harbor, ghcr.io, Docker Hub), Watchtower, the releases you follow and HexDeck itself, merged into one card |
+| 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
 | ⚙️ **The machine itself** | `/proc` and `/sys` read directly: processors, memory, load, sensors. No agent to install |
 | 📝 **Lists, notes, an agenda** | A to-do kept on the server, a notepad on the board, a calendar that merges feeds and release dates |
 | 📈 **History for every number** | Kept and drawn behind the number, whether the adapter declared a metric or not |
@@ -213,7 +213,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 ## The services it speaks to
 
-**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Cronicle, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, InfluxDB, Grafana, GoatCounter, Umami, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Ollama, llama.cpp, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
+**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, container registries, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Cronicle, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, InfluxDB, Grafana, GoatCounter, Umami, Alertmanager, Scrutiny, UPS through PeaNUT, Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Ollama, llama.cpp, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
 **Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, FortiGate, Traefik, Caddy, Nginx Proxy Manager, nginx ignition, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, Keycloak, Matrix Synapse, CrowdSec, mailcow, Stalwart, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 

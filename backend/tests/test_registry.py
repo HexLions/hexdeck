@@ -106,3 +106,38 @@ def test_the_demo() -> None:
     for tick in range(0, 60, 7):
         assert adapter.demo("repositories", {}, tick).items
         assert adapter.demo("image", {}, tick).primary["label"] == "Tags"
+
+
+@respx.mock
+async def test_a_token_realm_without_https_and_bad_token_answers(ctx: Context) -> None:
+    challenge = 'Bearer realm="http://registry.example.com/token",service="r",scope="repository:a/b:pull"'
+    respx.get(url__regex=r"https://registry\.example\.com/v2/a/b/tags/list.*").mock(return_value=httpx.Response(401, headers={"WWW-Authenticate": challenge}))
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("registry").fetch("image", {"url": "https://registry.example.com", "username": "u", "password": "p"}, {"repository": "a/b"}, ctx)
+    assert failure.value.code == "bad_challenge", "the password never goes to an http token service"
+    respx.get(url__regex=r"https://ghcr\.io/v2/x/y/tags/list.*").mock(return_value=httpx.Response(
+        401, headers={"WWW-Authenticate": FIXTURE["ghcr_challenge_tags"].replace("hexlions/hexdeck", "x/y")}))
+    respx.get("https://ghcr.io/token").mock(side_effect=[httpx.Response(200, text="<html>"), httpx.Response(200, json={"token": ""})])
+    for _ in range(2):
+        with pytest.raises(AdapterError) as failure:
+            await get_adapter("registry").fetch("image", {"url": "https://ghcr.io"}, {"repository": "x/y"}, Context(httpx.AsyncClient(), integration_id=1, widget_id=1, cache={}))
+        assert failure.value.code == "bad_token"
+
+
+@respx.mock
+async def test_a_list_cut_short_names_no_newest_version(ctx: Context) -> None:
+    def page(request: httpx.Request) -> httpx.Response:
+        last = int(request.url.params.get("last", "0"))
+        return httpx.Response(200, json={"tags": [f"1.{last + n}" for n in range(1, 4)]},
+                              headers={"Link": f'</v2/big/app/tags/list?n=100&last={last + 3}>; rel="next"'})
+    respx.get(url__regex=rf"{ZOT}/v2/big/app/tags/list.*").mock(side_effect=page)
+    data = await get_adapter("registry").fetch("image", BASIC, {"repository": "big/app"}, ctx)
+    assert data.primary == {"label": "Tags", "value": "30+"}
+    assert [one["label"] for one in data.secondary] == ["Image"] and data.metrics == {}
+
+
+async def test_a_name_that_is_not_a_repository(ctx: Context) -> None:
+    for name in ("../etc", "a?b", "UPPER/case"):
+        with pytest.raises(AdapterError) as failure:
+            await get_adapter("registry").fetch("image", BASIC, {"repository": name}, ctx)
+        assert failure.value.code == "no_repository"

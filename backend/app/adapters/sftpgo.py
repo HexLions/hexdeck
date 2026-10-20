@@ -22,7 +22,8 @@ what it may not count instead of failing.
 
 ⚠️ Times are milliseconds since the epoch. ``used_quota_size`` and
 ``last_login`` are left out of a user who never uploaded or signed in, and a
-``quota_size`` of 0 means no limit.
+``quota_size`` of 0 means no limit. ``/users`` answers at most 500 at a time;
+the cards read one page, so an installation with more counts the first 500.
 """
 
 from __future__ import annotations
@@ -44,6 +45,8 @@ from .base import (
 )
 
 BANNED = "SFTPGo has banned this machine's address in its defender."
+#: Users read in one request; ``limit`` is capped at 500 by SFTPGo itself.
+MOST_USERS = 500
 SERVICES = (("ssh", "SFTP"), ("ftp", "FTP"), ("webdav", "WebDAV"))
 
 
@@ -90,7 +93,7 @@ class SftpGoAdapter(Adapter):
         text = response.text[:300]
         if response.status_code == 403 and "blocked" in text:
             raise AuthFailed(BANNED, hint="It lifts after the ban time (30 minutes by default), or remove it under Defender in SFTPGo's admin.")
-        if response.status_code in (400, 401) and ("api key" in text.lower() or "token" in text.lower()):
+        if response.status_code == 401 or (response.status_code == 400 and "api key" in text.lower()):
             raise AuthFailed("SFTPGo refused the API key.",
                              hint="A wrong key counts against this machine in SFTPGo's defender; fix it before the card asks again and again.")
         if response.status_code == 403:
@@ -112,7 +115,9 @@ class SftpGoAdapter(Adapter):
         if not isinstance(version, dict) or "version" not in version:
             raise AdapterError("This address answers, but not the way SFTPGo does.", code="not_sftpgo")
         connections = await self._get(config, ctx, "/connections", cache=0)
-        count = len(connections) if isinstance(connections, list) else 0
+        if not isinstance(connections, list):
+            raise AdapterError("This address answers, but not the way SFTPGo does.", code="not_sftpgo")
+        count = len(connections)
         return f"SFTPGo {version['version']} answers with {count} connection{'' if count == 1 else 's'} open."
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
@@ -120,10 +125,10 @@ class SftpGoAdapter(Adapter):
         if widget_kind == "connections":
             return self._connections(await self._get(config, ctx, "/connections", cache=15) or [], limit)
         if widget_kind == "quotas":
-            return self._quotas(await self._get(config, ctx, "/users?limit=500", cache=300) or [], limit)
+            return self._quotas(await self._get(config, ctx, f"/users?limit={MOST_USERS}", cache=300) or [], limit)
         status = await self._get(config, ctx, "/status", cache=60)
         connections = await self._get(config, ctx, "/connections", cache=15)
-        users = await self._get(config, ctx, "/users?limit=500", cache=300, optional=True)
+        users = await self._get(config, ctx, f"/users?limit={MOST_USERS}", cache=300, optional=True)
         banned = await self._get(config, ctx, "/defender/hosts", cache=60, optional=True)
         return self._status(status or {}, connections or [], users, banned)
 
