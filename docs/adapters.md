@@ -131,6 +131,7 @@ that one of thirty-five renderers draws.
 | Glances | system, file systems, sensors | | optional password |
 | Scrutiny | disks, disk health | | none |
 | UPS (PeaNUT) | UPS, UPS details | | optional sign-in |
+| UPS (NUT) | UPS | | none: reading a NUT server needs no account, only `upsmon` logs in, to command a shutdown. Talks to `upsd` on port 3493, no PeaNUT in between. On TrueNAS tick Remote Monitor in System > Services > UPS, or upsd listens only on the NAS itself; the UPS name is the service's Identifier. Red on battery, battery low, overload or forced shutdown; `upsd`'s own errors (unknown UPS, driver not connected, stale data) are said in words |
 | Gotify | messages, message count | | client token (an application token may only write) |
 | ntfy | messages | | topic, and a token for a protected one |
 | Prometheus | query value, query list | | optional basic auth |

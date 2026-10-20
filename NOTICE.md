@@ -522,6 +522,11 @@ Updated at every milestone.
   Checked against Traccar 6.16.0 running locally with positions sent as the
   OsmAnd app sends them, a device that never reported, the status timeout
   passing, a garbled token and a wrong password.
+- **The NUT network protocol, spoken by hand.** `VER` and `LIST VAR` over a
+  plain TCP connection to `upsd`, no library and no account, with `upsd`'s
+  one-line errors turned into words. Checked against upsd 2.8.1 from Debian
+  13 running locally with the dummy-ups driver on line, on battery with the
+  battery low, without its driver, and asked for a UPS it does not know.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

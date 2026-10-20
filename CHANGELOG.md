@@ -15,6 +15,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   Harbor, ghcr.io or Docker Hub. ⚠️ Beta.
 - **Traccar**: which GPS trackers are online, when each was last heard
   from, how fast it moves and its battery. ⚠️ Beta.
+- **UPS (NUT)**: a UPS straight from its NUT server, such as TrueNAS's UPS
+  service, with no PeaNUT in between: charge, runtime left, load, input
+  voltage, and red when it runs on battery. ⚠️ Beta.
 
 ## 0.30.0 (2026-10-19)
 

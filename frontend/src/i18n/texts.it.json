@@ -2429,7 +2429,12 @@
     "Made in Traccar under Settings > Preferences > Token. Or leave it empty and sign in below.": "Creato in Traccar sotto Impostazioni > Preferenze > Token. Oppure lascialo vuoto e accedi qui sotto.",
     "Only without a token.": "Solo senza token.",
     "Traccar GPS tracking: which trackers are online, when each was last heard from, how fast it moves and its battery.": "Localizzazione GPS Traccar: quali tracker sono online, quando ognuno si è fatto sentire l'ultima volta, quanto va veloce e la batteria.",
-    "Trackers": "Tracker"
+    "Trackers": "Tracker",
+    "A UPS straight from its NUT server, such as TrueNAS's UPS service: charge, runtime left, load, and whether it runs on battery.": "Un UPS direttamente dal suo server NUT, come il servizio UPS di TrueNAS: carica, autonomia rimasta, carico, e se va a batteria.",
+    "Charge, runtime left, load and input voltage; red on battery.": "Carica, autonomia rimasta, carico e tensione in ingresso; rosso a batteria.",
+    "On TrueNAS the Identifier of the UPS service.": "Su TrueNAS l'Identifier del servizio UPS.",
+    "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "La macchina a cui è collegato l'UPS. Su TrueNAS spunta Remote Monitor nel servizio UPS.",
+    "UPS name": "Nome UPS"
   },
   "labels": {
     "Jobs": "Job",
@@ -3641,6 +3646,7 @@
     "Nothing is waiting to go out.": "Niente è in attesa di partire.",
     "Umami has no site yet.": "Umami non ha ancora siti.",
     "The server has no slots.": "Il server non ha slot.",
-    "The model is still loading.": "Il modello si sta ancora caricando."
+    "The model is still loading.": "Il modello si sta ancora caricando.",
+    "Input": "Ingresso"
   }
 }
