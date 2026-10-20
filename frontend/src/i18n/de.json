@@ -823,7 +823,9 @@
     "move": "Auf eine andere Seite verschieben oder kopieren",
     "moveTo": "Verschieben nach…",
     "copyTo": "Kopieren nach…",
-    "copyHere": "Hier duplizieren"
+    "copyHere": "Hier duplizieren",
+    "hideOnPhone": "Auf dem Handy ausblenden",
+    "hideOnPhoneHelp": "Auf dem Handy fehlt diese Karte, damit das Board kurz bleibt. Im Bearbeitungsmodus wird sie gezeigt, damit man sie wiederfindet."
   },
   "library": {
     "title": "Widget hinzufügen",

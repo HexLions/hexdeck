@@ -823,7 +823,9 @@
     "move": "Mover o copiar a otra página",
     "moveTo": "Mover a…",
     "copyTo": "Copiar a…",
-    "copyHere": "Duplicar aquí"
+    "copyHere": "Duplicar aquí",
+    "hideOnPhone": "Ocultar en el móvil",
+    "hideOnPhoneHelp": "En el móvil esta tarjeta no aparece, para que el tablero quede corto. En modo edición se muestra, para volver a encontrarla."
   },
   "library": {
     "title": "Añadir un widget",
