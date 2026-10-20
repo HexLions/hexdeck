@@ -2409,7 +2409,14 @@
     "Every site with its visitors right now and over the last 24 hours.": "Jede Website mit ihren Besuchern jetzt und in den letzten 24 Stunden.",
     "Its name or domain. Empty means the first site.": "Ihr Name oder ihre Domain. Leer bedeutet die erste Website.",
     "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Umami-Webanalyse: Besucher auf jeder Website jetzt, und Besucher und Aufrufe in den letzten 24 Stunden.",
-    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Besucher jetzt, und Besucher, Aufrufe und Absprungrate in den letzten 24 Stunden."
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Besucher jetzt, und Besucher, Aufrufe und Absprungrate in den letzten 24 Stunden.",
+    "An admin API key; the admin needs API key authentication allowed in its settings.": "Ein Admin-API-Schlüssel; beim Admin muss die Anmeldung per API-Schlüssel in seinen Einstellungen erlaubt sein.",
+    "Connections now, enabled users, the services running and banned addresses.": "Verbindungen jetzt, aktivierte Benutzer, laufende Dienste und gesperrte Adressen.",
+    "Quotas": "Kontingente",
+    "SFTPGo file server: who is connected now, how full each user's quota is, and banned addresses.": "SFTPGo-Dateiserver: wer gerade verbunden ist, wie voll das Kontingent jedes Benutzers ist, und gesperrte Adressen.",
+    "The address of SFTPGo's web admin, without /api/v2.": "Die Adresse der Weboberfläche von SFTPGo, ohne /api/v2.",
+    "The users with a quota, fullest first.": "Die Benutzer mit Kontingent, die vollsten zuerst.",
+    "Who is connected, over which protocol, from where and since when.": "Wer verbunden ist, über welches Protokoll, von wo und seit wann."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3610,6 +3617,7 @@
     "Prompt": "Prompt",
     "Bounce rate": "Absprungrate",
     "Right now": "Gerade jetzt",
-    "Domains": "Domains"
+    "Domains": "Domains",
+    "Banned": "Gesperrt"
   }
 }

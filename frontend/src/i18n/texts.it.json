@@ -2409,7 +2409,14 @@
     "Every site with its visitors right now and over the last 24 hours.": "Ogni sito con i suoi visitatori adesso e nelle ultime 24 ore.",
     "Its name or domain. Empty means the first site.": "Il suo nome o dominio. Vuoto significa il primo sito.",
     "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Analisi web Umami: visitatori su ogni sito adesso, e visitatori e visualizzazioni nelle ultime 24 ore.",
-    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Visitatori adesso, e visitatori, visualizzazioni e frequenza di rimbalzo nelle ultime 24 ore."
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Visitatori adesso, e visitatori, visualizzazioni e frequenza di rimbalzo nelle ultime 24 ore.",
+    "An admin API key; the admin needs API key authentication allowed in its settings.": "Una chiave API di un admin; l'admin deve avere l'autenticazione con chiave API consentita nelle sue impostazioni.",
+    "Connections now, enabled users, the services running and banned addresses.": "Connessioni adesso, utenti abilitati, servizi in esecuzione e indirizzi bannati.",
+    "Quotas": "Quote",
+    "SFTPGo file server: who is connected now, how full each user's quota is, and banned addresses.": "File server SFTPGo: chi è connesso adesso, quanto è piena la quota di ogni utente, e gli indirizzi bannati.",
+    "The address of SFTPGo's web admin, without /api/v2.": "L'indirizzo dell'amministrazione web di SFTPGo, senza /api/v2.",
+    "The users with a quota, fullest first.": "Gli utenti con una quota, i più pieni per primi.",
+    "Who is connected, over which protocol, from where and since when.": "Chi è connesso, con quale protocollo, da dove e da quando."
   },
   "labels": {
     "Jobs": "Job",
@@ -3610,6 +3617,7 @@
     "Prompt": "Prompt",
     "Bounce rate": "Frequenza di rimbalzo",
     "Right now": "Adesso",
-    "Domains": "Domini"
+    "Domains": "Domini",
+    "Banned": "Bannati"
   }
 }

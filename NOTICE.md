@@ -506,6 +506,11 @@ Updated at every milestone.
   queries of release v3.4.0 build, with an API key or a sign-in. Its build
   needed more memory than the machine it was written on had, so it was not
   run.
+- **SFTPGo and its defender.** The status, the open connections, the users
+  with their quotas and the defender's list, with an admin API key. Checked
+  against SFTPGo v2.7.6 running locally with an SFTP session, an upload,
+  failed sign-ins, a key of an admin allowed less, and a wrong key, which
+  turned out to get the caller's address banned.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

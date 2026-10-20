@@ -5,6 +5,12 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+- **SFTPGo**: who is connected now, how full each user's quota is, and the
+  addresses its defender has banned. ⚠️ Beta.
+
 ## 0.30.0 (2026-10-19)
 
 A page that says how every card is read, a snapshot before each update of the

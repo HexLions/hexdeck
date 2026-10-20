@@ -2409,7 +2409,14 @@
     "Every site with its visitors right now and over the last 24 hours.": "Cada sitio con sus visitantes ahora y en las últimas 24 horas.",
     "Its name or domain. Empty means the first site.": "Su nombre o dominio. Vacío significa el primer sitio.",
     "Umami web analytics: visitors on each site right now, and visitors and views over the last 24 hours.": "Analítica web Umami: visitantes en cada sitio ahora, y visitantes y vistas en las últimas 24 horas.",
-    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Visitantes ahora, y visitantes, vistas y tasa de rebote en las últimas 24 horas."
+    "Visitors right now, and visitors, views and bounce rate over the last 24 hours.": "Visitantes ahora, y visitantes, vistas y tasa de rebote en las últimas 24 horas.",
+    "An admin API key; the admin needs API key authentication allowed in its settings.": "Una clave de API de un administrador; el administrador necesita la autenticación por clave de API permitida en sus ajustes.",
+    "Connections now, enabled users, the services running and banned addresses.": "Conexiones ahora, usuarios habilitados, servicios en marcha y direcciones bloqueadas.",
+    "Quotas": "Cuotas",
+    "SFTPGo file server: who is connected now, how full each user's quota is, and banned addresses.": "Servidor de archivos SFTPGo: quién está conectado ahora, cuánto se ha llenado la cuota de cada usuario, y las direcciones bloqueadas.",
+    "The address of SFTPGo's web admin, without /api/v2.": "La dirección de la administración web de SFTPGo, sin /api/v2.",
+    "The users with a quota, fullest first.": "Los usuarios con cuota, los más llenos primero.",
+    "Who is connected, over which protocol, from where and since when.": "Quién está conectado, por qué protocolo, desde dónde y desde cuándo."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3610,6 +3617,7 @@
     "Prompt": "Prompt",
     "Bounce rate": "Tasa de rebote",
     "Right now": "Ahora mismo",
-    "Domains": "Dominios"
+    "Domains": "Dominios",
+    "Banned": "Bloqueadas"
   }
 }

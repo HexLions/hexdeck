@@ -1,0 +1,313 @@
+{
+ "status": {
+  "ssh": {
+   "is_active": true,
+   "bindings": [
+    {
+     "address": "127.0.0.1",
+     "port": 12022,
+     "apply_proxy_config": true
+    }
+   ],
+   "ssh_commands": [
+    "md5sum",
+    "sha1sum",
+    "sha256sum",
+    "cd",
+    "pwd",
+    "scp"
+   ],
+   "host_keys": [
+    {
+     "path": "/var/lib/sftpgo/id_rsa",
+     "fingerprint": "SHA256:NME77XCrjOFaTnesIKUivhOh6+ecEwxABx2VqzMRIZ4",
+     "algorithms": [
+      "rsa-sha2-256",
+      "rsa-sha2-512"
+     ]
+    },
+    {
+     "path": "/var/lib/sftpgo/id_ecdsa",
+     "fingerprint": "SHA256:imgFVnLGZmSAGvaqTCnr5/cNWVksiMpn8w+0PfDuqvg",
+     "algorithms": [
+      "ecdsa-sha2-nistp256"
+     ]
+    },
+    {
+     "path": "/var/lib/sftpgo/id_ed25519",
+     "fingerprint": "SHA256:x1RwBfj5c/RN422NgnZU7lh2wFPzri6Yr3TSepLPP8I",
+     "algorithms": [
+      "ssh-ed25519"
+     ]
+    }
+   ],
+   "authentications": [
+    "password",
+    "publickey",
+    "keyboard-interactive",
+    "publickey+password",
+    "publickey+keyboard-interactive"
+   ],
+   "macs": [
+    "hmac-sha2-256-etm@openssh.com",
+    "hmac-sha2-256"
+   ],
+   "kex_algorithms": [
+    "mlkem768x25519-sha256",
+    "curve25519-sha256",
+    "curve25519-sha256@libssh.org",
+    "ecdh-sha2-nistp256",
+    "ecdh-sha2-nistp384",
+    "ecdh-sha2-nistp521",
+    "diffie-hellman-group14-sha256",
+    "diffie-hellman-group16-sha512",
+    "diffie-hellman-group-exchange-sha256"
+   ],
+   "ciphers": [
+    "aes128-gcm@openssh.com",
+    "aes256-gcm@openssh.com",
+    "chacha20-poly1305@openssh.com",
+    "aes128-ctr",
+    "aes192-ctr",
+    "aes256-ctr"
+   ],
+   "public_key_algorithms": [
+    "ssh-ed25519",
+    "sk-ssh-ed25519@openssh.com",
+    "sk-ecdsa-sha2-nistp256@openssh.com",
+    "ecdsa-sha2-nistp256",
+    "ecdsa-sha2-nistp384",
+    "ecdsa-sha2-nistp521",
+    "rsa-sha2-256",
+    "rsa-sha2-512"
+   ]
+  },
+  "ftp": {
+   "is_active": false,
+   "bindings": null,
+   "passive_port_range": {
+    "start": 0,
+    "end": 0
+   }
+  },
+  "webdav": {
+   "is_active": false,
+   "bindings": null
+  },
+  "data_provider": {
+   "driver": "sqlite",
+   "is_active": true,
+   "error": ""
+  },
+  "defender": {
+   "is_active": true
+  },
+  "mfa": {
+   "is_active": true,
+   "totp_configs": [
+    {
+     "name": "Default",
+     "issuer": "SFTPGo",
+     "algo": "sha1"
+    }
+   ]
+  },
+  "allow_list": {
+   "is_active": false
+  },
+  "rate_limiters": {
+   "is_active": false,
+   "protocols": null
+  }
+ },
+ "connections": [
+  {
+   "username": "anna",
+   "connection_id": "SFTP_ae0999290016972dac86e5da8318700e2ec7989675f50449c2e8a04bb99065e4_1",
+   "client_version": "SSH-2.0-OpenSSH_10.0p2 Debian-7+deb13u4",
+   "remote_address": "192.168.1.20:35974",
+   "connection_time": 1792492567347,
+   "last_activity": 1792492567347,
+   "current_time": 1792492570601,
+   "protocol": "SFTP"
+  }
+ ],
+ "users": [
+  {
+   "id": 1,
+   "status": 1,
+   "username": "anna",
+   "public_keys": [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyOnlyForTheFixture anna@example.com"
+   ],
+   "has_password": true,
+   "home_dir": "/srv/sftpgo/data/anna",
+   "uid": 0,
+   "gid": 0,
+   "max_sessions": 0,
+   "quota_size": 10485760,
+   "quota_files": 0,
+   "permissions": {
+    "/": [
+     "*"
+    ]
+   },
+   "used_quota_size": 3000000,
+   "used_quota_files": 1,
+   "last_quota_update": 1792492567257,
+   "upload_data_transfer": 0,
+   "download_data_transfer": 0,
+   "total_data_transfer": 0,
+   "last_login": 1792492567249,
+   "created_at": 1792492532957,
+   "updated_at": 1792492544762,
+   "first_upload": 1792492567257,
+   "last_password_change": 1792492532957,
+   "filters": {
+    "hooks": {
+     "external_auth_disabled": false,
+     "pre_login_disabled": false,
+     "check_password_disabled": false
+    },
+    "totp_config": {
+     "secret": {}
+    }
+   },
+   "filesystem": {
+    "provider": 0,
+    "osconfig": {},
+    "s3config": {},
+    "gcsconfig": {},
+    "azblobconfig": {},
+    "cryptconfig": {},
+    "sftpconfig": {},
+    "httpconfig": {}
+   }
+  },
+  {
+   "id": 2,
+   "status": 1,
+   "username": "ben",
+   "has_password": true,
+   "home_dir": "/srv/sftpgo/data/ben",
+   "uid": 0,
+   "gid": 0,
+   "max_sessions": 0,
+   "quota_size": 10485760,
+   "quota_files": 0,
+   "permissions": {
+    "/": [
+     "*"
+    ]
+   },
+   "upload_data_transfer": 0,
+   "download_data_transfer": 0,
+   "total_data_transfer": 0,
+   "created_at": 1792492533014,
+   "updated_at": 1792492533014,
+   "last_password_change": 1792492533014,
+   "filters": {
+    "hooks": {
+     "external_auth_disabled": false,
+     "pre_login_disabled": false,
+     "check_password_disabled": false
+    },
+    "totp_config": {
+     "secret": {}
+    }
+   },
+   "filesystem": {
+    "provider": 0,
+    "osconfig": {},
+    "s3config": {},
+    "gcsconfig": {},
+    "azblobconfig": {},
+    "cryptconfig": {},
+    "sftpconfig": {},
+    "httpconfig": {}
+   }
+  },
+  {
+   "id": 3,
+   "status": 0,
+   "username": "carl",
+   "has_password": true,
+   "home_dir": "/srv/sftpgo/data/carl",
+   "uid": 0,
+   "gid": 0,
+   "max_sessions": 0,
+   "quota_size": 0,
+   "quota_files": 0,
+   "permissions": {
+    "/": [
+     "*"
+    ]
+   },
+   "upload_data_transfer": 0,
+   "download_data_transfer": 0,
+   "total_data_transfer": 0,
+   "created_at": 1792492533075,
+   "updated_at": 1792492533075,
+   "last_password_change": 1792492533075,
+   "filters": {
+    "hooks": {
+     "external_auth_disabled": false,
+     "pre_login_disabled": false,
+     "check_password_disabled": false
+    },
+    "totp_config": {
+     "secret": {}
+    }
+   },
+   "filesystem": {
+    "provider": 0,
+    "osconfig": {},
+    "s3config": {},
+    "gcsconfig": {},
+    "azblobconfig": {},
+    "cryptconfig": {},
+    "sftpconfig": {},
+    "httpconfig": {}
+   }
+  }
+ ],
+ "defender": [
+  {
+   "id": "3139322e3136382e312e3230",
+   "ip": "192.168.1.20",
+   "score": 2
+  }
+ ],
+ "version": {
+  "version": "2.7.6",
+  "build_date": "2026-09-18T20:24:45Z",
+  "commit_hash": "62ae9ba3",
+  "features": [
+   "+metrics",
+   "+azblob",
+   "+gcs",
+   "+s3",
+   "+bolt",
+   "+mysql",
+   "+pgsql",
+   "+sqlite",
+   "-unixcrypt",
+   "+portable"
+  ]
+ },
+ "wrong_key": {
+  "error": "the provided api key is not valid",
+  "message": ""
+ },
+ "no_key": {
+  "error": "no token found",
+  "message": "Unauthorized"
+ },
+ "blocked": {
+  "error": "your IP address is blocked",
+  "message": ""
+ },
+ "forbidden": {
+  "message": "Forbidden"
+ }
+}
