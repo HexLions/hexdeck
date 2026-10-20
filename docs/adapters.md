@@ -19,6 +19,7 @@ that one of thirty-five renderers draws.
 | Portainer | containers, summary | container actions | access token |
 | Nomad | jobs, nodes, cluster | stop a job, scale a task group up or down | none on a cluster without ACLs, else an ACL token with node:read and namespace:read-job; the buttons need namespace:scale-job or namespace:submit-job |
 | Cup | image updates, updates waiting | check now | none; Cup has no sign-in, so its port stays inside the network |
+| Container registry | repositories, image | | none for public images; otherwise a user name and password (or a personal access token in the password). The registry says how on its first 401: Basic (zot, a registry behind htpasswd) gets them on every request, Bearer (ghcr.io, Docker Hub, Harbor) sends them to the token service it names and uses the token for that one scope. The repository list needs `/v2/_catalog`, which ghcr.io and Docker Hub do not offer; there the image card names its image. Paged lists are followed up to ten pages |
 | Coolify | applications, deployments, status | | API token; the API has to be switched on in Coolify |
 | Gitea, Forgejo | open issues or pull requests, Actions jobs, repositories | | access token with read access to repositories, issues and the user |
 | GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |
@@ -130,6 +131,7 @@ that one of thirty-five renderers draws.
 | Glances | system, file systems, sensors | | optional password |
 | Scrutiny | disks, disk health | | none |
 | UPS (PeaNUT) | UPS, UPS details | | optional sign-in |
+| UPS (NUT) | UPS | | none: reading a NUT server needs no account, only `upsmon` logs in, to command a shutdown. Talks to `upsd` on port 3493, no PeaNUT in between. On TrueNAS tick Remote Monitor in System > Services > UPS, or upsd listens only on the NAS itself; the UPS name is the service's Identifier. Red on battery, battery low, overload or forced shutdown; `upsd`'s own errors (unknown UPS, driver not connected, stale data) are said in words |
 | Gotify | messages, message count | | client token (an application token may only write) |
 | ntfy | messages | | topic, and a token for a protected one |
 | Prometheus | query value, query list | | optional basic auth |
@@ -166,6 +168,7 @@ that one of thirty-five renderers draws.
 | Arcane | overview, environments, projects, containers, image updates | start, stop and restart a container; start, stop, redeploy and update a project; update a container to its newer image | API key from Settings > API keys; environments:list, containers:list and projects:list for the cards, images:list, volumes:list and networks:list for the overview's counts, and containers:start, containers:stop, containers:restart, projects:deploy, projects:down, projects:update and image-updates:check for the buttons; Arcane 2.14 |
 | Dockhand | overview, environments, stacks, containers, image updates | | API token from Profile > API tokens, or nothing when Dockhand's sign-in is switched off; a token may do everything its user may, and in the free edition every user may do everything, though the cards only read; Dockhand 1.0 |
 | FileBrowser Quantum | storage | | an API token with the permission api, made in FileBrowser's settings; shares are counted when the token may read them |
+| SFTPGo | server, connections, quotas | | an admin API key in `X-SFTPGO-API-KEY`, for an admin with API key authentication allowed; without `view_users` or `view_defender` the server card leaves those counts out. ⚠️ A wrong key counts against HexDeck's address in SFTPGo's defender (2 points of 15), so a card left with one gets HexDeck banned within minutes, after which every call answers 403 for the ban time; the card says which it is |
 | FreshRSS | feed reader, unread, unread by feed | | user name and the API password from Settings > Profile, not the sign-in password; API access allowed under Administration > Authentication |
 | IMAP | unread mail, latest mail, folders | | user name and password or app password of the mailbox, over TLS, STARTTLS or, on a trusted network, unencrypted; no OAuth2, so Microsoft 365 is mostly out of reach. Reads counts and the sender, subject and date of a mail, never its text, and never marks anything as read |
 | Linkding | bookmarks, recent bookmarks | | REST API token from Settings > Integrations; each account sees its own bookmarks only |
@@ -205,6 +208,7 @@ that one of thirty-five renderers draws.
 | Elasticsearch | cluster, indices | | an encoded API key with the cluster privileges monitor and view_index_metadata, or basic credentials, or nothing on a cluster without security. OpenSearch answers the same calls |
 | Shelly | device, outputs | switch an output on or off | none on a device without authentication; a Gen 1 device takes its admin password. Gen 2 and later use digest, which is not supported yet. Local address only, never the cloud |
 | Tasmota | device, sensors | switch a relay on or off | none, or the web admin password, sent as HTTP Basic for `admin` (never in the address). One `Status 0` command reads everything; a plug with two measuring channels shows their sum. Local address only |
+| Traccar | trackers, devices | | a token from Settings > Preferences > Token as a bearer token, or an e-mail address and password as HTTP Basic. A wrong token is 400 with a Java stack trace, not 401. A device that stops reporting turns `unknown` after the status timeout, and one that never reported is `offline`; both count as not heard from. Speeds come in knots and are shown in km/h |
 | Steam | player, recently played, library | | Web API key from steamcommunity.com/dev, plus the 64-bit id or custom profile name. The profile's game details have to be public, or Steam answers an empty list |
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |

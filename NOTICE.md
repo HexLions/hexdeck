@@ -506,6 +506,27 @@ Updated at every milestone.
   queries of release v3.4.0 build, with an API key or a sign-in. Its build
   needed more memory than the machine it was written on had, so it was not
   run.
+- **SFTPGo and its defender.** The status, the open connections, the users
+  with their quotas and the defender's list, with an admin API key. Checked
+  against SFTPGo v2.7.6 running locally with an SFTP session, an upload,
+  failed sign-ins, a key of an admin allowed less, and a wrong key, which
+  turned out to get the caller's address banned.
+- **Container registries through the distribution API alone.** The
+  catalog, the tag lists with their `Link` pages, and both ways of signing
+  in: Basic as the challenge asks, or a token from the realm the Bearer
+  challenge names, for that one scope. Checked against zot v2.1.22 running
+  locally behind htpasswd with images pushed to it, and against ghcr.io and
+  Docker Hub anonymously.
+- **Traccar's devices and their last positions.** Read with a token or a
+  password, the state taken as Traccar means it rather than as it reads.
+  Checked against Traccar 6.16.0 running locally with positions sent as the
+  OsmAnd app sends them, a device that never reported, the status timeout
+  passing, a garbled token and a wrong password.
+- **The NUT network protocol, spoken by hand.** `VER` and `LIST VAR` over a
+  plain TCP connection to `upsd`, no library and no account, with `upsd`'s
+  one-line errors turned into words. Checked against upsd 2.8.1 from Debian
+  13 running locally with the dummy-ups driver on line, on battery with the
+  battery low, without its driver, and asked for a UPS it does not know.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

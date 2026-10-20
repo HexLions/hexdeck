@@ -5,6 +5,20 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+- **SFTPGo**: who is connected now, how full each user's quota is, and the
+  addresses its defender has banned. ⚠️ Beta.
+- **Container registry**: the repositories of any OCI or Docker registry,
+  and the tags and newest version of one image, on zot, Distribution,
+  Harbor, ghcr.io or Docker Hub. ⚠️ Beta.
+- **Traccar**: which GPS trackers are online, when each was last heard
+  from, how fast it moves and its battery. ⚠️ Beta.
+- **UPS (NUT)**: a UPS straight from its NUT server, such as TrueNAS's UPS
+  service, with no PeaNUT in between: charge, runtime left, load, input
+  voltage, and red when it runs on battery. ⚠️ Beta.
+
 ## 0.30.0 (2026-10-19)
 
 A page that says how every card is read, a snapshot before each update of the
