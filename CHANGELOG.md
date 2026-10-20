@@ -35,6 +35,13 @@ and four integrations, a UPS straight from NUT among them.
   service, with no PeaNUT in between: charge, runtime left, load, input
   voltage, and red when it runs on battery. ⚠️ Beta.
 
+### Security
+
+- **Vite 7.3.7.** The development server's launch-editor could be made to
+  run commands or test for files on Windows (GHSA-r825-w8mm-5pxw,
+  GHSA-698v-4r3x-3vcv, GHSA-587h-7wmj-h5pm). Only the development server
+  used it; the built app does not contain it.
+
 ## 0.30.0 (2026-10-19)
 
 A page that says how every card is read, a snapshot before each update of the
