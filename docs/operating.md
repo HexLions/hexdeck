@@ -122,6 +122,33 @@ notices and says so in the log, and the columns a newer version added stay
 where they are; whether the older version copes with them is not something it
 can promise. Restore a snapshot from before the update instead.
 
+## Prometheus
+
+`/api/metrics` hands HexDeck's own state to Prometheus in its text format:
+which cards fail (`hexdeck_card_up`, `hexdeck_card_failures`), how long their
+reads take (`hexdeck_card_read_seconds`), how many browsers follow a board
+(`hexdeck_stream_connections`), when the newest snapshot was written
+(`hexdeck_backup_last_timestamp_seconds`) and whether the last copy off the
+machine worked (`hexdeck_backup_copy_ok`). Each card is labelled with its
+number, its kind and its board.
+
+It is off until `HEXDECK_METRICS_TOKEN` is set, and then answers only a
+request that sends that token:
+
+```yaml
+scrape_configs:
+  - job_name: hexdeck
+    metrics_path: /api/metrics
+    authorization:
+      credentials: the-value-of-HEXDECK_METRICS_TOKEN
+    static_configs:
+      - targets: ["hexdeck:8000"]
+```
+
+An alert on `hexdeck_card_up == 0` for longer than the card's interval, or on
+`time() - hexdeck_backup_last_timestamp_seconds > 2 * 86400`, says what the
+dashboard itself cannot say when nobody is looking at it.
+
 ## The Docker socket
 
 The shipped `docker-compose.yml` mounts `/var/run/docker.sock`. That gives

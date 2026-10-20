@@ -139,6 +139,11 @@ class Settings(BaseSettings):
     backup_copy_password_file: Path | None = None
     #: How many copies stay in that folder; older ones HexDeck wrote are deleted.
     backup_copy_keep: int = 14
+    #: The bearer token Prometheus sends to ``/api/metrics``. Empty switches
+    #: the endpoint off: it answers 404, as if it were not there.
+    metrics_token: str = ""
+    #: The same from a file, such as a Docker secret.
+    metrics_token_file: Path | None = None
     #: How long the rows nobody reads again are kept. ``0`` switches a sweep
     #: off and lets that table grow, which is what all three did until now.
     #:
@@ -181,7 +186,7 @@ class Settings(BaseSettings):
         would otherwise run on a key they believe is gone.
         """
         for field, file_field in (("secret_key", "secret_key_file"), ("secret_key_previous", "secret_key_previous_file"),
-                                  ("backup_copy_password", "backup_copy_password_file")):
+                                  ("backup_copy_password", "backup_copy_password_file"), ("metrics_token", "metrics_token_file")):
             path = getattr(self, file_field)
             if path is None:
                 continue

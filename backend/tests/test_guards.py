@@ -43,6 +43,7 @@ PUBLIC: dict[str, str] = {
     "GET /api/v1/icons/{name}.{ext}": "logos, like any image; kiosk displays have no session",
     "GET /api/v1/kiosk": "checks the kiosk token itself",
     "POST /api/v1/kiosk/session": "the door of a wall display: the token in the body is the credential",
+    "GET /api/metrics": "Prometheus has no session; HEXDECK_METRICS_TOKEN as a bearer token is checked inside, and without it the address is a 404",
     "GET /{path:path}": "the single-page app",
 }
 

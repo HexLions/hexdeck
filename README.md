@@ -169,6 +169,8 @@ Rarely needed, but real:
 | `HEXDECK_BACKUP_COPY_PASSWORD` | empty | The password of those archives. Without it nothing is copied. |
 | `HEXDECK_BACKUP_COPY_PASSWORD_FILE` | empty | The same from a file, such as a Docker secret. |
 | `HEXDECK_BACKUP_COPY_KEEP` | `14` | How many copies stay in that folder; older ones HexDeck wrote are deleted. |
+| `HEXDECK_METRICS_TOKEN` | empty | Switches on `/api/metrics` for Prometheus, for requests that send this as a bearer token. See [Prometheus](docs/operating.md#prometheus). |
+| `HEXDECK_METRICS_TOKEN_FILE` | empty | The same from a file, such as a Docker secret. |
 
 A guard test keeps this table in step with the settings in the code.
 
