@@ -5,6 +5,12 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+- **Woodpecker CI**: pipelines running and waiting, the repositories whose
+  last pipeline failed, and the latest runs. ⚠️ Beta.
+
 ## 0.31.1 (2026-10-21)
 
 More from a UPS through NUT: the power drawn and a details card.

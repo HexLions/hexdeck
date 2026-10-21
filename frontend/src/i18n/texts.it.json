@@ -2435,7 +2435,15 @@
     "On TrueNAS the Identifier of the UPS service.": "Su TrueNAS l'Identifier del servizio UPS.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "La macchina a cui è collegato l'UPS. Su TrueNAS spunta Remote Monitor nel servizio UPS.",
     "UPS name": "Nome UPS",
-    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver."
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver.",
+    "CI": "CI",
+    "Every active repository with how its last pipeline ended, failing ones first.": "Ogni repository attivo con l'esito della sua ultima pipeline, prima quelli falliti.",
+    "In Woodpecker: your user menu, then Access token. An administrator's token also counts the queue and the agents.": "In Woodpecker: il tuo menu utente, poi Access token. Il token di un amministratore conta anche la coda e gli agent.",
+    "Latest pipelines": "Ultime pipeline",
+    "Personal token": "Token personale",
+    "Pipelines running and waiting, failing repositories, and agents.": "Pipeline in esecuzione e in attesa, repository che falliscono, e agent.",
+    "The latest pipelines across the repositories, newest first.": "Le ultime pipeline di tutti i repository, le più recenti per prime.",
+    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: pipeline in esecuzione e in attesa, i repository la cui ultima pipeline è fallita, e le ultime esecuzioni."
   },
   "labels": {
     "Jobs": "Job",
@@ -3657,6 +3665,9 @@
     "Nominal power": "Potenza nominale",
     "Beeper": "Cicalino",
     "Self-test": "Autotest",
-    "Driver": "Driver"
+    "Driver": "Driver",
+    "Agents": "Agent",
+    "No repository is active in Woodpecker.": "Nessun repository è attivo in Woodpecker.",
+    "No pipeline has run yet.": "Nessuna pipeline è ancora stata eseguita."
   }
 }

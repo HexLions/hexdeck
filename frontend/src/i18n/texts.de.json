@@ -2435,7 +2435,15 @@
     "On TrueNAS the Identifier of the UPS service.": "Bei TrueNAS der Identifier des USV-Dienstes.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "Der Rechner, an dem die USV hängt. Bei TrueNAS im USV-Dienst Remote Monitor ankreuzen.",
     "UPS name": "USV-Name",
-    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber."
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber.",
+    "CI": "CI",
+    "Every active repository with how its last pipeline ended, failing ones first.": "Jedes aktive Repository mit dem Ergebnis seiner letzten Pipeline, die fehlgeschlagenen zuerst.",
+    "In Woodpecker: your user menu, then Access token. An administrator's token also counts the queue and the agents.": "In Woodpecker: dein Benutzermenü, dann Access token. Der Token eines Administrators zählt auch die Warteschlange und die Agents.",
+    "Latest pipelines": "Letzte Pipelines",
+    "Personal token": "Persönlicher Token",
+    "Pipelines running and waiting, failing repositories, and agents.": "Laufende und wartende Pipelines, fehlschlagende Repositories und Agents.",
+    "The latest pipelines across the repositories, newest first.": "Die letzten Pipelines über alle Repositories, die neuesten zuerst.",
+    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: laufende und wartende Pipelines, die Repositories, deren letzte Pipeline fehlschlug, und die letzten Läufe."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3657,6 +3665,9 @@
     "Nominal power": "Nennleistung",
     "Beeper": "Signalton",
     "Self-test": "Selbsttest",
-    "Driver": "Treiber"
+    "Driver": "Treiber",
+    "Agents": "Agents",
+    "No repository is active in Woodpecker.": "Kein Repository ist in Woodpecker aktiv.",
+    "No pipeline has run yet.": "Noch keine Pipeline ist gelaufen."
   }
 }
