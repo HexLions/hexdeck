@@ -5,6 +5,15 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **A UPS on battery is said in words.** Two new events, "A UPS runs on
+  battery" (with the runtime left, and again when the battery runs low) and
+  "A UPS is back on mains power", from the UPS (NUT) card. A new channel
+  starts with the first one on; an existing channel can tick both.
+
 ## 0.31.1 (2026-10-21)
 
 More from a UPS through NUT: the power drawn and a details card.

@@ -128,3 +128,20 @@ async def test_the_details_of_that_cyberpower() -> None:
     assert rows["Input frequency"] == "49.8" and rows["Nominal power"] == 600
     assert "Output" not in rows, "25.4 V out with 230 V in is not what comes out"
     assert rows["Driver"] == "usbhid-ups 2.8.0" and rows["Beeper"] == "enabled"
+
+
+def test_the_mains_going_and_coming_back_are_said() -> None:
+    adapter = get_adapter("nut")
+    rows = {"battery.charge": "97", "battery.runtime": "1500", "ups.load": "23"}
+    on_line = adapter._status({**rows, "ups.status": "OL"})
+    on_battery = adapter._status({**rows, "ups.status": "OB DISCHRG"})
+    low = adapter._status({**rows, "battery.charge": "9", "ups.status": "OB DISCHRG LB"})
+    assert adapter.detect("status", None, on_battery, {}) == [], "nothing to compare with after a start"
+    [lost] = adapter.detect("status", on_line, on_battery, {})
+    assert lost.event == "power_lost" and lost.title == "On battery, 25m left" and lost.body == "Charge 97 %."
+    assert adapter.detect("status", on_battery, on_battery, {}) == [], "only on the change"
+    [running_low] = adapter.detect("status", on_battery, low, {})
+    assert running_low.title.startswith("Battery low: shut down now")
+    [back] = adapter.detect("status", low, on_line, {})
+    assert back.event == "power_back"
+    assert adapter.detect("details", on_line, on_battery, {}) == [], "one card says it, not every card of the UPS"

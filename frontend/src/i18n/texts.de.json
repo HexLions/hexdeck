@@ -2435,7 +2435,9 @@
     "On TrueNAS the Identifier of the UPS service.": "Bei TrueNAS der Identifier des USV-Dienstes.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "Der Rechner, an dem die USV hängt. Bei TrueNAS im USV-Dienst Remote Monitor ankreuzen.",
     "UPS name": "USV-Name",
-    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber."
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber.",
+    "A UPS runs on battery": "Eine USV läuft auf Batterie",
+    "A UPS is back on mains power": "Eine USV ist wieder am Netz"
   },
   "labels": {
     "Jobs": "Jobs",
