@@ -1072,6 +1072,20 @@
       "small": [
         "/api/metrics gibt den Zustand von HexDeck an Prometheus, sobald HEXDECK_METRICS_TOKEN gesetzt ist."
       ]
+    },
+    "0.31.1": {
+      "lead": "HexDeck 0.31.1: mehr von einer USV über NUT.",
+      "sections": [
+        {
+          "title": "USV-Details",
+          "body": "Die USV-Karte zeigt die aufgenommene Leistung in Watt, und eine neue Karte USV-Details zeigt Modell, Akku, Eingangsfrequenz, Nennleistung, die Grenzen für niedrigen Akku, Signalton und Treiber.",
+          "path": "System > Anbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Eine USV, die den Herstellernamen mit Leerzeichen füllt, wird nach ihrem Modell benannt, und eine Ausgangsspannung, die nicht stimmen kann, wird weggelassen."
+      ]
     }
   }
 }

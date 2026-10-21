@@ -302,6 +302,20 @@
       "small": [
         "/api/metrics entrega el estado de HexDeck a Prometheus una vez definida HEXDECK_METRICS_TOKEN."
       ]
+    },
+    "0.31.1": {
+      "lead": "HexDeck 0.31.1: más datos de un SAI a través de NUT.",
+      "sections": [
+        {
+          "title": "Detalles del SAI",
+          "body": "La tarjeta del SAI muestra la potencia consumida en vatios, y una nueva tarjeta Detalles del SAI muestra el modelo, la batería, la frecuencia de entrada, la potencia nominal, los límites de batería baja, el avisador y el controlador.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Un SAI que rellena con espacios el nombre del fabricante se nombra por su modelo, y una tensión de salida que no puede ser cierta se omite."
+      ]
     }
   }
 }

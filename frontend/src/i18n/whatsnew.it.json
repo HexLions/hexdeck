@@ -446,6 +446,20 @@
       "small": [
         "/api/metrics passa lo stato di HexDeck a Prometheus una volta impostata HEXDECK_METRICS_TOKEN."
       ]
+    },
+    "0.31.1": {
+      "lead": "HexDeck 0.31.1: più informazioni da un UPS via NUT.",
+      "sections": [
+        {
+          "title": "Dettagli UPS",
+          "body": "La card UPS mostra la potenza assorbita in watt, e una nuova card Dettagli UPS mostra modello, batteria, frequenza in ingresso, potenza nominale, soglie di batteria bassa, cicalino e driver.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Un UPS che riempie di spazi il nome del costruttore viene chiamato con il modello, e una tensione d'uscita che non può essere giusta viene omessa."
+      ]
     }
   }
 }
