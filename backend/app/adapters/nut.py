@@ -38,6 +38,7 @@ from .base import (
     Adapter,
     AdapterError,
     Context,
+    Detected,
     Field,
     WidgetData,
     WidgetType,
@@ -245,7 +246,8 @@ class NutAdapter(Adapter):
         power = _power(found)
         if power is not None:
             secondary.append({"label": "Power", "value": round(power), "unit": "W"})
-        meta: dict[str, Any] = {}
+        # The status words, for ``detect``: it compares this answer with the last.
+        meta: dict[str, Any] = {"flags": flags}
         if state == "bad":
             meta["status_reason"] = NutAdapter._words(found.get("ups.status", ""))
         metrics = {name: value for name, value in (("charge", charge), ("load", load),
@@ -253,6 +255,40 @@ class NutAdapter(Adapter):
                                                    ("power_w", round(power) if power is not None else None)) if value is not None}
         return WidgetData(status=state, primary={"label": "Charge", "value": round(charge) if charge is not None else "?", "unit": "%" if charge is not None else ""},
                           secondary=secondary, meta=meta, metrics=metrics)
+
+    def detect(self, widget_kind: str, before: WidgetData | None, after: WidgetData,
+               options: dict[str, Any]) -> list[Detected]:
+        """The mains going and coming back, said in words with the runtime left.
+
+        ⚠️ Only on the change, and only between two answers that both carry the
+        status: the first answer after a start compares with nothing, so a UPS
+        already on battery when HexDeck starts is said by the red card alone.
+        The battery running low is said apart, once, because it is the moment
+        to shut things down.
+        """
+        if widget_kind != "status" or before is None:
+            return []
+        was = set((before.meta or {}).get("flags") or [])
+        now = set((after.meta or {}).get("flags") or [])
+        if not was or not now:
+            return []
+        values = {row.get("label"): row.get("value") for row in after.secondary}
+        charge = (after.primary or {}).get("value")
+        left = values.get("Runtime")
+        found: list[Detected] = []
+        if "OB" in now and "OB" not in was:
+            found.append(Detected(event="power_lost", title=f"On battery, {left} left" if left else "On battery",
+                                  body=f"Charge {charge} %." if charge not in (None, "?") else "", level="bad",
+                                  key="power_lost", quiet_seconds=60))
+        if "LB" in now and "LB" not in was:
+            found.append(Detected(event="power_lost", title="Battery low: shut down now" + (f", {left} left" if left else ""),
+                                  body=f"Charge {charge} %." if charge not in (None, "?") else "", level="bad",
+                                  key="battery_low", quiet_seconds=60))
+        if "OL" in now and "OB" in was:
+            found.append(Detected(event="power_back", title="Back on mains power",
+                                  body=f"Charge {charge} %." if charge not in (None, "?") else "", level="ok",
+                                  key="power_back", quiet_seconds=60))
+        return found
 
     @staticmethod
     def _details(found: dict[str, str]) -> WidgetData:

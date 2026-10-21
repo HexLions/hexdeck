@@ -176,7 +176,7 @@ A guard test keeps this table in step with the settings in the code.
 
 ### Reverse proxy
 
-HexDeck speaks plain HTTP on port 8000 and trusts `X-Forwarded-Proto` for its cookies. Server-Sent Events need a proxy that does not buffer: for nginx, `proxy_buffering off;` on the location; Traefik and Caddy need nothing.
+HexDeck speaks plain HTTP on port 8000 and trusts `X-Forwarded-Proto` for its cookies. Server-Sent Events need a proxy that does not buffer: for nginx, `proxy_buffering off;` on the location; Traefik and Caddy need nothing. Examples for all three: [Behind a reverse proxy](docs/reverse-proxy.md).
 
 ### Two things to decide before the first start
 
@@ -317,6 +317,10 @@ and Spanish throughout, next to English and German.
 - [Docker labels](docs/labels.md)
 - [Boards as files and provisioning](docs/provisioning.md)
 - [Kiosk displays](docs/kiosk.md)
+- [Signing in: providers, home networks, second factors](docs/sign-in.md)
+- [Notifications: channels, events, quiet hours](docs/notifications.md)
+- [Behind a reverse proxy: nginx, Traefik, Caddy](docs/reverse-proxy.md)
+- [When something is wrong](docs/troubleshooting.md)
 - [API](docs/api.md)
 
 ## Development

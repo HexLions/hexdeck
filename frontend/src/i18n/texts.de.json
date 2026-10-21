@@ -2449,7 +2449,9 @@
     "Every card with a due date that is not done, overdue first, with its board and list.": "Jede Karte mit Fälligkeitsdatum, die nicht erledigt ist, überfällige zuerst, mit ihrem Board und ihrer Liste.",
     "Made in Planka under your user settings. Or leave it empty and sign in below.": "Erstellt in Planka unter deinen Benutzereinstellungen. Oder leer lassen und unten anmelden.",
     "Overdue cards, cards due this week, and open cards.": "Überfällige Karten, diese Woche fällige Karten und offene Karten.",
-    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Planka-Kanban-Boards: die fälligen Karten, überfällige zuerst, über alle Boards, die du sehen kannst."
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Planka-Kanban-Boards: die fälligen Karten, überfällige zuerst, über alle Boards, die du sehen kannst.",
+    "A UPS runs on battery": "Eine USV läuft auf Batterie",
+    "A UPS is back on mains power": "Eine USV ist wieder am Netz"
   },
   "labels": {
     "Jobs": "Jobs",

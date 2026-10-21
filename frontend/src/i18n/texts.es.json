@@ -2449,7 +2449,9 @@
     "Every card with a due date that is not done, overdue first, with its board and list.": "Cada tarjeta con fecha de vencimiento que no está hecha, primero las vencidas, con su tablero y su lista.",
     "Made in Planka under your user settings. Or leave it empty and sign in below.": "Creada en Planka en los ajustes de tu usuario. O déjala vacía e inicia sesión abajo.",
     "Overdue cards, cards due this week, and open cards.": "Tarjetas vencidas, tarjetas que vencen esta semana, y tarjetas abiertas.",
-    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Tableros kanban de Planka: las tarjetas que vencen, primero las vencidas, en todos los tableros que puedes ver."
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Tableros kanban de Planka: las tarjetas que vencen, primero las vencidas, en todos los tableros que puedes ver.",
+    "A UPS runs on battery": "Un SAI funciona con batería",
+    "A UPS is back on mains power": "Un SAI vuelve a la red eléctrica"
   },
   "labels": {
     "Private resources": "Recursos privados",

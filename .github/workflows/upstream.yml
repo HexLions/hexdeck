@@ -57,7 +57,14 @@ jobs:
           grep -E '^backend/app/adapters/(github|truenas|core|notepad|projects|publicip|minecraft|steam|shelly|elasticsearch|urbackup|openwrt|kubernetes|amp|proxmenux|netbird)\.py$' /tmp/files.txt \
             >> /tmp/ours.txt || true
 
+          # ⚠️ Upstream's words go into a code block, never into the issue as
+          # Markdown: a commit subject with @someone, #12 or a link would ping,
+          # cross-reference or mislead from an issue this repository wrote. A
+          # backtick in the text could close the block, so they become quotes.
+          fenced() { echo '```text'; tr '`' "'"; echo '```'; }
+
           UPSTREAM_TAG=$(git describe --tags --abbrev=0 upstream/main 2>/dev/null || echo "none")
+          UPSTREAM_TAG=$(printf '%s' "$UPSTREAM_TAG" | tr -cd 'A-Za-z0-9._-')
           {
             echo "Upstream (\`DerKezorm/nexdeck\`) has **$COUNT commits** this fork does not, newest upstream tag \`$UPSTREAM_TAG\`."
             echo
@@ -65,7 +72,7 @@ jobs:
             echo
             echo "These are files this fork does not touch, so they come over as they are."
             echo
-            if [ -s /tmp/theirs.txt ]; then sed 's/^/- `/; s/$/`/' /tmp/theirs.txt; else echo "_None._"; fi
+            if [ -s /tmp/theirs.txt ]; then fenced < /tmp/theirs.txt; else echo "_None._"; fi
             echo
             echo "### Files this fork has its own version of"
             echo
@@ -74,11 +81,11 @@ jobs:
             # ⚠️ head reads the file and sed the head, not the other way round:
             # with pipefail, sed killed by the pipe head closed failed the step
             # whenever upstream had changed more than 60 of our files.
-            if [ -s /tmp/ours.txt ]; then head -60 /tmp/ours.txt | sed 's/^/- `/; s/$/`/'; else echo "_None._"; fi
+            if [ -s /tmp/ours.txt ]; then head -60 /tmp/ours.txt | fenced; else echo "_None._"; fi
             echo
             echo "### The commits"
             echo
-            head -60 /tmp/commits.txt
+            head -60 /tmp/commits.txt | fenced
             echo
             echo "---"
             echo
@@ -95,11 +102,14 @@ jobs:
         # ⚠️ The REST API, not gh issue create: that one goes through GraphQL,
         # and with this workflow's token it was refused with "Resource not
         # accessible by integration" on its first run, on 2026-10-09.
+        # ⚠️ Only an issue this workflow opened. Anybody may open one with the
+        # same title, and the newest came first in the list: the report went
+        # into a stranger's issue, whose body they can edit afterwards.
         run: |
           set -euo pipefail
           REPO="$GITHUB_REPOSITORY"
           EXISTING=$(gh api "repos/$REPO/issues?state=open&per_page=100" \
-            --jq "[.[] | select(.pull_request == null and .title == \"$TITLE\")][0].number // empty")
+            --jq "[.[] | select(.pull_request == null and .title == \"$TITLE\" and .user.login == \"github-actions[bot]\")][0].number // empty")
           if [ -n "$EXISTING" ]; then
             gh api -X PATCH "repos/$REPO/issues/$EXISTING" -F body=@/tmp/body.md > /dev/null
             echo "Updated issue #$EXISTING."

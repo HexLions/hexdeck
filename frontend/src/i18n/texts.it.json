@@ -2449,7 +2449,9 @@
     "Every card with a due date that is not done, overdue first, with its board and list.": "Ogni card con una scadenza non ancora completata, prima quelle scadute, con la sua board e la sua lista.",
     "Made in Planka under your user settings. Or leave it empty and sign in below.": "Creata in Planka nelle impostazioni del tuo utente. Oppure lasciala vuota e accedi qui sotto.",
     "Overdue cards, cards due this week, and open cards.": "Card scadute, card in scadenza questa settimana, e card aperte.",
-    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Board kanban di Planka: le card in scadenza, prima quelle scadute, su tutte le board che puoi vedere."
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Board kanban di Planka: le card in scadenza, prima quelle scadute, su tutte le board che puoi vedere.",
+    "A UPS runs on battery": "Un UPS va a batteria",
+    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica"
   },
   "labels": {
     "Jobs": "Job",

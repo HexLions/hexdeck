@@ -43,6 +43,8 @@ EVENTS: dict[str, str] = {
     "disk_filling": "A disk is filling up",
     "update_available": "A new HexDeck version",
     "maintenance_due": "A maintenance item is due",
+    "power_lost": "A UPS runs on battery",
+    "power_back": "A UPS is back on mains power",
     "test": "Test message",
 }
 

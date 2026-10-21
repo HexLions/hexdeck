@@ -8,6 +8,11 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ## Unreleased
 
 ### Added
+
+- **A UPS on battery is said in words.** Two new events, "A UPS runs on
+  battery" (with the runtime left, and again when the battery runs low) and
+  "A UPS is back on mains power", from the UPS (NUT) card. A new channel
+  starts with the first one on; an existing channel can tick both.
 - **Woodpecker CI**: pipelines running and waiting, the repositories whose
   last pipeline failed, and the latest runs. ⚠️ Beta.
 - **Planka**: the cards that are due across the boards, overdue ones first,
