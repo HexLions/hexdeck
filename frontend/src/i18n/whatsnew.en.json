@@ -1072,6 +1072,20 @@
       "small": [
         "/api/metrics hands HexDeck's own state to Prometheus once HEXDECK_METRICS_TOKEN is set."
       ]
+    },
+    "0.31.1": {
+      "lead": "HexDeck 0.31.1: more from a UPS through NUT.",
+      "sections": [
+        {
+          "title": "UPS details",
+          "body": "The UPS card shows the power drawn in watts, and a new UPS details card shows the model, battery, input frequency, nominal power, the low-battery limits, beeper and driver.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A UPS that pads its maker's name is named by its model, and an output voltage that cannot be right is left out."
+      ]
     }
   }
 }
