@@ -2434,7 +2434,8 @@
     "Charge, runtime left, load and input voltage; red on battery.": "Ladung, verbleibende Laufzeit, Last und Eingangsspannung; rot auf Batterie.",
     "On TrueNAS the Identifier of the UPS service.": "Bei TrueNAS der Identifier des USV-Dienstes.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "Der Rechner, an dem die USV hängt. Bei TrueNAS im USV-Dienst Remote Monitor ankreuzen.",
-    "UPS name": "USV-Name"
+    "UPS name": "USV-Name",
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3647,6 +3648,15 @@
     "Umami has no site yet.": "Umami hat noch keine Website.",
     "The server has no slots.": "Der Server hat keine Slots.",
     "The model is still loading.": "Das Modell wird noch geladen.",
-    "Input": "Eingang"
+    "Input": "Eingang",
+    "Battery type": "Batterietyp",
+    "Low battery at": "Akku niedrig bei",
+    "Low runtime at": "Laufzeit niedrig bei",
+    "Input frequency": "Eingangsfrequenz",
+    "Output": "Ausgang",
+    "Nominal power": "Nennleistung",
+    "Beeper": "Signalton",
+    "Self-test": "Selbsttest",
+    "Driver": "Treiber"
   }
 }
