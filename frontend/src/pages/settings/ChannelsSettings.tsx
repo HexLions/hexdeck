@@ -17,7 +17,7 @@ type Notice = { text: string; level: 'ok' | 'error' }
 type EventSpec = { event: string; label: string }
 
 /** Which events a new channel starts with: the ones nobody wants to miss. */
-const DEFAULT_EVENTS = ['outage', 'recovery', 'action_failed']
+const DEFAULT_EVENTS = ['outage', 'recovery', 'action_failed', 'power_lost']
 
 /**
  * Where HexDeck writes when something happens.

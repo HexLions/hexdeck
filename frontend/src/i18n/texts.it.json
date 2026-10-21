@@ -2435,7 +2435,9 @@
     "On TrueNAS the Identifier of the UPS service.": "Su TrueNAS l'Identifier del servizio UPS.",
     "The machine the UPS is plugged into. On TrueNAS tick Remote Monitor in the UPS service.": "La macchina a cui è collegato l'UPS. Su TrueNAS spunta Remote Monitor nel servizio UPS.",
     "UPS name": "Nome UPS",
-    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver."
+    "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver.",
+    "A UPS runs on battery": "Un UPS va a batteria",
+    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica"
   },
   "labels": {
     "Jobs": "Job",
