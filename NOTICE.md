@@ -533,6 +533,11 @@ Updated at every milestone.
   running locally with Forgejo 17.0.0 as its forge, signed in through
   Forgejo's OAuth, one agent on the local backend, a pipeline that passed and
   one that failed.
+- **Planka's boards for their due cards.** The projects with their boards,
+  then each board's lists and cards, the archive and trash lists left out.
+  Checked against Planka 2.2.1, the prebuilt release, running locally on
+  PostgreSQL 17 with an API key, a sign-in, the terms not yet accepted, a
+  wrong key and a wrong password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

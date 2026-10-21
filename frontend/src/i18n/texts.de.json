@@ -2443,7 +2443,13 @@
     "Personal token": "Persönlicher Token",
     "Pipelines running and waiting, failing repositories, and agents.": "Laufende und wartende Pipelines, fehlschlagende Repositories und Agents.",
     "The latest pipelines across the repositories, newest first.": "Die letzten Pipelines über alle Repositories, die neuesten zuerst.",
-    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: laufende und wartende Pipelines, die Repositories, deren letzte Pipeline fehlschlug, und die letzten Läufe."
+    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: laufende und wartende Pipelines, die Repositories, deren letzte Pipeline fehlschlug, und die letzten Läufe.",
+    "Due": "Fällig",
+    "Due cards": "Fällige Karten",
+    "Every card with a due date that is not done, overdue first, with its board and list.": "Jede Karte mit Fälligkeitsdatum, die nicht erledigt ist, überfällige zuerst, mit ihrem Board und ihrer Liste.",
+    "Made in Planka under your user settings. Or leave it empty and sign in below.": "Erstellt in Planka unter deinen Benutzereinstellungen. Oder leer lassen und unten anmelden.",
+    "Overdue cards, cards due this week, and open cards.": "Überfällige Karten, diese Woche fällige Karten und offene Karten.",
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Planka-Kanban-Boards: die fälligen Karten, überfällige zuerst, über alle Boards, die du sehen kannst."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3668,6 +3674,8 @@
     "Driver": "Treiber",
     "Agents": "Agents",
     "No repository is active in Woodpecker.": "Kein Repository ist in Woodpecker aktiv.",
-    "No pipeline has run yet.": "Noch keine Pipeline ist gelaufen."
+    "No pipeline has run yet.": "Noch keine Pipeline ist gelaufen.",
+    "Open cards": "Offene Karten",
+    "No card is due.": "Keine Karte ist fällig."
   }
 }

@@ -10,6 +10,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 ### Added
 - **Woodpecker CI**: pipelines running and waiting, the repositories whose
   last pipeline failed, and the latest runs. ⚠️ Beta.
+- **Planka**: the cards that are due across the boards, overdue ones first,
+  and how many fall due this week. ⚠️ Beta.
 
 ## 0.31.1 (2026-10-21)
 

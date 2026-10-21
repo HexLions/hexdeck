@@ -2443,7 +2443,13 @@
     "Personal token": "Token personal",
     "Pipelines running and waiting, failing repositories, and agents.": "Pipelines en marcha y en espera, repositorios que fallan, y agentes.",
     "The latest pipelines across the repositories, newest first.": "Las últimas pipelines de todos los repositorios, las más recientes primero.",
-    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: pipelines en marcha y en espera, los repositorios cuya última pipeline falló, y las últimas ejecuciones."
+    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: pipelines en marcha y en espera, los repositorios cuya última pipeline falló, y las últimas ejecuciones.",
+    "Due": "Vencen",
+    "Due cards": "Tarjetas que vencen",
+    "Every card with a due date that is not done, overdue first, with its board and list.": "Cada tarjeta con fecha de vencimiento que no está hecha, primero las vencidas, con su tablero y su lista.",
+    "Made in Planka under your user settings. Or leave it empty and sign in below.": "Creada en Planka en los ajustes de tu usuario. O déjala vacía e inicia sesión abajo.",
+    "Overdue cards, cards due this week, and open cards.": "Tarjetas vencidas, tarjetas que vencen esta semana, y tarjetas abiertas.",
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Tableros kanban de Planka: las tarjetas que vencen, primero las vencidas, en todos los tableros que puedes ver."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3668,6 +3674,8 @@
     "Driver": "Controlador",
     "Agents": "Agentes",
     "No repository is active in Woodpecker.": "Ningún repositorio está activo en Woodpecker.",
-    "No pipeline has run yet.": "Todavía no se ha ejecutado ninguna pipeline."
+    "No pipeline has run yet.": "Todavía no se ha ejecutado ninguna pipeline.",
+    "Open cards": "Tarjetas abiertas",
+    "No card is due.": "Ninguna tarjeta vence."
   }
 }

@@ -2443,7 +2443,13 @@
     "Personal token": "Token personale",
     "Pipelines running and waiting, failing repositories, and agents.": "Pipeline in esecuzione e in attesa, repository che falliscono, e agent.",
     "The latest pipelines across the repositories, newest first.": "Le ultime pipeline di tutti i repository, le più recenti per prime.",
-    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: pipeline in esecuzione e in attesa, i repository la cui ultima pipeline è fallita, e le ultime esecuzioni."
+    "Woodpecker CI: pipelines running and waiting, the repositories whose last pipeline failed, and the latest runs.": "Woodpecker CI: pipeline in esecuzione e in attesa, i repository la cui ultima pipeline è fallita, e le ultime esecuzioni.",
+    "Due": "In scadenza",
+    "Due cards": "Card in scadenza",
+    "Every card with a due date that is not done, overdue first, with its board and list.": "Ogni card con una scadenza non ancora completata, prima quelle scadute, con la sua board e la sua lista.",
+    "Made in Planka under your user settings. Or leave it empty and sign in below.": "Creata in Planka nelle impostazioni del tuo utente. Oppure lasciala vuota e accedi qui sotto.",
+    "Overdue cards, cards due this week, and open cards.": "Card scadute, card in scadenza questa settimana, e card aperte.",
+    "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Board kanban di Planka: le card in scadenza, prima quelle scadute, su tutte le board che puoi vedere."
   },
   "labels": {
     "Jobs": "Job",
@@ -3668,6 +3674,8 @@
     "Driver": "Driver",
     "Agents": "Agent",
     "No repository is active in Woodpecker.": "Nessun repository è attivo in Woodpecker.",
-    "No pipeline has run yet.": "Nessuna pipeline è ancora stata eseguita."
+    "No pipeline has run yet.": "Nessuna pipeline è ancora stata eseguita.",
+    "Open cards": "Card aperte",
+    "No card is due.": "Nessuna card in scadenza."
   }
 }
