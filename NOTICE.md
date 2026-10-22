@@ -527,6 +527,17 @@ Updated at every milestone.
   one-line errors turned into words. Checked against upsd 2.8.1 from Debian
   13 running locally with the dummy-ups driver on line, on battery with the
   battery low, without its driver, and asked for a UPS it does not know.
+- **Woodpecker CI through its API, with Forgejo behind it.** The
+  repositories with their last pipeline, the pipeline feed, the queue and the
+  agents, the agent secrets left unread. Checked against Woodpecker 3.19.0
+  running locally with Forgejo 17.0.0 as its forge, signed in through
+  Forgejo's OAuth, one agent on the local backend, a pipeline that passed and
+  one that failed.
+- **Planka's boards for their due cards.** The projects with their boards,
+  then each board's lists and cards, the archive and trash lists left out.
+  Checked against Planka 2.2.1, the prebuilt release, running locally on
+  PostgreSQL 17 with an API key, a sign-in, the terms not yet accepted, a
+  wrong key and a wrong password.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

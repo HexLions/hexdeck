@@ -13,6 +13,10 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   battery" (with the runtime left, and again when the battery runs low) and
   "A UPS is back on mains power", from the UPS (NUT) card. A new channel
   starts with the first one on; an existing channel can tick both.
+- **Woodpecker CI**: pipelines running and waiting, the repositories whose
+  last pipeline failed, and the latest runs. ⚠️ Beta.
+- **Planka**: the cards that are due across the boards, overdue ones first,
+  and how many fall due this week. ⚠️ Beta.
 
 ## 0.31.1 (2026-10-21)
 

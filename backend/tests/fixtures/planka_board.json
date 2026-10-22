@@ -1,0 +1,361 @@
+{
+ "projects": {
+  "items": [
+   {
+    "id": "1890815949968245764",
+    "createdAt": "2026-10-21T14:53:46.066Z",
+    "updatedAt": "2026-10-21T14:53:46.070Z",
+    "name": "Homelab",
+    "description": null,
+    "backgroundType": null,
+    "backgroundGradient": null,
+    "isHidden": false,
+    "ownerProjectManagerId": "1890815949985022981",
+    "backgroundImageId": null,
+    "isFavorite": false
+   }
+  ],
+  "included": {
+   "projectManagers": [
+    {
+     "id": "1890815949985022981",
+     "createdAt": "2026-10-21T14:53:46.068Z",
+     "updatedAt": null,
+     "projectId": "1890815949968245764",
+     "userId": "1890814429516268545"
+    }
+   ],
+   "baseCustomFieldGroups": [],
+   "boards": [
+    {
+     "id": "1890815950245069830",
+     "createdAt": "2026-10-21T14:53:46.100Z",
+     "updatedAt": null,
+     "position": 65536,
+     "name": "Upgrades",
+     "defaultView": "kanban",
+     "defaultCardType": "project",
+     "limitCardTypesToDefaultOne": false,
+     "alwaysDisplayCardCreator": false,
+     "displayCardAges": false,
+     "expandTaskListsByDefault": false,
+     "projectId": "1890815949968245764"
+    }
+   ],
+   "boardMemberships": [
+    {
+     "id": "1890815950261847047",
+     "createdAt": "2026-10-21T14:53:46.101Z",
+     "updatedAt": null,
+     "role": "editor",
+     "canComment": null,
+     "projectId": "1890815949968245764",
+     "boardId": "1890815950245069830",
+     "userId": "1890814429516268545"
+    }
+   ],
+   "customFields": [],
+   "notificationServices": [],
+   "users": [
+    {
+     "id": "1890814429516268545",
+     "createdAt": "2026-10-21T14:50:44.814Z",
+     "updatedAt": "2026-10-21T14:53:32.760Z",
+     "email": "admin@example.com",
+     "role": "admin",
+     "name": "Admin",
+     "username": "admin",
+     "phone": null,
+     "organization": null,
+     "language": "en-US",
+     "apiKeyPrefix": "K1M2oxt9",
+     "subscribeToOwnCards": false,
+     "subscribeToCardWhenCommenting": true,
+     "turnOffRecentCardHighlighting": false,
+     "enableFavoritesByDefault": true,
+     "defaultEditorMode": "wysiwyg",
+     "defaultHomeView": "groupedProjects",
+     "defaultProjectsOrder": "byDefault",
+     "isDeactivated": false,
+     "autoLogoutMode": "30m",
+     "isTotpEnabled": false,
+     "totpEnabledAt": null,
+     "avatar": null,
+     "totpRecoveryCodesRemaining": 0,
+     "isDefaultAdmin": true,
+     "lockedFieldNames": [
+      "email",
+      "password",
+      "name",
+      "role",
+      "username"
+     ]
+    }
+   ],
+   "backgroundImages": []
+  }
+ },
+ "board": {
+  "item": {
+   "id": "1890815950245069830",
+   "createdAt": "2026-10-21T14:53:46.100Z",
+   "updatedAt": null,
+   "position": 65536,
+   "name": "Upgrades",
+   "defaultView": "kanban",
+   "defaultCardType": "project",
+   "limitCardTypesToDefaultOne": false,
+   "alwaysDisplayCardCreator": false,
+   "displayCardAges": false,
+   "expandTaskListsByDefault": false,
+   "projectId": "1890815949968245764",
+   "isSubscribed": false
+  },
+  "included": {
+   "boardMemberships": [
+    {
+     "id": "1890815950261847047",
+     "createdAt": "2026-10-21T14:53:46.101Z",
+     "updatedAt": null,
+     "role": "editor",
+     "canComment": null,
+     "projectId": "1890815949968245764",
+     "boardId": "1890815950245069830",
+     "userId": "1890814429516268545"
+    }
+   ],
+   "labels": [],
+   "lists": [
+    {
+     "id": "1890815950488339466",
+     "createdAt": "2026-10-21T14:53:46.128Z",
+     "updatedAt": null,
+     "type": "active",
+     "position": 65536,
+     "name": "To do",
+     "color": null,
+     "boardId": "1890815950245069830"
+    },
+    {
+     "id": "1890815950798717964",
+     "createdAt": "2026-10-21T14:53:46.166Z",
+     "updatedAt": null,
+     "type": "active",
+     "position": 73728,
+     "name": "Done",
+     "color": null,
+     "boardId": "1890815950245069830"
+    },
+    {
+     "id": "1890815950647723019",
+     "createdAt": "2026-10-21T14:53:46.147Z",
+     "updatedAt": null,
+     "type": "active",
+     "position": 81920,
+     "name": "Doing",
+     "color": null,
+     "boardId": "1890815950245069830"
+    },
+    {
+     "id": "1890815950270235656",
+     "createdAt": "2026-10-21T14:53:46.103Z",
+     "updatedAt": null,
+     "type": "archive",
+     "position": null,
+     "name": null,
+     "color": null,
+     "boardId": "1890815950245069830"
+    },
+    {
+     "id": "1890815950278624265",
+     "createdAt": "2026-10-21T14:53:46.103Z",
+     "updatedAt": null,
+     "type": "trash",
+     "position": null,
+     "name": null,
+     "color": null,
+     "boardId": "1890815950245069830"
+    }
+   ],
+   "cards": [
+    {
+     "id": "1890815951008433165",
+     "createdAt": "2026-10-21T14:53:46.191Z",
+     "updatedAt": null,
+     "type": "project",
+     "position": 65536,
+     "name": "Replace UPS battery",
+     "description": null,
+     "dueDate": "2026-10-19T14:53:46.000Z",
+     "isDueCompleted": false,
+     "stopwatch": null,
+     "commentsTotal": 0,
+     "isClosed": false,
+     "listChangedAt": "2026-10-21T14:53:46.190Z",
+     "boardId": "1890815950245069830",
+     "listId": "1890815950488339466",
+     "creatorUserId": "1890814429516268545",
+     "prevListId": null,
+     "coverAttachmentId": null,
+     "isSubscribed": false
+    },
+    {
+     "id": "1890815951335588881",
+     "createdAt": "2026-10-21T14:53:46.229Z",
+     "updatedAt": null,
+     "type": "project",
+     "position": 65536,
+     "name": "Move Plex to the new NAS",
+     "description": null,
+     "dueDate": "2026-11-10T14:53:46.000Z",
+     "isDueCompleted": false,
+     "stopwatch": null,
+     "commentsTotal": 0,
+     "isClosed": false,
+     "listChangedAt": "2026-10-21T14:53:46.229Z",
+     "boardId": "1890815950245069830",
+     "listId": "1890815950647723019",
+     "creatorUserId": "1890814429516268545",
+     "prevListId": null,
+     "coverAttachmentId": null,
+     "isSubscribed": false
+    },
+    {
+     "id": "1890815951184593935",
+     "createdAt": "2026-10-21T14:53:46.212Z",
+     "updatedAt": null,
+     "type": "project",
+     "position": 131072,
+     "name": "Renew certificates",
+     "description": null,
+     "dueDate": "2026-10-22T14:53:46.000Z",
+     "isDueCompleted": false,
+     "stopwatch": null,
+     "commentsTotal": 0,
+     "isClosed": false,
+     "listChangedAt": "2026-10-21T14:53:46.211Z",
+     "boardId": "1890815950245069830",
+     "listId": "1890815950488339466",
+     "creatorUserId": "1890814429516268545",
+     "prevListId": null,
+     "coverAttachmentId": null,
+     "isSubscribed": false
+    },
+    {
+     "id": "1890815951478195219",
+     "createdAt": "2026-10-21T14:53:46.247Z",
+     "updatedAt": null,
+     "type": "project",
+     "position": 131072,
+     "name": "Clean the dust filters",
+     "description": null,
+     "dueDate": "2026-10-19T14:53:46.000Z",
+     "isDueCompleted": true,
+     "stopwatch": null,
+     "commentsTotal": 0,
+     "isClosed": false,
+     "listChangedAt": "2026-10-21T14:53:46.246Z",
+     "boardId": "1890815950245069830",
+     "listId": "1890815950647723019",
+     "creatorUserId": "1890814429516268545",
+     "prevListId": null,
+     "coverAttachmentId": null,
+     "isSubscribed": false
+    },
+    {
+     "id": "1890815951000000001",
+     "createdAt": "2026-10-21T14:53:46.191Z",
+     "updatedAt": null,
+     "type": "project",
+     "position": 65536,
+     "name": "Old idea in the trash",
+     "description": null,
+     "dueDate": "2026-10-19T14:53:46.000Z",
+     "isDueCompleted": false,
+     "stopwatch": null,
+     "commentsTotal": 0,
+     "isClosed": false,
+     "listChangedAt": "2026-10-21T14:53:46.190Z",
+     "boardId": "1890815950245069830",
+     "listId": "1890815950278624265",
+     "creatorUserId": "1890814429516268545",
+     "prevListId": null,
+     "coverAttachmentId": null,
+     "isSubscribed": false
+    }
+   ],
+   "cardMemberships": [],
+   "cardLabels": [],
+   "taskLists": [],
+   "tasks": [],
+   "customFieldGroups": [],
+   "customFields": [],
+   "customFieldValues": [],
+   "users": [
+    {
+     "id": "1890814429516268545",
+     "createdAt": "2026-10-21T14:50:44.814Z",
+     "updatedAt": "2026-10-21T14:53:32.760Z",
+     "email": "admin@example.com",
+     "role": "admin",
+     "name": "Admin",
+     "username": "admin",
+     "phone": null,
+     "organization": null,
+     "language": "en-US",
+     "apiKeyPrefix": "K1M2oxt9",
+     "subscribeToOwnCards": false,
+     "subscribeToCardWhenCommenting": true,
+     "turnOffRecentCardHighlighting": false,
+     "enableFavoritesByDefault": true,
+     "defaultEditorMode": "wysiwyg",
+     "defaultHomeView": "groupedProjects",
+     "defaultProjectsOrder": "byDefault",
+     "isDeactivated": false,
+     "autoLogoutMode": "30m",
+     "isTotpEnabled": false,
+     "totpEnabledAt": null,
+     "avatar": null,
+     "totpRecoveryCodesRemaining": 0,
+     "isDefaultAdmin": true,
+     "lockedFieldNames": [
+      "email",
+      "password",
+      "name",
+      "role",
+      "username"
+     ]
+    }
+   ],
+   "projects": [
+    {
+     "id": "1890815949968245764",
+     "createdAt": "2026-10-21T14:53:46.066Z",
+     "updatedAt": "2026-10-21T14:53:46.070Z",
+     "name": "Homelab",
+     "description": null,
+     "backgroundType": null,
+     "backgroundGradient": null,
+     "isHidden": false,
+     "ownerProjectManagerId": "1890815949985022981",
+     "backgroundImageId": null
+    }
+   ],
+   "attachments": []
+  }
+ },
+ "login_terms": {
+  "code": "E_FORBIDDEN",
+  "pendingToken": "pending-token-replaced-in-the-fixture",
+  "message": "Terms acceptance required",
+  "step": "accept-terms"
+ },
+ "login_ok": {
+  "item": "access-token-replaced-in-the-fixture"
+ },
+ "unauthorized": {
+  "code": "E_UNAUTHORIZED",
+  "message": "Access token is missing, invalid or expired"
+ },
+ "_note": "The last card was moved into the board's trash list by hand for the test; Planka answered the other four as they are."
+}

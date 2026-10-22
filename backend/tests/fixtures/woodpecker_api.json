@@ -1,0 +1,325 @@
+{
+ "version": {
+  "source": "https://github.com/woodpecker-ci/woodpecker",
+  "version": "3.19.0"
+ },
+ "repos": [
+  {
+   "id": 2,
+   "forge_id": 1,
+   "forge_remote_id": "2",
+   "org_id": 1,
+   "owner": "fjadmin",
+   "name": "broken-app",
+   "full_name": "fjadmin/broken-app",
+   "avatar_url": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "forge_url": "https://forgejo.local/fjadmin/broken-app",
+   "clone_url": "https://forgejo.local/fjadmin/broken-app.git",
+   "clone_url_ssh": "ssh://worker@localhost/fjadmin/broken-app.git",
+   "default_branch": "main",
+   "pr_enabled": true,
+   "timeout": 60,
+   "visibility": "public",
+   "private": false,
+   "trusted": {
+    "network": false,
+    "volumes": false,
+    "security": false
+   },
+   "require_approval": "forks",
+   "approval_allowed_users": null,
+   "active": true,
+   "allow_pr": true,
+   "allow_deploy": false,
+   "config_file": "",
+   "cancel_previous_pipeline_events": [
+    "push",
+    "pull_request"
+   ],
+   "netrc_trusted": null,
+   "config_extension_endpoint": "",
+   "config_extension_exclusive": false,
+   "config_extension_netrc": false,
+   "registry_extension_endpoint": "",
+   "registry_extension_netrc": false,
+   "secret_extension_endpoint": "",
+   "secret_extension_netrc": false,
+   "last_pipeline": {
+    "id": 3,
+    "number": 2,
+    "author": "fjadmin",
+    "parent": 0,
+    "event": "manual",
+    "event_reason": null,
+    "status": "failure",
+    "errors": [
+     {
+      "type": "bad_habit",
+      "message": "Consider adding a `when` block with an `event` filter to this step or the entire workflow",
+      "is_warning": true,
+      "data": {
+       "docs": "https://woodpecker-ci.org/docs/usage/linter#event-filter-for-all-steps",
+       "field": "steps.test",
+       "file": "woodpecker"
+      }
+     }
+    ],
+    "created": 1792577569,
+    "updated": 1792577569,
+    "started": 1792577569,
+    "finished": 1792577569,
+    "deploy_to": "",
+    "deploy_task": "",
+    "commit": "b77bc62c7ea325967b1c1b51682c4d23966b9ed7",
+    "branch": "main",
+    "rerun_count": 0,
+    "ref": "refs/heads/main",
+    "refspec": "",
+    "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+    "forge_url": "https://forgejo.local/fjadmin/broken-app/commit/b77bc62c7ea325967b1c1b51682c4d23966b9ed7",
+    "reviewed_by": "",
+    "reviewed": 0,
+    "version": "3.19.0",
+    "title": "",
+    "message": "MANUAL PIPELINE @ main",
+    "timestamp": 1792577569,
+    "sender": "",
+    "author_email": "fjadmin@example.com"
+   }
+  },
+  {
+   "id": 1,
+   "forge_id": 1,
+   "forge_remote_id": "1",
+   "org_id": 1,
+   "owner": "fjadmin",
+   "name": "hello-app",
+   "full_name": "fjadmin/hello-app",
+   "avatar_url": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "forge_url": "https://forgejo.local/fjadmin/hello-app",
+   "clone_url": "https://forgejo.local/fjadmin/hello-app.git",
+   "clone_url_ssh": "ssh://worker@localhost/fjadmin/hello-app.git",
+   "default_branch": "main",
+   "pr_enabled": true,
+   "timeout": 60,
+   "visibility": "public",
+   "private": false,
+   "trusted": {
+    "network": false,
+    "volumes": false,
+    "security": false
+   },
+   "require_approval": "forks",
+   "approval_allowed_users": null,
+   "active": true,
+   "allow_pr": true,
+   "allow_deploy": false,
+   "config_file": "",
+   "cancel_previous_pipeline_events": [
+    "push",
+    "pull_request"
+   ],
+   "netrc_trusted": null,
+   "config_extension_endpoint": "",
+   "config_extension_exclusive": false,
+   "config_extension_netrc": false,
+   "registry_extension_endpoint": "",
+   "registry_extension_netrc": false,
+   "secret_extension_endpoint": "",
+   "secret_extension_netrc": false,
+   "last_pipeline": {
+    "id": 4,
+    "number": 2,
+    "author": "fjadmin",
+    "parent": 0,
+    "event": "manual",
+    "event_reason": null,
+    "status": "success",
+    "errors": [
+     {
+      "type": "bad_habit",
+      "message": "Consider adding a `when` block with an `event` filter to this step or the entire workflow",
+      "is_warning": true,
+      "data": {
+       "docs": "https://woodpecker-ci.org/docs/usage/linter#event-filter-for-all-steps",
+       "field": "steps.build",
+       "file": "woodpecker"
+      }
+     }
+    ],
+    "created": 1792577569,
+    "updated": 1792577589,
+    "started": 1792577569,
+    "finished": 1792577589,
+    "deploy_to": "",
+    "deploy_task": "",
+    "commit": "a4b3491cf0c48f1daae986b6e385dd77449e1571",
+    "branch": "main",
+    "rerun_count": 0,
+    "ref": "refs/heads/main",
+    "refspec": "",
+    "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+    "forge_url": "https://forgejo.local/fjadmin/hello-app/commit/a4b3491cf0c48f1daae986b6e385dd77449e1571",
+    "reviewed_by": "",
+    "reviewed": 0,
+    "version": "3.19.0",
+    "title": "",
+    "message": "MANUAL PIPELINE @ main",
+    "timestamp": 1792577569,
+    "sender": "",
+    "author_email": "fjadmin@example.com"
+   }
+  }
+ ],
+ "feed": [
+  {
+   "repo_id": 1,
+   "full_name": "fjadmin/hello-app",
+   "id": 4,
+   "number": 2,
+   "event": "manual",
+   "status": "success",
+   "created": 1792577569,
+   "started": 1792577569,
+   "finished": 1792577589,
+   "commit": "a4b3491cf0c48f1daae986b6e385dd77449e1571",
+   "branch": "main",
+   "ref": "refs/heads/main",
+   "author": "fjadmin",
+   "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "author_email": "fjadmin@example.com",
+   "message": "MANUAL PIPELINE @ main"
+  },
+  {
+   "repo_id": 2,
+   "full_name": "fjadmin/broken-app",
+   "id": 3,
+   "number": 2,
+   "event": "manual",
+   "status": "failure",
+   "created": 1792577569,
+   "started": 1792577569,
+   "finished": 1792577569,
+   "commit": "b77bc62c7ea325967b1c1b51682c4d23966b9ed7",
+   "branch": "main",
+   "ref": "refs/heads/main",
+   "author": "fjadmin",
+   "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "author_email": "fjadmin@example.com",
+   "message": "MANUAL PIPELINE @ main"
+  },
+  {
+   "repo_id": 2,
+   "full_name": "fjadmin/broken-app",
+   "id": 2,
+   "number": 1,
+   "event": "manual",
+   "status": "failure",
+   "created": 1792577222,
+   "started": 1792577223,
+   "finished": 1792577224,
+   "commit": "61b8e8518577e25dda6dd3223cb381e559d2db02",
+   "branch": "main",
+   "ref": "refs/heads/main",
+   "author": "fjadmin",
+   "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "author_email": "fjadmin@example.com",
+   "message": "MANUAL PIPELINE @ main"
+  },
+  {
+   "repo_id": 1,
+   "full_name": "fjadmin/hello-app",
+   "id": 1,
+   "number": 1,
+   "event": "manual",
+   "status": "failure",
+   "created": 1792577222,
+   "started": 1792577222,
+   "finished": 1792577223,
+   "commit": "bbde4d8c948e2c7c5fcf7a2215c5a8e33366086c",
+   "branch": "main",
+   "ref": "refs/heads/main",
+   "author": "fjadmin",
+   "author_avatar": "https://forgejo.local/avatars/635e9fce5b81433f1be3de8b2baf4f1d",
+   "author_email": "fjadmin@example.com",
+   "message": "MANUAL PIPELINE @ main"
+  }
+ ],
+ "agents": [
+  {
+   "id": 1,
+   "created": 1792577218,
+   "updated": 1792577588,
+   "name": "lab-agent",
+   "owner_id": -1,
+   "token": "agent-secret-replaced-in-the-fixture",
+   "last_contact": 1792577588,
+   "last_work": 1792577569,
+   "platform": "linux/amd64",
+   "backend": "local",
+   "capacity": 1,
+   "version": "3.19.0",
+   "no_schedule": false,
+   "custom_labels": null,
+   "org_id": -1,
+   "filters": null
+  }
+ ],
+ "queue_idle": {
+  "pending": [],
+  "waiting_on_deps": [],
+  "running": [],
+  "stats": {
+   "worker_count": 1,
+   "pending_count": 0,
+   "waiting_on_deps_count": 0,
+   "running_count": 0
+  },
+  "paused": false
+ },
+ "queue_running": {
+  "pending": [],
+  "waiting_on_deps": [],
+  "running": [
+   {
+    "id": "4",
+    "pid": 1,
+    "name": "woodpecker",
+    "labels": {
+     "org-id": "1",
+     "repo": "fjadmin/hello-app",
+     "woodpecker-ci.org/branch": "main",
+     "woodpecker-ci.org/commit-branch": "main",
+     "woodpecker-ci.org/event": "manual",
+     "woodpecker-ci.org/forge-id": "forgejo",
+     "woodpecker-ci.org/org-id": "1",
+     "woodpecker-ci.org/repo-forge-id": "1",
+     "woodpecker-ci.org/repo-full-name": "fjadmin/hello-app",
+     "woodpecker-ci.org/repo-id": "1",
+     "woodpecker-ci.org/repo-name": "hello-app"
+    },
+    "dependencies": null,
+    "run_on": [
+     "success"
+    ],
+    "dep_status": {},
+    "agent_id": 1,
+    "pipeline_id": 4,
+    "repo_id": 1,
+    "concurrency_limit": 0,
+    "concurrency_group": "",
+    "created": 1792577569,
+    "pipeline_number": 2,
+    "agent_name": "lab-agent"
+   }
+  ],
+  "stats": {
+   "worker_count": 0,
+   "pending_count": 0,
+   "waiting_on_deps_count": 0,
+   "running_count": 1
+  },
+  "paused": false
+ },
+ "unauthorized_body": "User not authorized"
+}

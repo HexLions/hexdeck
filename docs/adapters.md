@@ -25,6 +25,7 @@ that one of thirty-five renderers draws.
 | GitLab | project, pipelines, merge requests | | a personal, project or group access token with read_api, sent as `PRIVATE-TOKEN`; none for a public project on GitLab.com. The project is its path, group/name, which goes into the address URL-encoded; a card can name another project than the connection's |
 | Semaphore UI | last runs, automation | | API token of a user; the cards see the projects that user sees |
 | Jenkins | overview, jobs | build a job (off by default, asks first) | a user name with an API token from the user's Security page, sent as HTTP Basic; with a token no CSRF crumb is needed. Jobs inside a folder are read one level deep. The button builds only a job the last answer listed, by its full name |
+| Woodpecker CI | CI, repositories, latest pipelines | | a personal token (user menu, Access token) as a bearer token. The queue and the agents are for administrators; for anybody else Woodpecker says 403 and the CI card counts running pipelines from the repositories instead. The agent list carries every agent's secret, which the card never shows |
 | Cronicle | overview, events | run an event (off by default, asks first) | an API key from Admin, API Keys in an `X-API-Key` header; reading needs no privilege, the button needs Run Events. Only the master server answers the API. An event's last result is its newest job in the history. Every answer is HTTP 200 and says success or failure in its `code` |
 | Meilisearch | indexes, search | | a key of its own with stats.get, indexes.get, tasks.get and version |
 | Synology DSM | system, volumes, disks, containers, vms | start, stop, restart; power on, shut down, reboot | user and password; containers and VM details through DSM's own interface calls |
@@ -148,6 +149,7 @@ that one of thirty-five renderers draws.
 | Grocy | stock to watch, pantry | | API key from Manage API keys |
 | KitchenOwl | shopping list, meal plan | | a long-lived token from Settings, Sessions, as a Bearer token. A household and a list are picked by name, empty takes the first. Every installation describes its API at `/api/openapi` |
 | Vikunja | due tasks, tasks | | API token with read_all for tasks and projects; the time zone for "today" is a field, because a token cannot read the user's own |
+| Planka | due cards, due | | an API key in `X-Api-Key`, or a user name and password for `POST /api/access-tokens`, signed in again once after a 401. The first sign-in of an account answers 403 until its terms are accepted once in a browser; an API key skips that. Cards in a board's archive and trash lists are left out, and so is a due date ticked done. Up to ten boards are read, one request each |
 | Kimai | time entries, booked time | stop a running timer | API token from Profile > API access |
 | Dawarich | distance, distance by month | | API key of the account; distances follow Dawarich's hourly calculation |
 | wger | weight, weigh-ins | | API key from the profile, sent as Token |
