@@ -17,10 +17,33 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   the update TrueNAS offers. The new cards need the current API, so https;
   a Read-Only Administrator's key reads them all. ⚠️ Written from TrueNAS
   25.10's source, not yet run against a TrueNAS.
+
+## 0.32.0 (2026-10-22)
+
+A UPS on battery says so, Woodpecker CI and Planka, and guides in docs/.
+
+### Added
+
 - **A UPS on battery is said in words.** Two new events, "A UPS runs on
   battery" (with the runtime left, and again when the battery runs low) and
   "A UPS is back on mains power", from the UPS (NUT) card. A new channel
   starts with the first one on; an existing channel can tick both.
+- **Woodpecker CI**: pipelines running and waiting, the repositories whose
+  last pipeline failed, and the latest runs. ⚠️ Beta.
+- **Planka**: the cards that are due across the boards, overdue ones first,
+  and how many fall due this week. ⚠️ Beta.
+
+### Changed
+
+- **Guides in docs/.** Signing in and second factors, notifications and
+  their channels, reverse proxies, and troubleshooting, linked from the
+  README.
+- Vitest 4.1.12, for GHSA-qxg6-89mg-rqv8 and GHSA-xp26-3454-mjgp.
+
+### Fixed
+
+- The upstream report workflow writes only into the issue it opened itself,
+  and puts commit titles and file names in as plain text.
 
 ## 0.31.1 (2026-10-21)
 
