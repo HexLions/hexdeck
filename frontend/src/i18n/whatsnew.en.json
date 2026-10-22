@@ -1086,6 +1086,27 @@
       "small": [
         "A UPS that pads its maker's name is named by its model, and an output voltage that cannot be right is left out."
       ]
+    },
+    "0.32.0": {
+      "lead": "HexDeck 0.32.0: a UPS that goes on battery tells you, and two new integrations.",
+      "sections": [
+        {
+          "title": "A UPS on battery",
+          "body": "Two new events from the UPS (NUT) card: \"A UPS runs on battery\", with the runtime left and again when the battery runs low, and \"A UPS is back on mains power\". New channels start with the first one on.",
+          "path": "System > Notifications"
+        },
+        {
+          "title": "Woodpecker CI and Planka",
+          "body": "Woodpecker CI shows the pipelines running and waiting, the repositories whose last pipeline failed and the latest runs. Planka shows the cards that are due across the boards, overdue ones first. Both are in beta.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "New guides in docs/: signing in, notifications, reverse proxies and troubleshooting.",
+        "The upstream report workflow writes only into its own issue, as plain text.",
+        "Vitest 4.1.12, for two advisories."
+      ]
     }
   }
 }

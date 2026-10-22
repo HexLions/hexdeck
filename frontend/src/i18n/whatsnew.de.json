@@ -1086,6 +1086,27 @@
       "small": [
         "Eine USV, die den Herstellernamen mit Leerzeichen füllt, wird nach ihrem Modell benannt, und eine Ausgangsspannung, die nicht stimmen kann, wird weggelassen."
       ]
+    },
+    "0.32.0": {
+      "lead": "HexDeck 0.32.0: eine USV, die auf Batterie läuft, sagt es dir, und zwei neue Anbindungen.",
+      "sections": [
+        {
+          "title": "Eine USV auf Batterie",
+          "body": "Zwei neue Ereignisse von der Karte USV (NUT): \"Eine USV läuft auf Batterie\", mit der verbleibenden Laufzeit und noch einmal, wenn der Akku knapp wird, und \"Eine USV ist wieder am Netz\". Neue Kanäle beginnen mit dem ersten eingeschaltet.",
+          "path": "System > Benachrichtigungen"
+        },
+        {
+          "title": "Woodpecker CI und Planka",
+          "body": "Woodpecker CI zeigt laufende und wartende Pipelines, die Repositories, deren letzte Pipeline fehlschlug, und die letzten Läufe. Planka zeigt die fälligen Karten über alle Boards, überfällige zuerst. Beide sind in der Beta.",
+          "path": "System > Verbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Neue Anleitungen in docs/: Anmeldung, Benachrichtigungen, Reverse Proxys und Fehlersuche.",
+        "Der Upstream-Bericht schreibt nur noch in sein eigenes Issue, als reiner Text.",
+        "Vitest 4.1.12, wegen zweier Sicherheitshinweise."
+      ]
     }
   }
 }
