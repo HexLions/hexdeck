@@ -316,6 +316,27 @@
       "small": [
         "Un SAI que rellena con espacios el nombre del fabricante se nombra por su modelo, y una tensión de salida que no puede ser cierta se omite."
       ]
+    },
+    "0.32.0": {
+      "lead": "HexDeck 0.32.0: un SAI que pasa a batería te avisa, y dos integraciones nuevas.",
+      "sections": [
+        {
+          "title": "Un SAI con batería",
+          "body": "Dos eventos nuevos de la tarjeta SAI (NUT): \"Un SAI funciona con batería\", con la autonomía que queda y otra vez cuando la batería está baja, y \"Un SAI vuelve a la red eléctrica\". Los canales nuevos empiezan con el primero activado.",
+          "path": "Sistema > Notificaciones"
+        },
+        {
+          "title": "Woodpecker CI y Planka",
+          "body": "Woodpecker CI muestra las pipelines en marcha y en espera, los repositorios cuya última pipeline falló y las últimas ejecuciones. Planka muestra las tarjetas que vencen en todos los tableros, primero las vencidas. Las dos están en beta.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Guías nuevas en docs/: inicio de sesión, notificaciones, proxies inversos y resolución de problemas.",
+        "El flujo del informe upstream escribe solo en su propia issue, como texto plano.",
+        "Vitest 4.1.12, por dos avisos de seguridad."
+      ]
     }
   }
 }

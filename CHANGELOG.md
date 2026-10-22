@@ -5,7 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.32.0 (2026-10-22)
+
+A UPS on battery says so, Woodpecker CI and Planka, and guides in docs/.
 
 ### Added
 
@@ -17,6 +19,18 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   last pipeline failed, and the latest runs. ⚠️ Beta.
 - **Planka**: the cards that are due across the boards, overdue ones first,
   and how many fall due this week. ⚠️ Beta.
+
+### Changed
+
+- **Guides in docs/.** Signing in and second factors, notifications and
+  their channels, reverse proxies, and troubleshooting, linked from the
+  README.
+- Vitest 4.1.12, for GHSA-qxg6-89mg-rqv8 and GHSA-xp26-3454-mjgp.
+
+### Fixed
+
+- The upstream report workflow writes only into the issue it opened itself,
+  and puts commit titles and file names in as plain text.
 
 ## 0.31.1 (2026-10-21)
 
