@@ -34,7 +34,32 @@ ALERTS = [
 OLD_INFO = {**INFO, "version": "TrueNAS-SCALE-24.10.2"}
 #: What a plain GET of /api/current, without a key, said on 25.10.7 on 21.09.2026.
 NEEDS_UPGRADE = 'No WebSocket UPGRADE hdr: None\n Can "Upgrade" only to "WebSocket".'
-ANSWERS = {"system.info": INFO, "pool.query": POOLS, "alert.list": ALERTS}
+#: The shapes of the middleware's models in TS-25.10.7 (src/middlewared/middlewared/api/v25_10_0).
+DISKS = [
+    {"name": "sda", "model": "WDC WD40EFZX-68AWUN0 ", "size": 4_000_787_030_016, "type": "HDD", "pool": "tank", "serial": "WD-EXAMPLE1"},
+    {"name": "sdb", "model": "WDC WD40EFZX-68AWUN0", "size": 4_000_787_030_016, "type": "HDD", "pool": "tank", "serial": "WD-EXAMPLE2"},
+    {"name": "nvme0n1", "model": "Samsung SSD 980 1TB", "size": 1_000_204_886_016, "type": "SSD", "pool": None, "serial": "S64EXAMPLE"},
+]
+#: ``disk.temperatures([], True)``: current and critical, or None for a disk that tells none.
+TEMPERATURES = {"sda": [38.0, 70.0], "sdb": [53.0, 70.0], "nvme0n1": None}
+APPS = [
+    {"name": "jellyfin", "id": "jellyfin", "state": "RUNNING", "upgrade_available": True, "image_updates_available": False, "human_version": "10.10.7_1.2.3", "version": "1.2.3"},
+    {"name": "immich", "id": "immich", "state": "CRASHED", "upgrade_available": False, "image_updates_available": False, "human_version": "v1.132.3_1.0.0", "version": "1.0.0"},
+    {"name": "adguard", "id": "adguard", "state": "STOPPED", "upgrade_available": False, "image_updates_available": False, "human_version": "v0.107_1.1.0", "version": "1.1.0"},
+]
+SNAPSHOT_TASKS = [
+    {"id": 1, "dataset": "tank/photos", "enabled": True, "state": {"state": "FINISHED", "datetime": {"$date": 1_789_712_345_000}}},
+    {"id": 2, "dataset": "tank/old", "enabled": False, "state": {"state": "PENDING"}},
+]
+REPLICATIONS = [
+    {"id": 1, "name": "tank/photos - backup/photos", "enabled": True,
+     "state": {"state": "ERROR", "datetime": {"$date": 1_789_712_000_000}, "error": "No incremental base on dataset 'tank/photos' and replication from scratch is not allowed."}},
+]
+UPDATE = {"code": "NORMAL", "status": {"current_version": {"train": "TrueNAS-SCALE-Goldeye", "profile": "GENERAL", "matches_profile": True},
+                                       "new_version": {"version": "25.10.8", "manifest": {}, "release_notes": None, "release_notes_url": "https://www.truenas.com/docs/"}},
+          "error": None, "update_download_progress": None}
+ANSWERS = {"system.info": INFO, "pool.query": POOLS, "alert.list": ALERTS, "disk.query": DISKS, "disk.temperatures": TEMPERATURES,
+           "app.query": APPS, "pool.snapshottask.query": SNAPSHOT_TASKS, "replication.query": REPLICATIONS, "update.status": UPDATE}
 #: One ``reporting.realtime`` event as 25.x sends it: CPU usage in percent, memory in bytes.
 LIVE = {"cpu": {"cpu": {"usage": 37.25, "temp": None}, "cpu0": {"usage": 40.0, "temp": None}},
         "memory": {"arc_size": 2_000_000_000, "arc_free_memory": 0, "arc_available_memory": 0,
@@ -86,6 +111,8 @@ class FakeTruenas:
                 self._pending.append(json.dumps({"jsonrpc": "2.0", "method": "collection_update",
                                                  "params": {"msg": "added", "collection": 'reporting.realtime:{"interval": 2}', "fields": self.live}}))
         else:
+            if method == "disk.temperatures":
+                assert message["params"] == [[], True], "every disk, with its critical temperature"
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": ANSWERS[method]}))
 
     async def recv(self) -> str:
@@ -138,7 +165,8 @@ async def test_https_reads_everything_through_the_current_api(ctx: Context, true
 
     fake.sent.clear()
     system = await adapter.fetch("system", config, {}, ctx)
-    assert fake.methods() == ["auth.login_with_api_key", "system.info", "alert.list", "core.subscribe"], "one connection for everything"
+    assert fake.methods() == ["auth.login_with_api_key", "system.info", "alert.list", "core.subscribe",
+                              "auth.login_with_api_key", "update.status"], "one connection for the card, and the hourly update check on its own"
     assert system.primary == {"label": "CPU", "value": 37.2, "unit": "%"}, "the CPU usage TrueNAS itself shows, not the load average"
     memory = next(entry for entry in system.secondary if entry["label"] == "Memory")
     assert memory["value"] == 50.0 and memory["unit"] == "%" and memory["text"] == "3.9 GB / 7.8 GB", "memory in use, of the total"
@@ -422,3 +450,105 @@ async def test_a_key_that_may_not_read_the_statistics_does_not_hold_the_card_up(
     system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
     assert time.monotonic() - started < 5, "it did not wait for an event that will not come"
     assert system.primary == {"label": "Load", "value": 12.5, "unit": "%"}
+
+
+async def test_the_system_card_names_the_update_on_offer(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert {"label": "Update", "value": "25.10.8"} in system.secondary
+
+
+async def test_an_update_check_that_fails_leaves_the_card_and_waits_an_hour(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    """``update.status`` asks the update server; a TrueNAS that cannot reach it
+    still shows its load, and is not asked again on every refresh."""
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(refuse={"update.status": "ENOPKG"})
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    config = {"url": "https://truenas.example.com", "api_key": KEY}
+    system = await adapter.fetch("system", config, {}, ctx)
+    assert system.primary["label"] == "CPU"
+    assert not [entry for entry in system.secondary if entry["label"] == "Update"]
+    ctx.cache.pop("truenas:system.info")
+    fake.sent.clear()
+    await adapter.fetch("system", config, {}, ctx)
+    assert "update.status" not in fake.methods()
+
+
+async def test_the_pools_say_when_they_were_scrubbed(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    pools = [
+        {**POOLS[0], "scan": {"function": "SCRUB", "state": "FINISHED", "end_time": {"$date": 1_789_712_345_000}, "errors": 0, "percentage": 100.0, "pause": None}},
+        {**POOLS[0], "name": "fast", "scan": {"function": "SCRUB", "state": "FINISHED", "end_time": {"$date": 1_789_712_345_000}, "errors": 2, "percentage": 100.0, "pause": None}},
+        {**POOLS[0], "name": "cold", "scan": {"function": "RESILVER", "state": "SCANNING", "percentage": 41.6, "pause": None}},
+        {**POOLS[0], "name": "new", "scan": None},
+    ]
+    monkeypatch.setitem(ANSWERS, "pool.query", pools)
+    fake = FakeTruenas()
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    card = await adapter.fetch("pools", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    found = {item["title"]: (item["subtitle"].split(" · ", 2)[-1] if item["subtitle"].count(" · ") == 2 else "", item["status"]) for item in card.items}
+    assert found == {"tank": ("scrubbed 2026-09-18", "ok"), "fast": ("scrubbed 2026-09-18, 2 errors", "warn"),
+                     "cold": ("resilvering 42%", "warn"), "new": ("", "ok")}
+
+
+async def test_the_disks_come_hottest_first_with_their_own_limit(ctx: Context, truenas) -> None:
+    adapter, fake = truenas
+    card = await adapter.fetch("disks", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert [(item["title"], item["value"], item["status"]) for item in card.items] == [
+        ("sdb WDC WD40EFZX-68AWUN0", "53 °C", "warn"),
+        ("sda WDC WD40EFZX-68AWUN0", "38 °C", "ok"),
+        ("nvme0n1 Samsung SSD 980 1TB", "", "unknown"),
+    ]
+    assert card.items[0]["subtitle"] == "tank · 3.6 TB · HDD"
+    assert card.items[2]["subtitle"].startswith("not in a pool · ")
+    assert card.status == "warn"
+    assert card.secondary == [{"label": "Disks", "value": 3}, {"label": "Hottest", "value": "53 °C"}]
+    assert fake.methods() == ["auth.login_with_api_key", "disk.query", "disk.temperatures"]
+
+
+async def test_a_disk_at_its_own_critical_temperature_is_red(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    monkeypatch.setitem(ANSWERS, "disk.temperatures", {"sda": [56.0, 55.0], "sdb": [61.0, None], "nvme0n1": 45.0})
+    fake = FakeTruenas()
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    card = await adapter.fetch("disks", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert {item["title"].split()[0]: item["status"] for item in card.items} == {"sda": "bad", "sdb": "bad", "nvme0n1": "ok"}
+
+
+async def test_the_apps_put_the_crashed_one_first_and_count_the_updates(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("apps", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert [(item["title"], item["value"], item["status"]) for item in card.items] == [
+        ("immich", "Crashed", "bad"), ("adguard", "Stopped", "unknown"), ("jellyfin", "Running", "ok"),
+    ]
+    assert card.items[2]["subtitle"] == "10.10.7_1.2.3 · update available"
+    assert card.secondary == [{"label": "Running", "value": "1 / 3"}, {"label": "Updates", "value": 1}]
+    assert card.status == "bad"
+
+
+async def test_the_tasks_show_the_failed_replication_with_its_reason(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("tasks", {"url": "https://truenas.example.com", "api_key": KEY}, {"limit": 5}, ctx)
+    assert [(item["title"], item["value"], item["status"]) for item in card.items] == [
+        ("tank/photos - backup/photos", "Failed", "bad"), ("tank/photos", "Done", "ok"),
+    ], "the disabled task is left out"
+    assert card.items[0]["subtitle"].startswith("Replication · ")
+    assert card.items[0]["subtitle"].endswith("No incremental base on dataset 'tank/photos' and replication from scratch is not allowed.")
+    assert " ago" in card.items[1]["subtitle"]
+    assert card.secondary == [{"label": "Tasks", "value": 2}, {"label": "Failed", "value": 1}]
+    assert card.status == "bad"
+
+
+async def test_the_new_cards_over_rest_say_what_they_need(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    """An older TrueNAS, read over REST, has no such calls; the card says so
+    rather than asking REST for something it does not have."""
+    adapter = get_adapter("truenas")
+    monkeypatch.setattr(adapter, "_open_socket", turned_down(404))
+    with respx.mock(assert_all_called=False) as router:
+        router.get("https://truenas.example.com/api/v2.0/system/info").mock(return_value=httpx.Response(200, json=OLD_INFO))
+        rest = router.get(url__regex=r".*/api/v2\.0/(disk|app|replication|pool/snapshottask).*").mock(return_value=httpx.Response(200, json=[]))
+        for kind in ("disks", "apps", "tasks"):
+            with pytest.raises(AdapterError) as refused:
+                await adapter.fetch(kind, {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+            assert refused.value.code == "needs_current_api"
+    assert not rest.called

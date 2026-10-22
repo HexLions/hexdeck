@@ -61,6 +61,7 @@ from .base import (
     Unreachable,
     WidgetData,
     WidgetType,
+    ago,
     base_url,
     duration_short,
     guard_outbound,
@@ -86,6 +87,29 @@ READS = {
     "pool.query": "/pool",
     "alert.list": "/alert/list",
 }
+
+#: The arguments of the methods that take some. ``disk.temperatures`` with
+#: no names is every disk, and the second one asks for each disk's critical
+#: temperature beside the current one: ``{"sda": [41.0, 70.0]}``.
+PARAMS: dict[str, tuple[Any, ...]] = {
+    "disk.temperatures": ([], True),
+}
+
+#: Read over the current API only. Over REST these cards say they need it.
+CURRENT_ONLY = ("disk.query", "disk.temperatures", "app.query", "pool.snapshottask.query", "replication.query", "update.status")
+
+#: How long what ``update.status`` said is kept; see ``_update``.
+UPDATE_SECONDS = 3600.0
+
+#: A disk this warm, in degrees Celsius, is shown in amber; at its own
+#: critical temperature, or at the second number when it names none, in red.
+DISK_WARM = 50.0
+DISK_HOT = 60.0
+
+APP_STATES = {"RUNNING": ("ok", "Running"), "DEPLOYING": ("warn", "Starting"), "STOPPING": ("warn", "Stopping"),
+              "STOPPED": ("unknown", "Stopped"), "CRASHED": ("bad", "Crashed")}
+TASK_STATES = {"FINISHED": ("ok", "Done"), "RUNNING": ("ok", "Running"), "WAITING": ("unknown", "Waiting"),
+               "PENDING": ("unknown", "Not run yet"), "HOLD": ("warn", "On hold"), "ERROR": ("bad", "Failed")}
 
 #: How long a TrueNAS without ``/api/current`` is not asked again.
 LEGACY_SECONDS = 3600.0
@@ -121,6 +145,15 @@ class TruenasAdapter(Adapter):
         WidgetType(kind="system", label="System", description="Load, memory, uptime and open alerts.", renderer="stats", default_size=(4, 2), refresh_seconds=30, metrics=("load",)),
         WidgetType(kind="pools", label="Pools", description="Every pool with usage and health.", renderer="list", default_size=(3, 2), refresh_seconds=120),
         WidgetType(kind="alerts", label="Alerts", description="Open alerts by level.", renderer="list", default_size=(3, 2), refresh_seconds=60),
+        WidgetType(kind="disks", label="Disks", description="Every disk with its temperature, model and pool, the hottest first.",
+                   renderer="list", default_size=(3, 3), refresh_seconds=300,
+                   options=(Field("limit", "Entries", type="number", default=12),)),
+        WidgetType(kind="apps", label="Apps", description="The apps on TrueNAS with their state, and which have an update.",
+                   renderer="list", default_size=(3, 3), refresh_seconds=60,
+                   options=(Field("limit", "Entries", type="number", default=12),)),
+        WidgetType(kind="tasks", label="Snapshots and replication", description="The periodic snapshot and replication tasks with how each last ended.",
+                   renderer="list", default_size=(3, 3), refresh_seconds=120,
+                   options=(Field("limit", "Entries", type="number", default=12),)),
     )
 
     # -- the REST API v2 -------------------------------------------------------
@@ -182,7 +215,7 @@ class TruenasAdapter(Adapter):
         for method in methods:
             if method not in fresh:
                 # The live statistics are an event of the current API; REST has none.
-                fresh[method] = None if method == REALTIME else await self._get(config, ctx, READS[method], cache=cache)
+                fresh[method] = None if method == REALTIME or method in CURRENT_ONLY else await self._get(config, ctx, READS[method], cache=cache)
         return {method: fresh[method] for method in methods}
 
     # -- the current API -------------------------------------------------------
@@ -268,7 +301,7 @@ class TruenasAdapter(Adapter):
                         )
                     answers: dict[str, Any] = {}
                     for method in methods:
-                        answers[method] = await realtime(socket) if method == REALTIME else await call(socket, method)
+                        answers[method] = await realtime(socket) if method == REALTIME else await call(socket, method, *PARAMS.get(method, ()))
                     return answers
                 finally:
                     await socket.close()
@@ -357,26 +390,62 @@ class TruenasAdapter(Adapter):
                 memory = {"label": "Memory", "value": human_bytes(memory_total)}
                 metrics = {"load": cpu}
                 worst = cpu
+            secondary = [memory, {"label": "Uptime", "value": duration_short(info.get("uptime_seconds"))}, {"label": "Alerts", "value": len(alerts)}]
+            update = await self._update(config, ctx)
+            if update:
+                secondary.append({"label": "Update", "value": update})
             return WidgetData(
                 status="bad" if any(a.get("level") in ("CRITICAL", "ERROR") for a in alerts) else ("warn" if alerts else status_from_percent(worst)),
                 primary={"label": cpu_label, "value": cpu, "unit": "%"},
-                secondary=[memory, {"label": "Uptime", "value": duration_short(info.get("uptime_seconds"))}, {"label": "Alerts", "value": len(alerts)}],
+                secondary=secondary,
                 metrics=metrics,
             )
         if widget_kind == "pools":
             items = []
             for pool in (await self._read(config, ctx, ["pool.query"], cache=60))["pool.query"] or []:
                 used = percent(pool.get("allocated"), pool.get("size"))
+                scan, scan_state = _scan(pool.get("scan"))
+                state = "unknown" if used is None else ("ok" if pool.get("healthy") and used < 90 else "warn")
                 items.append({
-                    "title": pool.get("name", "?"), "subtitle": f"{human_bytes(pool.get('allocated'))} of {human_bytes(pool.get('size'))} · {pool.get('status', '?')}",
+                    "title": pool.get("name", "?"),
+                    "subtitle": " · ".join(part for part in (f"{human_bytes(pool.get('allocated'))} of {human_bytes(pool.get('size'))}", str(pool.get("status", "?")), scan) if part),
                     "progress": used, "value": percent_text(used),
                     # A pool whose size did not come is not a healthy pool.
-                    "status": "unknown" if used is None else ("ok" if pool.get("healthy") and used < 90 else "warn"),
+                    "status": "warn" if state == "ok" and scan_state == "warn" else state,
                 })
             return WidgetData(items=items)
+        limit = max(1, int(options.get("limit") or 12))
+        if widget_kind == "disks":
+            read = await self._read(config, ctx, ["disk.query", "disk.temperatures"], cache=300)
+            return _disks(read["disk.query"], read["disk.temperatures"], limit)
+        if widget_kind == "apps":
+            return _apps((await self._read(config, ctx, ["app.query"], cache=30))["app.query"], limit)
+        if widget_kind == "tasks":
+            read = await self._read(config, ctx, ["pool.snapshottask.query", "replication.query"], cache=60)
+            return _tasks(read["pool.snapshottask.query"], read["replication.query"], limit)
         alerts = [a for a in (await self._read(config, ctx, ["alert.list"]))["alert.list"] or [] if not a.get("dismissed")]
         items = [{"title": str(a.get("formatted") or a.get("text", "?"))[:120], "subtitle": _day(a.get("datetime")), "status": "bad" if a.get("level") in ("CRITICAL", "ERROR") else "warn"} for a in alerts]
         return WidgetData(status="bad" if any(i["status"] == "bad" for i in items) else ("warn" if items else "ok"), items=items or [], secondary=[{"label": "Open", "value": len(items)}])
+
+    async def _update(self, config: dict[str, Any], ctx: Context) -> str | None:
+        """The version TrueNAS offers to update to, or None.
+
+        ⚠️ ``update.status`` asks the update server, so it is read once an
+        hour, on a connection of its own: a TrueNAS that cannot reach that
+        server, or a key whose role may not ask, leaves the rest of the card
+        as it was, and is not asked again within the hour either.
+        """
+        now = time.monotonic()
+        quiet = ctx.cache.get("truenas:update-quiet")
+        if quiet and quiet > now:
+            return None
+        try:
+            status = (await self._read(config, ctx, ["update.status"], cache=UPDATE_SECONDS))["update.status"]
+        except AdapterError:
+            ctx.cache["truenas:update-quiet"] = now + UPDATE_SECONDS
+            return None
+        new = ((status or {}).get("status") or {}).get("new_version") if isinstance(status, dict) else None
+        return str(new.get("version") or "") or None if isinstance(new, dict) else None
 
     #: Above this, a pool has stopped being somebody's problem for later.
     FULL_PERCENT = 90.0
@@ -418,6 +487,27 @@ class TruenasAdapter(Adapter):
             return WidgetData(primary={"label": "Load", "value": load, "unit": "%"}, secondary=[{"label": "Memory", "value": "64.0 GB"}, {"label": "Uptime", "value": duration_short(12 * 86400 + tick)}, {"label": "Alerts", "value": 1}], metrics={"load": load}, status="warn")
         if widget_kind == "pools":
             return WidgetData(items=[{"title": "tank", "subtitle": "41.2 TB of 58.0 TB · ONLINE", "progress": 71.0, "value": "71%", "status": "ok"}, {"title": "fast", "subtitle": "1.2 TB of 1.8 TB · ONLINE", "progress": 66.6, "value": "67%", "status": "ok"}])
+        limit = max(1, int(options.get("limit") or 12))
+        if widget_kind == "disks":
+            warm = round(fake.walk("truenas-disk", tick, 36, 47))
+            disks = [{"name": f"sd{letter}", "model": "WDC WD120EFBX", "size": 12_000_138_625_024, "type": "HDD", "pool": "tank"} for letter in "abcd"]
+            disks.append({"name": "nvme0n1", "model": "Samsung SSD 980 1TB", "size": 1_000_204_886_016, "type": "SSD", "pool": "fast"})
+            heat = {"sda": [warm, 70.0], "sdb": [warm + 2, 70.0], "sdc": [warm - 1, 70.0], "sdd": [warm + 1, 70.0], "nvme0n1": [warm + 9, 84.8]}
+            return _disks(disks, heat, limit)
+        if widget_kind == "apps":
+            return _apps([
+                {"name": "jellyfin", "state": "RUNNING", "upgrade_available": tick % 4 == 0, "human_version": "10.10.7_1.2.3"},
+                {"name": "immich", "state": "RUNNING", "upgrade_available": False, "human_version": "v1.132.3_1.0.0"},
+                {"name": "nextcloud", "state": "DEPLOYING" if tick % 5 == 0 else "RUNNING", "upgrade_available": False, "human_version": "31.0.4_2.0.1"},
+                {"name": "adguard-home", "state": "STOPPED", "upgrade_available": False, "human_version": "v0.107.61_1.1.0"},
+            ], limit)
+        if widget_kind == "tasks":
+            moment = {"$date": (time.time() - 1800) * 1000}
+            return _tasks(
+                [{"dataset": "tank/photos", "enabled": True, "state": {"state": "FINISHED", "datetime": moment}},
+                 {"dataset": "tank/documents", "enabled": True, "state": {"state": "FINISHED", "datetime": moment}}],
+                [{"name": "tank/photos - offsite/photos", "enabled": True, "state": {"state": "RUNNING" if tick % 3 == 0 else "FINISHED", "datetime": moment}}],
+                limit)
         return WidgetData(status="warn", items=[{"title": "Scrub of pool tank finished with 0 errors", "subtitle": "2026-09-04", "status": "warn"}], secondary=[{"label": "Open", "value": 1}])
 
 
@@ -520,3 +610,138 @@ def _percent(item: dict[str, Any]) -> float | None:
         return float(raw)
     except ValueError:
         return None
+
+
+def _current_only(answer: Any) -> None:
+    """A card of the current API on a TrueNAS read over REST says so."""
+    if answer is None:
+        raise AdapterError("This card needs the current TrueNAS API: TrueNAS 25.04 or later, over https://.",
+                           code="needs_current_api", hint="Change the URL to https://. A TrueNAS before 25.04 has no such card.")
+
+
+def _scan(scan: Any) -> tuple[str, str]:
+    """The pool's last scrub or running resilver in words, and whether it needs a look.
+
+    The ``scan`` of ``pool.query``: ``function`` SCRUB or RESILVER, ``state``
+    SCANNING, FINISHED or CANCELED, ``end_time`` as ``{"$date": ms}``.
+    """
+    if not isinstance(scan, dict) or not scan.get("function"):
+        return "", "ok"
+    function, state = str(scan.get("function")), str(scan.get("state") or "")
+    done = scan.get("percentage")
+    progress = f" {float(done):.0f}%" if isinstance(done, (int, float)) else ""
+    if function == "RESILVER":
+        return (f"resilvering{progress}", "warn") if state == "SCANNING" else ("", "ok")
+    if state == "SCANNING":
+        return ("scrub paused" if scan.get("pause") else f"scrubbing{progress}"), "ok"
+    if state == "CANCELED":
+        return "scrub cancelled", "ok"
+    if state == "FINISHED":
+        errors = int(scan.get("errors") or 0)
+        day = _day(scan.get("end_time"))
+        words = f"scrubbed {day}" if day else "scrubbed"
+        return (f"{words}, {errors} error{'' if errors == 1 else 's'}", "warn") if errors else (words, "ok")
+    return "", "ok"
+
+
+def _disks(disks: Any, temperatures: Any, limit: int) -> WidgetData:
+    """Every disk, the hottest first.
+
+    ⚠️ ``disk.temperatures`` reads each disk through the kernel's drivetemp,
+    which sends the disk a command, so TrueNAS itself keeps the number for
+    five minutes; the card is not refreshed more often than that either. A
+    disk that tells no temperature answers None.
+    """
+    _current_only(disks)
+    heat = temperatures if isinstance(temperatures, dict) else {}
+    rows = []
+    for disk in disks or []:
+        if not isinstance(disk, dict):
+            continue
+        name = str(disk.get("name") or "?")
+        reading = heat.get(name)
+        current, critical = (reading[0], reading[1]) if isinstance(reading, list) and len(reading) == 2 else (reading, None)
+        current = float(current) if isinstance(current, (int, float)) else None
+        top = float(critical) if isinstance(critical, (int, float)) and critical > DISK_WARM else DISK_HOT
+        state = "unknown" if current is None else "bad" if current >= top else "warn" if current >= DISK_WARM else "ok"
+        kind = str(disk.get("type") or "")
+        rows.append((current if current is not None else -1.0, {
+            "title": " ".join(part for part in (name, str(disk.get("model") or "").strip()) if part),
+            "subtitle": " · ".join(part for part in (str(disk.get("pool") or "not in a pool"), human_bytes(disk.get("size")) if disk.get("size") else "", kind) if part),
+            "status": state,
+            "value": f"{current:.0f} °C" if current is not None else "",
+        }))
+    items = [item for _heat, item in sorted(rows, key=lambda row: (-row[0], row[1]["title"]))][:limit]
+    hottest = max((row[0] for row in rows), default=-1.0)
+    worst = "bad" if any(i["status"] == "bad" for i in items) else "warn" if any(i["status"] == "warn" for i in items) else "ok"
+    secondary = [{"label": "Disks", "value": len(rows)}]
+    if hottest >= 0:
+        secondary.append({"label": "Hottest", "value": f"{hottest:.0f} °C"})
+    return WidgetData(status=worst, items=items, secondary=secondary, meta={"empty": "TrueNAS lists no disk."})
+
+
+def _apps(apps: Any, limit: int) -> WidgetData:
+    """The apps, crashed and starting ones first, then by name."""
+    _current_only(apps)
+    order = {"bad": 0, "warn": 1, "unknown": 2, "ok": 3}
+    items = []
+    updates = 0
+    for app in apps or []:
+        if not isinstance(app, dict):
+            continue
+        state, words = APP_STATES.get(str(app.get("state") or ""), ("unknown", str(app.get("state") or "?").title()))
+        update = bool(app.get("upgrade_available") or app.get("image_updates_available"))
+        updates += update
+        items.append({
+            "title": str(app.get("name") or app.get("id") or "?"),
+            "subtitle": " · ".join(part for part in (str(app.get("human_version") or app.get("version") or ""), "update available" if update else "") if part),
+            "status": state,
+            "value": words,
+        })
+    items.sort(key=lambda item: (order.get(item["status"], 2), item["title"].lower()))
+    running = sum(1 for item in items if item["value"] == "Running")
+    return WidgetData(
+        status="bad" if any(i["status"] == "bad" for i in items) else "ok",
+        items=items[:limit],
+        secondary=[{"label": "Running", "value": f"{running} / {len(items)}"}, {"label": "Updates", "value": updates}],
+        meta={"empty": "No app is installed on TrueNAS."},
+    )
+
+
+def _tasks(snapshots: Any, replications: Any, limit: int) -> WidgetData:
+    """The enabled periodic snapshot and replication tasks, failed ones first.
+
+    ⚠️ Both carry ``state`` as a dict from zettarepl: ``state`` FINISHED,
+    RUNNING, WAITING, PENDING (never run since TrueNAS started), HOLD (with a
+    ``reason``) or ERROR (with an ``error``), and ``datetime`` as
+    ``{"$date": ms}``. A snapshot task is named by its dataset; a replication
+    by its own name.
+    """
+    _current_only(snapshots)
+    _current_only(replications)
+    order = {"bad": 0, "warn": 1, "unknown": 2, "ok": 3}
+    items = []
+    for task, kind in [(one, "Snapshot") for one in snapshots or []] + [(one, "Replication") for one in replications or []]:
+        if not isinstance(task, dict) or not task.get("enabled", True):
+            continue
+        details = task.get("state") if isinstance(task.get("state"), dict) else {}
+        state, words = TASK_STATES.get(str(details.get("state") or ""), ("unknown", str(details.get("state") or "?").title()))
+        why = str(details.get("error") or details.get("reason") or "").strip()
+        moment = details.get("datetime")
+        since = ago(moment.get("$date") / 1000 if isinstance(moment, dict) and isinstance(moment.get("$date"), (int, float)) else None)
+        when = f"{since} ago" if since else ""
+        name = str((task.get("dataset") if kind == "Snapshot" else task.get("name")) or "?")
+        items.append({
+            "title": name,
+            "subtitle": " · ".join(part for part in (kind, when, why[:120]) if part),
+            "status": state,
+            "value": words,
+        })
+    items.sort(key=lambda item: (order.get(item["status"], 2), item["title"].lower()))
+    failed = sum(1 for item in items if item["status"] == "bad")
+    return WidgetData(
+        status="bad" if failed else "warn" if any(i["status"] == "warn" for i in items) else "ok",
+        items=items[:limit],
+        secondary=[{"label": "Tasks", "value": len(items)}, {"label": "Failed", "value": failed}],
+        meta={"empty": "No snapshot or replication task is enabled."},
+    )

@@ -2437,7 +2437,12 @@
     "UPS name": "USV-Name",
     "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modell, Akkuspannung und -typ, Eingang und Ausgang, die Leistung, die sie liefern kann, die Grenzen für niedrigen Akku, Signalton und Treiber.",
     "A UPS runs on battery": "Eine USV läuft auf Batterie",
-    "A UPS is back on mains power": "Eine USV ist wieder am Netz"
+    "A UPS is back on mains power": "Eine USV ist wieder am Netz",
+    "Apps": "Apps",
+    "Every disk with its temperature, model and pool, the hottest first.": "Jede Festplatte mit Temperatur, Modell und Pool, die wärmste zuerst.",
+    "Snapshots and replication": "Snapshots und Replikation",
+    "The apps on TrueNAS with their state, and which have an update.": "Die Apps auf TrueNAS mit ihrem Zustand, und welche ein Update haben.",
+    "The periodic snapshot and replication tasks with how each last ended.": "Die periodischen Snapshot- und Replikationsaufgaben, mit dem Ergebnis ihres letzten Laufs."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3659,6 +3664,9 @@
     "Nominal power": "Nennleistung",
     "Beeper": "Signalton",
     "Self-test": "Selbsttest",
-    "Driver": "Treiber"
+    "Driver": "Treiber",
+    "No app is installed on TrueNAS.": "Auf TrueNAS ist keine App installiert.",
+    "TrueNAS lists no disk.": "TrueNAS listet keine Festplatte.",
+    "No snapshot or replication task is enabled.": "Keine Snapshot- oder Replikationsaufgabe ist aktiv."
   }
 }

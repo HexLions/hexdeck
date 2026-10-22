@@ -2437,7 +2437,12 @@
     "UPS name": "Nombre del SAI",
     "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modelo, tensión y tipo de batería, entrada y salida, la potencia que puede dar, los límites de batería baja, avisador acústico y controlador.",
     "A UPS runs on battery": "Un SAI funciona con batería",
-    "A UPS is back on mains power": "Un SAI vuelve a la red eléctrica"
+    "A UPS is back on mains power": "Un SAI vuelve a la red eléctrica",
+    "Apps": "Apps",
+    "Every disk with its temperature, model and pool, the hottest first.": "Cada disco con su temperatura, modelo y pool, primero los más calientes.",
+    "Snapshots and replication": "Snapshots y replicación",
+    "The apps on TrueNAS with their state, and which have an update.": "Las apps de TrueNAS con su estado, y cuáles tienen una actualización.",
+    "The periodic snapshot and replication tasks with how each last ended.": "Las tareas de snapshots periódicos y de replicación, con cómo terminó la última vez."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3659,6 +3664,9 @@
     "Nominal power": "Potencia nominal",
     "Beeper": "Avisador acústico",
     "Self-test": "Autoprueba",
-    "Driver": "Controlador"
+    "Driver": "Controlador",
+    "No app is installed on TrueNAS.": "No hay ninguna app instalada en TrueNAS.",
+    "TrueNAS lists no disk.": "TrueNAS no muestra ningún disco.",
+    "No snapshot or replication task is enabled.": "No hay ninguna tarea de snapshots ni de replicación activa."
   }
 }

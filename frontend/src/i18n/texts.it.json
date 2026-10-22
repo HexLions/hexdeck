@@ -2437,7 +2437,12 @@
     "UPS name": "Nome UPS",
     "Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.": "Modello, tensione e tipo di batteria, ingresso e uscita, la potenza che può dare, le soglie di batteria bassa, cicalino e driver.",
     "A UPS runs on battery": "Un UPS va a batteria",
-    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica"
+    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica",
+    "Apps": "App",
+    "Every disk with its temperature, model and pool, the hottest first.": "Ogni disco con temperatura, modello e pool, prima i più caldi.",
+    "Snapshots and replication": "Snapshot e replica",
+    "The apps on TrueNAS with their state, and which have an update.": "Le app su TrueNAS con il loro stato, e quali hanno un aggiornamento.",
+    "The periodic snapshot and replication tasks with how each last ended.": "I task di snapshot periodici e di replica, con l'esito dell'ultima esecuzione."
   },
   "labels": {
     "Jobs": "Job",
@@ -3659,6 +3664,9 @@
     "Nominal power": "Potenza nominale",
     "Beeper": "Cicalino",
     "Self-test": "Autotest",
-    "Driver": "Driver"
+    "Driver": "Driver",
+    "No app is installed on TrueNAS.": "Nessuna app installata su TrueNAS.",
+    "TrueNAS lists no disk.": "TrueNAS non elenca nessun disco.",
+    "No snapshot or replication task is enabled.": "Nessun task di snapshot o di replica è attivo."
   }
 }
