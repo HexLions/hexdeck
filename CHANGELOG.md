@@ -14,8 +14,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   which have an update; and Snapshots and replication, with how each task last
   ended and why it failed. The pools card says when each pool was last
   scrubbed, with its errors, or how far a resilver is; the system card names
-  the update TrueNAS offers. The new cards need TrueNAS 25.04 or later over
-  https; a Read-Only Administrator's key reads them all.
+  the update TrueNAS offers. The new cards need the current API, so https;
+  a Read-Only Administrator's key reads them all. ⚠️ Written from TrueNAS
+  25.10's source, not yet run against a TrueNAS.
 - **A UPS on battery is said in words.** Two new events, "A UPS runs on
   battery" (with the runtime left, and again when the battery runs low) and
   "A UPS is back on mains power", from the UPS (NUT) card. A new channel

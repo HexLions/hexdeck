@@ -20,7 +20,7 @@ from websockets.exceptions import InvalidStatus
 from websockets.http11 import Response
 
 from app.adapters import get_adapter
-from app.adapters.base import AdapterError, Context
+from app.adapters.base import AdapterError, Context, ago
 from app.adapters.truenas import _version
 
 KEY = "1-readonlykey"
@@ -41,7 +41,7 @@ DISKS = [
     {"name": "nvme0n1", "model": "Samsung SSD 980 1TB", "size": 1_000_204_886_016, "type": "SSD", "pool": None, "serial": "S64EXAMPLE"},
 ]
 #: ``disk.temperatures([], True)``: current and critical, or None for a disk that tells none.
-TEMPERATURES = {"sda": [38.0, 70.0], "sdb": [53.0, 70.0], "nvme0n1": None}
+TEMPERATURES = {"sda": [38.0, 70.0], "sdb": [53.0, 70.0], "nvme0n1": [None, None]}
 APPS = [
     {"name": "jellyfin", "id": "jellyfin", "state": "RUNNING", "upgrade_available": True, "image_updates_available": False, "human_version": "10.10.7_1.2.3", "version": "1.2.3"},
     {"name": "immich", "id": "immich", "state": "CRASHED", "upgrade_available": False, "image_updates_available": False, "human_version": "v1.132.3_1.0.0", "version": "1.0.0"},
@@ -113,6 +113,8 @@ class FakeTruenas:
         else:
             if method == "disk.temperatures":
                 assert message["params"] == [[], True], "every disk, with its critical temperature"
+            if method == "disk.query":
+                assert message["params"] == [[], {"extra": {"pools": True}}], "with the pool each disk is in"
             self._pending.append(json.dumps({"jsonrpc": "2.0", "id": number, "result": ANSWERS[method]}))
 
     async def recv(self) -> str:
@@ -455,7 +457,7 @@ async def test_a_key_that_may_not_read_the_statistics_does_not_hold_the_card_up(
 async def test_the_system_card_names_the_update_on_offer(ctx: Context, truenas) -> None:
     adapter, _fake = truenas
     system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
-    assert {"label": "Update", "value": "25.10.8"} in system.secondary
+    assert {"label": "Update available", "value": "25.10.8"} in system.secondary
 
 
 async def test_an_update_check_that_fails_leaves_the_card_and_waits_an_hour(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -467,7 +469,7 @@ async def test_an_update_check_that_fails_leaves_the_card_and_waits_an_hour(ctx:
     config = {"url": "https://truenas.example.com", "api_key": KEY}
     system = await adapter.fetch("system", config, {}, ctx)
     assert system.primary["label"] == "CPU"
-    assert not [entry for entry in system.secondary if entry["label"] == "Update"]
+    assert not [entry for entry in system.secondary if entry["label"] == "Update available"]
     ctx.cache.pop("truenas:system.info")
     fake.sent.clear()
     await adapter.fetch("system", config, {}, ctx)
@@ -487,7 +489,8 @@ async def test_the_pools_say_when_they_were_scrubbed(ctx: Context, monkeypatch: 
     monkeypatch.setattr(adapter, "_open_socket", fake.open)
     card = await adapter.fetch("pools", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
     found = {item["title"]: (item["subtitle"].split(" · ", 2)[-1] if item["subtitle"].count(" · ") == 2 else "", item["status"]) for item in card.items}
-    assert found == {"tank": ("scrubbed 2026-09-18", "ok"), "fast": ("scrubbed 2026-09-18, 2 errors", "warn"),
+    since = ago(1_789_712_345)
+    assert found == {"tank": (f"scrubbed {since} ago", "ok"), "fast": (f"scrubbed {since} ago, 2 errors", "warn"),
                      "cold": ("resilvering 42%", "warn"), "new": ("", "ok")}
 
 
@@ -552,3 +555,25 @@ async def test_the_new_cards_over_rest_say_what_they_need(ctx: Context, monkeypa
                 await adapter.fetch(kind, {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
             assert refused.value.code == "needs_current_api"
     assert not rest.called
+
+
+async def test_an_update_server_out_of_reach_is_an_answer_not_an_error(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    """``update.status`` catches its own failures and answers ``code`` ERROR
+    (plugins/update_/status.py); the card shows no update and stays as it is."""
+    adapter = get_adapter("truenas")
+    monkeypatch.setitem(ANSWERS, "update.status", {"code": "ERROR", "status": None, "update_download_progress": None,
+                                                   "error": {"errname": "ENOPKG", "reason": "No releases match specified update profile."}})
+    fake = FakeTruenas()
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    system = await adapter.fetch("system", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert system.primary["label"] == "CPU"
+    assert not [entry for entry in system.secondary if entry["label"] == "Update available"]
+
+
+async def test_the_apps_card_is_amber_while_one_is_starting(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    monkeypatch.setitem(ANSWERS, "app.query", [{**APPS[0], "state": "DEPLOYING"}])
+    fake = FakeTruenas()
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    card = await adapter.fetch("apps", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
+    assert card.status == "warn"

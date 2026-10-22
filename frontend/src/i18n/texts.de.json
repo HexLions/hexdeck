@@ -3667,6 +3667,15 @@
     "Driver": "Treiber",
     "No app is installed on TrueNAS.": "Auf TrueNAS ist keine App installiert.",
     "TrueNAS lists no disk.": "TrueNAS listet keine Festplatte.",
-    "No snapshot or replication task is enabled.": "Keine Snapshot- oder Replikationsaufgabe ist aktiv."
+    "No snapshot or replication task is enabled.": "Keine Snapshot- oder Replikationsaufgabe ist aktiv.",
+    "Crashed": "Abgestürzt",
+    "On hold": "Angehalten",
+    "Not run yet": "Noch nicht gelaufen",
+    "update available": "Update verfügbar",
+    "not in a pool": "in keinem Pool",
+    "Replication": "Replikation",
+    "Snapshot": "Snapshot",
+    "scrub paused": "Scrub pausiert",
+    "scrub cancelled": "Scrub abgebrochen"
   }
 }

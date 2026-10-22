@@ -34,6 +34,13 @@ does not exist 404, over http and over https alike, and neither moved the
 count. Only a 404 there lets the REST API be asked, and what it says its
 version is remains the second line, for a proxy that says 404 on TrueNAS'
 behalf.
+
+The disks, apps and tasks cards, the scrub on the pools card and the update
+on the system card were written from the middleware's source at TS-25.10.7
+(``api/v25_10_0`` and the plugins ``disk_/temperature.py``, ``snapshot.py``,
+``replication.py``, ``zettarepl.py``, ``pool_/scrub.py``,
+``update_/status.py``), not yet run against a TrueNAS. Every method they call
+is open to the Read-Only Administrator role (``role.py``).
 """
 
 from __future__ import annotations
@@ -93,6 +100,8 @@ READS = {
 #: temperature beside the current one: ``{"sda": [41.0, 70.0]}``.
 PARAMS: dict[str, tuple[Any, ...]] = {
     "disk.temperatures": ([], True),
+    # Without ``extra.pools`` every disk's ``pool`` is None (plugins/disk.py).
+    "disk.query": ([], {"extra": {"pools": True}}),
 }
 
 #: Read over the current API only. Over REST these cards say they need it.
@@ -132,7 +141,7 @@ class TruenasAdapter(Adapter):
     description = "Pools, alerts, load and uptime."
     icon = "truenas"
     docs_url = "https://www.truenas.com/docs/api/"
-    #: Every card against TrueNAS SCALE 25.10.7 with a read-only and a full key, 18.09.2026.
+    #: System, pools and alerts against TrueNAS SCALE 25.10.7 with a read-only and a full key, 18.09.2026.
     beta = False
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="https://truenas.local",
@@ -203,7 +212,8 @@ class TruenasAdapter(Adapter):
         if cache and known and known[0] > now:
             label = known[1]
         else:
-            info = await self._get(config, ctx, READS["system.info"], cache=cache)
+            # Never longer than the system card keeps it: the answer is shared by address.
+            info = await self._get(config, ctx, READS["system.info"], cache=min(cache, 10))
             label = str((info or {}).get("version") or "")
             ctx.cache["truenas:version"] = (now + VERSION_SECONDS, label)
             fresh["system.info"] = info
@@ -393,7 +403,7 @@ class TruenasAdapter(Adapter):
             secondary = [memory, {"label": "Uptime", "value": duration_short(info.get("uptime_seconds"))}, {"label": "Alerts", "value": len(alerts)}]
             update = await self._update(config, ctx)
             if update:
-                secondary.append({"label": "Update", "value": update})
+                secondary.append({"label": "Update available", "value": update})
             return WidgetData(
                 status="bad" if any(a.get("level") in ("CRITICAL", "ERROR") for a in alerts) else ("warn" if alerts else status_from_percent(worst)),
                 primary={"label": cpu_label, "value": cpu, "unit": "%"},
@@ -612,10 +622,16 @@ def _percent(item: dict[str, Any]) -> float | None:
         return None
 
 
+def _seconds(moment: Any) -> float | None:
+    """``{"$date": milliseconds}``, as TrueNAS sends a time, in seconds."""
+    value = moment.get("$date") if isinstance(moment, dict) else None
+    return value / 1000 if isinstance(value, int | float) else None
+
+
 def _current_only(answer: Any) -> None:
     """A card of the current API on a TrueNAS read over REST says so."""
     if answer is None:
-        raise AdapterError("This card needs the current TrueNAS API: TrueNAS 25.04 or later, over https://.",
+        raise AdapterError("This card needs the current TrueNAS API, over https://.",
                            code="needs_current_api", hint="Change the URL to https://. A TrueNAS before 25.04 has no such card.")
 
 
@@ -638,8 +654,8 @@ def _scan(scan: Any) -> tuple[str, str]:
         return "scrub cancelled", "ok"
     if state == "FINISHED":
         errors = int(scan.get("errors") or 0)
-        day = _day(scan.get("end_time"))
-        words = f"scrubbed {day}" if day else "scrubbed"
+        since = ago(_seconds(scan.get("end_time")))
+        words = f"scrubbed {since} ago" if since else "scrubbed"
         return (f"{words}, {errors} error{'' if errors == 1 else 's'}", "warn") if errors else (words, "ok")
     return "", "ok"
 
@@ -701,7 +717,7 @@ def _apps(apps: Any, limit: int) -> WidgetData:
     items.sort(key=lambda item: (order.get(item["status"], 2), item["title"].lower()))
     running = sum(1 for item in items if item["value"] == "Running")
     return WidgetData(
-        status="bad" if any(i["status"] == "bad" for i in items) else "ok",
+        status="bad" if any(i["status"] == "bad" for i in items) else "warn" if any(i["status"] == "warn" for i in items) else "ok",
         items=items[:limit],
         secondary=[{"label": "Running", "value": f"{running} / {len(items)}"}, {"label": "Updates", "value": updates}],
         meta={"empty": "No app is installed on TrueNAS."},
@@ -727,8 +743,7 @@ def _tasks(snapshots: Any, replications: Any, limit: int) -> WidgetData:
         details = task.get("state") if isinstance(task.get("state"), dict) else {}
         state, words = TASK_STATES.get(str(details.get("state") or ""), ("unknown", str(details.get("state") or "?").title()))
         why = str(details.get("error") or details.get("reason") or "").strip()
-        moment = details.get("datetime")
-        since = ago(moment.get("$date") / 1000 if isinstance(moment, dict) and isinstance(moment.get("$date"), (int, float)) else None)
+        since = ago(_seconds(details.get("datetime")))
         when = f"{since} ago" if since else ""
         name = str((task.get("dataset") if kind == "Snapshot" else task.get("name")) or "?")
         items.append({
