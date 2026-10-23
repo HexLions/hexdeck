@@ -52,7 +52,8 @@ Every card is one integration's widget on a free grid: dragged, sized by hand, o
 to one of four sizes from its menu. A template is a starting point, not a mould.
 
 `Ctrl+Z` puts the last arrangement back · *Tidy up* sorts a page into reading order ·
-Shift and a click select several cards · a card's menu moves it to another page or board.
+Shift and a click select several cards · a card's menu moves or copies it to another page or board ·
+a card can stay off the phone and still show on the desk and the wall.
 
 ### Media
 
@@ -289,7 +290,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | | |
 | --- | --- |
 | Layout | 12, 24 or 36 columns per board, chosen width, rows that fit the screen |
-| Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved to another page or board |
+| Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved or copied to another page or board, cards left off the phone |
 | Starting points | Seven board templates, four bundled themes, themes as JSON |
 | Holders | A tabs card and a group: cards leave the grid and live inside one, which folds away and moves as one |
 | Numbers | History behind every headline number, declared metric or not |
@@ -302,6 +303,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | Migrating | Import from Homepage and Homarr; leave demo mode |
 | Sharing | Where a card allows it, viewers tick a to-do or write a notepad, and nothing else |
 | Upkeep | Recurring maintenance items, announced once a day through the notification channels |
+| Card status | System › Card status: when each card last read its service, how long it took, when it reads next, and why the last read failed |
 | Version | In the account menu and under both settings navigations, with a link to the releases when a newer one is out |
 | Upstream | A weekly workflow opens one issue with the commits nexdeck has and this fork does not, split into the adapters upstream owns and the files this fork has rewritten. It merges nothing. nexdeck takes no pull requests, so this goes one way: taken, and named |
 
