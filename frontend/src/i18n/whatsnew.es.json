@@ -364,6 +364,42 @@
       ],
       "smallTitle": "Cosas más pequeñas",
       "small": []
+    },
+    "0.33.0": {
+      "lead": "HexDeck 0.33.0: lo que nexdeck hizo de la 0.43 a la 0.48, con Pulse, más TrueNAS y un nombre propio.",
+      "sections": [
+        {
+          "title": "Pulse",
+          "body": "Una integración nueva: un resumen de lo que vigila Pulse, los recursos que necesitan una mirada y las alertas activas. En beta.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Más TrueNAS",
+          "body": "Las interfaces con su tráfico en directo, los servicios y las máquinas virtuales y contenedores, y avisos de un disco caliente, una tarea fallida y una actualización pendiente. Aún no probadas en un TrueNAS real.",
+          "path": "Sistema > Conexiones > TrueNAS"
+        },
+        {
+          "title": "Versiones de tus servicios",
+          "body": "La versión que ejecuta cada conexión, y si ha salido una más nueva; la tarjeta Actualizaciones puede listar los servicios atrasados.",
+          "path": "Sistema > Integraciones"
+        },
+        {
+          "title": "Un nombre y un logo propios",
+          "body": "En la pestaña del navegador, la barra, la página de inicio de sesión y la app instalada.",
+          "path": "Sistema > Apariencia"
+        },
+        {
+          "title": "Páginas en un orden nuevo",
+          "body": "Cada página de un tablero tiene un asa para arrastrarla, y una dirección propia.",
+          "path": "Modo edición (lápiz) > Ajustes del tablero"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Uptime Kuma puede limitarse a una página de estado, nombra lo que está caído y sale de la beta.",
+        "Las tarjetas de Proxmox dicen qué permiso le falta al token.",
+        "certifi 2026.10.19, por GHSA-6q48-6c7w-9gw2."
+      ]
     }
   }
 }

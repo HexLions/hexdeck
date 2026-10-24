@@ -5,9 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.33.0 (2026-10-24)
 
-What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
+What nexdeck did from 0.43 to 0.48: Pulse, more TrueNAS, service versions, a name and logo of your own, and pages in a new order.
 
 ### Added
 
