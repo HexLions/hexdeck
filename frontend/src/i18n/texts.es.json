@@ -328,7 +328,6 @@
     "How many devices there are, how many are reachable, and how many need an update.": "Cuántos dispositivos hay, cuántos están accesibles y cuántos necesitan una actualización.",
     "How many disks are fine, how many are not, and how warm the warmest is.": "Cuántos discos están bien, cuántos no, y cuánto se calienta el más caliente.",
     "How many documents there are, and how many are still in the inbox.": "Cuántos documentos hay, y cuántos siguen en la bandeja de entrada.",
-    "How many monitors are up and down.": "Cuántos monitores están activos y caídos.",
     "How many routers and services there are, and how many are broken.": "Cuántos routers y servicios hay, y cuántos están rotos.",
     "How much has arrived, and how much of it was loud.": "Cuánto ha llegado, y cuánto de ello era ruidoso.",
     "How much is collected for deletion, over how many collections.": "Cuánto hay reunido para borrar, repartido en cuántas colecciones.",
@@ -2468,7 +2467,9 @@
     "Active alerts": "Alertas activas",
     "Critical alerts and warnings, critical first, with how long each has been open.": "Alertas críticas y avisos, los críticos primero, con cuánto tiempo llevan abiertos.",
     "Show acknowledged alerts": "Mostrar alertas reconocidas",
-    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Elige el preajuste Kiosk / Monitoring, que solo da monitoring:read. Las tarjetas no escriben nada."
+    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Elige el preajuste Kiosk / Monitoring, que solo da monitoring:read. Las tarjetas no escriben nada.",
+    "How many monitors are up and down, and which ones are down.": "Cuántos monitores están activos y caídos, y cuáles están caídos.",
+    "Only the monitors of one status page: the last part of its address, as in /status/home. Empty means every monitor.": "Solo los monitores de una página de estado: la última parte de su dirección, como en /status/home. Vacío significa todos los monitores."
   },
   "labels": {
     "Private resources": "Recursos privados",

@@ -308,7 +308,6 @@
     "How many devices there are, how many are reachable, and how many need an update.": "Quanti dispositivi ci sono, quanti sono raggiungibili e quanti hanno bisogno di un aggiornamento.",
     "How many disks are fine, how many are not, and how warm the warmest is.": "Quanti dischi stanno bene, quanti no, e quanto è caldo il più caldo.",
     "How many documents there are, and how many are still in the inbox.": "Quanti documenti ci sono, e quanti sono ancora nella posta in arrivo.",
-    "How many monitors are up and down.": "Quanti monitor sono su e giù.",
     "How many routers and services there are, and how many are broken.": "Quanti router e servizi ci sono, e quanti sono rotti.",
     "How much has arrived, and how much of it was loud.": "Quanto è arrivato, e quanto di questo era rumoroso.",
     "How much is collected for deletion, over how many collections.": "Quanto è raccolto per l'eliminazione, su quante raccolte.",
@@ -2468,7 +2467,9 @@
     "Active alerts": "Avvisi attivi",
     "Critical alerts and warnings, critical first, with how long each has been open.": "Avvisi critici e avvertimenti, prima i critici, con da quanto sono aperti.",
     "Show acknowledged alerts": "Mostra gli avvisi confermati",
-    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Scegli il preset Kiosk / Monitoring, che concede solo monitoring:read. Le schede non scrivono nulla."
+    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Scegli il preset Kiosk / Monitoring, che concede solo monitoring:read. Le schede non scrivono nulla.",
+    "How many monitors are up and down, and which ones are down.": "Quanti monitor sono attivi e quanti fuori servizio, e quali sono fuori servizio.",
+    "Only the monitors of one status page: the last part of its address, as in /status/home. Empty means every monitor.": "Solo i monitor di una pagina di stato: l'ultima parte del suo indirizzo, come in /status/home. Vuoto significa tutti i monitor."
   },
   "labels": {
     "Jobs": "Job",

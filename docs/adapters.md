@@ -124,7 +124,7 @@ that one of thirty-five renderers draws.
 | openHAB | things, items | switch a Switch Item on or off | an API token from an administrator (Profile, Create API token) as a Bearer token, needed for the Things; the Items are readable without one while anonymous access stays on, as it is by default. The items card names Items or Groups, a Group standing for its members. The switch sends `ON` or `OFF` only to a Switch Item the card lists |
 | ESPHome | overview, devices | | none, or the dashboard's user name and password as basic auth (ESPHome Device Builder). Reads `/devices` and `/ping`, which the old built-in dashboard has too, but only without a password. Online is the dashboard's own guess from mDNS and ping |
 | Node-RED | status, flows | | none, or a user of the editor when adminAuth is set; the token is asked with the scope read, which a read-only user is allowed. Missing node types are found by comparing the flows with the installed nodes, because the flow state says started even while Node-RED waits for them |
-| Uptime Kuma | monitors, summary | | API key (metrics endpoint) |
+| Uptime Kuma | monitors, summary (both by name or by status page) | | API key (metrics endpoint); a status page is read without one |
 | Healthchecks | checks, checks up | | API key from the project settings; the read-only one is enough, and healthchecks.io works too |
 | UptimeRobot | overview, monitors, open incidents | | the read-only API key from Integrations > API, sent as Bearer to API v3; an account key would also be able to change monitors. The free plan allows ten requests a minute for the whole account. A monitor's HTTP password, headers and key are never read |
 | ChangeDetection.io | recent changes, watches | check all now | API key from Settings > API |

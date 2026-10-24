@@ -553,6 +553,9 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         "octoprint", "openmediavault", "patchmon", "rtorrent",
         # Taken over from nexdeck 0.31 to 0.36, confirmed there the same way.
         "frigate", "m3ueditor", "mailpit", "nexlore", "nexsift", "nginxignition", "readmeabook", "realdebrid", "reclaimerr",
+        # Taken over from nexdeck 0.48.0: Uptime Kuma, seen there on 2026-10-24
+        # against 1.23.17, the status pages against 1.23.17 and 2.x.
+        "uptimekuma",
         # The ten this fork wrote itself, confirmed on 2026-10-06 against the
         # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
         # Kubernetes in their rack, and Minecraft, Steam, Shelly, NetBird,

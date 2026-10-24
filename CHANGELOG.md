@@ -16,6 +16,14 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   alerts, read with a token that has monitoring:read alone. From nexdeck
   0.44.0. ⚠️ Beta.
 
+### Changed
+
+- **Uptime Kuma by status page, and out of beta.** The Monitors and Up and
+  down cards can keep to one status page by its slug, matched by monitor
+  number on Uptime Kuma 2 and by name on 1.23, and the summary names what is
+  down. Groups and push monitors no longer read -1 ms, and the counts follow
+  the name filter. nexdeck saw it against a real 1.23.17. From nexdeck 0.48.0.
+
 ### Fixed
 
 - **Proxmox cards stayed empty when the token was short of rights.** The

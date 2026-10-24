@@ -308,7 +308,6 @@
     "How many devices there are, how many are reachable, and how many need an update.": "Wie viele Geräte es gibt, wie viele erreichbar sind und wie viele ein Update brauchen.",
     "How many disks are fine, how many are not, and how warm the warmest is.": "Wie viele Platten in Ordnung sind, wie viele nicht, und wie warm die wärmste ist.",
     "How many documents there are, and how many are still in the inbox.": "Wie viele Dokumente es gibt und wie viele noch im Posteingang liegen.",
-    "How many monitors are up and down.": "Wie viele Monitore erreichbar und wie viele ausgefallen sind.",
     "How many routers and services there are, and how many are broken.": "Wie viele Router und Dienste es gibt, und wie viele davon kaputt sind.",
     "How much has arrived, and how much of it was loud.": "Wie viel angekommen ist, und wie viel davon laut war.",
     "How much is collected for deletion, over how many collections.": "Wie viel zum Löschen gesammelt ist, über wie viele Sammlungen.",
@@ -2468,7 +2467,9 @@
     "Active alerts": "Aktive Alarme",
     "Critical alerts and warnings, critical first, with how long each has been open.": "Kritische Alarme und Warnungen, kritische zuerst, mit ihrer Dauer.",
     "Show acknowledged alerts": "Bestätigte Alarme zeigen",
-    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Die Voreinstellung Kiosk / Monitoring wählen, sie gibt nur monitoring:read. Die Karten schreiben nichts."
+    "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Die Voreinstellung Kiosk / Monitoring wählen, sie gibt nur monitoring:read. Die Karten schreiben nichts.",
+    "How many monitors are up and down, and which ones are down.": "Wie viele Monitore erreichbar und wie viele ausgefallen sind, und welche ausgefallen sind.",
+    "Only the monitors of one status page: the last part of its address, as in /status/home. Empty means every monitor.": "Nur die Monitore einer Statusseite: der letzte Teil ihrer Adresse, etwa /status/home. Leer heißt alle Monitore."
   },
   "labels": {
     "Jobs": "Jobs",
