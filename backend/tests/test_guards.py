@@ -45,6 +45,10 @@ PUBLIC: dict[str, str] = {
     "POST /api/v1/kiosk/session": "the door of a wall display: the token in the body is the credential",
     "GET /api/metrics": "Prometheus has no session; HEXDECK_METRICS_TOKEN as a bearer token is checked inside, and without it the address is a 404",
     "GET /{path:path}": "the single-page app",
+    "GET /manifest.webmanifest": "the installed app reads it without a session, with the installation's name and icons",
+    "GET /api/v1/brand": "the sign-in page and the browser tab show the installation's name and logo before anyone signs in",
+    "GET /api/v1/brand/logo": "the same logo, as a picture",
+    "GET /api/v1/brand/icon-{size}.png": "the icons a phone puts on its home screen, fetched without a session",
 }
 
 AUTH_DEPENDENCIES = {deps.optional_user, deps.current_user, deps.admin_user, deps.not_guest}

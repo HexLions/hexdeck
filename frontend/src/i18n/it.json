@@ -506,6 +506,29 @@
       "collapsedHelp": "Copre il minimo; un clic la riapre.",
       "qualityTitle": "Qualità audio su questo dispositivo",
       "qualityHelp": "Meno dell'originale risparmia dati lungo la strada. Quando la linea continua a bloccarsi, il lettore la abbassa da solo."
+    },
+    "brand": {
+      "title": "Nome e logo",
+      "help": "Il tuo nome e il tuo logo dove compare HexDeck: la scheda del browser, la barra, la pagina di accesso, l’app installata e i display a parete. «Informazioni su HexDeck» continua a dire HexDeck. La pagina di accesso li mostra entrambi, quindi li vede chiunque raggiunga questo indirizzo.",
+      "name": "Nome",
+      "nameHelp": "Fino a 40 caratteri. Vuoto significa HexDeck.",
+      "logo": "Logo",
+      "logoHelp": "SVG, PNG o WebP fino a 512 KB. Un SVG con script viene rifiutato. Le icone dell’app installata vengono disegnate da esso.",
+      "choose": "Scegli un file",
+      "remove": "Rimuovi il logo",
+      "uploaded": "Il logo è al suo posto.",
+      "removed": "Il logo è stato rimosso; torna il simbolo di HexDeck.",
+      "unreadable": "Questo browser non riesce a disegnare quel file. Prova con un PNG.",
+      "favicon": "Icona nella scheda del browser",
+      "favicon_logo": "Dal logo",
+      "favicon_hexdeck": "Mantieni l’icona di HexDeck",
+      "appIcon": "Icona dell’app installata",
+      "appIcon_logo": "Dal logo, su sfondo scuro",
+      "appIcon_hexdeck": "Mantieni l’icona di HexDeck",
+      "appIconHelp": "Un telefono che ha già l’app mantiene la vecchia icona finché l’app non viene aggiunta di nuovo.",
+      "boardInTitle": "Metti il nome della bacheca davanti nella scheda",
+      "preview": "Anteprima",
+      "sampleBoard": "Casa"
     }
   },
   "menu": {
@@ -1361,5 +1384,8 @@
     "notSet": "Non impostato",
     "automaticHelp": "Se è impostato uno dei due, un riquadro può scegliere l'indirizzo da solo: quello di casa nelle reti fidate di Sistema, Provider di accesso, Niente login in casa, e l'altro ovunque.",
     "deleteThis": "Elimina {{name}}"
+  },
+  "brand": {
+    "withHexdeck": "con HexDeck"
   }
 }

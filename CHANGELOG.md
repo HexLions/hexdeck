@@ -34,6 +34,11 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   lists the services behind, every one or only those picked, and can show
   what is up to date as well. Read every six hours. GitHub is asked only
   while Check for updates is on under System, About. From nexdeck 0.47.0.
+- **A name and a logo of the installation's own.** Under System,
+  Appearance: in the browser tab, the bar, the sign-in page, the installed
+  app and on wall displays, with "with HexDeck" under it on the sign-in page.
+  The logo is checked like an uploaded icon and goes into every backup. Both
+  are public, since the sign-in page shows them. From nexdeck 0.47.0.
 - **Pages of a board in a new order.** Under Board settings, Pages, every
   page has a handle, dragged or moved with the arrow keys as in the list of
   boards; the whole order goes to the server in one call,
