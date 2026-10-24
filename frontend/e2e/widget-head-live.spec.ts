@@ -93,3 +93,59 @@ test('the buttons of a hovered card leave the dot and the beta mark in sight', a
     await page.request.delete(`/api/v1/integrations/${(await service.json()).id}`, { headers: CSRF })
   }
 })
+
+/**
+ * ⚠️ Reported on 24.10.2026: in edit mode the bar with Add widget and Done lay
+ * over the bottom of the cards in the last row, resize corner and all, and
+ * the page ended right there, so those cards could not be resized. The page
+ * now leaves the bar's room under the board while editing. On a board whose
+ * rows fit the screen that was not enough: measured while scrolled, the rows
+ * grew by the scroll and the last row followed the window down again.
+ */
+test('in edit mode the bar leaves the resize corner of the last row within reach', async ({ page }) => {
+  await signIn(page)
+  const service = await page.request.post('/api/v1/integrations', { data: { kind: 'nomad', name: 'Nomad low', config: {}, demo: true }, headers: CSRF })
+  expect(service.status()).toBe(201)
+  const made = await page.request.post('/api/v1/boards', { data: { name: 'Low', slug: 'low' }, headers: CSRF })
+  expect(made.status()).toBe(201)
+  try {
+    const board = await made.json()
+    // Rows that fill the window put the last row's bottom where the bar is.
+    const fit = await page.request.patch('/api/v1/boards/low', { data: { settings: { ...board.settings, fit_screen: true } }, headers: CSRF })
+    expect(fit.ok()).toBe(true)
+    const columns = Number((await fit.json()).settings?.columns ?? 12)
+    const pageId = board.pages[0].id
+    const card = await page.request.post(`/api/v1/pages/${pageId}/widgets`, {
+      data: { kind: 'nomad.summary', title: 'Nomad low', integration_id: (await service.json()).id },
+      headers: CSRF,
+    })
+    expect(card.status()).toBe(201)
+    const id = String((await card.json()).widget.id)
+    // Half the width, so the resize corner sits in the middle, under the bar.
+    const placed = await page.request.put(`/api/v1/pages/${pageId}/layouts`, { data: { lg: [{ i: id, x: 0, y: 0, w: columns / 2, h: 4 }] }, headers: CSRF })
+    expect(placed.ok()).toBe(true)
+
+    await page.goto('/b/low')
+    const section = page.locator('section[aria-label="Nomad low"]')
+    await expect(section).toBeVisible()
+    await page.getByRole('button', { name: 'Edit board' }).click()
+    const done = page.getByRole('button', { name: 'Done' })
+    await expect(done).toBeVisible()
+    // As far down as the page goes: the room under the board is what lets the last row out from under the bar.
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+    await page.waitForTimeout(300)
+
+    const corner = page.locator('.react-grid-item').filter({ has: section }).locator('.react-resizable-handle').first()
+    const reachable = await corner.evaluate((handle) => {
+      const box = handle.getBoundingClientRect()
+      const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2)
+      return { onTop: hit === handle || handle.contains(hit), bottom: Math.round(box.bottom), window: window.innerHeight,
+               scrolled: Math.round(window.scrollY), height: document.documentElement.scrollHeight }
+    })
+    expect(reachable.onTop, `the corner at ${reachable.bottom} of ${reachable.window} px is covered (scrolled ${reachable.scrolled} of ${reachable.height})`).toBe(true)
+    await done.click()
+  } finally {
+    await page.request.delete('/api/v1/boards/low', { headers: CSRF })
+    await page.request.delete(`/api/v1/integrations/${(await service.json()).id}`, { headers: CSRF })
+  }
+})

@@ -475,7 +475,11 @@ function useFitRowHeight(host: RefObject<HTMLDivElement | null>, enabled: boolea
     let frame = 0
     const measure = () => {
       frame = 0
-      const top = host.current?.getBoundingClientRect().top ?? 0
+      // ⚠️ From the top of the page, not of the window. Measured while the page
+      // was scrolled, the grid seemed to start higher, the rows grew by the
+      // scroll, and the last row followed the bottom of the window down under
+      // the edit bar however far the page was scrolled.
+      const top = (host.current?.getBoundingClientRect().top ?? 0) + window.scrollY
       setHeight(rowHeightFor(window.innerHeight - top - BOTTOM_PADDING, rows, GAP))
     }
     const schedule = () => {
