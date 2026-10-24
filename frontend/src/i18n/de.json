@@ -623,6 +623,7 @@
     "edit": "Board bearbeiten",
     "confirmAction": "Diese Aktion jetzt ausführen?",
     "pageName": "Name der Seite",
+    "pageNameFirst": "Gib der Seite zuerst einen Namen.",
     "tabs": {
       "boards": "Boards",
       "look": "Aussehen",

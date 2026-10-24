@@ -42,7 +42,14 @@ from ..schemas import (
 from ..security import create_kiosk_cookie, hash_token, new_opaque_token
 from ..services import boards as board_service
 from ..services import history
-from ..services.boards import COLUMNS, ImportError_, board_summary, board_view, slugify, unique_slug
+from ..services.boards import (
+    COLUMNS,
+    ImportError_,
+    board_summary,
+    board_view,
+    unique_page_slug,
+    unique_slug,
+)
 from ..services.collector import collector
 from ..services.layout import NEW_BOARD_COLUMNS, columns_of, normalise_settings, scale_layout
 from ..services.sse import board_topic, hub
@@ -275,7 +282,7 @@ def delete_board(slug: str, user: CurrentUser, db: DbSession) -> None:
 def create_page(slug: str, body: PageCreate, user: CurrentUser, db: DbSession) -> dict:
     board, permission = require_board(db, slug, user, "edit")
     position = (db.scalar(select(Page.position).where(Page.board_id == board.id).order_by(Page.position.desc())) or 0) + 1
-    page = Page(board_id=board.id, name=body.name.strip(), slug=slugify(body.name), icon=body.icon, position=position, layouts={key: [] for key in COLUMNS})
+    page = Page(board_id=board.id, name=body.name.strip(), slug=unique_page_slug(db, board.id, body.name), icon=body.icon, position=position, layouts={key: [] for key in COLUMNS})
     db.add(page)
     db.commit()
     _announce(board.id)
@@ -295,7 +302,7 @@ def patch_page(page_id: int, body: PagePatch, user: CurrentUser, db: DbSession) 
     page, board, permission = _page_for_edit(db, page_id, user)
     if body.name is not None:
         page.name = body.name.strip()
-        page.slug = slugify(body.name)
+        page.slug = unique_page_slug(db, board.id, body.name, ignore_id=page.id)
     if body.icon is not None:
         page.icon = body.icon
     if body.position is not None:

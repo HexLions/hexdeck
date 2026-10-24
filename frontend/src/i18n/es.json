@@ -623,6 +623,7 @@
     "edit": "Editar tablero",
     "confirmAction": "¿Ejecutar esta acción ahora?",
     "pageName": "Nombre de la página",
+    "pageNameFirst": "Primero ponle un nombre a la página.",
     "tabs": {
       "boards": "Tableros",
       "look": "Aspecto",

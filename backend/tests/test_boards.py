@@ -447,3 +447,16 @@ def test_a_new_board_is_arranged_on_twenty_four_columns(client: TestClient) -> N
     setup_admin(client)
     board = client.post("/api/v1/boards", json={"name": "Wide"}, headers=CSRF).json()
     assert board["settings"]["columns"] == 24
+
+
+def test_two_pages_of_one_name_get_two_addresses(client: TestClient) -> None:
+    """The page looked up by an address was always the first of that name, so a second one could not be opened."""
+    setup_admin(client)
+    board = _board(client)
+    first = client.post(f"/api/v1/boards/{board['slug']}/pages", json={"name": "Network"}, headers=CSRF).json()
+    second = client.post(f"/api/v1/boards/{board['slug']}/pages", json={"name": "Network"}, headers=CSRF).json()
+    slugs = [page["slug"] for page in second["pages"] if page["name"] == "Network"]
+    assert slugs == ["network", "network-2"]
+    own = next(page for page in first["pages"] if page["slug"] == "network")
+    renamed = client.patch(f"/api/v1/pages/{own['id']}", json={"name": "Network"}, headers=CSRF).json()
+    assert sorted(page["slug"] for page in renamed["pages"] if page["name"] == "Network") == ["network", "network-2"], "renaming to its own name keeps its address"
