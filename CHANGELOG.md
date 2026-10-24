@@ -5,6 +5,17 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Fixed
+
+- **In edit mode the bar no longer covers the last row.** The bar with Add
+  widget and Done lay over the bottom of the last row's cards, resize corner
+  and all, and the page ended there, so they could not be resized. The page
+  now leaves room under the board while editing. On a board whose rows fit
+  the screen the rows also grew as the page scrolled, so the last row
+  followed the window down; they are now measured from the top of the page.
+
 ## 0.32.1 (2026-10-24)
 
 More from TrueNAS, and security updates for twelve npm advisories.

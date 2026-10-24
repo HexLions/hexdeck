@@ -488,7 +488,11 @@ export function BoardPage() {
   }
 
   return (
-    <div className="min-h-full pb-24 md:pb-10">
+    // ⚠️ In edit mode the floating bar below sits 24 px over the bottom and is
+    // about 44 px tall. With 40 px under the board it lay over the last row's
+    // resize corners, and the page ended there, so those cards could not be
+    // resized. While editing, the page leaves the bar's room to scroll into.
+    <div className={`min-h-full ${editing ? 'pb-36 md:pb-28' : 'pb-24 md:pb-10'}`}>
       <BackgroundLayer background={previewBackground ?? data.background} />
       {topBar}
       <main className="mx-auto px-3 sm:px-4 pt-4" style={{ maxWidth: maxWidthOf(settings) }}>
