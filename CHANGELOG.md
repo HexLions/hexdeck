@@ -5,6 +5,30 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
+
+### Added
+
+- **Pulse**: an overview of what Pulse watches on Proxmox, Docker and the
+  rest, the resources that need a look (Pulse 6.5 or newer), and the active
+  alerts, read with a token that has monitoring:read alone. From nexdeck
+  0.44.0. ⚠️ Beta.
+
+### Fixed
+
+- **Proxmox cards stayed empty when the token was short of rights.** The
+  node card and the guest cards now say which right is missing, the map shows
+  such a node as online instead of 0 %, and the connection test names the
+  missing rights. From nexdeck 0.45.0.
+
+### Security
+
+- **certifi 2026.10.19.** The older bundle still trusted emSign roots whose
+  intermediate keys were compromised (GHSA-6q48-6c7w-9gw2). From nexdeck
+  0.46.0.
+
 ## 0.32.2 (2026-10-24)
 
 The edit bar no longer covers the last row.
