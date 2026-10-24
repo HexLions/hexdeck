@@ -1134,6 +1134,42 @@
       ],
       "smallTitle": "Smaller things",
       "small": []
+    },
+    "0.33.0": {
+      "lead": "HexDeck 0.33.0: what nexdeck did from 0.43 to 0.48, with Pulse, more TrueNAS and a name of your own.",
+      "sections": [
+        {
+          "title": "Pulse",
+          "body": "A new integration: an overview of what Pulse watches, the resources that need a look and the active alerts. In beta.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "More TrueNAS",
+          "body": "Interfaces with their live traffic, the services and the virtual machines and containers, and notifications for a hot disk, a failed task and a waiting update. Not yet tried on a real TrueNAS.",
+          "path": "System > Connections > TrueNAS"
+        },
+        {
+          "title": "Versions of your services",
+          "body": "The version each connection runs, and whether a newer release is out; the Updates card can list the services that are behind.",
+          "path": "System > Integrations"
+        },
+        {
+          "title": "A name and a logo of your own",
+          "body": "In the browser tab, the bar, the sign-in page and the installed app.",
+          "path": "System > Appearance"
+        },
+        {
+          "title": "Pages in a new order",
+          "body": "Every page of a board has a handle to drag it, and an address of its own.",
+          "path": "Edit mode (pencil) > Board settings"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Uptime Kuma can keep to one status page, names what is down, and is out of beta.",
+        "Proxmox cards say which right the token is missing.",
+        "certifi 2026.10.19, for GHSA-6q48-6c7w-9gw2."
+      ]
     }
   }
 }
