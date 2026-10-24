@@ -1122,6 +1122,18 @@
         "Sicherheitsupdates für zwölf Hinweise in DOMPurify, fast-uri, serialize-javascript, undici und Zod.",
         "Die README nennt das Kopieren von Karten, Karten ohne Telefon und die Seite Kartenstatus."
       ]
+    },
+    "0.32.2": {
+      "lead": "HexDeck 0.32.2: die Bearbeitungsleiste verdeckt die letzte Reihe nicht mehr.",
+      "sections": [
+        {
+          "title": "Die letzte Reihe skalieren",
+          "body": "Im Bearbeitungsmodus lag die Leiste mit Widget hinzufügen und Fertig über dem unteren Rand der letzten Reihe, und diese Karten ließen sich nicht in der Größe ändern. Die Seite lässt jetzt Platz unter dem Board, und auf einem Board, dessen Reihen den Bildschirm füllen, wachsen die Reihen beim Scrollen nicht mehr.",
+          "path": "Bearbeiten (Stift)"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": []
     }
   }
 }

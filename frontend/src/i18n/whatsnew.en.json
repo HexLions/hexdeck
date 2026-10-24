@@ -1122,6 +1122,18 @@
         "Security updates for twelve advisories in DOMPurify, fast-uri, serialize-javascript, undici and Zod.",
         "The README names copying cards, cards left off the phone and the card status page."
       ]
+    },
+    "0.32.2": {
+      "lead": "HexDeck 0.32.2: the edit bar no longer covers the last row.",
+      "sections": [
+        {
+          "title": "Resize the last row",
+          "body": "In edit mode the bar with Add widget and Done lay over the bottom of the last row, so those cards could not be resized. The page now leaves room under the board, and on a board whose rows fit the screen the rows no longer grow as the page scrolls.",
+          "path": "Edit mode (pencil)"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": []
     }
   }
 }
