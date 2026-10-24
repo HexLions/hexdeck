@@ -1,11 +1,11 @@
 # HexDeck
 
-**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and twenty-four services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
+**A homelab dashboard that keeps up with the lab.** Live cards for two hundred and twenty-five services, boards that fill any screen, a roadmap for what you are building and a list of what needs doing again next month, in one place, on the desk, the phone and the wall.
 
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-224-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-225-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **224 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **225 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -220,7 +220,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 ## The services it speaks to
 
-**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, container registries, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Woodpecker CI, Cronicle, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, InfluxDB, Grafana, GoatCounter, Umami, Alertmanager, Scrutiny, UPS through PeaNUT, UPS straight from NUT (TrueNAS's UPS service), Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Ollama, llama.cpp, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
+**Hosts and containers.** Docker, Kubernetes, Proxmox VE, ProxMenux, Proxmox Backup Server, Kopia, Duplicati, UrBackup, Portainer, Nomad, Cup, container registries, Coolify, Gitea, Forgejo, GitLab, Semaphore UI, Jenkins, Woodpecker CI, Cronicle, Meilisearch, Elasticsearch, Synology DSM, Unraid, TrueNAS, Garage, Glances, Beszel, Prometheus, InfluxDB, Grafana, GoatCounter, Umami, Alertmanager, Scrutiny, UPS through PeaNUT, UPS straight from NUT (TrueNAS's UPS service), Wake-on-LAN, Backrest, rclone, Komodo, Netdata, Pulse, Ollama, llama.cpp, Open WebUI, Watchtower, What's Up Docker, Zabbix, Arcane, Dockhand, PatchMon, nextrmnl.
 
 **Network.** Your public address, UniFi, MikroTik, FRITZ!Box, OpenWrt, OPNsense, pfSense, FortiGate, Traefik, Caddy, Nginx Proxy Manager, nginx ignition, Pi-hole, AdGuard Home, Technitium, NextDNS, Tailscale, Headscale, Cloudflare, NetBird, wg-easy, NetBox, Gluetun, authentik, Keycloak, Matrix Synapse, CrowdSec, mailcow, Stalwart, Shlink, Speedtest Tracker, MySpeed, nexpulse, Uptime Kuma, Healthchecks, UptimeRobot, ChangeDetection.io, n8n, Blocky, Gatus, NetAlertX, Pocket ID, Pangolin, SNMP.
 
@@ -276,7 +276,7 @@ offer is in [docs/adapters.md](docs/adapters.md).
 
 | Service | Change |
 | --- | --- |
-| TrueNAS | The current JSON-RPC API, no call to the deprecated REST one where it exists; live processor and memory use. Contributed upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9). Since then: disks with their temperature, apps, snapshot and replication tasks, the last scrub and the update on offer |
+| TrueNAS | The current JSON-RPC API, no call to the deprecated REST one where it exists; live processor and memory use. Contributed upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9). Since then: disks with their temperature, apps, snapshot and replication tasks, the last scrub and the update on offer; from nexdeck 0.46.0 the interfaces, services and VMs cards and notifications for a hot disk, a failed task and a waiting update |
 | GitHub | Issues, pull requests with review state, workflow runs and milestones, cached with ETags |
 | YouTube | A card for the channels an account follows |
 | What's Up Docker, Cup, Watchtower | An `updates()` hook that feeds one merged updates card |

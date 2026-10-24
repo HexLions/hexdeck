@@ -105,6 +105,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^scrubbing (\d+)%$/, 'Scrub läuft, $1%'],
     [/^resilvering (\d+)%$/, 'Resilver läuft, $1%'],
     [/^(\d+ (?:min|h|d)) ago$/, 'vor $1'],
+    [/^Down: (.+)$/, 'Ausgefallen: $1'],
+    [/^Runs (\S+)$/, 'Läuft mit $1'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -218,6 +220,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^scrubbed (\d+ (?:min|h|d)) ago, (\d+) errors?$/, 'scrub hace $1, $2 errores'],
     [/^scrubbing (\d+)%$/, 'scrub en curso, $1%'],
     [/^resilvering (\d+)%$/, 'resilver en curso, $1%'],
+    [/^Down: (.+)$/, 'Caídos: $1'],
+    [/^Runs (\S+)$/, 'En uso: $1'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -304,6 +308,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^scrubbing (\d+)%$/, 'scrub in corso, $1%'],
     [/^resilvering (\d+)%$/, 'resilver in corso, $1%'],
     [/^(\d+ (?:min|h|d)) ago$/, '$1 fa'],
+    [/^Down: (.+)$/, 'Non raggiungibili: $1'],
+    [/^Runs (\S+)$/, 'In uso: $1'],
   ],
 }
 

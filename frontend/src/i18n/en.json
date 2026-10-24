@@ -249,7 +249,20 @@
       "enabled": "Enabled",
       "search": "Search",
       "searchPlaceholder": "plex, docker, wol, npm...",
-      "noMatch": "Nothing matches “{{query}}”."
+      "noMatch": "Nothing matches “{{query}}”.",
+      "version": {
+        "checking": "Looking up the version…",
+        "runs": "Runs {{version}}",
+        "notSaid": "Version not given",
+        "newer": "Newer: {{version}}",
+        "newerMajor": "Newer: {{version}} (major)",
+        "current": "Up to date",
+        "noRelease": "Newest not known",
+        "noProject": "No public releases",
+        "unread": "Version not read",
+        "notAsked": "Newest not asked",
+        "notAskedHelp": "Switch on Check for updates under System, About to compare with the newest release on GitHub."
+      }
     },
     "users": {
       "title": "Users",
@@ -288,7 +301,7 @@
       "demoHelp": "Every widget shows fake data. Switch it off when you connect real services.",
       "demoForced": "Set by HEXDECK_DEMO on the container. Remove the variable and restart to switch it off.",
       "updateCheck": "Check for updates",
-      "updateCheckHelp": "Asks GitHub once a day whether a newer version exists. Off by default.",
+      "updateCheckHelp": "Asks GitHub once a day whether a newer HexDeck exists, and every six hours for the newest releases of your connected services. Off by default.",
       "oidc": "Identity providers",
       "oidcHelp": "Sign in via authentik, Keycloak, Authelia, Pocket ID and others that speak OpenID Connect.",
       "oidcSlug": "Short name",
@@ -493,6 +506,29 @@
       "collapsedHelp": "Covers least; a click opens it again.",
       "qualityTitle": "Sound quality on this device",
       "qualityHelp": "Less than the original saves data on the way. When the line keeps stalling, the player turns it down by itself."
+    },
+    "brand": {
+      "title": "Name and logo",
+      "help": "Your own name and logo where HexDeck's stand: the browser tab, the bar, the sign-in page, the installed app and wall displays. \"About HexDeck\" keeps saying HexDeck. The sign-in page shows both, so anyone who reaches this address sees them.",
+      "name": "Name",
+      "nameHelp": "Up to 40 characters. Empty means HexDeck.",
+      "logo": "Logo",
+      "logoHelp": "SVG, PNG or WebP up to 512 KB. An SVG that carries script is refused. The icons of the installed app are drawn from it.",
+      "choose": "Choose a file",
+      "remove": "Remove logo",
+      "uploaded": "The logo is in place.",
+      "removed": "The logo is gone; HexDeck's mark is back.",
+      "unreadable": "This browser cannot draw that file. Try a PNG.",
+      "favicon": "Icon in the browser tab",
+      "favicon_logo": "From the logo",
+      "favicon_hexdeck": "Keep HexDeck's icon",
+      "appIcon": "Icon of the installed app",
+      "appIcon_logo": "From the logo, on a dark ground",
+      "appIcon_hexdeck": "Keep HexDeck's icon",
+      "appIconHelp": "A phone that already has the app keeps the old icon until the app is added again.",
+      "boardInTitle": "Put the board's name in front in the tab",
+      "preview": "Preview",
+      "sampleBoard": "Home"
     }
   },
   "menu": {
@@ -623,6 +659,7 @@
     "edit": "Edit board",
     "confirmAction": "Run this action now?",
     "pageName": "Page name",
+    "pageNameFirst": "Give the page a name first.",
     "tabs": {
       "boards": "Boards",
       "look": "Look",
@@ -890,7 +927,7 @@
     "website": "Website",
     "license": "License",
     "whatsNewOpen": "Read it again",
-    "updateCheckLabel": "Ask GitHub once a day",
+    "updateCheckLabel": "Ask GitHub for newer versions",
     "checkNow": "Check now",
     "checked": "Asked GitHub.",
     "lastChecked": "Last asked {{when}}",
@@ -1347,5 +1384,8 @@
     "notSet": "Not set",
     "automaticHelp": "With one of the two set, a tile can open its address automatically: the one for home in the trusted networks named under System, Sign-in providers, No sign-in at home, and the other one everywhere else.",
     "deleteThis": "Delete {{name}}"
+  },
+  "brand": {
+    "withHexdeck": "with HexDeck"
   }
 }

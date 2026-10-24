@@ -112,6 +112,12 @@ class BoardOrder(BaseModel):
     slugs: list[str] = Field(default_factory=list, max_length=200)
 
 
+class PageOrder(BaseModel):
+    """Every page of a board, by number, in the order its tabs should show them."""
+
+    ids: list[int] = Field(default_factory=list, max_length=200)
+
+
 class PageCreate(BaseModel):
     name: str = Field(min_length=1, max_length=120)
     icon: str = Field(default="", max_length=80)
@@ -465,6 +471,16 @@ class SearchBody(BaseModel):
 
     enabled: bool = True
     targets: list[SearchTargetBody] = Field(default_factory=list, max_length=20)
+
+
+class BrandBody(BaseModel):
+    """The name of the installation and where its logo stands in for HexDeck's."""
+
+    #: Roomier than the 40 characters on purpose: a longer one gets a sentence back, not a 422.
+    name: str = Field(default="", max_length=200)
+    favicon: str = Field(default="logo", max_length=20)
+    app_icon: str = Field(default="logo", max_length=20)
+    board_in_title: Any = True
 
 
 class AppearanceBody(BaseModel):

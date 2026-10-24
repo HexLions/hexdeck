@@ -31,6 +31,7 @@ import type { Action, Breakpoint, LayoutItem, WidgetView } from '../lib/types'
 import { useEditedPage } from '../lib/groups'
 import { homeBoardPath } from '../lib/homeBoard'
 import { useAuth } from '../stores/auth'
+import { useTabTitle } from '../lib/brand'
 import { useLive } from '../stores/live'
 import { useNotices } from '../stores/notices'
 import { usePlayer } from '../stores/player'
@@ -88,6 +89,7 @@ export function BoardPage() {
   const canEdit = data ? ['edit', 'act', 'owner'].includes(data.permission) && !data.provisioned : false
   const canAct = data ? ['act', 'owner'].includes(data.permission) : false
   const settings = previewSettings ?? data?.settings ?? {}
+  useTabTitle(data?.name)
 
   // Snapshot and history into the live store.
   useEffect(() => {
@@ -702,6 +704,8 @@ export function BoardPage() {
         }
       >
         <input className="input" autoFocus aria-label={t('board.pageName')} value={newPageName} placeholder={t('board.pageName')} onChange={(e) => setNewPageName(e.target.value)} />
+        {/* The button stays off without a name; say so instead of leaving a dead button. */}
+        {!newPageName.trim() && <p className="text-xs text-muted mt-2">{t('board.pageNameFirst')}</p>}
       </Dialog>
       {toast && (
         <Toast level={toast.level} onClose={() => setToast(null)}>

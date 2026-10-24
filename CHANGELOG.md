@@ -5,6 +5,76 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
+
+### Added
+
+- **Pulse**: an overview of what Pulse watches on Proxmox, Docker and the
+  rest, the resources that need a look (Pulse 6.5 or newer), and the active
+  alerts, read with a token that has monitoring:read alone. From nexdeck
+  0.44.0. ⚠️ Beta.
+- **TrueNAS: interfaces, services, and VMs and containers.** Three more
+  cards: every network interface with its link, address and live traffic,
+  the services that start with TrueNAS and whether they run, and the
+  virtual machines and containers with their state. Taken from nexdeck
+  0.46.0 into HexDeck's own TrueNAS adapter, which already had the disks,
+  apps, tasks, scrub and update; written from TrueNAS 25.10's source, not
+  yet run against a TrueNAS.
+- **Notifications for a hot disk, a failed task and a waiting update.** The
+  TrueNAS disks, tasks, apps and system cards can now tell when a disk gets
+  hot, a snapshot or replication task fails, and an update waits. The SNMP
+  uplink event that was already sent can now be subscribed to as well. From
+  nexdeck 0.46.0.
+
+- **Versions of the connected services.** System, Integrations shows the
+  version each connection runs, read from what its connection test says, and
+  whether a newer release of its project is out on GitHub; the Updates card
+  lists the services behind, every one or only those picked, and can show
+  what is up to date as well. Read every six hours. GitHub is asked only
+  while Check for updates is on under System, About. From nexdeck 0.47.0.
+- **A name and a logo of the installation's own.** Under System,
+  Appearance: in the browser tab, the bar, the sign-in page, the installed
+  app and on wall displays, with "with HexDeck" under it on the sign-in page.
+  The logo is checked like an uploaded icon and goes into every backup. Both
+  are public, since the sign-in page shows them. From nexdeck 0.47.0.
+- **Pages of a board in a new order.** Under Board settings, Pages, every
+  page has a handle, dragged or moved with the arrow keys as in the list of
+  boards; the whole order goes to the server in one call,
+  `PUT /boards/{slug}/pages/order`. From nexdeck 0.48.0.
+
+### Changed
+
+- **Uptime Kuma by status page, and out of beta.** The Monitors and Up and
+  down cards can keep to one status page by its slug, matched by monitor
+  number on Uptime Kuma 2 and by name on 1.23, and the summary names what is
+  down. Groups and push monitors no longer read -1 ms, and the counts follow
+  the name filter. nexdeck saw it against a real 1.23.17. From nexdeck 0.48.0.
+
+### Fixed
+
+- **Proxmox cards stayed empty when the token was short of rights.** The
+  node card and the guest cards now say which right is missing, the map shows
+  such a node as online instead of 0 %, and the connection test names the
+  missing rights. From nexdeck 0.45.0.
+
+- **Two pages of one name shared one address,** and the second could not be
+  opened at all. Every page of a board now gets an address of its own, and
+  the add-page dialog says why its button is off while the name is empty.
+  From nexdeck 0.43.0.
+
+- **The Updates card asked GitHub for HexDeck's newest version whatever
+  the switch under System said.** It now goes through Check for updates,
+  as its help always said; with the switch off it shows only what a check by
+  hand found.
+
+### Security
+
+- **certifi 2026.10.19.** The older bundle still trusted emSign roots whose
+  intermediate keys were compromised (GHSA-6q48-6c7w-9gw2). From nexdeck
+  0.46.0.
+
 ## 0.32.2 (2026-10-24)
 
 The edit bar no longer covers the last row.

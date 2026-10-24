@@ -289,6 +289,28 @@ class GithubAdapter(Adapter):
                 return None
             raise
 
+    async def newest_release(self, config: dict[str, Any], ctx: Context, repo: str) -> dict[str, Any] | None:
+        """The newest release of one project, for a card that gathers from several places.
+
+        Through the same ETags and the same rate limit as the cards here, so a
+        project asked for on two cards costs one request. None when the
+        project has no release. As nexdeck 0.47.0 has it, for the versions of
+        the connected services.
+        """
+        try:
+            answer = await self._releases(ctx, str(config.get("token") or ""), repo, prereleases=False)
+        except _Stale as stale:
+            # The hourly limit is used up: the last answer is still the newest known.
+            answer = stale.body
+        if not isinstance(answer, dict):
+            return None
+        return {
+            "tag": str(answer.get("tag_name") or answer.get("name") or "?"),
+            "url": str(answer.get("html_url") or f"https://github.com/{repo}/releases"),
+            "published": self._stamp(answer.get("published_at") or answer.get("created_at") or ""),
+            "prerelease": bool(answer.get("prerelease")),
+        }
+
     async def _releases_card(self, ctx: Context, token: str, options: dict[str, Any]) -> WidgetData:
         repos = self._repos(options, presets=True)
         if not repos:

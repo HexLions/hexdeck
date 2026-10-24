@@ -249,7 +249,20 @@
       "enabled": "Attiva",
       "search": "Cerca",
       "searchPlaceholder": "plex, docker, wol, npm...",
-      "noMatch": "Niente corrisponde a “{{query}}”."
+      "noMatch": "Niente corrisponde a “{{query}}”.",
+      "version": {
+        "checking": "Ricerca della versione…",
+        "runs": "In uso: {{version}}",
+        "notSaid": "Versione non indicata",
+        "newer": "Più recente: {{version}}",
+        "newerMajor": "Più recente: {{version}} (principale)",
+        "current": "Aggiornato",
+        "noRelease": "Ultima non nota",
+        "noProject": "Nessuna release pubblica",
+        "unread": "Versione non letta",
+        "notAsked": "Ultima non richiesta",
+        "notAskedHelp": "Attiva Cerca aggiornamenti in Sistema, Informazioni per confrontare con l’ultima release su GitHub."
+      }
     },
     "users": {
       "title": "Utenti",
@@ -288,7 +301,7 @@
       "demoHelp": "Ogni card mostra dati finti. Disattivala quando colleghi servizi reali.",
       "demoForced": "Impostata da HEXDECK_DEMO sul container. Rimuovi la variabile e riavvia per disattivarla.",
       "updateCheck": "Controlla aggiornamenti",
-      "updateCheckHelp": "Chiede a GitHub una volta al giorno se esiste una versione più recente. Disattivato di default.",
+      "updateCheckHelp": "Chiede a GitHub una volta al giorno se esiste un HexDeck più recente, e ogni sei ore le ultime release dei tuoi servizi collegati. Disattivato di fabbrica.",
       "oidc": "Provider di identità",
       "oidcHelp": "Accedi tramite authentik, Keycloak, Authelia, Pocket ID e altri che parlano OpenID Connect.",
       "oidcSlug": "Nome breve",
@@ -493,6 +506,29 @@
       "collapsedHelp": "Copre il minimo; un clic la riapre.",
       "qualityTitle": "Qualità audio su questo dispositivo",
       "qualityHelp": "Meno dell'originale risparmia dati lungo la strada. Quando la linea continua a bloccarsi, il lettore la abbassa da solo."
+    },
+    "brand": {
+      "title": "Nome e logo",
+      "help": "Il tuo nome e il tuo logo dove compare HexDeck: la scheda del browser, la barra, la pagina di accesso, l’app installata e i display a parete. «Informazioni su HexDeck» continua a dire HexDeck. La pagina di accesso li mostra entrambi, quindi li vede chiunque raggiunga questo indirizzo.",
+      "name": "Nome",
+      "nameHelp": "Fino a 40 caratteri. Vuoto significa HexDeck.",
+      "logo": "Logo",
+      "logoHelp": "SVG, PNG o WebP fino a 512 KB. Un SVG con script viene rifiutato. Le icone dell’app installata vengono disegnate da esso.",
+      "choose": "Scegli un file",
+      "remove": "Rimuovi il logo",
+      "uploaded": "Il logo è al suo posto.",
+      "removed": "Il logo è stato rimosso; torna il simbolo di HexDeck.",
+      "unreadable": "Questo browser non riesce a disegnare quel file. Prova con un PNG.",
+      "favicon": "Icona nella scheda del browser",
+      "favicon_logo": "Dal logo",
+      "favicon_hexdeck": "Mantieni l’icona di HexDeck",
+      "appIcon": "Icona dell’app installata",
+      "appIcon_logo": "Dal logo, su sfondo scuro",
+      "appIcon_hexdeck": "Mantieni l’icona di HexDeck",
+      "appIconHelp": "Un telefono che ha già l’app mantiene la vecchia icona finché l’app non viene aggiunta di nuovo.",
+      "boardInTitle": "Metti il nome della bacheca davanti nella scheda",
+      "preview": "Anteprima",
+      "sampleBoard": "Casa"
     }
   },
   "menu": {
@@ -623,6 +659,7 @@
     "edit": "Modifica board",
     "confirmAction": "Eseguire questa azione adesso?",
     "pageName": "Nome della pagina",
+    "pageNameFirst": "Prima dai un nome alla pagina.",
     "tabs": {
       "boards": "Board",
       "look": "Aspetto",
@@ -890,7 +927,7 @@
     "website": "Sito",
     "license": "Licenza",
     "whatsNewOpen": "Rileggile",
-    "updateCheckLabel": "Chiedi a GitHub una volta al giorno",
+    "updateCheckLabel": "Chiedi a GitHub le versioni più recenti",
     "checkNow": "Controlla adesso",
     "checked": "Chiesto a GitHub.",
     "lastChecked": "Ultima richiesta {{when}}",
@@ -1347,5 +1384,8 @@
     "notSet": "Non impostato",
     "automaticHelp": "Se è impostato uno dei due, un riquadro può scegliere l'indirizzo da solo: quello di casa nelle reti fidate di Sistema, Provider di accesso, Niente login in casa, e l'altro ovunque.",
     "deleteThis": "Elimina {{name}}"
+  },
+  "brand": {
+    "withHexdeck": "con HexDeck"
   }
 }

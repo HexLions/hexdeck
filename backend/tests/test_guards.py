@@ -45,6 +45,10 @@ PUBLIC: dict[str, str] = {
     "POST /api/v1/kiosk/session": "the door of a wall display: the token in the body is the credential",
     "GET /api/metrics": "Prometheus has no session; HEXDECK_METRICS_TOKEN as a bearer token is checked inside, and without it the address is a 404",
     "GET /{path:path}": "the single-page app",
+    "GET /manifest.webmanifest": "the installed app reads it without a session, with the installation's name and icons",
+    "GET /api/v1/brand": "the sign-in page and the browser tab show the installation's name and logo before anyone signs in",
+    "GET /api/v1/brand/logo": "the same logo, as a picture",
+    "GET /api/v1/brand/icon-{size}.png": "the icons a phone puts on its home screen, fetched without a session",
 }
 
 AUTH_DEPENDENCIES = {deps.optional_user, deps.current_user, deps.admin_user, deps.not_guest}
@@ -553,6 +557,9 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         "octoprint", "openmediavault", "patchmon", "rtorrent",
         # Taken over from nexdeck 0.31 to 0.36, confirmed there the same way.
         "frigate", "m3ueditor", "mailpit", "nexlore", "nexsift", "nginxignition", "readmeabook", "realdebrid", "reclaimerr",
+        # Taken over from nexdeck 0.48.0: Uptime Kuma, seen there on 2026-10-24
+        # against 1.23.17, the status pages against 1.23.17 and 2.x.
+        "uptimekuma",
         # The ten this fork wrote itself, confirmed on 2026-10-06 against the
         # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
         # Kubernetes in their rack, and Minecraft, Steam, Shelly, NetBird,

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { ApiError, get, put } from '../../api/client'
 import { Field, Toast } from '../../components/ui'
 import { accentVariables, applyAppearance, type Appearance, type Theme } from '../../lib/appearance'
+import { BrandSettings } from './BrandSettings'
 import { SettingsCard } from './SettingsCard'
 
 const EMPTY: Appearance = { preset: 'hex', accent: '', css: '', colour: '#3aa0ff', presets: {}, theme: null, themes: {} }
@@ -92,6 +93,7 @@ export function AppearanceSettings() {
   const themes = Object.entries(form.themes ?? {})
   return (
     <>
+      <BrandSettings />
       <SettingsCard title={t('settings.appearance.themeTitle')} description={t('settings.appearance.themeHelp')}>
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('settings.appearance.themeTitle')}>
           {[['shipped', null] as const, ...themes].map(([key, theme]) => {
