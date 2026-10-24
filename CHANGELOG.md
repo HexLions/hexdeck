@@ -28,6 +28,11 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   uplink event that was already sent can now be subscribed to as well. From
   nexdeck 0.46.0.
 
+- **Pages of a board in a new order.** Under Board settings, Pages, every
+  page has a handle, dragged or moved with the arrow keys as in the list of
+  boards; the whole order goes to the server in one call,
+  `PUT /boards/{slug}/pages/order`. From nexdeck 0.48.0.
+
 ### Changed
 
 - **Uptime Kuma by status page, and out of beta.** The Monitors and Up and
@@ -42,6 +47,11 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   node card and the guest cards now say which right is missing, the map shows
   such a node as online instead of 0 %, and the connection test names the
   missing rights. From nexdeck 0.45.0.
+
+- **Two pages of one name shared one address,** and the second could not be
+  opened at all. Every page of a board now gets an address of its own, and
+  the add-page dialog says why its button is off while the name is empty.
+  From nexdeck 0.43.0.
 
 ### Security
 
