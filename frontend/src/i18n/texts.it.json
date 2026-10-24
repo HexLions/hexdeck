@@ -2451,7 +2451,12 @@
     "Overdue cards, cards due this week, and open cards.": "Card scadute, card in scadenza questa settimana, e card aperte.",
     "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Board kanban di Planka: le card in scadenza, prima quelle scadute, su tutte le board che puoi vedere.",
     "A UPS runs on battery": "Un UPS va a batteria",
-    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica"
+    "A UPS is back on mains power": "Un UPS è tornato sulla rete elettrica",
+    "Apps": "App",
+    "Every disk with its temperature, model and pool, the hottest first.": "Ogni disco con temperatura, modello e pool, prima i più caldi.",
+    "Snapshots and replication": "Snapshot e replica",
+    "The apps on TrueNAS with their state, and which have an update.": "Le app su TrueNAS con il loro stato, e quali hanno un aggiornamento.",
+    "The periodic snapshot and replication tasks with how each last ended.": "I task di snapshot periodici e di replica, con l'esito dell'ultima esecuzione."
   },
   "labels": {
     "Jobs": "Job",
@@ -3678,6 +3683,18 @@
     "No repository is active in Woodpecker.": "Nessun repository è attivo in Woodpecker.",
     "No pipeline has run yet.": "Nessuna pipeline è ancora stata eseguita.",
     "Open cards": "Card aperte",
-    "No card is due.": "Nessuna card in scadenza."
+    "No card is due.": "Nessuna card in scadenza.",
+    "No app is installed on TrueNAS.": "Nessuna app installata su TrueNAS.",
+    "TrueNAS lists no disk.": "TrueNAS non elenca nessun disco.",
+    "No snapshot or replication task is enabled.": "Nessun task di snapshot o di replica è attivo.",
+    "Crashed": "Bloccata",
+    "On hold": "In sospeso",
+    "Not run yet": "Mai eseguito",
+    "update available": "aggiornamento disponibile",
+    "not in a pool": "in nessun pool",
+    "Replication": "Replica",
+    "Snapshot": "Snapshot",
+    "scrub paused": "scrub in pausa",
+    "scrub cancelled": "scrub annullato"
   }
 }

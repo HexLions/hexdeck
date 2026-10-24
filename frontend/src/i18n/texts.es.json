@@ -2451,7 +2451,12 @@
     "Overdue cards, cards due this week, and open cards.": "Tarjetas vencidas, tarjetas que vencen esta semana, y tarjetas abiertas.",
     "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Tableros kanban de Planka: las tarjetas que vencen, primero las vencidas, en todos los tableros que puedes ver.",
     "A UPS runs on battery": "Un SAI funciona con batería",
-    "A UPS is back on mains power": "Un SAI vuelve a la red eléctrica"
+    "A UPS is back on mains power": "Un SAI vuelve a la red eléctrica",
+    "Apps": "Apps",
+    "Every disk with its temperature, model and pool, the hottest first.": "Cada disco con su temperatura, modelo y pool, primero los más calientes.",
+    "Snapshots and replication": "Snapshots y replicación",
+    "The apps on TrueNAS with their state, and which have an update.": "Las apps de TrueNAS con su estado, y cuáles tienen una actualización.",
+    "The periodic snapshot and replication tasks with how each last ended.": "Las tareas de snapshots periódicos y de replicación, con cómo terminó la última vez."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3678,6 +3683,18 @@
     "No repository is active in Woodpecker.": "Ningún repositorio está activo en Woodpecker.",
     "No pipeline has run yet.": "Todavía no se ha ejecutado ninguna pipeline.",
     "Open cards": "Tarjetas abiertas",
-    "No card is due.": "Ninguna tarjeta vence."
+    "No card is due.": "Ninguna tarjeta vence.",
+    "No app is installed on TrueNAS.": "No hay ninguna app instalada en TrueNAS.",
+    "TrueNAS lists no disk.": "TrueNAS no muestra ningún disco.",
+    "No snapshot or replication task is enabled.": "No hay ninguna tarea de snapshots ni de replicación activa.",
+    "Crashed": "Caída",
+    "On hold": "En espera",
+    "Not run yet": "Aún no ejecutada",
+    "update available": "actualización disponible",
+    "not in a pool": "en ningún pool",
+    "Replication": "Replicación",
+    "Snapshot": "Snapshot",
+    "scrub paused": "scrub en pausa",
+    "scrub cancelled": "scrub cancelado"
   }
 }

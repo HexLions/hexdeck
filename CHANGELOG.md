@@ -5,6 +5,19 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **More from TrueNAS.** Three new cards: Disks, with each disk's
+  temperature, model and pool, the hottest first; Apps, with their state and
+  which have an update; and Snapshots and replication, with how each task last
+  ended and why it failed. The pools card says when each pool was last
+  scrubbed, with its errors, or how far a resilver is; the system card names
+  the update TrueNAS offers. The new cards need the current API, so https;
+  a Read-Only Administrator's key reads them all. ⚠️ Written from TrueNAS
+  25.10's source, not yet run against a TrueNAS.
+
 ## 0.32.0 (2026-10-22)
 
 A UPS on battery says so, Woodpecker CI and Planka, and guides in docs/.

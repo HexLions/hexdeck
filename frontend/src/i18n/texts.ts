@@ -100,6 +100,11 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^This address answers, but not as (nex[a-z]+)\.$/, 'Unter dieser Adresse antwortet etwas, aber nicht $1.'],
     [/^(\d+) of (\d+) up$/, '$1 von $2 aktiv'],
     [/^priority (\d+)$/, 'Priorität $1'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago$/, 'Scrub vor $1'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago, (\d+) errors?$/, 'Scrub vor $1, $2 Fehler'],
+    [/^scrubbing (\d+)%$/, 'Scrub läuft, $1%'],
+    [/^resilvering (\d+)%$/, 'Resilver läuft, $1%'],
+    [/^(\d+ (?:min|h|d)) ago$/, 'vor $1'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -209,6 +214,10 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^This address answers, but not as (nex[a-z]+)\.$/, 'Esta dirección responde, pero no como $1.'],
     [/^(\d+) of (\d+) up$/, '$1 de $2 activos'],
     [/^priority (\d+)$/, 'prioridad $1'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago$/, 'scrub hace $1'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago, (\d+) errors?$/, 'scrub hace $1, $2 errores'],
+    [/^scrubbing (\d+)%$/, 'scrub en curso, $1%'],
+    [/^resilvering (\d+)%$/, 'resilver en curso, $1%'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -290,6 +299,11 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^This address answers, but not as (nex[a-z]+)\.$/, 'Questo indirizzo risponde, ma non come $1.'],
     [/^(\d+) of (\d+) up$/, '$1 di $2 attivi'],
     [/^priority (\d+)$/, 'priorità $1'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago$/, 'scrub $1 fa'],
+    [/^scrubbed (\d+ (?:min|h|d)) ago, (\d+) errors?$/, 'scrub $1 fa, $2 errori'],
+    [/^scrubbing (\d+)%$/, 'scrub in corso, $1%'],
+    [/^resilvering (\d+)%$/, 'resilver in corso, $1%'],
+    [/^(\d+ (?:min|h|d)) ago$/, '$1 fa'],
   ],
 }
 

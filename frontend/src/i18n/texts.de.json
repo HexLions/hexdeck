@@ -2451,7 +2451,12 @@
     "Overdue cards, cards due this week, and open cards.": "Überfällige Karten, diese Woche fällige Karten und offene Karten.",
     "Planka kanban boards: the cards that are due, overdue ones first, across every board you can see.": "Planka-Kanban-Boards: die fälligen Karten, überfällige zuerst, über alle Boards, die du sehen kannst.",
     "A UPS runs on battery": "Eine USV läuft auf Batterie",
-    "A UPS is back on mains power": "Eine USV ist wieder am Netz"
+    "A UPS is back on mains power": "Eine USV ist wieder am Netz",
+    "Apps": "Apps",
+    "Every disk with its temperature, model and pool, the hottest first.": "Jede Festplatte mit Temperatur, Modell und Pool, die wärmste zuerst.",
+    "Snapshots and replication": "Snapshots und Replikation",
+    "The apps on TrueNAS with their state, and which have an update.": "Die Apps auf TrueNAS mit ihrem Zustand, und welche ein Update haben.",
+    "The periodic snapshot and replication tasks with how each last ended.": "Die periodischen Snapshot- und Replikationsaufgaben, mit dem Ergebnis ihres letzten Laufs."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3678,6 +3683,18 @@
     "No repository is active in Woodpecker.": "Kein Repository ist in Woodpecker aktiv.",
     "No pipeline has run yet.": "Noch keine Pipeline ist gelaufen.",
     "Open cards": "Offene Karten",
-    "No card is due.": "Keine Karte ist fällig."
+    "No card is due.": "Keine Karte ist fällig.",
+    "No app is installed on TrueNAS.": "Auf TrueNAS ist keine App installiert.",
+    "TrueNAS lists no disk.": "TrueNAS listet keine Festplatte.",
+    "No snapshot or replication task is enabled.": "Keine Snapshot- oder Replikationsaufgabe ist aktiv.",
+    "Crashed": "Abgestürzt",
+    "On hold": "Angehalten",
+    "Not run yet": "Noch nicht gelaufen",
+    "update available": "Update verfügbar",
+    "not in a pool": "in keinem Pool",
+    "Replication": "Replikation",
+    "Snapshot": "Snapshot",
+    "scrub paused": "Scrub pausiert",
+    "scrub cancelled": "Scrub abgebrochen"
   }
 }
