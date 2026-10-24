@@ -496,6 +496,18 @@
         "Aggiornamenti di sicurezza per dodici advisory in DOMPurify, fast-uri, serialize-javascript, undici e Zod.",
         "Il README cita la copia delle card, le card nascoste sul telefono e la pagina Stato delle card."
       ]
+    },
+    "0.32.2": {
+      "lead": "HexDeck 0.32.2: la barra di modifica non copre più l'ultima fila.",
+      "sections": [
+        {
+          "title": "Ridimensiona l'ultima fila",
+          "body": "In modifica la barra con Aggiungi widget e Fatto copriva il fondo dell'ultima fila, e quelle card non si potevano ridimensionare. Ora la pagina lascia spazio sotto la board, e sulle board con le righe adattate allo schermo le righe non si allungano più scorrendo.",
+          "path": "Modifica (matita)"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": []
     }
   }
 }

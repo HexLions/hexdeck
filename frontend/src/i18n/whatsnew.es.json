@@ -352,6 +352,18 @@
         "Actualizaciones de seguridad para doce avisos en DOMPurify, fast-uri, serialize-javascript, undici y Zod.",
         "El README menciona copiar tarjetas, tarjetas fuera del teléfono y la página Estado de las tarjetas."
       ]
+    },
+    "0.32.2": {
+      "lead": "HexDeck 0.32.2: la barra de edición ya no tapa la última fila.",
+      "sections": [
+        {
+          "title": "Redimensionar la última fila",
+          "body": "En modo edición la barra con Añadir widget y Hecho tapaba el borde inferior de la última fila, y esas tarjetas no se podían redimensionar. Ahora la página deja espacio bajo el tablero, y en un tablero cuyas filas llenan la pantalla las filas ya no crecen al desplazarse.",
+          "path": "Modo edición (lápiz)"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": []
     }
   }
 }
