@@ -28,6 +28,9 @@ pyyaml==6.0.3
 websockets==15.0.1
 # One adapter, a hundred notification services.
 apprise==1.13.1
+# httpx pulls it in. Below 2026.10.19 it trusts emSign roots whose intermediate
+# keys were compromised (GHSA-6q48-6c7w-9gw2); pinned so no build falls back.
+certifi==2026.10.19
 # RSS and Atom parsing for the feed widget.
 feedparser==6.0.12
 python-multipart==0.0.31
