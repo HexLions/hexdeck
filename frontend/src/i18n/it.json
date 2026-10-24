@@ -249,7 +249,20 @@
       "enabled": "Attiva",
       "search": "Cerca",
       "searchPlaceholder": "plex, docker, wol, npm...",
-      "noMatch": "Niente corrisponde a “{{query}}”."
+      "noMatch": "Niente corrisponde a “{{query}}”.",
+      "version": {
+        "checking": "Ricerca della versione…",
+        "runs": "In uso: {{version}}",
+        "notSaid": "Versione non indicata",
+        "newer": "Più recente: {{version}}",
+        "newerMajor": "Più recente: {{version}} (principale)",
+        "current": "Aggiornato",
+        "noRelease": "Ultima non nota",
+        "noProject": "Nessuna release pubblica",
+        "unread": "Versione non letta",
+        "notAsked": "Ultima non richiesta",
+        "notAskedHelp": "Attiva Cerca aggiornamenti in Sistema, Informazioni per confrontare con l’ultima release su GitHub."
+      }
     },
     "users": {
       "title": "Utenti",
@@ -288,7 +301,7 @@
       "demoHelp": "Ogni card mostra dati finti. Disattivala quando colleghi servizi reali.",
       "demoForced": "Impostata da HEXDECK_DEMO sul container. Rimuovi la variabile e riavvia per disattivarla.",
       "updateCheck": "Controlla aggiornamenti",
-      "updateCheckHelp": "Chiede a GitHub una volta al giorno se esiste una versione più recente. Disattivato di default.",
+      "updateCheckHelp": "Chiede a GitHub una volta al giorno se esiste un HexDeck più recente, e ogni sei ore le ultime release dei tuoi servizi collegati. Disattivato di fabbrica.",
       "oidc": "Provider di identità",
       "oidcHelp": "Accedi tramite authentik, Keycloak, Authelia, Pocket ID e altri che parlano OpenID Connect.",
       "oidcSlug": "Nome breve",
@@ -891,7 +904,7 @@
     "website": "Sito",
     "license": "Licenza",
     "whatsNewOpen": "Rileggile",
-    "updateCheckLabel": "Chiedi a GitHub una volta al giorno",
+    "updateCheckLabel": "Chiedi a GitHub le versioni più recenti",
     "checkNow": "Controlla adesso",
     "checked": "Chiesto a GitHub.",
     "lastChecked": "Ultima richiesta {{when}}",

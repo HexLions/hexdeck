@@ -6,6 +6,7 @@ from typing import Any
 
 from sqlalchemy import func
 
+from ..services.upstream import UPSTREAM
 from . import demo as fake
 from .base import (
     Action,
@@ -224,12 +225,18 @@ class CoreAdapter(Adapter):
         WidgetType(
             kind="updates",
             label="Updates",
-            description="One list of what has a newer version: the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.",
+            description="One list of what has a newer version: your connected services, the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.",
             renderer="list",
             default_size=(3, 3),
             min_size=(2, 2),
             refresh_seconds=900,
             options=(
+                Field("services", "Connected services", type="select", default="all",
+                      help="The version each service says it runs, held against the newest release of its project on GitHub, looked at every six hours while Check for updates is on under System, About. A service that does not name its version, or whose project is not on GitHub, is left out here and listed under System, Integrations.",
+                      options=(("all", "Every connection that names its version"), ("pick", "Only the ones picked"), ("none", "None"))),
+                Field("picked", "Services", type="integrations", default=[], only_when=("services", "pick"),
+                      # Kinds only, to narrow the picker; it shows the connections' own names.
+                      options=tuple((kind, "") for kind in sorted(UPSTREAM))),
                 Field("sources", "Connections", type="integrations",
                       options=(("wud", "What's Up Docker"), ("cup", "Cup"), ("watchtower", "Watchtower")),
                       default=[], help="The services that watch your images."),
@@ -237,6 +244,7 @@ class CoreAdapter(Adapter):
                       help="One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker."),
                 Field("hexdeck", "HexDeck itself", type="bool", default=True,
                       help="Needs the update check under System; without it HexDeck asks GitHub nothing."),
+                Field("show_current", "Also show what is up to date", type="bool", default=False),
                 Field("limit", "Entries", type="number", default=12),
             ),
         ),
@@ -576,19 +584,26 @@ class CoreAdapter(Adapter):
             },
         )
 
-    @staticmethod
-    async def _updates(ctx: Context, options: dict[str, Any]) -> WidgetData:
+    @classmethod
+    async def _updates(cls, ctx: Context, options: dict[str, Any]) -> WidgetData:
         """Everything that has a newer version, in one list.
 
-        Three kinds of source, asked in turn and never allowed to take the card
-        down: a connection whose adapter knows about updates, the releases of
-        the repositories somebody follows, and HexDeck's own version.
+        Four kinds of source, asked in turn and never allowed to take the card
+        down: the connected services against their projects' releases, a
+        connection whose adapter knows about updates, the releases of the
+        repositories somebody follows, and HexDeck's own version.
         """
         from .. import __version__
         from . import get_adapter
 
         items: list[dict[str, Any]] = []
         failures: list[str] = []
+        services = str(options.get("services") or "all")
+        if services != "none":
+            try:
+                items.extend(await cls._services(ctx, services, options.get("picked") or [], bool(options.get("show_current"))))
+            except Exception as error:  # noqa: BLE001 - the same as every other source
+                failures.append(f"Connected services: {getattr(error, 'message', str(error))}")
         sources = options.get("sources") or []
         if isinstance(sources, str):
             sources = [part for part in sources.split(",") if part.strip()]
@@ -621,9 +636,14 @@ class CoreAdapter(Adapter):
                 failures.append(f"GitHub: {getattr(error, 'message', str(error))}")
         if options.get("hexdeck", True):
             try:
-                from ..routers.system import latest_version
+                from ..db import db_session
+                from ..routers import system
 
-                newest = await latest_version()
+                # ⚠️ Through the switch in System: a way out that passes it is
+                # one the operator did not agree to.
+                with db_session() as db:
+                    allowed = system.update_check_on(db)
+                newest = await system.known_latest_version(allowed)
                 if newest and newest != __version__:
                     items.append({
                         "title": "HexDeck",
@@ -647,6 +667,58 @@ class CoreAdapter(Adapter):
             metrics={"updates": float(waiting)},
             meta={"empty": "Everything is up to date", "failures": failures},
         )
+
+    @classmethod
+    async def _services(cls, ctx: Context, services: str, picked: Any, show_current: bool) -> list[dict[str, Any]]:
+        """A row for each connected service behind its project's newest release, or every one with ``show_current``.
+
+        From nexdeck 0.47.0.
+
+        ⚠️ Never a connection reserved for administrators. The card is read once
+        for everyone who sees it, and on a board an administrator shares with
+        edit rights anybody may add one, so neither the viewer nor the owner
+        decides this. Its version stands under System, Integrations.
+        """
+        import time
+
+        from sqlalchemy import select
+
+        from ..db import db_session
+        from ..models import Integration
+        from ..routers import system
+        from ..services import versions
+        from . import get_adapter
+
+        if ctx.resolve_integration is None:
+            return []
+        wanted = {int(one) for one in picked if str(one).isdigit()} if services == "pick" else None
+        with db_session() as db:
+            # Without the operator's switch nothing newer is known, and so nothing is asked at all.
+            if not system.update_check_on(db):
+                return []
+            found = [
+                (one.id, one.kind, one.name)
+                for one in db.scalars(select(Integration).where(Integration.enabled.is_(True), Integration.demo.is_(False)))
+                if one.kind in versions.UPSTREAM and not one.admin_only and (wanted is None or one.id in wanted)
+            ]
+        readings = await versions.read_many([(number, kind) for number, kind, _name in found], ctx.resolve_integration, ctx)
+        rows: list[dict[str, Any]] = []
+        for number, kind, name in found:
+            reading = readings[number]
+            if reading.state == "behind":
+                fresh = bool(reading.published) and time.time() - reading.published < 7 * 86400
+                rows.append({
+                    "title": name,
+                    "subtitle": " · ".join(part for part in (f"Runs {reading.running}", "major version" if versions.major_jump(reading.running, reading.newest) else "") if part),
+                    "status": "warn",
+                    "value": reading.newest,
+                    "url": reading.url,
+                    "emphasis": fresh,
+                    "icon": get_adapter(kind).icon,
+                })
+            elif reading.state == "current" and show_current:
+                rows.append({"title": name, "subtitle": "Up to date", "status": "ok", "value": reading.running, "icon": get_adapter(kind).icon})
+        return rows
 
     @staticmethod
     def _todo(options: dict[str, Any]) -> WidgetData:
@@ -1004,3 +1076,4 @@ def parse_links(text: str) -> list[dict[str, str]]:
 
 
 ADAPTER = CoreAdapter()
+

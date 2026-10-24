@@ -9,9 +9,12 @@ from typing import Any
 import httpx
 import pytest
 import respx
+from fastapi.testclient import TestClient
 
 from app.adapters import get_adapter
 from app.adapters.base import Context
+
+from .conftest import CSRF, setup_admin
 
 WUD = "http://wud.lan:3000"
 CUP = "http://cup.lan:8000"
@@ -42,7 +45,7 @@ async def test_the_card_merges_the_containers_the_repositories_and_hexdeck_itsel
         "tag_name": "v1.2.0", "name": "1.2.0", "html_url": "https://github.com/o/r/releases/v1.2.0", "published_at": "2026-09-20T10:00:00Z", "prerelease": False,
     }, headers={"X-RateLimit-Remaining": "42"}))
     resolve = await _resolver({7: ("wud", {"url": WUD, "token": "t"})})
-    data = await get_adapter("core").fetch("updates", {}, {"sources": [7], "repos": "o/r"}, _ctx(resolve))
+    data = await get_adapter("core").fetch("updates", {}, {"sources": [7], "repos": "o/r", "services": "none", "hexdeck": False}, _ctx(resolve))
     titles = [item["title"] for item in data.items]
     assert "radarr" in titles, "a container with a newer image"
     assert "sonarr" not in titles, "one that is up to date is not news"
@@ -52,9 +55,17 @@ async def test_the_card_merges_the_containers_the_repositories_and_hexdeck_itsel
     assert data.primary["value"] == len(data.items)
 
 
+def _asking(client: TestClient) -> None:
+    """The operator's switch under System, About: without it GitHub is never asked."""
+    setup_admin(client)
+    assert client.patch("/api/v1/settings", json={"update_check": True}, headers=CSRF).status_code == 200
+
+
 @respx.mock
-async def test_hexdeck_says_when_it_is_behind(monkeypatch: pytest.MonkeyPatch) -> None:
+async def test_hexdeck_says_when_it_is_behind(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     from app.routers import system
+
+    _asking(client)
 
     async def newer(force: bool = False) -> str:
         return "99.0.0"
@@ -67,8 +78,10 @@ async def test_hexdeck_says_when_it_is_behind(monkeypatch: pytest.MonkeyPatch) -
 
 
 @respx.mock
-async def test_nothing_to_do_is_said_plainly(monkeypatch: pytest.MonkeyPatch) -> None:
+async def test_nothing_to_do_is_said_plainly(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     from app.routers import system
+
+    _asking(client)
 
     async def same(force: bool = False) -> str | None:
         return None
@@ -86,7 +99,7 @@ async def test_a_source_that_will_not_answer_does_not_take_the_card_with_it() ->
         "tag_name": "v2.0.0", "name": "2.0.0", "html_url": "u", "published_at": "2026-09-20T10:00:00Z", "prerelease": False,
     }, headers={"X-RateLimit-Remaining": "42"}))
     resolve = await _resolver({9: ("cup", {"url": CUP})})
-    data = await get_adapter("core").fetch("updates", {}, {"sources": [9], "repos": "o/r"}, _ctx(resolve))
+    data = await get_adapter("core").fetch("updates", {}, {"sources": [9], "repos": "o/r", "services": "none", "hexdeck": False}, _ctx(resolve))
     assert [item["title"] for item in data.items] == ["o/r"], "the repository still comes through"
     assert any("Cup" in warning for warning in data.meta["failures"])
     assert data.status == "warn"
@@ -94,3 +107,26 @@ async def test_a_source_that_will_not_answer_does_not_take_the_card_with_it() ->
 
 def test_the_demo_draws() -> None:
     assert get_adapter("core").demo("updates", {}, 0).items
+
+
+async def test_hexdeck_asks_github_nothing_while_the_switch_is_off(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    """⚠️ The card used to ask GitHub whatever the switch under System said."""
+    from app.routers import system
+
+    async def never(force: bool = False) -> str:
+        raise AssertionError("GitHub was asked with the switch off")
+
+    setup_admin(client)
+    monkeypatch.setattr(system, "latest_version", never)
+    data = await get_adapter("core").fetch("updates", {}, {"hexdeck": True}, _ctx(None))
+    assert data.items == [] and not data.meta["failures"]
+
+
+async def test_a_card_asks_the_connected_services_unless_told_not_to(client: TestClient) -> None:
+    """Every connection that names its version is a source by default; without any the card is up to date."""
+    _asking(client)
+    from app.services.collector import collector
+
+    ctx = Context(collector.client, widget_id=1, cache={}, resolve_integration=collector.resolve_integration)
+    card = await get_adapter("core").fetch("updates", {}, {"hexdeck": False}, ctx)
+    assert card.items == [] and not card.meta["failures"]

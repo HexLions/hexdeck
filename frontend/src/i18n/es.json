@@ -236,7 +236,20 @@
       "enabled": "Activada",
       "search": "Buscar",
       "searchPlaceholder": "plex, docker, wol, npm...",
-      "noMatch": "Nada coincide con “{{query}}”."
+      "noMatch": "Nada coincide con “{{query}}”.",
+      "version": {
+        "checking": "Consultando la versión…",
+        "runs": "En uso: {{version}}",
+        "notSaid": "Versión no indicada",
+        "newer": "Más nueva: {{version}}",
+        "newerMajor": "Más nueva: {{version}} (principal)",
+        "current": "Al día",
+        "noRelease": "Última no conocida",
+        "noProject": "Sin publicaciones públicas",
+        "unread": "Versión no leída",
+        "notAsked": "Última no consultada",
+        "notAskedHelp": "Activa Buscar actualizaciones en Sistema, Acerca de para comparar con la última publicación en GitHub."
+      }
     },
     "users": {
       "title": "Usuarios",
@@ -275,7 +288,7 @@
       "demoHelp": "Todos los widgets muestran datos falsos. Desactívalo cuando conectes servicios reales.",
       "demoForced": "Definido por NEXDECK_DEMO en el contenedor. Quita la variable y reinicia para desactivarlo.",
       "updateCheck": "Buscar actualizaciones",
-      "updateCheckHelp": "Pregunta a GitHub una vez al día si existe una versión más reciente. Desactivado por defecto.",
+      "updateCheckHelp": "Pregunta a GitHub una vez al día si hay un HexDeck más nuevo, y cada seis horas por las últimas publicaciones de tus servicios conectados. Desactivado de fábrica.",
       "oidc": "Proveedores de identidad",
       "oidcHelp": "Inicia sesión mediante authentik, Keycloak, Authelia, Pocket ID y otros que hablen OpenID Connect.",
       "oidcSlug": "Nombre corto",
@@ -891,7 +904,7 @@
     "website": "Sitio web",
     "license": "Licencia",
     "whatsNewOpen": "Volver a leerlo",
-    "updateCheckLabel": "Preguntar a GitHub una vez al día",
+    "updateCheckLabel": "Preguntar a GitHub por versiones más nuevas",
     "checkNow": "Comprobar ahora",
     "checked": "Se preguntó a GitHub.",
     "lastChecked": "Última consulta {{when}}",

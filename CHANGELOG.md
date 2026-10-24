@@ -28,6 +28,12 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   uplink event that was already sent can now be subscribed to as well. From
   nexdeck 0.46.0.
 
+- **Versions of the connected services.** System, Integrations shows the
+  version each connection runs, read from what its connection test says, and
+  whether a newer release of its project is out on GitHub; the Updates card
+  lists the services behind, every one or only those picked, and can show
+  what is up to date as well. Read every six hours. GitHub is asked only
+  while Check for updates is on under System, About. From nexdeck 0.47.0.
 - **Pages of a board in a new order.** Under Board settings, Pages, every
   page has a handle, dragged or moved with the arrow keys as in the list of
   boards; the whole order goes to the server in one call,
@@ -52,6 +58,11 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   opened at all. Every page of a board now gets an address of its own, and
   the add-page dialog says why its button is off while the name is empty.
   From nexdeck 0.43.0.
+
+- **The Updates card asked GitHub for HexDeck's newest version whatever
+  the switch under System said.** It now goes through Check for updates,
+  as its help always said; with the switch off it shows only what a check by
+  hand found.
 
 ### Security
 

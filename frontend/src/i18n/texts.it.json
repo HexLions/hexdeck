@@ -1312,7 +1312,6 @@
     "Hide the address itself": "Nascondi l'indirizzo",
     "For a board on a wall: the provider and the place are shown, the number is not.": "Per una board appesa al muro: si mostrano provider e luogo, non il numero.",
     "Updates": "Aggiornamenti",
-    "One list of what has a newer version: the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.": "Una lista sola di ciò che ha una versione nuova: i container che WUD, Cup o Watchtower sorvegliano, le release che segui e HexDeck stesso.",
     "Connections": "Connessioni",
     "What's Up Docker": "What's Up Docker",
     "Cup": "Cup",
@@ -2478,7 +2477,13 @@
     "A backup task failed": "Un'attività di backup non è riuscita",
     "A disk is running hot": "Un disco si sta scaldando",
     "An update is waiting on a server": "Un aggiornamento è in attesa su un server",
-    "Pools, disks, apps, interfaces, services, VMs and snapshot tasks, with load and alerts.": "Pool, dischi, app, interfacce, servizi, VM e attività di snapshot, con carico e avvisi."
+    "Pools, disks, apps, interfaces, services, VMs and snapshot tasks, with load and alerts.": "Pool, dischi, app, interfacce, servizi, VM e attività di snapshot, con carico e avvisi.",
+    "Also show what is up to date": "Mostra anche ciò che è aggiornato",
+    "Connected services": "Servizi collegati",
+    "Every connection that names its version": "Ogni connessione che indica la propria versione",
+    "Only the ones picked": "Solo quelle scelte",
+    "The version each service says it runs, held against the newest release of its project on GitHub, looked at every six hours while Check for updates is on under System, About. A service that does not name its version, or whose project is not on GitHub, is left out here and listed under System, Integrations.": "La versione che ogni servizio dichiara di usare, confrontata con l’ultima release del suo progetto su GitHub, controllata ogni sei ore finché Cerca aggiornamenti è attivo in Sistema, Informazioni. Un servizio che non indica la propria versione, o il cui progetto non è su GitHub, non compare qui ed è elencato in Sistema, Integrazioni.",
+    "One list of what has a newer version: your connected services, the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.": "Una lista sola di ciò che ha una versione nuova: i tuoi servizi collegati, i container che WUD, Cup o Watchtower sorvegliano, le release che segui e HexDeck stesso."
   },
   "labels": {
     "Jobs": "Job",
@@ -3736,6 +3741,7 @@
     "Nothing needs a look.": "Niente da controllare.",
     "LXC containers": "Container LXC",
     "Docker containers": "Container Docker",
-    "No link": "Nessun collegamento"
+    "No link": "Nessun collegamento",
+    "major version": "versione principale"
   }
 }
