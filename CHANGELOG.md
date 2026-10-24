@@ -5,7 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.32.1 (2026-10-24)
+
+More from TrueNAS, and security updates for twelve npm advisories.
 
 ### Added
 
@@ -17,6 +19,16 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   the update TrueNAS offers. The new cards need the current API, so https;
   a Read-Only Administrator's key reads them all. ⚠️ Written from TrueNAS
   25.10's source, not yet run against a TrueNAS.
+
+### Changed
+
+- The README names copying cards, cards left off the phone, and System ›
+  Card status.
+
+### Security
+
+- DOMPurify 3.4.17, fast-uri 3.1.9, serialize-javascript 7.1.4, undici
+  7.30.1 and Zod 4.6.7, for twelve advisories.
 
 ## 0.32.0 (2026-10-22)
 

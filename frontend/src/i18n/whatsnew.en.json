@@ -1107,6 +1107,21 @@
         "The upstream report workflow writes only into its own issue, as plain text.",
         "Vitest 4.1.12, for two advisories."
       ]
+    },
+    "0.32.1": {
+      "lead": "HexDeck 0.32.1: more from TrueNAS, and security updates.",
+      "sections": [
+        {
+          "title": "More from TrueNAS",
+          "body": "Three new cards: Disks with their temperature, Apps with their state and updates, and Snapshots and replication with how each task last ended. The pools card says when each pool was last scrubbed; the system card names the update on offer. Not yet tried on a real TrueNAS: say so if something looks wrong.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "Security updates for twelve advisories in DOMPurify, fast-uri, serialize-javascript, undici and Zod.",
+        "The README names copying cards, cards left off the phone and the card status page."
+      ]
     }
   }
 }

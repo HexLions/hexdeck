@@ -1107,6 +1107,21 @@
         "Der Upstream-Bericht schreibt nur noch in sein eigenes Issue, als reiner Text.",
         "Vitest 4.1.12, wegen zweier Sicherheitshinweise."
       ]
+    },
+    "0.32.1": {
+      "lead": "HexDeck 0.32.1: mehr von TrueNAS, und Sicherheitsupdates.",
+      "sections": [
+        {
+          "title": "Mehr von TrueNAS",
+          "body": "Drei neue Karten: Festplatten mit ihrer Temperatur, Apps mit Zustand und Updates, und Snapshots und Replikation mit dem Ergebnis jeder Aufgabe. Die Pool-Karte sagt, wann jeder Pool zuletzt gescrubbt wurde; die Systemkarte nennt das angebotene Update. Noch nicht an einem echten TrueNAS ausprobiert: sag Bescheid, wenn etwas nicht stimmt.",
+          "path": "System > Verbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Sicherheitsupdates für zwölf Hinweise in DOMPurify, fast-uri, serialize-javascript, undici und Zod.",
+        "Die README nennt das Kopieren von Karten, Karten ohne Telefon und die Seite Kartenstatus."
+      ]
     }
   }
 }
