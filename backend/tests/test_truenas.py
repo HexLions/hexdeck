@@ -20,7 +20,7 @@ from websockets.exceptions import InvalidStatus
 from websockets.http11 import Response
 
 from app.adapters import get_adapter
-from app.adapters.base import AdapterError, Context, ago
+from app.adapters.base import AdapterError, Context, WidgetData, ago
 from app.adapters.truenas import _version
 
 KEY = "1-readonlykey"
@@ -58,8 +58,22 @@ REPLICATIONS = [
 UPDATE = {"code": "NORMAL", "status": {"current_version": {"train": "TrueNAS-SCALE-Goldeye", "profile": "GENERAL", "matches_profile": True},
                                        "new_version": {"version": "25.10.8", "manifest": {}, "release_notes": None, "release_notes_url": "https://www.truenas.com/docs/"}},
           "error": None, "update_download_progress": None}
+#: The cards taken from nexdeck 0.46.0, in the shapes nexdeck read from the
+#: middleware's source (release/25.10.0, api/v25_10_0), not measured.
+SUMMARY = {"ips": {"enp1s0": {"IPV4": ["192.168.1.20/24"], "IPV6": ["fe80::1/64"]}}, "default_routes": ["192.168.1.1"], "nameservers": ["192.168.1.1"]}
+SERVICES = [
+    {"id": 1, "service": "cifs", "enable": True, "state": "RUNNING", "pids": [100]},
+    {"id": 2, "service": "nfs", "enable": True, "state": "STOPPED", "pids": []},
+    {"id": 3, "service": "ssh", "enable": False, "state": "RUNNING", "pids": [200]},
+    {"id": 4, "service": "ups", "enable": False, "state": "STOPPED", "pids": []},
+]
+VMS = [{"id": 1, "name": "homeassistant", "vcpus": 1, "cores": 2, "threads": 1, "memory": 4096, "status": {"state": "RUNNING", "pid": 42, "domain_state": "RUNNING"}},
+       {"id": 2, "name": "windows", "vcpus": 4, "cores": 1, "threads": 1, "memory": 8192, "status": {"state": "STOPPED", "pid": None, "domain_state": "SHUTOFF"}}]
+INSTANCES = [{"id": "pihole", "name": "pihole", "type": "CONTAINER", "status": "RUNNING", "cpu": "1", "memory": 536_870_912},
+             {"id": "homeassistant", "name": "homeassistant", "type": "VM", "status": "RUNNING", "cpu": "2", "memory": 4_294_967_296}]
 ANSWERS = {"system.info": INFO, "pool.query": POOLS, "alert.list": ALERTS, "disk.query": DISKS, "disk.temperatures": TEMPERATURES,
-           "app.query": APPS, "pool.snapshottask.query": SNAPSHOT_TASKS, "replication.query": REPLICATIONS, "update.status": UPDATE}
+           "app.query": APPS, "pool.snapshottask.query": SNAPSHOT_TASKS, "replication.query": REPLICATIONS, "update.status": UPDATE,
+           "network.general.summary": SUMMARY, "service.query": SERVICES, "vm.query": VMS, "virt.instance.query": INSTANCES}
 #: One ``reporting.realtime`` event as 25.x sends it: CPU usage in percent, memory in bytes.
 LIVE = {"cpu": {"cpu": {"usage": 37.25, "temp": None}, "cpu0": {"usage": 40.0, "temp": None}},
         "memory": {"arc_size": 2_000_000_000, "arc_free_memory": 0, "arc_available_memory": 0,
@@ -577,3 +591,162 @@ async def test_the_apps_card_is_amber_while_one_is_starting(ctx: Context, monkey
     monkeypatch.setattr(adapter, "_open_socket", fake.open)
     card = await adapter.fetch("apps", {"url": "https://truenas.example.com", "api_key": KEY}, {}, ctx)
     assert card.status == "warn"
+
+
+HTTPS = {"url": "https://truenas.example.com", "api_key": KEY}
+
+
+async def test_the_interfaces_come_from_the_event_the_system_card_reads_anyway(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    live = {**LIVE, "interfaces": {
+        "enp1s0": {"link_state": "LINK_STATE_UP", "speed": 1000, "received_bytes_rate": 1_250_000.0, "sent_bytes_rate": 250_000.0},
+        "enp2s0": {"link_state": "LINK_STATE_DOWN", "speed": 0, "received_bytes": 0, "sent_bytes": 0, "received_bytes_rate": 0, "sent_bytes_rate": 0},
+    }}
+    fake = FakeTruenas(live=live)
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    card = await adapter.fetch("interfaces", HTTPS, {}, ctx)
+    assert "network.general.summary" in fake.methods() and "core.subscribe" in fake.methods()
+    up, down = card.items
+    assert up == {"title": "enp1s0", "subtitle": "192.168.1.20/24 · 1000 Mbit/s", "value": "↓ 1.2 MB/s ↑ 244.1 KB/s", "status": "ok"}
+    assert (down["status"], down["subtitle"], down["value"]) == ("unknown", "No link", ""), "a port without a cable is grey, not red"
+    assert card.metrics == {"down": 1_250_000.0, "up": 250_000.0}
+    assert [(row["metric"], row["value"]) for row in card.secondary] == [("down", "1.2 MB/s"), ("up", "244.1 KB/s")]
+
+    fake.sent.clear()
+    ctx.cache.pop("truenas:reporting.realtime")
+    await adapter.fetch("interfaces", HTTPS, {}, ctx)
+    assert "network.general.summary" not in fake.methods(), "the addresses are kept for five minutes"
+    assert "core.subscribe" in fake.methods(), "the traffic is not"
+
+
+async def test_an_interface_card_without_interfaces_says_so(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    with pytest.raises(AdapterError) as empty:
+        await adapter.fetch("interfaces", HTTPS, {}, ctx)
+    assert empty.value.code == "no_interfaces", "an empty card would hide that TrueNAS sent none"
+
+
+async def test_the_services_card_shows_what_is_meant_to_run(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("services", HTTPS, {}, ctx)
+    assert [(item["title"], item["value"], item["status"]) for item in card.items] == [
+        ("NFS", "Stopped", "bad"), ("SMB", "Running", "ok"), ("SSH", "Running", "ok"),
+    ], "set to start and stopped is red; running without being set to start still shows"
+    every = await adapter.fetch("services", HTTPS, {"all_services": True}, ctx)
+    assert ("UPS", "Stopped", "unknown") in [(item["title"], item["value"], item["status"]) for item in every.items]
+
+
+async def test_vms_and_containers_are_counted_once(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("vms", HTTPS, {}, ctx)
+    assert [(item["title"], item["subtitle"], item["value"], item["status"]) for item in card.items] == [
+        ("homeassistant", "VM · 2 vCPU · 4.0 GB", "Running", "ok"),
+        ("pihole", "Container · 1 vCPU · 512.0 MB", "Running", "ok"),
+        ("windows", "VM · 4 vCPU · 8.0 GB", "Stopped", "unknown"),
+    ]
+    assert card.secondary == [{"label": "Running", "value": 2}]
+
+
+async def test_one_list_of_machines_missing_leaves_the_other(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(refuse={"virt.instance.query": "ENOMETHOD"})
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    card = await adapter.fetch("vms", HTTPS, {}, ctx)
+    assert [item["title"] for item in card.items] == ["homeassistant", "windows"]
+
+
+async def test_without_either_list_of_machines_the_card_says_so(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(refuse={"vm.query": "ENOMETHOD", "virt.instance.query": "ENOMETHOD"})
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    with pytest.raises(AdapterError) as missing:
+        await adapter.fetch("vms", HTTPS, {}, ctx)
+    assert "neither" in missing.value.message
+
+
+async def test_a_refused_role_on_the_machines_is_not_taken_for_a_missing_method(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    fake = FakeTruenas(refuse={"vm.query": "EACCES"})
+    monkeypatch.setattr(adapter, "_open_socket", fake.open)
+    with pytest.raises(AdapterError) as refused:
+        await adapter.fetch("vms", HTTPS, {}, ctx)
+    assert refused.value.code == "auth_failed"
+
+
+async def test_the_cards_from_nexdeck_over_rest_say_what_they_need(ctx: Context, monkeypatch: pytest.MonkeyPatch) -> None:
+    adapter = get_adapter("truenas")
+    monkeypatch.setattr(adapter, "_open_socket", turned_down(404))
+    with respx.mock(assert_all_called=False) as router:
+        router.get("https://truenas.example.com/api/v2.0/system/info").mock(return_value=httpx.Response(200, json=OLD_INFO))
+        for kind in ("interfaces", "services"):
+            with pytest.raises(AdapterError) as refused:
+                await adapter.fetch(kind, HTTPS, {}, ctx)
+            assert refused.value.code == "needs_current_api"
+        with pytest.raises(AdapterError) as neither:
+            await adapter.fetch("vms", HTTPS, {}, ctx)
+        assert "https://" in neither.value.hint
+
+
+def _data(*items: dict[str, Any], **kwargs: Any) -> WidgetData:
+    return WidgetData(items=list(items), **kwargs)
+
+
+def test_a_disk_is_told_once_when_it_gets_hot() -> None:
+    adapter = get_adapter("truenas")
+    cool, hot = {"title": "sda", "value": "40 °C", "status": "ok"}, {"title": "sda", "value": "56 °C", "status": "warn", "subtitle": "tank"}
+    told = adapter.detect("disks", _data(cool), _data(hot), {})
+    assert [(found.event, found.title, found.key) for found in told] == [("disk_hot", "sda is at 56 °C", "disk_hot:sda:warn")]
+    assert adapter.detect("disks", _data(hot), _data({**hot, "value": "57 °C"}), {}) == [], "only on the crossing"
+    assert len(adapter.detect("disks", None, _data(hot), {})) == 1, "hot when the card first looks, like a full pool"
+
+
+def test_a_disk_going_from_yellow_to_red_is_told_again() -> None:
+    adapter = get_adapter("truenas")
+    warm, hot = {"title": "sda", "value": "52 °C", "status": "warn"}, {"title": "sda", "value": "61 °C", "status": "bad"}
+    assert [found.level for found in adapter.detect("disks", _data(warm), _data(hot), {})] == ["bad"]
+    assert adapter.detect("disks", _data(hot), _data(warm), {}) == [], "cooling down is no news"
+
+
+async def test_a_failed_task_is_told_when_it_fails_not_when_the_card_first_sees_it(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("tasks", HTTPS, {"limit": 5}, ctx)
+    failed = card.items[0]
+    assert failed["id"] == "replication:1"
+    good = {**failed, "status": "ok", "value": "Done"}
+    told = adapter.detect("tasks", _data(good), _data(failed), {})
+    assert [(found.event, found.title, found.level, found.key) for found in told] == [
+        ("backup_failed", "tank/photos - backup/photos failed", "bad", "backup_failed:replication:1")]
+    assert adapter.detect("tasks", None, _data(failed), {}) == []
+    assert adapter.detect("tasks", _data(failed), _data(failed), {}) == []
+    broken = WidgetData(items=[good], error="TrueNAS could not be reached.")
+    assert len(adapter.detect("tasks", broken, _data(failed), {})) == 1, "a task that failed while the card was in error is still told"
+
+
+async def test_an_app_update_is_told_once_per_version(ctx: Context, truenas) -> None:
+    adapter, _fake = truenas
+    card = await adapter.fetch("apps", HTTPS, {}, ctx)
+    waiting = next(item for item in card.items if item["title"] == "jellyfin")
+    assert waiting["update"] == "a newer version", "this answer names no latest_version"
+    current = {**waiting, "update": ""}
+    told = adapter.detect("apps", _data(current), _data(waiting), {})
+    assert [(found.event, found.title) for found in told] == [("software_update", "jellyfin: update to a newer version")]
+    assert adapter.detect("apps", _data(waiting), _data(waiting), {}) == []
+    assert len(adapter.detect("apps", _data(waiting), _data({**waiting, "update": "1.2.5"}), {})) == 1, "a newer one is news again"
+    assert adapter.detect("apps", None, _data(waiting), {}) == [], "twenty old updates are no news when the card is added"
+    image = {**current, "update": "image"}
+    assert [found.title for found in adapter.detect("apps", _data(current), _data(image), {})] == ["jellyfin: new image"]
+
+
+def test_a_truenas_update_is_told_once() -> None:
+    adapter = get_adapter("truenas")
+    before = WidgetData(secondary=[{"label": "Alerts", "value": 0}])
+    after = WidgetData(secondary=[{"label": "Alerts", "value": 0}, {"label": "Update available", "value": "25.10.8"}])
+    assert [found.title for found in adapter.detect("system", before, after, {})] == ["TrueNAS 25.10.8 is available"]
+    assert adapter.detect("system", after, after, {}) == []
+    assert adapter.detect("system", None, after, {}) == []
+
+
+@pytest.mark.parametrize("kind", ["interfaces", "services", "vms"])
+def test_every_card_from_nexdeck_has_a_demo(kind: str) -> None:
+    data = get_adapter("truenas").demo(kind, {}, 3)
+    assert data.items, kind

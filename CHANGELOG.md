@@ -15,6 +15,18 @@ What nexdeck did from 0.43.0 to 0.48.0, taken over where it fits.
   rest, the resources that need a look (Pulse 6.5 or newer), and the active
   alerts, read with a token that has monitoring:read alone. From nexdeck
   0.44.0. ⚠️ Beta.
+- **TrueNAS: interfaces, services, and VMs and containers.** Three more
+  cards: every network interface with its link, address and live traffic,
+  the services that start with TrueNAS and whether they run, and the
+  virtual machines and containers with their state. Taken from nexdeck
+  0.46.0 into HexDeck's own TrueNAS adapter, which already had the disks,
+  apps, tasks, scrub and update; written from TrueNAS 25.10's source, not
+  yet run against a TrueNAS.
+- **Notifications for a hot disk, a failed task and a waiting update.** The
+  TrueNAS disks, tasks, apps and system cards can now tell when a disk gets
+  hot, a snapshot or replication task fails, and an update waits. The SNMP
+  uplink event that was already sent can now be subscribed to as well. From
+  nexdeck 0.46.0.
 
 ### Changed
 

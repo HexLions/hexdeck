@@ -546,7 +546,6 @@
     "Plex RAM": "RAM Plex",
     "Plex token": "Token Plex",
     "Pools": "Pool",
-    "Pools, alerts, load and uptime.": "Pool, alert, carico e uptime.",
     "Port": "Porta",
     "Port 49000, not the web interface. The box has to allow access for applications.": "Porta 49000, non l'interfaccia web. Il box deve consentire l'accesso per le applicazioni.",
     "Port for the check": "Porta per il controllo",
@@ -2469,7 +2468,17 @@
     "Show acknowledged alerts": "Mostra gli avvisi confermati",
     "Pick the preset Kiosk / Monitoring, which gives it monitoring:read alone. The cards write nothing.": "Scegli il preset Kiosk / Monitoring, che concede solo monitoring:read. Le schede non scrivono nulla.",
     "How many monitors are up and down, and which ones are down.": "Quanti monitor sono attivi e quanti fuori servizio, e quali sono fuori servizio.",
-    "Only the monitors of one status page: the last part of its address, as in /status/home. Empty means every monitor.": "Solo i monitor di una pagina di stato: l'ultima parte del suo indirizzo, come in /status/home. Vuoto significa tutti i monitor."
+    "Only the monitors of one status page: the last part of its address, as in /status/home. Empty means every monitor.": "Solo i monitor di una pagina di stato: l'ultima parte del suo indirizzo, come in /status/home. Vuoto significa tutti i monitor.",
+    "Every network interface with its link, address and live traffic. Needs TrueNAS 25.04 or later.": "Ogni interfaccia di rete con collegamento, indirizzo e traffico in tempo reale. Richiede TrueNAS 25.04 o successivo.",
+    "Link speed": "Velocità del collegamento",
+    "Services": "Servizi",
+    "Show services that are switched off": "Mostra anche i servizi disattivati",
+    "The services that start with TrueNAS, such as SMB, NFS and SSH, and whether they run. Needs TrueNAS 25.04 or later.": "I servizi che partono con TrueNAS, come SMB, NFS e SSH, e se sono in esecuzione. Richiede TrueNAS 25.04 o successivo.",
+    "Virtual machines and containers with their state. Needs TrueNAS 25.04 or later.": "Macchine virtuali e container con il loro stato. Richiede TrueNAS 25.04 o successivo.",
+    "A backup task failed": "Un'attività di backup non è riuscita",
+    "A disk is running hot": "Un disco si sta scaldando",
+    "An update is waiting on a server": "Un aggiornamento è in attesa su un server",
+    "Pools, disks, apps, interfaces, services, VMs and snapshot tasks, with load and alerts.": "Pool, dischi, app, interfacce, servizi, VM e attività di snapshot, con carico e avvisi."
   },
   "labels": {
     "Jobs": "Job",
@@ -3726,6 +3735,7 @@
     "This card needs Pulse 6.5 or newer.": "Questa scheda richiede Pulse 6.5 o successivo.",
     "Nothing needs a look.": "Niente da controllare.",
     "LXC containers": "Container LXC",
-    "Docker containers": "Container Docker"
+    "Docker containers": "Container Docker",
+    "No link": "Nessun collegamento"
   }
 }

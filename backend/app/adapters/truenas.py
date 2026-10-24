@@ -41,6 +41,10 @@ on the system card were written from the middleware's source at TS-25.10.7
 ``replication.py``, ``zettarepl.py``, ``pool_/scrub.py``,
 ``update_/status.py``), not yet run against a TrueNAS. Every method they call
 is open to the Read-Only Administrator role (``role.py``).
+
+The interfaces, services and VMs cards, and the notifications for a hot disk,
+a failed task and a waiting update, come from nexdeck 0.46.0 (its issue #49),
+which wrote them from the same source; also not yet run against a TrueNAS.
 """
 
 from __future__ import annotations
@@ -65,6 +69,7 @@ from .base import (
     Context,
     Detected,
     Field,
+    Status,
     Unreachable,
     WidgetData,
     WidgetType,
@@ -73,6 +78,8 @@ from .base import (
     duration_short,
     guard_outbound,
     human_bytes,
+    human_rate,
+    join_parts,
     percent,
     percent_text,
     status_from_percent,
@@ -105,7 +112,17 @@ PARAMS: dict[str, tuple[Any, ...]] = {
 }
 
 #: Read over the current API only. Over REST these cards say they need it.
-CURRENT_ONLY = ("disk.query", "disk.temperatures", "app.query", "pool.snapshottask.query", "replication.query", "update.status")
+CURRENT_ONLY = ("disk.query", "disk.temperatures", "app.query", "pool.snapshottask.query", "replication.query", "update.status",
+                "network.general.summary", "service.query", "vm.query", "virt.instance.query")
+
+#: Methods a TrueNAS may not have, or not on this version. An error from one of
+#: them is an empty answer; a card that reads several still shows the rest.
+#: The Incus instances are gone from some builds. A refused role is not caught
+#: here: that is ``auth_failed``.
+OPTIONAL = {"virt.instance.query", "vm.query"}
+
+#: How long the interfaces card keeps the addresses; the traffic is read anew.
+SUMMARY_SECONDS = 300.0
 
 #: How long what ``update.status`` said is kept; see ``_update``.
 UPDATE_SECONDS = 3600.0
@@ -138,7 +155,7 @@ class TruenasAdapter(Adapter):
     kind = "truenas"
     label = "TrueNAS"
     category = "nas"
-    description = "Pools, alerts, load and uptime."
+    description = "Pools, disks, apps, interfaces, services, VMs and snapshot tasks, with load and alerts."
     icon = "truenas"
     docs_url = "https://www.truenas.com/docs/api/"
     #: System, pools and alerts against TrueNAS SCALE 25.10.7 with a read-only and a full key, 18.09.2026.
@@ -163,6 +180,14 @@ class TruenasAdapter(Adapter):
         WidgetType(kind="tasks", label="Snapshots and replication", description="The periodic snapshot and replication tasks with how each last ended.",
                    renderer="list", default_size=(3, 3), refresh_seconds=120,
                    options=(Field("limit", "Entries", type="number", default=12),)),
+        WidgetType(kind="interfaces", label="Interfaces", description="Every network interface with its link, address and live traffic. Needs TrueNAS 25.04 or later.",
+                   renderer="list", default_size=(3, 2), refresh_seconds=30, metrics=("down", "up"),
+                   parts=(("address", "Address"), ("speed", "Link speed"), ("value", "Traffic"))),
+        WidgetType(kind="services", label="Services", description="The services that start with TrueNAS, such as SMB, NFS and SSH, and whether they run. Needs TrueNAS 25.04 or later.",
+                   renderer="list", default_size=(3, 2), refresh_seconds=60,
+                   options=(Field("all_services", "Show services that are switched off", type="bool", default=False),)),
+        WidgetType(kind="vms", label="VMs and containers", description="Virtual machines and containers with their state. Needs TrueNAS 25.04 or later.",
+                   renderer="list", default_size=(3, 2), refresh_seconds=30),
     )
 
     # -- the REST API v2 -------------------------------------------------------
@@ -311,7 +336,15 @@ class TruenasAdapter(Adapter):
                         )
                     answers: dict[str, Any] = {}
                     for method in methods:
-                        answers[method] = await realtime(socket) if method == REALTIME else await call(socket, method, *PARAMS.get(method, ()))
+                        if method == REALTIME:
+                            answers[method] = await realtime(socket)
+                            continue
+                        try:
+                            answers[method] = await call(socket, method, *PARAMS.get(method, ()))
+                        except AdapterError as error:
+                            if method not in OPTIONAL or error.code != "rpc_error":
+                                raise
+                            answers[method] = None
                     return answers
                 finally:
                     await socket.close()
@@ -433,6 +466,17 @@ class TruenasAdapter(Adapter):
         if widget_kind == "tasks":
             read = await self._read(config, ctx, ["pool.snapshottask.query", "replication.query"], cache=60)
             return _tasks(read["pool.snapshottask.query"], read["replication.query"], limit)
+        if widget_kind == "interfaces":
+            summary = (await self._read(config, ctx, ["network.general.summary"], cache=SUMMARY_SECONDS))["network.general.summary"]
+            _current_only(summary)
+            return _interfaces((await self._read(config, ctx, [REALTIME])).get(REALTIME), summary, options)
+        if widget_kind == "services":
+            services = (await self._read(config, ctx, ["service.query"], cache=30))["service.query"]
+            _current_only(services)
+            return _services(services, options)
+        if widget_kind == "vms":
+            read = await self._read(config, ctx, ["vm.query", "virt.instance.query"])
+            return _machines(read["vm.query"], read["virt.instance.query"])
         alerts = [a for a in (await self._read(config, ctx, ["alert.list"]))["alert.list"] or [] if not a.get("dismissed")]
         items = [{"title": str(a.get("formatted") or a.get("text", "?"))[:120], "subtitle": _day(a.get("datetime")), "status": "bad" if a.get("level") in ("CRITICAL", "ERROR") else "warn"} for a in alerts]
         return WidgetData(status="bad" if any(i["status"] == "bad" for i in items) else ("warn" if items else "ok"), items=items or [], secondary=[{"label": "Open", "value": len(items)}])
@@ -462,11 +506,36 @@ class TruenasAdapter(Adapter):
 
     def detect(self, widget_kind: str, before: WidgetData | None, after: WidgetData,
                options: dict[str, Any]) -> list[Detected]:
-        """A pool that crossed into the last tenth of itself.
+        """A pool that crossed into the last tenth of itself, and what the newer cards notice.
 
         ⚠️ Only on the crossing. A pool that sits at 94 per cent for a month
         is not news every five minutes; it became news once.
+
+        ⚠️ A failed task and a waiting update are told only when they appear
+        between two fetches, never on the first. A NAS with twenty apps behind
+        their releases would otherwise send twenty messages the moment the
+        card is put on a board, about nothing that just happened.
         """
+        if widget_kind == "disks":
+            return [Detected(event="disk_hot", title=f"{item.get('title')} is at {item.get('value')}", body=str(item.get("subtitle") or ""),
+                             level=item.get("status", "warn"), key=f"disk_hot:{item.get('title')}:{item.get('status')}", quiet_seconds=86400)
+                    for item in _newly(before, after, lambda item: item.get("status") in ("warn", "bad"), first=True,
+                                       # From yellow to red is news of its own.
+                                       same=lambda old, new: old.get("status") == new.get("status") or new.get("status") == "warn")][:5]
+        if widget_kind == "tasks":
+            return [Detected(event="backup_failed", title=f"{item.get('title')} failed", body=str(item.get("subtitle") or ""),
+                             level="bad", key=f"backup_failed:{item.get('id')}", quiet_seconds=3600)
+                    for item in _newly(before, after, lambda item: item.get("status") == "bad")][:5]
+        if widget_kind == "apps":
+            return [Detected(event="software_update", title=f"{item.get('title')}: update to {item['update']}" if item.get("update") != "image" else f"{item.get('title')}: new image",
+                             level="ok", key=f"software_update:app:{item.get('title')}:{item.get('update')}", quiet_seconds=7 * 86400)
+                    for item in _newly(before, after, lambda item: bool(item.get("update")), same=lambda a, b: a.get("update") == b.get("update"))][:5]
+        if widget_kind == "system":
+            now, was = _chip(after, "Update available"), _chip(before, "Update available") if before and not before.error else None
+            if not now or before is None or before.error or now == was:
+                return []
+            return [Detected(event="software_update", title=f"TrueNAS {now} is available", level="ok",
+                             key=f"software_update:truenas:{now}", quiet_seconds=7 * 86400)]
         if widget_kind not in ("pools", "volumes"):
             return []
         was = {}
@@ -518,6 +587,20 @@ class TruenasAdapter(Adapter):
                  {"dataset": "tank/documents", "enabled": True, "state": {"state": "FINISHED", "datetime": moment}}],
                 [{"name": "tank/photos - offsite/photos", "enabled": True, "state": {"state": "RUNNING" if tick % 3 == 0 else "FINISHED", "datetime": moment}}],
                 limit)
+        if widget_kind == "interfaces":
+            down, up = fake.walk("truenas-down", tick, 2, 60) * 1_000_000, fake.walk("truenas-up", tick, 1, 20) * 1_000_000
+            return _interfaces({"interfaces": {
+                "enp1s0": {"link_state": "LINK_STATE_UP", "speed": 10000, "received_bytes_rate": down, "sent_bytes_rate": up},
+                "enp2s0": {"link_state": "LINK_STATE_DOWN", "speed": 0, "received_bytes_rate": 0, "sent_bytes_rate": 0},
+                "br0": {"link_state": "LINK_STATE_UP", "speed": 10000, "received_bytes_rate": down * 0.1, "sent_bytes_rate": up * 0.2},
+            }}, {"ips": {"enp1s0": {"IPV4": ["192.168.1.20/24"]}, "br0": {"IPV4": ["192.168.1.21/24"]}}}, options)
+        if widget_kind == "services":
+            return _services([{"service": "cifs", "enable": True, "state": "RUNNING"}, {"service": "nfs", "enable": True, "state": "RUNNING"},
+                              {"service": "ssh", "enable": True, "state": "RUNNING"}, {"service": "ups", "enable": False, "state": "STOPPED"}], options)
+        if widget_kind == "vms":
+            return _machines([{"name": "homeassistant", "vcpus": 2, "cores": 1, "threads": 1, "memory": 4096, "status": {"state": "RUNNING"}},
+                              {"name": "windows", "vcpus": 4, "cores": 1, "threads": 1, "memory": 8192, "status": {"state": "STOPPED"}}],
+                             [{"name": "pihole", "type": "CONTAINER", "status": "RUNNING", "cpu": "1", "memory": 536_870_912}])
         return WidgetData(status="warn", items=[{"title": "Scrub of pool tank finished with 0 errors", "subtitle": "2026-09-04", "status": "warn"}], secondary=[{"label": "Open", "value": 1}])
 
 
@@ -713,6 +796,11 @@ def _apps(apps: Any, limit: int) -> WidgetData:
             "subtitle": " · ".join(part for part in (str(app.get("human_version") or app.get("version") or ""), "update available" if update else "") if part),
             "status": state,
             "value": words,
+            # Which update, for ``detect``: a newer catalog version, or newer
+            # images for the same one (the only kind a custom app has). The
+            # renderer leaves the key alone.
+            "update": (str(app.get("latest_version") or "") or "a newer version") if app.get("upgrade_available")
+                      else ("image" if app.get("image_updates_available") else ""),
         })
     items.sort(key=lambda item: (order.get(item["status"], 2), item["title"].lower()))
     running = sum(1 for item in items if item["value"] == "Running")
@@ -747,6 +835,7 @@ def _tasks(snapshots: Any, replications: Any, limit: int) -> WidgetData:
         when = f"{since} ago" if since else ""
         name = str((task.get("dataset") if kind == "Snapshot" else task.get("name")) or "?")
         items.append({
+            "id": f"{kind.lower()}:{task.get('id')}",
             "title": name,
             "subtitle": " · ".join(part for part in (kind, when, why[:120]) if part),
             "status": state,
@@ -760,3 +849,186 @@ def _tasks(snapshots: Any, replications: Any, limit: int) -> WidgetData:
         secondary=[{"label": "Tasks", "value": len(items)}, {"label": "Failed", "value": failed}],
         meta={"empty": "No snapshot or replication task is enabled."},
     )
+
+
+# -- the cards and notifications taken from nexdeck 0.46.0 --------------------
+
+#: What TrueNAS' own Services page calls them; ``service.query`` has the old names.
+SERVICE_NAMES = {
+    "cifs": "SMB", "nfs": "NFS", "ssh": "SSH", "ftp": "FTP", "iscsitarget": "iSCSI", "nvmet": "NVMe-oF",
+    "snmp": "SNMP", "ups": "UPS", "smartd": "S.M.A.R.T.",
+}
+#: A VM in ``vm.query`` and an instance in ``virt.instance.query``, as a colour and a word.
+MACHINE_STATES: dict[str, tuple[Status, str]] = {
+    "RUNNING": ("ok", "Running"), "STARTING": ("ok", "Starting"), "STOPPING": ("ok", "Stopping"),
+    "STOPPED": ("unknown", "Stopped"), "SUSPENDED": ("warn", "Paused"), "FROZEN": ("warn", "Paused"),
+    "FREEZING": ("warn", "Paused"), "THAWED": ("ok", "Running"), "ERROR": ("bad", "Error"),
+}
+#: Which rows come first: the ones somebody has to look at.
+ROW_ORDER = {"bad": 0, "warn": 1, "ok": 2, "unknown": 3}
+
+
+def _number(value: Any) -> float:
+    return float(value) if isinstance(value, int | float) and not isinstance(value, bool) else 0.0
+
+
+def _overall(items: list[dict[str, Any]]) -> Status:
+    states = {item.get("status") for item in items}
+    return "bad" if "bad" in states else ("warn" if "warn" in states else "ok")
+
+
+def _sorted(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(items, key=lambda item: (ROW_ORDER.get(str(item.get("status")), 3), str(item.get("title") or "").lower()))
+
+
+def _interfaces(realtime: Any, summary: Any, options: dict[str, Any]) -> WidgetData:
+    """Every interface from the realtime event, with its address from ``network.general.summary``.
+
+    ⚠️ The traffic is the event's, not ``reporting.netdata_get_data``: the
+    event the system card subscribes to anyway carries every interface's rate
+    in bytes per second (``get_interface_stats``, 25.04 and 25.10), so the
+    card costs TrueNAS nothing new. The link speed is in Mbit/s there, and the
+    names are those of ``interface.query``, so no container's veth turns up.
+
+    A link that is down is grey, not red. A NAS with four ports and one cable
+    is not broken.
+    """
+    interfaces = realtime.get("interfaces") if isinstance(realtime, dict) else None
+    if not isinstance(interfaces, dict):
+        raise AdapterError("TrueNAS sent no live figures for its interfaces.", code="no_realtime",
+                           hint="The key's user needs the Read-Only Administrator role, which may read the reporting.")
+    if not interfaces:
+        # ⚠️ Not measured. The one event on record, from a test VM on
+        # 25.10.7, had an empty ``interfaces``; whether that VM had none
+        # configured or the event leaves them out is open. An empty card would
+        # hide which, so it says so instead.
+        raise AdapterError("TrueNAS listed no interfaces in its live figures.", code="no_interfaces",
+                           hint="TrueNAS takes them from Network > Interfaces; one set up there should appear here.")
+    addresses = summary.get("ips") if isinstance(summary, dict) and isinstance(summary.get("ips"), dict) else {}
+    items: list[dict[str, Any]] = []
+    down = up = 0.0
+    for name in sorted(interfaces):
+        stats = interfaces[name] if isinstance(interfaces[name], dict) else {}
+        linked = stats.get("link_state") == "LINK_STATE_UP"
+        received, sent = _number(stats.get("received_bytes_rate")), _number(stats.get("sent_bytes_rate"))
+        down, up = down + received, up + sent
+        ips = addresses.get(name) if isinstance(addresses.get(name), dict) else {}
+        first = next(iter([*(ips.get("IPV4") or []), *(ips.get("IPV6") or [])]), "")
+        speed = _number(stats.get("speed"))
+        items.append({
+            "title": name,
+            "subtitle": join_parts(options, ("address", first), ("speed", f"{speed:.0f} Mbit/s" if linked and speed else ""),
+                                   ("link", "" if linked else "No link")),
+            "value": f"↓ {human_rate(received)} ↑ {human_rate(sent)}" if linked else "",
+            "status": "ok" if linked else "unknown",
+        })
+    return WidgetData(items=items, metrics={"down": down, "up": up},
+                      secondary=[{"label": "Download", "metric": "down", "value": human_rate(down)},
+                                 {"label": "Upload", "metric": "up", "value": human_rate(up)}])
+
+
+def _services(services: Any, options: dict[str, Any]) -> WidgetData:
+    """The services meant to start with TrueNAS, and whether they run.
+
+    ``enable`` is "start on boot". One that should start and is stopped is
+    red; one that runs without being set to start is shown as well, since it
+    runs. The rest only with the option, or the card would list eight
+    services most people never switched on.
+    """
+    every = bool(options.get("all_services"))
+    items: list[dict[str, Any]] = []
+    for service in services or []:
+        if not isinstance(service, dict):
+            continue
+        state = str(service.get("state") or "").upper()
+        running = state == "RUNNING"
+        if not (every or service.get("enable") or running):
+            continue
+        name = str(service.get("service") or "?")
+        items.append({
+            "title": SERVICE_NAMES.get(name, name.upper()),
+            "value": "Running" if running else ("Stopped" if state == "STOPPED" else "Unknown"),
+            "status": "ok" if running else ("bad" if service.get("enable") and state == "STOPPED" else "unknown"),
+        })
+    return WidgetData(status=_overall(items), items=_sorted(items))
+
+
+def _machines(vms: Any, instances: Any) -> WidgetData:
+    """Virtual machines from ``vm.query`` and containers from ``virt.instance.query``.
+
+    25.10 makes VMs with ``vm.*`` again and keeps Incus for containers; 25.04
+    could make VMs with Incus too. So both are read, and an Incus VM with the
+    name of a ``vm.query`` one is the same machine, counted once. ``vm.query``
+    gives memory in MiB, Incus in bytes.
+    """
+    if vms is None and instances is None:
+        raise AdapterError("TrueNAS answered neither vm.query nor virt.instance.query.", code="rpc_error",
+                           hint="Virtual machines and containers need the current TrueNAS API, over https://, and TrueNAS 25.04 or later.")
+    items: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for vm in vms or []:
+        if not isinstance(vm, dict):
+            continue
+        name = str(vm.get("name") or "?")
+        seen.add(name)
+        status = vm.get("status") if isinstance(vm.get("status"), dict) else {}
+        cpus = int(_number(vm.get("vcpus")) or 1) * int(_number(vm.get("cores")) or 1) * int(_number(vm.get("threads")) or 1)
+        memory = _number(vm.get("memory")) * 1024 * 1024
+        items.append(_machine_row(name, "VM", f"{cpus} vCPU", human_bytes(memory) if memory else "", str(status.get("state") or "").upper()))
+    for instance in instances or []:
+        if not isinstance(instance, dict):
+            continue
+        name = str(instance.get("name") or "?")
+        kind = "VM" if str(instance.get("type") or "").upper() == "VM" else "Container"
+        if kind == "VM" and name in seen:
+            continue
+        # Incus takes a count or a set of cores ("0-3"); only a count is a number of vCPUs.
+        cpu = str(instance.get("cpu") or "")
+        memory = _number(instance.get("memory"))
+        items.append(_machine_row(name, kind, (f"{cpu} vCPU" if cpu.isdigit() else f"CPU {cpu}") if cpu else "", human_bytes(memory) if memory else "", str(instance.get("status") or "").upper()))
+    running = sum(1 for item in items if item["value"] == "Running")
+    return WidgetData(status=_overall(items), items=_sorted(items), secondary=[{"label": "Running", "value": running}])
+
+
+def _machine_row(name: str, kind: str, cpu: str, memory: str, state: str) -> dict[str, Any]:
+    status, word = MACHINE_STATES.get(state, ("unknown", state.title() or "Unknown"))
+    return {"title": name, "subtitle": " · ".join(part for part in (kind, cpu, memory) if part), "value": word, "status": status}
+
+
+def _newly(before: WidgetData | None, after: WidgetData, test: Any, *, first: bool = False, same: Any = None) -> list[dict[str, Any]]:
+    """The rows of ``after`` for which ``test`` holds and did not before.
+
+    Matched by ``id``, else by title. ``same`` says whether a row that held
+    before is still the same news: an app whose waiting update moved on to a
+    newer version is news again. ``first`` lets a card speak that has nothing
+    before it; see ``detect``.
+    """
+    if after.error:
+        return []
+    # ⚠️ A card in error keeps its last good rows (``collector._failure``).
+    # Compared against those, a task that failed while TrueNAS rebooted is
+    # still news afterwards; treated as "nothing before", it was lost.
+    if before is None or (before.error and not before.items):
+        return [item for item in after.items if test(item)] if first else []
+
+    def key(item: dict[str, Any]) -> str:
+        return str(item.get("id") or item.get("title") or "")
+
+    earlier = {key(item): item for item in before.items}
+    found = []
+    for item in after.items:
+        if not test(item):
+            continue
+        old = earlier.get(key(item))
+        if old is not None and test(old) and (same is None or same(old, item)):
+            continue
+        found.append(item)
+    return found
+
+
+def _chip(data: WidgetData | None, label: str) -> str | None:
+    """The value of the secondary row with this label, or None."""
+    for row in (data.secondary if data else []):
+        if row.get("label") == label:
+            return str(row.get("value"))
+    return None
