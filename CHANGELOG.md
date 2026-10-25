@@ -5,10 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.33.1 (2026-10-25)
 
-What nexdeck 0.48.0 added that 0.33.0 left for later: key figures, a
-countdown and a timer.
+Key figures, a countdown and a timer from nexdeck 0.48, and the UPS load drawn over time.
 
 ### Added
 

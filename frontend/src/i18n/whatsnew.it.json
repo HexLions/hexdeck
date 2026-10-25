@@ -544,6 +544,31 @@
         "Le card Proxmox dicono quale permesso manca al token.",
         "certifi 2026.10.19, per GHSA-6q48-6c7w-9gw2."
       ]
+    },
+    "0.33.1": {
+      "lead": "HexDeck 0.33.1: key figures, un conto alla rovescia, un timer, e il carico dell'UPS nel tempo.",
+      "sections": [
+        {
+          "title": "Key figures",
+          "body": "Numeri da più connessioni in una sola griglia di tessere, gialle o rosse quando serve. Pensata per i display a parete.",
+          "path": "Modifica (matita) > Aggiungi widget > Base"
+        },
+        {
+          "title": "Conto alla rovescia e timer",
+          "body": "I giorni che mancano a una data, anche ogni anno, e un timer che continua anche se ricarichi la pagina e suona quando finisce.",
+          "path": "Modifica (matita) > Aggiungi widget > Base"
+        },
+        {
+          "title": "Carico UPS",
+          "body": "Una nuova card per un UPS via NUT: il carico nell'ultima ora, nelle ultime 6 ore o nell'ultimo giorno, con la potenza assorbita.",
+          "path": "Modifica (matita) > Aggiungi widget > UPS (NUT)"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "La card UPS dice Autonomia residua: quanto dura la batteria al carico attuale.",
+        "Giallo da e Rosso da colorano il numero in ogni vista."
+      ]
     }
   }
 }
