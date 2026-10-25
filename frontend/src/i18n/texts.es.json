@@ -2524,7 +2524,9 @@
     "History behind the number": "Historial detrás del número",
     "The last hours as a faint line, as the card itself records them.": "Las últimas horas como una línea tenue, tal como la tarjeta las registra.",
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Tarjetas de esta página que muestran un número. Salen del tablero y aparecen aquí como mosaicos, cada uno con sus propios ajustes, hasta que se quita esta tarjeta.",
-    "A dot in the corner": "Punto en la esquina"
+    "A dot in the corner": "Punto en la esquina",
+    "UPS load": "Carga del SAI",
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "La carga del SAI en la última hora, las últimas 6 horas o el último día, con la potencia consumida."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3783,6 +3785,7 @@
     "LXC containers": "Contenedores LXC",
     "Docker containers": "Contenedores Docker",
     "No link": "Sin enlace",
-    "major version": "versión principal"
+    "major version": "versión principal",
+    "Runtime left": "Autonomía restante"
   }
 }

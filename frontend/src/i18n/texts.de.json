@@ -2524,7 +2524,9 @@
     "History behind the number": "Verlauf hinter der Zahl",
     "The last hours as a faint line, as the card itself records them.": "Die letzten Stunden als blasse Linie, so wie die Karte sie selbst aufzeichnet.",
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Karten dieser Seite, die eine Zahl zeigen. Sie verlassen das Board und erscheinen hier als Kacheln, jede mit ihren eigenen Einstellungen, bis diese Karte entfernt wird.",
-    "A dot in the corner": "Punkt in der Ecke"
+    "A dot in the corner": "Punkt in der Ecke",
+    "UPS load": "USV-Last",
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Die Last der USV in der letzten Stunde, den letzten 6 Stunden oder am letzten Tag, mit der aufgenommenen Leistung."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3783,6 +3785,7 @@
     "LXC containers": "LXC-Container",
     "Docker containers": "Docker-Container",
     "No link": "Keine Verbindung",
-    "major version": "Hauptversion"
+    "major version": "Hauptversion",
+    "Runtime left": "Restlaufzeit"
   }
 }

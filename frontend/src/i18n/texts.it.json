@@ -2524,7 +2524,9 @@
     "History behind the number": "Andamento dietro il numero",
     "The last hours as a faint line, as the card itself records them.": "Le ultime ore come una linea tenue, come la scheda stessa le registra.",
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Schede di questa pagina che mostrano un numero. Lasciano la bacheca e compaiono qui come riquadri, ognuna con le sue impostazioni, finché questa scheda non viene rimossa.",
-    "A dot in the corner": "Punto nell'angolo"
+    "A dot in the corner": "Punto nell'angolo",
+    "UPS load": "Carico UPS",
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Il carico dell'UPS nell'ultima ora, nelle ultime 6 ore o nell'ultimo giorno, con la potenza assorbita."
   },
   "labels": {
     "Jobs": "Job",
@@ -3783,6 +3785,7 @@
     "LXC containers": "Container LXC",
     "Docker containers": "Container Docker",
     "No link": "Nessun collegamento",
-    "major version": "versione principale"
+    "major version": "versione principale",
+    "Runtime left": "Autonomia residua"
   }
 }

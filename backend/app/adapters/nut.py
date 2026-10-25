@@ -35,6 +35,7 @@ from typing import Any
 
 from . import demo as fake
 from .base import (
+    CHART_HOURS,
     Adapter,
     AdapterError,
     Context,
@@ -44,6 +45,7 @@ from .base import (
     WidgetType,
     duration_short,
     guard_outbound,
+    status_from_percent,
 )
 
 TIMEOUT = 8.0
@@ -171,6 +173,12 @@ class NutAdapter(Adapter):
         WidgetType(kind="details", label="UPS details",
                    description="Model, battery voltage and type, input and output, the power it can give, the low-battery limits, beeper and driver.",
                    renderer="stats", default_size=(4, 3), refresh_seconds=60),
+        # ⚠️ Load alone. The UPS card can be drawn as a chart too, but it puts
+        # charge, load, runtime and watts on one scale, and the load, the line
+        # that says how hard the UPS works, sat flat at the bottom.
+        WidgetType(kind="load", label="UPS load", description="The load on the UPS over the last hour, 6 hours or day, with the power drawn.",
+                   renderer="chart", default_size=(4, 2), refresh_seconds=30, metrics=("load",),
+                   options=(Field("chart_hours", "Chart shows", type="select", default="24", options=CHART_HOURS),)),
     )
 
     def _target(self, config: dict[str, Any]) -> tuple[str, int, str]:
@@ -211,6 +219,8 @@ class NutAdapter(Adapter):
         found, _version = await self._read(config, ctx)
         if widget_kind == "details":
             return self._details(found)
+        if widget_kind == "load":
+            return self._load(found, options)
         return self._status(found)
 
     @staticmethod
@@ -238,7 +248,9 @@ class NutAdapter(Adapter):
             state = "unknown"
         secondary: list[dict[str, Any]] = [{"label": "Status", "value": NutAdapter._words(found.get("ups.status", ""))}]
         if runtime is not None:
-            secondary.append({"label": "Runtime", "value": duration_short(runtime)})
+            # Battery left at this load, not how long the UPS has been on:
+            # "Runtime" alone was read as the latter.
+            secondary.append({"label": "Runtime left", "value": duration_short(runtime)})
         if load is not None:
             secondary.append({"label": "Load", "value": round(load), "unit": "%"})
         if voltage is not None:
@@ -255,6 +267,30 @@ class NutAdapter(Adapter):
                                                    ("power_w", round(power) if power is not None else None)) if value is not None}
         return WidgetData(status=state, primary={"label": "Charge", "value": round(charge) if charge is not None else "?", "unit": "%" if charge is not None else ""},
                           secondary=secondary, meta=meta, metrics=metrics)
+
+    @staticmethod
+    def _load(found: dict[str, str], options: dict[str, Any]) -> WidgetData:
+        """How hard the UPS works, as a line over time: ``ups.load`` in percent.
+
+        The history is HexDeck's own, kept for a day, so a new card starts empty
+        and fills as it reads.
+        """
+        load = _number(found, "ups.load")
+        hours = str(options.get("chart_hours") or "24")
+        secondary: list[dict[str, Any]] = []
+        power = _power(found)
+        if power is not None:
+            secondary.append({"label": "Power", "value": round(power), "unit": "W"})
+        nominal = _number(found, "ups.realpower.nominal")
+        if nominal is not None:
+            secondary.append({"label": "Nominal power", "value": round(nominal), "unit": "W"})
+        return WidgetData(
+            status=status_from_percent(load),
+            primary={"label": "Load", "value": round(load) if load is not None else "?", "unit": "%" if load is not None else "", "metric": "load"},
+            secondary=secondary,
+            metrics={"load": load} if load is not None else {},
+            meta={"chart_hours": int(hours) if hours in {value for value, _ in CHART_HOURS} else 24},
+        )
 
     def detect(self, widget_kind: str, before: WidgetData | None, after: WidgetData,
                options: dict[str, Any]) -> list[Detected]:
@@ -274,7 +310,7 @@ class NutAdapter(Adapter):
             return []
         values = {row.get("label"): row.get("value") for row in after.secondary}
         charge = (after.primary or {}).get("value")
-        left = values.get("Runtime")
+        left = values.get("Runtime left")
         found: list[Detected] = []
         if "OB" in now and "OB" not in was:
             found.append(Detected(event="power_lost", title=f"On battery, {left} left" if left else "On battery",
@@ -340,6 +376,8 @@ class NutAdapter(Adapter):
             "battery.charge.low": "10", "battery.runtime.low": "120", "input.frequency": "50.0",
             "ups.beeper.status": "enabled", "ups.test.result": "Done and passed", "driver.name": "usbhid-ups", "driver.version": "2.8.1",
         }
+        if widget_kind == "load":
+            return self._load(found, options)
         return self._details(found) if widget_kind == "details" else self._status(found)
 
 

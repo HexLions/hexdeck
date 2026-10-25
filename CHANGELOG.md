@@ -12,6 +12,11 @@ countdown and a timer.
 
 ### Added
 
+- **UPS load**, a new card for a UPS through NUT: the load in percent over
+  the last hour, 6 hours or day, with the power drawn and the nominal power,
+  to see how hard the UPS works across the day. The UPS card could already
+  be drawn as a chart, but with charge, load, runtime and watts on one scale.
+  The history is HexDeck's own, so the line starts when the card is added.
 - **Key figures**, a new basic card: numbers from several connections in
   one grid, such as the processor of the NAS, the downloads and the blocked
   queries. Each tile is a number card of the page with its value, unit and
@@ -36,6 +41,9 @@ countdown and a timer.
 
 ### Changed
 
+- **"Runtime left" on the UPS (NUT) card,** not "Runtime": it is how long the
+  battery lasts at the present load, and was read as how long the UPS had
+  been on.
 - **Yellow from and Red from colour the number in every view,** so a tile
   of key figures takes its colour from them whatever the card's view; the
   plain number and the rows do not read them, and the card's status stays
