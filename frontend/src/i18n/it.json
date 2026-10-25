@@ -1387,5 +1387,38 @@
   },
   "brand": {
     "withHexdeck": "con HexDeck"
+  },
+  "countdown": {
+    "unset": "Scegli una data nelle impostazioni della scheda.",
+    "until": "a {{event}}",
+    "today": "Oggi",
+    "here": "Ci siamo",
+    "days_one": "giorno",
+    "days_other": "giorni",
+    "unit": {
+      "d": "g",
+      "h": "h",
+      "min": "min",
+      "s": "s"
+    },
+    "ago_one": "{{count}} giorno fa",
+    "ago_other": "{{count}} giorni fa"
+  },
+  "timer": {
+    "start": "Avvia",
+    "pause": "Pausa",
+    "resume": "Riprendi",
+    "stop": "Ferma",
+    "reset": "Azzera",
+    "oneMore": "Un minuto in più",
+    "done": "Tempo scaduto",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s"
+  },
+  "figures": {
+    "empty": "Ancora nessun riquadro. Apri le impostazioni della scheda e scegli schede che mostrano un numero.",
+    "emptyEditing": "Scegli nelle impostazioni di questa scheda le schede che mostrano un numero."
   }
 }

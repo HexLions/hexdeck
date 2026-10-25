@@ -1387,5 +1387,38 @@
   },
   "brand": {
     "withHexdeck": "with HexDeck"
+  },
+  "countdown": {
+    "unset": "Pick a date in the card's settings.",
+    "until": "until {{event}}",
+    "today": "Today",
+    "here": "It is here",
+    "days_one": "day",
+    "days_other": "days",
+    "unit": {
+      "d": "d",
+      "h": "h",
+      "min": "min",
+      "s": "s"
+    },
+    "ago_one": "{{count}} day ago",
+    "ago_other": "{{count}} days ago"
+  },
+  "timer": {
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Go on",
+    "stop": "Stop",
+    "reset": "Reset",
+    "oneMore": "One minute more",
+    "done": "Time is up",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s"
+  },
+  "figures": {
+    "empty": "No tiles yet. Open the card's settings and pick cards that show a number.",
+    "emptyEditing": "Pick cards that show a number in this card's settings."
   }
 }

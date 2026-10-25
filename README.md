@@ -283,7 +283,7 @@ offer is in [docs/adapters.md](docs/adapters.md).
 
 ### Cards that need no service
 
-Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Updates · Host
+Roadmap · Project · Items · Notepad · To-do · Countdown · Timer · Key figures · Status page · Notices · Updates · Host
 
 ### The board
 
@@ -292,7 +292,7 @@ Roadmap · Project · Items · Notepad · To-do · Status page · Notices · Upd
 | Layout | 12, 24 or 36 columns per board, chosen width, rows that fit the screen |
 | Arranging | Multi-select, tidy up, four preset sizes, Ctrl+Z, cards moved or copied to another page or board, cards left off the phone |
 | Starting points | Seven board templates, four bundled themes, themes as JSON |
-| Holders | A tabs card and a group: cards leave the grid and live inside one, which folds away and moves as one |
+| Holders | A tabs card, a group and key figures: cards leave the grid and live inside one, which moves as one; a group folds away, key figures show each number as a tile |
 | Numbers | History behind every headline number, declared metric or not |
 
 ### Operating

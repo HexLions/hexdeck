@@ -1387,5 +1387,38 @@
   },
   "brand": {
     "withHexdeck": "mit HexDeck"
+  },
+  "countdown": {
+    "unset": "Datum in den Einstellungen der Karte wählen.",
+    "until": "bis {{event}}",
+    "today": "Heute",
+    "here": "Es ist so weit",
+    "days_one": "Tag",
+    "days_other": "Tage",
+    "unit": {
+      "d": "T",
+      "h": "h",
+      "min": "min",
+      "s": "s"
+    },
+    "ago_one": "vor {{count}} Tag",
+    "ago_other": "vor {{count}} Tagen"
+  },
+  "timer": {
+    "start": "Start",
+    "pause": "Anhalten",
+    "resume": "Weiter",
+    "stop": "Aus",
+    "reset": "Zurücksetzen",
+    "oneMore": "Eine Minute mehr",
+    "done": "Die Zeit ist um",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s"
+  },
+  "figures": {
+    "empty": "Noch keine Kacheln. In den Einstellungen der Karte Karten mit einer Zahl wählen.",
+    "emptyEditing": "In den Einstellungen dieser Karte Karten mit einer Zahl wählen."
   }
 }
