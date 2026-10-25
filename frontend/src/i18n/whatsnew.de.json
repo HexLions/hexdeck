@@ -1170,6 +1170,31 @@
         "Proxmox-Karten sagen, welches Recht dem Token fehlt.",
         "certifi 2026.10.19, wegen GHSA-6q48-6c7w-9gw2."
       ]
+    },
+    "0.33.1": {
+      "lead": "HexDeck 0.33.1: Kennzahlen, ein Countdown, ein Timer und die USV-Last im Verlauf.",
+      "sections": [
+        {
+          "title": "Kennzahlen",
+          "body": "Zahlen aus mehreren Verbindungen in einem Raster aus Kacheln, gelb oder rot, wo sie es sein sollen. Für Wanddisplays gemacht.",
+          "path": "Bearbeiten (Stift) > Widget hinzufügen > Grundlagen"
+        },
+        {
+          "title": "Countdown und Timer",
+          "body": "Die Tage bis zu einem Datum, auf Wunsch jedes Jahr, und ein Timer, der ein Neuladen übersteht und klingelt, wenn er abgelaufen ist.",
+          "path": "Bearbeiten (Stift) > Widget hinzufügen > Grundlagen"
+        },
+        {
+          "title": "USV-Last",
+          "body": "Eine neue Karte für eine USV über NUT: die Last der letzten Stunde, 6 Stunden oder des letzten Tages, mit der aufgenommenen Leistung.",
+          "path": "Bearbeiten (Stift) > Widget hinzufügen > UPS (NUT)"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Die USV-Karte sagt Restlaufzeit: wie lange der Akku bei der jetzigen Last hält.",
+        "Gelb ab und Rot ab färben die Zahl in jeder Ansicht."
+      ]
     }
   }
 }

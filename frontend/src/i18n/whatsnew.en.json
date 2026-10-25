@@ -1170,6 +1170,31 @@
         "Proxmox cards say which right the token is missing.",
         "certifi 2026.10.19, for GHSA-6q48-6c7w-9gw2."
       ]
+    },
+    "0.33.1": {
+      "lead": "HexDeck 0.33.1: key figures, a countdown, a timer, and the UPS load over time.",
+      "sections": [
+        {
+          "title": "Key figures",
+          "body": "Numbers from several connections in one grid of tiles, yellow or red where they should be. Made for wall displays.",
+          "path": "Edit mode (pencil) > Add widget > Basics"
+        },
+        {
+          "title": "Countdown and timer",
+          "body": "The days until a date, every year if you like, and a timer that keeps running across a reload and rings when it is done.",
+          "path": "Edit mode (pencil) > Add widget > Basics"
+        },
+        {
+          "title": "UPS load",
+          "body": "A new card for a UPS through NUT: the load over the last hour, 6 hours or day, with the power drawn.",
+          "path": "Edit mode (pencil) > Add widget > UPS (NUT)"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The UPS card says Runtime left: how long the battery lasts at the present load.",
+        "Yellow from and Red from colour the number in every view."
+      ]
     }
   }
 }

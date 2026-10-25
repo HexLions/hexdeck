@@ -400,6 +400,31 @@
         "Las tarjetas de Proxmox dicen qué permiso le falta al token.",
         "certifi 2026.10.19, por GHSA-6q48-6c7w-9gw2."
       ]
+    },
+    "0.33.1": {
+      "lead": "HexDeck 0.33.1: cifras clave, una cuenta atrás, un temporizador y la carga del SAI en el tiempo.",
+      "sections": [
+        {
+          "title": "Cifras clave",
+          "body": "Números de varias conexiones en una sola cuadrícula de mosaicos, amarillos o rojos cuando toca. Pensada para pantallas de pared.",
+          "path": "Modo edición (lápiz) > Añadir widget > Básicos"
+        },
+        {
+          "title": "Cuenta atrás y temporizador",
+          "body": "Los días hasta una fecha, cada año si quieres, y un temporizador que sigue tras recargar la página y suena al terminar.",
+          "path": "Modo edición (lápiz) > Añadir widget > Básicos"
+        },
+        {
+          "title": "Carga del SAI",
+          "body": "Una tarjeta nueva para un SAI a través de NUT: la carga de la última hora, 6 horas o día, con la potencia consumida.",
+          "path": "Modo edición (lápiz) > Añadir widget > UPS (NUT)"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "La tarjeta del SAI dice Autonomía restante: cuánto dura la batería con la carga actual.",
+        "Amarillo desde y Rojo desde colorean el número en cada vista."
+      ]
     }
   }
 }
