@@ -49,7 +49,7 @@ async def test_on_line() -> None:
         data = await get_adapter("nut").fetch("status", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {}, _ctx())
     assert data.status == "ok"
     assert data.primary == {"label": "Charge", "value": 100, "unit": "%"}
-    assert data.secondary == [{"label": "Status", "value": "On line"}, {"label": "Runtime", "value": "41m"},
+    assert data.secondary == [{"label": "Status", "value": "On line"}, {"label": "Runtime left", "value": "41m"},
                               {"label": "Load", "value": 23, "unit": "%"}, {"label": "Input", "value": 231, "unit": "V"},
                               {"label": "Power", "value": 93, "unit": "W"}]
     assert data.metrics == {"charge": 100.0, "load": 23.0, "runtime_min": 41.0, "power_w": 93.0}, "23 % of 405 W nominal"
@@ -61,7 +61,7 @@ async def test_on_battery_and_low_is_red_with_the_reason() -> None:
     async with server:
         data = await get_adapter("nut").fetch("status", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {}, _ctx())
     assert data.status == "bad" and data.meta["status_reason"] == "On battery, Battery low"
-    assert data.primary["value"] == 8 and data.secondary[1] == {"label": "Runtime", "value": "3m 10s"}
+    assert data.primary["value"] == 8 and data.secondary[1] == {"label": "Runtime left", "value": "3m 10s"}
 
 
 @pytest.mark.parametrize(("answer", "code"), [("unknown_ups", "unknown_ups"), ("driver_not_connected", "driver_not_connected")])
@@ -145,3 +145,28 @@ def test_the_mains_going_and_coming_back_are_said() -> None:
     [back] = adapter.detect("status", low, on_line, {})
     assert back.event == "power_back"
     assert adapter.detect("details", on_line, on_battery, {}) == [], "one card says it, not every card of the UPS"
+
+
+async def test_the_load_card_draws_the_load_alone() -> None:
+    """One line: the load. Charge, runtime and watts on the same scale left it flat at the bottom."""
+    server, port, _heard = await _upsd(FIXTURE["online"])
+    async with server:
+        data = await get_adapter("nut").fetch("load", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {"chart_hours": "6"}, _ctx())
+    assert data.primary == {"label": "Load", "value": 23, "unit": "%", "metric": "load"}
+    assert data.metrics == {"load": 23.0}
+    assert data.secondary == [{"label": "Power", "value": 93, "unit": "W"}, {"label": "Nominal power", "value": 405, "unit": "W"}]
+    assert data.meta == {"chart_hours": 6}
+    assert data.status == "ok"
+
+
+async def test_the_load_card_keeps_to_the_stretches_it_offers() -> None:
+    server, port, _heard = await _upsd(FIXTURE["online"])
+    async with server:
+        data = await get_adapter("nut").fetch("load", {"host": "127.0.0.1", "port": port, "ups": "ups"}, {"chart_hours": "999"}, _ctx())
+    assert data.meta == {"chart_hours": 24}
+
+
+def test_the_load_card_is_a_chart_with_a_choice_of_hours() -> None:
+    widget = next(one for one in get_adapter("nut").widgets if one.kind == "load")
+    assert widget.renderer == "chart" and widget.metrics == ("load",)
+    assert [field.name for field in widget.options] == ["chart_hours"]
