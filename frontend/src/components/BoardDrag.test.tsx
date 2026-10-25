@@ -53,10 +53,11 @@ function board(editing: boolean) {
 }
 
 describe('what a drag is allowed to start on', () => {
-  it('leaves only the card buttons out while editing', () => {
-    // The settings and delete buttons of the card, and nothing else. Written
-    // out rather than matched loosely: this is the whole rule.
-    expect(board(true)).toBe('.card-controls')
+  it('leaves only the card buttons and the settings of a tile out while editing', () => {
+    // The settings and delete buttons of the card, and the settings button of
+    // a tile of key figures. Written out rather than matched loosely: this is
+    // the whole rule.
+    expect(board(true)).toBe('.card-controls, .nd-tile-settings')
   })
 
   it('still leaves buttons and links alone when not editing', () => {

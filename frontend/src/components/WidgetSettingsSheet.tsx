@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { ApiError, del, get, patch, post, put } from '../api/client'
 import type { AdapterSpec, AppEntry, Integration } from '../api/types'
 import { tAdapter } from '../i18n/texts'
+import { inFigures, TILE_LINES } from '../lib/figures'
+import { useEditedPage } from '../lib/groups'
 import type { WidgetData, WidgetView } from '../lib/types'
 import { useAuth } from '../stores/auth'
 import { FieldInput } from './FieldInput'
@@ -45,6 +47,8 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
   const apps = useQuery({ queryKey: ['apps'], queryFn: () => get<AppEntry[]>('/apps'), enabled: appTile, staleTime: 60_000 })
   // A list or nothing: an answer of another shape must not take the whole sheet down.
   const catalog = Array.isArray(apps.data) ? apps.data : NO_APPS
+  // A tile of key figures offers the lines that colour it, whatever its view.
+  const tile = useEditedPage((state) => inFigures(widget?.id, state.widgets))
   const [title, setTitle] = useState('')
   const [icon, setIcon] = useState('')
   const [link, setLink] = useState('')
@@ -332,6 +336,8 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
       {spec?.options
         .filter((option) => {
           if (!option.only_when) return true
+          // A tile of key figures draws the number whatever the view, coloured by these lines.
+          if (tile && TILE_LINES.has(option.name)) return true
           const [name, wanted] = option.only_when
           const current = options[name] ?? spec.options.find((other) => other.name === name)?.default
           // Several values are joined by "|": the ceiling of a dial is the ceiling

@@ -165,7 +165,7 @@ that one of thirty-five renderers draws.
 | PhotoPrism | photo library, recently added | start indexing | app password from Settings > Account > Apps and Devices; a client access token cannot list photos |
 | Tandoor Recipes | meal plan, shopping list | tick an entry off | API token from Settings > API; the scope read is enough to look, ticking off needs read write |
 | Wallos | next payments, subscription costs | | API key from the profile; it goes in the body of a POST, never in the address |
-| Weather (Open-Meteo), RSS feeds, Calendar, Basics | current, headlines, upcoming, clock, notes, bookmarks, iframe, app tile, host, updates, status, notices, to-do | | none; the host card reads /proc, and the machine's own when /proc and /sys are mounted under /host |
+| Weather (Open-Meteo), RSS feeds, Calendar, Basics | current, headlines, upcoming, clock, countdown, timer, notes, bookmarks, iframe, app tile, key figures, host, updates, status, notices, to-do | | none; the host card reads /proc, and the machine's own when /proc and /sys are mounted under /host |
 | AMP (CubeCoders) | servers, server, panel | start, stop or restart a server | a panel account's user name and password; AMP has no API tokens, and an account with two-factor cannot be used unattended. One server's numbers come through a login proxied by the controller |
 | Pterodactyl | overview, servers | start, stop, restart a server (off by default, asks before stopping) | a client API key from Account, API Credentials (`ptlc_...`), as a Bearer token; the card sees the servers that user can reach. Each server's live state comes from its node through the panel; a node that does not answer marks that server, not the card. Buttons act only on a server the panel lists |
 | Arcane | overview, environments, projects, containers, image updates | start, stop and restart a container; start, stop, redeploy and update a project; update a container to its newer image | API key from Settings > API keys; environments:list, containers:list and projects:list for the cards, images:list, volumes:list and networks:list for the overview's counts, and containers:start, containers:stop, containers:restart, projects:deploy, projects:down, projects:update and image-updates:check for the buttons; Arcane 2.14 |
@@ -277,6 +277,17 @@ a tight spot.
 `search`, `ask`, `player`, `roadmap`, `project`, `items`, `meter`, `segments`: thirty-three, the keys of `RENDERER_MIN` in
 `backend/app/adapters/base.py`. A fetch may pick another renderer for its data through
 `meta["renderer"]`; the media library card uses that for its icon row.
+
+Key figures (`core.figures`, renderer `figures`) hold number cards of their
+page in `options.cards`, as a group or a tabs card does, and draw each as a
+tile with its value, unit and colour. The picker in their settings offers
+the cards drawn by `value`, `stats` or `gauge` that record a metric and are
+refreshed by the server. "Yellow from" and "Red from" set `meta.level` in
+every view; the dial, the LEDs, the digits and a tile read it, and a card's
+settings offer the two while it is a tile. The countdown and the timer
+(`countdown`, `timer`) count in the browser; a field of type `date` or `time`
+is the browser's own picker. A timer's state is kept in the browser that runs
+it. From nexdeck 0.48.0.
 
 Every card drawn by `value`, `stats` or `gauge` that records at least one
 metric gets the drawings of a number by itself: a dial, LED bars, seven
