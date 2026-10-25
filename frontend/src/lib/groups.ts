@@ -1,5 +1,5 @@
 /**
- * Cards that hold other cards: the tabs card and the group. A holder keeps
+ * Cards that hold other cards: the tabs card, the group and key figures. A holder keeps
  * the numbers of cards of its own page in `options.cards`; those cards leave
  * the grid and are drawn inside it. Their data keeps coming as it did, they
  * are only drawn somewhere else. Removing the holder brings them back.
@@ -9,7 +9,7 @@ import { create } from 'zustand'
 
 import type { Action, WidgetView } from './types'
 
-export const GROUP_KINDS = new Set(['core.tabs', 'core.group'])
+export const GROUP_KINDS = new Set(['core.tabs', 'core.group', 'core.figures'])
 
 /** The numbers a holder keeps, as numbers, whatever came in. */
 export function heldBy(widget: WidgetView): number[] {
@@ -40,6 +40,8 @@ export interface PageCards {
   canAct?: boolean
   editing?: boolean
   onAction?: (widgetId: number, action: Action) => void
+  /** The settings of a card the holder draws, for a tile of key figures while the board is arranged. */
+  onSettings?: (widgetId: number) => void
 }
 
 export const PageCardsContext = createContext<PageCards>({ widgets: [] })

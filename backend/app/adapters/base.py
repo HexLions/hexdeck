@@ -33,13 +33,15 @@ logger = logging.getLogger("hexdeck.adapters")
 #: person editing may build on that connection at all.
 FieldType = Literal["text", "password", "url", "number", "bool", "select", "integrations",
                     "textarea", "timezone", "items", "choices", "colour", "board", "pictures",
-                    "project", "milestone", "cards"]
+                    "project", "milestone", "cards", "date", "time"]
 #: ``items`` picks among the rows a card is showing; ``choices`` picks among
 #: values the service itself hands out, through ``Adapter.choices``;
 #: ``board`` picks one of this installation's own boards, which no service
 #: knows about; ``pictures`` is a list somebody builds by uploading files
 #: or naming addresses, not a text field with a syntax. ``cards`` picks other
-#: cards of the same page, for a card that holds them.
+#: cards of the same page, for a card that holds them. ``date`` and ``time``
+#: are a day (2026-12-24) and a time of day (18:30), as the browser's own
+#: pickers write them.
 Status = Literal["ok", "warn", "bad", "unknown"]
 #: ``project`` and ``milestone`` pick among HexDeck's own projects; ``milestone``
 #: reads the project from ``from_field``.
@@ -104,6 +106,10 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "image": (1, 1),
     "wol": (1, 1),
     "clock": (2, 1),
+    # Days in large, a line under them.
+    "countdown": (2, 1),
+    # The time, the buttons under it.
+    "timer": (2, 2),
     "text": (2, 1),
     "search": (2, 1),
     "value": (2, 2),
@@ -145,6 +151,8 @@ RENDERER_MIN: dict[str, tuple[int, int]] = {
     "tabs": (2, 2),
     # A title and at least one row of cards inside.
     "group": (3, 2),
+    # A tile with its number at least, two side by side.
+    "figures": (2, 2),
     # A tree needs room to branch: three levels and a few boxes side by side.
     "topology": (4, 3),
     "roadmap": (4, 2),
@@ -673,7 +681,7 @@ def drawing_fields(options: tuple[Field, ...], own_dial: bool) -> tuple[Field, .
                       options=(("across", "Across"), ("upright", "Upright")),
                       only_when=("view", "meter")))
     made.append(Field("level_warn", "Yellow from", type="number",
-                      help="In the unit of the number. Empty leaves the colour to the card.",
+                      help="In the unit of the number. It colours the dial, the LEDs, the digits and a tile of key figures. Empty leaves the colour to the card.",
                       only_when=("view", "|".join(SINGLE_NUMBER_VIEWS))))
     made.append(Field("level_bad", "Red from", type="number",
                       help="Below Yellow from means low numbers are the bad ones, as with free space.",
@@ -837,15 +845,19 @@ def low_is_bad(options: dict[str, Any]) -> bool:
 
 
 def apply_level(data: WidgetData, options: dict[str, Any]) -> WidgetData:
-    """Colour one number by the lines the operator drew, when asked to show one number.
+    """Colour one number by the lines the operator drew.
 
     ⚠️ Only the colour of the drawing, under ``meta.level``. The card's own
     status stays what the service said: the problems card, the notices and the
     red glow of a card that went down all read ``status``, and a yellow line
     somebody drew for the look of an LED row is not a fault of the service.
+
+    Worked out in every view, not only in the dial, the LEDs and the digits.
+    A tile of key figures draws the card's number whatever its view, and
+    would otherwise take its colour from the lines only once the card was set
+    to seven segments, a view the tile never shows. The plain number and the
+    rows do not read ``meta.level``, so for them nothing changes. From nexdeck.
     """
-    if not single_number_view(options):
-        return data
     value = (data.primary or {}).get("value")
     warn, bad = level_lines(options)
     if (warn is None and bad is None) or isinstance(value, bool) or not isinstance(value, (int, float)):

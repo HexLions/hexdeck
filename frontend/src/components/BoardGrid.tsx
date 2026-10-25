@@ -97,7 +97,7 @@ export function BoardGrid(props: Props) {
   // Everything else here works on the cards that remain.
   const inside = useMemo(() => tucked(everyCard), [everyCard])
   const widgets = useMemo(() => everyCard.filter((widget) => !inside.has(widget.id)), [everyCard, inside])
-  const pageCards = useMemo(() => ({ widgets: everyCard, canAct, editing, onAction }), [everyCard, canAct, editing, onAction])
+  const pageCards = useMemo(() => ({ widgets: everyCard, canAct, editing, onAction, onSettings }), [everyCard, canAct, editing, onAction, onSettings])
   const columns = props.columns ?? 12
   const { t } = useTranslation()
   // The grid draws at the width WidthProvider assumes before it has measured,
@@ -252,8 +252,9 @@ export function BoardGrid(props: Props) {
         // hold of: on a monitor card the strip of bars filled it, and what was
         // left to drag was the two millimetres of padding at the edge. Nothing
         // in the body does anything in edit mode anyway; the stylesheet takes
-        // its pointer events away, which is what makes this safe.
-        draggableCancel={editing ? '.card-controls' : "button, a, input, select, textarea, [role='button'], .no-drag"}
+        // its pointer events away, which is what makes this safe. The settings
+        // button of a tile of key figures keeps its events, as the card's own.
+        draggableCancel={editing ? '.card-controls, .nd-tile-settings' : "button, a, input, select, textarea, [role='button'], .no-drag"}
         compactType={autoCompact ? 'vertical' : null}
         // Without compaction, other cards must never move on their own: a card
         // dragged across the board used to push everything aside, and nothing

@@ -5,6 +5,43 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+What nexdeck 0.48.0 added that 0.33.0 left for later: key figures, a
+countdown and a timer.
+
+### Added
+
+- **Key figures**, a new basic card: numbers from several connections in
+  one grid, such as the processor of the NAS, the downloads and the blocked
+  queries. Each tile is a number card of the page with its value, unit and
+  colour, and keeps its own settings, opened from the tile while the board
+  is arranged. The cards are picked in the settings, which offer only cards
+  that show a number. The grid works out its rows from the number of tiles
+  and the shape of the card, or keeps to one, two, three, four or six
+  across. A yellow or red tile is tinted, has a coloured edge or a dot, and
+  can draw its history behind the number. Made for wall displays. From
+  nexdeck 0.48.0; dragging a card in and adding one from the last tile need
+  groups that take cards by dragging, which HexDeck does not have yet.
+- **Countdown**, a new basic card: the days until a date, such as a
+  holiday, and hours and minutes in the last two days when a time is set.
+  Every year for a birthday; once the day is past it counts the days since
+  or says that it is here. From nexdeck 0.48.0.
+- **Timer**, a new basic card: start, pause, go on, reset, a minute more,
+  and quick picks that start at once, such as a kitchen timer on a wall
+  tablet. It runs in the browser, each browser its own, and keeps running
+  across a reload. When it is done the card flashes until somebody taps it,
+  and rings for a minute unless it is set to flash only. From nexdeck
+  0.48.0.
+
+### Changed
+
+- **Yellow from and Red from colour the number in every view,** so a tile
+  of key figures takes its colour from them whatever the card's view; the
+  plain number and the rows do not read them, and the card's status stays
+  what the service said. A card that is a tile offers the two lines in its
+  settings. From nexdeck 0.48.0.
+
 ## 0.33.0 (2026-10-24)
 
 What nexdeck did from 0.43 to 0.48: Pulse, more TrueNAS, service versions, a name and logo of your own, and pages in a new order.
