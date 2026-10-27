@@ -17,6 +17,13 @@ From nexdeck 0.49.0.
   checked yet says so on a row of its own instead of "Everything is up to
   date", and so do environments that did not answer. From nexdeck 0.49.0.
 
+### Fixed
+
+- **A page the browser translated** (Chrome, Edge or an extension) no longer
+  goes blank the next time something on it changes. The translator swaps
+  texts for its own elements, and the page tripped over the texts it no
+  longer found. From nexdeck 0.49.0.
+
 ## 0.33.1 (2026-10-25)
 
 Key figures, a countdown and a timer from nexdeck 0.48, and the UPS load drawn over time.
