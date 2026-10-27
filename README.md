@@ -279,7 +279,7 @@ offer is in [docs/adapters.md](docs/adapters.md).
 | TrueNAS | The current JSON-RPC API, no call to the deprecated REST one where it exists; live processor and memory use. Contributed upstream as [nexdeck#9](https://github.com/DerKezorm/nexdeck/pull/9). Since then: disks with their temperature, apps, snapshot and replication tasks, the last scrub and the update on offer; from nexdeck 0.46.0 the interfaces, services and VMs cards and notifications for a hot disk, a failed task and a waiting update |
 | GitHub | Issues, pull requests with review state, workflow runs and milestones, cached with ETags |
 | YouTube | A card for the channels an account follows |
-| What's Up Docker, Cup, Watchtower | An `updates()` hook that feeds one merged updates card |
+| What's Up Docker, Cup, Watchtower | An `updates()` hook that feeds one merged updates card; Arcane and Dockhand feed it too, from nexdeck 0.49.0 |
 
 ### Cards that need no service
 
