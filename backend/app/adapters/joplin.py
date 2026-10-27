@@ -2,8 +2,8 @@
 an administrator every account with its storage.
 
 Written from Joplin Server's source, server-v3.7.3 (packages/server/src:
-routes/api/sessions.ts, users.ts, items.ts, ping.ts; models/SessionModel.ts,
-UserModel.ts, ItemModel.ts, utils/pagination.ts). Not yet run against a
+routes/api/sessions.ts, users.ts, items.ts; models/SessionModel.ts,
+UserModel.ts, ItemModel.ts, models/utils/pagination.ts, utils/routeUtils.ts). Not yet run against a
 Joplin Server: it ships only as a container image, and this machine runs none.
 
 ⚠️ Joplin Server keeps the notes as sync items, often end-to-end encrypted.
@@ -28,6 +28,13 @@ account type, not its storage. ``GET /api/users`` gives every column of every
 account, password hash included, and only to an administrator: the card reads
 the name, e-mail, storage, quota and whether it is enabled, and nothing else
 of it leaves this module.
+
+⚠️ Joplin Server answers 404 "Invalid origin" to every request whose host is
+not the host of its ``APP_BASE_URL`` (``isValidOrigin``). A card that uses
+the LAN address of a server published under a domain hits exactly that.
+
+⚠️ A quota left to the account type's default (``max_total_item_size`` null)
+is shown as none; on a self-hosted server the default type has no limit.
 
 ⚠️ ``/api/items/root/children`` pages 100 at a time, newest change first, with
 ``has_more`` and a ``cursor``; it has no total. The card counts at most
@@ -61,6 +68,11 @@ TOKEN_KEY = "joplin:session"
 MAX_PAGES = 10
 PAGE = 100
 FULL_PERCENT = 90.0
+
+
+def _wrong_host() -> AdapterError:
+    return AdapterError("Joplin Server does not answer at this address.", code="wrong_host",
+                        hint="Use the address set as APP_BASE_URL on Joplin Server, host included: it answers 404 to any other host.")
 
 
 def _seconds(value: Any) -> float | None:
@@ -108,6 +120,8 @@ class JoplinAdapter(Adapter):
                 raise AuthFailed("This account signs in with a second factor, which Joplin Server allows none of over its API.",
                                  hint="Make an account without two-factor sign-in for the dashboard.")
             raise AuthFailed("Joplin Server refused the e-mail or password.", hint="Check them; it is the account's own e-mail.")
+        if response.status_code == 404:
+            raise _wrong_host()
         if response.status_code >= 400:
             raise AdapterError(f"Joplin Server answered the sign-in with HTTP {response.status_code}.", code="http_error",
                                hint="Check the URL; it is Joplin Server's own address, without /api.")
@@ -130,7 +144,7 @@ class JoplinAdapter(Adapter):
                                          verify=not config.get("insecure"), cache_seconds=cache, auth_errors=False)
             if response.status_code != 403:
                 break
-            if attempt == 0 and kept:
+            if attempt == 0 and kept and "session has expired" in response.text:
                 # Twelve hours on, the session is gone: sign in again, once.
                 ctx.cache.pop(TOKEN_KEY, None)
                 session = await self._sign_in(config, ctx)
@@ -140,6 +154,8 @@ class JoplinAdapter(Adapter):
                 raise AuthFailed("Only an administrator of Joplin Server sees the accounts.",
                                  hint="Use an administrator's account for this card, or the Sync card.")
             raise AuthFailed("Joplin Server refused the session.", hint="Check the e-mail and password.")
+        if response.status_code == 404:
+            raise _wrong_host()
         if response.status_code >= 400:
             raise AdapterError(f"Joplin Server answered with HTTP {response.status_code}.", code="http_error",
                                hint="Check the URL; it is Joplin Server's own address, without /api.")
@@ -159,7 +175,8 @@ class JoplinAdapter(Adapter):
 
     async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> WidgetData:
         if widget_kind == "users":
-            answer = await self._get(config, ctx, "/users", cache=300, admin=True)
+            # Not kept: the answer holds every account's password hash.
+            answer = await self._get(config, ctx, "/users", cache=0, admin=True)
             users = answer.get("items") if isinstance(answer, dict) else None
             if not isinstance(users, list):
                 raise AdapterError("This address answers, but not the way Joplin Server does.", code="not_joplin")

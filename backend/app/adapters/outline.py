@@ -20,7 +20,8 @@ card sends none and asks for one row to read the totals.
 schedules a check of that sign-in every time it is asked.
 
 ⚠️ The read routes are rate limited (``documents.list`` to a hundred a minute
-per key); the cards refresh every five minutes.
+per key); the cards refresh every five minutes. Being POSTs, the answers are
+not kept between cards: each refresh costs two or three calls.
 """
 
 from __future__ import annotations

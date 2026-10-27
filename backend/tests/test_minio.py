@@ -49,7 +49,7 @@ async def test_a_drive_offline_is_red_and_says_so() -> None:
     respx.get(f"{URL}/minio/v2/metrics/cluster").mock(return_value=httpx.Response(200, text=FIXTURE["cluster_drive_down"]))
     data = await get_adapter("minio").fetch("cluster", CONFIG, {}, _ctx())
     assert data.status == "bad"
-    assert data.meta["status_reason"] == "0 node(s), 1 drive(s) offline"
+    assert data.meta["status_reason"] == "1 drive(s) offline", "only what is offline"
     assert data.metrics["drives_offline"] == 1.0
 
 
@@ -89,3 +89,19 @@ async def test_the_console_address_is_named() -> None:
 async def test_the_connection_test_counts_the_nodes() -> None:
     respx.get(f"{URL}/minio/v2/metrics/cluster").mock(return_value=httpx.Response(200, text=FIXTURE["cluster"]))
     assert await get_adapter("minio").test(CONFIG, _ctx()) == "MinIO answers with 2 nodes online."
+
+
+@respx.mock
+async def test_no_metrics_at_the_address_is_named() -> None:
+    respx.get(f"{URL}/minio/v2/metrics/cluster").mock(return_value=httpx.Response(404, text="Not Found"))
+    with pytest.raises(AdapterError) as refused:
+        await get_adapter("minio").test(CONFIG, _ctx())
+    assert refused.value.code == "not_minio"
+
+
+@respx.mock
+async def test_figures_minio_did_not_report_are_left_out() -> None:
+    respx.get(f"{URL}/minio/v2/metrics/cluster").mock(return_value=httpx.Response(200, text="minio_cluster_bucket_total 2\n"))
+    data = await get_adapter("minio").fetch("cluster", CONFIG, {}, _ctx())
+    assert [row["label"] for row in data.secondary] == ["Buckets"]
+    assert data.status == "unknown"

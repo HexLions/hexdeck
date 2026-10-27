@@ -100,3 +100,19 @@ async def test_something_else_at_the_address_is_said() -> None:
     with pytest.raises(AdapterError) as refused:
         await get_adapter("seafile").test(TOKEN_CONFIG, _ctx())
     assert refused.value.code == "not_seafile"
+
+
+@respx.mock
+async def test_a_token_from_a_sign_in_that_was_deleted_signs_in_once_more() -> None:
+    ctx = _ctx()
+    ctx.cache["seafile:token"] = "deleted-token"
+    login = respx.post(f"{URL}/api2/auth-token/").mock(return_value=httpx.Response(200, json=FIXTURE["token"]))
+
+    def account(request: httpx.Request) -> httpx.Response:
+        if request.headers["Authorization"] == "Token deleted-token":
+            return httpx.Response(401, json=FIXTURE["invalid_token"])
+        return httpx.Response(200, json=FIXTURE["account"])
+
+    respx.get(f"{URL}/api2/account/info/").mock(side_effect=account)
+    assert await get_adapter("seafile").test(LOGIN_CONFIG, ctx) == "Seafile answers for Alex."
+    assert login.call_count == 1

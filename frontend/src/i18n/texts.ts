@@ -108,7 +108,10 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^Down: (.+)$/, 'Ausgefallen: $1'],
     [/^Runs (\S+)$/, 'Läuft mit $1'],
     [/^(\d+) objects$/, '$1 Objekte'],
-    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 Knoten, $2 Laufwerk(e) offline'],
+    [/^(\d+) node\(s\) offline, (\d+) drive\(s\) offline$/, '$1 Knoten offline, $2 Laufwerk(e) offline'],
+    [/^(\d+) node\(s\) offline$/, '$1 Knoten offline'],
+    [/^(\d+) drive\(s\) offline$/, '$1 Laufwerk(e) offline'],
+    [/^1 object$/, '1 Objekt'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -225,7 +228,10 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^Down: (.+)$/, 'Caídos: $1'],
     [/^Runs (\S+)$/, 'En uso: $1'],
     [/^(\d+) objects$/, '$1 objetos'],
-    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 nodo(s), $2 disco(s) sin conexión'],
+    [/^(\d+) node\(s\) offline, (\d+) drive\(s\) offline$/, '$1 nodo(s) sin conexión, $2 disco(s) sin conexión'],
+    [/^(\d+) node\(s\) offline$/, '$1 nodo(s) sin conexión'],
+    [/^(\d+) drive\(s\) offline$/, '$1 disco(s) sin conexión'],
+    [/^1 object$/, '1 objeto'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -315,7 +321,10 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^Down: (.+)$/, 'Non raggiungibili: $1'],
     [/^Runs (\S+)$/, 'In uso: $1'],
     [/^(\d+) objects$/, '$1 oggetti'],
-    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 nodo/i, $2 disco/i offline'],
+    [/^(\d+) node\(s\) offline, (\d+) drive\(s\) offline$/, '$1 nodo/i offline, $2 disco/i offline'],
+    [/^(\d+) node\(s\) offline$/, '$1 nodo/i offline'],
+    [/^(\d+) drive\(s\) offline$/, '$1 disco/i offline'],
+    [/^1 object$/, '1 oggetto'],
   ],
 }
 

@@ -13,7 +13,10 @@ the other bases answer as refused too; the card says to use an account token.
 ``/meta/bases/{id}/tables`` the tables of one, without the junction tables of
 many-to-many links unless asked. Row counts are one request per table
 (``/api/v2/tables/{id}/records/count`` answers ``{"count": n}``), so the card
-counts at most ``MAX_TABLES`` tables and keeps the answers ten minutes.
+counts at most ``MAX_TABLES`` tables of the first ``MAX_BASES`` bases and keeps
+the answers ten minutes. Only the first page of bases is read (``pageInfo``
+holds 25 a page in the OpenAPI example); its paging parameters were not
+checked, so none is sent.
 """
 
 from __future__ import annotations
@@ -35,6 +38,8 @@ from .base import (
 
 #: Tables whose rows are counted, one request each.
 MAX_TABLES = 40
+#: Bases whose tables are listed, one request each.
+MAX_BASES = 20
 COUNT_SECONDS = 600
 
 
@@ -88,7 +93,7 @@ class NocodbAdapter(Adapter):
         """Every table with its base's title and row count, the number of bases, and of tables in all."""
         bases = self._list(await self._get(config, ctx, "/meta/bases/"))
         tables: list[dict[str, Any]] = []
-        for one in bases:
+        for one in bases[:MAX_BASES]:
             for table in self._list(await self._get(config, ctx, f"/meta/bases/{quote(str(one.get('id')), safe='')}/tables")):
                 if table.get("enabled") is False or table.get("mm"):
                     continue

@@ -133,3 +133,22 @@ async def test_something_else_at_the_address_is_said() -> None:
     with pytest.raises(AdapterError) as refused:
         await get_adapter("joplin").test(CONFIG, _ctx())
     assert refused.value.code == "not_joplin"
+
+
+@respx.mock
+async def test_another_host_than_app_base_url_is_named() -> None:
+    respx.post(f"{URL}/api/sessions").mock(return_value=httpx.Response(404, json={"error": f"Invalid origin: {URL}"}))
+    with pytest.raises(AdapterError) as refused:
+        await get_adapter("joplin").test(CONFIG, _ctx())
+    assert refused.value.code == "wrong_host" and "APP_BASE_URL" in refused.value.hint
+
+
+@respx.mock
+async def test_a_normal_account_on_the_accounts_card_does_not_sign_in_again() -> None:
+    ctx = _ctx()
+    ctx.cache["joplin:session"] = (FIXTURE["session"]["id"], "u")
+    login = respx.post(f"{URL}/api/sessions").mock(return_value=httpx.Response(200, json=FIXTURE["session"]))
+    respx.get(f"{URL}/api/users").mock(return_value=httpx.Response(403, json=FIXTURE["not_admin"]))
+    with pytest.raises(AuthFailed):
+        await get_adapter("joplin").fetch("users", CONFIG, {}, ctx)
+    assert login.call_count == 0, "sign-ins are rate limited; only an expired session earns a new one"

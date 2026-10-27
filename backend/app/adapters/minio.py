@@ -13,8 +13,9 @@ once and holding no more than the right to read metrics. A MinIO started
 with ``MINIO_PROMETHEUS_AUTH_TYPE=public`` needs no token at all.
 
 ⚠️ The paths sit under ``/minio``: ``/minio/v2/metrics/cluster`` and
-``/minio/v2/metrics/bucket``. A refused token is a JSON error from the admin
-side, 403 ``AccessDenied``.
+``/minio/v2/metrics/bucket``. A refused token is an admin API error
+(``toAdminAPIErr(errAuthentication)`` in metrics.go); its status lives in
+files not read here, so 401 and 403 are both taken as a refusal.
 
 ⚠️ The usage figures (``minio_cluster_usage_*``, ``minio_bucket_usage_*``)
 come from MinIO's background scanner. A freshly started MinIO reports none
@@ -131,10 +132,10 @@ class MinioAdapter(Adapter):
     def _cluster(samples: list[tuple[str, dict[str, str], float]]) -> WidgetData:
         total = _highest(samples, "minio_cluster_capacity_usable_total_bytes")
         free = _highest(samples, "minio_cluster_capacity_usable_free_bytes")
-        nodes_on = _highest(samples, "minio_cluster_nodes_online_total") or 0
-        nodes_off = _highest(samples, "minio_cluster_nodes_offline_total") or 0
-        drives_on = _highest(samples, "minio_cluster_drive_online_total") or 0
-        drives_off = _highest(samples, "minio_cluster_drive_offline_total") or 0
+        nodes_on = _highest(samples, "minio_cluster_nodes_online_total")
+        nodes_off = _highest(samples, "minio_cluster_nodes_offline_total")
+        drives_on = _highest(samples, "minio_cluster_drive_online_total")
+        drives_off = _highest(samples, "minio_cluster_drive_offline_total")
         buckets = _highest(samples, "minio_cluster_bucket_total")
         objects = _highest(samples, "minio_cluster_usage_object_total")
         used = total - free if total is not None and free is not None else None
@@ -142,19 +143,23 @@ class MinioAdapter(Adapter):
         secondary: list[dict[str, Any]] = []
         if used is not None and total:
             secondary.append({"label": "Used", "value": f"{human_bytes(used)} of {human_bytes(total)}"})
-        secondary.append({"label": "Nodes", "value": f"{int(nodes_on)} / {int(nodes_on + nodes_off)}"})
-        secondary.append({"label": "Drives", "value": f"{int(drives_on)} / {int(drives_on + drives_off)}"})
+        # A figure MinIO did not report is left out, not shown as nought.
+        if nodes_on is not None:
+            secondary.append({"label": "Nodes", "value": f"{int(nodes_on)} / {int(nodes_on + (nodes_off or 0))}"})
+        if drives_on is not None:
+            secondary.append({"label": "Drives", "value": f"{int(drives_on)} / {int(drives_on + (drives_off or 0))}"})
         if buckets is not None:
             secondary.append({"label": "Buckets", "value": int(buckets)})
         if objects is not None:
             secondary.append({"label": "Objects", "value": int(objects)})
-        status = "bad" if nodes_off or drives_off else status_from_percent(share)
+        offline = [f"{int(count)} {word} offline" for count, word in ((nodes_off, "node(s)"), (drives_off, "drive(s)")) if count]
+        status = "bad" if offline else status_from_percent(share)
         return WidgetData(
             status=status,
             primary={"label": "Used", "value": percent_text(share) if share is not None else "?"},
             secondary=secondary,
-            metrics={key: value for key, value in (("used_percent", share), ("drives_offline", float(drives_off))) if value is not None},
-            meta={"status_reason": f"{int(nodes_off)} node(s), {int(drives_off)} drive(s) offline"} if status == "bad" else {},
+            metrics={key: value for key, value in (("used_percent", share), ("drives_offline", drives_off)) if value is not None},
+            meta={"status_reason": ", ".join(offline)} if offline else {},
         )
 
     @staticmethod
@@ -170,7 +175,7 @@ class MinioAdapter(Adapter):
             elif name == "minio_bucket_usage_object_total":
                 objects[bucket] = max(value, objects.get(bucket, 0))
         names = sorted(set(sizes) | set(objects), key=lambda bucket: (-sizes.get(bucket, 0), bucket))
-        items = [{"title": bucket, "subtitle": f"{int(objects[bucket])} objects" if bucket in objects else "",
+        items = [{"title": bucket, "subtitle": (f"{int(objects[bucket])} object{'' if objects[bucket] == 1 else 's'}" if bucket in objects else ""),
                   "status": "ok", "value": human_bytes(sizes[bucket]) if bucket in sizes else ""} for bucket in names[:limit]]
         return WidgetData(status="ok", items=items,
                           meta={"empty": "MinIO has not counted its buckets yet; its scanner reports them after its first pass."})

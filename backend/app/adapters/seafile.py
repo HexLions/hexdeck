@@ -64,7 +64,7 @@ class SeafileAdapter(Adapter):
         Field("insecure", "Ignore TLS errors", type="bool", default=False),
     )
     widgets = (
-        WidgetType(kind="space", label="Space", description="How much of the account's quota its libraries take.",
+        WidgetType(kind="space", label="Storage", description="How much of the account's quota its libraries take.",
                    renderer="value", default_size=(3, 2), refresh_seconds=600, metrics=("used_percent",)),
         WidgetType(kind="libraries", label="Libraries", description="The account's libraries, the most recently changed first, with their size.",
                    renderer="list", default_size=(3, 3), refresh_seconds=300,
@@ -102,12 +102,20 @@ class SeafileAdapter(Adapter):
         return token
 
     async def _get(self, config: dict[str, Any], ctx: Context, path: str, cache: float = 120) -> Any:
-        token = await self._token(config, ctx)
-        response = await ctx.request("GET", f"{base_url(config)}/api2{path}", headers={"Authorization": f"Token {token}"},
-                                     verify=not config.get("insecure"), cache_seconds=cache, auth_errors=False)
-        if response.status_code in (401, 403):
-            ctx.cache.pop(TOKEN_KEY, None)
-            raise AuthFailed("Seafile refused the token.", hint="Paste a new token, or sign in with the user name and password.")
+        signed_in = not str(config.get("token") or "").strip()
+        for attempt in (0, 1):
+            token = await self._token(config, ctx)
+            response = await ctx.request("GET", f"{base_url(config)}/api2{path}", headers={"Authorization": f"Token {token}"},
+                                         verify=not config.get("insecure"), cache_seconds=cache, auth_errors=False)
+            if response.status_code not in (401, 403):
+                break
+            if signed_in and attempt == 0:
+                # A token from an earlier sign-in that was deleted since: sign in once more.
+                ctx.cache.pop(TOKEN_KEY, None)
+                continue
+            raise AuthFailed("Seafile refused the token." if not signed_in else "Seafile refused the sign-in's token.",
+                             hint="Paste a new token: in Seafile, Settings, then Web API Auth Token, Generate." if not signed_in
+                             else "Check the user name and password.")
         if response.status_code >= 400:
             raise AdapterError(f"Seafile answered with HTTP {response.status_code}.", code="http_error",
                                hint="Check the URL; it is Seafile's own address.")
