@@ -543,6 +543,9 @@ Updated at every milestone.
   root's children, and for an administrator the accounts with their
   storage. Written from Joplin Server's source, server-v3.7.3; not yet run
   against a Joplin Server, which ships only as a container image.
+- **NocoDB's bases, tables and row counts.** Its v2 API with an account
+  token, one count per table. Written from NocoDB's OpenAPI file and token
+  strategy, release 2026.10.0; not yet run against a NocoDB.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

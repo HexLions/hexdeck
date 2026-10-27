@@ -12,6 +12,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Joplin Server**: when the notes last synced and how many items it
   holds, and for an administrator every account with its storage and quota.
   The notes themselves stay unread. ⚠️ Beta.
+- **NocoDB**: the bases and their tables with how many rows each holds,
+  the largest first. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

@@ -1,0 +1,17 @@
+{
+  "bases": {"list": [
+    {"id": "p_shop0000000001", "title": "Shop", "deleted": false, "status": null, "sources": []},
+    {"id": "p_home0000000002", "title": "Homelab", "deleted": false, "status": null, "sources": []},
+    {"id": "p_gone0000000003", "title": "Old", "deleted": true, "status": null, "sources": []}
+  ], "pageInfo": {"isFirstPage": true, "isLastPage": true, "page": 1, "pageSize": 25, "totalRows": 3}},
+  "shop_tables": {"list": [
+    {"id": "md_orders0000001", "base_id": "p_shop0000000001", "table_name": "nc_shop___Orders", "title": "Orders", "type": "table", "enabled": true, "mm": false, "deleted": null},
+    {"id": "md_customers0002", "base_id": "p_shop0000000001", "table_name": "nc_shop___Customers", "title": "Customers", "type": "table", "enabled": true, "mm": false, "deleted": null},
+    {"id": "md_link00000003", "base_id": "p_shop0000000001", "table_name": "nc_shop___nc_m2m_orders_customers", "title": "nc_m2m_orders_customers", "type": "table", "enabled": true, "mm": true, "deleted": null}
+  ], "pageInfo": {"isFirstPage": true, "isLastPage": true, "page": 1, "pageSize": 25, "totalRows": 3}},
+  "home_tables": {"list": [
+    {"id": "md_devices000004", "base_id": "p_home0000000002", "table_name": "nc_home___Devices", "title": "Devices", "type": "table", "enabled": true, "mm": false, "deleted": null}
+  ], "pageInfo": {"isFirstPage": true, "isLastPage": true, "page": 1, "pageSize": 25, "totalRows": 1}},
+  "counts": {"md_orders0000001": 1204, "md_customers0002": 342, "md_devices000004": 41},
+  "invalid_token": {"msg": "Invalid token"}
+}

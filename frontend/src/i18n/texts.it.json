@@ -2531,7 +2531,12 @@
     "Every account with its storage and quota, the fullest first. Needs an administrator.": "Ogni account con spazio usato e quota, prima i più pieni. Serve un amministratore.",
     "Joplin Server: when the notes last synced and how many items it holds; for an administrator, every account with its storage.": "Joplin Server: quando le note sono state sincronizzate l'ultima volta e quanti elementi contiene; per un amministratore, ogni account con il suo spazio.",
     "Sync": "Sincronizzazione",
-    "When the notes last changed on the server, and how many items it holds.": "Quando le note sono cambiate l'ultima volta sul server, e quanti elementi contiene."
+    "When the notes last changed on the server, and how many items it holds.": "Quando le note sono cambiate l'ultima volta sul server, e quanti elementi contiene.",
+    "All the rows across the bases, with the bases and tables they are in.": "Tutte le righe di tutte le basi, con le basi e le tabelle in cui stanno.",
+    "Every table with its base and how many rows it holds, the largest first.": "Ogni tabella con la sua base e quante righe contiene, prima le più grandi.",
+    "In NocoDB: Account settings, then Tokens. A token made inside one base only reads that base.": "In NocoDB: Impostazioni account, poi Tokens. Un token creato dentro una base legge solo quella base.",
+    "NocoDB: the bases and their tables, with how many rows each holds, the largest first.": "NocoDB: le basi e le loro tabelle, con quante righe contiene ciascuna, prima le più grandi.",
+    "Tables": "Tabelle"
   },
   "labels": {
     "Jobs": "Job",
@@ -3794,6 +3799,8 @@
     "Runtime left": "Autonomia residua",
     "Last change": "Ultima modifica",
     "Never": "Mai",
-    "Joplin Server has no account.": "Joplin Server non ha nessun account."
+    "Joplin Server has no account.": "Joplin Server non ha nessun account.",
+    "Bases": "Basi",
+    "NocoDB has no table yet.": "NocoDB non ha ancora nessuna tabella."
   }
 }
