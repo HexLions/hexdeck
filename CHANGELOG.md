@@ -5,6 +5,18 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+From nexdeck 0.49.0.
+
+### Added
+
+- **Arcane and Dockhand** feed the Updates card, next to What's Up Docker,
+  Cup and Watchtower: the containers whose image has an update, as each last
+  checked, without the buttons of their own cards. A source that has not
+  checked yet says so on a row of its own instead of "Everything is up to
+  date", and so do environments that did not answer. From nexdeck 0.49.0.
+
 ## 0.33.1 (2026-10-25)
 
 Key figures, a countdown and a timer from nexdeck 0.48, and the UPS load drawn over time.

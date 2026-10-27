@@ -130,3 +130,69 @@ async def test_a_card_asks_the_connected_services_unless_told_not_to(client: Tes
     ctx = Context(collector.client, widget_id=1, cache={}, resolve_integration=collector.resolve_integration)
     card = await get_adapter("core").fetch("updates", {}, {"hexdeck": False}, ctx)
     assert card.items == [] and not card.meta["failures"]
+
+
+# -- Arcane and Dockhand as container sources, from nexdeck (issue #51) ------------------------
+
+
+class _Source:
+    """A connection whose image updates are already read: Arcane's or Dockhand's own card data."""
+
+    def __init__(self, kind: str, data: Any) -> None:
+        adapter = get_adapter(kind)
+        self.kind, self.label, self.icon, self.data, self.asked = kind, adapter.label, adapter.icon, data, []
+
+    async def fetch(self, widget_kind: str, config: dict[str, Any], options: dict[str, Any], ctx: Context) -> Any:
+        self.asked.append(widget_kind)
+        return self.data
+
+
+def _sources(sources: dict[int, _Source]):
+    async def resolve(integration_id: int):
+        return sources[integration_id], {}, _ctx(None)
+
+    return resolve
+
+
+async def test_arcane_and_dockhand_bring_their_image_updates_without_buttons() -> None:
+    arcane = get_adapter("arcane").demo("updates", {}, 0)
+    dockhand = get_adapter("dockhand").demo("updates", {}, 0)
+    assert arcane.items and dockhand.items, "the demo of each lists an update, or this test proves nothing"
+    assert any(row.get("actions") for row in arcane.items), "Arcane's own card has buttons; they must stay behind"
+    sources = {1: _Source("arcane", arcane), 2: _Source("dockhand", dockhand)}
+    card = await get_adapter("core").fetch("updates", {}, {"sources": ["1", "2"], "services": "none", "hexdeck": False, "limit": 50}, _ctx(_sources(sources)))
+    assert sources[1].asked == ["updates"] and sources[2].asked == ["updates"]
+    assert len(card.items) == len(arcane.items) + len(dockhand.items)
+    assert all("actions" not in row for row in card.items)
+    assert {row["source"] for row in card.items} == {"Arcane", "Dockhand"}
+    assert card.status == "warn"
+
+
+async def test_a_source_that_has_not_checked_says_so_instead_of_up_to_date() -> None:
+    from app.adapters.arcane import ArcaneAdapter
+    from app.adapters.dockhand import DockhandAdapter
+
+    arcane = ArcaneAdapter._update_rows([({"id": "0", "name": "Local"}, [{"id": "a", "names": ["web"], "image": "nginx"}])], False, False)
+    dockhand = DockhandAdapter._update_rows([({"id": 1, "name": "Local", "updateCheckEnabled": False}, {"pendingUpdates": []})], False, False)
+    assert arcane.status == dockhand.status == "unknown"
+    sources = {1: _Source("arcane", arcane), 2: _Source("dockhand", dockhand)}
+    card = await get_adapter("core").fetch("updates", {}, {"sources": ["1", "2"], "services": "none", "hexdeck": False}, _ctx(_sources(sources)))
+    assert [(row["title"], row["status"]) for row in card.items] == [("Arcane", "unknown"), ("Dockhand", "unknown")]
+    assert card.items[0]["subtitle"] == "Arcane has not checked these images for updates yet."
+    assert card.status == "ok", "not checked is no reason to colour the card"
+    checked = DockhandAdapter._update_rows([({"id": 1, "name": "Local", "updateCheckEnabled": True}, {"pendingUpdates": []})], False, False)
+    quiet = await get_adapter("core").fetch("updates", {}, {"sources": ["1"], "services": "none", "hexdeck": False}, _ctx(_sources({1: _Source("dockhand", checked)})))
+    assert quiet.items == [], "checked and nothing waiting is simply up to date"
+
+
+async def test_environments_that_did_not_answer_are_a_line() -> None:
+    from app.adapters.base import WidgetData
+
+    partial = WidgetData(status="warn", items=[], meta={"notice": "Some environments did not answer; their rows are missing.", "empty": "Everything is up to date."})
+    card = await get_adapter("core").fetch("updates", {}, {"sources": ["1"], "services": "none", "hexdeck": False}, _ctx(_sources({1: _Source("arcane", partial)})))
+    assert [(row["title"], row["subtitle"], row["status"]) for row in card.items] == [("Arcane", "Some environments did not answer; their rows are missing.", "warn")]
+
+
+def test_the_card_offers_arcane_and_dockhand_as_sources() -> None:
+    field = next(one for one in get_adapter("core").widget("updates").options if one.name == "sources")
+    assert {"arcane", "dockhand"} <= {kind for kind, _label in field.options}

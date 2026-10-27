@@ -265,7 +265,7 @@ class CoreAdapter(Adapter):
         WidgetType(
             kind="updates",
             label="Updates",
-            description="One list of what has a newer version: your connected services, the containers WUD, Cup or Watchtower watch, the releases you follow, and HexDeck itself.",
+            description="One list of what has a newer version: your connected services, the containers WUD, Cup, Arcane, Dockhand or Watchtower watch, the releases you follow, and HexDeck itself.",
             renderer="list",
             default_size=(3, 3),
             min_size=(2, 2),
@@ -278,7 +278,7 @@ class CoreAdapter(Adapter):
                       # Kinds only, to narrow the picker; it shows the connections' own names.
                       options=tuple((kind, "") for kind in sorted(UPSTREAM))),
                 Field("sources", "Connections", type="integrations",
-                      options=(("wud", "What's Up Docker"), ("cup", "Cup"), ("watchtower", "Watchtower")),
+                      options=(("wud", "What's Up Docker"), ("cup", "Cup"), ("arcane", "Arcane"), ("dockhand", "Dockhand"), ("watchtower", "Watchtower")),
                       default=[], help="The services that watch your images."),
                 Field("repos", "Repositories", type="textarea", placeholder="owner/name",
                       help="One per line, as owner/name on GitHub. Their newest release is shown, whether or not it runs in Docker."),
@@ -676,9 +676,13 @@ class CoreAdapter(Adapter):
             try:
                 adapter, config_of, source_ctx = await ctx.resolve_integration(int(source)) if ctx.resolve_integration else (None, {}, None)
                 hook = getattr(adapter, "updates", None)
-                if adapter is None or hook is None:
+                if adapter is not None and hook is None and adapter.kind in ("arcane", "dockhand"):
+                    rows = await _image_updates(adapter, config_of, source_ctx)
+                elif adapter is None or hook is None:
                     continue
-                for row in await hook(config_of, source_ctx):
+                else:
+                    rows = await hook(config_of, source_ctx)
+                for row in rows:
                     items.append({**row, "source": adapter.label, "icon": adapter.icon})
             except Exception as error:  # noqa: BLE001 - one source that fails is one line of warning
                 name = getattr(adapter, "label", "A connection") if "adapter" in dir() else "A connection"
@@ -1100,6 +1104,25 @@ class CoreAdapter(Adapter):
                 "open_new_tab": options.get("open_new_tab", True),
             })
         raise KeyError(widget_kind)
+
+
+async def _image_updates(adapter: Any, config: dict[str, Any], ctx: Context) -> list[dict[str, Any]]:
+    """The containers Arcane or Dockhand list with an update, for the merged card.
+
+    From nexdeck (issue #51). Each lists the containers whose image has an
+    update, as it last checked; the buttons stay on the source's own card.
+    ⚠️ An empty list from either can mean that nothing was checked yet; their
+    own card says so, and so does a row here, instead of "Everything is up to
+    date". The same for environments that did not answer.
+    """
+    data = await adapter.fetch("updates", config, {}, ctx)
+    rows = [{key: row[key] for key in ("title", "subtitle", "status", "value", "url") if key in row} for row in data.items]
+    meta = data.meta or {}
+    if meta.get("notice"):
+        rows.append({"title": adapter.label, "subtitle": str(meta["notice"]), "status": "warn"})
+    if not data.items and data.status == "unknown":
+        rows.append({"title": adapter.label, "subtitle": str(meta.get("empty") or ""), "status": "unknown"})
+    return rows
 
 
 def parse_pictures(written: Any) -> list[dict[str, str]]:
