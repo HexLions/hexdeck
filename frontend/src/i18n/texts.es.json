@@ -2542,7 +2542,11 @@
     "Outline wiki: the documents changed most recently, and how many documents, collections and people it has.": "Wiki Outline: los documentos cambiados más recientemente, y cuántos documentos, colecciones y personas tiene.",
     "Recently changed": "Cambiados recientemente",
     "The documents changed most recently, with their collection, who changed them and when.": "Los documentos cambiados más recientemente, con su colección, quién los cambió y cuándo.",
-    "Wiki": "Wiki"
+    "Wiki": "Wiki",
+    "How much of the account's quota its libraries take.": "Cuánto de la cuota de la cuenta ocupan sus bibliotecas.",
+    "In Seafile: Settings, then Web API Auth Token, Generate. Or leave it empty and sign in below; an account with two-factor sign-in needs the token.": "En Seafile: Ajustes, luego Web API Auth Token, Generate. O déjalo vacío e inicia sesión abajo; una cuenta con inicio de sesión en dos pasos necesita el token.",
+    "Seafile: the space your account uses of its quota, and your libraries with their size and last change.": "Seafile: el espacio que tu cuenta usa de su cuota, y tus bibliotecas con su tamaño y su último cambio.",
+    "The account's libraries, the most recently changed first, with their size.": "Las bibliotecas de la cuenta, las cambiadas más recientemente primero, con su tamaño."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3809,6 +3813,10 @@
     "Bases": "Bases",
     "NocoDB has no table yet.": "NocoDB aún no tiene ninguna tabla.",
     "Untitled": "Sin título",
-    "No document has been written yet.": "Aún no se ha escrito ningún documento."
+    "No document has been written yet.": "Aún no se ha escrito ningún documento.",
+    "Quota": "Cuota",
+    "No limit": "Sin límite",
+    "encrypted": "cifrada",
+    "This account owns no library.": "Esta cuenta no tiene ninguna biblioteca."
   }
 }

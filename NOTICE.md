@@ -550,6 +550,10 @@ Updated at every milestone.
   the totals read from `pagination.total` with one row each, and the
   newest changes with their collection and author. Written from Outline's
   source, v1.12.0; not yet run against an Outline.
+- **Seafile's space and libraries.** Its api2 with a token, made by
+  signing in once when none is given, the account's quota and its own
+  libraries. Written from Seahub's source, v14.0.9-server; not yet run
+  against a Seafile.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

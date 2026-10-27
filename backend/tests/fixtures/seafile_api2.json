@@ -1,0 +1,12 @@
+{
+  "token": {"token": "24fd3c026886e3121b2ca630805ed425c272cb96"},
+  "account": {"email": "alex@example.com", "name": "Alex", "usage": 70985310208, "total": 107374182400, "space_usage": "66.1%", "login_id": "", "is_staff": false, "contact_email": "alex@example.com"},
+  "account_unlimited": {"email": "alex@example.com", "name": "Alex", "usage": 5368709120, "total": -2, "space_usage": "0%", "is_staff": true},
+  "repos": [
+    {"type": "repo", "id": "b5ff3c6a-0000-4000-8000-000000000001", "owner": "alex@example.com", "name": "Documents", "mtime": 1789990000, "modifier_name": "Sam", "size": 4294967296, "encrypted": false, "permission": "rw", "virtual": false},
+    {"type": "repo", "id": "b5ff3c6a-0000-4000-8000-000000000002", "owner": "alex@example.com", "name": "Photos", "mtime": 1790000000, "modifier_name": "Alex", "size": 65766254592, "encrypted": false, "permission": "rw", "virtual": false},
+    {"type": "repo", "id": "b5ff3c6a-0000-4000-8000-000000000003", "owner": "alex@example.com", "name": "Tax returns", "mtime": 1789000000, "modifier_name": "Alex", "size": 943718400, "encrypted": true, "permission": "rw", "virtual": false}
+  ],
+  "wrong_password": {"non_field_errors": ["Unable to login with provided credentials."]},
+  "invalid_token": {"detail": "Invalid token"}
+}

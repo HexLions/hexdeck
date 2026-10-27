@@ -17,6 +17,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Outline**: the documents changed most recently with their collection,
   author and time, and how many documents, collections and people the wiki
   has. ⚠️ Beta.
+- **Seafile**: the space the account uses of its quota, and its libraries
+  with their size and last change. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

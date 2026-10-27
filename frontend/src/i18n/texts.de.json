@@ -2542,7 +2542,11 @@
     "Outline wiki: the documents changed most recently, and how many documents, collections and people it has.": "Outline-Wiki: die zuletzt geänderten Dokumente, und wie viele Dokumente, Sammlungen und Personen es hat.",
     "Recently changed": "Zuletzt geändert",
     "The documents changed most recently, with their collection, who changed them and when.": "Die zuletzt geänderten Dokumente, mit ihrer Sammlung, wer sie geändert hat und wann.",
-    "Wiki": "Wiki"
+    "Wiki": "Wiki",
+    "How much of the account's quota its libraries take.": "Wie viel vom Kontingent des Kontos seine Bibliotheken belegen.",
+    "In Seafile: Settings, then Web API Auth Token, Generate. Or leave it empty and sign in below; an account with two-factor sign-in needs the token.": "In Seafile: Einstellungen, dann Web API Auth Token, Generate. Oder leer lassen und unten anmelden; ein Konto mit Zwei-Faktor-Anmeldung braucht den Token.",
+    "Seafile: the space your account uses of its quota, and your libraries with their size and last change.": "Seafile: der Speicher, den dein Konto von seinem Kontingent belegt, und deine Bibliotheken mit Größe und letzter Änderung.",
+    "The account's libraries, the most recently changed first, with their size.": "Die Bibliotheken des Kontos, die zuletzt geänderte zuerst, mit ihrer Größe."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3809,6 +3813,10 @@
     "Bases": "Basen",
     "NocoDB has no table yet.": "NocoDB hat noch keine Tabelle.",
     "Untitled": "Ohne Titel",
-    "No document has been written yet.": "Es wurde noch kein Dokument geschrieben."
+    "No document has been written yet.": "Es wurde noch kein Dokument geschrieben.",
+    "Quota": "Kontingent",
+    "No limit": "Keine Grenze",
+    "encrypted": "verschlüsselt",
+    "This account owns no library.": "Dieses Konto besitzt keine Bibliothek."
   }
 }
