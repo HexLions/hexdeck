@@ -538,6 +538,26 @@ Updated at every milestone.
   Checked against Planka 2.2.1, the prebuilt release, running locally on
   PostgreSQL 17 with an API key, a sign-in, the terms not yet accepted, a
   wrong key and a wrong password.
+- **Joplin Server through its sync API, not the notes.** A session from
+  the account's own sign-in, the newest change and the item count from the
+  root's children, and for an administrator the accounts with their
+  storage. Written from Joplin Server's source, server-v3.7.3; not yet run
+  against a Joplin Server, which ships only as a container image.
+- **NocoDB's bases, tables and row counts.** Its v2 API with an account
+  token, one count per table. Written from NocoDB's OpenAPI file and token
+  strategy, release 2026.10.0; not yet run against a NocoDB.
+- **Outline's documents, collections and people.** Its POST API with a key,
+  the totals read from `pagination.total` with one row each, and the
+  newest changes with their collection and author. Written from Outline's
+  source, v1.12.0; not yet run against an Outline.
+- **Seafile's space and libraries.** Its api2 with a token, made by
+  signing in once when none is given, the account's quota and its own
+  libraries. Written from Seahub's source, v14.0.9-server; not yet run
+  against a Seafile.
+- **MinIO through its Prometheus metrics.** The cluster and bucket pages
+  with the metrics token, parsed with their labels, each figure taken once
+  across nodes. Written from MinIO's source, RELEASE.2025-10-15T17-29-55Z;
+  not yet run against a MinIO, whose binaries are no longer served.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

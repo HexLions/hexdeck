@@ -7,10 +7,20 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ## Unreleased
 
-From nexdeck 0.49.0.
-
 ### Added
 
+- **Joplin Server**: when the notes last synced and how many items it
+  holds, and for an administrator every account with its storage and quota.
+  The notes themselves stay unread. ⚠️ Beta.
+- **NocoDB**: the bases and their tables with how many rows each holds,
+  the largest first. ⚠️ Beta.
+- **Outline**: the documents changed most recently with their collection,
+  author and time, and how many documents, collections and people the wiki
+  has. ⚠️ Beta.
+- **Seafile**: the space the account uses of its quota, and its libraries
+  with their size and last change. ⚠️ Beta.
+- **MinIO**: space used and free, nodes and drives online, and the buckets
+  by size, from its Prometheus metrics. ⚠️ Beta.
 - **Arcane and Dockhand** feed the Updates card, next to What's Up Docker,
   Cup and Watchtower: the containers whose image has an update, as each last
   checked, without the buttons of their own cards. A source that has not

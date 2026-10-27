@@ -1,0 +1,18 @@
+{
+  "session": {"id": "sessionid0000000000000000000001", "user_id": "userid000000000000000000000001"},
+  "me": {"id": "userid000000000000000000000001", "email": "admin@example.com", "full_name": "Admin", "account_type": 0, "created_time": 1789000000000, "updated_time": 1789500000000},
+  "page1": {"items": [{"id": "item0001", "name": "8a1b2c3d4e5f60718293a4b5c6d7e8f9.md", "updated_time": 1790000000000},
+                      {"id": "item0002", "name": "0f1e2d3c4b5a69788796a5b4c3d2e1f0.md", "updated_time": 1789990000000}],
+            "has_more": true, "cursor": "eyJsaW1pdCI6MTAwLCJwYWdlIjoxfQ=="},
+  "page2": {"items": [{"id": "item0003", "name": "11223344556677889900aabbccddeeff.md", "updated_time": 1789000000000}],
+            "has_more": false, "cursor": null},
+  "users": {"items": [
+    {"id": "userid000000000000000000000001", "email": "admin@example.com", "full_name": "Admin", "password": "$2a$10$notarealhashnotarealhashnotarealhash", "is_admin": 1, "enabled": 1, "total_item_size": 104857600, "max_total_item_size": null, "totp_secret": ""},
+    {"id": "userid000000000000000000000002", "email": "alex@example.com", "full_name": "Alex", "password": "$2a$10$notarealhashnotarealhashnotarealhash", "is_admin": 0, "enabled": 1, "total_item_size": 1932735283, "max_total_item_size": 2147483648, "totp_secret": ""},
+    {"id": "userid000000000000000000000003", "email": "old@example.com", "full_name": "", "password": "$2a$10$notarealhashnotarealhashnotarealhash", "is_admin": 0, "enabled": 0, "total_item_size": 0, "max_total_item_size": 0, "totp_secret": ""}
+  ], "has_more": false},
+  "wrong_password": {"error": "Invalid email or password"},
+  "mfa": {"error": "Invalid authentication code"},
+  "expired": {"error": "Your session has expired. Please login again."},
+  "not_admin": {"error": "non-admin cannot list users"}
+}

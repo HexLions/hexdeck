@@ -1,0 +1,18 @@
+{
+  "documents_recent": {
+    "pagination": {"limit": 2, "offset": 0, "nextPath": "/api/documents.list?limit=2&offset=2", "total": 128},
+    "data": [
+      {"id": "9d0a6a4e-1111-4c2b-9f0e-000000000001", "url": "/doc/backup-rotation-AbCdEf1234", "title": "Backup rotation", "collectionId": "c0000000-0000-4000-8000-000000000001",
+       "updatedAt": "2026-10-27T09:12:00.000Z", "updatedBy": {"id": "u1", "name": "Alex", "avatarUrl": null}, "publishedAt": "2026-10-01T08:00:00.000Z"},
+      {"id": "9d0a6a4e-1111-4c2b-9f0e-000000000002", "url": "/doc/untitled-XyZ9876543", "title": "", "collectionId": "c0000000-0000-4000-8000-000000000099",
+       "updatedAt": "2026-10-20T18:00:00.000Z", "updatedBy": {"id": "u2", "name": "Sam", "avatarUrl": null}, "publishedAt": null}
+    ],
+    "policies": [], "status": 200, "ok": true
+  },
+  "documents_total": {"pagination": {"limit": 1, "offset": 0, "nextPath": "/api/documents.list?limit=1&offset=1", "total": 128}, "data": [{"id": "x", "title": "x"}], "status": 200, "ok": true},
+  "collections": {"pagination": {"limit": 100, "offset": 0, "nextPath": "/api/collections.list?limit=100&offset=100", "total": 6},
+    "data": [{"id": "c0000000-0000-4000-8000-000000000001", "name": "Homelab"}, {"id": "c0000000-0000-4000-8000-000000000002", "name": "Projects"}], "status": 200, "ok": true},
+  "users_total": {"pagination": {"limit": 1, "offset": 0, "nextPath": "/api/users.list?limit=1&offset=1", "total": 3}, "data": [{"id": "u1", "name": "Alex"}], "status": 200, "ok": true},
+  "invalid_key": {"ok": false, "error": "authentication_required", "status": 401, "message": "Invalid API key"},
+  "scoped_key": {"ok": false, "error": "authorization_error", "status": 403, "message": "API key does not have access to this resource"}
+}
