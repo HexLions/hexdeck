@@ -21,6 +21,24 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   with their size and last change. ⚠️ Beta.
 - **MinIO**: space used and free, nodes and drives online, and the buckets
   by size, from its Prometheus metrics. ⚠️ Beta.
+- **Arcane and Dockhand** feed the Updates card, next to What's Up Docker,
+  Cup and Watchtower: the containers whose image has an update, as each last
+  checked, without the buttons of their own cards. A source that has not
+  checked yet says so on a row of its own instead of "Everything is up to
+  date", and so do environments that did not answer. From nexdeck 0.49.0.
+
+### Fixed
+
+- **A page the browser translated** (Chrome, Edge or an extension) no longer
+  goes blank the next time something on it changes. The translator swaps
+  texts for its own elements, and the page tripped over the texts it no
+  longer found. From nexdeck 0.49.0.
+
+### Changed
+
+- **What's new** loads only when it is due, the first time after an update,
+  instead of with every board, which keeps every release note out of the
+  first load. From nexdeck 0.49.0.
 
 ## 0.33.1 (2026-10-25)
 

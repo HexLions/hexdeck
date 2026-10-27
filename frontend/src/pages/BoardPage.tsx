@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, LayoutGrid, Plus, Settings2, Undo2, Wand2 } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -19,7 +19,6 @@ import { MobileTabBar } from '../components/MobileTabBar'
 import { NoticeDrawer } from '../components/NoticeDrawer'
 import { TopBar } from '../components/TopBar'
 import { Confirm, Dialog, Spinner, Toast } from '../components/ui'
-import { WhatsNewDialog } from '../components/WhatsNewDialog'
 import { WidgetLibrary } from '../components/WidgetLibrary'
 import { WidgetSettingsSheet, type WidgetDraft } from '../components/WidgetSettingsSheet'
 import { useStream } from '../hooks/useStream'
@@ -35,6 +34,13 @@ import { useTabTitle } from '../lib/brand'
 import { useLive } from '../stores/live'
 import { useNotices } from '../stores/notices'
 import { usePlayer } from '../stores/player'
+
+/**
+ * "What's new" comes once per version, with every release note there has been:
+ * a quarter of a megabyte that has no place in the first load (measured by
+ * nexdeck at its 0.49.0, when it pushed the first load over its limit).
+ */
+const WhatsNewDialog = lazy(() => import('../components/WhatsNewDialog').then((module) => ({ default: module.WhatsNewDialog })))
 
 const EDIT_HINT_SEEN = 'nexdeck.editHintSeen'
 
@@ -635,7 +641,11 @@ export function BoardPage() {
       />
       <NoticeDrawer />
       <CommandPalette open={palette} onClose={() => setPalette(false)} boards={boards.data ?? []} widgets={widgets} actions={allActions} onAction={onAction} data={liveData} />
-      <WhatsNewDialog />
+      {user && user.seen_version !== __HEXDECK_VERSION__ ? (
+        <Suspense fallback={null}>
+          <WhatsNewDialog />
+        </Suspense>
+      ) : null}
 
       <ActionSheet
         pending={pending}
