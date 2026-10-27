@@ -2536,7 +2536,13 @@
     "Every table with its base and how many rows it holds, the largest first.": "Ogni tabella con la sua base e quante righe contiene, prima le più grandi.",
     "In NocoDB: Account settings, then Tokens. A token made inside one base only reads that base.": "In NocoDB: Impostazioni account, poi Tokens. Un token creato dentro una base legge solo quella base.",
     "NocoDB: the bases and their tables, with how many rows each holds, the largest first.": "NocoDB: le basi e le loro tabelle, con quante righe contiene ciascuna, prima le più grandi.",
-    "Tables": "Tabelle"
+    "Tables": "Tabelle",
+    "How many documents, collections and people the wiki has.": "Quanti documenti, raccolte e persone ha il wiki.",
+    "In Outline: Settings, then API keys. It starts with ol_api_. A key with scopes needs documents.list, collections.list and users.list.": "In Outline: Impostazioni, poi Chiavi API. Inizia con ol_api_. Una chiave con ambiti limitati deve avere documents.list, collections.list e users.list.",
+    "Outline wiki: the documents changed most recently, and how many documents, collections and people it has.": "Wiki Outline: i documenti modificati più di recente, e quanti documenti, raccolte e persone ha.",
+    "Recently changed": "Modificati di recente",
+    "The documents changed most recently, with their collection, who changed them and when.": "I documenti modificati più di recente, con la loro raccolta, chi li ha modificati e quando.",
+    "Wiki": "Wiki"
   },
   "labels": {
     "Jobs": "Job",
@@ -3801,6 +3807,8 @@
     "Never": "Mai",
     "Joplin Server has no account.": "Joplin Server non ha nessun account.",
     "Bases": "Basi",
-    "NocoDB has no table yet.": "NocoDB non ha ancora nessuna tabella."
+    "NocoDB has no table yet.": "NocoDB non ha ancora nessuna tabella.",
+    "Untitled": "Senza titolo",
+    "No document has been written yet.": "Non è ancora stato scritto nessun documento."
   }
 }

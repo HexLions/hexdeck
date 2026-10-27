@@ -14,6 +14,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   The notes themselves stay unread. ⚠️ Beta.
 - **NocoDB**: the bases and their tables with how many rows each holds,
   the largest first. ⚠️ Beta.
+- **Outline**: the documents changed most recently with their collection,
+  author and time, and how many documents, collections and people the wiki
+  has. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

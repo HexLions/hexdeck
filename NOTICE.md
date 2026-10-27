@@ -546,6 +546,10 @@ Updated at every milestone.
 - **NocoDB's bases, tables and row counts.** Its v2 API with an account
   token, one count per table. Written from NocoDB's OpenAPI file and token
   strategy, release 2026.10.0; not yet run against a NocoDB.
+- **Outline's documents, collections and people.** Its POST API with a key,
+  the totals read from `pagination.total` with one row each, and the
+  newest changes with their collection and author. Written from Outline's
+  source, v1.12.0; not yet run against an Outline.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
