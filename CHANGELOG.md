@@ -19,6 +19,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   has. ⚠️ Beta.
 - **Seafile**: the space the account uses of its quota, and its libraries
   with their size and last change. ⚠️ Beta.
+- **MinIO**: space used and free, nodes and drives online, and the buckets
+  by size, from its Prometheus metrics. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

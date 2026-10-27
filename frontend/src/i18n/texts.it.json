@@ -2546,7 +2546,13 @@
     "How much of the account's quota its libraries take.": "Quanta parte della quota dell'account occupano le sue librerie.",
     "In Seafile: Settings, then Web API Auth Token, Generate. Or leave it empty and sign in below; an account with two-factor sign-in needs the token.": "In Seafile: Impostazioni, poi Web API Auth Token, Generate. Oppure lascialo vuoto e accedi qui sotto; un account con accesso a due fattori ha bisogno del token.",
     "Seafile: the space your account uses of its quota, and your libraries with their size and last change.": "Seafile: lo spazio che il tuo account usa della sua quota, e le tue librerie con dimensione e ultima modifica.",
-    "The account's libraries, the most recently changed first, with their size.": "Le librerie dell'account, prima quelle modificate più di recente, con la loro dimensione."
+    "The account's libraries, the most recently changed first, with their size.": "Le librerie dell'account, prima quelle modificate più di recente, con la loro dimensione.",
+    "Every bucket with its size and objects, the largest first.": "Ogni bucket con dimensione e oggetti, prima i più grandi.",
+    "Metrics token": "Token delle metriche",
+    "MinIO object storage: space used and free, nodes and drives online, and the buckets by size.": "Object storage MinIO: spazio usato e libero, nodi e dischi online, e i bucket per dimensione.",
+    "Space used of the usable capacity, buckets and objects, nodes and drives online.": "Spazio usato della capacità utilizzabile, bucket e oggetti, nodi e dischi online.",
+    "The S3 address of MinIO, not its console.": "L'indirizzo S3 di MinIO, non la sua console.",
+    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Quello che mc admin prometheus generate <alias> stampa come bearer_token. Vuoto se MinIO gira con MINIO_PROMETHEUS_AUTH_TYPE=public."
   },
   "labels": {
     "Jobs": "Job",
@@ -3817,6 +3823,8 @@
     "Quota": "Quota",
     "No limit": "Nessun limite",
     "encrypted": "cifrata",
-    "This account owns no library.": "Questo account non possiede nessuna libreria."
+    "This account owns no library.": "Questo account non possiede nessuna libreria.",
+    "Drives": "Dischi",
+    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO non ha ancora contato i suoi bucket; il suo scanner li riporta dopo il primo passaggio."
   }
 }

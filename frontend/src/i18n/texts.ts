@@ -107,6 +107,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+ (?:min|h|d)) ago$/, 'vor $1'],
     [/^Down: (.+)$/, 'Ausgefallen: $1'],
     [/^Runs (\S+)$/, 'Läuft mit $1'],
+    [/^(\d+) objects$/, '$1 Objekte'],
+    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 Knoten, $2 Laufwerk(e) offline'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -222,6 +224,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^resilvering (\d+)%$/, 'resilver en curso, $1%'],
     [/^Down: (.+)$/, 'Caídos: $1'],
     [/^Runs (\S+)$/, 'En uso: $1'],
+    [/^(\d+) objects$/, '$1 objetos'],
+    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 nodo(s), $2 disco(s) sin conexión'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -310,6 +314,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+ (?:min|h|d)) ago$/, '$1 fa'],
     [/^Down: (.+)$/, 'Non raggiungibili: $1'],
     [/^Runs (\S+)$/, 'In uso: $1'],
+    [/^(\d+) objects$/, '$1 oggetti'],
+    [/^(\d+) node\(s\), (\d+) drive\(s\) offline$/, '$1 nodo/i, $2 disco/i offline'],
   ],
 }
 

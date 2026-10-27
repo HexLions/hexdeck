@@ -554,6 +554,10 @@ Updated at every milestone.
   signing in once when none is given, the account's quota and its own
   libraries. Written from Seahub's source, v14.0.9-server; not yet run
   against a Seafile.
+- **MinIO through its Prometheus metrics.** The cluster and bucket pages
+  with the metrics token, parsed with their labels, each figure taken once
+  across nodes. Written from MinIO's source, RELEASE.2025-10-15T17-29-55Z;
+  not yet run against a MinIO, whose binaries are no longer served.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
