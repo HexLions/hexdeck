@@ -24,6 +24,12 @@ From nexdeck 0.49.0.
   texts for its own elements, and the page tripped over the texts it no
   longer found. From nexdeck 0.49.0.
 
+### Changed
+
+- **What's new** loads only when it is due, the first time after an update,
+  instead of with every board, which keeps every release note out of the
+  first load. From nexdeck 0.49.0.
+
 ## 0.33.1 (2026-10-25)
 
 Key figures, a countdown and a timer from nexdeck 0.48, and the UPS load drawn over time.
