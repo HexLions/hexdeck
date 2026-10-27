@@ -2526,7 +2526,12 @@
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Karten dieser Seite, die eine Zahl zeigen. Sie verlassen das Board und erscheinen hier als Kacheln, jede mit ihren eigenen Einstellungen, bis diese Karte entfernt wird.",
     "A dot in the corner": "Punkt in der Ecke",
     "UPS load": "USV-Last",
-    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Die Last der USV in der letzten Stunde, den letzten 6 Stunden oder am letzten Tag, mit der aufgenommenen Leistung."
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Die Last der USV in der letzten Stunde, den letzten 6 Stunden oder am letzten Tag, mit der aufgenommenen Leistung.",
+    "An account without two-factor sign-in: Joplin Server allows none over its API. An administrator also sees every account.": "Ein Konto ohne Zwei-Faktor-Anmeldung: Joplin Server erlaubt über seine API keine. Ein Administrator sieht auch jedes Konto.",
+    "Every account with its storage and quota, the fullest first. Needs an administrator.": "Jedes Konto mit Speicher und Kontingent, das vollste zuerst. Braucht einen Administrator.",
+    "Joplin Server: when the notes last synced and how many items it holds; for an administrator, every account with its storage.": "Joplin Server: wann die Notizen zuletzt synchronisiert wurden und wie viele Elemente er hält; für einen Administrator jedes Konto mit seinem Speicher.",
+    "Sync": "Synchronisierung",
+    "When the notes last changed on the server, and how many items it holds.": "Wann sich die Notizen auf dem Server zuletzt geändert haben, und wie viele Elemente er hält."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3786,6 +3791,9 @@
     "Docker containers": "Docker-Container",
     "No link": "Keine Verbindung",
     "major version": "Hauptversion",
-    "Runtime left": "Restlaufzeit"
+    "Runtime left": "Restlaufzeit",
+    "Last change": "Letzte Änderung",
+    "Never": "Nie",
+    "Joplin Server has no account.": "Joplin Server hat kein Konto."
   }
 }

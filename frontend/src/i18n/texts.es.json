@@ -2526,7 +2526,12 @@
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Tarjetas de esta página que muestran un número. Salen del tablero y aparecen aquí como mosaicos, cada uno con sus propios ajustes, hasta que se quita esta tarjeta.",
     "A dot in the corner": "Punto en la esquina",
     "UPS load": "Carga del SAI",
-    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "La carga del SAI en la última hora, las últimas 6 horas o el último día, con la potencia consumida."
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "La carga del SAI en la última hora, las últimas 6 horas o el último día, con la potencia consumida.",
+    "An account without two-factor sign-in: Joplin Server allows none over its API. An administrator also sees every account.": "Una cuenta sin inicio de sesión en dos pasos: Joplin Server no lo permite por su API. Un administrador ve además todas las cuentas.",
+    "Every account with its storage and quota, the fullest first. Needs an administrator.": "Cada cuenta con su espacio y su cuota, las más llenas primero. Necesita un administrador.",
+    "Joplin Server: when the notes last synced and how many items it holds; for an administrator, every account with its storage.": "Joplin Server: cuándo se sincronizaron las notas por última vez y cuántos elementos guarda; para un administrador, cada cuenta con su espacio.",
+    "Sync": "Sincronización",
+    "When the notes last changed on the server, and how many items it holds.": "Cuándo cambiaron por última vez las notas en el servidor, y cuántos elementos guarda."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3786,6 +3791,9 @@
     "Docker containers": "Contenedores Docker",
     "No link": "Sin enlace",
     "major version": "versión principal",
-    "Runtime left": "Autonomía restante"
+    "Runtime left": "Autonomía restante",
+    "Last change": "Último cambio",
+    "Never": "Nunca",
+    "Joplin Server has no account.": "Joplin Server no tiene ninguna cuenta."
   }
 }

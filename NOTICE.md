@@ -538,6 +538,11 @@ Updated at every milestone.
   Checked against Planka 2.2.1, the prebuilt release, running locally on
   PostgreSQL 17 with an API key, a sign-in, the terms not yet accepted, a
   wrong key and a wrong password.
+- **Joplin Server through its sync API, not the notes.** A session from
+  the account's own sign-in, the newest change and the item count from the
+  root's children, and for an administrator the accounts with their
+  storage. Written from Joplin Server's source, server-v3.7.3; not yet run
+  against a Joplin Server, which ships only as a container image.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

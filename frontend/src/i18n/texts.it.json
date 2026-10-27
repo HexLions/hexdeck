@@ -2526,7 +2526,12 @@
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Schede di questa pagina che mostrano un numero. Lasciano la bacheca e compaiono qui come riquadri, ognuna con le sue impostazioni, finché questa scheda non viene rimossa.",
     "A dot in the corner": "Punto nell'angolo",
     "UPS load": "Carico UPS",
-    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Il carico dell'UPS nell'ultima ora, nelle ultime 6 ore o nell'ultimo giorno, con la potenza assorbita."
+    "The load on the UPS over the last hour, 6 hours or day, with the power drawn.": "Il carico dell'UPS nell'ultima ora, nelle ultime 6 ore o nell'ultimo giorno, con la potenza assorbita.",
+    "An account without two-factor sign-in: Joplin Server allows none over its API. An administrator also sees every account.": "Un account senza accesso a due fattori: Joplin Server non lo consente dalla sua API. Un amministratore vede anche ogni account.",
+    "Every account with its storage and quota, the fullest first. Needs an administrator.": "Ogni account con spazio usato e quota, prima i più pieni. Serve un amministratore.",
+    "Joplin Server: when the notes last synced and how many items it holds; for an administrator, every account with its storage.": "Joplin Server: quando le note sono state sincronizzate l'ultima volta e quanti elementi contiene; per un amministratore, ogni account con il suo spazio.",
+    "Sync": "Sincronizzazione",
+    "When the notes last changed on the server, and how many items it holds.": "Quando le note sono cambiate l'ultima volta sul server, e quanti elementi contiene."
   },
   "labels": {
     "Jobs": "Job",
@@ -3786,6 +3791,9 @@
     "Docker containers": "Container Docker",
     "No link": "Nessun collegamento",
     "major version": "versione principale",
-    "Runtime left": "Autonomia residua"
+    "Runtime left": "Autonomia residua",
+    "Last change": "Ultima modifica",
+    "Never": "Mai",
+    "Joplin Server has no account.": "Joplin Server non ha nessun account."
   }
 }
