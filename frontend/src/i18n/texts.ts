@@ -113,6 +113,9 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) drive\(s\) offline$/, '$1 Laufwerk(e) offline'],
     [/^1 object$/, '1 Objekt'],
     [/^Not running: (.+)$/, 'Läuft nicht: $1'],
+    [/^next in (\d+ (?:min|h|d))$/, 'nächster Lauf in $1'],
+    [/^(\d+) snapshots?$/, '$1 Snapshots'],
+    [/^checked (\d+ (?:min|h|d)) ago$/, 'geprüft vor $1'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -234,6 +237,9 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) drive\(s\) offline$/, '$1 disco(s) sin conexión'],
     [/^1 object$/, '1 objeto'],
     [/^Not running: (.+)$/, 'No funcionan: $1'],
+    [/^next in (\d+ (?:min|h|d))$/, 'próxima ejecución en $1'],
+    [/^(\d+) snapshots?$/, '$1 instantáneas'],
+    [/^checked (\d+ (?:min|h|d)) ago$/, 'comprobado hace $1'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -328,6 +334,9 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) drive\(s\) offline$/, '$1 disco/i offline'],
     [/^1 object$/, '1 oggetto'],
     [/^Not running: (.+)$/, 'Non in esecuzione: $1'],
+    [/^next in (\d+ (?:min|h|d))$/, 'prossima esecuzione tra $1'],
+    [/^(\d+) snapshots?$/, '$1 snapshot'],
+    [/^checked (\d+ (?:min|h|d)) ago$/, 'controllato $1 fa'],
   ],
 }
 

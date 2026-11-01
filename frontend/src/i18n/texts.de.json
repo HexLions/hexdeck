@@ -2634,7 +2634,13 @@
     "The server of Your Spotify (the API, port 8080), not the web interface.": "Der Server von Your Spotify (die API, Port 8080), nicht die Weboberfläche.",
     "The tracks played last, with artist and how long ago.": "Die zuletzt gespielten Titel, mit Künstler und wie lange das her ist.",
     "Tracks played today, this week and this month.": "Heute, diese Woche und diesen Monat gespielte Titel.",
-    "Use the address of the server (the API), which is not always the one of the web interface.": "Die Adresse des Servers (der API) nehmen, die nicht immer die der Weboberfläche ist."
+    "Use the address of the server (the API), which is not always the one of the web interface.": "Die Adresse des Servers (der API) nehmen, die nicht immer die der Weboberfläche ist.",
+    "Backup summary": "Sicherungsübersicht",
+    "Every backup schedule with its last run, source and destination, and a button that runs it now.": "Jeder Sicherungsplan mit letztem Lauf, Quelle und Ziel und einem Knopf, der ihn sofort startet.",
+    "Every schedule with its last run, source and destination and when it runs next, failed ones first, with a button that runs it now.": "Jeder Plan mit letztem Lauf, Quelle, Ziel und nächstem Lauf, gescheiterte zuerst, mit einem Knopf, der ihn sofort startet.",
+    "How many schedules there are, how many are fine, failed, running or paused, and when the last good backup ran.": "Wie viele Pläne es gibt, wie viele in Ordnung, fehlgeschlagen, laufend oder pausiert sind und wann die letzte gute Sicherung lief.",
+    "Every repository with its state, size and snapshots, worst first.": "Jedes Repository mit Zustand, Größe und Snapshots, das schlechteste zuerst.",
+    "From Settings > Personal > API keys in Zerobyte 0.40 or newer. The key may do what its user may, and the cards only read.": "Aus Einstellungen > Persönlich > API-Schlüssel in Zerobyte 0.40 oder neuer. Der Schlüssel darf, was sein Benutzer darf, die Karten lesen nur."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3943,6 +3949,13 @@
     "Update the playlists": "Playlists aktualisieren",
     "Update the guide": "Guide aktualisieren",
     "Map the channels again": "Kanäle neu zuordnen",
-    "Nothing was played yet.": "Noch nichts gespielt."
+    "Nothing was played yet.": "Noch nichts gespielt.",
+    "Too old": "Zu alt",
+    "Backups fine": "Sicherungen in Ordnung",
+    "In error": "Mit Fehler",
+    "Source unavailable": "Quelle nicht erreichbar",
+    "Repository error": "Repository-Fehler",
+    "Being repaired": "Wird repariert",
+    "Check cancelled": "Prüfung abgebrochen"
   }
 }
