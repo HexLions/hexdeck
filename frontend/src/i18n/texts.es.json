@@ -2597,7 +2597,11 @@
     "Weekly": "Semanal",
     "Monthly": "Mensual",
     "Yearly": "Anual",
-    "No note has a reminder.": "Ninguna nota tiene recordatorio."
+    "No note has a reminder.": "Ninguna nota tiene recordatorio.",
+    "Scenes, images, galleries, how much space they take, and how much has been watched.": "Escenas, imágenes, galerías, cuánto espacio ocupan y cuánto se ha visto.",
+    "Settings > Security > Generate API Key; it needs a user name and password to be set first. Leave empty when Stash has no login.": "Settings > Security > Generate API Key; antes hay que definir un nombre de usuario y una contraseña. Déjalo vacío si Stash no tiene inicio de sesión.",
+    "The size of the library, the tasks Stash is running and a button to scan for new files.": "El tamaño de la biblioteca, las tareas que ejecuta Stash y un botón para buscar archivos nuevos.",
+    "What Stash is scanning, generating or cleaning right now, with progress, and buttons to scan or stop.": "Lo que Stash está escaneando, generando o limpiando ahora, con el progreso, y botones para escanear o detener."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3874,6 +3878,13 @@
     "Task Photos": "Tarea Fotos",
     "Busiest core": "Núcleo más ocupado",
     "Cores": "Núcleos",
-    "Needs the host mounted": "Necesita el host montado"
+    "Needs the host mounted": "Necesita el host montado",
+    "Galleries": "Galerías",
+    "Length": "Duración",
+    "Scan for new files": "Buscar archivos nuevos",
+    "Scenes": "Escenas",
+    "Stop all tasks": "Detener todas las tareas",
+    "Watched": "Visto",
+    "No task is running.": "Ninguna tarea en curso."
   }
 }
