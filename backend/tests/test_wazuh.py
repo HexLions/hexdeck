@@ -13,7 +13,7 @@ from app.adapters.base import AdapterError, AuthFailed, Context, Unreachable
 from app.adapters.wazuh import WazuhAdapter
 
 W = "https://wazuh.example.com:55000"
-CONFIG = {"url": W, "username": "nexdeck", "password": "made-up-password", "insecure": True}
+CONFIG = {"url": W, "username": "hexdeck", "password": "made-up-password", "insecure": True}
 SUMMARY = {"data": {"connection": {"active": 9, "disconnected": 2, "never_connected": 1, "pending": 0, "total": 12},
                     "configuration": {"synced": 9, "not_synced": 3, "total": 12}}, "error": 0}
 NOW = datetime(2026, 9, 12, 13, 25, 50, tzinfo=UTC).timestamp()

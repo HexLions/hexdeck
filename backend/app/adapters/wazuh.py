@@ -46,7 +46,7 @@ from .base import (
 )
 
 TOKEN = "wazuh-token"
-#: Wazuh's token lives 15 minutes by default; nexdeck signs in again after 12.
+#: Wazuh's token lives 15 minutes by default; HexDeck signs in again after 12.
 TOKEN_SECONDS = 12 * 60
 #: The daemons a manager cannot do without; the others may be switched off on purpose.
 CORE = ("wazuh-analysisd", "wazuh-remoted", "wazuh-modulesd", "wazuh-db", "wazuh-execd", "wazuh-apid")
