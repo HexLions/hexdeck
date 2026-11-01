@@ -18,6 +18,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from starlette.staticfiles import StaticFiles
 
 from . import __version__
+from .adapters import all_adapters
 from .adapters.base import close_relaxed_client
 from .config import LEGACY_NAMES_ADOPTED, get_settings
 from .db import db_session, get_engine
@@ -216,6 +217,11 @@ async def lifespan(app: FastAPI):
     anyio.to_thread.current_default_thread_limiter().total_tokens = get_settings().request_threads
     get_engine()
     migrate()
+    # ⚠️ Every adapter module is imported here, before the first request, not
+    # by whichever request asks first. With over two hundred of them that took
+    # seconds, and the first start of a fresh installation paid for all of it
+    # in the press on Finish.
+    all_adapters()
     _rewrap_previous_secret()
     with db_session() as db:
         system.load_demo_flag(db)
