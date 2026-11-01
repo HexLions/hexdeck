@@ -2609,7 +2609,17 @@
     "Its state, the project it works on, the items in hand and the traffic.": "Su estado, el proyecto en el que trabaja, los elementos en curso y el tráfico.",
     "Only when the warrior's web interface has a user name and password (its Settings).": "Solo si la interfaz web del warrior tiene usuario y contraseña (en sus ajustes).",
     "Warrior": "Warrior",
-    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Qué hace el ArchiveTeam Warrior: su estado, el proyecto en el que trabaja y los elementos en curso."
+    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Qué hace el ArchiveTeam Warrior: su estado, el proyecto en el que trabaja y los elementos en curso.",
+    "A user of the API with a read-only role. Not the dashboard's wazuh-wui.": "Un usuario de la API con un rol de solo lectura. No el wazuh-wui del panel.",
+    "Agents": "Agentes",
+    "Agents not reporting": "Agentes sin informar",
+    "How many Wazuh agents report in, which ones do not, and whether the manager's daemons run.": "Cuántos agentes de Wazuh informan, cuáles no, y si los daemons del manager funcionan.",
+    "How many agents are active, and which are disconnected, never connected or pending, as a ring.": "Cuántos agentes están activos y cuáles desconectados, nunca conectados o pendientes, como un anillo.",
+    "Manager": "Manager",
+    "The API ships with a certificate Wazuh made itself.": "La API trae un certificado que Wazuh creó por sí mismo.",
+    "The agents that are not active, disconnected ones first, with when they last reported.": "Los agentes que no están activos, primero los desconectados, con cuándo informaron por última vez.",
+    "The manager's API on port 55000, not the dashboard.": "La API del manager en el puerto 55000, no el panel.",
+    "Whether the manager's daemons run; red when one has failed.": "Si los daemons del manager funcionan; en rojo si uno ha fallado."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3907,6 +3917,11 @@
     "Needs a nickname": "Necesita un apodo",
     "Not connected to the tracker": "Sin conexión con el tracker",
     "Shutting down": "Apagándose",
-    "Rebooting": "Reiniciando"
+    "Rebooting": "Reiniciando",
+    "Agents active": "Agentes activos",
+    "Daemons running": "Daemons en marcha",
+    "Disconnected": "Desconectado",
+    "Not reporting": "Sin informar",
+    "Every agent is reporting.": "Todos los agentes informan."
   }
 }

@@ -2609,7 +2609,17 @@
     "Its state, the project it works on, the items in hand and the traffic.": "Sein Zustand, das Projekt, an dem er arbeitet, die Aufgaben in Arbeit und der Verkehr.",
     "Only when the warrior's web interface has a user name and password (its Settings).": "Nur wenn die Weboberfläche des Warriors Benutzername und Passwort hat (in seinen Einstellungen).",
     "Warrior": "Warrior",
-    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Was der ArchiveTeam Warrior tut: sein Zustand, das Projekt, an dem er arbeitet, und die Aufgaben in Arbeit."
+    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Was der ArchiveTeam Warrior tut: sein Zustand, das Projekt, an dem er arbeitet, und die Aufgaben in Arbeit.",
+    "A user of the API with a read-only role. Not the dashboard's wazuh-wui.": "Ein Benutzer der API mit einer Nur-Lese-Rolle. Nicht wazuh-wui des Dashboards.",
+    "Agents": "Agenten",
+    "Agents not reporting": "Agenten ohne Meldung",
+    "How many Wazuh agents report in, which ones do not, and whether the manager's daemons run.": "Wie viele Wazuh-Agenten sich melden, welche nicht, und ob die Daemons des Managers laufen.",
+    "How many agents are active, and which are disconnected, never connected or pending, as a ring.": "Wie viele Agenten aktiv sind und welche getrennt, nie verbunden oder ausstehend sind, als Ring.",
+    "Manager": "Manager",
+    "The API ships with a certificate Wazuh made itself.": "Die API kommt mit einem Zertifikat, das Wazuh selbst erstellt hat.",
+    "The agents that are not active, disconnected ones first, with when they last reported.": "Die Agenten, die nicht aktiv sind, getrennte zuerst, mit dem Zeitpunkt der letzten Meldung.",
+    "The manager's API on port 55000, not the dashboard.": "Die API des Managers auf Port 55000, nicht das Dashboard.",
+    "Whether the manager's daemons run; red when one has failed.": "Ob die Daemons des Managers laufen; rot, wenn einer ausgefallen ist."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3907,6 +3917,11 @@
     "Needs a nickname": "Braucht einen Spitznamen",
     "Not connected to the tracker": "Nicht mit dem Tracker verbunden",
     "Shutting down": "Fährt herunter",
-    "Rebooting": "Startet neu"
+    "Rebooting": "Startet neu",
+    "Agents active": "Agenten aktiv",
+    "Daemons running": "Daemons laufen",
+    "Disconnected": "Getrennt",
+    "Not reporting": "Ohne Meldung",
+    "Every agent is reporting.": "Jeder Agent meldet sich."
   }
 }

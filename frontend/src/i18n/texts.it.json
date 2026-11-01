@@ -2609,7 +2609,17 @@
     "Its state, the project it works on, the items in hand and the traffic.": "Il suo stato, il progetto su cui lavora, gli elementi in corso e il traffico.",
     "Only when the warrior's web interface has a user name and password (its Settings).": "Solo se l'interfaccia web del warrior ha nome utente e password (nelle sue impostazioni).",
     "Warrior": "Warrior",
-    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Cosa fa l'ArchiveTeam Warrior: il suo stato, il progetto su cui lavora e gli elementi in corso."
+    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Cosa fa l'ArchiveTeam Warrior: il suo stato, il progetto su cui lavora e gli elementi in corso.",
+    "A user of the API with a read-only role. Not the dashboard's wazuh-wui.": "Un utente dell'API con un ruolo di sola lettura. Non il wazuh-wui della dashboard.",
+    "Agents": "Agent",
+    "Agents not reporting": "Agent che non rispondono",
+    "How many Wazuh agents report in, which ones do not, and whether the manager's daemons run.": "Quanti agent Wazuh si fanno sentire, quali no, e se i daemon del manager sono in esecuzione.",
+    "How many agents are active, and which are disconnected, never connected or pending, as a ring.": "Quanti agent sono attivi e quali disconnessi, mai connessi o in attesa, come anello.",
+    "Manager": "Manager",
+    "The API ships with a certificate Wazuh made itself.": "L'API viene con un certificato creato da Wazuh stesso.",
+    "The agents that are not active, disconnected ones first, with when they last reported.": "Gli agent non attivi, prima quelli disconnessi, con l'ultimo momento in cui si sono fatti sentire.",
+    "The manager's API on port 55000, not the dashboard.": "L'API del manager sulla porta 55000, non la dashboard.",
+    "Whether the manager's daemons run; red when one has failed.": "Se i daemon del manager sono in esecuzione; rosso quando uno è fallito."
   },
   "labels": {
     "Jobs": "Job",
@@ -3907,6 +3917,11 @@
     "Needs a nickname": "Richiede un soprannome",
     "Not connected to the tracker": "Non connesso al tracker",
     "Shutting down": "Spegnimento",
-    "Rebooting": "Riavvio"
+    "Rebooting": "Riavvio",
+    "Agents active": "Agent attivi",
+    "Daemons running": "Daemon in esecuzione",
+    "Disconnected": "Disconnesso",
+    "Not reporting": "Non rispondono",
+    "Every agent is reporting.": "Ogni agent si fa sentire."
   }
 }
