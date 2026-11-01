@@ -2584,7 +2584,20 @@
     "How much of the disks is in use. Needs dashdot's privileged mount of the host.": "Cuánto de los discos está en uso. Necesita el montaje privilegiado del host de dashdot.",
     "How much of the memory is in use.": "Cuánta memoria está en uso.",
     "The load of the processor, with the busiest core.": "La carga del procesador, con el núcleo más ocupado.",
-    "What the machine receives and sends, in megabits per second.": "Lo que la máquina recibe y envía, en megabits por segundo."
+    "What the machine receives and sends, in megabits per second.": "Lo que la máquina recibe y envía, en megabits por segundo.",
+    "How many notes Anchor holds, the notes changed last, and the notes with a reminder.": "Cuántas notas tiene Anchor, las notas cambiadas más recientemente y las notas con un recordatorio.",
+    "How many notes there are, with those pinned, with a reminder and archived.": "Cuántas notas hay, con las fijadas, las que tienen recordatorio y las archivadas.",
+    "Pinned": "Fijadas",
+    "Profile > API token in Anchor (made with Regenerate). The one from signing in lasts fifteen minutes.": "Perfil > Token de API en Anchor (creado con Regenerar). El del inicio de sesión dura quince minutos.",
+    "Recent notes": "Notas recientes",
+    "The notes changed last, with their first line.": "Las notas cambiadas más recientemente, con su primera línea.",
+    "The notes with a reminder, in the order of the reminder's time.": "Las notas con recordatorio, en el orden de la hora del recordatorio.",
+    "Untitled": "Sin título",
+    "Daily": "Diario",
+    "Weekly": "Semanal",
+    "Monthly": "Mensual",
+    "Yearly": "Anual",
+    "No note has a reminder.": "Ninguna nota tiene recordatorio."
   },
   "labels": {
     "Private resources": "Recursos privados",

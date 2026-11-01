@@ -5,7 +5,7 @@
 [![CI](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml/badge.svg)](https://github.com/HexLions/hexdeck/actions/workflows/ci.yml)
 [![Container image](https://img.shields.io/badge/ghcr.io-hexlions%2Fhexdeck-2496ed?logo=docker&logoColor=white)](https://github.com/HexLions/hexdeck/pkgs/container/hexdeck)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-3aa0ff)](LICENSE)
-[![Integrations](https://img.shields.io/badge/integrations-231-3aa0ff)](#the-services-it-speaks-to)
+[![Integrations](https://img.shields.io/badge/integrations-232-3aa0ff)](#the-services-it-speaks-to)
 [![Release](https://img.shields.io/github/v/release/HexLions/hexdeck?color=3aa0ff&label=release)](https://github.com/HexLions/hexdeck/releases/latest)
 
 HexDeck is a fork of [nexdeck](https://github.com/DerKezorm/nexdeck) by DerKezorm, licensed under AGPL-3.0. The fork point, the copyright notices and the list of changes are in [NOTICE.md](NOTICE.md).
@@ -32,7 +32,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | | |
 | --- | --- |
 | 📡 **Live, not polled** | One request per service, pushed to every open browser |
-| 🔌 **231 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
+| 🔌 **232 integrations** | [Listed in full below](#the-services-it-speaks-to), plus a JSON API card for the rest |
 | 🎛️ **Actions where the data is** | Restart a container, start a VM, pause downloads, wake a machine. Destructive ones confirm; all are logged |
 | 🩺 **A status page of your own** | Every reachability check in one list, with latency, uptime bars and the notices sent |
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
@@ -227,7 +227,7 @@ For the **TrueNAS card itself**, use `https://` and an API key **linked to a use
 
 **Media.** Plex, Jellyfin, Emby, Tautulli, Jellystat, Radarr, Sonarr, Lidarr, Readarr, Prowlarr, Jackett, slskd, autobrr, Bazarr, SABnzbd, NZBGet, qBittorrent, Transmission, Deluge, pyLoad, aria2, Seerr, Overseerr, Jellyseerr, Ombi, Nexview, Maintainerr, Reclaimerr, Tdarr, M3U Editor, Unmanic, FileFlows, RomM, Sportarr, Tube Archivist, PeerTube, Minecraft, AMP, Pterodactyl, NeutArr, Tracearr, ReadMeABook, nexbeat, nexcrate, Qui, Real-Debrid, rTorrent.
 
-**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Fronius, Shelly, Tasmota, Traccar, Immich, Nextcloud, Seafile, Syncthing, SFTPGo, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, KitchenOwl, Vikunja, Planka, Joplin Server, NocoDB, Outline, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
+**Home and files.** Home Assistant, openHAB, Homebridge, ESPHome, Node-RED, Frigate, Reolink, evcc, OpenDTU, Fronius, Shelly, Tasmota, Traccar, Anchor, Immich, Nextcloud, Seafile, Syncthing, SFTPGo, Paperless-ngx, Papra, Firefly III, Actual Budget, Mealie, Grocy, KitchenOwl, Vikunja, Planka, Joplin Server, NocoDB, Outline, Kimai, Dawarich, wger, Audiobookshelf, Navidrome, Komga, Kavita, Calibre-Web, BookOrbit, Ghostfolio, Homebox, PhotoPrism, Tandoor Recipes, Wallos, FileBrowser Quantum, openmediavault, OctoPrint, Spoolman, LubeLogger, Moonraker (Klipper), nexlore, nexcanvas, nexbrand, nexpaper, nexdiary.
 
 **Feeds, weather and messages.** Hacker News, YouTube, GitHub releases, share prices, Twitch, Owncast, Steam, RSS, Miniflux, Mastodon, Lemmy, Karakeep, Linkwarden, Readeck, Memos, Trilium Notes, Wiki.js, BookStack, iCal, Weather, ntfy, Gotify, nexmail, FreshRSS, Linkding, IMAP, Mailpit, nexsift.
 
