@@ -2619,7 +2619,11 @@
     "The API ships with a certificate Wazuh made itself.": "La API trae un certificado que Wazuh creó por sí mismo.",
     "The agents that are not active, disconnected ones first, with when they last reported.": "Los agentes que no están activos, primero los desconectados, con cuándo informaron por última vez.",
     "The manager's API on port 55000, not the dashboard.": "La API del manager en el puerto 55000, no el panel.",
-    "Whether the manager's daemons run; red when one has failed.": "Si los daemons del manager funcionan; en rojo si uno ha fallado."
+    "Whether the manager's daemons run; red when one has failed.": "Si los daemons del manager funcionan; en rojo si uno ha fallado.",
+    "The web interface of xTeVe, port 34400. Its API has to be switched on in the settings.": "La interfaz web de xTeVe, puerto 34400. Su API debe estar activada en los ajustes.",
+    "Whether xTeVe answers, its version, the guide source, the streams and channels it knows, and update buttons.": "Si xTeVe responde, su versión, la fuente de la guía, los streams y canales que conoce, y botones de actualización.",
+    "Whether xTeVe or Threadfin runs, its version and guide source, and buttons to update the playlists, the guide and the channel mapping.": "Si xTeVe o Threadfin está en marcha, su versión y fuente de guía, y botones para actualizar las listas, la guía y la asignación de canales.",
+    "xTeVe status": "Estado de xTeVe"
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3922,6 +3926,11 @@
     "Daemons running": "Daemons en marcha",
     "Disconnected": "Desconectado",
     "Not reporting": "Sin informar",
-    "Every agent is reporting.": "Todos los agentes informan."
+    "Every agent is reporting.": "Todos los agentes informan.",
+    "Guide source": "Fuente de la guía",
+    "xTeVe": "xTeVe",
+    "Update the playlists": "Actualizar las listas",
+    "Update the guide": "Actualizar la guía",
+    "Map the channels again": "Asignar los canales de nuevo"
   }
 }
