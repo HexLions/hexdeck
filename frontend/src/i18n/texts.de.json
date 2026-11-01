@@ -2579,7 +2579,12 @@
     "What happened in the last 24 hours and what is still red, from every board of this board's owner.": "Was in den letzten 24 Stunden passiert ist und was noch rot ist, von allen Boards des Besitzers dieses Boards.",
     "A backup is too old": "Eine Sicherung ist zu alt",
     "The daily report": "Der Tagesbericht",
-    "Everything, changes in HexDeck too": "Alles, auch Änderungen in HexDeck"
+    "Everything, changes in HexDeck too": "Alles, auch Änderungen in HexDeck",
+    "CPU load, memory, storage and network traffic of the machine dashdot runs on.": "CPU-Last, Arbeitsspeicher, Speicherplatz und Netzwerkverkehr des Rechners, auf dem dashdot läuft.",
+    "How much of the disks is in use. Needs dashdot's privileged mount of the host.": "Wie viel der Datenträger belegt ist. Braucht dashdots privilegierte Einbindung des Hosts.",
+    "How much of the memory is in use.": "Wie viel des Arbeitsspeichers belegt ist.",
+    "The load of the processor, with the busiest core.": "Die Last des Prozessors, mit dem am stärksten ausgelasteten Kern.",
+    "What the machine receives and sends, in megabits per second.": "Was der Rechner empfängt und sendet, in Megabit pro Sekunde."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3853,6 +3858,9 @@
     "This account owns no library.": "Dieses Konto besitzt keine Bibliothek.",
     "Drives": "Laufwerke",
     "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO hat seine Buckets noch nicht gezählt; sein Scanner meldet sie nach dem ersten Durchlauf.",
-    "Task Photos": "Aufgabe Fotos"
+    "Task Photos": "Aufgabe Fotos",
+    "Busiest core": "Meistbelasteter Kern",
+    "Cores": "Kerne",
+    "Needs the host mounted": "Host muss eingebunden sein"
   }
 }

@@ -129,6 +129,7 @@ that one of thirty-five renderers draws.
 | UptimeRobot | overview, monitors, open incidents | | the read-only API key from Integrations > API, sent as Bearer to API v3; an account key would also be able to change monitors. The free plan allows ten requests a minute for the whole account. A monitor's HTTP password, headers and key are never read |
 | ChangeDetection.io | recent changes, watches | check all now | API key from Settings > API |
 | n8n | workflows, last runs, summary | publish, unpublish | API key from Settings > n8n API |
+| dashdot | CPU (load as a gauge, busiest core), memory, storage (needs dashdot's privileged mount of the host, else it says so), network (megabits per second in and out) | | none; dashdot has no sign-in, so its port stays inside the network. Beta: run against dashdot 6.3.4, as a plain container and with the host mounted, not yet an instance in use |
 | Beszel | hosts, host | | user and password |
 | Glances | system, file systems, sensors | | optional password |
 | Scrutiny | disks, disk health | | none |
