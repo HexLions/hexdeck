@@ -2605,7 +2605,11 @@
     "Active sessions, connections and the throughput of the last minute, with the traffic proxied so far.": "Aktive Sitzungen, Verbindungen und der Durchsatz der letzten Minute, dazu der bisher weitergeleitete Verkehr.",
     "Sessions, connections, throughput and traffic of a Syncthing relay server (strelaysrv).": "Sitzungen, Verbindungen, Durchsatz und Verkehr eines Syncthing-Relay-Servers (strelaysrv).",
     "Status URL": "Status-URL",
-    "The status address of the relay, started with -status-srv; not the relay port 22067.": "Die Statusadresse des Relays, gestartet mit -status-srv, nicht der Relay-Port 22067."
+    "The status address of the relay, started with -status-srv; not the relay port 22067.": "Die Statusadresse des Relays, gestartet mit -status-srv, nicht der Relay-Port 22067.",
+    "Its state, the project it works on, the items in hand and the traffic.": "Sein Zustand, das Projekt, an dem er arbeitet, die Aufgaben in Arbeit und der Verkehr.",
+    "Only when the warrior's web interface has a user name and password (its Settings).": "Nur wenn die Weboberfläche des Warriors Benutzername und Passwort hat (in seinen Einstellungen).",
+    "Warrior": "Warrior",
+    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Was der ArchiveTeam Warrior tut: sein Zustand, das Projekt, an dem er arbeitet, und die Aufgaben in Arbeit."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3893,6 +3897,16 @@
     "Proxied": "Weitergeleitet",
     "Throughput": "Durchsatz",
     "Pool": "Pool",
-    "None": "Keiner"
+    "None": "Keiner",
+    "Items in hand": "Aufgaben in Arbeit",
+    "Receiving": "Empfang",
+    "Project": "Projekt",
+    "Working": "Arbeitet",
+    "Switching project": "Wechselt das Projekt",
+    "No project": "Kein Projekt",
+    "Needs a nickname": "Braucht einen Spitznamen",
+    "Not connected to the tracker": "Nicht mit dem Tracker verbunden",
+    "Shutting down": "Fährt herunter",
+    "Rebooting": "Startet neu"
   }
 }

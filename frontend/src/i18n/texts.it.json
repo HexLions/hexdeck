@@ -2605,7 +2605,11 @@
     "Active sessions, connections and the throughput of the last minute, with the traffic proxied so far.": "Sessioni attive, connessioni e throughput dell'ultimo minuto, con il traffico inoltrato finora.",
     "Sessions, connections, throughput and traffic of a Syncthing relay server (strelaysrv).": "Sessioni, connessioni, throughput e traffico di un server relay Syncthing (strelaysrv).",
     "Status URL": "URL di stato",
-    "The status address of the relay, started with -status-srv; not the relay port 22067.": "L'indirizzo di stato del relay, avviato con -status-srv; non la porta del relay 22067."
+    "The status address of the relay, started with -status-srv; not the relay port 22067.": "L'indirizzo di stato del relay, avviato con -status-srv; non la porta del relay 22067.",
+    "Its state, the project it works on, the items in hand and the traffic.": "Il suo stato, il progetto su cui lavora, gli elementi in corso e il traffico.",
+    "Only when the warrior's web interface has a user name and password (its Settings).": "Solo se l'interfaccia web del warrior ha nome utente e password (nelle sue impostazioni).",
+    "Warrior": "Warrior",
+    "What the ArchiveTeam Warrior is doing: its state, the project it works on and the items in hand.": "Cosa fa l'ArchiveTeam Warrior: il suo stato, il progetto su cui lavora e gli elementi in corso."
   },
   "labels": {
     "Jobs": "Job",
@@ -3893,6 +3897,16 @@
     "Proxied": "Inoltrato",
     "Throughput": "Throughput",
     "Pool": "Pool",
-    "None": "Nessuno"
+    "None": "Nessuno",
+    "Items in hand": "Elementi in corso",
+    "Receiving": "Ricezione",
+    "Project": "Progetto",
+    "Working": "Al lavoro",
+    "Switching project": "Cambio di progetto",
+    "No project": "Nessun progetto",
+    "Needs a nickname": "Richiede un soprannome",
+    "Not connected to the tracker": "Non connesso al tracker",
+    "Shutting down": "Spegnimento",
+    "Rebooting": "Riavvio"
   }
 }
