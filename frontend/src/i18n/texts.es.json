@@ -2601,7 +2601,11 @@
     "Scenes, images, galleries, how much space they take, and how much has been watched.": "Escenas, imágenes, galerías, cuánto espacio ocupan y cuánto se ha visto.",
     "Settings > Security > Generate API Key; it needs a user name and password to be set first. Leave empty when Stash has no login.": "Settings > Security > Generate API Key; antes hay que definir un nombre de usuario y una contraseña. Déjalo vacío si Stash no tiene inicio de sesión.",
     "The size of the library, the tasks Stash is running and a button to scan for new files.": "El tamaño de la biblioteca, las tareas que ejecuta Stash y un botón para buscar archivos nuevos.",
-    "What Stash is scanning, generating or cleaning right now, with progress, and buttons to scan or stop.": "Lo que Stash está escaneando, generando o limpiando ahora, con el progreso, y botones para escanear o detener."
+    "What Stash is scanning, generating or cleaning right now, with progress, and buttons to scan or stop.": "Lo que Stash está escaneando, generando o limpiando ahora, con el progreso, y botones para escanear o detener.",
+    "Active sessions, connections and the throughput of the last minute, with the traffic proxied so far.": "Sesiones activas, conexiones y el caudal del último minuto, con el tráfico retransmitido hasta ahora.",
+    "Sessions, connections, throughput and traffic of a Syncthing relay server (strelaysrv).": "Sesiones, conexiones, caudal y tráfico de un servidor de relé de Syncthing (strelaysrv).",
+    "Status URL": "URL de estado",
+    "The status address of the relay, started with -status-srv; not the relay port 22067.": "La dirección de estado del relé, iniciada con -status-srv; no el puerto de relé 22067."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3885,6 +3889,10 @@
     "Scenes": "Escenas",
     "Stop all tasks": "Detener todas las tareas",
     "Watched": "Visto",
-    "No task is running.": "Ninguna tarea en curso."
+    "No task is running.": "Ninguna tarea en curso.",
+    "Proxied": "Retransmitido",
+    "Throughput": "Caudal",
+    "Pool": "Pool",
+    "None": "Ninguno"
   }
 }

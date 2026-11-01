@@ -2601,7 +2601,11 @@
     "Scenes, images, galleries, how much space they take, and how much has been watched.": "Scene, immagini, gallerie, quanto spazio occupano e quanto è stato guardato.",
     "Settings > Security > Generate API Key; it needs a user name and password to be set first. Leave empty when Stash has no login.": "Settings > Security > Generate API Key; prima vanno impostati nome utente e password. Lascia vuoto se Stash non ha un accesso.",
     "The size of the library, the tasks Stash is running and a button to scan for new files.": "La dimensione della libreria, le attività che Stash sta eseguendo e un pulsante per cercare nuovi file.",
-    "What Stash is scanning, generating or cleaning right now, with progress, and buttons to scan or stop.": "Cosa Stash sta scansionando, generando o pulendo ora, con l'avanzamento, e pulsanti per scansionare o fermare."
+    "What Stash is scanning, generating or cleaning right now, with progress, and buttons to scan or stop.": "Cosa Stash sta scansionando, generando o pulendo ora, con l'avanzamento, e pulsanti per scansionare o fermare.",
+    "Active sessions, connections and the throughput of the last minute, with the traffic proxied so far.": "Sessioni attive, connessioni e throughput dell'ultimo minuto, con il traffico inoltrato finora.",
+    "Sessions, connections, throughput and traffic of a Syncthing relay server (strelaysrv).": "Sessioni, connessioni, throughput e traffico di un server relay Syncthing (strelaysrv).",
+    "Status URL": "URL di stato",
+    "The status address of the relay, started with -status-srv; not the relay port 22067.": "L'indirizzo di stato del relay, avviato con -status-srv; non la porta del relay 22067."
   },
   "labels": {
     "Jobs": "Job",
@@ -3885,6 +3889,10 @@
     "Scenes": "Scene",
     "Stop all tasks": "Ferma tutte le attività",
     "Watched": "Guardato",
-    "No task is running.": "Nessuna attività in corso."
+    "No task is running.": "Nessuna attività in corso.",
+    "Proxied": "Inoltrato",
+    "Throughput": "Throughput",
+    "Pool": "Pool",
+    "None": "Nessuno"
   }
 }

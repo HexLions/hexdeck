@@ -37,6 +37,7 @@ that one of thirty-five renderers draws.
 | Kopia | snapshots, backups | | the server's user and password; the CSRF token of its start page is fetched and kept |
 | Duplicati | backup jobs, backups | | the password of the web interface; Duplicati 2.1 or newer |
 | Syncthing | folders, status | | API key |
+| Syncthing Relay | relay (active sessions, connections, throughput of the last minute, traffic proxied so far, uptime) | | none; the status address of strelaysrv (`-status-srv`, port 22070), not the relay port 22067. Beta: run against strelaysrv 2.1.7, idle, nobody used the relay |
 | Backrest | backup plans, backups | back up a plan now | user and password of Backrest's own sign-in, or nothing when it is switched off |
 | rclone | status, transfers | | the `--rc-user` and `--rc-pass` of `rclone rcd` (or rclone started with `--rc`) as HTTP Basic, or nothing with `--rc-no-auth`. Every call is a POST with a `{}` body. The counters run from the daemon's start, so an error stays counted until `core/stats-reset`; the card turns amber for errors, red only for a fatal one |
 | Stash | library (scenes, images, galleries, size, length, plays; numbers only, no titles or names), tasks (what is scanning, generating or cleaning, with progress) | scan for new files, stop all tasks | an API key (Settings > Security; it needs a user name and password first), or none when Stash has no login |
