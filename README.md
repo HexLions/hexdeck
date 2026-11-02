@@ -141,6 +141,7 @@ Mount `/var/run/docker.sock` (already in the compose file) to see this host's co
 | `HEXDECK_KEEP_ACTION_LOG_DAYS` | `90` | How long the record of who pressed what is kept. `0` keeps it forever. |
 | `HEXDECK_KEEP_NOTICES_DAYS` | `90` | How long messages in the notice centre are kept. |
 | `HEXDECK_KEEP_OUTAGES_DAYS` | `365` | How long finished outages are kept, and maintenance that is over. A running one is never swept. |
+| `HEXDECK_KEEP_EVENTS_DAYS` | `365` | How long the lines of the chronicle are kept. |
 | `PUID`, `PGID` | `1000` | Owner of the files in the data volume. |
 | `DOCKER_GID` | detected | Group of the mounted Docker socket, when detection fails. |
 

@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, LogIn, LogOut, Moon, Server, Sun, UserRound } from 'lucide-react'
+import { Bell, ChevronDown, History, LogIn, LogOut, Moon, Server, Sun, UserRound } from 'lucide-react'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
@@ -147,6 +147,7 @@ function UserMenu({ user, signedIn }: { user: HeaderUser; signedIn: boolean }) {
   const name = user.display_name || user.username
   const entries = [
     { to: '/settings', icon: UserRound, label: t('menu.settings') },
+    { to: '/chronicle', icon: History, label: t('menu.chronicle') },
     { to: '/system', icon: Server, label: t('menu.system') },
   ]
   return (

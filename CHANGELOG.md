@@ -9,6 +9,27 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Added
 
+- **Chronicle**, in the account menu: what changed, newest first, one
+  heading a day. Cards that turned yellow, red or green again, services that
+  stopped answering and came back, maintenance, a service that runs another
+  version, containers that restarted or were created anew, and for
+  administrators the changes made in HexDeck: connections and cards added,
+  changed and removed, sign-ins and refused ones. Filters for the kind of
+  line, 24 hours to a year, and words. Everybody else sees the lines about
+  boards they may open. Kept for a year (`HEXDECK_KEEP_EVENTS_DAYS`). From
+  nexdeck 0.49.0.
+- **What happened** and **Daily report**, two new cards: the latest lines of
+  the chronicle, and what happened in the last 24 hours and what is still
+  red. As a message, the daily summary of each channel stays as it was. From
+  nexdeck 0.49.0.
+- A yellow or red card says **since when** next to its reason, also after a
+  restart, from the chronicle.
+- **A backup that is too old** turns the card yellow: Backrest, Kopia and
+  Duplicati hold the last good backup of every plan, source or job against a
+  limit of the connection, 26 hours unless set otherwise. A connection whose
+  backups run less often than once a day should raise "Too old after
+  (hours)", to about 200 for a weekly one. From nexdeck 0.49.0.
+- The **Updates** card says how old the newer release is.
 - **Needs attention**: the Problems card grew into a card that says what
   needs a look, from every board of the board's owner: the cards that are
   yellow or red with their reason, the services whose check fails, and the

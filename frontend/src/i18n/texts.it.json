@@ -2566,7 +2566,20 @@
     "Updates never colour the card. They need Check for updates under System, About.": "Gli aggiornamenti non colorano mai la card. Serve Cerca aggiornamenti in Sistema, Informazioni.",
     "Waiting updates as a quiet line": "Aggiornamenti in attesa come riga discreta",
     "Warnings and errors the owner has not read yet. Plain news like a finished download is left out.": "Avvisi ed errori che il proprietario non ha ancora letto. Le semplici notizie, come un download completato, restano fuori.",
-    "What needs a look, from every board of this board's owner: cards that are yellow or red, services that do not answer and unread warnings from the bell. Otherwise it says that everything is fine.": "Ciò che richiede un’occhiata, da tutte le board del proprietario di questa board: card gialle o rosse, servizi che non rispondono e avvisi non letti della campanella. Altrimenti dice che va tutto bene."
+    "What needs a look, from every board of this board's owner: cards that are yellow or red, services that do not answer and unread warnings from the bell. Otherwise it says that everything is fine.": "Ciò che richiede un’occhiata, da tutte le board del proprietario di questa board: card gialle o rosse, servizi che non rispondono e avvisi non letti della campanella. Altrimenti dice che va tutto bene.",
+    "A plan, source or job whose last good backup is older than this turns the card yellow. 26 suits a nightly backup, about 200 a weekly one; 0 switches it off.": "Un piano, una sorgente o un lavoro il cui ultimo backup riuscito è più vecchio rende gialla la card. 26 va bene per un backup notturno, circa 200 per uno settimanale; 0 lo disattiva.",
+    "Too old after (hours)": "Troppo vecchio dopo (ore)",
+    "Cards and services": "Card e servizi",
+    "Cards, services and versions": "Card, servizi e versioni",
+    "Versions and containers": "Versioni e container",
+    "Which lines": "Quali righe",
+    "What happened": "Cosa è successo",
+    "Daily report": "Rapporto giornaliero",
+    "The latest lines of the chronicle from every board of this board's owner: cards that turned yellow, red or green, outages, maintenance, new versions and containers that restarted.": "Le ultime righe della cronaca da tutte le board del proprietario di questa board: card diventate gialle, rosse o di nuovo verdi, guasti, manutenzione, nuove versioni e container riavviati.",
+    "What happened in the last 24 hours and what is still red, from every board of this board's owner.": "Cosa è successo nelle ultime 24 ore e cosa è ancora rosso, da tutte le board del proprietario di questa board.",
+    "A backup is too old": "Un backup è troppo vecchio",
+    "The daily report": "Il rapporto giornaliero",
+    "Everything, changes in HexDeck too": "Tutto, anche le modifiche in HexDeck"
   },
   "labels": {
     "Jobs": "Job",

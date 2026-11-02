@@ -115,6 +115,27 @@ function AttentionCard(props: RenderProps) {
   )
 }
 
+/** The chronicle's two cards load only when a board has one. */
+const LazyChronicleCard = lazy(() => import('./ChronicleCards').then((module) => ({ default: module.ChronicleCard })))
+const LazyReportCard = lazy(() => import('./ChronicleCards').then((module) => ({ default: module.ReportCard })))
+
+function ChronicleCard(props: RenderProps) {
+  return (
+    <Suspense fallback={<div className="flex-1" />}>
+      <LazyChronicleCard {...props} />
+    </Suspense>
+  )
+}
+
+function ReportCard(props: RenderProps) {
+  return (
+    <Suspense fallback={<div className="flex-1" />}>
+      <LazyReportCard {...props} />
+    </Suspense>
+  )
+}
+
+
 const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   value: ValueCard,
   gauge: GaugeCard,
@@ -164,6 +185,8 @@ const RENDERERS: Record<string, ComponentType<RenderProps>> = {
   wol: WolCard,
   player: PlayerCard,
   attention: AttentionCard,
+  chronicle: ChronicleCard,
+  report: ReportCard,
 }
 
 export function renderWidget(props: RenderProps) {
@@ -978,6 +1001,10 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
                 </span>
               ) : null}
               {item.value !== undefined && item.value !== '' && <span className="num text-xs text-muted whitespace-nowrap">{String(item.value)}</span>}
+              {/* How old the newer release is, on a row of the updates card. */}
+              {typeof item.released === 'number' && (
+                <span className="num text-xs text-faint whitespace-nowrap" title={t('card.released')}>{timeAgo(item.released)}</span>
+              )}
               {item.url ? (
                 <a href={safeUrl(item.url)} target="_blank" rel="noopener noreferrer" className="text-faint hover:text-accent" aria-label={t('card.open')}>
                   <ExternalLink size={12} />

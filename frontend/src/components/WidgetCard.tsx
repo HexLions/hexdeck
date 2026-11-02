@@ -3,6 +3,7 @@ import { Fragment, lazy, Suspense, useEffect, useLayoutEffect, useRef, useState,
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
+import { momentOf } from '../lib/chronicle'
 import { SIZE_PRESETS, type SizePreset } from '../lib/layout'
 import { maintenanceTarget } from '../lib/maintenance'
 import { safeUrl } from '../lib/safeUrl'
@@ -189,7 +190,9 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
   // service gives one (Nexview names its findings, for example).
   const urgent = Array.isArray(data?.meta?.urgent) ? (data?.meta?.urgent as unknown[]).map(String) : []
   const reasons = (showFindings || failed ? [errorText, data?.meta?.status_reason ? String(data.meta.status_reason) : '', ...urgent] : [errorText]).filter(Boolean).map((text) => tLabel(text))
-  const statusTitle = [t(`status.${status}`), ...reasons].join(' · ')
+  // Since when, from the chronicle also after a restart.
+  const since = (status === 'warn' || status === 'bad') && typeof data?.since === 'number' ? t('attention.since', { when: momentOf(data.since, i18n.language, t) }) : ''
+  const statusTitle = [t(`status.${status}`), ...reasons, since].filter(Boolean).join(' · ')
 
   // Maintenance: an administrator sets it from the card; everyone sees until when.
   const admin = useAuth((state) => state.user?.role === 'admin')
@@ -270,9 +273,9 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
           </h3>
           {awayChip}
           {/* Why yellow or red, right on the card; the veil already says it for failures. */}
-          {!failed && (status === 'warn' || status === 'bad') && reasons.length > 0 && (
-            <span className={`hidden @min-[300px]:inline text-[10px] truncate max-w-[45%] ${status === 'bad' ? 'text-bad' : 'text-warn'}`} title={statusTitle}>
-              {reasons[0]}
+          {!failed && (status === 'warn' || status === 'bad') && (reasons.length > 0 || since) && (
+            <span className={`hidden @min-[300px]:inline text-[10px] truncate max-w-[45%] ${status === 'bad' ? 'text-bad' : 'text-warn'}`} title={statusTitle} data-testid="card-reason">
+              {[reasons[0], since].filter(Boolean).join(' · ')}
             </span>
           )}
           {/* In the head, beside the dot and the beta mark rather than over them. */}
