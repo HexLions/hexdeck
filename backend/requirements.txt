@@ -37,7 +37,7 @@ python-multipart==0.0.31
 # One adapter speaks SNMP to switches, which httpx cannot; pyasn1 is its
 # encoder. Taken over with the adapter from upstream.
 pysnmp==7.1.29
-pyasn1==0.6.4
+pyasn1==0.6.5
 
 # The second factor. pyotp does the time codes, segno draws the QR code in
 # our own process: a secret sent to a foreign QR service is not a secret.
