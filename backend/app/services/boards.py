@@ -188,7 +188,12 @@ def _drawn_as(widget: Widget, declared: str) -> str:
     return view if view in ("gauge", "value", "meter", "segments") else declared
 
 
-def widget_view(db: Session, widget: Widget, bars: list[float | None] | None = None) -> dict[str, Any]:
+def widget_view(db: Session, widget: Widget, bars: list[float | None] | None = None,
+                maintenance_until: dict[int, Any] | None = None) -> dict[str, Any]:
+    """A card as the browser gets it. ``maintenance_until`` is what
+    ``maintenance.until_by_card`` says for a whole board; one card alone asks."""
+    from . import maintenance
+
     try:
         adapter, kind = split_widget_kind(widget.kind)
         widget_type = adapter.widget(kind)
@@ -246,7 +251,14 @@ def widget_view(db: Session, widget: Widget, bars: list[float | None] | None = N
         "default_size": default_size,
         "min_size": min_size,
         "health": health,
+        # Until when the card's connection, or the tile itself, is in maintenance.
+        "maintenance": _away((maintenance_until if maintenance_until is not None
+                              else maintenance.until_by_card(db, [widget])).get(widget.id)),
     }
+
+
+def _away(row: Any) -> dict[str, Any] | None:
+    return {"id": row.id, "until": row.ends_at.isoformat()} if row is not None else None
 
 
 def board_view(db: Session, board: Board, permission: str, *, include_live: bool = True) -> dict[str, Any]:
@@ -262,8 +274,11 @@ def board_view(db: Session, board: Board, permission: str, *, include_live: bool
     checked = {w.id: health_service.bars_window(w.options)
                for page in pages for w in page.widgets if w.health_check is not None}
     all_bars = health_service.bars_for(db, checked)
+    from . import maintenance
+
+    away = maintenance.until_by_card(db, [w for page in pages for w in page.widgets])
     for page in pages:
-        widgets = [widget_view(db, w, all_bars.get(w.id)) for w in page.widgets]
+        widgets = [widget_view(db, w, all_bars.get(w.id), away) for w in page.widgets]
         widget_ids.extend(w.id for w in page.widgets)
         page_views.append({
             "id": page.id, "name": page.name, "slug": page.slug, "icon": page.icon, "position": page.position,

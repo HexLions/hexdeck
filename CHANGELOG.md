@@ -9,6 +9,21 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Added
 
+- **Needs attention**: the Problems card grew into a card that says what
+  needs a look, from every board of the board's owner: the cards that are
+  yellow or red with their reason, the services whose check fails, and the
+  warnings of the bell the owner has not read yet, red before yellow and the
+  newest first, each with its board and since when. A row leads to the card
+  on its board, or to the service if the card is told to; what does not fit
+  opens as the whole list. Waiting updates stand on a quiet line and never
+  colour it. From nexdeck 0.49.0.
+- **Maintenance**: an administrator puts a connection, or a single app tile,
+  into maintenance for one to eight hours or until a time, from the wrench on
+  the card. Until then nothing about it is told, in the bell or on any
+  channel, and no outage is opened; a service that rejects its credentials is
+  still told. The cards keep showing what they read and say until when. The
+  availability bars draw the time grey and leave it out of the share of time
+  a service was up. `POST /api/v1/maintenance`. From nexdeck 0.49.0.
 - **Joplin Server**: when the notes last synced and how many items it
   holds, and for an administrator every account with its storage and quota.
   The notes themselves stay unread. ⚠️ Beta.
@@ -36,6 +51,11 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Changed
 
+- Problems cards that exist keep doing what they did: only their own board,
+  no bell, no updates, and a row opens the service. Each of these is a setting
+  of the card now; new cards start with every board, the bell, the updates and
+  the card on its board. The database gets a table for maintenance and its
+  version 17, which writes these old answers into the existing cards.
 - **What's new** loads only when it is due, the first time after an update,
   instead of with every board, which keeps every release note out of the
   first load. From nexdeck 0.49.0.
