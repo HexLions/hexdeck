@@ -1165,9 +1165,13 @@
     "flow": "Wohin der Strom fließt",
     "topology": "Wie die Orte zusammenhängen",
     "problemsMore": "+{{count}} weitere",
-    "lastHours_one": "letzte Stunde",
-    "lastHours_other": "letzte {{count}} Stunden",
-    "released": "Erschienen"
+    "released": "Erschienen",
+    "range": "Zeitraum",
+    "rangeHours": "{{count}} h",
+    "rangeDays": "{{count}} T",
+    "rangeYear": "1 J",
+    "lowHigh": "{{low}} bis {{high}}",
+    "collectingLong": "Wird gesammelt. Die ersten Stunden erscheinen nach einer Stunde, die ersten Tage nach Mitternacht."
   },
   "player": {
     "title": "Musik",
@@ -1523,7 +1527,13 @@
       "card_added": "Karte {{name}} auf {{after}} hinzugefügt",
       "card_removed": "Karte {{name}} von {{after}} entfernt",
       "signed_in": "{{name}} hat sich angemeldet",
-      "sign_in_refused": "Anmeldung für {{name}} abgelehnt"
+      "sign_in_refused": "Anmeldung für {{name}} abgelehnt",
+      "forecast_full_one": "{{name}} ist in etwa einem Tag voll",
+      "forecast_full_other": "{{name}} ist in etwa {{count}} Tagen voll",
+      "forecast_bad_one": "{{name}} erreicht Rot in etwa einem Tag",
+      "forecast_bad_other": "{{name}} erreicht Rot in etwa {{count}} Tagen",
+      "forecast_warn_one": "{{name}} erreicht Gelb in etwa einem Tag",
+      "forecast_warn_other": "{{name}} erreicht Gelb in etwa {{count}} Tagen"
     },
     "way": {
       "password": "mit Passwort",
@@ -1550,5 +1560,20 @@
     "updatesCount_one": "Update",
     "updatesCount_other": "Updates",
     "quiet": "In den letzten 24 Stunden ist nichts passiert, und nichts ist rot."
+  },
+  "forecast": {
+    "full_one": "Voll in etwa einem Tag",
+    "full_other": "Voll in etwa {{count}} Tagen",
+    "fullRow_one": "{{row}} voll in etwa einem Tag",
+    "fullRow_other": "{{row}} voll in etwa {{count}} Tagen",
+    "bad_one": "Erreicht Rot in etwa einem Tag",
+    "bad_other": "Erreicht Rot in etwa {{count}} Tagen",
+    "warn_one": "Erreicht Gelb in etwa einem Tag",
+    "warn_other": "Erreicht Gelb in etwa {{count}} Tagen",
+    "slower": "{{row}} dauert jede Woche länger, +{{minutes}} min je Woche",
+    "around": "um den {{date}}",
+    "reachesOn": "erreicht um den {{date}}",
+    "told": "gemeldet",
+    "basis": "Fortgeschrieben aus den letzten 30 Tagen"
   }
 }

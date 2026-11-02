@@ -1165,9 +1165,13 @@
     "flow": "Where the power goes",
     "topology": "How the places hang together",
     "problemsMore": "+{{count}} more",
-    "lastHours_one": "last hour",
-    "lastHours_other": "last {{count}} hours",
-    "released": "Released"
+    "released": "Released",
+    "range": "Range",
+    "rangeHours": "{{count}} h",
+    "rangeDays": "{{count}} d",
+    "rangeYear": "1 y",
+    "lowHigh": "{{low}} to {{high}}",
+    "collectingLong": "Collecting. The first hours appear after an hour, the first days after midnight."
   },
   "player": {
     "title": "Music",
@@ -1523,7 +1527,13 @@
       "card_added": "Card {{name}} added to {{after}}",
       "card_removed": "Card {{name}} removed from {{after}}",
       "signed_in": "{{name}} signed in",
-      "sign_in_refused": "Sign-in refused for {{name}}"
+      "sign_in_refused": "Sign-in refused for {{name}}",
+      "forecast_full_one": "{{name}} will be full in about a day",
+      "forecast_full_other": "{{name}} will be full in about {{count}} days",
+      "forecast_bad_one": "{{name}} reaches red in about a day",
+      "forecast_bad_other": "{{name}} reaches red in about {{count}} days",
+      "forecast_warn_one": "{{name}} reaches yellow in about a day",
+      "forecast_warn_other": "{{name}} reaches yellow in about {{count}} days"
     },
     "way": {
       "password": "with the password",
@@ -1550,5 +1560,20 @@
     "updatesCount_one": "update",
     "updatesCount_other": "updates",
     "quiet": "Nothing happened in the last 24 hours, and nothing is red."
+  },
+  "forecast": {
+    "full_one": "Full in about a day",
+    "full_other": "Full in about {{count}} days",
+    "fullRow_one": "{{row}} full in about a day",
+    "fullRow_other": "{{row}} full in about {{count}} days",
+    "bad_one": "Reaches red in about a day",
+    "bad_other": "Reaches red in about {{count}} days",
+    "warn_one": "Reaches yellow in about a day",
+    "warn_other": "Reaches yellow in about {{count}} days",
+    "slower": "{{row}} takes longer every week, +{{minutes}} min a week",
+    "around": "around {{date}}",
+    "reachesOn": "reached around {{date}}",
+    "told": "told",
+    "basis": "Carried on from the last 30 days"
   }
 }

@@ -1165,9 +1165,13 @@
     "flow": "Dove va l'energia",
     "topology": "Come sono collegati i punti",
     "problemsMore": "+{{count}} altri",
-    "lastHours_one": "ultima ora",
-    "lastHours_other": "ultime {{count}} ore",
-    "released": "Pubblicato"
+    "released": "Pubblicato",
+    "range": "Periodo",
+    "rangeHours": "{{count}} h",
+    "rangeDays": "{{count}} g",
+    "rangeYear": "1 a",
+    "lowHigh": "da {{low}} a {{high}}",
+    "collectingLong": "Raccolta in corso. Le prime ore appaiono dopo un'ora, i primi giorni dopo mezzanotte."
   },
   "player": {
     "title": "Musica",
@@ -1523,7 +1527,13 @@
       "card_added": "Card {{name}} aggiunta a {{after}}",
       "card_removed": "Card {{name}} tolta da {{after}}",
       "signed_in": "{{name}} ha effettuato l’accesso",
-      "sign_in_refused": "Accesso rifiutato per {{name}}"
+      "sign_in_refused": "Accesso rifiutato per {{name}}",
+      "forecast_full_one": "{{name}} sarà pieno tra circa un giorno",
+      "forecast_full_other": "{{name}} sarà pieno tra circa {{count}} giorni",
+      "forecast_bad_one": "{{name}} raggiunge il rosso tra circa un giorno",
+      "forecast_bad_other": "{{name}} raggiunge il rosso tra circa {{count}} giorni",
+      "forecast_warn_one": "{{name}} raggiunge il giallo tra circa un giorno",
+      "forecast_warn_other": "{{name}} raggiunge il giallo tra circa {{count}} giorni"
     },
     "way": {
       "password": "con la password",
@@ -1550,5 +1560,20 @@
     "updatesCount_one": "aggiornamento",
     "updatesCount_other": "aggiornamenti",
     "quiet": "Non è successo niente nelle ultime 24 ore, e niente è rosso."
+  },
+  "forecast": {
+    "full_one": "Pieno tra circa un giorno",
+    "full_other": "Pieno tra circa {{count}} giorni",
+    "fullRow_one": "{{row}} pieno tra circa un giorno",
+    "fullRow_other": "{{row}} pieno tra circa {{count}} giorni",
+    "bad_one": "Raggiunge il rosso tra circa un giorno",
+    "bad_other": "Raggiunge il rosso tra circa {{count}} giorni",
+    "warn_one": "Raggiunge il giallo tra circa un giorno",
+    "warn_other": "Raggiunge il giallo tra circa {{count}} giorni",
+    "slower": "{{row}} dura di più ogni settimana, +{{minutes}} min a settimana",
+    "around": "verso il {{date}}",
+    "reachesOn": "raggiunto verso il {{date}}",
+    "told": "segnalato",
+    "basis": "Proiettato dagli ultimi 30 giorni"
   }
 }

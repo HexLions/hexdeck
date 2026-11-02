@@ -1,4 +1,4 @@
-"""Maintenance windows (roadmap M1, 24.10.2026).
+"""Maintenance windows (24.10.2026).
 
 An administrator puts a connection or an app tile into maintenance until a
 time. Until then nothing about it is told except rejected credentials, no

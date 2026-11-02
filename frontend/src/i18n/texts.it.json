@@ -2579,7 +2579,9 @@
     "What happened in the last 24 hours and what is still red, from every board of this board's owner.": "Cosa è successo nelle ultime 24 ore e cosa è ancora rosso, da tutte le board del proprietario di questa board.",
     "A backup is too old": "Un backup è troppo vecchio",
     "The daily report": "Il rapporto giornaliero",
-    "Everything, changes in HexDeck too": "Tutto, anche le modifiche in HexDeck"
+    "Everything, changes in HexDeck too": "Tutto, anche le modifiche in HexDeck",
+    "The last year": "L'ultimo anno",
+    "Something is full or reaches its red line soon": "Qualcosa sarà presto pieno o raggiungerà la sua linea rossa"
   },
   "labels": {
     "Jobs": "Job",

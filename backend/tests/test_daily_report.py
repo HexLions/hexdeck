@@ -1,4 +1,4 @@
-"""The daily report (roadmap M2): a summary of the last 24 hours, on a card and once a day on a channel."""
+"""The daily report: a summary of the last 24 hours, on a card and once a day on a channel."""
 
 from __future__ import annotations
 

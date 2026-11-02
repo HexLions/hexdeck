@@ -1,5 +1,5 @@
 /**
- * The chronicle's cards and page (roadmap M2): lines that lead to their card,
+ * The chronicle's cards and page: lines that lead to their card,
  * the daily report's facts, filters and paging, and "since" on a card.
  */
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

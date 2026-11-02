@@ -1,4 +1,4 @@
-"""The chronicle (roadmap M2, 25.10.2026): what changed, and when, and who may read it."""
+"""The chronicle (25.10.2026): what changed, and when, and who may read it."""
 
 from __future__ import annotations
 
