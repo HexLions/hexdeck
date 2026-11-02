@@ -39,8 +39,8 @@ from ..schemas import (
     WidgetPatch,
     WidgetPreview,
 )
+from ..services import chronicle, history
 from ..services import health as health_service
-from ..services import history
 from ..services.boards import _validate_options, place_widget, remove_from_layouts, widget_view
 from ..services.collector import collector
 from ..services.hass_ws import hass_listener
@@ -104,6 +104,8 @@ def create_widget(page_id: int, body: WidgetCreate, user: CurrentUser, db: DbSes
     size = (body.w or widget_type.default_size[0], body.h or widget_type.default_size[1])
     place_widget(page, widget.id, size, widget_type.min_size, columns_of(board.settings))
     health_service.ensure_check_for_widget(db, widget)
+    chronicle.record("card_added", widget_id=widget.id, integration_id=widget.integration_id, board_id=board.id,
+                     user_id=user.id, name=widget.title or body.kind, after=board.name, db=db)
     db.commit()
     db.refresh(widget)
     collector.schedule(widget.id)
@@ -278,6 +280,8 @@ def delete_widget(widget_id: int, user: CurrentUser, db: DbSession) -> None:
     integration_id = widget.integration_id
     remove_from_layouts(page, widget.id)
     history.forget_widget(db, widget.id)
+    chronicle.record("card_removed", widget_id=widget.id, integration_id=integration_id, board_id=board.id,
+                     user_id=user.id, name=widget.title or widget.kind, after=board.name, db=db)
     db.delete(widget)
     db.commit()
     collector.unschedule(widget_id)

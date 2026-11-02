@@ -32,7 +32,7 @@ from ..security import (
     read_step_token,
     verify_password,
 )
-from ..services import auto_login, avatars, login_guard, mail, password_reset, two_factor
+from ..services import auto_login, avatars, chronicle, login_guard, mail, password_reset, two_factor
 from ..uploads import read_at_most
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
@@ -75,6 +75,9 @@ def user_public(user: User, request: Request | None = None) -> UserPublic:
 def open_session(db: DbSession, user: User, request: Request, response: Response, auto: bool = False) -> None:
     session = Session(user_id=user.id, user_agent=request.headers.get("user-agent", "")[:300])
     db.add(session)
+    # Every way in comes through here: password, second factor, a provider, the home network, the first start.
+    chronicle.record("signed_in", user_id=user.id, name=user.username, after="by itself" if auto else "",
+                     detail=auto_login.address_text(request), db=db)
     db.commit()
     set_session_cookie(response, request, create_session_token(user.id, session.id, auto=auto))
     if request.cookies.get(auto_login.MANUAL_COOKIE):
@@ -108,6 +111,8 @@ def login(body: LoginBody, request: Request, response: Response, db: DbSession) 
     if user is None or user.disabled or not right:
         login_guard.failed(address, account)
         logger.info("Sign-in refused for %r from %s.", body.username, address)
+        # The name as it was typed, for the administrator: it says what was tried, not whether it exists.
+        chronicle.record("sign_in_refused", level="warn", name=body.username[:80], detail=address)
         raise error("bad_credentials", "User name or password is wrong.", status.HTTP_401_UNAUTHORIZED)
     login_guard.succeeded(address, account)
     if two_factor.enabled(user):
