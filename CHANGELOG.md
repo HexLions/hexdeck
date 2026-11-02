@@ -60,6 +60,14 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   instead of with every board, which keeps every release note out of the
   first load. From nexdeck 0.49.0.
 
+### Security
+
+- pyasn1 0.6.5, for four advisories; glob 14.0.3 and minimatch 11.0.3 for
+  the build tools, through npm overrides. The dependency audit can accept an
+  advisory that has no fix yet, for one package and until a day: deepmerge's
+  (GHSA-gcqx-w48m-w2h4), reached only while building, until 31.12.2026.
+  From nexdeck.
+
 ## 0.33.1 (2026-10-25)
 
 Key figures, a countdown and a timer from nexdeck 0.48, and the UPS load drawn over time.
