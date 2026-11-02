@@ -2554,7 +2554,19 @@
     "MinIO object storage: space used and free, nodes and drives online, and the buckets by size.": "MinIO-Objektspeicher: belegter und freier Platz, Knoten und Laufwerke online, und die Buckets nach Größe.",
     "Space used of the usable capacity, buckets and objects, nodes and drives online.": "Belegter Platz der nutzbaren Kapazität, Buckets und Objekte, Knoten und Laufwerke online.",
     "The S3 address of MinIO, not its console.": "Die S3-Adresse von MinIO, nicht seine Konsole.",
-    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Was mc admin prometheus generate <alias> als bearer_token ausgibt. Leer, wenn MinIO mit MINIO_PROMETHEUS_AUTH_TYPE=public läuft."
+    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Was mc admin prometheus generate <alias> als bearer_token ausgibt. Leer, wenn MinIO mit MINIO_PROMETHEUS_AUTH_TYPE=public läuft.",
+    "From where": "Woher",
+    "Needs attention": "Aufmerksamkeit",
+    "Only this board": "Nur dieses Board",
+    "Tapping a row opens": "Antippen einer Zeile öffnet",
+    "The card is read once for everyone who sees it, so it shows what the owner of the board sees.": "Die Karte wird für alle, die sie sehen, einmal gelesen. Darum zeigt sie, was der Besitzer des Boards sieht.",
+    "The card, on its board": "Die Karte auf ihrem Board",
+    "The service": "Den Dienst",
+    "Unread warnings from the bell": "Ungelesene Warnungen aus der Glocke",
+    "Updates never colour the card. They need Check for updates under System, About.": "Updates färben die Karte nie. Sie brauchen „Nach Updates suchen“ unter System, Über.",
+    "Waiting updates as a quiet line": "Wartende Updates als leise Zeile",
+    "Warnings and errors the owner has not read yet. Plain news like a finished download is left out.": "Warnungen und Fehler, die der Besitzer noch nicht gelesen hat. Einfache Neuigkeiten wie ein fertiger Download bleiben draußen.",
+    "What needs a look, from every board of this board's owner: cards that are yellow or red, services that do not answer and unread warnings from the bell. Otherwise it says that everything is fine.": "Was einen Blick braucht, von allen Boards des Besitzers dieses Boards: Karten auf Gelb oder Rot, Dienste, die nicht antworten, und ungelesene Warnungen aus der Glocke. Sonst sagt sie, dass alles in Ordnung ist."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3827,6 +3839,7 @@
     "encrypted": "verschlüsselt",
     "This account owns no library.": "Dieses Konto besitzt keine Bibliothek.",
     "Drives": "Laufwerke",
-    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO hat seine Buckets noch nicht gezählt; sein Scanner meldet sie nach dem ersten Durchlauf."
+    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO hat seine Buckets noch nicht gezählt; sein Scanner meldet sie nach dem ersten Durchlauf.",
+    "Task Photos": "Aufgabe Fotos"
   }
 }

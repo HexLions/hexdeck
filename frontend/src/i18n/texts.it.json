@@ -2524,7 +2524,7 @@
     "A tinted tile": "Un riquadro colorato",
     "A coloured edge": "Un bordo colorato",
     "History behind the number": "Andamento dietro il numero",
-    "The last hours as a faint line, as the card itself records them.": "Le ultime ore come una linea tenue, come la scheda stessa le registra.",
+    "The last hours as a faint line, as the card itself records them.": "Le ultime ore come una linea tenue, come la card stessa le registra.",
     "Cards of this page that show a number. They leave the board and show here as tiles, each with its own settings, until this card is removed.": "Schede di questa pagina che mostrano un numero. Lasciano la bacheca e compaiono qui come riquadri, ognuna con le sue impostazioni, finché questa scheda non viene rimossa.",
     "A dot in the corner": "Punto nell'angolo",
     "UPS load": "Carico UPS",
@@ -2554,7 +2554,19 @@
     "MinIO object storage: space used and free, nodes and drives online, and the buckets by size.": "Object storage MinIO: spazio usato e libero, nodi e dischi online, e i bucket per dimensione.",
     "Space used of the usable capacity, buckets and objects, nodes and drives online.": "Spazio usato della capacità utilizzabile, bucket e oggetti, nodi e dischi online.",
     "The S3 address of MinIO, not its console.": "L'indirizzo S3 di MinIO, non la sua console.",
-    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Quello che mc admin prometheus generate <alias> stampa come bearer_token. Vuoto se MinIO gira con MINIO_PROMETHEUS_AUTH_TYPE=public."
+    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Quello che mc admin prometheus generate <alias> stampa come bearer_token. Vuoto se MinIO gira con MINIO_PROMETHEUS_AUTH_TYPE=public.",
+    "From where": "Da dove",
+    "Needs attention": "Da controllare",
+    "Only this board": "Solo questa board",
+    "Tapping a row opens": "Toccare una riga apre",
+    "The card is read once for everyone who sees it, so it shows what the owner of the board sees.": "La card viene letta una volta per tutti quelli che la vedono, quindi mostra ciò che vede il proprietario della board.",
+    "The card, on its board": "La card, nella sua board",
+    "The service": "Il servizio",
+    "Unread warnings from the bell": "Avvisi non letti della campanella",
+    "Updates never colour the card. They need Check for updates under System, About.": "Gli aggiornamenti non colorano mai la card. Serve Cerca aggiornamenti in Sistema, Informazioni.",
+    "Waiting updates as a quiet line": "Aggiornamenti in attesa come riga discreta",
+    "Warnings and errors the owner has not read yet. Plain news like a finished download is left out.": "Avvisi ed errori che il proprietario non ha ancora letto. Le semplici notizie, come un download completato, restano fuori.",
+    "What needs a look, from every board of this board's owner: cards that are yellow or red, services that do not answer and unread warnings from the bell. Otherwise it says that everything is fine.": "Ciò che richiede un’occhiata, da tutte le board del proprietario di questa board: card gialle o rosse, servizi che non rispondono e avvisi non letti della campanella. Altrimenti dice che va tutto bene."
   },
   "labels": {
     "Jobs": "Job",
@@ -3827,6 +3839,7 @@
     "encrypted": "cifrata",
     "This account owns no library.": "Questo account non possiede nessuna libreria.",
     "Drives": "Dischi",
-    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO non ha ancora contato i suoi bucket; il suo scanner li riporta dopo il primo passaggio."
+    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO non ha ancora contato i suoi bucket; il suo scanner li riporta dopo il primo passaggio.",
+    "Task Photos": "Attività Foto"
   }
 }

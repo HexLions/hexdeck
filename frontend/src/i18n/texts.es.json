@@ -2554,7 +2554,19 @@
     "MinIO object storage: space used and free, nodes and drives online, and the buckets by size.": "Almacenamiento de objetos MinIO: espacio usado y libre, nodos y discos en línea, y los buckets por tamaño.",
     "Space used of the usable capacity, buckets and objects, nodes and drives online.": "Espacio usado de la capacidad utilizable, buckets y objetos, nodos y discos en línea.",
     "The S3 address of MinIO, not its console.": "La dirección S3 de MinIO, no su consola.",
-    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Lo que mc admin prometheus generate <alias> imprime como bearer_token. Vacío si MinIO se ejecuta con MINIO_PROMETHEUS_AUTH_TYPE=public."
+    "What mc admin prometheus generate <alias> prints as bearer_token. Empty when MinIO runs with MINIO_PROMETHEUS_AUTH_TYPE=public.": "Lo que mc admin prometheus generate <alias> imprime como bearer_token. Vacío si MinIO se ejecuta con MINIO_PROMETHEUS_AUTH_TYPE=public.",
+    "From where": "De dónde",
+    "Needs attention": "Requiere atención",
+    "Only this board": "Solo este tablero",
+    "Tapping a row opens": "Al tocar una fila se abre",
+    "The card is read once for everyone who sees it, so it shows what the owner of the board sees.": "La tarjeta se lee una sola vez para todos los que la ven, así que muestra lo que ve el propietario del tablero.",
+    "The card, on its board": "La tarjeta, en su tablero",
+    "The service": "El servicio",
+    "Unread warnings from the bell": "Avisos sin leer de la campana",
+    "Updates never colour the card. They need Check for updates under System, About.": "Las actualizaciones nunca colorean la tarjeta. Necesitan Buscar actualizaciones en Sistema, Acerca de.",
+    "Waiting updates as a quiet line": "Actualizaciones pendientes como línea discreta",
+    "Warnings and errors the owner has not read yet. Plain news like a finished download is left out.": "Avisos y errores que el propietario aún no ha leído. Las noticias simples, como una descarga terminada, quedan fuera.",
+    "What needs a look, from every board of this board's owner: cards that are yellow or red, services that do not answer and unread warnings from the bell. Otherwise it says that everything is fine.": "Lo que necesita un vistazo, de todos los tableros del propietario de este tablero: tarjetas en amarillo o rojo, servicios que no responden y avisos sin leer de la campana. Si no hay nada, dice que todo está bien."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3827,6 +3839,7 @@
     "encrypted": "cifrada",
     "This account owns no library.": "Esta cuenta no tiene ninguna biblioteca.",
     "Drives": "Discos",
-    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO aún no ha contado sus buckets; su escáner los informa tras su primera pasada."
+    "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO aún no ha contado sus buckets; su escáner los informa tras su primera pasada.",
+    "Task Photos": "Tarea Fotos"
   }
 }
