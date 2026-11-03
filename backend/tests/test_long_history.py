@@ -60,9 +60,13 @@ def test_an_hour_is_folded_once_from_its_minutes_weighted_by_their_count(client:
     folded = [row for row in _rows(HistoryHour) if row.ts == hour]
     assert len(folded) == 1
     assert (folded[0].avg, folded[0].min, folded[0].max, folded[0].count) == (25.0, 9.0, 41.0, 120)
+    # ⚠️ The mark follows the time the second run is given, not the first: in
+    # the last minute of an hour ``now + 60`` is already the next hour, and an
+    # expectation worked out from ``now`` failed then (seen on CI at 19:59:47).
+    later = now + 60
     with db_session() as db:
-        history.condense(db, now=now + 60)
-        assert db.get(Setting, history.FOLDED).value["hour"] == now - 3600 - (now - 3600) % 3600
+        history.condense(db, now=later)
+        assert db.get(Setting, history.FOLDED).value["hour"] == later - 3600 - (later - 3600) % 3600
     assert [row.count for row in _rows(HistoryHour) if row.ts == hour] == [120], "folded again, it would count twice"
 
 
