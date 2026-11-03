@@ -159,6 +159,8 @@ Rarely needed, but real:
 | `HEXDECK_REQUEST_THREADS` | `24` | Worker threads for synchronous routes. Keep it below the two above added together. |
 | `HEXDECK_HISTORY_RAW_HOURS` | `1` | How long raw samples are kept before they become minute averages. |
 | `HEXDECK_HISTORY_MINUTE_HOURS` | `24` | How long those minute averages are kept. |
+| `HEXDECK_HISTORY_HOUR_DAYS` | `90` | How long hour rows are kept: what charts of 7 and 30 days and the forecasts read. |
+| `HEXDECK_HISTORY_DAY_DAYS` | `730` | How long day rows are kept: a chart of a year. |
 | `HEXDECK_LOG_HISTORY_HOURS` | `6` | How long container log lines are kept. |
 | `HEXDECK_HEALTH_INTERVAL_SECONDS` | `30` | Default interval for reachability checks. |
 | `HEXDECK_OUTAGE_THRESHOLD_SECONDS` | `120` | How long a service must be down before an outage is announced. |

@@ -1,5 +1,5 @@
 /**
- * The attention card (roadmap M1): what needs a look, from every board of the
+ * The attention card: what needs a look, from every board of the
  * board's owner, or "All good". Built as the mock-up that was agreed on 24.10.2026:
  * a sentence on top with the count of red and yellow, red before yellow and
  * the newest first, a row leads to its card (or its service), what does not

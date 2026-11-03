@@ -45,6 +45,7 @@ EVENTS: dict[str, str] = {
     "disk_hot": "A disk is running hot",
     "backup_failed": "A backup task failed",
     "backup_stale": "A backup is too old",
+    "forecast": "Something is full or reaches its red line soon",
     "software_update": "An update is waiting on a server",
     "update_available": "A new HexDeck version",
     "maintenance_due": "A maintenance item is due",

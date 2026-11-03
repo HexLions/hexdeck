@@ -1027,9 +1027,13 @@
     "topology": "Cómo se conectan los lugares",
     "uptime": "Disponibilidad en la ventana",
     "problemsMore": "+{{count}} más",
-    "lastHours_one": "última hora",
-    "lastHours_other": "últimas {{count}} horas",
-    "released": "Publicado"
+    "released": "Publicado",
+    "range": "Periodo",
+    "rangeHours": "{{count}} h",
+    "rangeDays": "{{count}} d",
+    "rangeYear": "1 a",
+    "lowHigh": "{{low}} a {{high}}",
+    "collectingLong": "Recopilando. Las primeras horas aparecen tras una hora, los primeros días tras la medianoche."
   },
   "player": {
     "title": "Música",
@@ -1523,7 +1527,13 @@
       "card_added": "Tarjeta {{name}} añadida a {{after}}",
       "card_removed": "Tarjeta {{name}} quitada de {{after}}",
       "signed_in": "{{name}} inició sesión",
-      "sign_in_refused": "Inicio de sesión rechazado para {{name}}"
+      "sign_in_refused": "Inicio de sesión rechazado para {{name}}",
+      "forecast_full_one": "{{name}} se llenará en aproximadamente un día",
+      "forecast_full_other": "{{name}} se llenará en aproximadamente {{count}} días",
+      "forecast_bad_one": "{{name}} llega al rojo en aproximadamente un día",
+      "forecast_bad_other": "{{name}} llega al rojo en aproximadamente {{count}} días",
+      "forecast_warn_one": "{{name}} llega al amarillo en aproximadamente un día",
+      "forecast_warn_other": "{{name}} llega al amarillo en aproximadamente {{count}} días"
     },
     "way": {
       "password": "con contraseña",
@@ -1550,5 +1560,20 @@
     "updatesCount_one": "actualización",
     "updatesCount_other": "actualizaciones",
     "quiet": "No pasó nada en las últimas 24 horas y nada está en rojo."
+  },
+  "forecast": {
+    "full_one": "Lleno en aproximadamente un día",
+    "full_other": "Lleno en aproximadamente {{count}} días",
+    "fullRow_one": "{{row}} lleno en aproximadamente un día",
+    "fullRow_other": "{{row}} lleno en aproximadamente {{count}} días",
+    "bad_one": "Llega al rojo en aproximadamente un día",
+    "bad_other": "Llega al rojo en aproximadamente {{count}} días",
+    "warn_one": "Llega al amarillo en aproximadamente un día",
+    "warn_other": "Llega al amarillo en aproximadamente {{count}} días",
+    "slower": "{{row}} tarda más cada semana, +{{minutes}} min por semana",
+    "around": "hacia el {{date}}",
+    "reachesOn": "se alcanza hacia el {{date}}",
+    "told": "avisado",
+    "basis": "Proyectado a partir de los últimos 30 días"
   }
 }

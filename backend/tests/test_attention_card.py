@@ -1,4 +1,4 @@
-"""The problems card grew into the attention card (roadmap M1, 24.10.2026).
+"""The problems card grew into the attention card (24.10.2026).
 
 It looks at every board of the board's owner, says since when a card is
 yellow or red, counts the unread warnings of the bell, leaves out what is in

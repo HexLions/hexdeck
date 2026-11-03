@@ -2579,7 +2579,9 @@
     "What happened in the last 24 hours and what is still red, from every board of this board's owner.": "Lo que pasó en las últimas 24 horas y lo que sigue en rojo, de todos los tableros del propietario de este tablero.",
     "A backup is too old": "Una copia de seguridad es demasiado antigua",
     "The daily report": "El informe diario",
-    "Everything, changes in HexDeck too": "Todo, también los cambios en HexDeck"
+    "Everything, changes in HexDeck too": "Todo, también los cambios en HexDeck",
+    "The last year": "El último año",
+    "Something is full or reaches its red line soon": "Algo se llenará pronto o llegará a su línea roja"
   },
   "labels": {
     "Private resources": "Recursos privados",

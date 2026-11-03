@@ -1,5 +1,5 @@
 /**
- * Two cards out of the chronicle (roadmap M2): "What happened", its latest
+ * Two cards out of the chronicle: "What happened", its latest
  * lines, and "Daily report", the last 24 hours and what is still red.
  */
 import { useTranslation } from 'react-i18next'

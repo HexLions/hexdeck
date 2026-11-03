@@ -9,6 +9,14 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Added
 
+- **History over months, and forecasts.** Hours are kept 90 days and days
+  two years, with the lowest and highest of each, beside the share of each
+  volume and the duration of each backup. Chart cards switch between 24
+  hours, 7 days, 30 days and a year. A forecast says when a volume is full, a
+  number reaches its red line or a backup gets slower; it is drawn on in the
+  chart and told once, under two weeks, as "Something is full or reaches its
+  red line soon". `HEXDECK_HISTORY_HOUR_DAYS`, `HEXDECK_HISTORY_DAY_DAYS`.
+  From nexdeck 0.49.0.
 - **Chronicle**, in the account menu: what changed, newest first, one
   heading a day. Cards that turned yellow, red or green again, services that
   stopped answering and came back, maintenance, a service that runs another

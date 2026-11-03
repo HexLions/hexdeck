@@ -1,4 +1,4 @@
-"""A backup that is too old turns its card yellow (roadmap M2): Backrest, Kopia and Duplicati."""
+"""A backup that is too old turns its card yellow: Backrest, Kopia and Duplicati."""
 
 from __future__ import annotations
 

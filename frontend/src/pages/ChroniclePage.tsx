@@ -1,5 +1,5 @@
 /**
- * The chronicle (roadmap M2): what changed, newest first, one heading a day.
+ * The chronicle: what changed, newest first, one heading a day.
  * Administrators see everything, others the lines about their boards; the
  * server decides that, the page only shows the filter that makes sense.
  */
