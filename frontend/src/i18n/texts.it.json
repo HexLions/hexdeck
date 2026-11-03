@@ -2612,7 +2612,16 @@
     "Tilt (degrees)": "Inclinazione (gradi)",
     "What is left after the inverter, the cables and the dirt. 85 suits most systems.": "Quello che resta dopo inverter, cavi e sporco. 85 va bene per la maggior parte degli impianti.",
     "What the panels add up to on paper.": "La potenza di targa dei pannelli sommati.",
-    "What your solar panels should make today, tomorrow and in the week, worked out from the Open-Meteo forecast. No account needed.": "Quanto dovrebbero produrre i tuoi pannelli oggi, domani e in settimana, calcolato dalla previsione Open-Meteo. Nessun account richiesto."
+    "What your solar panels should make today, tomorrow and in the week, worked out from the Open-Meteo forecast. No account needed.": "Quanto dovrebbero produrre i tuoi pannelli oggi, domani e in settimana, calcolato dalla previsione Open-Meteo. Nessun account richiesto.",
+    "A Bambu Lab 3D printer on your network: what it prints, how far along, its temperatures, errors and filament.": "Una stampante 3D Bambu Lab sulla tua rete: cosa stampa, a che punto è, temperature, errori e filamento.",
+    "Access code": "Codice di accesso",
+    "Filament": "Filamento",
+    "How far the print is, the time left, the layer, the temperatures and any error.": "A che punto è la stampa, il tempo rimanente, lo strato, le temperature e gli eventuali errori.",
+    "On the printer's screen under Settings, Device.": "Sullo schermo della stampante in Impostazioni, Dispositivo.",
+    "On the printer's screen under Settings, WLAN or Network.": "Sullo schermo della stampante in Impostazioni, WLAN o Rete.",
+    "Serial number": "Numero di serie",
+    "The printer's address on your network.": "L'indirizzo della stampante sulla tua rete.",
+    "What is loaded in each AMS slot: material, how much is left, and the AMS's humidity.": "Cosa c'è in ogni slot dell'AMS: materiale, quanto ne resta e l'umidità dell'AMS."
   },
   "labels": {
     "Jobs": "Job",
@@ -3899,6 +3908,10 @@
     "The municipality is in no alert zone.": "Il comune non è in nessuna zona di allerta.",
     "Power now": "Potenza adesso",
     "Still to come": "Ancora da produrre",
-    "Open-Meteo has no forecast for these days.": "Open-Meteo non ha previsioni per questi giorni."
+    "Open-Meteo has no forecast for these days.": "Open-Meteo non ha previsioni per questi giorni.",
+    "Job": "Lavoro",
+    "Progress": "Avanzamento",
+    "Slicing": "Slicing",
+    "No filament is loaded in an AMS.": "Nessun filamento caricato in un AMS."
   }
 }

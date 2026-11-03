@@ -104,6 +104,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   Beta.
 - **Solar forecast**: what your panels should make today, tomorrow and in
   the week, from Open-Meteo, without an account. ⚠️ Beta.
+- **Bambu Lab**: what a 3D printer on your network prints, how far along,
+  its temperatures and errors, and the filament in its AMS. Not yet run
+  against a printer. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

@@ -569,6 +569,10 @@ Updated at every milestone.
   (Apache 2.0) and its library (MIT).** The same API and the same temperature
   model, with hours added up instead of quarter hours; no code taken.
   Checked against the live API on 03.11.2026.
+- **Bambu Lab printers over MQTT, after the HACS integration of greghesp
+  (MIT).** The same local broker, topics and report; a few MQTT packets
+  written here instead of a client library, no code taken. Tested against a
+  small broker in the tests; not yet run against a printer.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
