@@ -84,6 +84,10 @@ The format follows Keep a Changelog; the project uses semantic versioning.
     next run, a button that runs one now, the repositories, and yellow when
     the last good backup is older than the connection allows (26 hours by
     default), told once as "A backup is too old".
+- **Maltrail** ⚠️ Beta: today's events by severity with the last one,
+  yellow with a high one, the latest findings and the events of the days
+  before. It signs in the way Maltrail's own page does, with the old digest
+  and with the PBKDF2 proof of the newer releases. From nexdeck 1.2.0.
 
 ### Fixed
 
@@ -105,6 +109,11 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   kept for six hours, so the card went on saying a newer release was out;
   a service behind the newest release is now asked again after half an
   hour. From nexdeck 1.1.1.
+- **A backup that ended in a warning** turns its card yellow: Zerobyte,
+  Backrest, and Kopia with errors. The rows said so already, but the cards
+  counted only failed and too old backups; the summary cards now count these
+  runs as Warning. A Kopia snapshot that is running stays yellow in its row
+  and leaves the card alone. From nexdeck 1.2.0.
 
 ### Changed
 
