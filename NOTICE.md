@@ -558,6 +558,9 @@ Updated at every milestone.
   with the metrics token, parsed with their labels, each figure taken once
   across nodes. Written from MinIO's source, RELEASE.2025-10-15T17-29-55Z;
   not yet run against a MinIO, whose binaries are no longer served.
+- **INGV's earthquakes, after the HACS integration of caiosweet (MIT).**
+  The same FDSN event service, asked for GeoJSON instead of QuakeML; no
+  code taken. Checked against the live service on 03.11.2026.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

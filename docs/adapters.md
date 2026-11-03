@@ -220,6 +220,7 @@ that one of thirty-five renderers draws.
 | Steam | player, recently played, library | | Web API key from steamcommunity.com/dev, plus the 64-bit id or custom profile name. The profile's game details have to be public, or Steam answers an empty list |
 | Minecraft | server, players | | none; the server list ping carries no credentials. Java over TCP (25565), Bedrock over UDP (19132); Java servers before 1.7 speak an older ping that is not supported |
 | Hacker News | stories | | none |
+| INGV earthquakes | earthquakes, earthquakes in short | | none: INGV's FDSN event service, asked for GeoJSON. Latitude, longitude and radius narrow it to a place; empty, all of Italy and its seas. `time` comes without a zone and is UTC; no quake is 204 with an empty body. Amber from magnitude 4, red from 5 |
 | Miniflux | unread, failing feeds, feed reader | | API key from Settings > API Keys |
 | Mastodon | server, account, notifications | | none for the server card, whose answers are public; a user token with read:accounts and read:notifications for the others, from Preferences > Development > New application. This week's posts and logins are the week in progress; a server can switch that activity off |
 | Lemmy | instance, hot | | none; the site's counts and the hot posts of its own communities are public. Lemmy 0.19's API v3; a post opens on this instance, though it may come from another. NSFW posts are left out |

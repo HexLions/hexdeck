@@ -112,6 +112,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) node\(s\) offline$/, '$1 Knoten offline'],
     [/^(\d+) drive\(s\) offline$/, '$1 Laufwerk(e) offline'],
     [/^1 object$/, '1 Objekt'],
+    [/^(\d+) km deep$/, '$1 km tief'],
+    [/^(\d+) km away$/, '$1 km entfernt'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -232,6 +234,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) node\(s\) offline$/, '$1 nodo(s) sin conexión'],
     [/^(\d+) drive\(s\) offline$/, '$1 disco(s) sin conexión'],
     [/^1 object$/, '1 objeto'],
+    [/^(\d+) km deep$/, '$1 km de profundidad'],
+    [/^(\d+) km away$/, 'a $1 km'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -325,6 +329,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) node\(s\) offline$/, '$1 nodo/i offline'],
     [/^(\d+) drive\(s\) offline$/, '$1 disco/i offline'],
     [/^1 object$/, '1 oggetto'],
+    [/^(\d+) km deep$/, '$1 km di profondità'],
+    [/^(\d+) km away$/, 'a $1 km'],
   ],
 }
 

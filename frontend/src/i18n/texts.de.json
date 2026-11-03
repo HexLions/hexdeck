@@ -2581,7 +2581,17 @@
     "The daily report": "Der Tagesbericht",
     "Everything, changes in HexDeck too": "Alles, auch Änderungen in HexDeck",
     "The last year": "Das letzte Jahr",
-    "Something is full or reaches its red line soon": "Etwas ist bald voll oder erreicht seine rote Linie"
+    "Something is full or reaches its red line soon": "Etwas ist bald voll oder erreicht seine rote Linie",
+    "Days back": "Tage zurück",
+    "Earthquakes": "Erdbeben",
+    "Earthquakes in short": "Erdbeben in Kürze",
+    "From magnitude": "Ab Magnitude",
+    "How many earthquakes, and the strongest, in the days chosen.": "Wie viele Erdbeben, und das stärkste, in den gewählten Tagen.",
+    "Radius (km)": "Radius (km)",
+    "The earthquakes INGV has recorded in and around Italy, the latest first, near a place or all of them.": "Die Erdbeben, die das INGV in und um Italien aufgezeichnet hat, die neuesten zuerst, nahe einem Ort oder alle.",
+    "The latest earthquakes with their magnitude, depth, distance and when.": "Die letzten Erdbeben mit Magnitude, Tiefe, Entfernung und Zeitpunkt.",
+    "With the longitude, only quakes within the radius count. Empty: all of Italy and its seas.": "Mit dem Längengrad zählen nur Beben im Radius. Leer: ganz Italien und seine Meere.",
+    "INGV earthquakes": "INGV-Erdbeben"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3855,6 +3865,10 @@
     "This account owns no library.": "Dieses Konto besitzt keine Bibliothek.",
     "Drives": "Laufwerke",
     "MinIO has not counted its buckets yet; its scanner reports them after its first pass.": "MinIO hat seine Buckets noch nicht gezählt; sein Scanner meldet sie nach dem ersten Durchlauf.",
-    "Task Photos": "Aufgabe Fotos"
+    "Task Photos": "Aufgabe Fotos",
+    "Latest": "Letztes",
+    "Strongest": "Stärkstes",
+    "Where": "Wo",
+    "No earthquake of that size in the days chosen.": "Kein Erdbeben dieser Stärke in den gewählten Tagen."
   }
 }

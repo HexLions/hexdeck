@@ -96,6 +96,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   advisory that has no fix yet, for one package and until a day: deepmerge's
   (GHSA-gcqx-w48m-w2h4), reached only while building, until 31.12.2026.
   From nexdeck.
+- **INGV earthquakes**: the latest earthquakes in and around Italy with
+  their magnitude, depth and distance from a place, and how many in the
+  days chosen. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 
