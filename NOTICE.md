@@ -576,6 +576,9 @@ Updated at every milestone.
 - **TP-Link Omada's Open API, after the HACS integration of bullitt186
   (MIT).** The same token flow, sites, devices and client counts; no code
   taken. Not yet run against a controller.
+- **Dahua's CGI API, after the HACS integration of rroller (MIT).** The same
+  calls for the device, its disks and motion, and what that project recorded
+  about real devices; no code taken. Not yet run against a device.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

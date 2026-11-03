@@ -110,6 +110,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **TP-Link Omada**: the gateways, switches and access points of a
   controller, whether they are connected, and how many clients they carry.
   Not yet run against a controller. ⚠️ Beta.
+- **Dahua**: a camera or recorder, also relabelled ones such as Amcrest, with
+  its model and firmware, motion now and the state of its disks. Not yet run
+  against a device. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

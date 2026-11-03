@@ -2630,7 +2630,12 @@
     "Network devices": "Netzwerkgeräte",
     "Omada ID": "Omada-ID",
     "Only this site, by name. Empty: every site, up to ten.": "Nur dieser Standort, nach Name. Leer: alle Standorte, bis zu zehn.",
-    "The controller's own address; for Omada Cloud the address of your region's Open API.": "Die eigene Adresse des Controllers; bei Omada Cloud die Open-API-Adresse deiner Region."
+    "The controller's own address; for Omada Cloud the address of your region's Open API.": "Die eigene Adresse des Controllers; bei Omada Cloud die Open-API-Adresse deiner Region.",
+    "A Dahua or Amcrest camera or recorder: model and firmware, whether there is motion now, and its disks.": "Eine Kamera oder ein Rekorder von Dahua oder Amcrest: Modell und Firmware, ob gerade Bewegung erkannt wird, und die Festplatten.",
+    "Camera or recorder": "Kamera oder Rekorder",
+    "Every disk or memory card with its state and how full it is. Recorders overwrite the oldest, so full is normal.": "Jede Festplatte oder Speicherkarte mit Zustand und Füllstand. Rekorder überschreiben das Älteste, voll ist also normal.",
+    "Motion on how many channels now, the model, the firmware and the state of the disks.": "Auf wie vielen Kanälen gerade Bewegung ist, das Modell, die Firmware und der Zustand der Festplatten.",
+    "Too many wrong tries lock this address out on the device for a while.": "Zu viele falsche Versuche sperren diese Adresse eine Weile auf dem Gerät."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3932,6 +3937,7 @@
     "Managed by others": "Anderswo verwaltet",
     "Heartbeat missed": "Kein Lebenszeichen",
     "Isolated": "Isoliert",
-    "The controller has no device yet.": "Der Controller hat noch kein Gerät."
+    "The controller has no device yet.": "Der Controller hat noch kein Gerät.",
+    "Motion now": "Bewegung jetzt"
   }
 }

@@ -119,6 +119,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) % humidity$/, '$1 % Feuchte'],
     [/^up (.+)$/, 'läuft seit $1'],
     [/^(\d+) device\(s\) not answering$/, '$1 Gerät(e) antworten nicht'],
+    [/^Disk in trouble: (.+)$/, 'Festplatte mit Problemen: $1'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -245,6 +246,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(Yellow|Orange|Red) alert today$/, 'Alerta hoy'],
     [/^(\d+) % humidity$/, '$1 % de humedad'],
     [/^(\d+) device\(s\) not answering$/, '$1 dispositivo(s) no responden'],
+    [/^Disk in trouble: (.+)$/, 'Disco con problemas: $1'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -345,6 +347,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) % humidity$/, '$1 % di umidità'],
     [/^up (.+)$/, 'attivo da $1'],
     [/^(\d+) device\(s\) not answering$/, '$1 dispositivo/i non rispondono'],
+    [/^Disk in trouble: (.+)$/, 'Disco con problemi: $1'],
   ],
 }
 

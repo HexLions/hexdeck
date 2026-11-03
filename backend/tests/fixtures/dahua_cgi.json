@@ -1,0 +1,6 @@
+{
+  "system_info": "appAutoStart=true\r\ndeviceType=DHI-NVR5464-16P-EI\r\nhardwareVersion=1.00\r\nprocessor=ST7108\r\nserialNumber=SERIAL0001\r\nupdateSerial=DHI-NVR5464\r\n",
+  "software_version": "version=2.800.0000016.0.R,build:2020-06-05\r\n",
+  "storage": "list.info[0].Name=/dev/sda\r\nlist.info[0].State=Success\r\nlist.info[0].HealthDataFlag=0\r\nlist.info[0].Detail[0].IsError=false\r\nlist.info[0].Detail[0].TotalBytes=1000000000000.000000\r\nlist.info[0].Detail[0].UsedBytes=250000000000.000000\r\nlist.info[0].Detail[1].IsError=false\r\nlist.info[0].Detail[1].TotalBytes=1000000000000.000000\r\nlist.info[0].Detail[1].UsedBytes=750000000000.000000\r\nlist.info[1].Name=/dev/sdb\r\nlist.info[1].State=Error\r\nlist.info[1].HealthDataFlag=1\r\nlist.info[1].Detail[0].IsError=true\r\nlist.info[1].Detail[0].TotalBytes=4000000000000.000000\r\nlist.info[1].Detail[0].UsedBytes=4000000000000.000000\r\n",
+  "motion": "channels[0]=0\r\nchannels[1]=5\r\n"
+}
