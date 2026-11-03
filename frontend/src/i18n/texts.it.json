@@ -2598,7 +2598,21 @@
     "Floods, landslides and storms, today and tomorrow, each with its level.": "Rischio idraulico, idrogeologico e temporali, oggi e domani, ciascuno con il suo livello.",
     "Municipality": "Comune",
     "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "L'allerta della Protezione Civile per un comune, oggi e domani: rischio idraulico, idrogeologico e temporali.",
-    "The worst alert for the municipality today, with its zone and tomorrow's.": "L'allerta peggiore di oggi per il comune, con la sua zona e quella di domani."
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "L'allerta peggiore di oggi per il comune, con la sua zona e quella di domani.",
+    "0 is south, -90 east, 90 west, 180 north.": "0 è sud, -90 est, 90 ovest, 180 nord.",
+    "0 lies flat, 90 stands upright.": "0 è in piano, 90 è in verticale.",
+    "Efficiency (%)": "Efficienza (%)",
+    "Facing (degrees)": "Orientamento (gradi)",
+    "Panels (kWp)": "Pannelli (kWp)",
+    "Solar forecast": "Previsione solare",
+    "Solar this week": "Solare questa settimana",
+    "Solar today": "Solare oggi",
+    "The energy expected on each of the next days, with the highest power.": "L'energia prevista per ciascuno dei prossimi giorni, con la potenza massima.",
+    "The energy expected today, what is left of it, tomorrow's, and the power now.": "L'energia prevista oggi, quanta ne manca, quella di domani e la potenza di adesso.",
+    "Tilt (degrees)": "Inclinazione (gradi)",
+    "What is left after the inverter, the cables and the dirt. 85 suits most systems.": "Quello che resta dopo inverter, cavi e sporco. 85 va bene per la maggior parte degli impianti.",
+    "What the panels add up to on paper.": "La potenza di targa dei pannelli sommati.",
+    "What your solar panels should make today, tomorrow and in the week, worked out from the Open-Meteo forecast. No account needed.": "Quanto dovrebbero produrre i tuoi pannelli oggi, domani e in settimana, calcolato dalla previsione Open-Meteo. Nessun account richiesto."
   },
   "labels": {
     "Jobs": "Job",
@@ -3882,6 +3896,9 @@
     "Flooding": "Rischio idraulico",
     "Landslides": "Rischio idrogeologico",
     "Storms": "Temporali",
-    "The municipality is in no alert zone.": "Il comune non è in nessuna zona di allerta."
+    "The municipality is in no alert zone.": "Il comune non è in nessuna zona di allerta.",
+    "Power now": "Potenza adesso",
+    "Still to come": "Ancora da produrre",
+    "Open-Meteo has no forecast for these days.": "Open-Meteo non ha previsioni per questi giorni."
   }
 }

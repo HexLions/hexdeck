@@ -2598,7 +2598,21 @@
     "Floods, landslides and storms, today and tomorrow, each with its level.": "Inundaciones, deslizamientos y tormentas, hoy y mañana, cada uno con su nivel.",
     "Municipality": "Municipio",
     "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "La alerta de la Protección Civil italiana para un municipio, hoy y mañana: inundaciones, deslizamientos y tormentas.",
-    "The worst alert for the municipality today, with its zone and tomorrow's.": "La peor alerta del municipio hoy, con su zona y la de mañana."
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "La peor alerta del municipio hoy, con su zona y la de mañana.",
+    "0 is south, -90 east, 90 west, 180 north.": "0 es sur, -90 este, 90 oeste, 180 norte.",
+    "0 lies flat, 90 stands upright.": "0 está plano, 90 está vertical.",
+    "Efficiency (%)": "Eficiencia (%)",
+    "Facing (degrees)": "Orientación (grados)",
+    "Panels (kWp)": "Paneles (kWp)",
+    "Solar forecast": "Previsión solar",
+    "Solar this week": "Solar esta semana",
+    "Solar today": "Solar hoy",
+    "The energy expected on each of the next days, with the highest power.": "La energía prevista para cada uno de los próximos días, con la potencia máxima.",
+    "The energy expected today, what is left of it, tomorrow's, and the power now.": "La energía prevista hoy, la que queda, la de mañana y la potencia ahora.",
+    "Tilt (degrees)": "Inclinación (grados)",
+    "What is left after the inverter, the cables and the dirt. 85 suits most systems.": "Lo que queda tras el inversor, los cables y la suciedad. 85 sirve para la mayoría de las instalaciones.",
+    "What the panels add up to on paper.": "Lo que suman los paneles sobre el papel.",
+    "What your solar panels should make today, tomorrow and in the week, worked out from the Open-Meteo forecast. No account needed.": "Lo que deberían producir tus paneles hoy, mañana y durante la semana, calculado con la previsión de Open-Meteo. Sin cuenta."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3882,6 +3896,9 @@
     "Flooding": "Inundaciones",
     "Landslides": "Deslizamientos",
     "Storms": "Tormentas",
-    "The municipality is in no alert zone.": "El municipio no está en ninguna zona de alerta."
+    "The municipality is in no alert zone.": "El municipio no está en ninguna zona de alerta.",
+    "Power now": "Potencia ahora",
+    "Still to come": "Aún por llegar",
+    "Open-Meteo has no forecast for these days.": "Open-Meteo no tiene previsión para estos días."
   }
 }

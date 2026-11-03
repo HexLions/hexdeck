@@ -102,6 +102,8 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Protezione Civile**: the Italian Civil Protection's alert for a
   municipality, today and tomorrow, for floods, landslides and storms. ⚠️
   Beta.
+- **Solar forecast**: what your panels should make today, tomorrow and in
+  the week, from Open-Meteo, without an account. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

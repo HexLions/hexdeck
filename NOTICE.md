@@ -565,6 +565,10 @@ Updated at every milestone.
   of caiosweet (MIT).** The same page and GeoJSON files; the municipality
   is matched by name instead of by point and polygon. No code taken.
   Checked against the bulletin of 03.11.2026.
+- **A solar forecast from Open-Meteo, after the HACS integration of rany2
+  (Apache 2.0) and its library (MIT).** The same API and the same temperature
+  model, with hours added up instead of quarter hours; no code taken.
+  Checked against the live API on 03.11.2026.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

@@ -2598,7 +2598,21 @@
     "Floods, landslides and storms, today and tomorrow, each with its level.": "Hochwasser, Erdrutsche und Gewitter, heute und morgen, jeweils mit Stufe.",
     "Municipality": "Gemeinde",
     "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "Die Warnung des italienischen Zivilschutzes für eine Gemeinde, heute und morgen: Hochwasser, Erdrutsche und Gewitter.",
-    "The worst alert for the municipality today, with its zone and tomorrow's.": "Die schlimmste Warnung für die Gemeinde heute, mit ihrer Zone und der von morgen."
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "Die schlimmste Warnung für die Gemeinde heute, mit ihrer Zone und der von morgen.",
+    "0 is south, -90 east, 90 west, 180 north.": "0 ist Süden, -90 Osten, 90 Westen, 180 Norden.",
+    "0 lies flat, 90 stands upright.": "0 liegt flach, 90 steht senkrecht.",
+    "Efficiency (%)": "Wirkungsgrad (%)",
+    "Facing (degrees)": "Ausrichtung (Grad)",
+    "Panels (kWp)": "Module (kWp)",
+    "Solar forecast": "Solarprognose",
+    "Solar this week": "Solar diese Woche",
+    "Solar today": "Solar heute",
+    "The energy expected on each of the next days, with the highest power.": "Die erwartete Energie an jedem der nächsten Tage, mit der höchsten Leistung.",
+    "The energy expected today, what is left of it, tomorrow's, and the power now.": "Die heute erwartete Energie, was davon noch kommt, die von morgen und die Leistung jetzt.",
+    "Tilt (degrees)": "Neigung (Grad)",
+    "What is left after the inverter, the cables and the dirt. 85 suits most systems.": "Was nach Wechselrichter, Kabeln und Schmutz bleibt. 85 passt für die meisten Anlagen.",
+    "What the panels add up to on paper.": "Was die Module zusammen auf dem Papier leisten.",
+    "What your solar panels should make today, tomorrow and in the week, worked out from the Open-Meteo forecast. No account needed.": "Was deine Solarmodule heute, morgen und in der Woche erzeugen sollten, berechnet aus der Open-Meteo-Prognose. Kein Konto nötig."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3882,6 +3896,9 @@
     "Flooding": "Hochwasser",
     "Landslides": "Erdrutsche",
     "Storms": "Gewitter",
-    "The municipality is in no alert zone.": "Die Gemeinde liegt in keiner Warnzone."
+    "The municipality is in no alert zone.": "Die Gemeinde liegt in keiner Warnzone.",
+    "Power now": "Leistung jetzt",
+    "Still to come": "Kommt noch",
+    "Open-Meteo has no forecast for these days.": "Open-Meteo hat für diese Tage keine Prognose."
   }
 }

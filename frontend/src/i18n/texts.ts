@@ -115,6 +115,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) km deep$/, '$1 km tief'],
     [/^(\d+) km away$/, '$1 km entfernt'],
     [/^(Yellow|Orange|Red) alert today$/, 'Warnung heute'],
+    [/^up to (\d+) W$/, 'bis zu $1 W'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -238,6 +239,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) km deep$/, '$1 km de profundidad'],
     [/^(\d+) km away$/, 'a $1 km'],
     [/^(Yellow|Orange|Red) alert today$/, 'Alerta hoy'],
+    [/^up to (\d+) W$/, 'hasta $1 W'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -334,6 +336,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) km deep$/, '$1 km di profondità'],
     [/^(\d+) km away$/, 'a $1 km'],
     [/^(Yellow|Orange|Red) alert today$/, 'Allerta oggi'],
+    [/^up to (\d+) W$/, 'fino a $1 W'],
   ],
 }
 
