@@ -2640,7 +2640,19 @@
     "Every schedule with its last run, source and destination and when it runs next, failed ones first, with a button that runs it now.": "Jeder Plan mit letztem Lauf, Quelle, Ziel und nächstem Lauf, gescheiterte zuerst, mit einem Knopf, der ihn sofort startet.",
     "How many schedules there are, how many are fine, failed, running or paused, and when the last good backup ran.": "Wie viele Pläne es gibt, wie viele in Ordnung, fehlgeschlagen, laufend oder pausiert sind und wann die letzte gute Sicherung lief.",
     "Every repository with its state, size and snapshots, worst first.": "Jedes Repository mit Zustand, Größe und Snapshots, das schlechteste zuerst.",
-    "From Settings > Personal > API keys in Zerobyte 0.40 or newer. The key may do what its user may, and the cards only read.": "Aus Einstellungen > Persönlich > API-Schlüssel in Zerobyte 0.40 oder neuer. Der Schlüssel darf, was sein Benutzer darf, die Karten lesen nur."
+    "From Settings > Personal > API keys in Zerobyte 0.40 or newer. The key may do what its user may, and the cards only read.": "Aus Einstellungen > Persönlich > API-Schlüssel in Zerobyte 0.40 oder neuer. Der Schlüssel darf, was sein Benutzer darf, die Karten lesen nur.",
+    "What Maltrail's sensors found on the network today, the latest findings, and the days before.": "Was die Sensoren von Maltrail heute im Netz gefunden haben, die neuesten Funde und die Tage davor.",
+    "The address of the Maltrail server, port 8338 by default.": "Die Adresse des Maltrail-Servers, ab Werk Port 8338.",
+    "A user from USERS in maltrail.conf. Not needed when USERS is empty.": "Ein Benutzer aus USERS in maltrail.conf. Nicht nötig, wenn USERS leer ist.",
+    "A user of its own for HexDeck is best: add a line to USERS in maltrail.conf and restart the server.": "Am besten ein eigener Benutzer für HexDeck: eine Zeile in USERS in maltrail.conf ergänzen und den Server neu starten.",
+    "The password admin is shipped with is accepted only from the Maltrail server itself.": "Das Passwort, mit dem admin ausgeliefert wird, gilt nur auf dem Maltrail-Server selbst.",
+    "How many events today, how many of them serious, and when the last one came.": "Wie viele Ereignisse heute, wie viele davon ernst, und wann das letzte kam.",
+    "Latest findings": "Neueste Funde",
+    "The newest events of the day: what, from where, and when.": "Die neuesten Ereignisse des Tages: was, von wo und wann.",
+    "At least": "Mindestens",
+    "Medium and high": "Mittel und hoch",
+    "High only": "Nur hoch",
+    "Events per day.": "Ereignisse pro Tag."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3956,6 +3968,12 @@
     "Source unavailable": "Quelle nicht erreichbar",
     "Repository error": "Repository-Fehler",
     "Being repaired": "Wird repariert",
-    "Check cancelled": "Prüfung abgebrochen"
+    "Check cancelled": "Prüfung abgebrochen",
+    "Events today": "Ereignisse heute",
+    "Medium": "Mittel",
+    "Low": "Niedrig",
+    "Last event": "Letztes Ereignis",
+    "Nothing found today.": "Heute nichts gefunden.",
+    "No events in these days.": "Keine Ereignisse in diesen Tagen."
   }
 }
