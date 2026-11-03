@@ -107,6 +107,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **Bambu Lab**: what a 3D printer on your network prints, how far along,
   its temperatures and errors, and the filament in its AMS. Not yet run
   against a printer. ⚠️ Beta.
+- **TP-Link Omada**: the gateways, switches and access points of a
+  controller, whether they are connected, and how many clients they carry.
+  Not yet run against a controller. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

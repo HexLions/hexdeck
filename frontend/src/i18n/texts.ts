@@ -117,6 +117,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(Yellow|Orange|Red) alert today$/, 'Warnung heute'],
     [/^up to (\d+) W$/, 'bis zu $1 W'],
     [/^(\d+) % humidity$/, '$1 % Feuchte'],
+    [/^up (.+)$/, 'läuft seit $1'],
+    [/^(\d+) device\(s\) not answering$/, '$1 Gerät(e) antworten nicht'],
   ],
   // ⚠️ Spanish, taken from upstream's own patterns.es.ts with its Spanish.
   // Kept inline like the other two rather than in a file of its own, so that
@@ -199,6 +201,7 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^Image backup (\d+ (?:min|h|d)) ago$/, 'Copia de imagen hace $1'],
     [/^Offline, last seen (\d+ (?:min|h|d)) ago$/, 'Desconectado, visto por última vez hace $1'],
     [/^(\d+ (?:min|h|d)) ago$/, 'hace $1'],
+    [/^up to (\d+) W$/, 'hasta $1 W'],
     [/^up (.+)$/, 'activo desde hace $1'],
     [/^(\d+) restarts$/, '$1 reinicios'],
     [/^(\d+) unhealthy$/, '$1 no sanos'],
@@ -240,8 +243,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(\d+) km deep$/, '$1 km de profundidad'],
     [/^(\d+) km away$/, 'a $1 km'],
     [/^(Yellow|Orange|Red) alert today$/, 'Alerta hoy'],
-    [/^up to (\d+) W$/, 'hasta $1 W'],
     [/^(\d+) % humidity$/, '$1 % de humedad'],
+    [/^(\d+) device\(s\) not answering$/, '$1 dispositivo(s) no responden'],
   ],
   it: [
     [/^([\d.,]+ [KMGTP]?B) of ([\d.,]+ [KMGTP]?B)$/, '$1 di $2'],
@@ -340,6 +343,8 @@ const PATTERNS: Record<string, [RegExp, string][]> = {
     [/^(Yellow|Orange|Red) alert today$/, 'Allerta oggi'],
     [/^up to (\d+) W$/, 'fino a $1 W'],
     [/^(\d+) % humidity$/, '$1 % di umidità'],
+    [/^up (.+)$/, 'attivo da $1'],
+    [/^(\d+) device\(s\) not answering$/, '$1 dispositivo/i non rispondono'],
   ],
 }
 

@@ -52,6 +52,7 @@ that one of thirty-five renderers draws.
 | AdGuard Home | summary, top blocked | pause 5 min, enable | user and password |
 | Public address | address | | none; one call to ipapi.co or ipwho.is, kept for an hour |
 | UniFi Network | network, console, devices, findings, wlans | | API key (Network 9.0+), or a local account without two-factor |
+| TP-Link Omada | network devices, devices | | a client of the controller's Open API (Settings, Platform Integration, Open API, client credentials mode). The token goes as `Authorization: AccessToken=`, not Bearer, and one that ran out earns one new one. `/api/info` names the Omada ID; Omada Cloud needs it filled in, and its free tier has no Open API. Up to ten sites, a hundred devices each. Red while a device is gone or misses its heartbeat. Not yet run against a controller |
 | Speedtest Tracker | latest, history | | API token |
 | MySpeed | last test, tests | | MySpeed's password in a `password` header when one is set, or nothing when its password level lets everyone read. The card turns amber when the last test falls short of the speeds set as expected in MySpeed |
 | nexpulse | latest result (a running test live, a button to start one), history (speed or ping idle and under load), period summary, recent tests, latency under load (graded A+ to F) | | API key from nexpulse under Settings > API keys; a key that may only read fills every card, one with "Read and start tests" adds the button. nexpulse 0.1.1 or newer tells nexdeck which kind of key it is; on 0.1.0 the button is always shown |

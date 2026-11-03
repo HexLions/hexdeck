@@ -1,0 +1,17 @@
+{
+  "info": {"errorCode": 0, "msg": "Success.", "result": {"controllerVer": "5.15.24", "apiVer": "3", "configured": true, "type": 1, "omadacId": "a1b2c3d4e5f60718293a4b5c6d7e8f90"}},
+  "token": {"errorCode": 0, "msg": "Open API Get Access Token successfully.", "result": {"accessToken": "AT-example", "tokenType": "bearer", "expiresIn": 7200, "refreshToken": "RT-example"}},
+  "bad_client": {"errorCode": -44106, "msg": "The client id or client secret is invalid."},
+  "sites": {"errorCode": 0, "msg": "Success.", "result": {"totalRows": 2, "currentPage": 1, "currentSize": 100, "data": [{"siteId": "site-home", "name": "Home"}, {"siteId": "site-garage", "name": "Garage"}]}},
+  "devices_home": {"errorCode": 0, "msg": "Success.", "result": {"totalRows": 3, "currentPage": 1, "currentSize": 100, "data": [
+    {"mac": "AA-BB-CC-00-00-01", "name": "AP Living room", "type": "ap", "model": "EAP650", "status": 14, "statusCategory": 1, "detailStatus": 14, "ip": "192.168.1.20", "cpuUtil": 15, "memUtil": 40, "uptime": "2day(s) 5h 30m 10s", "clientNum": 12, "firmwareVersion": "1.2.3"},
+    {"mac": "AA-BB-CC-00-00-02", "name": "Core switch", "type": "switch", "model": "TL-SG3428", "status": 14, "statusCategory": 1, "detailStatus": 14, "ip": "192.168.1.21", "cpuUtil": 5, "memUtil": 30, "uptime": 90000, "clientNum": 0},
+    {"mac": "AA-BB-CC-00-00-03", "name": "Gateway", "type": "gateway", "model": "ER605", "status": 14, "statusCategory": 1, "detailStatus": 14, "ip": "192.168.1.1", "cpuUtil": 10, "memUtil": 22, "uptime": 360000, "clientNum": 0}
+  ]}},
+  "devices_garage": {"errorCode": 0, "msg": "Success.", "result": {"totalRows": 1, "currentPage": 1, "currentSize": 100, "data": [
+    {"mac": "AA-BB-CC-00-00-04", "name": "AP Garage", "type": "ap", "model": "EAP225-Outdoor", "status": 30, "statusCategory": 3, "detailStatus": 30, "ip": "192.168.1.22", "uptime": null, "clientNum": 3}
+  ]}},
+  "clients": {"errorCode": 0, "msg": "Success.", "result": {"totalRows": 15, "currentPage": 1, "currentSize": 1, "data": [{"mac": "11-22-33-44-55-66", "name": "phone"}]}},
+  "expired": {"errorCode": -44112, "msg": "The Access Token has expired."},
+  "unsupported": {"errorCode": -1600, "msg": "Unsupported request path."}
+}

@@ -2621,7 +2621,16 @@
     "On the printer's screen under Settings, WLAN or Network.": "En la pantalla de la impresora, en Ajustes, WLAN o Red.",
     "Serial number": "Número de serie",
     "The printer's address on your network.": "La dirección de la impresora en tu red.",
-    "What is loaded in each AMS slot: material, how much is left, and the AMS's humidity.": "Qué hay en cada ranura del AMS: material, cuánto queda y la humedad del AMS."
+    "What is loaded in each AMS slot: material, how much is left, and the AMS's humidity.": "Qué hay en cada ranura del AMS: material, cuánto queda y la humedad del AMS.",
+    "A TP-Link Omada controller: its gateways, switches and access points, whether they are connected, and how many clients they carry.": "Un controlador TP-Link Omada: sus puertas de enlace, switches y puntos de acceso, si están conectados y cuántos clientes tienen.",
+    "Empty: asked from the controller. Omada Cloud needs it filled in.": "Vacío: se pregunta al controlador. Omada Cloud necesita que se rellene.",
+    "Every gateway, switch and access point with its state, clients, processor and uptime, those in trouble first.": "Cada puerta de enlace, switch y punto de acceso con su estado, clientes, procesador y tiempo activo, primero los que tienen problemas.",
+    "How many devices are connected, how many clients they carry, and the sites.": "Cuántos dispositivos están conectados, cuántos clientes tienen y los sitios.",
+    "In the controller: Settings, Platform Integration, Open API. Add a client in client credentials mode.": "En el controlador: Ajustes, Platform Integration, Open API. Añade un cliente en modo Client Credentials.",
+    "Network devices": "Dispositivos de red",
+    "Omada ID": "ID de Omada",
+    "Only this site, by name. Empty: every site, up to ten.": "Solo este sitio, por nombre. Vacío: todos los sitios, hasta diez.",
+    "The controller's own address; for Omada Cloud the address of your region's Open API.": "La dirección del controlador; en Omada Cloud, la de la Open API de tu región."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3912,6 +3921,17 @@
     "Job": "Trabajo",
     "Progress": "Progreso",
     "Slicing": "Laminando",
-    "No filament is loaded in an AMS.": "No hay filamento cargado en un AMS."
+    "No filament is loaded in an AMS.": "No hay filamento cargado en un AMS.",
+    "Disconnected": "Desconectado",
+    "Provisioning": "Aprovisionando",
+    "Configuring": "Configurando",
+    "Upgrading": "Actualizando",
+    "Rebooting": "Reiniciando",
+    "Adopting": "Adoptando",
+    "Adopt failed": "Adopción fallida",
+    "Managed by others": "Gestionado por otros",
+    "Heartbeat missed": "Sin señal",
+    "Isolated": "Aislado",
+    "The controller has no device yet.": "El controlador aún no tiene ningún dispositivo."
   }
 }

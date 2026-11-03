@@ -2621,7 +2621,16 @@
     "On the printer's screen under Settings, WLAN or Network.": "Auf dem Display des Druckers unter Einstellungen, WLAN oder Netzwerk.",
     "Serial number": "Seriennummer",
     "The printer's address on your network.": "Die Adresse des Druckers in deinem Netz.",
-    "What is loaded in each AMS slot: material, how much is left, and the AMS's humidity.": "Was in jedem AMS-Fach liegt: Material, wie viel übrig ist, und die Feuchte im AMS."
+    "What is loaded in each AMS slot: material, how much is left, and the AMS's humidity.": "Was in jedem AMS-Fach liegt: Material, wie viel übrig ist, und die Feuchte im AMS.",
+    "A TP-Link Omada controller: its gateways, switches and access points, whether they are connected, and how many clients they carry.": "Ein TP-Link-Omada-Controller: seine Gateways, Switches und Access Points, ob sie verbunden sind und wie viele Clients sie tragen.",
+    "Empty: asked from the controller. Omada Cloud needs it filled in.": "Leer: wird beim Controller erfragt. Omada Cloud braucht ihn ausgefüllt.",
+    "Every gateway, switch and access point with its state, clients, processor and uptime, those in trouble first.": "Jedes Gateway, jeder Switch und Access Point mit Zustand, Clients, Prozessor und Laufzeit, die mit Problemen zuerst.",
+    "How many devices are connected, how many clients they carry, and the sites.": "Wie viele Geräte verbunden sind, wie viele Clients sie tragen, und die Standorte.",
+    "In the controller: Settings, Platform Integration, Open API. Add a client in client credentials mode.": "Im Controller: Einstellungen, Platform Integration, Open API. Einen Client im Modus Client Credentials anlegen.",
+    "Network devices": "Netzwerkgeräte",
+    "Omada ID": "Omada-ID",
+    "Only this site, by name. Empty: every site, up to ten.": "Nur dieser Standort, nach Name. Leer: alle Standorte, bis zu zehn.",
+    "The controller's own address; for Omada Cloud the address of your region's Open API.": "Die eigene Adresse des Controllers; bei Omada Cloud die Open-API-Adresse deiner Region."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3912,6 +3921,17 @@
     "Job": "Auftrag",
     "Progress": "Fortschritt",
     "Slicing": "Wird geslict",
-    "No filament is loaded in an AMS.": "In keinem AMS liegt Filament."
+    "No filament is loaded in an AMS.": "In keinem AMS liegt Filament.",
+    "Disconnected": "Getrennt",
+    "Provisioning": "Wird eingerichtet",
+    "Configuring": "Wird konfiguriert",
+    "Upgrading": "Wird aktualisiert",
+    "Rebooting": "Startet neu",
+    "Adopting": "Wird übernommen",
+    "Adopt failed": "Übernahme fehlgeschlagen",
+    "Managed by others": "Anderswo verwaltet",
+    "Heartbeat missed": "Kein Lebenszeichen",
+    "Isolated": "Isoliert",
+    "The controller has no device yet.": "Der Controller hat noch kein Gerät."
   }
 }

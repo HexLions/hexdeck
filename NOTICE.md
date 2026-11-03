@@ -573,6 +573,9 @@ Updated at every milestone.
   (MIT).** The same local broker, topics and report; a few MQTT packets
   written here instead of a client library, no code taken. Tested against a
   small broker in the tests; not yet run against a printer.
+- **TP-Link Omada's Open API, after the HACS integration of bullitt186
+  (MIT).** The same token flow, sites, devices and client counts; no code
+  taken. Not yet run against a controller.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
