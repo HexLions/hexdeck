@@ -2591,7 +2591,14 @@
     "The earthquakes INGV has recorded in and around Italy, the latest first, near a place or all of them.": "I terremoti registrati dall'INGV in Italia e dintorni, prima i più recenti, vicino a un luogo o tutti.",
     "The latest earthquakes with their magnitude, depth, distance and when.": "Gli ultimi terremoti con magnitudo, profondità, distanza e quando.",
     "With the longitude, only quakes within the radius count. Empty: all of Italy and its seas.": "Con la longitudine contano solo i terremoti entro il raggio. Vuoto: tutta Italia e i suoi mari.",
-    "INGV earthquakes": "Terremoti INGV"
+    "INGV earthquakes": "Terremoti INGV",
+    "Alert": "Allerta",
+    "Alert by risk": "Allerta per rischio",
+    "As the Civil Protection writes it, in Italian: Milano, Reggio di Calabria, Sant'Omero.": "Come lo scrive la Protezione Civile: Milano, Reggio di Calabria, Sant'Omero.",
+    "Floods, landslides and storms, today and tomorrow, each with its level.": "Rischio idraulico, idrogeologico e temporali, oggi e domani, ciascuno con il suo livello.",
+    "Municipality": "Comune",
+    "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "L'allerta della Protezione Civile per un comune, oggi e domani: rischio idraulico, idrogeologico e temporali.",
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "L'allerta peggiore di oggi per il comune, con la sua zona e quella di domani."
   },
   "labels": {
     "Jobs": "Job",
@@ -3869,6 +3876,12 @@
     "Latest": "Ultimo",
     "Strongest": "Più forte",
     "Where": "Dove",
-    "No earthquake of that size in the days chosen.": "Nessun terremoto di quella forza nei giorni scelti."
+    "No earthquake of that size in the days chosen.": "Nessun terremoto di quella forza nei giorni scelti.",
+    "No alert": "Nessuna allerta",
+    "Orange": "Arancione",
+    "Flooding": "Rischio idraulico",
+    "Landslides": "Rischio idrogeologico",
+    "Storms": "Temporali",
+    "The municipality is in no alert zone.": "Il comune non è in nessuna zona di allerta."
   }
 }

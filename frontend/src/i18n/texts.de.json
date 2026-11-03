@@ -2591,7 +2591,14 @@
     "The earthquakes INGV has recorded in and around Italy, the latest first, near a place or all of them.": "Die Erdbeben, die das INGV in und um Italien aufgezeichnet hat, die neuesten zuerst, nahe einem Ort oder alle.",
     "The latest earthquakes with their magnitude, depth, distance and when.": "Die letzten Erdbeben mit Magnitude, Tiefe, Entfernung und Zeitpunkt.",
     "With the longitude, only quakes within the radius count. Empty: all of Italy and its seas.": "Mit dem Längengrad zählen nur Beben im Radius. Leer: ganz Italien und seine Meere.",
-    "INGV earthquakes": "INGV-Erdbeben"
+    "INGV earthquakes": "INGV-Erdbeben",
+    "Alert": "Warnung",
+    "Alert by risk": "Warnung nach Risiko",
+    "As the Civil Protection writes it, in Italian: Milano, Reggio di Calabria, Sant'Omero.": "So, wie der Zivilschutz ihn schreibt, auf Italienisch: Milano, Reggio di Calabria, Sant'Omero.",
+    "Floods, landslides and storms, today and tomorrow, each with its level.": "Hochwasser, Erdrutsche und Gewitter, heute und morgen, jeweils mit Stufe.",
+    "Municipality": "Gemeinde",
+    "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "Die Warnung des italienischen Zivilschutzes für eine Gemeinde, heute und morgen: Hochwasser, Erdrutsche und Gewitter.",
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "Die schlimmste Warnung für die Gemeinde heute, mit ihrer Zone und der von morgen."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -3869,6 +3876,12 @@
     "Latest": "Letztes",
     "Strongest": "Stärkstes",
     "Where": "Wo",
-    "No earthquake of that size in the days chosen.": "Kein Erdbeben dieser Stärke in den gewählten Tagen."
+    "No earthquake of that size in the days chosen.": "Kein Erdbeben dieser Stärke in den gewählten Tagen.",
+    "No alert": "Keine Warnung",
+    "Orange": "Orange",
+    "Flooding": "Hochwasser",
+    "Landslides": "Erdrutsche",
+    "Storms": "Gewitter",
+    "The municipality is in no alert zone.": "Die Gemeinde liegt in keiner Warnzone."
   }
 }

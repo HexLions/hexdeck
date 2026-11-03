@@ -561,6 +561,10 @@ Updated at every milestone.
 - **INGV's earthquakes, after the HACS integration of caiosweet (MIT).**
   The same FDSN event service, asked for GeoJSON instead of QuakeML; no
   code taken. Checked against the live service on 03.11.2026.
+- **The Civil Protection's criticality bulletin, after the HACS integration
+  of caiosweet (MIT).** The same page and GeoJSON files; the municipality
+  is matched by name instead of by point and polygon. No code taken.
+  Checked against the bulletin of 03.11.2026.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

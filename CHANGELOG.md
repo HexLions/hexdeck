@@ -99,6 +99,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **INGV earthquakes**: the latest earthquakes in and around Italy with
   their magnitude, depth and distance from a place, and how many in the
   days chosen. ⚠️ Beta.
+- **Protezione Civile**: the Italian Civil Protection's alert for a
+  municipality, today and tomorrow, for floods, landslides and storms. ⚠️
+  Beta.
 
 ## 0.33.1 (2026-10-25)
 

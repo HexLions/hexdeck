@@ -2591,7 +2591,14 @@
     "The earthquakes INGV has recorded in and around Italy, the latest first, near a place or all of them.": "Los terremotos que el INGV ha registrado en Italia y alrededores, los más recientes primero, cerca de un lugar o todos.",
     "The latest earthquakes with their magnitude, depth, distance and when.": "Los últimos terremotos con su magnitud, profundidad, distancia y cuándo.",
     "With the longitude, only quakes within the radius count. Empty: all of Italy and its seas.": "Con la longitud solo cuentan los terremotos dentro del radio. Vacío: toda Italia y sus mares.",
-    "INGV earthquakes": "Terremotos INGV"
+    "INGV earthquakes": "Terremotos INGV",
+    "Alert": "Alerta",
+    "Alert by risk": "Alerta por riesgo",
+    "As the Civil Protection writes it, in Italian: Milano, Reggio di Calabria, Sant'Omero.": "Como lo escribe Protección Civil, en italiano: Milano, Reggio di Calabria, Sant'Omero.",
+    "Floods, landslides and storms, today and tomorrow, each with its level.": "Inundaciones, deslizamientos y tormentas, hoy y mañana, cada uno con su nivel.",
+    "Municipality": "Municipio",
+    "The alert of the Italian Civil Protection for a municipality, today and tomorrow: floods, landslides and storms.": "La alerta de la Protección Civil italiana para un municipio, hoy y mañana: inundaciones, deslizamientos y tormentas.",
+    "The worst alert for the municipality today, with its zone and tomorrow's.": "La peor alerta del municipio hoy, con su zona y la de mañana."
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -3869,6 +3876,12 @@
     "Latest": "Último",
     "Strongest": "Más fuerte",
     "Where": "Dónde",
-    "No earthquake of that size in the days chosen.": "Ningún terremoto de esa magnitud en los días elegidos."
+    "No earthquake of that size in the days chosen.": "Ningún terremoto de esa magnitud en los días elegidos.",
+    "No alert": "Sin alerta",
+    "Orange": "Naranja",
+    "Flooding": "Inundaciones",
+    "Landslides": "Deslizamientos",
+    "Storms": "Tormentas",
+    "The municipality is in no alert zone.": "El municipio no está en ninguna zona de alerta."
   }
 }
