@@ -1,0 +1,23 @@
+{
+  "fragment": {"print": {"command": "push_status", "sequence_id": "10", "mc_percent": 6}},
+  "printing": {"print": {
+    "command": "push_status", "sequence_id": "11", "msg": 0,
+    "gcode_state": "RUNNING", "mc_percent": 42, "mc_remaining_time": 134, "layer_num": 88, "total_layer_num": 212,
+    "subtask_name": "Rack bracket", "gcode_file": "/data/Metadata/plate_1.gcode",
+    "nozzle_temper": 219.8125, "nozzle_target_temper": 220, "bed_temper": 54.75, "bed_target_temper": 55,
+    "chamber_temper": 31, "print_error": 0, "wifi_signal": "-48dBm", "hms": [],
+    "ams": {"ams_exist_bits": "1", "tray_now": "0", "ams": [
+      {"id": "0", "humidity": "5", "humidity_raw": "18", "temp": "26.2", "tray": [
+        {"id": "0", "tray_type": "PLA", "tray_sub_brands": "PLA Matte", "tray_color": "000000FF", "remain": 93},
+        {"id": "1", "tray_type": "PETG", "tray_sub_brands": "PETG HF", "tray_color": "FF6A13FF", "remain": 7},
+        {"id": "2", "tray_type": "ABS", "tray_sub_brands": "", "tray_color": "FFFFFFFF", "remain": -1},
+        {"id": "3", "tray_type": "", "tray_sub_brands": "", "tray_color": "00000000", "remain": 0}
+      ]}
+    ]}
+  }},
+  "idle": {"print": {"command": "push_status", "gcode_state": "IDLE", "mc_percent": 0, "mc_remaining_time": 0, "layer_num": 0, "total_layer_num": 0,
+                     "subtask_name": "", "nozzle_temper": 27.8125, "bed_temper": 29.75, "print_error": 0, "hms": []}},
+  "failed": {"print": {"command": "push_status", "gcode_state": "FAILED", "mc_percent": 17, "mc_remaining_time": 0, "subtask_name": "Rack bracket",
+                       "nozzle_temper": 40.0, "bed_temper": 35.0, "print_error": 50348044,
+                       "hms": [{"attr": 50331904, "code": 65543}]}}
+}

@@ -1,0 +1,79 @@
+{
+ "near_milan": {
+  "type": "FeatureCollection",
+  "features": [
+   {
+    "type": "Feature",
+    "properties": {
+     "eventId": 47847212,
+     "originId": 148346401,
+     "time": "2026-11-02T00:51:05.410000",
+     "author": "SURVEY-INGV",
+     "magType": "ML",
+     "mag": 2.3,
+     "magAuthor": "--",
+     "type": "earthquake",
+     "place": "4 km SE Morfasso (PC)",
+     "version": 100,
+     "geojson_creationTime": "2026-11-03T20:44:01"
+    },
+    "geometry": {
+     "type": "Point",
+     "coordinates": [
+      9.7272,
+      44.686,
+      25.1
+     ]
+    }
+   },
+   {
+    "type": "Feature",
+    "properties": {
+     "eventId": 47847112,
+     "originId": 148346141,
+     "time": "2026-11-02T00:10:46.890000",
+     "author": "SURVEY-INGV",
+     "magType": "ML",
+     "mag": 2.7,
+     "magAuthor": "--",
+     "type": "earthquake",
+     "place": "2 km W Tarzo (TV)",
+     "version": 100,
+     "geojson_creationTime": "2026-11-03T20:44:01"
+    },
+    "geometry": {
+     "type": "Point",
+     "coordinates": [
+      12.2093,
+      45.9643,
+      14.4
+     ]
+    }
+   },
+   {
+    "type": "Feature",
+    "properties": {
+     "eventId": 47843702,
+     "originId": 148340411,
+     "time": "2026-11-01T12:08:12.060000",
+     "author": "SURVEY-INGV",
+     "magType": "ML",
+     "mag": 2.2,
+     "magAuthor": "--",
+     "type": "earthquake",
+     "place": "2 km NE Velo d'Astico (VI)",
+     "version": 100,
+     "geojson_creationTime": "2026-11-03T20:44:01"
+    },
+    "geometry": {
+     "type": "Point",
+     "coordinates": [
+      11.3812,
+      45.8023,
+      11
+     ]
+    }
+   }
+  ]
+ }
+}

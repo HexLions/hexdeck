@@ -558,6 +558,27 @@ Updated at every milestone.
   with the metrics token, parsed with their labels, each figure taken once
   across nodes. Written from MinIO's source, RELEASE.2025-10-15T17-29-55Z;
   not yet run against a MinIO, whose binaries are no longer served.
+- **INGV's earthquakes, after the HACS integration of caiosweet (MIT).**
+  The same FDSN event service, asked for GeoJSON instead of QuakeML; no
+  code taken. Checked against the live service on 03.11.2026.
+- **The Civil Protection's criticality bulletin, after the HACS integration
+  of caiosweet (MIT).** The same page and GeoJSON files; the municipality
+  is matched by name instead of by point and polygon. No code taken.
+  Checked against the bulletin of 03.11.2026.
+- **A solar forecast from Open-Meteo, after the HACS integration of rany2
+  (Apache 2.0) and its library (MIT).** The same API and the same temperature
+  model, with hours added up instead of quarter hours; no code taken.
+  Checked against the live API on 03.11.2026.
+- **Bambu Lab printers over MQTT, after the HACS integration of greghesp
+  (MIT).** The same local broker, topics and report; a few MQTT packets
+  written here instead of a client library, no code taken. Tested against a
+  small broker in the tests; not yet run against a printer.
+- **TP-Link Omada's Open API, after the HACS integration of bullitt186
+  (MIT).** The same token flow, sites, devices and client counts; no code
+  taken. Not yet run against a controller.
+- **Dahua's CGI API, after the HACS integration of rroller (MIT).** The same
+  calls for the device, its disks and motion, and what that project recorded
+  about real devices; no code taken. Not yet run against a device.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,
