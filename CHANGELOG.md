@@ -9,6 +9,14 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Added
 
+- **Maintenance every week.** For backups, updates and restarts that come
+  back, the maintenance dialog of a card plans a window on chosen days, from a
+  time, for one to 24 hours. Shortly before each start HexDeck puts the
+  connection or the app tile into maintenance by itself, so nothing about it is
+  told, no outage is opened and the availability bars draw the time grey, just
+  as with maintenance set by hand. "End now" ends this week's window and leaves
+  the plan. The time is the clock of the browser it was set in, and stays the
+  same across summer time. `POST /api/v1/maintenance/plans`. From nexdeck 1.3.0.
 - **History over months, and forecasts.** Hours are kept 90 days and days
   two years, with the lowest and highest of each, beside the share of each
   volume and the duration of each backup. Chart cards switch between 24

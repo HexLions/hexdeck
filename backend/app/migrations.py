@@ -181,6 +181,10 @@ def _problems_cards_stay_as_they_were(connection: Connection) -> None:
     logger.info("%d problems card(s) keep looking at their own board only.", len(rows))
 
 
+def _maintenance_plans(connection: Connection) -> None:
+    Base.metadata.tables["maintenance_plans"].create(connection, checkfirst=True)
+    _add_column(connection, "maintenance", "plan_id", "INTEGER REFERENCES maintenance_plans(id) ON DELETE SET NULL")
+
 MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     # (version, description, function). Version 1 is create_all.
     (2, "Nexview widgets get the bundled Nexview logo", _nexview_logo),
@@ -199,6 +203,7 @@ MIGRATIONS: list[tuple[int, str, Callable[[Connection], None]]] = [
     (15, "A reachability check knows since when it measures", _check_since_column),
     (16, "A notification channel has quiet hours and a daily summary", _channel_schedule_column),
     (17, "Problems cards that exist keep looking at their own board only", _problems_cards_stay_as_they_were),
+    (18, "Maintenance can come back every week", _maintenance_plans),
 ]
 
 
