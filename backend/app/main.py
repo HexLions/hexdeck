@@ -18,6 +18,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from starlette.staticfiles import StaticFiles
 
 from . import __version__
+from .adapters import all_adapters
 from .adapters.base import close_relaxed_client
 from .config import LEGACY_NAMES_ADOPTED, get_settings
 from .db import db_session, get_engine
@@ -60,7 +61,7 @@ from .routers import (
 )
 from .routers import journal as journal_router
 from .security import prune_sessions
-from .services import backup, history, journal, provisioning, report, retention
+from .services import backup, history, journal, maintenance_plans, provisioning, report, retention
 from .services import channels as channel_service
 from .services import icons as icon_service
 from .services import oidc as oidc_service
@@ -216,6 +217,11 @@ async def lifespan(app: FastAPI):
     anyio.to_thread.current_default_thread_limiter().total_tokens = get_settings().request_threads
     get_engine()
     migrate()
+    # ⚠️ Every adapter module is imported here, before the first request, not
+    # by whichever request asks first. With over two hundred of them that took
+    # seconds, and the first start of a fresh installation paid for all of it
+    # in the press on Finish.
+    all_adapters()
     _rewrap_previous_secret()
     with db_session() as db:
         system.load_demo_flag(db)
@@ -228,6 +234,7 @@ async def lifespan(app: FastAPI):
     scheduled = asyncio.create_task(_alert_schedule(), name="alert-schedule")
     provisioning_task = asyncio.create_task(provisioning.watch(), name="provisioning")
     rounds = asyncio.create_task(report.rounds(), name="rounds")
+    plan_rounds = asyncio.create_task(maintenance_plans.rounds(), name="maintenance-plans")
     logger.info("HexDeck %s ready.", __version__)
     if LEGACY_NAMES_ADOPTED:
         logger.warning(
@@ -240,6 +247,7 @@ async def lifespan(app: FastAPI):
         housekeeping.cancel()
         scheduled.cancel()
         rounds.cancel()
+        plan_rounds.cancel()
         provisioning_task.cancel()
         await hass_listener.stop()
         await health_service.stop()

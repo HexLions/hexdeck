@@ -9,6 +9,14 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Added
 
+- **Maintenance every week.** For backups, updates and restarts that come
+  back, the maintenance dialog of a card plans a window on chosen days, from a
+  time, for one to 24 hours. Shortly before each start HexDeck puts the
+  connection or the app tile into maintenance by itself, so nothing about it is
+  told, no outage is opened and the availability bars draw the time grey, just
+  as with maintenance set by hand. "End now" ends this week's window and leaves
+  the plan. The time is the clock of the browser it was set in, and stays the
+  same across summer time. `POST /api/v1/maintenance/plans`. From nexdeck 1.3.0.
 - **History over months, and forecasts.** Hours are kept 90 days and days
   two years, with the lowest and highest of each, beside the share of each
   volume and the duration of each backup. Chart cards switch between 24
@@ -70,6 +78,32 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   checked, without the buttons of their own cards. A source that has not
   checked yet says so on a row of its own instead of "Everything is up to
   date", and so do environments that did not answer. From nexdeck 0.49.0.
+- **Nine integrations from nexdeck 1.1.1**, every one ⚠️ Beta:
+  - **Anchor**: notes with those pinned, with a reminder and archived, the
+    notes changed last, and the reminders in the order of their time.
+  - **dashdot**: CPU with the busiest core, memory, storage and network of
+    the machine it runs on.
+  - **Stash**: the numbers of the library and the tasks it runs, with a
+    button that scans for new files and one that stops every task.
+  - **Syncthing Relay**: sessions, connections, throughput and the traffic
+    of a strelaysrv, read from its status address.
+  - **ArchiveTeam Warrior**: its state, the project it works on and the
+    items in hand, read from the stream its own page uses.
+  - **Wazuh**: agents active and silent, and the manager's daemons, red
+    when one has failed.
+  - **xTeVe** (and Threadfin): whether it runs, its version and guide
+    source, and buttons that update the playlists and the guide and map the
+    channels again.
+  - **Your Spotify**: tracks played today, this week and this month, and
+    the ones played last.
+  - **Zerobyte**: every backup schedule with its source, destination and
+    next run, a button that runs one now, the repositories, and yellow when
+    the last good backup is older than the connection allows (26 hours by
+    default), told once as "A backup is too old".
+- **Maltrail** ⚠️ Beta: today's events by severity with the last one,
+  yellow with a high one, the latest findings and the events of the days
+  before. It signs in the way Maltrail's own page does, with the old digest
+  and with the PBKDF2 proof of the newer releases. From nexdeck 1.2.0.
 
 ### Fixed
 
@@ -77,6 +111,25 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   goes blank the next time something on it changes. The translator swaps
   texts for its own elements, and the page tripped over the texts it no
   longer found. From nexdeck 0.49.0.
+- **A redirect to another place takes no credentials along.** httpx drops
+  only `Authorization` on such a hop, so an API key sent in a header of its
+  own went on to whatever host a service named. Now a hop to another host,
+  another port or from https down to http keeps only harmless headers, and a
+  POST redirected there is refused. From nexdeck 1.1.1.
+- **Speedtest Tracker**: the history asks for its pages with `page[number]`,
+  as the API reads it. From nexdeck 1.1.1.
+- **FortiGate** no longer counts the template of a dial-up tunnel as a
+  tunnel that is down when its clients name it as their parent. From
+  nexdeck 1.1.1.
+- **An updated service** shows as current within the hour. Its version was
+  kept for six hours, so the card went on saying a newer release was out;
+  a service behind the newest release is now asked again after half an
+  hour. From nexdeck 1.1.1.
+- **A backup that ended in a warning** turns its card yellow: Zerobyte,
+  Backrest, and Kopia with errors. The rows said so already, but the cards
+  counted only failed and too old backups; the summary cards now count these
+  runs as Warning. A Kopia snapshot that is running stays yellow in its row
+  and leaves the card alone. From nexdeck 1.2.0.
 
 ### Changed
 
@@ -88,9 +141,13 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **What's new** loads only when it is due, the first time after an update,
   instead of with every board, which keeps every release note out of the
   first load. From nexdeck 0.49.0.
+- **The first start is quicker**: every integration is loaded while the
+  server starts instead of by the first request that needs one. From
+  nexdeck 1.1.1.
 
 ### Security
 
+- oauthlib 4.0.1, for GHSA-3jp2-3mrg-2vxc.
 - pyasn1 0.6.5, for four advisories; glob 14.0.3 and minimatch 11.0.3 for
   the build tools, through npm overrides. The dependency audit can accept an
   advisory that has no fix yet, for one package and until a day: deepmerge's
