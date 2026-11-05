@@ -1847,7 +1847,7 @@ body.has-player-bar main {
   }
 }
 
-/* The attention card and maintenance (roadmap M1, 24.10.2026). */
+/* The attention card and maintenance (24.10.2026). */
 @layer components {
   .nd-att-row {
     display: flex;
@@ -1937,7 +1937,7 @@ body.has-player-bar main {
   }
 }
 
-/* Lines of the chronicle (roadmap M2), on its page and on its card. */
+/* Lines of the chronicle, on its page and on its card. */
 @layer components {
   .nd-chron-row {
     display: flex;

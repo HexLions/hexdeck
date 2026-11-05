@@ -1,5 +1,5 @@
 /**
- * Maintenance for a connection or an app tile (roadmap M1): for how long, or
+ * Maintenance for a connection or an app tile: for how long, or
  * until a time today or tomorrow; and the running one moved or ended.
  * Administrators only; the server says no to anybody else as well.
  */

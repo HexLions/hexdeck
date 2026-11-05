@@ -11,6 +11,7 @@ import { safeUrl } from '../lib/safeUrl'
 import { tLabel } from '../i18n/texts'
 import type { Action, WidgetData, WidgetView } from '../lib/types'
 import { renderWidget } from './renderers'
+import { ForecastLine } from './ForecastLine'
 import { ServiceIcon } from './ServiceIcon'
 import { useAuth } from '../stores/auth'
 
@@ -293,6 +294,7 @@ export function WidgetCard({ widget, data, series, editing, canAct, canEdit, onA
       {bare && awayChip ? <div className="nd-away-corner">{awayChip}</div> : null}
       <div className="flex-1 min-h-0 flex flex-col">
         {renderWidget({ widget, data, series, canAct, canEdit, onAction, link, editing })}
+        {!bare && !failed && data?.forecast ? <ForecastLine forecast={data.forecast} /> : null}
       </div>
       {/* The failure lies over the body: the layout underneath stays as it is, the
           last good values show through, and the red is impossible to miss. */}
