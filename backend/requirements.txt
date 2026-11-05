@@ -14,7 +14,7 @@ pyjwt==2.15.0
 # attack in PKCE comparison. Pinned here because nothing else would raise
 # it, and the audit counts every installed package, not only the asked-for
 # ones.
-oauthlib==4.0.0
+oauthlib==4.0.1
 httpx==0.28.1
 cryptography==50.0.1
 # Web Push: py-vapid signs each message for the push service (RFC 8292),

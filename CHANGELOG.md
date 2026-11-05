@@ -147,6 +147,7 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 ### Security
 
+- oauthlib 4.0.1, for GHSA-3jp2-3mrg-2vxc.
 - pyasn1 0.6.5, for four advisories; glob 14.0.3 and minimatch 11.0.3 for
   the build tools, through npm overrides. The dependency audit can accept an
   advisory that has no fix yet, for one package and until a day: deepmerge's
