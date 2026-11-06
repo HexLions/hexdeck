@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ApiError, del, get, patch, post, put } from '../api/client'
@@ -12,6 +12,8 @@ import { useAuth } from '../stores/auth'
 import { FieldInput } from './FieldInput'
 import { IconPicker } from './IconPicker'
 import { Confirm, Field, Select, Sheet, Switch } from './ui'
+
+const DependsOn = lazy(() => import('./inventory/DependsOn').then((module) => ({ default: module.DependsOn })))
 
 export interface WidgetDraft {
   id: number
@@ -367,6 +369,12 @@ export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted
         <Switch checked={options.show_findings === true} onChange={(value) => setOptions((o) => ({ ...o, show_findings: value }))} label={t('widget.showFindings')} description={t('widget.showFindingsHelp')} />
       )}
       <Switch checked={options.hide_on_phone === true} onChange={(value) => setOptions((o) => ({ ...o, hide_on_phone: value }))} label={t('widget.hideOnPhone')} description={t('widget.hideOnPhoneHelp')} />
+      {isApp && admin && widget.id > 0 && (
+        // What this tile's app runs on. Loaded with its words only when an administrator opens a tile.
+        <Suspense fallback={null}>
+          <DependsOn subject={`tile:${widget.id}`} />
+        </Suspense>
+      )}
       {isApp && (
         <div className="rounded-xl border border-line p-3 mb-3">
           <Switch checked={options.check !== false} onChange={(value) => setOptions((o) => ({ ...o, check: value }))} label={t('widget.health.enable')} description={t('widget.health.help')} />

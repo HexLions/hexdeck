@@ -496,6 +496,8 @@ class WidgetData(BaseModel):
     since: float | None = None
     #: When a volume is full, a number reaches its red, a backup gets slower (``services/forecast.py``).
     forecast: dict[str, Any] | None = None
+    #: What this card's service hangs on that is down right now (roadmap M5, ``services/dependencies.py``).
+    cause: str | None = None
 
 
 class Detected(BaseModel):
@@ -1654,6 +1656,16 @@ class Adapter:
         ctx: Context,
     ) -> str:
         raise AdapterError("This widget has no actions.", code="no_such_action")
+
+    async def things(self, config: dict[str, Any], ctx: Context) -> dict[str, Any] | None:
+        """What runs here (roadmap M5): ``{"host": [addresses of this engine], "things": [...]}``, or None.
+
+        Each thing: ``kind`` (``container``, ``guest``), ``key``, ``name``,
+        ``image``, ``state``, ``addresses``, ``ports`` (published on the
+        host) and ``host_network``. Read only, about once an hour
+        (``services/dependencies.py``).
+        """
+        return None
 
     #: What a button card may ask this adapter to do. Empty for almost every
     #: adapter, and that is the point: see :class:`Deed`.

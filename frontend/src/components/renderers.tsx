@@ -1954,7 +1954,7 @@ export function AppTile({ widget, data, link }: RenderProps) {
           {description && <div className="text-[11px] text-muted truncate">{description}</div>}
         </div>
         <div className="flex flex-col items-end gap-1">
-          <span className="dot" data-status={widget.options?.check === false ? 'unknown' : status} />
+          <span className="dot" data-status={widget.options?.check === false ? 'unknown' : status} title={health?.cause ? t('dependencies.because', { name: health.cause }) : undefined} />
           {health?.last_latency_ms !== null && health?.last_latency_ms !== undefined && <span className="num text-[10px] text-faint">{health.last_latency_ms} ms</span>}
         </div>
       </div>

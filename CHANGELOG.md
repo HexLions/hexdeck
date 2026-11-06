@@ -5,6 +5,28 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **What runs on what.** HexDeck asks Docker, Portainer, a Synology and Proxmox
+  every hour which containers and guests they run, with their addresses and
+  published ports, and works out which service runs in which. The same address
+  and port is taken as given; a name that only looks alike, or a match behind a
+  reverse proxy, is proposed for a yes or a no. Under System, Inventory
+  everything stands as a tree and as a map with one column per machine. Nginx
+  Proxy Manager says where it forwards. From nexdeck 0.49.0.
+- **Why is it broken?** A red or yellow card, a row of the attention card and a
+  line of the chronicle have a "Why?" that opens a page of the service, for
+  administrators: since when it is in trouble, what happened in the two hours
+  before to it and to what it runs on, what it hangs on and what hangs on it, its
+  check and cards, its container's buttons, and a runbook of your own. From
+  nexdeck 0.49.0.
+- **One message for an outage that takes others with it.** When a host, a
+  container or a guest goes down, what runs on it waits a moment, and then one
+  message goes out with the list. Their cards say "because Synology is down"
+  instead of their own reason. From nexdeck 0.49.0.
+
 ## 0.34.0 (2026-11-06)
 
 Maintenance that can come back every week, a chronicle, history over months with forecasts, needs attention, and 21 new integrations from nexdeck and after HACS.

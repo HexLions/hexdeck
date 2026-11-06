@@ -65,7 +65,7 @@ class Message:
 
 
 def emit(event: str, title: str, body: str = "", *, level: str = "info", link: str = "",
-         user_ids: list[int] | None = None, integration_id: int | None = None) -> None:
+         user_ids: list[int] | None = None, integration_id: int | None = None, subject: str | None = None, held: bool = False) -> None:
     """Create notices and dispatch channels. Safe to call from anywhere in the loop.
 
     ``integration_id`` names the connection the news is about. One in
@@ -73,8 +73,12 @@ def emit(event: str, title: str, body: str = "", *, level: str = "info", link: s
     names. One check here instead of one at every caller, so a new kind of
     news cannot forget it.
     """
-    from . import maintenance
+    from . import dependencies, maintenance
 
+    # Roadmap M5: an outage of something that hangs on something else waits a
+    # moment for its cause, and is then told once, under it.
+    if not held and dependencies.hold(event, subject, title, body, level=level, link=link, user_ids=user_ids, integration_id=integration_id):
+        return
     message = Message(event=event, title=title[:200], body=body, level=level, link=link)
     targets: list[int] = []
     with db_session() as db:

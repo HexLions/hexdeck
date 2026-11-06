@@ -153,7 +153,8 @@
       "media": "Multimedia",
       "player": "Reproductor de música",
       "apps": "Apps",
-      "projects": "Proyectos"
+      "projects": "Proyectos",
+      "inventory": "Inventario"
     },
     "mail": {
       "title": "Servidor de correo",
@@ -1588,5 +1589,12 @@
     "reachesOn": "se alcanza hacia el {{date}}",
     "told": "avisado",
     "basis": "Proyectado a partir de los últimos 30 días"
+  },
+  "dependencies": {
+    "because": "porque {{name}} no responde"
+  },
+  "diagnosis": {
+    "why": "¿Por qué?",
+    "whyOf": "¿Por qué {{name}} está en rojo o amarillo?"
   }
 }

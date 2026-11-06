@@ -38,6 +38,7 @@ engine and rebuilds what sits on top, for a lab that is run and built at the sam
 | 🔄 **One updates list** | WUD, Cup, Watchtower, the releases you follow and HexDeck itself, merged into one card |
 | ⚙️ **The machine itself** | `/proc` and `/sys` read directly: processors, memory, load, sensors. No agent to install |
 | 📝 **Lists, notes, an agenda** | A to-do kept on the server, a notepad on the board, a calendar that merges feeds and release dates |
+| 🧭 **What runs on what, and why it broke** | Learns which service runs in which container or guest, sends one message for an outage, and gives each service a page with what happened and your runbook |
 | 📈 **History for every number** | Kept and drawn behind the number, whether the adapter declared a metric or not |
 | 📱 **Three screens, one arrangement** | Desk, tablet, an installable phone app, and kiosk links that cycle pages and dim at night |
 | 👥 **Users, roles, sharing** | Administrators, users and guests; boards shared at view, edit or act level |

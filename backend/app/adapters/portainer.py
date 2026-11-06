@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any
+from urllib.parse import urlsplit
 
 from . import containers as containers_one
 from .base import (
@@ -16,7 +17,14 @@ from .base import (
     human_bytes,
     path_segment,
 )
-from .docker import CONTAINER_ACTIONS, DockerAdapter, container_name, cpu_percent, memory_used
+from .docker import (
+    CONTAINER_ACTIONS,
+    DockerAdapter,
+    container_name,
+    container_thing,
+    cpu_percent,
+    memory_used,
+)
 
 
 class PortainerAdapter(Adapter):
@@ -228,6 +236,17 @@ class PortainerAdapter(Adapter):
             history=bool(options.get("history", True)), cpu_per_core=True,
             actions=DockerAdapter._actions_for(state, entry.get("Id", "")),
         )
+
+    async def things(self, config: dict[str, Any], ctx: Context) -> dict[str, Any] | None:
+        endpoint = await self._endpoint(config, ctx)
+        verify = not config.get("insecure", True)
+        rows = await ctx.get_json(f"{base_url(config)}/api/endpoints/{endpoint}/docker/containers/json", params={"all": 1},
+                                  headers=self._headers(config), verify=verify, cache_seconds=60)
+        environments = await ctx.get_json(f"{base_url(config)}/api/endpoints", headers=self._headers(config), verify=verify, cache_seconds=300)
+        reach = next((str(one.get("URL") or "") for one in environments if isinstance(one, dict) and str(one.get("Id")) == str(endpoint)), "")
+        # An environment on Portainer's own socket runs where Portainer runs.
+        host = urlsplit(reach.replace("tcp://", "http://", 1)).hostname if reach.startswith("tcp://") else urlsplit(base_url(config)).hostname
+        return {"host": [host] if host else [], "things": [container_thing(row) for row in rows if isinstance(row, dict)]}
 
     async def action(self, widget_kind: str, action_id: str, params: dict[str, Any], config: dict[str, Any], options: dict[str, Any], ctx: Context) -> str:
         if action_id not in CONTAINER_ACTIONS:

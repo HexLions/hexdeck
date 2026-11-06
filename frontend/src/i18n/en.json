@@ -166,7 +166,8 @@
       "media": "Media",
       "projects": "Projects",
       "player": "Music player",
-      "apps": "Apps"
+      "apps": "Apps",
+      "inventory": "Inventory"
     },
     "mail": {
       "title": "Mail server",
@@ -1588,5 +1589,12 @@
     "reachesOn": "reached around {{date}}",
     "told": "told",
     "basis": "Carried on from the last 30 days"
+  },
+  "dependencies": {
+    "because": "because {{name}} is down"
+  },
+  "diagnosis": {
+    "why": "Why?",
+    "whyOf": "Why is {{name}} red or yellow?"
   }
 }

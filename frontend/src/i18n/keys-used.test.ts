@@ -8,7 +8,15 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import en from './en.json'
+import diagnosisEn from './diagnosis.en.json'
+import inventoryEn from './inventory.en.json'
+import enOwn from './en.json'
+
+// The words of the inventory and the diagnosis come in files of their own (`lib/lazyTexts.ts`), and count as English too.
+const en = enOwn
+for (const [name, branch] of [...Object.entries(inventoryEn), ...Object.entries(diagnosisEn)]) {
+  ;(en as Record<string, unknown>)[name] = { ...((en as Record<string, Record<string, unknown>>)[name] ?? {}), ...branch }
+}
 
 function files(directory: string): string[] {
   return readdirSync(directory).flatMap((name: string) => {

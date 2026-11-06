@@ -166,7 +166,8 @@
       "media": "Medien",
       "projects": "Projekte",
       "player": "Musik-Player",
-      "apps": "Apps"
+      "apps": "Apps",
+      "inventory": "Inventar"
     },
     "mail": {
       "title": "Mailserver",
@@ -1588,5 +1589,12 @@
     "reachesOn": "erreicht um den {{date}}",
     "told": "gemeldet",
     "basis": "Fortgeschrieben aus den letzten 30 Tagen"
+  },
+  "dependencies": {
+    "because": "weil {{name}} ausgefallen ist"
+  },
+  "diagnosis": {
+    "why": "Warum?",
+    "whyOf": "Warum ist {{name}} rot oder gelb?"
   }
 }
