@@ -1,0 +1,78 @@
+{
+  "diagnosis": {
+    "title": "Diagnose",
+    "back": "Zurück",
+    "notFound": "Diesen Dienst, Container oder Gast gibt es nicht mehr.",
+    "kind": {
+      "integration": "Anbindung",
+      "tile": "App-Kachel",
+      "container": "Container",
+      "guest": "Gast"
+    },
+    "state": {
+      "now_bad": "Rot seit {{when}}",
+      "now_warn": "Gelb seit {{when}}",
+      "nowOpen_bad": "Rot",
+      "nowOpen_warn": "Gelb",
+      "past_bad": "War rot von {{from}} bis {{to}}",
+      "past_warn": "War gelb von {{from}} bis {{to}}",
+      "pastOpen_bad": "War rot ab {{from}}",
+      "pastOpen_warn": "War gelb ab {{from}}",
+      "ok": "In den letzten 30 Tagen war nichts"
+    },
+    "length": {
+      "minutes": "{{minutes}} min",
+      "hours": "{{hours}} h {{minutes}} min",
+      "days": "{{days}} T {{hours}} h"
+    },
+    "cause": {
+      "now": "Wahrscheinlich wegen {{name}}",
+      "past": "Es lag an {{name}}",
+      "note": "{{name}} hängt daran, darum wurde es nicht einzeln gemeldet.",
+      "open": "Ansehen"
+    },
+    "happened": "Was passiert ist",
+    "windowNow": "zwei Stunden davor bis jetzt",
+    "windowPast": "zwei Stunden davor bis zum Ende",
+    "windowOk": "die letzten zwei Stunden",
+    "nothingHappened": "In der Zeit wurde nichts festgehalten.",
+    "via": "hängt an: {{name}}",
+    "began": "{{time}} · Beginn",
+    "ended": "{{time}} · Ende",
+    "readOn": "In der Chronik weiterlesen",
+    "checksTitle": "Prüfung und Karten",
+    "checkOk": "antwortet",
+    "checkUnknown": "noch nicht geprüft",
+    "checkDown": "weg seit {{when}}",
+    "checkOff": "ausgeschaltet",
+    "noCards": "Keine Karte zeigt das.",
+    "hangs": {
+      "title": "Hängt an",
+      "nothing": "An nichts, was nexdeck kennt.",
+      "this": "dieser Dienst",
+      "carries": "Daran hängt",
+      "open": "Diagnose",
+      "down": "weg",
+      "up": "läuft"
+    },
+    "runbook": {
+      "title": "Runbook",
+      "empty": "Noch kein Runbook. Schreib auf, was beim nächsten Mal hilft, oder verlinke eine Anleitung.",
+      "write": "Runbook schreiben",
+      "edit": "Bearbeiten",
+      "text": "Was zu tun ist",
+      "link": "Link zu einer längeren Anleitung (wahlweise)",
+      "hint": "Markdown: Listen mit 1. oder -, **fett**, `Code`.",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "by": "{{user}}, {{when}}",
+      "badLink": "Ein Link beginnt mit http:// oder https://."
+    },
+    "buttons": {
+      "title": "Knöpfe",
+      "none": "Keine Knöpfe: nexdeck kann das nicht selbst neu starten.",
+      "from": "Von der Karte {{card}}. Jeder fragt vorher.",
+      "done": "{{label}}: erledigt."
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Activity, Archive, Globe, Info, KeyRound, LayoutGrid, Mail, Palette, Plug, ScrollText, Search, Users } from 'lucide-react'
+import { Activity, Archive, Globe, Info, KeyRound, LayoutGrid, Mail, Network, Palette, Plug, ScrollText, Search, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ import { BackupsSettings } from './BackupsSettings'
 import { CardRunsSettings } from './CardRunsSettings'
 import { AddressSettings } from './AddressSettings'
 import { IntegrationsSettings } from './IntegrationsSettings'
+import { InventorySettings } from './InventorySettings'
 import { MailSettings } from './MailSettings'
 import { OidcSettings } from './OidcSettings'
 import { SearchSettings } from './SearchSettings'
@@ -33,6 +34,7 @@ export function SystemPage() {
   const entries: NavEntry[] = [
     { to: 'integrations', icon: Plug, label: t('settings.nav.integrations') },
     { to: 'apps', icon: LayoutGrid, label: t('settings.nav.apps'), show: admin },
+    { to: 'inventory', icon: Network, label: t('settings.nav.inventory'), show: admin },
     { to: 'users', icon: Users, label: t('settings.nav.users'), show: admin },
     { to: 'address', icon: Globe, label: t('settings.nav.address'), show: admin },
     { to: 'mail', icon: Mail, label: t('settings.nav.mail'), show: admin },
@@ -57,6 +59,7 @@ export function SystemPage() {
             <Route index element={<Navigate to="/system/integrations" replace />} />
             <Route path="integrations" element={<IntegrationsSettings />} />
             <Route path="apps" element={forAdmin(<AppsSettings />)} />
+            <Route path="inventory" element={forAdmin(<InventorySettings />)} />
             <Route path="users" element={forAdmin(<UsersSettings />)} />
             <Route path="address" element={forAdmin(<AddressSettings />)} />
             <Route path="mail" element={forAdmin(<MailSettings />)} />

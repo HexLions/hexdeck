@@ -166,7 +166,8 @@
       "media": "Media",
       "projects": "Progetti",
       "player": "Lettore musicale",
-      "apps": "App"
+      "apps": "App",
+      "inventory": "Inventario"
     },
     "mail": {
       "title": "Server di posta",
@@ -1588,5 +1589,12 @@
     "reachesOn": "raggiunto verso il {{date}}",
     "told": "segnalato",
     "basis": "Proiettato dagli ultimi 30 giorni"
+  },
+  "dependencies": {
+    "because": "perché {{name}} non risponde"
+  },
+  "diagnosis": {
+    "why": "Perché?",
+    "whyOf": "Perché {{name}} è rosso o giallo?"
   }
 }
