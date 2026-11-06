@@ -569,6 +569,42 @@
         "La card UPS dice Autonomia residua: quanto dura la batteria al carico attuale.",
         "Giallo da e Rosso da colorano il numero in ogni vista."
       ]
+    },
+    "0.34.0": {
+      "lead": "HexDeck 0.34.0: manutenzione, cronaca, storico di mesi con previsioni e 21 nuove integrazioni.",
+      "sections": [
+        {
+          "title": "Manutenzione",
+          "body": "Metti in manutenzione una connessione o una tile app: nessuna notifica, nessun disservizio aperto. Può anche ripetersi ogni settimana, nei giorni scelti e secondo il tuo orologio.",
+          "path": "La chiave inglese su una card"
+        },
+        {
+          "title": "Cronaca",
+          "body": "Cosa è cambiato, dal più recente: card diventate gialle o rosse, disservizi, nuove versioni e modifiche fatte in HexDeck. Due nuove card la mostrano su una board.",
+          "path": "Menu account > Cronaca"
+        },
+        {
+          "title": "Storico di mesi e previsioni",
+          "body": "I numeri restano per due anni e i grafici arrivano fino a un anno. Una previsione dice quando un volume si riempie o un numero raggiunge la sua linea rossa.",
+          "path": "Una card con grafico"
+        },
+        {
+          "title": "Da controllare",
+          "body": "La card Problemi ora dice cosa merita un'occhiata in tutte le tue board.",
+          "path": "Modifica (matita) > Aggiungi widget"
+        },
+        {
+          "title": "21 nuove integrazioni",
+          "body": "Terremoti INGV, Protezione Civile, Previsione solare, Bambu Lab, TP-Link Omada, Dahua, Joplin Server, NocoDB, Outline, Seafile, MinIO, dashdot, Anchor, Stash, Syncthing Relay, ArchiveTeam Warrior, Wazuh, xTeVe, Your Spotify, Zerobyte e Maltrail.",
+          "path": "Sistema > Connessioni"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Un redirect verso un altro indirizzo non porta più con sé le credenziali.",
+        "Un backup troppo vecchio, o finito con un avviso, rende gialla la sua card.",
+        "Arcane e Dockhand alimentano la card Aggiornamenti."
+      ]
     }
   }
 }
