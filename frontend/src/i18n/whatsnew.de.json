@@ -1195,6 +1195,42 @@
         "Die USV-Karte sagt Restlaufzeit: wie lange der Akku bei der jetzigen Last hält.",
         "Gelb ab und Rot ab färben die Zahl in jeder Ansicht."
       ]
+    },
+    "0.34.0": {
+      "lead": "HexDeck 0.34.0: Wartung, eine Chronik, Verlauf über Monate mit Prognosen und 21 neue Integrationen.",
+      "sections": [
+        {
+          "title": "Wartung",
+          "body": "Setze eine Verbindung oder eine App-Kachel in Wartung: keine Benachrichtigung, kein Ausfall. Sie kann auch jede Woche wiederkommen, an gewählten Tagen, nach deiner eigenen Uhr.",
+          "path": "Der Schraubenschlüssel auf einer Karte"
+        },
+        {
+          "title": "Chronik",
+          "body": "Was sich geändert hat, das Neueste zuerst: Karten, die gelb oder rot wurden, Ausfälle, neue Versionen und Änderungen in HexDeck. Zwei neue Karten zeigen sie auf einem Board.",
+          "path": "Kontomenü > Chronik"
+        },
+        {
+          "title": "Verlauf über Monate und Prognosen",
+          "body": "Zahlen bleiben zwei Jahre erhalten, Diagramme reichen ein Jahr zurück. Eine Prognose sagt, wann ein Volume voll ist oder eine Zahl ihre rote Linie erreicht.",
+          "path": "Eine Karte mit Diagramm"
+        },
+        {
+          "title": "Aufmerksamkeit",
+          "body": "Die Karte Probleme sagt jetzt, was auf deinen Boards einen Blick braucht.",
+          "path": "Bearbeiten (Stift) > Widget hinzufügen"
+        },
+        {
+          "title": "21 neue Integrationen",
+          "body": "INGV-Erdbeben, Protezione Civile, Solarprognose, Bambu Lab, TP-Link Omada, Dahua, Joplin Server, NocoDB, Outline, Seafile, MinIO, dashdot, Anchor, Stash, Syncthing Relay, ArchiveTeam Warrior, Wazuh, xTeVe, Your Spotify, Zerobyte und Maltrail.",
+          "path": "System > Anbindungen"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Eine Weiterleitung an eine andere Adresse nimmt keine Zugangsdaten mehr mit.",
+        "Ein zu altes Backup oder eines, das mit einer Warnung endete, färbt seine Karte gelb.",
+        "Arcane und Dockhand speisen die Karte Updates."
+      ]
     }
   }
 }

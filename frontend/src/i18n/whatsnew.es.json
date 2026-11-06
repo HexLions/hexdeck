@@ -425,6 +425,42 @@
         "La tarjeta del SAI dice Autonomía restante: cuánto dura la batería con la carga actual.",
         "Amarillo desde y Rojo desde colorean el número en cada vista."
       ]
+    },
+    "0.34.0": {
+      "lead": "HexDeck 0.34.0: mantenimiento, una crónica, historial de meses con previsiones y 21 integraciones nuevas.",
+      "sections": [
+        {
+          "title": "Mantenimiento",
+          "body": "Pon en mantenimiento una conexión o un mosaico de app: sin avisos y sin abrir una interrupción. También puede repetirse cada semana, en los días elegidos y según tu reloj.",
+          "path": "La llave inglesa de una tarjeta"
+        },
+        {
+          "title": "Crónica",
+          "body": "Qué ha cambiado, lo más reciente primero: tarjetas que pasaron a amarillo o rojo, interrupciones, versiones nuevas y cambios hechos en HexDeck. Dos tarjetas nuevas la muestran en un tablero.",
+          "path": "Menú de la cuenta > Crónica"
+        },
+        {
+          "title": "Historial de meses y previsiones",
+          "body": "Los números se guardan dos años y los gráficos llegan hasta un año atrás. Una previsión dice cuándo se llena un volumen o un número alcanza su línea roja.",
+          "path": "Una tarjeta con gráfico"
+        },
+        {
+          "title": "Requiere atención",
+          "body": "La tarjeta Problemas ahora dice qué merece un vistazo en todos tus tableros.",
+          "path": "Modo edición (lápiz) > Añadir widget"
+        },
+        {
+          "title": "21 integraciones nuevas",
+          "body": "Terremotos INGV, Protezione Civile, Previsión solar, Bambu Lab, TP-Link Omada, Dahua, Joplin Server, NocoDB, Outline, Seafile, MinIO, dashdot, Anchor, Stash, Syncthing Relay, ArchiveTeam Warrior, Wazuh, xTeVe, Your Spotify, Zerobyte y Maltrail.",
+          "path": "Sistema > Conexiones"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Una redirección a otra dirección ya no se lleva las credenciales.",
+        "Una copia demasiado antigua, o que terminó con un aviso, pone su tarjeta en amarillo.",
+        "Arcane y Dockhand alimentan la tarjeta Actualizaciones."
+      ]
     }
   }
 }

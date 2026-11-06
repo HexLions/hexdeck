@@ -5,7 +5,9 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
-## Unreleased
+## 0.34.0 (2026-11-06)
+
+Maintenance that can come back every week, a chronicle, history over months with forecasts, needs attention, and 21 new integrations from nexdeck and after HACS.
 
 ### Added
 
@@ -104,6 +106,23 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   yellow with a high one, the latest findings and the events of the days
   before. It signs in the way Maltrail's own page does, with the old digest
   and with the PBKDF2 proof of the newer releases. From nexdeck 1.2.0.
+- **INGV earthquakes**: the latest earthquakes in and around Italy with
+  their magnitude, depth and distance from a place, and how many in the
+  days chosen. ⚠️ Beta.
+- **Protezione Civile**: the Italian Civil Protection's alert for a
+  municipality, today and tomorrow, for floods, landslides and storms. ⚠️
+  Beta.
+- **Solar forecast**: what your panels should make today, tomorrow and in
+  the week, from Open-Meteo, without an account. ⚠️ Beta.
+- **Bambu Lab**: what a 3D printer on your network prints, how far along,
+  its temperatures and errors, and the filament in its AMS. Not yet run
+  against a printer. ⚠️ Beta.
+- **TP-Link Omada**: the gateways, switches and access points of a
+  controller, whether they are connected, and how many clients they carry.
+  Not yet run against a controller. ⚠️ Beta.
+- **Dahua**: a camera or recorder, also relabelled ones such as Amcrest, with
+  its model and firmware, motion now and the state of its disks. Not yet run
+  against a device. ⚠️ Beta.
 
 ### Fixed
 
@@ -153,23 +172,6 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   advisory that has no fix yet, for one package and until a day: deepmerge's
   (GHSA-gcqx-w48m-w2h4), reached only while building, until 31.12.2026.
   From nexdeck.
-- **INGV earthquakes**: the latest earthquakes in and around Italy with
-  their magnitude, depth and distance from a place, and how many in the
-  days chosen. ⚠️ Beta.
-- **Protezione Civile**: the Italian Civil Protection's alert for a
-  municipality, today and tomorrow, for floods, landslides and storms. ⚠️
-  Beta.
-- **Solar forecast**: what your panels should make today, tomorrow and in
-  the week, from Open-Meteo, without an account. ⚠️ Beta.
-- **Bambu Lab**: what a 3D printer on your network prints, how far along,
-  its temperatures and errors, and the filament in its AMS. Not yet run
-  against a printer. ⚠️ Beta.
-- **TP-Link Omada**: the gateways, switches and access points of a
-  controller, whether they are connected, and how many clients they carry.
-  Not yet run against a controller. ⚠️ Beta.
-- **Dahua**: a camera or recorder, also relabelled ones such as Amcrest, with
-  its model and firmware, motion now and the state of its disks. Not yet run
-  against a device. ⚠️ Beta.
 
 ## 0.33.1 (2026-10-25)
 

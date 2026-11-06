@@ -1195,6 +1195,42 @@
         "The UPS card says Runtime left: how long the battery lasts at the present load.",
         "Yellow from and Red from colour the number in every view."
       ]
+    },
+    "0.34.0": {
+      "lead": "HexDeck 0.34.0: maintenance, a chronicle, history over months with forecasts, and 21 new integrations.",
+      "sections": [
+        {
+          "title": "Maintenance",
+          "body": "Put a connection or an app tile into maintenance: nothing is told, no outage opens. It can also come back every week, on chosen days, on your own clock.",
+          "path": "The wrench on a card"
+        },
+        {
+          "title": "Chronicle",
+          "body": "What changed, newest first: cards that turned yellow or red, outages, new versions, and what was changed in HexDeck. Two new cards show it on a board.",
+          "path": "Account menu > Chronicle"
+        },
+        {
+          "title": "History over months, and forecasts",
+          "body": "Numbers are kept for two years and charts reach back a year. A forecast says when a volume fills up or a number reaches its red line.",
+          "path": "A chart card"
+        },
+        {
+          "title": "Needs attention",
+          "body": "The Problems card now says what wants a look across your boards.",
+          "path": "Edit mode (pencil) > Add widget"
+        },
+        {
+          "title": "21 new integrations",
+          "body": "INGV earthquakes, Protezione Civile, Solar forecast, Bambu Lab, TP-Link Omada, Dahua, Joplin Server, NocoDB, Outline, Seafile, MinIO, dashdot, Anchor, Stash, Syncthing Relay, ArchiveTeam Warrior, Wazuh, xTeVe, Your Spotify, Zerobyte and Maltrail.",
+          "path": "System > Connections"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A redirect to another place no longer takes credentials along.",
+        "A backup that is too old, or that ended in a warning, turns its card yellow.",
+        "Arcane and Dockhand feed the Updates card."
+      ]
     }
   }
 }
