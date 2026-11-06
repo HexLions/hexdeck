@@ -461,6 +461,31 @@
         "Una copia demasiado antigua, o que terminó con un aviso, pone su tarjeta en amarillo.",
         "Arcane y Dockhand alimentan la tarjeta Actualizaciones."
       ]
+    },
+    "0.35.0": {
+      "lead": "HexDeck 0.35.0: qué corre sobre qué, un solo mensaje para una caída y una página que dice por qué algo se ha roto.",
+      "sections": [
+        {
+          "title": "Inventario",
+          "body": "HexDeck pregunta cada hora a Docker, Portainer, una Synology y Proxmox qué ejecutan y deduce qué servicio corre dónde. Lo que solo supone espera tu sí.",
+          "path": "Sistema > Inventario"
+        },
+        {
+          "title": "Un solo mensaje para una caída",
+          "body": "Cuando cae un host, un contenedor o una máquina virtual, recibes un solo mensaje con la lista de lo que depende de él. Las demás tarjetas dicen a qué esperan.",
+          "path": "Sistema > Inventario"
+        },
+        {
+          "title": "¿Por qué?",
+          "body": "Una tarjeta roja o amarilla lleva a la página de su servicio: desde cuándo, qué pasó en las dos horas anteriores, de qué depende, sus botones y un runbook propio.",
+          "path": "¿Por qué? en una tarjeta roja o amarilla"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Una conexión o un mosaico de app puede indicar a mano sobre qué corre.",
+        "Nginx Proxy Manager dice adónde reenvía."
+      ]
     }
   }
 }

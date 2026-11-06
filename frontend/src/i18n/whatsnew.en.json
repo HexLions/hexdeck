@@ -1231,6 +1231,31 @@
         "A backup that is too old, or that ended in a warning, turns its card yellow.",
         "Arcane and Dockhand feed the Updates card."
       ]
+    },
+    "0.35.0": {
+      "lead": "HexDeck 0.35.0: what runs on what, one message for an outage, and a page that says why something broke.",
+      "sections": [
+        {
+          "title": "Inventory",
+          "body": "HexDeck asks Docker, Portainer, a Synology and Proxmox every hour what they run and works out which service runs where. What it only guesses waits for your yes.",
+          "path": "System > Inventory"
+        },
+        {
+          "title": "One message for an outage",
+          "body": "When a host, a container or a guest goes down, you get one message with the list of what hangs on it. The other cards say what they are waiting for.",
+          "path": "System > Inventory"
+        },
+        {
+          "title": "Why?",
+          "body": "A red or yellow card leads to a page of its service: since when, what happened in the two hours before, what it hangs on, its buttons and a runbook of your own.",
+          "path": "Why? on a red or yellow card"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "A connection and an app tile can say by hand what they run on.",
+        "Nginx Proxy Manager says where it forwards."
+      ]
     }
   }
 }

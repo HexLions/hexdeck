@@ -605,6 +605,31 @@
         "Un backup troppo vecchio, o finito con un avviso, rende gialla la sua card.",
         "Arcane e Dockhand alimentano la card Aggiornamenti."
       ]
+    },
+    "0.35.0": {
+      "lead": "HexDeck 0.35.0: cosa gira su cosa, un solo messaggio per un guasto e una pagina che dice perché qualcosa si è rotto.",
+      "sections": [
+        {
+          "title": "Inventario",
+          "body": "HexDeck chiede ogni ora a Docker, Portainer, Synology e Proxmox cosa fanno girare e ricava quale servizio gira dove. Quello che può solo ipotizzare aspetta il tuo sì.",
+          "path": "Sistema > Inventario"
+        },
+        {
+          "title": "Un solo messaggio per un guasto",
+          "body": "Quando cade un host, un container o una VM, ricevi un solo messaggio con l'elenco di ciò che ne dipende. Le altre card dicono cosa stanno aspettando.",
+          "path": "Sistema > Inventario"
+        },
+        {
+          "title": "Perché?",
+          "body": "Una card rossa o gialla porta alla pagina del suo servizio: da quando, cosa è successo nelle due ore prima, da cosa dipende, i suoi bottoni e un runbook scritto da te.",
+          "path": "Perché? su una card rossa o gialla"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Una connessione o una tile app può indicare a mano su cosa gira.",
+        "Nginx Proxy Manager dice verso dove inoltra."
+      ]
     }
   }
 }

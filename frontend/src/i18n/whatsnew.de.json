@@ -1231,6 +1231,31 @@
         "Ein zu altes Backup oder eines, das mit einer Warnung endete, färbt seine Karte gelb.",
         "Arcane und Dockhand speisen die Karte Updates."
       ]
+    },
+    "0.35.0": {
+      "lead": "HexDeck 0.35.0: was worauf läuft, eine Nachricht für einen Ausfall und eine Seite, die sagt, warum etwas kaputt ist.",
+      "sections": [
+        {
+          "title": "Inventar",
+          "body": "HexDeck fragt Docker, Portainer, eine Synology und Proxmox jede Stunde, was sie ausführen, und ermittelt, welcher Dienst wo läuft. Was es nur vermutet, wartet auf dein Ja.",
+          "path": "System > Inventar"
+        },
+        {
+          "title": "Eine Nachricht für einen Ausfall",
+          "body": "Fällt ein Host, ein Container oder ein Gast aus, kommt eine Nachricht mit der Liste dessen, was daran hängt. Die anderen Karten sagen, worauf sie warten.",
+          "path": "System > Inventar"
+        },
+        {
+          "title": "Warum?",
+          "body": "Eine rote oder gelbe Karte führt zur Seite ihres Dienstes: seit wann, was in den zwei Stunden davor geschah, woran er hängt, seine Knöpfe und ein eigenes Runbook.",
+          "path": "Warum? auf einer roten oder gelben Karte"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Eine Verbindung oder App-Kachel kann von Hand sagen, worauf sie läuft.",
+        "Nginx Proxy Manager sagt, wohin er weiterleitet."
+      ]
     }
   }
 }
