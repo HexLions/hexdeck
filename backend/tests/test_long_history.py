@@ -80,8 +80,9 @@ def test_an_hour_waits_until_its_raw_samples_are_minutes(client: TestClient) -> 
 
 
 def test_a_day_is_folded_at_the_houses_midnight_once_its_hours_are_there(client: TestClient) -> None:
-    now = int(time.time())
-    midnight = history.local_midnight(now)
+    # A fixed hour of the day: in the first hours after midnight the hour row below is still ahead of the clock.
+    midnight = history.local_midnight(int(time.time()))
+    now = midnight + 12 * 3600
     yesterday = history.local_midnight(midnight - 3600)
     _hours(2, "used", [(yesterday + hour * 3600, 50.0 + hour) for hour in range(24)])
     _hours(2, "used", [(midnight + 3600, 99.0)])
