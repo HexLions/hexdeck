@@ -57,7 +57,7 @@ that one of thirty-five renderers draws.
 | Pi-hole | summary, top blocked | pause 5 min, enable | app password (v6) |
 | AdGuard Home | summary, top blocked | pause 5 min, enable | user and password |
 | Public address | address | | none; one call to ipapi.co or ipwho.is, kept for an hour |
-| UniFi Network | network, console, devices, findings, wlans | | API key (Network 9.0+), or a local account without two-factor |
+| UniFi Network | network, console, devices, findings, wlans, speed test, speed test history (the gateway's own speed tests, each internet line apart) | | API key (Network 9.0+), or a local account without two-factor |
 | TP-Link Omada | network devices, devices | | a client of the controller's Open API (Settings, Platform Integration, Open API, client credentials mode). The token goes as `Authorization: AccessToken=`, not Bearer, and one that ran out earns one new one. `/api/info` names the Omada ID; Omada Cloud needs it filled in, and its free tier has no Open API. Up to ten sites, a hundred devices each. Red while a device is gone or misses its heartbeat. Not yet run against a controller |
 | Speedtest Tracker | latest, history | | API token |
 | MySpeed | last test, tests | | MySpeed's password in a `password` header when one is set, or nothing when its password level lets everyone read. The card turns amber when the last test falls short of the speeds set as expected in MySpeed |
@@ -154,7 +154,7 @@ that one of thirty-five renderers draws.
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
 | Umami | site, sites | | an Umami 3 API key (`umami_...`) as a bearer token, or a user name and password for `POST /api/auth/login`, whose token is signed in again once after a 401. Umami answers 401 also for a site the account may not see. Visitors right now are the sessions of the last five minutes; the rest covers the last 24 hours. Written from the source of v3.4.0, not yet run against an installation |
-| JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
+| JSON API | value (with up to four badges from the same answer), list; both can wrap long text | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |
 | Papra | documents (count, size, trash), latest documents (with tags), organizations | | an API key from API keys in the user menu with Read organizations and Read documents; the organization by name or ID, or the first the key can see. Beta: run against a fresh Papra, not yet one in use |

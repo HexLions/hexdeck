@@ -352,6 +352,8 @@ export function ValueCard({ data, series, onAction, canAct }: RenderProps) {
   const metric = Object.keys(data?.metrics ?? {})[0] ?? 'primary'
   const points = series?.[metric]
   const hasFooter = Boolean(data?.secondary?.length || data?.actions?.length)
+  // A card that asks for it breaks a long text onto further lines instead of ending it in "…" (#63).
+  const wrap = Boolean(data?.meta?.wrap)
   return (
     <div className="flex-1 flex flex-col min-h-0 relative">
       {worthDrawing(points) && (
@@ -359,8 +361,8 @@ export function ValueCard({ data, series, onAction, canAct }: RenderProps) {
           <Sparkline values={points} height={60} className="!h-full" />
         </div>
       )}
-      <div className="flex-1 flex flex-col justify-center px-3 min-h-0 relative">
-        <div className="num value-number leading-none font-semibold tracking-tight rise" key={String(primary?.value)}>
+      <div className={`flex-1 flex flex-col ${wrap ? 'justify-center-safe' : 'justify-center'} px-3 min-h-0 relative`}>
+        <div className={`num value-number ${wrap ? 'value-wrap leading-tight' : 'leading-none'} font-semibold tracking-tight rise`} data-wrap={wrap || undefined} key={String(primary?.value)}>
           {formatValue(primary?.value)}
           {primary?.unit && <span className="text-sm text-muted font-medium ml-1.5">{primary.unit}</span>}
         </div>
@@ -930,6 +932,9 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
   const items = data?.items ?? []
   if (!items.length && !data?.error) return <Empty>{data?.meta?.empty ? tLabel(String(data.meta.empty)) : t('card.nothing')}</Empty>
   const subtitleOf = (item: Record<string, unknown>): string => wordedSubtitle(item, t, i18n.language)
+  // A card that asks for it breaks long titles, subtitles and values onto further lines (#63).
+  const wrap = Boolean(data?.meta?.wrap)
+  const cut = wrap ? 'whitespace-normal [overflow-wrap:anywhere]' : 'truncate'
   return (
     <div className="flex-1 min-h-0 flex flex-col">
       {data?.meta?.headline && data.primary ? (
@@ -954,7 +959,9 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
           const bars = Array.isArray(item.bars) ? (item.bars as (number | null)[]) : []
           const uptime = typeof item.uptime === 'number' ? item.uptime : null
           return (
-            <li key={String(item.id ?? index)} className="group/row flex items-center gap-2.5 px-1.5 py-1.5 rounded-lg hover:bg-surface-hover">
+            // ⚠️ A wrapped row can be taller than the card: centred, its dot
+            // and its value sat halfway down and out of sight.
+            <li key={String(item.id ?? index)} className={`group/row flex ${wrap ? 'items-start [&>.dot]:mt-1.5' : 'items-center'} gap-2.5 px-1.5 py-1.5 rounded-lg hover:bg-surface-hover`}>
               {item.art ? (
                 // A cover beside the row, for lists of titles: requests,
                 // recently added. Small, and the dot moves onto its corner so
@@ -970,10 +977,10 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
                 <div className="flex items-center gap-2">
                   {/* `emphasis` marks a row that wants attention without being
                       a fault: an unread mail is not a yellow one. */}
-                  <span className={`text-[13px] truncate ${item.emphasis ? 'font-semibold' : 'font-medium'}`}>{String(item.title ?? '')}</span>
+                  <span className={`text-[13px] ${cut} ${item.emphasis ? 'font-semibold' : 'font-medium'}`}>{String(item.title ?? '')}</span>
                   {typeof item.cpu === 'number' && <span className="num text-[10px] text-muted">{item.cpu.toFixed(0)}%</span>}
                 </div>
-                {item.subtitle ? <div className="text-[11px] text-muted truncate">{subtitleOf(item)}</div> : null}
+                {item.subtitle ? <div className={`text-[11px] text-muted ${cut}`}>{subtitleOf(item)}</div> : null}
                 {progress !== null && (
                   <div className="bar mt-1" data-status={status}>
                     <i style={{ width: `${progress}%` }} />
@@ -1000,7 +1007,7 @@ export function ListCard({ widget, data, onAction, canAct, series }: RenderProps
                   <ActionButtons actions={item.actions as Action[]} onAction={onAction} canAct={canAct} compact />
                 </span>
               ) : null}
-              {item.value !== undefined && item.value !== '' && <span className="num text-xs text-muted whitespace-nowrap">{String(item.value)}</span>}
+              {item.value !== undefined && item.value !== '' && <span className={`num text-xs text-muted ${wrap ? 'max-w-[50%] text-right [overflow-wrap:anywhere]' : 'whitespace-nowrap'}`}>{String(item.value)}</span>}
               {/* How old the newer release is, on a row of the updates card. */}
               {typeof item.released === 'number' && (
                 <span className="num text-xs text-faint whitespace-nowrap" title={t('card.released')}>{timeAgo(item.released)}</span>
