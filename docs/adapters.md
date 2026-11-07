@@ -57,7 +57,7 @@ that one of thirty-five renderers draws.
 | Pi-hole | summary, top blocked | pause 5 min, enable | app password (v6) |
 | AdGuard Home | summary, top blocked | pause 5 min, enable | user and password |
 | Public address | address | | none; one call to ipapi.co or ipwho.is, kept for an hour |
-| UniFi Network | network, console, devices, findings, wlans | | API key (Network 9.0+), or a local account without two-factor |
+| UniFi Network | network, console, devices, findings, wlans, speed test, speed test history (the gateway's own speed tests, each internet line apart) | | API key (Network 9.0+), or a local account without two-factor |
 | TP-Link Omada | network devices, devices | | a client of the controller's Open API (Settings, Platform Integration, Open API, client credentials mode). The token goes as `Authorization: AccessToken=`, not Bearer, and one that ran out earns one new one. `/api/info` names the Omada ID; Omada Cloud needs it filled in, and its free tier has no Open API. Up to ten sites, a hundred devices each. Red while a device is gone or misses its heartbeat. Not yet run against a controller |
 | Speedtest Tracker | latest, history | | API token |
 | MySpeed | last test, tests | | MySpeed's password in a `password` header when one is set, or nothing when its password level lets everyone read. The card turns amber when the last test falls short of the speeds set as expected in MySpeed |

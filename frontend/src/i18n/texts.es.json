@@ -185,7 +185,7 @@
     "Colour": "Color",
     "Combined CPU and memory of all running containers.": "CPU y memoria sumadas de todos los contenedores en marcha.",
     "Config > General > API Key": "Config > General > API Key",
-    "Connected clients, access points and switches, WAN traffic.": "Clientes conectados, puntos de acceso y switches, tráfico de la WAN.",
+    "Connected clients, access points and switches, WAN traffic, the gateway's speed tests.": "Clientes conectados, puntos de acceso y switches, tráfico de la WAN, las pruebas de velocidad del gateway.",
     "Connected devices, folders, uptime and the version.": "Dispositivos conectados, carpetas, tiempo activo y la versión.",
     "Connection": "Conexión",
     "Connection state, external address, uptime and what is going over the line.": "Estado de la conexión, dirección externa, tiempo activo y lo que pasa por la línea.",
@@ -2709,8 +2709,16 @@
     "Every disk or memory card with its state and how full it is. Recorders overwrite the oldest, so full is normal.": "Cada disco o tarjeta de memoria con su estado y lo lleno que está. Los grabadores sobrescriben lo más antiguo, así que lleno es normal.",
     "Motion on how many channels now, the model, the firmware and the state of the disks.": "En cuántos canales hay movimiento ahora, el modelo, el firmware y el estado de los discos.",
     "Too many wrong tries lock this address out on the device for a while.": "Demasiados intentos fallidos bloquean esta dirección en el dispositivo durante un tiempo.",
+    "Speed test history": "Historial de pruebas de velocidad",
+    "Every WAN": "Todas las WAN",
+    "Download, upload and latency of the newest speed test the gateway ran, on its schedule or by hand.": "Descarga, subida y latencia de la prueba de velocidad más reciente del gateway, programada o hecha a mano.",
+    "The gateway's speed tests over a period, download and upload, as a line or as bars.": "Las pruebas de velocidad del gateway en un periodo, descarga y subida, como línea o como barras.",
+    "Which internet line, on a gateway with more than one.": "Qué línea de internet, en un gateway con más de una.",
     "Wrap long text": "Ajustar el texto largo",
-    "Long text breaks onto further lines instead of being cut short.": "El texto largo sigue en más líneas en lugar de cortarse."
+    "Long text breaks onto further lines instead of being cut short.": "El texto largo sigue en más líneas en lugar de cortarse.",
+    "WAN 1": "WAN 1",
+    "WAN 2": "WAN 2",
+    "WAN 3": "WAN 3"
   },
   "labels": {
     "Private resources": "Recursos privados",
@@ -4059,6 +4067,10 @@
     "Heartbeat missed": "Sin señal",
     "Isolated": "Aislado",
     "The controller has no device yet.": "El controlador aún no tiene ningún dispositivo.",
-    "Motion now": "Movimiento ahora"
+    "Motion now": "Movimiento ahora",
+    "Last test": "Última prueba",
+    "No test yet": "Todavía ninguna prueba",
+    "No speed test on this console yet": "Todavía no hay ninguna prueba de velocidad en esta consola",
+    "The last speed test measured nothing": "La última prueba de velocidad no midió nada"
   }
 }
