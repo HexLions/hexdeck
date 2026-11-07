@@ -154,7 +154,7 @@ that one of thirty-five renderers draws.
 | Grafana | alerts, status | | service account token; needs unified alerting, so Grafana 9.0 or newer |
 | GoatCounter | visitors, pages, referrers | | a token from User, API with the permission Read statistics, as a Bearer token. GoatCounter allows 500 API requests an hour per token, so the cards keep their answer ten minutes. A referrer without a name is direct traffic |
 | Umami | site, sites | | an Umami 3 API key (`umami_...`) as a bearer token, or a user name and password for `POST /api/auth/login`, whose token is signed in again once after a 401. Umami answers 401 also for a site the account may not see. Visitors right now are the sessions of the last five minutes; the rest covers the last 24 hours. Written from the source of v3.4.0, not yet run against an installation |
-| JSON API | value (with up to four badges from the same answer), list | | optional bearer token |
+| JSON API | value (with up to four badges from the same answer), list; both can wrap long text | | optional bearer token |
 | iCal feed | events | | feed address |
 | Paperless-ngx | archive, latest documents | | API token from the user profile |
 | Papra | documents (count, size, trash), latest documents (with tags), organizations | | an API key from API keys in the user menu with Read organizations and Read documents; the organization by name or ID, or the first the key can see. Beta: run against a fresh Papra, not yet one in use |

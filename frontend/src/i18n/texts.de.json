@@ -2708,7 +2708,9 @@
     "Camera or recorder": "Kamera oder Rekorder",
     "Every disk or memory card with its state and how full it is. Recorders overwrite the oldest, so full is normal.": "Jede Festplatte oder Speicherkarte mit Zustand und Füllstand. Rekorder überschreiben das Älteste, voll ist also normal.",
     "Motion on how many channels now, the model, the firmware and the state of the disks.": "Auf wie vielen Kanälen gerade Bewegung ist, das Modell, die Firmware und der Zustand der Festplatten.",
-    "Too many wrong tries lock this address out on the device for a while.": "Zu viele falsche Versuche sperren diese Adresse eine Weile auf dem Gerät."
+    "Too many wrong tries lock this address out on the device for a while.": "Zu viele falsche Versuche sperren diese Adresse eine Weile auf dem Gerät.",
+    "Wrap long text": "Langen Text umbrechen",
+    "Long text breaks onto further lines instead of being cut short.": "Langer Text geht in weiteren Zeilen weiter, statt abgeschnitten zu werden."
   },
   "labels": {
     "Jobs": "Jobs",

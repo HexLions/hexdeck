@@ -2708,7 +2708,9 @@
     "Camera or recorder": "Cámara o grabador",
     "Every disk or memory card with its state and how full it is. Recorders overwrite the oldest, so full is normal.": "Cada disco o tarjeta de memoria con su estado y lo lleno que está. Los grabadores sobrescriben lo más antiguo, así que lleno es normal.",
     "Motion on how many channels now, the model, the firmware and the state of the disks.": "En cuántos canales hay movimiento ahora, el modelo, el firmware y el estado de los discos.",
-    "Too many wrong tries lock this address out on the device for a while.": "Demasiados intentos fallidos bloquean esta dirección en el dispositivo durante un tiempo."
+    "Too many wrong tries lock this address out on the device for a while.": "Demasiados intentos fallidos bloquean esta dirección en el dispositivo durante un tiempo.",
+    "Wrap long text": "Ajustar el texto largo",
+    "Long text breaks onto further lines instead of being cut short.": "El texto largo sigue en más líneas en lugar de cortarse."
   },
   "labels": {
     "Private resources": "Recursos privados",
