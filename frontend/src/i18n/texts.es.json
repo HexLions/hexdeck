@@ -2221,6 +2221,17 @@
     "My account > Connections in nexbrand, after the operator has switched on API tokens. It starts with nxb_; the level Read is enough.": "Mi cuenta > Conexiones en nexbrand, una vez que el operador haya activado los tokens de API. Empieza por nxb_; basta el nivel Lectura.",
     "My account > Connections in nexcanvas, after the operator has switched on API tokens. It starts with nxa_ and only reads.": "Mi cuenta > Conexiones en nexcanvas, una vez que el operador haya activado los tokens de API. Empieza por nxa_ y solo puede leer.",
     "My account > Connections in nexdiary, after the operator has switched on API tokens. It starts with nxa_ and only reads.": "Mi cuenta > Conexiones en nexdiary, una vez que el operador haya activado los tokens de API. Empieza por nxa_ y solo puede leer.",
+    "The tasks of a family or a small group in nextasks: what is overdue, due today and coming up, what is assigned to you, and the open tasks of one list.": "Las tareas de una familia o un grupo pequeño en nextasks: lo vencido, lo que vence hoy y lo que viene, lo que tienes asignado y las tareas abiertas de una lista.",
+    "My account > Connections in nextasks, after the operator has switched on API tokens under Settings > Server > API. It starts with ntk_; Read is enough, and it sees only the spaces picked for it.": "Mi cuenta > Conexiones en nextasks, una vez que el operador haya activado los tokens de API en Ajustes > Servidor > API. Empieza por ntk_; basta con Lectura, y solo ve los espacios elegidos para él.",
+    "Today in nextasks": "Hoy en nextasks",
+    "How many tasks are overdue, due today and due in the next 7 days. Red when something is overdue, yellow when many are due today.": "Cuántas tareas están vencidas, vencen hoy y vencen en los próximos 7 días. Rojo cuando algo está vencido, amarillo cuando vencen muchas hoy.",
+    "Yellow from (due today)": "Amarillo desde (vencen hoy)",
+    "Yellow when at least this many tasks are due today. 0 switches this off.": "Amarillo cuando vencen hoy al menos tantas tareas. 0 lo desactiva.",
+    "The next tasks with a due date, overdue first, then today and the next 7 days, each opening in nextasks. Red when something is overdue.": "Las próximas tareas con fecha, primero las vencidas, luego las de hoy y los próximos 7 días, cada una se abre en nextasks. Rojo cuando algo está vencido.",
+    "Assigned to me": "Asignadas a mí",
+    "How many open tasks are assigned to the token's account, and the first of them, soonest due first.": "Cuántas tareas abiertas están asignadas a la cuenta del token, y las primeras de ellas, las que vencen antes primero.",
+    "Task list": "Lista de tareas",
+    "The open tasks of one list, such as the shopping list, in the order nextasks shows them.": "Las tareas abiertas de una lista, como la lista de la compra, en el orden en que las muestra nextasks.",
     "Name or ID. Empty means the first organization the key can see.": "Nombre o ID. Vacío significa la primera organización que ve la clave.",
     "Names, separated by commas. Only these are shown, and one of them without a link turns the card red. Empty shows all.": "Nombres separados por comas. Solo se muestran estas, y si una pierde el enlace la tarjeta se pone roja. Vacío las muestra todas.",
     "Of a REST API administrator with a read-only profile.": "De un administrador de API REST con un perfil de solo lectura.",
@@ -4071,6 +4082,11 @@
     "Last test": "Última prueba",
     "No test yet": "Todavía ninguna prueba",
     "No speed test on this console yet": "Todavía no hay ninguna prueba de velocidad en esta consola",
-    "The last speed test measured nothing": "La última prueba de velocidad no midió nada"
+    "The last speed test measured nothing": "La última prueba de velocidad no midió nada",
+    "Next 7 days": "Próximos 7 días",
+    "Nothing is assigned to you.": "No tienes nada asignado.",
+    "Nothing is open in this list.": "No hay nada abierto en esta lista.",
+    "Pick a list in the card's settings.": "Elige una lista en los ajustes de la tarjeta.",
+    "nextasks has no such list, or the token may not see it.": "nextasks no tiene esa lista, o el token no puede verla."
   }
 }
