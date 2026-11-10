@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Plus, Search as SearchIcon, Trash2 } from 'lucide-react'
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
+import { Fragment, lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import type { About, AdapterSpec, Integration } from '../../api/types'
 import { FieldInput } from '../../components/FieldInput'
 import { ServiceIcon } from '../../components/ServiceIcon'
 import { Confirm, Field, Select, Sheet, Switch } from '../../components/ui'
+import { sameAddress } from '../../lib/sameAddress'
 import { useAuth } from '../../stores/auth'
 import { LeaveDemo } from '../../components/LeaveDemo'
 
@@ -200,6 +201,7 @@ export function IntegrationsSettings() {
       {(editing || adding) && adapters.data && (
         <IntegrationSheet
           adapters={adapters.data}
+          connections={integrations.data ?? []}
           integration={editing}
           kind={adding ?? editing?.kind ?? ''}
           onClose={() => {
@@ -229,7 +231,7 @@ export function IntegrationsSettings() {
   )
 }
 
-function IntegrationSheet({ adapters, integration, kind, onClose, onSaved }: { adapters: AdapterSpec[]; integration: Integration | null; kind: string; onClose: () => void; onSaved: () => void }) {
+function IntegrationSheet({ adapters, connections, integration, kind, onClose, onSaved }: { adapters: AdapterSpec[]; connections: Integration[]; integration: Integration | null; kind: string; onClose: () => void; onSaved: () => void }) {
   const admin = useAuth((s) => s.user?.role === 'admin')
   const { t } = useTranslation()
   const adapter = adapters.find((a) => a.kind === kind)
@@ -305,7 +307,21 @@ function IntegrationSheet({ adapters, integration, kind, onClose, onSaved }: { a
       {/* Locked: users neither build on it nor see it in their list. What
           the administrator has built with it keeps running for them. */}
       <Switch checked={adminOnly} onChange={setAdminOnly} label={t('settings.integrations.adminOnly')} description={t('settings.integrations.adminOnlyHelp')} />
-      {!demo && adapter.fields.map((field) => <FieldInput key={field.name} spec={field} value={config[field.name]} onChange={(value) => setConfig((c) => ({ ...c, [field.name]: value }))} onFill={(values) => setConfig((c) => ({ ...c, ...values }))} />)}
+      {!demo &&
+        adapter.fields.map((field) => {
+          // Said while the address is entered, before a test is refused for a reason nobody thinks of.
+          const twin = sameAddress(field, config[field.name], adapter.kind, integration?.id ?? null, connections)
+          return (
+            <Fragment key={field.name}>
+              <FieldInput spec={field} value={config[field.name]} onChange={(value) => setConfig((c) => ({ ...c, [field.name]: value }))} onFill={(values) => setConfig((c) => ({ ...c, ...values }))} />
+              {twin && (
+                <p className="text-[11px] text-warn -mt-2 mb-3" role="status">
+                  {t('settings.integrations.sameAddress', { name: twin.name })}
+                </p>
+              )}
+            </Fragment>
+          )
+        })}
       <Switch checked={enabled} onChange={setEnabled} label={t('settings.integrations.enabled')} />
       {result && (
         // ⚠️ Passed with a hint is yellow, not green: the hint says the cards
