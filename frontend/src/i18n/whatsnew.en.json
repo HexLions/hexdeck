@@ -1256,6 +1256,31 @@
         "A connection and an app tile can say by hand what they run on.",
         "Nginx Proxy Manager says where it forwards."
       ]
+    },
+    "0.36.0": {
+      "lead": "HexDeck 0.36.0: speed tests from UniFi, help when a connection is refused, and a board that loads lighter.",
+      "sections": [
+        {
+          "title": "Speed tests from UniFi",
+          "body": "Two new cards read back the speed tests the gateway runs itself: the last one with download, upload and latency, and their history as a line or as bars. No second container needed.",
+          "path": "Edit mode (pencil) > Add widget > UniFi"
+        },
+        {
+          "title": "Help when a connection is refused",
+          "body": "The sheet says when another connection of the same kind already has the address you enter, and a refused test names the host that was asked. A pasted key loses the space a copy picked up beside it.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "A lighter board",
+          "body": "Opening a board downloads about a fifth of what it did, and the browser keeps the app's files instead of fetching them again.",
+          "path": "Board > any card"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "JSON API cards can wrap a long text onto further lines.",
+        "nextasks, in beta: what is due today, due tasks, assigned to me and one list."
+      ]
     }
   }
 }
