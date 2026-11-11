@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 from typing import Any
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, status
 from sqlalchemy import func, select
@@ -40,6 +41,45 @@ def _demo_note() -> dict[str, str]:
     if get_settings().demo:
         return {"hint": "Demo mode is on for the whole installation through HEXDECK_DEMO, so the cards still show invented data. Remove the variable and restart."}
     return {"hint": "Demo mode is on for the whole installation, so the cards still show invented data. Switch it off under System > Integrations."}
+
+
+def _asked(adapter: Adapter, config: dict[str, Any]) -> str:
+    """The host a connection asks, as ``host`` or ``host:port``; empty when it has no address of its own.
+
+    ⚠️ Only the host and the port. An address may carry a user name and a
+    password in front of an ``@``, and one kept as a secret is a secret as a
+    whole: neither belongs in a message on screen.
+    """
+    for field in adapter.fields:
+        if field.type != "url" or field.secret:
+            continue
+        address = str(config.get(field.name) or "").strip()
+        try:
+            split = urlsplit(address if "://" in address else f"http://{address}")
+            host, port = split.hostname or "", split.port
+        except ValueError:
+            continue
+        if not host:
+            continue
+        if ":" in host:
+            host = f"[{host}]"
+        return f"{host}:{port}" if port else host
+    return ""
+
+
+def _failed(failure: AdapterError, adapter: Adapter, config: dict[str, Any]) -> dict[str, Any]:
+    """What a failed test answers.
+
+    ⚠️ A refusal names the host that was asked. "Check the API key or the
+    password" sends somebody to the key, and the key can be right: a second
+    Proxmox entered with the address of the first is refused just the same,
+    because its token belongs to the other machine.
+    """
+    hint = failure.hint
+    asked = _asked(adapter, config) if failure.code == "auth_failed" else ""
+    if asked:
+        hint = f"{hint} If the credentials are right, check the address: {asked} may be another machine.".strip()
+    return {"ok": False, "message": failure.message, "hint": hint, "code": failure.code}
 
 
 @router.get("/adapters", summary="List every adapter and its widgets")
@@ -258,7 +298,7 @@ async def test_integration(body: IntegrationTest, user: AdminUser, db: DbSession
     try:
         message = await adapter.test(config, ctx)
     except AdapterError as failure:
-        return {"ok": False, "message": failure.message, "hint": failure.hint, "code": failure.code}
+        return _failed(failure, adapter, config)
     except Exception as failure:  # noqa: BLE001
         return {"ok": False, "message": f"Unexpected error: {failure.__class__.__name__}.", "hint": "", "code": "crash"}
     finally:
@@ -358,7 +398,7 @@ async def test_saved(integration_id: int, user: AdminUser, db: DbSession) -> dic
     except AdapterError as failure:
         integration.last_error = failure.message
         db.commit()
-        return {"ok": False, "message": failure.message, "hint": failure.hint, "code": failure.code}
+        return _failed(failure, adapter, config)
     except Exception as failure:  # noqa: BLE001
         return {"ok": False, "message": f"Unexpected error: {failure.__class__.__name__}.", "hint": "", "code": "crash"}
     finally:

@@ -41,8 +41,13 @@ const NO_APPS: AppEntry[] = []
 /** Everything about one widget: title, icon, link, connection, options, reachability check. */
 export function WidgetSettingsSheet({ widget, pages, onClose, onSaved, onDeleted, onPreview, onPreviewData }: Props) {
   const { t } = useTranslation()
-  const adapters = useQuery({ queryKey: ['adapters'], queryFn: () => get<AdapterSpec[]>('/adapters'), staleTime: 300_000 })
-  const integrations = useQuery({ queryKey: ['integrations'], queryFn: () => get<Integration[]>('/integrations') })
+  // ⚠️ Only while the sheet is open. It is mounted with the board, and it used
+  // to ask for the whole adapter catalogue each time a board was opened: 94 kB
+  // compressed out of the 121 kB a board load took, for a sheet most visits
+  // never open.
+  const open = widget !== null
+  const adapters = useQuery({ queryKey: ['adapters'], queryFn: () => get<AdapterSpec[]>('/adapters'), enabled: open, staleTime: 300_000 })
+  const integrations = useQuery({ queryKey: ['integrations'], queryFn: () => get<Integration[]>('/integrations'), enabled: open })
   const admin = useAuth((s) => s.user?.role === 'admin')
   // The catalog only matters to an app tile; a guest edits nothing and is not asked.
   const appTile = widget?.kind === 'core.app'
