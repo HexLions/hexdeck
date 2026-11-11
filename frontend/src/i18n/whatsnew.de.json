@@ -1256,6 +1256,31 @@
         "Eine Verbindung oder App-Kachel kann von Hand sagen, worauf sie läuft.",
         "Nginx Proxy Manager sagt, wohin er weiterleitet."
       ]
+    },
+    "0.36.0": {
+      "lead": "HexDeck 0.36.0: Speedtests von UniFi, Hilfe bei einer abgelehnten Anbindung und ein Board, das leichter lädt.",
+      "sections": [
+        {
+          "title": "Speedtests von UniFi",
+          "body": "Zwei neue Karten lesen die Speedtests, die das Gateway selbst ausführt: den letzten mit Download, Upload und Latenz, und ihren Verlauf als Linie oder als Balken. Kein zweiter Container nötig.",
+          "path": "Bearbeiten (Stift) > Widget hinzufügen > UniFi"
+        },
+        {
+          "title": "Hilfe bei einer abgelehnten Anbindung",
+          "body": "Das Formular sagt, wenn eine andere Anbindung derselben Art die eingegebene Adresse schon hat, und ein abgelehnter Test nennt den gefragten Host. Ein eingefügter Schlüssel verliert das Leerzeichen, das beim Kopieren mitkam.",
+          "path": "System > Anbindungen"
+        },
+        {
+          "title": "Ein leichteres Board",
+          "body": "Das Öffnen eines Boards lädt etwa ein Fünftel von vorher, und der Browser behält die Dateien der App, statt sie erneut zu holen.",
+          "path": "Board > beliebige Karte"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "JSON-API-Karten können einen langen Text umbrechen.",
+        "nextasks, in Beta: was heute fällig ist, fällige Aufgaben, mir zugewiesen und eine Liste."
+      ]
     }
   }
 }

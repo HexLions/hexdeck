@@ -630,6 +630,31 @@
         "Una connessione o una tile app può indicare a mano su cosa gira.",
         "Nginx Proxy Manager dice verso dove inoltra."
       ]
+    },
+    "0.36.0": {
+      "lead": "HexDeck 0.36.0: speed test da UniFi, un aiuto quando una connessione viene rifiutata e una board che si carica più leggera.",
+      "sections": [
+        {
+          "title": "Speed test da UniFi",
+          "body": "Due nuove card leggono gli speed test che il gateway esegue da solo: l'ultimo con download, upload e latenza, e la loro cronologia come linea o come barre. Non serve un secondo container.",
+          "path": "Aggiungi una card > UniFi"
+        },
+        {
+          "title": "Un aiuto quando una connessione viene rifiutata",
+          "body": "Il modulo avvisa quando un'altra connessione dello stesso tipo ha già l'indirizzo che inserisci, e un test rifiutato nomina l'host interrogato. Una chiave incollata perde lo spazio preso con la copia.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Una board più leggera",
+          "body": "Aprire una board scarica circa un quinto di prima, e il browser conserva i file dell'app invece di scaricarli di nuovo.",
+          "path": "Board > qualsiasi card"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Le card JSON API possono mandare a capo un testo lungo.",
+        "nextasks, in beta: cosa scade oggi, attività in scadenza, assegnate a me e una lista."
+      ]
     }
   }
 }
