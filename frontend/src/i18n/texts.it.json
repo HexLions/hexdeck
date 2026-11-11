@@ -33,7 +33,6 @@
     "A card stopped working": "Una card ha smesso di funzionare",
     "A certificate is running out": "Un certificato sta per scadere",
     "A chart": "Un grafico",
-    "A dedicated user without two-factor authentication works best.": "Un utente dedicato senza autenticazione a due fattori funziona meglio.",
     "A dial": "Un quadrante",
     "A dial needs to know what counts as full.": "Un quadrante deve sapere cosa conta come pieno.",
     "A disk is filling up": "Un disco si sta riempiendo",
@@ -2718,7 +2717,10 @@
     "Long text breaks onto further lines instead of being cut short.": "Il testo lungo continua sulle righe successive invece di essere tagliato.",
     "WAN 1": "WAN 1",
     "WAN 2": "WAN 2",
-    "WAN 3": "WAN 3"
+    "WAN 3": "WAN 3",
+    "Trusted device": "Dispositivo attendibile",
+    "Set by enrolling HexDeck as a trusted device, never typed in.": "Viene dalla registrazione come dispositivo attendibile, non si digita mai.",
+    "With two-factor sign-in, save the connection, then enrol HexDeck as a trusted device below.": "Con la verifica in due passaggi, salva la connessione e registra HexDeck qui sotto come dispositivo attendibile."
   },
   "labels": {
     "Jobs": "Job",

@@ -263,6 +263,24 @@
         "unread": "Version not read",
         "notAsked": "Newest not asked",
         "notAskedHelp": "Switch on Check for updates under System, About to compare with the newest release on GitHub."
+      },
+      "mfa": {
+        "title": "Synology trusted device",
+        "saveFirst": "Save changes first",
+        "enrolled": "Enrolled",
+        "notEnrolled": "Not enrolled",
+        "help": "For an account with two-factor sign-in: enter the six-digit code from your authenticator app or Synology Secure SignIn once, and DSM keeps HexDeck as a trusted device.",
+        "code": "Authentication code",
+        "codePlaceholder": "Six-digit code",
+        "enrolling": "Enrolling…",
+        "enrol": "Enrol trusted device",
+        "reenrol": "Re-enrol trusted device",
+        "unenrol": "Un-enrol trusted device",
+        "enrolledDone": "Synology trusted device enrolled successfully.",
+        "removedDone": "Trusted device removed. Enrolling again needs a new six-digit code.",
+        "confirmTitle": "Un-enrol Synology trusted device?",
+        "confirmBody": "HexDeck forgets its trusted-device credential and signs in anew. Address, user name and password stay. Enrolling again needs a new six-digit code.",
+        "confirm": "Un-enrol"
       }
     },
     "users": {
