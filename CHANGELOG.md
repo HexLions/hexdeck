@@ -37,6 +37,16 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   service refused the key. A password is stored as typed, and so is a secret
   of several lines.
 
+### Fixed
+
+- **Opening a board** no longer downloads the catalogue of every adapter. The
+  settings sheet of a card asked for it while still closed: 94 kB compressed
+  out of the 121 kB a board load took. It is asked for when the sheet opens.
+- **The built JavaScript and CSS are kept by the browser.** Their names carry
+  a hash of their content, and they went out with no word about caching, so
+  without a service worker (plain http on a home network) a browser could
+  fetch them again on every visit. They now say they never change.
+
 ## 0.35.0 (2026-11-06)
 
 What runs on what, one message for an outage that takes others with it, and a page that says why a service broke.
