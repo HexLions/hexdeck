@@ -20,6 +20,31 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   breaks a long text onto further lines instead of ending it in "…": the value of
   the Value card, and the titles, subtitles and values of the List card. Off by
   default, so cards already on a board look as before. From nexdeck 1.4.0.
+- **Synology with two-factor sign-in.** A Synology connection whose account
+  signs in with a second factor no longer fails: once it is saved, an admin
+  enters the six-digit code from the authenticator app or Synology Secure
+  SignIn, and DSM keeps HexDeck as a trusted device, so no code is asked again.
+  The code is never stored, the device credential is kept encrypted, never shown
+  and never exported, and it is dropped when the address, the user or the
+  password change; the device can be removed again from the same place. Checked
+  on DSM 6.2, not yet on DSM 7. Contributed to nexdeck by iamevl; from nexdeck
+  1.6.0.
+
+### Fixed
+
+- **Every line in the chart popup.** On a chart card with more than one line,
+  the popup of the 7 d, 30 d and 1 y ranges named only the first line. It now
+  names every line at the moment under the pointer, with its colour, name and
+  value, and each line gets its own dot. From nexdeck 1.5.1.
+- **The chart over a day has a popup too, and its lines keep off the legend.**
+  Pointing at the short chart of a chart card names the time and every line's
+  value, as the longer ranges already do. In a small card the lines ran over the
+  legend below them; they now fill the space they are given. From nexdeck 1.6.0.
+- **BookOrbit 3.** From BookOrbit 3.0 the reading and recently added shelves
+  come wrapped in an object with the size of the shelf; the connection test
+  stayed green while every shelf card turned red. Both shapes are read now, and
+  on BookOrbit 3 the Library card counts every book being read, past the fifty a
+  shelf hands out. From nexdeck 1.7.0.
 
 ## 0.35.0 (2026-11-06)
 
