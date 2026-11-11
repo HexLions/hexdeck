@@ -20,6 +20,22 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   breaks a long text onto further lines instead of ending it in "…": the value of
   the Value card, and the titles, subtitles and values of the List card. Off by
   default, so cards already on a board look as before. From nexdeck 1.4.0.
+- **An address another connection already has** is remarked on under the
+  field while a connection is entered or edited, with the name of the other
+  one. It is a remark and stops nothing: two connections to one service, with
+  two accounts or two tokens, stay allowed.
+
+### Changed
+
+- **A refused connection test names the host that was asked**, after the
+  advice to check the key: a second Proxmox entered with the address of the
+  first one is refused with a token that is correct, because the token
+  belongs to the other machine. Only the host and the port are named, never a
+  user name or a password written into the address.
+- **A pasted key or token** is stored without the space or the tab a copy
+  picks up beside it; the field is masked, so it showed nowhere and the
+  service refused the key. A password is stored as typed, and so is a secret
+  of several lines.
 
 ## 0.35.0 (2026-11-06)
 
