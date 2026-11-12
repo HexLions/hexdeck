@@ -41,6 +41,14 @@ vi.mock('../api/client', () => ({
   }),
 }))
 
+// ⚠️ For every test. Deleting empties the uploaded icons and uploading
+// counts, and a test run after either found the other's leftovers.
+beforeEach(() => {
+  calls.uploaded.length = 0
+  calls.deleted.length = 0
+  calls.own = [{ id: 7, filename: 'nas.png', url: '/api/v1/assets/7/nas.png' }]
+})
+
 function wrap(children: ReactNode) {
   return <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>{children}</QueryClientProvider>
 }
