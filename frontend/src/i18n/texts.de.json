@@ -2729,7 +2729,21 @@
     "Long text breaks onto further lines instead of being cut short.": "Langer Text geht in weiteren Zeilen weiter, statt abgeschnitten zu werden.",
     "WAN 1": "WAN 1",
     "WAN 2": "WAN 2",
-    "WAN 3": "WAN 3"
+    "WAN 3": "WAN 3",
+    "DexFrame": "DexFrame",
+    "Admin key": "Admin-Schlüssel",
+    "Frame": "Rahmen",
+    "Shiny counter": "Shiny-Zähler",
+    "Only if you set one on the board (System section); every change needs it then.": "Nur wenn du auf dem Board einen gesetzt hast (Bereich System); dann braucht ihn jede Änderung.",
+    "The DexFrame e-paper Pokémon frame: battery, the page on screen and the shiny counter, with buttons to change page and count encounters.": "Der E-Paper-Pokémon-Rahmen DexFrame: Akku, die angezeigte Seite und der Shiny-Zähler, mit Tasten zum Blättern und Zählen von Begegnungen.",
+    "The address of the board, as you open its web page.": "Die Adresse des Boards, wie du seine Webseite öffnest.",
+    "The encounters on the board's shiny hunt counter, with buttons to add and take away one.": "Die Begegnungen auf dem Shiny-Zähler des Boards, mit Tasten für eine mehr und eine weniger.",
+    "The page on screen, the battery and the firmware, with buttons for the previous and next page and a full refresh.": "Die angezeigte Seite, der Akku und die Firmware, mit Tasten für die vorige und nächste Seite und eine volle Aktualisierung.",
+    "Next page": "Nächste Seite",
+    "Previous page": "Vorige Seite",
+    "Refresh the screen": "Bildschirm aktualisieren",
+    "Count an encounter": "Eine Begegnung zählen",
+    "Target": "Ziel"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -4087,6 +4101,13 @@
     "Nothing is assigned to you.": "Dir ist nichts zugewiesen.",
     "Nothing is open in this list.": "In dieser Liste ist nichts offen.",
     "Pick a list in the card's settings.": "Wähle in den Einstellungen der Karte eine Liste.",
-    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen."
+    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen.",
+    "Drawing": "Zeichnet",
+    "Encounters": "Begegnungen",
+    "Minus one": "Eine weniger",
+    "Plus one": "Eine mehr",
+    "Previous": "Zurück",
+    "Refresh": "Aktualisieren",
+    "Showing": "Zeigt"
   }
 }
