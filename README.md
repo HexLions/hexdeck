@@ -238,9 +238,11 @@ Adapters that have not been confirmed against a live instance yet carry a *beta*
 
 ## What this fork changes
 
-Forked from nexdeck 0.15.0; upstream's 0.16.1 TrueNAS work and twenty-three of the
-adapters upstream added up to its 0.30.0 are taken over. Item by item in
-[NOTICE.md](NOTICE.md), release by release in [CHANGELOG.md](CHANGELOG.md).
+Forked from nexdeck 0.15.0, and still following it: what upstream has done up to
+its 1.5.0 is taken over where it fits, its adapters and its larger features
+alike (needs attention and maintenance, the chronicle, history and forecasts,
+the inventory). What was taken and what was left is in [NOTICE.md](NOTICE.md),
+release by release in [CHANGELOG.md](CHANGELOG.md).
 
 ### Integrations added
 
