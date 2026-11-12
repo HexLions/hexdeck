@@ -84,12 +84,19 @@ def test_a_day_is_folded_at_the_houses_midnight_once_its_hours_are_there(client:
     midnight = history.local_midnight(int(time.time()))
     now = midnight + 12 * 3600
     yesterday = history.local_midnight(midnight - 3600)
-    _hours(2, "used", [(yesterday + hour * 3600, 50.0 + hour) for hour in range(24)])
+    # ⚠️ The hour rows that start inside yesterday, as the server makes them:
+    # on the hour of UTC. Where the clock is half or three quarters of an hour
+    # off UTC (India, Nepal, Newfoundland) the first of them starts after
+    # midnight, and on the day the clocks change there are 23 or 25. Twenty-
+    # four rows from midnight on held only in whole-hour zones on ordinary
+    # days. Found by running the tests with TZ=Asia/Kathmandu.
+    starts = range(yesterday + (-yesterday) % 3600, midnight, 3600)
+    _hours(2, "used", [(start, 50.0 + number) for number, start in enumerate(starts)])
     _hours(2, "used", [(midnight + 3600, 99.0)])
     with db_session() as db:
         history.condense(db, now=now)
     days = [row for row in _rows(HistoryDay) if row.key == "2:used"]
-    assert [(row.ts, row.min, row.max) for row in days] == [(yesterday, 50.0, 73.0)], "today is not over yet"
+    assert [(row.ts, row.min, row.max) for row in days] == [(yesterday, 50.0, 50.0 + len(starts) - 1)], "today is not over yet"
     assert datetime.fromtimestamp(days[0].ts).astimezone().hour == 0
 
 
