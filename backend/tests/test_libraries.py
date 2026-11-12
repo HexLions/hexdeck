@@ -371,7 +371,9 @@ def test_only_declared_deeds_are_reachable_from_a_button() -> None:
     with_deeds = {a.kind for a in all_adapters() if a.deeds}
     # AMP is on the list because a button that starts a game server is worth
     # having; everything it may do is start, stop or restart one named instance.
-    assert with_deeds == {"plex", "jellyfin", "emby", "nexpulse", "amp"}, f"unexpected: {sorted(with_deeds)}"
+    # DexFrame: next/previous page, a screen refresh and +1 on its counter, nothing
+    # that changes its settings or its pages.
+    assert with_deeds == {"plex", "jellyfin", "emby", "nexpulse", "amp", "dexframe"}, f"unexpected: {sorted(with_deeds)}"
     for adapter in all_adapters():
         for one in adapter.deeds:
             assert adapter.widget(one.widget_kind), f"{adapter.kind}: {one.id} names no widget"
