@@ -199,7 +199,13 @@ def test_ics_parser_and_recurrence() -> None:
     assert events[0]["all_day"] is True and events[0]["location"] == "Main street 1"
     window = (date(2026, 9, 7), date(2026, 9, 21))
     assert occurrences(events[0], *window) == [date(2026, 9, 10)]
-    assert occurrences(events[1], *window) == [date(2026, 9, 8), date(2026, 9, 15)]
+    # ⚠️ On this machine's day, not on UTC's. 09:00 UTC on Tuesday 1 September
+    # is Monday evening in Samoa and Wednesday in Kiribati, so the four
+    # meetings fall on other days there, and a literal list held only in
+    # Europe. Found by running the tests with TZ=Pacific/Pago_Pago.
+    first = datetime(2026, 9, 1, 9, 0, tzinfo=UTC).astimezone().date()
+    weekly = [first + timedelta(weeks=week) for week in range(4)]
+    assert occurrences(events[1], *window) == [day for day in weekly if window[0] <= day <= window[1]]
     assert occurrences(events[2], *window) == [date(2026, 9, 12)], "a yearly rule from 1990 lands on this year's date"
 
 

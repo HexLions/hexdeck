@@ -94,6 +94,9 @@ describe('a board that redraws', () => {
       onAction: noop, onRefresh: noop, onSettings: noop, onRemove: noop,
     } as unknown as Parameters<typeof BoardGrid>[0]
 
+    // ⚠️ The count starts here: every other test in this file draws cards too,
+    // and run before this one they left their calls behind.
+    drawn.mockClear()
     const view = render(<BoardGrid {...props} data={data} />)
     expect(drawn).toHaveBeenCalledTimes(30)
 
