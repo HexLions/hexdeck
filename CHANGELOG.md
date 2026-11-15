@@ -5,6 +5,14 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **Pi-PaaS**: the apps on a Raspberry Pi running Pi-PaaS, which ones
+  crashed or stopped answering, the CPU temperature, and a button to
+  restart an app. ⚠️ Beta.
+
 ## 0.36.0 (2026-11-11)
 
 Speed tests from UniFi, help when a connection is refused, a board that loads lighter, and nextasks in beta.

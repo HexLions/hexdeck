@@ -478,6 +478,12 @@ Updated at every milestone.
   with the API token, which Jenkins exempts from its CSRF crumb. Checked
   against Jenkins 2.580.1 running locally, with passing, failing, running,
   queued and disabled jobs, an offline agent, and a wrong token.
+- **Pi-PaaS from one summary call.** The apps, their state, address, CPU
+  and memory, and the machine's temperature, memory and disk come from
+  `/api/summary` with a bearer API token; the restart button posts to
+  `/api/apps/<id>/restart` for an app that call listed. Checked against
+  Pi-PaaS 1.2.0 (before its release) running locally, with a running app, one parked after
+  crashing, a stopped site, viewer and operator tokens and a wrong token.
 - **openHAB, Items without a token and Things with one.** The Items come
   from `/rest/items`, which openHAB lets an anonymous user read by default;
   the Things from `/rest/things?summary=true`, which needs an

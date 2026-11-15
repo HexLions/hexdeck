@@ -2729,7 +2729,16 @@
     "Long text breaks onto further lines instead of being cut short.": "Langer Text geht in weiteren Zeilen weiter, statt abgeschnitten zu werden.",
     "WAN 1": "WAN 1",
     "WAN 2": "WAN 2",
-    "WAN 3": "WAN 3"
+    "WAN 3": "WAN 3",
+    "Apps running out of all, the ones that crashed or do not answer, and the CPU temperature, memory and free disk.": "Laufende Apps von allen, die abgestürzten oder nicht antwortenden, dazu CPU-Temperatur, Speicher und freier Plattenplatz.",
+    "Every app with its state, address and memory, the troubled ones first, and a button to restart it.": "Jede App mit Zustand, Adresse und Speicher, die problematischen zuerst, und eine Taste zum Neustarten.",
+    "Made in Pi-PaaS under Settings, API tokens. The viewer role is enough without the restart button.": "In Pi-PaaS unter Einstellungen, API-Tokens erstellt. Ohne die Neustart-Taste reicht die Rolle Betrachter.",
+    "Needs a token with the operator role. Asks before it restarts an app.": "Braucht ein Token mit der Rolle Operator. Fragt nach, bevor eine App neu startet.",
+    "Offer the restart button": "Neustart-Taste anbieten",
+    "Only the troubled ones": "Nur die problematischen",
+    "Pi-PaaS: how many apps run on the Raspberry Pi, which crashed or stopped answering, the CPU temperature, and a button to restart an app.": "Pi-PaaS: wie viele Apps auf dem Raspberry Pi laufen, welche abgestürzt sind oder nicht mehr antworten, die CPU-Temperatur und eine Taste zum Neustarten einer App.",
+    "No troubled app": "Keine App mit Problemen",
+    "No app deployed yet": "Noch keine App bereitgestellt"
   },
   "labels": {
     "Jobs": "Jobs",
@@ -4087,6 +4096,9 @@
     "Nothing is assigned to you.": "Dir ist nichts zugewiesen.",
     "Nothing is open in this list.": "In dieser Liste ist nichts offen.",
     "Pick a list in the card's settings.": "Wähle in den Einstellungen der Karte eine Liste.",
-    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen."
+    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen.",
+    "Disk free": "Platte frei",
+    "Not responding": "Antwortet nicht",
+    "Failed update": "Update fehlgeschlagen"
   }
 }

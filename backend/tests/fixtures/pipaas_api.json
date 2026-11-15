@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "version": "1.2.0",
+    "hostname": "raspberrypi",
+    "system": {
+      "temperature": 20,
+      "load": 1.22,
+      "cpus": 6,
+      "memory": {
+        "total": 3221225472,
+        "free": 1026576384
+      },
+      "disk": {
+        "total": 6107684864,
+        "free": 6008303616
+      },
+      "uptime": 508188.36
+    },
+    "totals": {
+      "apps": 3,
+      "running": 1,
+      "stopped": 1,
+      "crashed": 1,
+      "unhealthy": 0
+    },
+    "apps": [
+      {
+        "id": "link-hub",
+        "name": "Link hub",
+        "type": "static",
+        "status": "stopped",
+        "port": 3006,
+        "url": "http://raspberrypi.local:3006",
+        "version": 1,
+        "cpu": null,
+        "memory": null,
+        "healthy": null,
+        "lastError": null
+      },
+      {
+        "id": "photo-blog",
+        "name": "Photo blog",
+        "type": "node",
+        "status": "running",
+        "port": 3004,
+        "url": "http://raspberrypi.local:3004",
+        "version": 1,
+        "cpu": 0,
+        "memory": 45129728,
+        "healthy": null,
+        "lastError": null
+      },
+      {
+        "id": "weather-bot",
+        "name": "Weather bot",
+        "type": "node",
+        "status": "crashed",
+        "port": 3005,
+        "url": "http://raspberrypi.local:3005",
+        "version": 1,
+        "cpu": null,
+        "memory": null,
+        "healthy": null,
+        "lastError": null
+      }
+    ]
+  },
+  "restart": {
+    "id": "photo-blog",
+    "name": "Photo blog",
+    "type": "node",
+    "port": 3004,
+    "url": "http://raspberrypi.local:3004",
+    "desired": "running",
+    "status": "running",
+    "version": 1,
+    "task": null,
+    "lastError": null
+  },
+  "refused": {
+    "error": "Login required"
+  },
+  "not_allowed": {
+    "error": "This needs the operator role"
+  },
+  "unknown_app": {
+    "error": "App not found"
+  }
+}
