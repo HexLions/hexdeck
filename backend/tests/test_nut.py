@@ -170,3 +170,13 @@ def test_the_load_card_is_a_chart_with_a_choice_of_hours() -> None:
     widget = next(one for one in get_adapter("nut").widgets if one.kind == "load")
     assert widget.renderer == "chart" and widget.metrics == ("load",)
     assert [field.name for field in widget.options] == ["chart_hours"]
+
+
+def test_a_power_of_zero_beside_a_load_is_worked_out() -> None:
+    """Some cards send ups.realpower as 0 because they do not measure it (nexdeck #71)."""
+    from app.adapters.nut import _power
+
+    assert _power({"ups.realpower": "0", "ups.load": "20", "ups.realpower.nominal": "600"}) == 120.0
+    assert _power({"ups.realpower": "0", "ups.load": "20"}) is None, "no nominal power: unknown, not zero"
+    assert _power({"ups.realpower": "0", "ups.load": "0", "ups.realpower.nominal": "600"}) == 0.0
+    assert _power({"ups.realpower": "150", "ups.load": "20", "ups.realpower.nominal": "600"}) == 150.0
