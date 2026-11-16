@@ -1,0 +1,173 @@
+{
+ "_source": "Flood 4.16.4 running locally on 2026-11-16 in front of Transmission 4.1.0: holiday-video.mkv complete and seeding, linux-image.iso without its data, once started and once stopped. Download directory replaced.",
+ "torrents": {
+  "id": 1794839549304,
+  "torrents": {
+   "3A6C3D19DA28B35F1621A59B38EDDFB25CEFF446": {
+    "hash": "3A6C3D19DA28B35F1621A59B38EDDFB25CEFF446",
+    "name": "holiday-video.mkv",
+    "comment": "",
+    "bytesDone": 3000000,
+    "dateActive": 0,
+    "dateAdded": 1794839463,
+    "dateCreated": 1794839457,
+    "dateFinished": 1794839463,
+    "directory": "/data/downloads",
+    "downRate": 0,
+    "downTotal": 0,
+    "upRate": 0,
+    "upTotal": 0,
+    "eta": -1,
+    "isPrivate": false,
+    "isInitialSeeding": false,
+    "isSequential": false,
+    "message": "",
+    "peersConnected": 0,
+    "peersTotal": 0,
+    "percentComplete": 100,
+    "priority": 2,
+    "ratio": 0,
+    "seedsConnected": 0,
+    "seedsTotal": 0,
+    "sizeBytes": 3000000,
+    "selectedSizeBytes": 3000000,
+    "status": [
+     "seeding",
+     "inactive",
+     "complete"
+    ],
+    "tags": [],
+    "trackerURIs": [
+     "tracker.invalid"
+    ]
+   },
+   "A1DBBB14FC989FF415579388D3C531C151B8975C": {
+    "hash": "A1DBBB14FC989FF415579388D3C531C151B8975C",
+    "name": "linux-image.iso",
+    "comment": "",
+    "bytesDone": 0,
+    "dateActive": 0,
+    "dateAdded": 1794839463,
+    "dateCreated": 1794839457,
+    "dateFinished": 0,
+    "directory": "/data/downloads",
+    "downRate": 0,
+    "downTotal": 0,
+    "upRate": 0,
+    "upTotal": 0,
+    "eta": -1,
+    "isPrivate": false,
+    "isInitialSeeding": false,
+    "isSequential": false,
+    "message": "",
+    "peersConnected": 0,
+    "peersTotal": 0,
+    "percentComplete": 0,
+    "priority": 2,
+    "ratio": 0,
+    "seedsConnected": 0,
+    "seedsTotal": 0,
+    "sizeBytes": 2000000,
+    "selectedSizeBytes": 2000000,
+    "status": [
+     "downloading",
+     "inactive"
+    ],
+    "tags": [],
+    "trackerURIs": [
+     "tracker.invalid"
+    ]
+   }
+  }
+ },
+ "torrents_stopped": {
+  "id": 1794839546287,
+  "torrents": {
+   "3A6C3D19DA28B35F1621A59B38EDDFB25CEFF446": {
+    "hash": "3A6C3D19DA28B35F1621A59B38EDDFB25CEFF446",
+    "name": "holiday-video.mkv",
+    "comment": "",
+    "bytesDone": 3000000,
+    "dateActive": 0,
+    "dateAdded": 1794839463,
+    "dateCreated": 1794839457,
+    "dateFinished": 1794839463,
+    "directory": "/data/downloads",
+    "downRate": 0,
+    "downTotal": 0,
+    "upRate": 0,
+    "upTotal": 0,
+    "eta": -1,
+    "isPrivate": false,
+    "isInitialSeeding": false,
+    "isSequential": false,
+    "message": "",
+    "peersConnected": 0,
+    "peersTotal": 0,
+    "percentComplete": 100,
+    "priority": 2,
+    "ratio": 0,
+    "seedsConnected": 0,
+    "seedsTotal": 0,
+    "sizeBytes": 3000000,
+    "selectedSizeBytes": 3000000,
+    "status": [
+     "seeding",
+     "inactive",
+     "complete"
+    ],
+    "tags": [],
+    "trackerURIs": [
+     "tracker.invalid"
+    ]
+   },
+   "A1DBBB14FC989FF415579388D3C531C151B8975C": {
+    "hash": "A1DBBB14FC989FF415579388D3C531C151B8975C",
+    "name": "linux-image.iso",
+    "comment": "",
+    "bytesDone": 0,
+    "dateActive": 0,
+    "dateAdded": 1794839463,
+    "dateCreated": 1794839457,
+    "dateFinished": 0,
+    "directory": "/data/downloads",
+    "downRate": 0,
+    "downTotal": 0,
+    "upRate": 0,
+    "upTotal": 0,
+    "eta": -1,
+    "isPrivate": false,
+    "isInitialSeeding": false,
+    "isSequential": false,
+    "message": "",
+    "peersConnected": 0,
+    "peersTotal": 0,
+    "percentComplete": 0,
+    "priority": 2,
+    "ratio": 0,
+    "seedsConnected": 0,
+    "seedsTotal": 0,
+    "sizeBytes": 2000000,
+    "selectedSizeBytes": 2000000,
+    "status": [
+     "stopped",
+     "inactive"
+    ],
+    "tags": [],
+    "trackerURIs": [
+     "tracker.invalid"
+    ]
+   }
+  }
+ },
+ "connection_test": {
+  "isConnected": true
+ },
+ "failed_login": {
+  "message": "Failed login."
+ },
+ "unauthorized": {
+  "code": "FLOOD_UNAUTHORIZED",
+  "message": "Unauthorized"
+ }
+}
