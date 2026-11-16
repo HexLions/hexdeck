@@ -71,8 +71,10 @@ class SynologyAdapter(Adapter):
     docs_url = "https://global.download.synology.com/download/Document/Software/DeveloperGuide/Os/DSM/All/enu/DSM_Login_Web_API_Guide_enu.pdf"
     fields = (
         Field("url", "URL", type="url", required=True, placeholder="https://nas.local:5001"),
-        Field("username", "User name", required=True, help="A dedicated user without two-factor authentication works best."),
+        Field("username", "User name", required=True, help="With two-factor sign-in, save the connection, then enrol HexDeck as a trusted device below."),
         Field("password", "Password", type="password", secret=True, required=True),
+        Field("device_id", "Trusted device", type="password", secret=True,
+              help="Set by enrolling HexDeck as a trusted device, never typed in."),
         Field("insecure", "Ignore TLS errors", type="bool", default=True),
     )
     widgets = (
@@ -141,6 +143,82 @@ class SynologyAdapter(Adapter):
         ),
     )
 
+    async def enrol_mfa(
+        self, config: dict[str, Any], ctx: Context, otp: str
+    ) -> str:
+        """Register a Synology trusted device using a one-time MFA code."""
+        if len(otp) != 6 or not otp.isascii() or not otp.isdigit():
+            raise ValueError("A six-digit authentication code is required.")
+
+        login_data = {
+            "api": "SYNO.API.Auth",
+            "version": "6",
+            "method": "login",
+            "account": config.get("username", ""),
+            "passwd": config.get("password", ""),
+            "session": "nexdeck",
+            "format": "sid",
+            "otp_code": otp,
+            "enable_device_token": "yes",
+            "device_name": "HexDeck",
+        }
+
+        response = await ctx.request(
+            "POST",
+            f"{base_url(config)}/webapi/auth.cgi",
+            data=login_data,
+            verify=not config.get("insecure", True),
+        )
+
+        if response.status_code >= 400:
+            raise AdapterError(
+                f"DSM answered MFA enrolment with HTTP {response.status_code}.",
+                code="http_error",
+            )
+
+        try:
+            result = response.json()
+        except ValueError as why:
+            raise AdapterError(
+                "DSM returned an invalid MFA enrolment response.",
+                code="bad_json",
+            ) from why
+
+        if not isinstance(result, dict) or not result.get("success"):
+            error_data = result.get("error") if isinstance(result, dict) else None
+            code = error_data.get("code") if isinstance(error_data, dict) else None
+            raise AuthFailed(
+                f"DSM refused MFA enrolment: {ERRORS.get(code, f'error {code}')}.",
+            )
+
+        data = result.get("data") or {}
+        device_id = data.get("did") if isinstance(data, dict) else None
+        if not isinstance(device_id, str) or not device_id:
+            raise AdapterError(
+                "DSM did not return a trusted-device credential.",
+                code="missing_device",
+            )
+
+        sid = data.get("sid")
+        if isinstance(sid, str) and sid:
+            try:
+                await ctx.request(
+                    "POST",
+                    f"{base_url(config)}/webapi/auth.cgi",
+                    data={
+                        "api": "SYNO.API.Auth",
+                        "version": "6",
+                        "method": "logout",
+                        "session": "nexdeck",
+                        "_sid": sid,
+                    },
+                    verify=not config.get("insecure", True),
+                )
+            except Exception:
+                pass  # A failed logout must not discard successful enrolment.
+
+        return device_id
+
     async def _sid(self, config: dict[str, Any], ctx: Context, force: bool = False) -> str:
         sid = ctx.cache.get("syno_sid")
         if sid and not force:
@@ -153,10 +231,22 @@ class SynologyAdapter(Adapter):
         #
         # Measured against DSM 7 on 07.09.2026: the login accepts a form body
         # on API versions 6 and 7 and answers with the same sid.
+        login_data = {
+            "api": "SYNO.API.Auth",
+            "version": "6",
+            "method": "login",
+            "account": config.get("username", ""),
+            "passwd": config.get("password", ""),
+            "session": "nexdeck",
+            "format": "sid",
+        }
+        if config.get("device_id"):
+            login_data["device_name"] = "HexDeck"
+            login_data["device_id"] = config["device_id"]
+
         response = await ctx.request(
             "POST", f"{base_url(config)}/webapi/auth.cgi",
-            data={"api": "SYNO.API.Auth", "version": "6", "method": "login", "account": config.get("username", ""),
-                  "passwd": config.get("password", ""), "session": "nexdeck", "format": "sid"},
+            data=login_data,
             verify=not config.get("insecure", True),
         )
         if response.status_code >= 400:

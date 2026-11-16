@@ -33,7 +33,6 @@
     "A card stopped working": "Eine Karte funktioniert nicht mehr",
     "A certificate is running out": "Ein Zertifikat läuft ab",
     "A chart": "Ein Diagramm",
-    "A dedicated user without two-factor authentication works best.": "Am besten ein eigener Benutzer ohne Zwei-Faktor-Anmeldung.",
     "A dial": "Ein Tacho",
     "A dial needs to know what counts as full.": "Ein Tacho muss wissen, was voll heißt.",
     "A disk is filling up": "Eine Platte läuft voll",
@@ -2729,7 +2728,25 @@
     "Long text breaks onto further lines instead of being cut short.": "Langer Text geht in weiteren Zeilen weiter, statt abgeschnitten zu werden.",
     "WAN 1": "WAN 1",
     "WAN 2": "WAN 2",
-    "WAN 3": "WAN 3"
+    "WAN 3": "WAN 3",
+    "Trusted device": "Vertrauenswürdiges Gerät",
+    "Set by enrolling HexDeck as a trusted device, never typed in.": "Kommt aus dem Eintrag als vertrauenswürdiges Gerät, wird nie eingetippt.",
+    "With two-factor sign-in, save the connection, then enrol HexDeck as a trusted device below.": "Bei Zwei-Faktor-Anmeldung die Anbindung speichern und HexDeck darunter als vertrauenswürdiges Gerät eintragen.",
+    "Photos and albums of a Piwigo gallery, and who visits it.": "Fotos und Alben einer Piwigo-Galerie, und wer sie besucht.",
+    "The address of the gallery, where ws.php lies.": "Die Adresse der Galerie, dort wo ws.php liegt.",
+    "API key ID": "ID des API-Schlüssels",
+    "Profile > API Keys, Piwigo 16.1 or newer. Without a key only public albums are counted.": "Profil > API Keys, ab Piwigo 16.1. Ohne Schlüssel zählen nur öffentliche Alben.",
+    "Shown once, when the key is made. Users and the figures of the whole gallery need the key of an administrator.": "Wird einmal gezeigt, wenn der Schlüssel entsteht. Benutzer und die Zahlen der ganzen Galerie brauchen den Schlüssel eines Administrators.",
+    "Gallery": "Galerie",
+    "Photos and albums, with users, tags and comments for an administrator's key.": "Fotos und Alben, mit dem Schlüssel eines Administrators auch Benutzer, Schlagwörter und Kommentare.",
+    "Albums": "Alben",
+    "How many photos each album holds, its sub-albums included.": "Wie viele Fotos jedes Album enthält, seine Unteralben mitgezählt.",
+    "Top-level albums": "Alben der obersten Ebene",
+    "All albums": "Alle Alben",
+    "Most photos first": "Die meisten Fotos zuerst",
+    "Newest photo first": "Neuestes Foto zuerst",
+    "By name": "Nach Name",
+    "The users of the gallery and when each came last. Needs an administrator's key.": "Die Benutzer der Galerie und wann jeder zuletzt da war. Braucht den Schlüssel eines Administrators."
   },
   "labels": {
     "Jobs": "Jobs",
@@ -4087,6 +4104,10 @@
     "Nothing is assigned to you.": "Dir ist nichts zugewiesen.",
     "Nothing is open in this list.": "In dieser Liste ist nichts offen.",
     "Pick a list in the card's settings.": "Wähle in den Einstellungen der Karte eine Liste.",
-    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen."
+    "nextasks has no such list, or the token may not see it.": "In nextasks gibt es diese Liste nicht, oder der Token darf sie nicht sehen.",
+    "Webmaster": "Webmaster",
+    "Generic": "Gemeinsam",
+    "No albums.": "Keine Alben.",
+    "No users.": "Keine Benutzer."
   }
 }
