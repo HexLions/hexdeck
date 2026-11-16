@@ -560,6 +560,9 @@ def test_only_confirmed_adapters_are_out_of_beta() -> None:
         # Taken over from nexdeck 0.48.0: Uptime Kuma, seen there on 2026-10-24
         # against 1.23.17, the status pages against 1.23.17 and 2.x.
         "uptimekuma",
+        # Taken over from nexdeck 1.8.0: nextasks, released on 2026-11-09 by its
+        # maintainer, who is upstream's own.
+        "nextasks",
         # The ten this fork wrote itself, confirmed on 2026-10-06 against the
         # operator's own instances: AMP, ProxMenux Monitor, UrBackup and
         # Kubernetes in their rack, and Minecraft, Steam, Shelly, NetBird,

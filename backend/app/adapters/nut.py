@@ -124,9 +124,11 @@ def _named(found: dict[str, str], *names: str) -> str:
 def _power(found: dict[str, str]) -> float | None:
     """Watts drawn: ``ups.realpower`` where the UPS measures it, else the load share of its nominal power."""
     measured = _number(found, "ups.realpower")
-    if measured is not None:
-        return measured
     load, nominal = _number(found, "ups.load"), _number(found, "ups.realpower.nominal")
+    # ⚠️ Some cards send ``ups.realpower`` as 0 because they do not measure it;
+    # beside a load above 0 that 0 is not a reading. Found by nexdeck (#71).
+    if measured is not None and not (measured == 0 and load):
+        return measured
     return load * nominal / 100 if load is not None and nominal else None
 
 
