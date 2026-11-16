@@ -19,6 +19,19 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   on DSM 6.2, not yet on DSM 7. Contributed to nexdeck by iamevl; from nexdeck
   1.6.0.
 
+- **Piwigo**, ⚠️ Beta: the photos and albums of a gallery, the photos of each
+  album with its sub-albums, and the users with their last visit for an
+  administrator's key. Built from Piwigo's source, not run against a gallery.
+  From nexdeck 1.8.0.
+
+### Changed
+
+- **nextasks is out of beta**, released by its maintainer on 2026-11-09. From
+  nexdeck 1.8.0.
+- **Every dialog is named by its title**, so a screen reader says what it is
+  about when it opens, and each connection's Edit button names the connection.
+  The first from nexdeck.
+
 ### Fixed
 
 - **Every line in the chart popup.** On a chart card with more than one line,
@@ -34,6 +47,11 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   stayed green while every shelf card turned red. Both shapes are read now, and
   on BookOrbit 3 the Library card counts every book being read, past the fifty a
   shelf hands out. From nexdeck 1.7.0.
+- **A port typed into its own field works for IMAP.** A number field is kept
+  as 994.0, and the IMAP adapter could not read that back. From nexdeck 1.8.0.
+- **A UPS that sends its power as 0** beside a load above 0 no longer shows 0 W:
+  the power is worked out from the load and the rated watts, as for a UPS that
+  sends no power at all. From nexdeck 1.8.0.
 
 ## 0.36.0 (2026-11-11)
 
