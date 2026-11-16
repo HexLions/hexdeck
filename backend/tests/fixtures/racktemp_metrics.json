@@ -1,0 +1,8 @@
+{
+ "_source": "GET /metrics of RackTemp 1.0.7 running locally on 2026-11-16 with three sensors: Rack top over its 30 \u00b0C limit, Closet without limits, Attic that never reported. HELP and TYPE lines left out.",
+ "metrics": "rack_temp_celsius{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 31.4\nrack_temp_humidity_percent{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 38.2\nrack_temp_last_seen_seconds{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 6\nrack_temp_online{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 1\nrack_temp_threshold_min_celsius{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 15\nrack_temp_threshold_max_celsius{sensor_id=\"cmwjdjs3200029y2eyo2rm1ln\",sensor=\"Rack top\",location=\"Server cabinet\"} 30\nrack_temp_celsius{sensor_id=\"cmwjdjs3t00049y2ez1cdotwt\",sensor=\"Closet\",location=\"Hall\"} 22.6\nrack_temp_humidity_percent{sensor_id=\"cmwjdjs3t00049y2ez1cdotwt\",sensor=\"Closet\",location=\"Hall\"} 54.9\nrack_temp_last_seen_seconds{sensor_id=\"cmwjdjs3t00049y2ez1cdotwt\",sensor=\"Closet\",location=\"Hall\"} 6\nrack_temp_online{sensor_id=\"cmwjdjs3t00049y2ez1cdotwt\",sensor=\"Closet\",location=\"Hall\"} 1\nrack_temp_online{sensor_id=\"cmwjdk3l6000a9y2eufidcwml\",sensor=\"Attic\",location=\"Roof\"} 0\n",
+ "version": {
+  "version": "1.0.7",
+  "commit": "dev"
+ }
+}
