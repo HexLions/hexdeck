@@ -1,0 +1,15 @@
+{
+ "_source": "Written anew in the shape of Checkmk 2.5.0p20's REST API source: constructors.collection_object around domain objects whose extensions are the Livestatus columns asked for, and the /version answer. Not the answer of a real site.",
+ "version": {"site": "mysite", "group": "mysite", "rest_api": {"revision": "0"}, "versions": {"apache": [2, 4, 62], "checkmk": "2.5.0p20.cre", "python": "3.13.5", "mod_wsgi": [5, 0, 2], "wsgi": [1, 0]}, "edition": "community", "demo": false},
+ "hosts": {"links": [], "id": "host", "domainType": "host", "value": [
+  {"links": [], "domainType": "host", "id": "nas", "title": "nas", "members": {}, "extensions": {"name": "nas", "state": 0, "acknowledged": 0, "scheduled_downtime_depth": 0}},
+  {"links": [], "domainType": "host", "id": "router", "title": "router", "members": {}, "extensions": {"name": "router", "state": 0, "acknowledged": 0, "scheduled_downtime_depth": 0}},
+  {"links": [], "domainType": "host", "id": "printer", "title": "printer", "members": {}, "extensions": {"name": "printer", "state": 1, "acknowledged": 1, "scheduled_downtime_depth": 0}}
+ ], "extensions": {"unreachable_sites": []}},
+ "problem_services": {"links": [], "id": "service", "domainType": "service", "value": [
+  {"links": [], "domainType": "service", "id": "nas:Filesystem /mnt/tank", "title": "Filesystem /mnt/tank on nas", "members": {}, "extensions": {"host_name": "nas", "description": "Filesystem /mnt/tank", "state": 1, "plugin_output": "Used: 86.20% - 3.44 TiB of 4.00 TiB, (warn/crit at 80.00%/90.00% used)WARN", "acknowledged": 0, "scheduled_downtime_depth": 0}},
+  {"links": [], "domainType": "service", "id": "router:Interface 2", "title": "Interface 2 on router", "members": {}, "extensions": {"host_name": "router", "description": "Interface 2", "state": 2, "plugin_output": "[eth1], (down)(!!), Speed: 1 GBit/s", "acknowledged": 0, "scheduled_downtime_depth": 0}},
+  {"links": [], "domainType": "service", "id": "nas:Check_MK Agent", "title": "Check_MK Agent on nas", "members": {}, "extensions": {"host_name": "nas", "description": "Check_MK Agent", "state": 3, "plugin_output": "Version: 2.4.0p12, OS: linux", "acknowledged": 0, "scheduled_downtime_depth": 1}}
+ ], "extensions": {"unreachable_sites": []}},
+ "unauthorized": {"title": "You need to be authenticated to use the REST API.", "status": 401, "detail": "Wrong credentials (Bearer header)"}
+}

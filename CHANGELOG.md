@@ -23,6 +23,21 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   album with its sub-albums, and the users with their last visit for an
   administrator's key. Built from Piwigo's source, not run against a gallery.
   From nexdeck 1.8.0.
+- **Medusa**: the series it follows, the episodes it missed and the ones
+  coming up, on a calendar card like Sonarr's. ⚠️ Beta.
+- **HDHomeRun**: which tuners are busy, on what channel and with what
+  signal, and how many channels it receives. ⚠️ Beta.
+- **Flood**: the torrents of whatever client it drives, their speed, and
+  pause or resume. ⚠️ Beta.
+- **UPS through apcupsd**: an APC UPS straight from apcupsd, without NUT:
+  charge, runtime left, load, input and whether it runs on battery, and its
+  details. ⚠️ Beta.
+- **Checkmk**: how many hosts and services of a site are fine, and the
+  problems, worst first. ⚠️ Beta.
+- **QNAP**: processor, memory and temperature of a NAS, how full its
+  volumes are, and the health of its disks. ⚠️ Beta.
+- **RackTemp**: the temperature and humidity of every rack sensor, against
+  the limits set for it, and which ones stopped reporting. ⚠️ Beta.
 
 ### Changed
 
@@ -52,6 +67,9 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 - **A UPS that sends its power as 0** beside a load above 0 no longer shows 0 W:
   the power is worked out from the load and the rated watts, as for a UPS that
   sends no power at all. From nexdeck 1.8.0.
+- **The state of a UPS** is translated: "On line", "On battery", "Battery
+  low" and the other words a UPS card shows stood in English in every
+  language, on the UPS through NUT too.
 
 ## 0.36.0 (2026-11-11)
 
