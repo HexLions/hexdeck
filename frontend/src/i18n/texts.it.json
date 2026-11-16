@@ -2729,7 +2729,21 @@
     "Long text breaks onto further lines instead of being cut short.": "Il testo lungo continua sulle righe successive invece di essere tagliato.",
     "WAN 1": "WAN 1",
     "WAN 2": "WAN 2",
-    "WAN 3": "WAN 3"
+    "WAN 3": "WAN 3",
+    "DexFrame": "DexFrame",
+    "Admin key": "Chiave admin",
+    "Frame": "Cornice",
+    "Shiny counter": "Contatore shiny",
+    "Only if you set one on the board (System section); every change needs it then.": "Solo se ne hai impostata una sulla board (sezione Sistema); da allora ogni modifica la richiede.",
+    "The DexFrame e-paper Pokémon frame: battery, the page on screen and the shiny counter, with buttons to change page and count encounters.": "La cornice e-paper Pokémon DexFrame: batteria, pagina sullo schermo e contatore shiny, con pulsanti per cambiare pagina e contare gli incontri.",
+    "The address of the board, as you open its web page.": "L'indirizzo della board, come apri la sua pagina web.",
+    "The encounters on the board's shiny hunt counter, with buttons to add and take away one.": "Gli incontri sul contatore shiny della board, con pulsanti per aggiungerne e toglierne uno.",
+    "The page on screen, the battery and the firmware, with buttons for the previous and next page and a full refresh.": "La pagina sullo schermo, la batteria e il firmware, con pulsanti per la pagina precedente e successiva e un refresh completo.",
+    "Next page": "Pagina successiva",
+    "Previous page": "Pagina precedente",
+    "Refresh the screen": "Aggiorna lo schermo",
+    "Count an encounter": "Conta un incontro",
+    "Target": "Obiettivo"
   },
   "labels": {
     "Jobs": "Job",
@@ -4087,6 +4101,13 @@
     "Nothing is assigned to you.": "Non ti è assegnato niente.",
     "Nothing is open in this list.": "Non c'è niente di aperto in questa lista.",
     "Pick a list in the card's settings.": "Scegli una lista nelle impostazioni della scheda.",
-    "nextasks has no such list, or the token may not see it.": "In nextasks non c'è questa lista, o il token non può vederla."
+    "nextasks has no such list, or the token may not see it.": "In nextasks non c'è questa lista, o il token non può vederla.",
+    "Drawing": "Disegno in corso",
+    "Encounters": "Incontri",
+    "Minus one": "Meno uno",
+    "Plus one": "Più uno",
+    "Previous": "Precedente",
+    "Refresh": "Aggiorna",
+    "Showing": "Mostra"
   }
 }

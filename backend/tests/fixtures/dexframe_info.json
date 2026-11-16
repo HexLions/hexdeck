@@ -1,0 +1,8 @@
+{"w": 400, "h": 300, "red": true, "api": 2, "features": "pages,quiet,intervals,flip,button,thresholds,countdown,settings,daily2,refresh,pools,stage,prev,counter,overlays,push",
+ "panel": "bwr", "panelName": "GDEY042Z98", "palette": ["white", "black", "red"], "bpp": 2, "partial": false,
+ "pageBudget": 640000, "maxSlots": 48, "slotsFit": 6, "count": 11, "daily": 7, "entries": 12, "current": 2, "interval": 10,
+ "sleep": false, "awake": 3, "timeValid": true, "today": 20405, "batteryMv": 3874, "fsUsed": 401408, "fsTotal": 983040,
+ "version": "2.0.0", "ap": false, "ssid": "example", "host": "dexframe", "keySet": false, "busy": false,
+ "dailyAt": 0, "dailyEvery": 1, "dailyShuffle": false, "dailyIndex": 20405, "pools": "1,1,1,1,1,1,1,1,1,1,1,7d", "order": "seq",
+ "quietInterval": 0, "counter": 1234, "push": false, "pushUntil": 0, "pending": false, "freeBytes": 580000,
+ "sleepOn": false, "intervalMin": 10, "batLowMv": 3500, "fullEvery": 10, "uptime": 5400, "appSize": 1572864, "sketchSize": 1219829}
