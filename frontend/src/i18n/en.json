@@ -239,6 +239,7 @@
       "edit": "Edit {{name}}",
       "new": "New {{name}} integration",
       "test": "Test connection",
+      "sameAddress": "The connection “{{name}}” already has this address. Check it if this one is another machine.",
       "betaHelp": "This adapter has not been confirmed against a live instance yet. If something looks wrong, please report it.",
       "docs": "API documentation",
       "name": "Name",

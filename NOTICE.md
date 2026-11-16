@@ -246,6 +246,62 @@ Updated at every milestone.
   dialogs; editing a board as YAML in place; deleting every notice; the
   problems card naming findings; mail with Date and Message-ID. Merged by hand
   into this fork's code, with upstream's tests and end-to-end specs.
+- **One bar, number drawings and the app catalog, from nexdeck 0.41.** The
+  single bar over a board, the dial, LED bars, seven segments and chart for
+  every number card, and the catalog of apps under System, Apps, whose tiles
+  follow one entry on every board. From 0.41.3 and 0.41.4: a dial card drawn
+  as its plain number, a dropped board that stays where it was dropped, and
+  nexpaper's last day to cancel.
+- **The command palette finds the links on a board, from nexdeck 0.42.0.**
+- **nexdeck 0.43 to 0.48.** Pulse came over as upstream has it. TrueNAS
+  interfaces, services, VMs and containers, and the notices for a hot disk,
+  a failed task and a waiting update, were merged by hand into this fork's
+  own TrueNAS adapter. The versions of the connected services against their
+  project's newest release, a name and a logo of the installation's own, the
+  pages of a board in a new order, Uptime Kuma by status page, and the Key
+  figures, Countdown and Timer cards are upstream's, with upstream's tests,
+  fitted to this fork's names.
+- **nexdeck 0.49.0.** Arcane and Dockhand feed the updates card, a page the
+  browser translated no longer goes blank, and "What's new" loads only when
+  it is due.
+- **Needs attention and maintenance, from nexdeck (fe59bfd).** The Problems
+  card that says what needs a look, and maintenance for a connection or an
+  app tile, with the database table and its migration. Ported by hand:
+  upstream's muted connections, card colours, showcase mode, wall template
+  and French were not taken, and this fork's Italian keeps its own words.
+- **The chronicle and the daily report card, from nexdeck (10ce612).** What
+  changed, newest first, with its filters and how long it is kept.
+  Upstream's daily report as a message was not taken: this fork has a daily
+  summary per notification channel.
+- **History over months and forecasts, from nexdeck (9b98206).** Hours kept
+  for 90 days and days for two years, the longer ranges on the chart cards,
+  and the forecast of when a volume is full or a number reaches its red
+  line.
+- **What runs on what, and why it broke, from nexdeck (9dbff70, e4ad643 and
+  the commits after them).** The inventory read from Docker, Portainer, a
+  Synology and Proxmox, the one message for an outage that takes others with
+  it, and the page of a service with what happened, what it hangs on and a
+  runbook. Ported by hand. Upstream's chat, "Ask nexdeck", and what only
+  serves it (its readers of container logs, the facts about what a button
+  would hit) were not taken, by this fork's own decision.
+- **nexdeck 1.1.1 to 1.3.0.** Ten integrations as upstream has them, with
+  their tests and translation patterns: Anchor, dashdot, Stash, Syncthing
+  Relay, ArchiveTeam Warrior, Wazuh, xTeVe, Your Spotify, Zerobyte and
+  Maltrail. Maintenance that comes back every week, with its table and
+  migration. A redirect to another host takes no credentials along; backups
+  that ended in a warning turn their card yellow; fixes for Speedtest
+  Tracker, FortiGate and the version of an updated service. Upstream's fix
+  for a stopped Pterodactyl server was not taken, since this fork's own
+  adapter already shows it grey.
+- **nexdeck 1.4.0 and 1.5.0.** UniFi reads back the gateway's own speed
+  tests on two cards, JSON API cards can wrap a long text, and nextasks came
+  over as upstream has it, with its tests. Upstream's `card_reads.json` and
+  its tool belong to custom cards, which this fork does not have.
+
+  ⚠️ What comes from nexdeck after this is named release by release in
+  [CHANGELOG.md](CHANGELOG.md), where every such entry ends in "From nexdeck"
+  and the version, and in the pull request that took it, which lists each
+  upstream commit as taken, already there or skipped, with the reason.
 - **NetBird, cloud and self-hosted alike.** The management API with a
   personal access token, which goes in as ``Authorization: Token nbp_...``
   and not as Bearer: sent as Bearer it is refused and nothing says which

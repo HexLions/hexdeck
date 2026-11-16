@@ -29,6 +29,16 @@ vi.mock('../api/client', () => ({
   }),
 }))
 
+const LIBRARY = [{ id: 9, filename: 'terrace.jpg', url: '/api/v1/assets/9/terrace.jpg' }]
+
+// ⚠️ For every test in the file, not for one group. The uploads of the first
+// group were still counted in the second, which held only while the second
+// ran after a test that uploaded nothing.
+beforeEach(() => {
+  calls.uploaded.length = 0
+  calls.library = [...LIBRARY]
+})
+
 function show(value: unknown) {
   const written: unknown[] = []
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
@@ -61,10 +71,6 @@ describe('asPictures', () => {
 })
 
 describe('PicturePicker', () => {
-  beforeEach(() => {
-    calls.uploaded.length = 0
-  })
-
   it('uploads a file and puts it at the end of the list', async () => {
     const written = show([{ url: '/a/1.png', caption: 'First' }])
     await userEvent.upload(screen.getByLabelText('Upload a picture'), new File(['x'], 'rack.png', { type: 'image/png' }))
@@ -138,7 +144,6 @@ describe('choosing from what is already there', () => {
     show([])
     await userEvent.click(screen.getByRole('button', { name: 'From the media' }))
     expect(await screen.findByText(/Nothing uploaded yet/)).toBeInTheDocument()
-    calls.library = [{ id: 9, filename: 'terrace.jpg', url: '/api/v1/assets/9/terrace.jpg' }]
   })
 
   it('does not add the same picture twice', async () => {

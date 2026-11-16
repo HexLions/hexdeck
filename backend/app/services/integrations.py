@@ -21,6 +21,17 @@ def _fields(kind: str) -> tuple[Field, ...]:
     return get_adapter(kind).fields
 
 
+def _pasted(field: Field) -> bool:
+    """Whether a secret is a key or a token, which somebody copies from another page.
+
+    ⚠️ A copy picks up the space or the tab beside the key, the service then
+    refuses it, and nothing on screen shows why: the field is masked. A
+    password is left as typed, because a space can be part of one, and so is a
+    field of several lines, which is stored as entered.
+    """
+    return field.type != "textarea" and not field.name.endswith("password")
+
+
 def store_config(kind: str, incoming: dict[str, Any], existing: dict[str, Any] | None = None) -> dict[str, Any]:
     """Merge an incoming config over the existing one, encrypting secrets."""
     result: dict[str, Any] = dict(existing or {})
@@ -31,6 +42,8 @@ def store_config(kind: str, incoming: dict[str, Any], existing: dict[str, Any] |
             continue
         value = incoming[f.name]
         if f.secret:
+            if isinstance(value, str) and _pasted(f):
+                value = value.strip()
             if value in (None, "", SECRET_PLACEHOLDER):
                 continue
             result[f.name] = encrypt(str(value))

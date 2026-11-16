@@ -239,6 +239,7 @@
       "edit": "Modifica {{name}}",
       "new": "Nuova integrazione {{name}}",
       "test": "Prova connessione",
+      "sameAddress": "La connessione “{{name}}” ha già questo indirizzo. Controllalo se questa è un'altra macchina.",
       "betaHelp": "Questo adapter non è ancora stato verificato su un'istanza reale. Se qualcosa sembra sbagliato, segnalalo.",
       "docs": "Documentazione API",
       "name": "Nome",

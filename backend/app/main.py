@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
 from starlette.staticfiles import StaticFiles
+from starlette.types import Scope
 
 from . import __version__
 from .adapters import all_adapters
@@ -437,9 +438,26 @@ def _index() -> Response:
     return FileResponse(directory / "index.html", headers={"Cache-Control": "no-cache"})
 
 
+class HashedFiles(StaticFiles):
+    """Built files whose name carries a hash of their content, so a name never means two things.
+
+    ⚠️ With no word about caching a browser guesses from the age of the file,
+    and right after an update that age is minutes: it asks again on every
+    visit, and every answer compresses 430 kB of JavaScript once more. The
+    service worker hides this, and a browser grants one only to https and to
+    localhost, which is not how a dashboard on a home network is opened.
+    """
+
+    async def get_response(self, path: str, scope: Scope) -> Response:
+        response = await super().get_response(path, scope)
+        if response.status_code < 400:
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
+
+
 _static = _static_dir()
 if _static is not None and (_static / "assets").is_dir():
-    app.mount("/assets", StaticFiles(directory=_static / "assets"), name="assets")
+    app.mount("/assets", HashedFiles(directory=_static / "assets"), name="assets")
 
 
 @app.get("/manifest.webmanifest", include_in_schema=False)

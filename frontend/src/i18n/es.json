@@ -226,6 +226,7 @@
       "edit": "Editar {{name}}",
       "new": "Nueva integración de {{name}}",
       "test": "Probar conexión",
+      "sameAddress": "La conexión “{{name}}” ya tiene esta dirección. Revísala si esta es otra máquina.",
       "betaHelp": "Este adaptador aún no se ha confirmado contra una instancia real. Si algo parece incorrecto, avísanos.",
       "docs": "Documentación de la API",
       "name": "Nombre",

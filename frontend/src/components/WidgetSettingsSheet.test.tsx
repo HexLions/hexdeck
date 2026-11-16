@@ -81,3 +81,28 @@ it('sends back the check that is there, not the factory one', async () => {
   expect(body.expect_status).toBe(401)
   expect(body.interval_seconds).toBe(120)
 })
+
+/**
+ * ⚠️ The sheet is mounted with the board and stays closed on most visits. It
+ * used to ask for the whole adapter catalogue anyway, which was most of what
+ * opening a board downloaded.
+ */
+it('asks for nothing while it is closed', async () => {
+  const asked = answerWith([])
+  vi.stubGlobal('fetch', asked)
+  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+  const { rerender } = render(
+    <QueryClientProvider client={client}>
+      <WidgetSettingsSheet widget={null} pages={[{ id: 1, name: 'one' }]} onClose={vi.fn()} onSaved={vi.fn()} onDeleted={vi.fn()} />
+    </QueryClientProvider>,
+  )
+  await new Promise((done) => setTimeout(done, 50))
+  expect(asked).not.toHaveBeenCalled()
+
+  rerender(
+    <QueryClientProvider client={client}>
+      <WidgetSettingsSheet widget={WIDGET as never} pages={[{ id: 1, name: 'one' }]} onClose={vi.fn()} onSaved={vi.fn()} onDeleted={vi.fn()} />
+    </QueryClientProvider>,
+  )
+  await waitFor(() => expect(asked.mock.calls.some(([input]) => String(input).includes('/adapters'))).toBe(true))
+})

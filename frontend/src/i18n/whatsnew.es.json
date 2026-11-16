@@ -486,6 +486,31 @@
         "Una conexión o un mosaico de app puede indicar a mano sobre qué corre.",
         "Nginx Proxy Manager dice adónde reenvía."
       ]
+    },
+    "0.36.0": {
+      "lead": "HexDeck 0.36.0: pruebas de velocidad de UniFi, ayuda cuando una conexión es rechazada y un tablero que carga más ligero.",
+      "sections": [
+        {
+          "title": "Pruebas de velocidad de UniFi",
+          "body": "Dos tarjetas nuevas leen las pruebas de velocidad que el gateway ejecuta por sí mismo: la última con descarga, subida y latencia, y su historial como línea o como barras. No hace falta un segundo contenedor.",
+          "path": "Modo edición (lápiz) > Añadir widget > UniFi"
+        },
+        {
+          "title": "Ayuda cuando una conexión es rechazada",
+          "body": "El formulario avisa cuando otra conexión del mismo tipo ya tiene la dirección que introduces, y una prueba rechazada nombra el host consultado. Una clave pegada pierde el espacio que vino con la copia.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Un tablero más ligero",
+          "body": "Abrir un tablero descarga cerca de una quinta parte de lo de antes, y el navegador conserva los archivos de la app en lugar de volver a pedirlos.",
+          "path": "Tablero > cualquier tarjeta"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "Las tarjetas JSON API pueden partir un texto largo en varias líneas.",
+        "nextasks, en beta: lo que vence hoy, tareas pendientes, asignadas a mí y una lista."
+      ]
     }
   }
 }

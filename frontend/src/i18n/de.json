@@ -239,6 +239,7 @@
       "edit": "{{name}} bearbeiten",
       "new": "Neue Anbindung: {{name}}",
       "test": "Verbindung testen",
+      "sameAddress": "Die Anbindung „{{name}}“ hat diese Adresse schon. Prüfe sie, wenn das hier eine andere Maschine ist.",
       "betaHelp": "Dieser Adapter wurde noch nicht an einer echten Instanz bestätigt. Wenn etwas falsch aussieht, melde es bitte.",
       "docs": "API-Dokumentation",
       "name": "Name",

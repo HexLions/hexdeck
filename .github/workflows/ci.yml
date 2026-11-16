@@ -102,9 +102,15 @@ jobs:
         working-directory: frontend
         run: npm run coverage
 
+      # ⚠️ The system libraries come from the runner's Ubuntu mirror, and on
+      # 11.11.2026 its name did not resolve for hours: ten minutes of retries,
+      # then a red run on main and on every pull request, with every test
+      # before it green. The browser is fetched first, and when the libraries
+      # take longer than four minutes the run goes on with those the runner
+      # has: the end-to-end test says for itself whether one is missing.
       - name: Browser for the end-to-end test
         working-directory: frontend
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium && (timeout 240 npx playwright install-deps chromium || echo "::warning::The system libraries for Chromium could not be installed; the runner's own are used.")
 
       - name: End-to-end test
         working-directory: frontend

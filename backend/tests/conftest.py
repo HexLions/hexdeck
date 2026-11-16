@@ -22,6 +22,10 @@ def data_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setenv("HEXDECK_DEMO", "0")
     monkeypatch.setenv("HEXDECK_HEALTH_INTERVAL_SECONDS", "5")
     monkeypatch.setenv("HEXDECK_LOG_LEVEL", "WARNING")
+    # ⚠️ The cheapest hash bcrypt makes. At the twelve rounds an installation
+    # uses, one password costs a quarter of a second, the tests set up or sign
+    # in several hundred times, and that was four of the six minutes they took.
+    monkeypatch.setenv("HEXDECK_BCRYPT_ROUNDS", "4")
     from app import config, crypto, db
     from app.services import collector as collector_module
     from app.services import login_guard

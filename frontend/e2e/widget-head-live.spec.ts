@@ -133,7 +133,19 @@ test('in edit mode the bar leaves the resize corner of the last row within reach
     const done = page.getByRole('button', { name: 'Done' })
     await expect(done).toBeVisible()
     // As far down as the page goes: the room under the board is what lets the last row out from under the bar.
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+    // ⚠️ Once the page has stopped growing. The room comes in over some hundred
+    // milliseconds after Edit, and a scroll sent meanwhile ends where the page
+    // ended at that moment: 21 px down instead of 74, with the corner still
+    // under the bar. It went unseen while opening a board was slow enough.
+    await expect(async () => {
+      const before = await page.evaluate(() => document.documentElement.scrollHeight)
+      await page.waitForTimeout(150)
+      const after = await page.evaluate(() => {
+        window.scrollTo(0, document.documentElement.scrollHeight)
+        return document.documentElement.scrollHeight
+      })
+      expect(after).toBe(before)
+    }).toPass()
     await page.waitForTimeout(300)
 
     const corner = page.locator('.react-grid-item').filter({ has: section }).locator('.react-resizable-handle').first()
