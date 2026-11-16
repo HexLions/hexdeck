@@ -5,6 +5,32 @@ All notable changes to HexDeck, which carries on the numbering of
 up to and including 0.16.0 is nexdeck's own history, kept here as it was.
 The format follows Keep a Changelog; the project uses semantic versioning.
 
+## Unreleased
+
+### Added
+
+- **Medusa**: the series it follows, the episodes it missed and the ones
+  coming up, on a calendar card like Sonarr's. ⚠️ Beta.
+- **HDHomeRun**: which tuners are busy, on what channel and with what
+  signal, and how many channels it receives. ⚠️ Beta.
+- **Flood**: the torrents of whatever client it drives, their speed, and
+  pause or resume. ⚠️ Beta.
+- **UPS through apcupsd**: an APC UPS straight from apcupsd, without NUT:
+  charge, runtime left, load, input and whether it runs on battery, and its
+  details. ⚠️ Beta.
+- **Checkmk**: how many hosts and services of a site are fine, and the
+  problems, worst first. ⚠️ Beta.
+- **QNAP**: processor, memory and temperature of a NAS, how full its
+  volumes are, and the health of its disks. ⚠️ Beta.
+- **RackTemp**: the temperature and humidity of every rack sensor, against
+  the limits set for it, and which ones stopped reporting. ⚠️ Beta.
+
+### Fixed
+
+- **The state of a UPS** is translated: "On line", "On battery", "Battery
+  low" and the other words a UPS card shows stood in English in every
+  language, on the UPS through NUT too.
+
 ## 0.36.0 (2026-11-11)
 
 Speed tests from UniFi, help when a connection is refused, a board that loads lighter, and nextasks in beta.
