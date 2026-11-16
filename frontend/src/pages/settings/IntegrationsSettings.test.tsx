@@ -70,7 +70,7 @@ describe('an address another connection already has', () => {
   it('is not found in the connection being edited', async () => {
     const user = userEvent.setup()
     show()
-    await user.click(await screen.findByRole('button', { name: 'Edit' }))
+    await user.click(await screen.findByRole('button', { name: 'Edit First host' }))
     expect(screen.getByLabelText(/^URL/)).toHaveValue('https://192.0.2.199:8006')
     expect(screen.queryByText(/already has this address/)).toBeNull()
   })

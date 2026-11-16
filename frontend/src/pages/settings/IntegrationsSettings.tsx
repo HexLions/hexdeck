@@ -153,7 +153,8 @@ export function IntegrationsSettings() {
               <span className="dot" data-status={!integration.enabled ? 'unknown' : integration.last_error ? 'bad' : integration.last_ok_at || integration.demo ? 'ok' : 'unknown'} />
               {admin && (
                 <>
-                  <button className="btn h-7 text-xs" onClick={() => setEditing(integration)}>
+                  {/* Named, so a list of several connections is not a row of identical "Edit" for a screen reader. */}
+                  <button className="btn h-7 text-xs" onClick={() => setEditing(integration)} aria-label={t('settings.integrations.edit', { name: integration.name })}>
                     {t('common.edit')}
                   </button>
                   <button className="btn btn-icon h-7 w-7 btn-danger" onClick={() => setRemoving(integration)} aria-label={t('common.delete')}>
