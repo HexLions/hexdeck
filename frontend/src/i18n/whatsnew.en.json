@@ -1281,6 +1281,32 @@
         "JSON API cards can wrap a long text onto further lines.",
         "nextasks, in beta: what is due today, due tasks, assigned to me and one list."
       ]
+    },
+    "0.37.0": {
+      "lead": "HexDeck 0.37.0: eight new services, Synology with two-factor sign-in, and charts that name every line.",
+      "sections": [
+        {
+          "title": "Eight new services",
+          "body": "Medusa, Flood, RackTemp, HDHomeRun, an APC UPS through apcupsd, Checkmk, QNAP and Piwigo, each in beta until it has been seen against an instance of its own.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "Synology with two-factor sign-in",
+          "body": "A Synology account that signs in with a second factor works now: save the connection, enter the six-digit code once, and DSM keeps HexDeck as a trusted device.",
+          "path": "System > Connections"
+        },
+        {
+          "title": "Charts that name every line",
+          "body": "Pointing at a chart card names the time and the value of every line, over a day as over a year.",
+          "path": "Board > any chart card"
+        }
+      ],
+      "smallTitle": "Smaller things",
+      "small": [
+        "The state of a UPS card is translated, on NUT too.",
+        "A UPS that reports 0 W beside a load shows the power worked out from the load.",
+        "nextasks is out of beta."
+      ]
     }
   }
 }

@@ -511,6 +511,32 @@
         "Las tarjetas JSON API pueden partir un texto largo en varias líneas.",
         "nextasks, en beta: lo que vence hoy, tareas pendientes, asignadas a mí y una lista."
       ]
+    },
+    "0.37.0": {
+      "lead": "HexDeck 0.37.0: ocho servicios nuevos, Synology con inicio de sesión en dos pasos y gráficos que nombran cada línea.",
+      "sections": [
+        {
+          "title": "Ocho servicios nuevos",
+          "body": "Medusa, Flood, RackTemp, HDHomeRun, un SAI APC a través de apcupsd, Checkmk, QNAP y Piwigo, cada uno en beta hasta que se haya visto con una instancia propia.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Synology con inicio de sesión en dos pasos",
+          "body": "Una cuenta de Synology con segundo factor ya funciona: guarda la conexión, introduce una vez el código de seis cifras y DSM mantiene HexDeck como dispositivo de confianza.",
+          "path": "Sistema > Conexiones"
+        },
+        {
+          "title": "Gráficos que nombran cada línea",
+          "body": "Al señalar una tarjeta de gráfico se ven la hora y el valor de cada línea, en un día como en un año.",
+          "path": "Tablero > cualquier tarjeta de gráfico"
+        }
+      ],
+      "smallTitle": "Cosas más pequeñas",
+      "small": [
+        "El estado de una tarjeta de SAI está traducido, también para NUT.",
+        "Un SAI que indica 0 W con carga muestra la potencia calculada a partir de la carga.",
+        "nextasks sale de la beta."
+      ]
     }
   }
 }

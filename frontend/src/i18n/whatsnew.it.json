@@ -655,6 +655,32 @@
         "Le card JSON API possono mandare a capo un testo lungo.",
         "nextasks, in beta: cosa scade oggi, attività in scadenza, assegnate a me e una lista."
       ]
+    },
+    "0.37.0": {
+      "lead": "HexDeck 0.37.0: otto servizi nuovi, Synology con l'accesso a due fattori e grafici che nominano ogni linea.",
+      "sections": [
+        {
+          "title": "Otto servizi nuovi",
+          "body": "Medusa, Flood, RackTemp, HDHomeRun, un UPS APC tramite apcupsd, Checkmk, QNAP e Piwigo, ognuno in beta finché non è stato visto su un'istanza vera.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Synology con accesso a due fattori",
+          "body": "Un account Synology con il secondo fattore ora funziona: salva la connessione, inserisci una volta il codice a sei cifre e DSM tiene HexDeck come dispositivo attendibile.",
+          "path": "Sistema > Connessioni"
+        },
+        {
+          "title": "Grafici che nominano ogni linea",
+          "body": "Puntando una card grafico vedi l'ora e il valore di ogni linea, su un giorno come su un anno.",
+          "path": "Board > qualsiasi card grafico"
+        }
+      ],
+      "smallTitle": "Cose più piccole",
+      "small": [
+        "Lo stato di una card UPS è tradotto, anche per NUT.",
+        "Un UPS che segna 0 W con un carico mostra la potenza ricavata dal carico.",
+        "nextasks esce dalla beta."
+      ]
     }
   }
 }

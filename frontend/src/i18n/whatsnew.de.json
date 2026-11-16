@@ -1281,6 +1281,32 @@
         "JSON-API-Karten können einen langen Text umbrechen.",
         "nextasks, in Beta: was heute fällig ist, fällige Aufgaben, mir zugewiesen und eine Liste."
       ]
+    },
+    "0.37.0": {
+      "lead": "HexDeck 0.37.0: acht neue Dienste, Synology mit Zwei-Faktor-Anmeldung und Diagramme, die jede Linie nennen.",
+      "sections": [
+        {
+          "title": "Acht neue Dienste",
+          "body": "Medusa, Flood, RackTemp, HDHomeRun, eine APC-USV über apcupsd, Checkmk, QNAP und Piwigo, jeder in Beta, bis er an einer eigenen Instanz gesehen wurde.",
+          "path": "System > Anbindungen"
+        },
+        {
+          "title": "Synology mit Zwei-Faktor-Anmeldung",
+          "body": "Ein Synology-Konto mit zweitem Faktor funktioniert jetzt: Anbindung speichern, einmal den sechsstelligen Code eingeben, und DSM behält HexDeck als vertrauenswürdiges Gerät.",
+          "path": "System > Anbindungen"
+        },
+        {
+          "title": "Diagramme, die jede Linie nennen",
+          "body": "Zeigt man auf eine Diagrammkarte, nennt sie Zeit und Wert jeder Linie, über einen Tag wie über ein Jahr.",
+          "path": "Board > beliebige Diagrammkarte"
+        }
+      ],
+      "smallTitle": "Kleinere Dinge",
+      "small": [
+        "Der Zustand einer USV-Karte ist übersetzt, auch bei NUT.",
+        "Eine USV, die 0 W bei Last meldet, zeigt die aus der Last berechnete Leistung.",
+        "nextasks ist aus der Beta."
+      ]
     }
   }
 }
