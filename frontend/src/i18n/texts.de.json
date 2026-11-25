@@ -4184,6 +4184,6 @@
     "No reading yet": "Noch keine Messung",
     "Disk free": "Platte frei",
     "Not responding": "Antwortet nicht",
-    "Failed update": "Update fehlgeschlagen"
+    "Last job failed": "Letzter Auftrag fehlgeschlagen"
   }
 }

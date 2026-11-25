@@ -11,7 +11,7 @@ The format follows Keep a Changelog; the project uses semantic versioning.
 
 - **Pi-PaaS**: the apps on a Raspberry Pi running Pi-PaaS, which ones
   crashed or stopped answering, the CPU temperature, and a button to
-  restart an app. ⚠️ Beta.
+  restart an app. Needs Pi-PaaS 1.2.0, not yet released. ⚠️ Beta.
 
 ## 0.37.0 (2026-11-16)
 

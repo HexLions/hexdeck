@@ -482,8 +482,9 @@ Updated at every milestone.
   and memory, and the machine's temperature, memory and disk come from
   `/api/summary` with a bearer API token; the restart button posts to
   `/api/apps/<id>/restart` for an app that call listed. Checked against
-  Pi-PaaS 1.2.0 (before its release) running locally, with a running app, one parked after
-  crashing, a stopped site, viewer and operator tokens and a wrong token.
+  Pi-PaaS 1.2.0 (not yet released) running locally, with a running app,
+  one parked after crashing, a stopped site, viewer and operator tokens
+  and a wrong token.
 - **openHAB, Items without a token and Things with one.** The Items come
   from `/rest/items`, which openHAB lets an anonymous user read by default;
   the Things from `/rest/things?summary=true`, which needs an

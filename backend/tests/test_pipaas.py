@@ -4,7 +4,9 @@
 ``/api/summary`` read with a viewer token (a Node app running, one parked
 after crashing, a stopped static site), the answer to a restart with an
 operator token, and the refusals for a wrong token, a viewer token
-restarting and an unknown app. The machine is written as
+restarting and an unknown app. The restart answer is trimmed to the fields
+the adapter reads; the 409 bodies are the messages in Pi-PaaS's apps.js
+and processes.js, not captured. The machine is written as
 ``raspberrypi.local``.
 """
 
@@ -113,7 +115,7 @@ async def test_a_failed_update_is_amber_on_both_cards() -> None:
     next(app for app in summary["apps"] if app["id"] == "photo-blog")["lastError"] = "npm run build failed (exit code 1)"
     respx.get(f"{BASE}/api/summary").mock(return_value=httpx.Response(200, json=summary))
     overview = await get_adapter("pipaas").fetch("overview", CONFIG, {}, _ctx())
-    assert overview.status == "warn" and overview.meta["notice"] == "Failed update: Photo blog"
+    assert overview.status == "warn" and overview.meta["notice"] == "Last job failed: Photo blog"
     apps = await get_adapter("pipaas").fetch("apps", CONFIG, {}, _ctx())
     blog = next(row for row in apps.items if row["id"] == "photo-blog")
     assert blog["status"] == "warn" and blog["subtitle"].endswith("npm run build failed (exit code 1)")
@@ -129,3 +131,55 @@ async def test_restarting_an_app_that_went_away_or_is_busy() -> None:
     route.mock(return_value=httpx.Response(409, json={"error": "App is busy (updating), try again when it has finished"}))
     with pytest.raises(AdapterError, match="busy"):
         await get_adapter("pipaas").action("apps", "restart", {"app": "photo-blog"}, CONFIG, {}, _ctx())
+
+
+@respx.mock
+async def test_a_port_held_by_another_process_is_not_called_busy() -> None:
+    _pipaas()
+    respx.post(f"{BASE}/api/apps/photo-blog/restart").mock(
+        return_value=httpx.Response(409, json={"error": "Port 3001 is already in use by another process"}))
+    with pytest.raises(AdapterError, match="refused: Port 3001 is already in use") as failure:
+        await get_adapter("pipaas").action("apps", "restart", {"app": "photo-blog"}, CONFIG, {}, _ctx())
+    assert failure.value.code == "refused"
+
+
+@respx.mock
+async def test_a_first_deploy_that_failed_is_amber_on_both_cards() -> None:
+    summary = json.loads(json.dumps(ANSWERS["summary"]))
+    summary["apps"] = [app for app in summary["apps"] if app["status"] != "crashed"]
+    site = next(app for app in summary["apps"] if app["status"] == "stopped")
+    site["lastError"] = "git clone failed (exit code 128)"
+    respx.get(f"{BASE}/api/summary").mock(return_value=httpx.Response(200, json=summary))
+    overview = await get_adapter("pipaas").fetch("overview", CONFIG, {}, _ctx())
+    assert overview.status == "warn" and overview.meta["notice"] == f"Last job failed: {site['name']}"
+    apps = await get_adapter("pipaas").fetch("apps", CONFIG, {"only_troubled": True}, _ctx())
+    assert apps.status == "warn" and [row["id"] for row in apps.items] == [site["id"]]
+
+
+@respx.mock
+async def test_a_job_in_progress_is_named_in_words() -> None:
+    summary = json.loads(json.dumps(ANSWERS["summary"]))
+    next(app for app in summary["apps"] if app["id"] == "photo-blog")["status"] = "rollingBack"
+    respx.get(f"{BASE}/api/summary").mock(return_value=httpx.Response(200, json=summary))
+    apps = await get_adapter("pipaas").fetch("apps", CONFIG, {}, _ctx())
+    blog = next(row for row in apps.items if row["id"] == "photo-blog")
+    assert blog["status"] == "warn" and blog["subtitle"].startswith("rolling back")
+
+
+@respx.mock
+async def test_an_answer_without_apps_is_not_pi_paas() -> None:
+    respx.get(f"{BASE}/api/summary").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+    with pytest.raises(AdapterError, match="does not look like Pi-PaaS") as failure:
+        await get_adapter("pipaas").fetch("overview", CONFIG, {}, _ctx())
+    assert failure.value.code == "unexpected"
+
+
+@respx.mock
+async def test_a_wrong_token_on_restart_and_an_unknown_action() -> None:
+    _pipaas()
+    respx.post(f"{BASE}/api/apps/photo-blog/restart").mock(return_value=httpx.Response(401, json={"error": "Login required"}))
+    with pytest.raises(AuthFailed, match="refused the API token"):
+        await get_adapter("pipaas").action("apps", "restart", {"app": "photo-blog"}, CONFIG, {}, _ctx())
+    with pytest.raises(AdapterError) as failure:
+        await get_adapter("pipaas").action("apps", "delete", {"app": "photo-blog"}, CONFIG, {}, _ctx())
+    assert failure.value.code == "no_such_action"

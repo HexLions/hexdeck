@@ -18,13 +18,19 @@ health check has run, ``cpu`` is null for the first sample after a start.
 
 ⚠️ ``lastError`` is the message of the last failed deploy, update, restore
 or rollback, and stays until the next one succeeds. A failed update leaves
-the previous version running, so a running app with ``lastError`` is amber,
-not red; only ``crashed`` is red.
+the previous version running, and a failed first deploy leaves the app
+registered and ``stopped``; either way it is amber, not red, on both cards.
+Only ``crashed`` is red.
+
+⚠️ A restart answers 409 for an app with a job in progress, and also when
+the app's port is held by another process, which is likely right after a
+crash; the card says what Pi-PaaS said. A restart is a stop with up to 8 s
+of grace and a start, longer for a Docker app, so it gets 30 s.
 
 ⚠️ The card turns amber at 75 °C, the default of Pi-PaaS's own temperature
 alert (Settings, Notifications); Pi-PaaS does not send its configured limit.
 
-Checked against Pi-PaaS 1.2.0 (commit 18f88f7, before its release) running
+Checked against Pi-PaaS 1.2.0 (commit 18f88f7, not yet released) running
 locally on 2026-11-15, with a Node app running, one that kept crashing, a
 stopped static site, a viewer token, an operator token and a wrong token.
 ``/api/summary`` first appears in Pi-PaaS 1.2.0.
@@ -50,6 +56,7 @@ from .base import (
 
 READ_SECONDS = 20
 BUSY = ("deploying", "updating", "restoring", "restarting", "stopping", "rollingBack")
+WORDS = {"rollingBack": "rolling back"}
 
 
 def app_state(app: dict[str, Any]) -> str:
@@ -57,10 +64,10 @@ def app_state(app: dict[str, Any]) -> str:
     status = str(app.get("status") or "")
     if status == "crashed":
         return "bad"
-    if status == "running":
-        return "warn" if app.get("healthy") is False or app.get("lastError") else "ok"
-    if status in BUSY:
+    if status in BUSY or app.get("lastError"):
         return "warn"
+    if status == "running":
+        return "warn" if app.get("healthy") is False else "ok"
     return "unknown"
 
 
@@ -101,7 +108,7 @@ class PiPaasAdapter(Adapter):
             raise AuthFailed("Pi-PaaS refused this request.", hint="A token whose role allows it.")
         if status == 404:
             raise AdapterError("Pi-PaaS has nothing at this address.", code="http_error",
-                               hint="The panel's address, for example http://raspberrypi.local:9000, of Pi-PaaS 1.2.0 or newer.")
+                               hint="The panel's address, for example http://raspberrypi.local:9000, of Pi-PaaS 1.2.0 or newer (not yet released).")
         if status >= 400:
             raise AdapterError(f"Pi-PaaS answered with HTTP {status}.", code="http_error")
 
@@ -116,7 +123,7 @@ class PiPaasAdapter(Adapter):
                                hint="The panel's address, for example http://raspberrypi.local:9000.") from failure
         if not isinstance(answer, dict) or not isinstance(answer.get("apps"), list):
             raise AdapterError("This does not look like Pi-PaaS.", code="unexpected",
-                               hint="Pi-PaaS 1.2.0 or newer, at the panel's address.")
+                               hint="Pi-PaaS 1.2.0 or newer (not yet released), at the panel's address.")
         return answer
 
     async def test(self, config: dict[str, Any], ctx: Context) -> str:
@@ -140,13 +147,19 @@ class PiPaasAdapter(Adapter):
         if app_id not in apps:
             raise AdapterError("Pi-PaaS has no such app.", code="no_such_app")
         response = await ctx.request("POST", f"{base_url(config)}/api/apps/{app_id}/restart", headers=self._headers(config),
-                                     verify=not config.get("insecure"), auth_errors=False)
+                                     verify=not config.get("insecure"), auth_errors=False, timeout=30)
         if response.status_code == 403:
             raise AuthFailed("This Pi-PaaS token may not restart apps.", hint="A token with the operator role.")
         if response.status_code == 404:
             raise AdapterError("Pi-PaaS no longer has this app.", code="no_such_app")
         if response.status_code == 409:
-            raise AdapterError("Pi-PaaS is busy with this app.", code="busy", hint="Try again when its job has finished.")
+            try:
+                said = str((response.json() or {}).get("error") or "")
+            except (ValueError, AttributeError):
+                said = ""
+            if not said or said.startswith("App is busy"):
+                raise AdapterError("Pi-PaaS is busy with this app.", code="busy", hint="Try again when its job has finished.")
+            raise AdapterError(f"Pi-PaaS refused: {said}", code="refused")
         self._refused(response.status_code)
         ctx.forget_answers()
         return f"{apps[app_id].get('name') or app_id} restarted."
@@ -170,7 +183,7 @@ class PiPaasAdapter(Adapter):
         if silent:
             secondary.append({"label": "Not responding", "value": len(silent)})
         if failed:
-            secondary.append({"label": "Failed update", "value": len(failed)})
+            secondary.append({"label": "Last job failed", "value": len(failed)})
         if isinstance(temp, (int, float)):
             secondary.append({"label": "CPU", "value": round(float(temp)), "unit": "°C", "metric": "temperature"})
         if memory.get("total"):
@@ -183,7 +196,7 @@ class PiPaasAdapter(Adapter):
         elif silent:
             notice = f"Not responding: {', '.join(silent[:3])}{' …' if len(silent) > 3 else ''}"
         elif failed:
-            notice = f"Failed update: {', '.join(failed[:3])}{' …' if len(failed) > 3 else ''}"
+            notice = f"Last job failed: {', '.join(failed[:3])}{' …' if len(failed) > 3 else ''}"
         hot = isinstance(temp, (int, float)) and temp >= 75
         return WidgetData(
             status="bad" if crashed else "warn" if silent or failed or hot else "ok",
@@ -204,7 +217,7 @@ class PiPaasAdapter(Adapter):
             if options.get("only_troubled") and state not in ("bad", "warn"):
                 continue
             status = str(app.get("status") or "?")
-            words = "not responding" if status == "running" and app.get("healthy") is False else status
+            words = "not responding" if status == "running" and app.get("healthy") is False else WORDS.get(status, status)
             memory = human_bytes(app["memory"]) if isinstance(app.get("memory"), (int, float)) else ""
             actions = []
             if options.get("restarting") and status in ("running", "crashed"):
