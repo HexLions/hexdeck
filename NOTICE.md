@@ -641,6 +641,36 @@ Updated at every milestone.
 - **Dahua's CGI API, after the HACS integration of rroller (MIT).** The same
   calls for the device, its disks and motion, and what that project recorded
   about real devices; no code taken. Not yet run against a device.
+- **Medusa through its own API v2.** The counts come from `/stats` and the
+  episodes from `/schedule`, which answers only the missed ones unless every
+  category is named. Checked against Medusa v1.0.27 running locally, with
+  three series added from TVmaze, a wrong key and no key.
+- **HDHomeRun, from SiliconDust's guide.** `discover.json` and
+  `lineup.json` as the HTTP development guide describes them; the tuner
+  status page is not in it, and its fields were taken from what Homepage's
+  widget reads. The device credential `discover.json` hands out is never
+  read. Not yet run against a tuner.
+- **Flood, whichever client it drives.** The torrents from `/api/torrents`
+  with the cookie its sign-in sets, signed in once more when a read is
+  refused; pause and resume send the hashes of a fresh read. Checked
+  against Flood 4.16.4 running locally in front of Transmission 4.1.0,
+  with a seeding and a stalled torrent, a stop and a start, a wrong password
+  and a request without the cookie.
+- **apcupsd's network server, spoken by hand.** The two-byte framing,
+  the `status` command and the fields as apcupsd 3.14.14's own source writes
+  them (`apcnis.c`, `apclibnis.c`, `apcstatus.c`). The host name and serial
+  number it also sends are never shown. Not yet run against a UPS.
+- **Checkmk's REST API, from its source.** The version, host and service
+  endpoints and the Bearer sign-in as Checkmk 2.5.0p20 writes them, compared
+  with 2.4.0, which added the POST listings. Not yet run against a site.
+- **QNAP's QTS pages, after qnapstats (MIT).** The sign-in, the system,
+  volume and disk pages that qnapstats 0.6.2 reads, which QTS's own interface
+  uses; no code taken, the XML is parsed anew and refused when it declares a
+  document type. Not yet run against a NAS.
+- **RackTemp, a sister project.** The sensors from its open `/metrics`
+  page, never from the per-sensor page that wants a key in the address.
+  Checked against RackTemp 1.0.7 running locally with three sensors: one
+  over its limit, one without limits and one that never reported.
 - **The relationship with upstream, as upstream wants it.** DerKezorm said on
   [nexdeck#30](https://github.com/DerKezorm/nexdeck/issues/30) that nexdeck
   stays a solo project and takes no pull requests for adapters or engine work,

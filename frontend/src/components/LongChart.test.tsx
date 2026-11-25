@@ -22,6 +22,8 @@ vi.mock('../api/client', async (original) => ({
   ...(await original<typeof import('../api/client')>()),
   get: vi.fn(async (path: string) => {
     asked.push(path)
+    if (path.startsWith('/widgets/9/history?')) return { down: [[now - 120, 10], [now - 60, 20], [now, 30]], up: [[now - 120, 1], [now - 60, 2], [now, 3]] }
+    if (path.includes('/widgets/8/history/long')) return { down: LONG, up: LONG.map(([ts, avg]) => [ts, avg / 10, avg / 10, avg / 10]), late: LONG.slice(25) }
     if (path.includes('/history/long')) return { used: LONG }
     return { used: [[now - 60, 80], [now, 81]] }
   }),
@@ -135,6 +137,60 @@ describe('on the card', () => {
     chart.getBoundingClientRect = () => ({ left: 0, top: 0, width: 400, height: 200, right: 400, bottom: 200, x: 0, y: 0, toJSON: () => ({}) })
     fireEvent.pointerMove(chart.querySelector('svg') as SVGElement, { clientX: 200 })
     expect(screen.getByTestId('long-chart-tip').textContent).toMatch(/to/)
+  })
+
+  it('names every line at the moment under the pointer, not only the first', async () => {
+    localStorage.setItem('nexdeck.chart.8', '720')
+    const data: WidgetData = {
+      status: 'ok',
+      primary: { label: 'Download', value: 89, metric: 'down' },
+      secondary: [{ label: 'Upload', value: 9, metric: 'up' }, { label: 'Later', value: 1, metric: 'late' }],
+      metrics: { down: 89, up: 9, late: 1 },
+      meta: { renderer: 'chart', chart_hours: 24 },
+    }
+    render(<ChartCard widget={{ ...VIEW, id: 8 }} data={data} series={{}} />)
+    const chart = await screen.findByTestId('long-chart')
+    chart.getBoundingClientRect = () => ({ left: 0, top: 0, width: 400, height: 200, right: 400, bottom: 200, x: 0, y: 0, toJSON: () => ({}) })
+    // Early in the month: the line that began on day 25 has nothing there and stays out of the tip.
+    fireEvent.pointerMove(chart.querySelector('svg') as SVGElement, { clientX: 100 })
+    const rows = screen.getAllByTestId('long-chart-tip-line').map((row) => row.textContent)
+    expect(rows).toHaveLength(2)
+    expect(rows[0]).toMatch(/^Download\d/)
+    expect(rows[1]).toMatch(/^Upload\d/)
+    const [download, upload] = rows.map((row) => Number(row!.replace(/^\D+/, '')))
+    expect(download / upload).toBeCloseTo(10, 0)
+    expect(chart.querySelectorAll('svg circle')).toHaveLength(2)
+    // At the end all three have a point.
+    fireEvent.pointerMove(chart.querySelector('svg') as SVGElement, { clientX: 390 })
+    expect(screen.getAllByTestId('long-chart-tip-line').map((row) => row.textContent?.replace(/[\d.,]+$/, ''))).toEqual(['Download', 'Upload', 'Later'])
+  })
+
+  it('has a popup over a day too, and its lines stay inside their box above the legend', async () => {
+    const data: WidgetData = {
+      status: 'ok',
+      primary: { label: 'Download', value: 30, metric: 'down' },
+      secondary: [{ label: 'Upload', value: 3, metric: 'up' }],
+      metrics: { down: 30, up: 3 },
+      meta: { renderer: 'chart', chart_hours: 24 },
+    }
+    render(<ChartCard widget={{ ...VIEW, id: 9 }} data={data} series={{}} />)
+    const layer = await screen.findByTestId('chart-hover')
+    await waitFor(() => expect(asked).toContain('/widgets/9/history?hours=24'))
+    // A fixed 64 pixels ran over the legend in a small card: every line is held in a box that clips.
+    const lines = layer.parentElement!.querySelectorAll('svg')
+    expect(lines).toHaveLength(2)
+    lines.forEach((line) => expect(line.closest('.overflow-hidden')).not.toBeNull())
+    expect(layer.parentElement!.getAttribute('title')).toBeNull()
+
+    layer.getBoundingClientRect = () => ({ left: 0, top: 0, width: 200, height: 60, right: 200, bottom: 60, x: 0, y: 0, toJSON: () => ({}) })
+    await waitFor(() => {
+      fireEvent.pointerMove(layer, { clientX: 100 })
+      expect(screen.getAllByTestId('chart-tip-line')).toHaveLength(2)
+    })
+    expect(screen.getAllByTestId('chart-tip-line').map((row) => row.textContent)).toEqual(['Download20', 'Upload2'])
+    expect(screen.getByTestId('chart-tip').textContent).toMatch(/\d{2}:\d{2}/)
+    fireEvent.pointerLeave(layer)
+    expect(screen.queryByTestId('chart-tip')).toBeNull()
   })
 })
 

@@ -13,6 +13,74 @@ The format follows Keep a Changelog; the project uses semantic versioning.
   crashed or stopped answering, the CPU temperature, and a button to
   restart an app. ⚠️ Beta.
 
+## 0.37.0 (2026-11-16)
+
+Eight new services, Synology with two-factor sign-in, and charts that name every line.
+
+### Added
+
+- **Synology with two-factor sign-in.** A Synology connection whose account
+  signs in with a second factor no longer fails: once it is saved, an admin
+  enters the six-digit code from the authenticator app or Synology Secure
+  SignIn, and DSM keeps HexDeck as a trusted device, so no code is asked again.
+  The code is never stored, the device credential is kept encrypted, never shown
+  and never exported, and it is dropped when the address, the user or the
+  password change; the device can be removed again from the same place. Checked
+  on DSM 6.2, not yet on DSM 7. Contributed to nexdeck by iamevl; from nexdeck
+  1.6.0.
+
+- **Piwigo**, ⚠️ Beta: the photos and albums of a gallery, the photos of each
+  album with its sub-albums, and the users with their last visit for an
+  administrator's key. Built from Piwigo's source, not run against a gallery.
+  From nexdeck 1.8.0.
+- **Medusa**: the series it follows, the episodes it missed and the ones
+  coming up, on a calendar card like Sonarr's. ⚠️ Beta.
+- **HDHomeRun**: which tuners are busy, on what channel and with what
+  signal, and how many channels it receives. ⚠️ Beta.
+- **Flood**: the torrents of whatever client it drives, their speed, and
+  pause or resume. ⚠️ Beta.
+- **UPS through apcupsd**: an APC UPS straight from apcupsd, without NUT:
+  charge, runtime left, load, input and whether it runs on battery, and its
+  details. ⚠️ Beta.
+- **Checkmk**: how many hosts and services of a site are fine, and the
+  problems, worst first. ⚠️ Beta.
+- **QNAP**: processor, memory and temperature of a NAS, how full its
+  volumes are, and the health of its disks. ⚠️ Beta.
+- **RackTemp**: the temperature and humidity of every rack sensor, against
+  the limits set for it, and which ones stopped reporting. ⚠️ Beta.
+
+### Changed
+
+- **nextasks is out of beta**, released by its maintainer on 2026-11-09. From
+  nexdeck 1.8.0.
+- **Every dialog is named by its title**, so a screen reader says what it is
+  about when it opens, and each connection's Edit button names the connection.
+  The first from nexdeck.
+
+### Fixed
+
+- **Every line in the chart popup.** On a chart card with more than one line,
+  the popup of the 7 d, 30 d and 1 y ranges named only the first line. It now
+  names every line at the moment under the pointer, with its colour, name and
+  value, and each line gets its own dot. From nexdeck 1.5.1.
+- **The chart over a day has a popup too, and its lines keep off the legend.**
+  Pointing at the short chart of a chart card names the time and every line's
+  value, as the longer ranges already do. In a small card the lines ran over the
+  legend below them; they now fill the space they are given. From nexdeck 1.6.0.
+- **BookOrbit 3.** From BookOrbit 3.0 the reading and recently added shelves
+  come wrapped in an object with the size of the shelf; the connection test
+  stayed green while every shelf card turned red. Both shapes are read now, and
+  on BookOrbit 3 the Library card counts every book being read, past the fifty a
+  shelf hands out. From nexdeck 1.7.0.
+- **A port typed into its own field works for IMAP.** A number field is kept
+  as 994.0, and the IMAP adapter could not read that back. From nexdeck 1.8.0.
+- **A UPS that sends its power as 0** beside a load above 0 no longer shows 0 W:
+  the power is worked out from the load and the rated watts, as for a UPS that
+  sends no power at all. From nexdeck 1.8.0.
+- **The state of a UPS** is translated: "On line", "On battery", "Battery
+  low" and the other words a UPS card shows stood in English in every
+  language, on the UPS through NUT too.
+
 ## 0.36.0 (2026-11-11)
 
 Speed tests from UniFi, help when a connection is refused, a board that loads lighter, and nextasks in beta.

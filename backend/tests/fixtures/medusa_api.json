@@ -1,0 +1,118 @@
+{
+ "_source": "Medusa v1.0.27 running locally on 2026-11-16, three series added from TVmaze: Friends and Game of Thrones (ended) and The Young and the Restless (weekdays). Trimmed to two entries per category.",
+ "stats": {
+  "episodes": {
+   "downloaded": 0,
+   "snatched": 0,
+   "total": 6159
+  },
+  "shows": {
+   "active": 1,
+   "total": 3
+  }
+ },
+ "schedule": {
+  "missed": [
+   {
+    "airdate": "2026-11-09",
+    "airs": "Monday 5:30 PM",
+    "localAirTime": "2026-11-09T17:30:00+00:00",
+    "epName": "Ep. #13503",
+    "season": 2026,
+    "episode": 219,
+    "episodeSlug": "s2026e219",
+    "indexerId": 4344,
+    "indexer": 3,
+    "network": "CBS",
+    "paused": 0,
+    "showSlug": "tvmaze4344",
+    "showName": "The Young and the Restless",
+    "showStatus": "Continuing",
+    "weekday": 0
+   },
+   {
+    "airdate": "2026-11-10",
+    "airs": "Tuesday 5:30 PM",
+    "localAirTime": "2026-11-10T17:30:00+00:00",
+    "epName": "Ep. #13504",
+    "season": 2026,
+    "episode": 220,
+    "episodeSlug": "s2026e220",
+    "indexerId": 4344,
+    "indexer": 3,
+    "network": "CBS",
+    "paused": 0,
+    "showSlug": "tvmaze4344",
+    "showName": "The Young and the Restless",
+    "showStatus": "Continuing",
+    "weekday": 1
+   }
+  ],
+  "today": [
+   {
+    "airdate": "2026-11-16",
+    "airs": "Monday 5:30 PM",
+    "localAirTime": "2026-11-16T17:30:00+00:00",
+    "epName": "Ep. #13508",
+    "season": 2026,
+    "episode": 224,
+    "episodeSlug": "s2026e224",
+    "indexerId": 4344,
+    "indexer": 3,
+    "network": "CBS",
+    "paused": 0,
+    "showSlug": "tvmaze4344",
+    "showName": "The Young and the Restless",
+    "showStatus": "Continuing",
+    "weekday": 0
+   }
+  ],
+  "soon": [
+   {
+    "airdate": "2026-11-17",
+    "airs": "Tuesday 5:30 PM",
+    "localAirTime": "2026-11-17T17:30:00+00:00",
+    "epName": "Ep. #13509",
+    "season": 2026,
+    "episode": 225,
+    "episodeSlug": "s2026e225",
+    "indexerId": 4344,
+    "indexer": 3,
+    "network": "CBS",
+    "paused": 0,
+    "showSlug": "tvmaze4344",
+    "showName": "The Young and the Restless",
+    "showStatus": "Continuing",
+    "weekday": 1
+   },
+   {
+    "airdate": "2026-11-18",
+    "airs": "Wednesday 5:30 PM",
+    "localAirTime": "2026-11-18T17:30:00+00:00",
+    "epName": "Ep. #13510",
+    "season": 2026,
+    "episode": 226,
+    "episodeSlug": "s2026e226",
+    "indexerId": 4344,
+    "indexer": 3,
+    "network": "CBS",
+    "paused": 0,
+    "showSlug": "tvmaze4344",
+    "showName": "The Young and the Restless",
+    "showStatus": "Continuing",
+    "weekday": 2
+   }
+  ],
+  "later": []
+ },
+ "schedule_counts": {
+  "missed": 5,
+  "today": 1,
+  "soon": 4,
+  "later": 0
+ },
+ "wrong_key": {
+  "error": "No authorization token."
+ },
+ "system_release": "1.0.27"
+}

@@ -1,0 +1,16 @@
+{
+ "_source": "Written anew from SiliconDust's HTTP development guide (discover.json example, the lineup fields and tags, as of 2026-07-14) and, for status.json, from the fields Homepage's HDHomeRun widget reads. Not an answer of a real unit.",
+ "discover": {"FriendlyName": "HDHomeRun FLEX 4K", "ModelNumber": "HDFX-4K", "FirmwareName": "hdhomerun_dvr_atsc3", "FirmwareVersion": "20260326", "DeviceID": "10AFFFFF", "DeviceAuth": "made-up-device-auth", "BaseURL": "http://hdhomerun.local", "LineupURL": "http://hdhomerun.local/lineup.json", "TunerCount": 4},
+ "lineup": [
+  {"GuideNumber": "2.1", "GuideName": "WCBS-HD", "HD": 1, "Tags": "favorite", "URL": "http://hdhomerun.local:5004/auto/v2.1"},
+  {"GuideNumber": "4.1", "GuideName": "WNBC-HD", "HD": 1, "URL": "http://hdhomerun.local:5004/auto/v4.1"},
+  {"GuideNumber": "4.2", "GuideName": "COZI", "URL": "http://hdhomerun.local:5004/auto/v4.2"},
+  {"GuideNumber": "7.1", "GuideName": "WABC-HD", "HD": 1, "Tags": "favorite,drm", "URL": "http://hdhomerun.local:5004/auto/v7.1"}
+ ],
+ "status": [
+  {"Resource": "tuner0", "VctNumber": "7.1", "VctName": "WABC-HD", "Frequency": 177000000, "SignalStrengthPercent": 86, "SignalQualityPercent": 100, "SymbolQualityPercent": 100, "TargetIP": "192.168.1.20", "NetworkRate": 8312016},
+  {"Resource": "tuner1", "VctNumber": "4.1", "VctName": "WNBC-HD", "Frequency": 503000000, "SignalStrengthPercent": 64, "SignalQualityPercent": 45, "SymbolQualityPercent": 100, "TargetIP": "192.168.1.21", "NetworkRate": 6211040},
+  {"Resource": "tuner2"},
+  {"Resource": "tuner3"}
+ ]
+}
